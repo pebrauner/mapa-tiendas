@@ -1,0 +1,4404 @@
+{
+ "metroios097mio_pp002S097RetiroenSucursal": {
+  "friendlyName": "Metro Tumbes",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S097RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "240101",
+   "city": "Tumbes",
+   "state": "Tumbes",
+   "country": "PER",
+   "street": "San Martin",
+   "number": "275",
+   "neighborhood": "Tumbes",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -80.4591825,
+    -3.5701937
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios097mio_pp002S097RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroios100mio_pp002S100RetiroenSucursal": {
+  "friendlyName": "Metro Plaza del Sol",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S100RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "200101",
+   "city": "Piura",
+   "state": "Piura",
+   "country": "PER",
+   "street": "Calle Cusco",
+   "number": "801",
+   "neighborhood": "Piura",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -80.6280087,
+    -5.1967357
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios100mio_pp002S100RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroios049mio_pp002S049RetiroenSucursal": {
+  "friendlyName": "Metro Plaza Luna - Piura",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S049RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "20001",
+   "city": "Piura",
+   "state": "Piura",
+   "country": "PER",
+   "street": "Avenida Grau",
+   "number": "1460",
+   "neighborhood": null,
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -80.63961,
+    -5.19249
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios049mio_pp002S049RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroios068mio_pp002S068RetiroenSucursal": {
+  "friendlyName": "Metro San Eduardo (PIU)",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S068RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "200101",
+   "city": "Piura",
+   "state": "Piura",
+   "country": "PER",
+   "street": "Las Palmeras",
+   "number": "168",
+   "neighborhood": "Piura",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -80.6306635,
+    -5.1737509
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios068mio_pp002S068RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroios082mio_pp002S082RetiroenSucursal": {
+  "friendlyName": "Metro Luis Gonzales",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S082RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "140101",
+   "city": "Chiclayo",
+   "state": "Lambayeque",
+   "country": "PER",
+   "street": "Avenida Luis Gonzáles",
+   "number": "711",
+   "neighborhood": "Chiclayo",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -79.84236,
+    -6.77128
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios082mio_pp002S082RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroios037mio_pp002S037RetiroenSucursal": {
+  "friendlyName": "Metro Balta - Chiclayo",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S037RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "14008",
+   "city": "Chiclayo",
+   "state": "Lambayeque",
+   "country": "PER",
+   "street": "Cristóbal Colón",
+   "number": "185",
+   "neighborhood": null,
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -79.83886,
+    -6.77609
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios037mio_pp002S037RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroios085mio_pp002S085RetiroenSucursal": {
+  "friendlyName": "Metro Grau Chiclayo",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S085RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "140101",
+   "city": "Chiclayo",
+   "state": "Lambayeque",
+   "country": "PER",
+   "street": "Avenida Las Américas",
+   "number": "409",
+   "neighborhood": "Chiclayo",
+   "complement": "",
+   "reference": null,
+   "geoCoordinates": [
+    -79.8446426,
+    -6.7781112
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios085mio_pp002S085RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroios083mio_pp002S083RetiroenSucursal": {
+  "friendlyName": "Metro Santa Victoria (CHI)",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S083RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "140101",
+   "city": "Chiclayo",
+   "state": "Lambayeque",
+   "country": "PER",
+   "street": "Avenida Santa Victoria",
+   "number": "411",
+   "neighborhood": "Chiclayo",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -79.8422832,
+    -6.780350800000001
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios083mio_pp002S083RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   }
+  ]
+ },
+ "metroios043mio_pp002S043RetiroenSucursal": {
+  "friendlyName": "Metro Santa Elena",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S043RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "14011",
+   "city": "Chiclayo",
+   "state": "Lambayeque",
+   "country": "PER",
+   "street": "Juan Tomis Stack",
+   "number": "255",
+   "neighborhood": null,
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -79.86284599999999,
+    -6.772378599999999
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios043mio_pp002S043RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroios086mio_pp002S086RetiroenSucursal": {
+  "friendlyName": "Metro Lambayeque (LAM)",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S086RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "140301",
+   "city": "Lambayeque",
+   "state": "Lambayeque",
+   "country": "PER",
+   "street": "Emiliano Niño",
+   "number": "100",
+   "neighborhood": "Lambayeque",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -79.9031913,
+    -6.7052251
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios086mio_pp002S086RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   }
+  ]
+ },
+ "metroios087mio_pp002S087RetiroenSucursal": {
+  "friendlyName": "Metro El Quinde - Cajamarca",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S087RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "06001",
+   "city": "Cajamarca",
+   "state": "Cajamarca",
+   "country": "PER",
+   "street": "Jirón Sor Manuela Gil",
+   "number": "250",
+   "neighborhood": null,
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -78.51022,
+    -7.14805
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios087mio_pp002S087RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroios053mio_pp002S053RetiroenSucursal": {
+  "friendlyName": "Metro Amazonas (CAJ)",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S053RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "060101",
+   "city": "Cajamarca",
+   "state": "Cajamarca",
+   "country": "PER",
+   "street": "Angamos",
+   "number": "911",
+   "neighborhood": "Cajamarca",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -78.5241094,
+    -7.148714099999999
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios053mio_pp002S053RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   }
+  ]
+ },
+ "metroios012mio_pp002S012RetiroenSucursal": {
+  "friendlyName": "Metro Pizarro (TRU)",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S012RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "130101",
+   "city": "Trujillo",
+   "state": "La Libertad",
+   "country": "PER",
+   "street": "Jirón Francisco Pizarro",
+   "number": "700",
+   "neighborhood": "Trujillo",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -79.0256259,
+    -8.109416
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios012mio_pp002S012RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroioh016mio_pp002H016RetiroenSucursal": {
+  "friendlyName": "Metro Ovalo Papal",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002H016RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "13011",
+   "city": "Trujillo",
+   "state": "La Libertad",
+   "country": "PER",
+   "street": "Díaz De Las Heras",
+   "number": null,
+   "neighborhood": null,
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -79.04125,
+    -8.11963
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroioh016mio_pp002H016RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroios051mio_pp002S051RetiroenSucursal": {
+  "friendlyName": "Metro América - Penta (TRU)",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S051RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "130101",
+   "city": "Trujillo",
+   "state": "La Libertad",
+   "country": "PER",
+   "street": "Avenida Mansiche",
+   "number": "1703",
+   "neighborhood": "Trujillo",
+   "complement": "",
+   "reference": null,
+   "geoCoordinates": [
+    -79.04490899999999,
+    -8.1017893
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios051mio_pp002S051RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   }
+  ]
+ },
+ "metroios055mio_pp002S055RetiroenSucursal": {
+  "friendlyName": "Metro Pacifico Chimbote",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S055RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "021809",
+   "city": "Santa",
+   "state": "Áncash",
+   "country": "PER",
+   "street": "Avenida Pacífico",
+   "number": "170",
+   "neighborhood": "Chimbote",
+   "complement": "",
+   "reference": null,
+   "geoCoordinates": [
+    -78.5349172,
+    -9.1205301
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios055mio_pp002S055RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroios044mio_pp002S044RetiroenSucursal": {
+  "friendlyName": "Metro Barranca",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S044RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "150201",
+   "city": "Barranca",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Jirón Ramon Castilla",
+   "number": "493",
+   "neighborhood": "Barranca",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.7640133,
+    -10.7483172
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios044mio_pp002S044RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   }
+  ]
+ },
+ "metroios036mio_pp002S036RetiroenSucursal": {
+  "friendlyName": "Metro Plaza Castilla",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S036RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "150101",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Alfonso Ugarte",
+   "number": "293",
+   "neighborhood": "Lima",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.04286549999999,
+    -12.042663
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios036mio_pp002S036RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroioh002mio_pp002H002RetiroenSucursal": {
+  "friendlyName": "Metro Breña",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002H002RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "150105",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Alfonso Ugarte",
+   "number": null,
+   "neighborhood": "Breña",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.04312,
+    -12.05397
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroioh002mio_pp002H002RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroioh009mio_pp002H009RetiroenSucursal": {
+  "friendlyName": "Metro Cercado Emancipación",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002H009RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "150101",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Jirón Cuzco",
+   "number": "245",
+   "neighborhood": "Lima",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.03175,
+    -12.04968
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroioh009mio_pp002H009RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroios027mio_pp002S027RetiroenSucursal": {
+  "friendlyName": "Retiro en Metro Breña - Martinto",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S027RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "150105",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Arica",
+   "number": "571-581-589-599",
+   "neighborhood": "Breña",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.0470545,
+    -12.0588031
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios027mio_pp002S027RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   }
+  ]
+ },
+ "metroios026mio_pp002S026RetiroenSucursal": {
+  "friendlyName": "Metro Rímac (Perricholi)",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S026RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "15093",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Jirón Trujillo",
+   "number": "414",
+   "neighborhood": "Rímac",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.0292922,
+    -12.040716
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios026mio_pp002S026RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   }
+  ]
+ },
+ "metroios031mio_pp002S031RetiroenSucursal": {
+  "friendlyName": "Metro Arzobispado",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S031RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "150101",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Manco Cápac",
+   "number": "493",
+   "neighborhood": "Lima",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.0289908,
+    -12.0643467
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios031mio_pp002S031RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   }
+  ]
+ },
+ "metroios002mio_pp002S002RetiroenSucursal": {
+  "friendlyName": "Metro Garzón",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S002RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "15072",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida General Eugenio Garzón",
+   "number": "1337",
+   "neighborhood": "Lima",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.05092,
+    -12.07395
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios002mio_pp002S002RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroios101mio_pp002S101RetiroenSucursal": {
+  "friendlyName": "Metro Las Lomas",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S101RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "15094",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Manuel Ramírez Sica",
+   "number": "275",
+   "neighborhood": "Lima",
+   "complement": "",
+   "reference": null,
+   "geoCoordinates": [
+    -77.0418815,
+    -12.0169887
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios101mio_pp002S101RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroios021mio_pp002S021RetiroenSucursal": {
+  "friendlyName": "Metro La Victoria",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S021RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "15033",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Javier Luna Pizarro",
+   "number": "1550",
+   "neighborhood": "Cercado de Lima",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.0260856,
+    -12.0752741
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios021mio_pp002S021RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroioh007mio_pp002H007RetiroenSucursal": {
+  "friendlyName": "Metro Ingeniería",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002H007RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "15333",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida 18 de Enero",
+   "number": null,
+   "neighborhood": "Lima",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.05187,
+    -12.01168
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroioh007mio_pp002H007RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroioh010mio_pp002H010RetiroenSucursal": {
+  "friendlyName": "Metro Colonial",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002H010RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "07011",
+   "city": "Callao",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Óscar R. Benavides",
+   "number": "3002",
+   "neighborhood": "Lima",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.0793975,
+    -12.0491986
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroioh010mio_pp002H010RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   }
+  ]
+ },
+ "metroios033mio_pp002S033RetiroenSucursal": {
+  "friendlyName": "Metro Arenales",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S033RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "150116",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida General Juan Antonio Álvarez de Arenales",
+   "number": "1705",
+   "neighborhood": "Lince",
+   "complement": "",
+   "reference": null,
+   "geoCoordinates": [
+    -77.0358352,
+    -12.0817814
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios033mio_pp002S033RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   }
+  ]
+ },
+ "metroios098mio_pp002S098RetiroenSucursal": {
+  "friendlyName": "Metro Gamarra",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S098RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "150101",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Aviación",
+   "number": "952",
+   "neighborhood": "Lima",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.01297,
+    -12.07118
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios098mio_pp002S098RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroios092mio_pp002S092RetiroenSucursal": {
+  "friendlyName": "Metro Agustino",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S092RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "150111",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Jr. Ancash",
+   "number": "2151",
+   "neighborhood": "El Agustino",
+   "complement": "",
+   "reference": null,
+   "geoCoordinates": [
+    -77.00113449999999,
+    -12.0404597
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios092mio_pp002S092RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   }
+  ]
+ },
+ "metroios035mio_pp002S035RetiroenSucursal": {
+  "friendlyName": "Metro San Felipe",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S035RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "15076",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Gregorio Escobedo",
+   "number": "101",
+   "neighborhood": "Jesús María",
+   "complement": "Centro Comercial San Felipe, Av. Gregorio Escobedo 101, Jesús María 15076",
+   "reference": null,
+   "geoCoordinates": [
+    -77.0538838,
+    -12.0868403
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios035mio_pp002S035RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   }
+  ]
+ },
+ "metroioh014mio_pp002H014RetiroenSucursal": {
+  "friendlyName": "Metro Plaza Norte",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002H014RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "15311",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Tomas Valle",
+   "number": null,
+   "neighborhood": "Lima",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.0603,
+    -12.00622
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroioh014mio_pp002H014RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroios005mio_pp002S005RetiroenSucursal": {
+  "friendlyName": "Metro Pershing",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S005RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "15076",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Gregorio Escobedo",
+   "number": "1050",
+   "neighborhood": "Lima",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.05777,
+    -12.08925
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios005mio_pp002S005RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroioh008mio_pp002H008RetiroenSucursal": {
+  "friendlyName": "Metro Canadá",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002H008RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "150115",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Canadá",
+   "number": "1110",
+   "neighborhood": "Lima",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.01388290000001,
+    -12.083902
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroioh008mio_pp002H008RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroioh005mio_pp002H005RetiroenSucursal": {
+  "friendlyName": "Metro San Miguel",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002H005RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "15084",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida la Marina",
+   "number": "25",
+   "neighborhood": "Lima",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.08913,
+    -12.07662
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroioh005mio_pp002H005RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroioh006mio_pp002H006RetiroenSucursal": {
+  "friendlyName": "Metro San Juan de Lurigancho",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002H006RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "15431",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Próceres de la Independencia",
+   "number": "1632",
+   "neighborhood": "Lima",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.00396,
+    -12.00654
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroioh006mio_pp002H006RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroios032mio_pp002S032RetiroenSucursal": {
+  "friendlyName": "Metro Faucett",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S032RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "15088",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida República de Venezuela",
+   "number": "5415",
+   "neighborhood": "Lima",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.09631,
+    -12.06315
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios032mio_pp002S032RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroios022mio_pp002S022RetiroenSucursal": {
+  "friendlyName": "Metro Angelica Gamarra",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S022RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "07036",
+   "city": "Callao",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Tomás Valle",
+   "number": "2852",
+   "neighborhood": "San Martín de Porres",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.09027019999999,
+    -12.0116018
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios022mio_pp002S022RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   }
+  ]
+ },
+ "metroioh013mio_pp002H013RetiroenSucursal": {
+  "friendlyName": "Metro Independencia",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002H013RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "15311",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Alfredo Mendiola",
+   "number": "3900",
+   "neighborhood": "Lima",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.06328,
+    -11.98791
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroioh013mio_pp002H013RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroios003mio_pp002S003RetiroenSucursal": {
+  "friendlyName": "Metro Aramburú",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S003RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "15047",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Calle Las Tiendas",
+   "number": "290",
+   "neighborhood": "Lima",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.02054,
+    -12.1038
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios003mio_pp002S003RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:01:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroios095mio_pp002S095RetiroenSucursal": {
+  "friendlyName": "Metro Minka",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S095RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "070101",
+   "city": "Callao",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Minka",
+   "number": null,
+   "neighborhood": "Callao",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.11424439999999,
+    -12.0462447
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios095mio_pp002S095RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   }
+  ]
+ },
+ "metroios099mio_pp002S099RetiroenSucursal": {
+  "friendlyName": "Metro Santa Anita",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S099RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "150137",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Carretera Central",
+   "number": "111",
+   "neighborhood": "Santa Anita",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -76.97068809999999,
+    -12.0569276
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios099mio_pp002S099RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroioh003mio_pp002H003RetiroenSucursal": {
+  "friendlyName": "Metro Limatambo",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002H003RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "150130",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Calle Profesor Jorge Muelle",
+   "number": "145",
+   "neighborhood": "San Borja",
+   "complement": "",
+   "reference": null,
+   "geoCoordinates": [
+    -77.00219,
+    -12.10972
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroioh003mio_pp002H003RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroios008mio_pp002S008RetiroenSucursal": {
+  "friendlyName": "Metro Schell Miraflores",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S008RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "15074",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Calle Schell",
+   "number": "250",
+   "neighborhood": "Lima",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.02983,
+    -12.12304
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios008mio_pp002S008RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroios028mio_pp002S028RetiroenSucursal": {
+  "friendlyName": "Metro Canto Rey",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S028RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "15419",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Auxiliar Avenida Próceres de la Independencia",
+   "number": "3247",
+   "neighborhood": "San Juan de Lurigancho",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.00218,
+    -11.97562
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios028mio_pp002S028RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroios025mio_pp002S025RetiroenSucursal": {
+  "friendlyName": "Metro Bellavista",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S025RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "070101",
+   "city": "Callao",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Óscar R. Benavides",
+   "number": "1608",
+   "neighborhood": "Callao",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.12616589999999,
+    -12.0590841
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios025mio_pp002S025RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   }
+  ]
+ },
+ "metroios001mio_pp002S001RetiroenSucursal": {
+  "friendlyName": "Metro La Molina",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S001RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "150114",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Los Higos",
+   "number": "194",
+   "neighborhood": "La Molina",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -76.95788,
+    -12.07012
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios001mio_pp002S001RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroios024mio_pp002S024RetiroenSucursal": {
+  "friendlyName": "Metro Ovalo Balta - Barranco",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S024RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "150104",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "",
+   "number": null,
+   "neighborhood": "Barranco",
+   "complement": "",
+   "reference": null,
+   "geoCoordinates": [
+    -77.0174531,
+    -12.1412375
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios024mio_pp002S024RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   }
+  ]
+ },
+ "metroios009mio_pp002S009RetiroenSucursal": {
+  "friendlyName": "Metro Barranco",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S009RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "15063",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Almirante Miguel Grau",
+   "number": "513",
+   "neighborhood": "Lima",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.02178,
+    -12.14648
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios009mio_pp002S009RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroios034mio_pp002S034RetiroenSucursal": {
+  "friendlyName": "Metro Puruchuco",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S034RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "15498",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Nicolás Ayllón",
+   "number": "4297",
+   "neighborhood": "Lima",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -76.93594809999999,
+    -12.0414298
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios034mio_pp002S034RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroios011mio_pp002S011RetiroenSucursal": {
+  "friendlyName": "Metro El Retablo",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S011RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "15314",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Universitaria",
+   "number": "7595",
+   "neighborhood": "Lima",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.05648,
+    -11.93404
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios011mio_pp002S011RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroioh011mio_pp002H011RetiroenSucursal": {
+  "friendlyName": "Metro Comas Pascana",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002H011RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "150110",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Túpac Amaru",
+   "number": "3874",
+   "neighborhood": "Lima",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.04446,
+    -11.93191
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroioh011mio_pp002H011RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroios010mio_pp002S010RetiroenSucursal": {
+  "friendlyName": "Metro Atocongo",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S010RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "15803",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida los Héroes",
+   "number": "100",
+   "neighborhood": "San Juan de Miraflores",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -76.9805976,
+    -12.1498626
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios010mio_pp002S010RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroios023mio_pp002S023RetiroenSucursal": {
+  "friendlyName": "Metro San Juan De Miraflores",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S023RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "15801",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida los Héroes",
+   "number": "300",
+   "neighborhood": "San Juan de Miraflores",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -76.9776892,
+    -12.1519684
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios023mio_pp002S023RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroioh001mio_pp002H001RetiroenSucursal": {
+  "friendlyName": "Metro Chorrillos",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002H001RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "15064",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Paseo de la República",
+   "number": "355",
+   "neighborhood": "Lima",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.01422,
+    -12.17375
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroioh001mio_pp002H001RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroios029mio_pp002S029RetiroenSucursal": {
+  "friendlyName": "Metro Miotta",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S029RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "15842",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Pedro Miotta",
+   "number": "409",
+   "neighborhood": "San Juan de Miraflores",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -76.9784434,
+    -12.1679747
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios029mio_pp002S029RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroios038mio_pp002S038RetiroenSucursal": {
+  "friendlyName": "Metro Huaylas",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S038RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "150108",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Defensores del Morro",
+   "number": "2070",
+   "neighborhood": "Chorrillos",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.0134932,
+    -12.1808372
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios038mio_pp002S038RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   }
+  ]
+ },
+ "metroios089mio_pp002S089RetiroenSucursal": {
+  "friendlyName": "Metro Santa Clara",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S089RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "150103",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Nicolás Ayllón",
+   "number": "8510",
+   "neighborhood": "Ate",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -76.8890583,
+    -12.0161186
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios089mio_pp002S089RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   }
+  ]
+ },
+ "metroios014mio_pp002S014RetiroenSucursal": {
+  "friendlyName": "Metro Ventanilla",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S014RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "070106",
+   "city": "Callao",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Callao",
+   "number": "s/n",
+   "neighborhood": "Ventanilla",
+   "complement": "Mz. C Lt. 30, Av. Néstor Gambetta s/n, Ventanilla 07036",
+   "reference": null,
+   "geoCoordinates": [
+    -77.1261347,
+    -11.877558
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios014mio_pp002S014RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   }
+  ]
+ },
+ "metroios047mio_pp002S047RetiroenSucursal": {
+  "friendlyName": "Metro Chaclacayo",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S047RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "15472",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Nicolás Ayllón",
+   "number": "965",
+   "neighborhood": "Lima",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -76.76765,
+    -11.97458
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios047mio_pp002S047RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroios067mio_pp002S067RetiroenSucursal": {
+  "friendlyName": "Metro Chosica",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S067RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "15468",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Prolongación 28 de Julio",
+   "number": "543",
+   "neighborhood": "Lurigancho-Chosica",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -76.6962791,
+    -11.9386865
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios067mio_pp002S067RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroios046mio_pp002S046RetiroenSucursal": {
+  "friendlyName": "Metro Cutervo (ICA)",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S046RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "110101",
+   "city": "Ica",
+   "state": "Ica",
+   "country": "PER",
+   "street": "Avenida Cutervo",
+   "number": "128",
+   "neighborhood": "Ica",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -75.7260481,
+    -14.0719157
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios046mio_pp002S046RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   }
+  ]
+ },
+ "metroios058mio_pp002S058RetiroenSucursal": {
+  "friendlyName": "Metro Los Maestros (ICA)",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S058RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "110101",
+   "city": "Ica",
+   "state": "Ica",
+   "country": "PER",
+   "street": "Avenida de los Maestros",
+   "number": "206",
+   "neighborhood": "Ica",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -75.7392273,
+    -14.0745813
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios058mio_pp002S058RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroios064mio_pp002S064RetiroenSucursal": {
+  "friendlyName": "Metro Chilca Huancayo",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S064RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "120101",
+   "city": "Huancayo",
+   "state": "Junín",
+   "country": "PER",
+   "street": "Avenida 9 de Diciembre",
+   "number": null,
+   "neighborhood": "Huancayo",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -75.2051094,
+    -12.0848125
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios064mio_pp002S064RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroios066mio_pp002S066RetiroenSucursal": {
+  "friendlyName": "Metro Huanuco",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S066RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "10001",
+   "city": "Huanuco",
+   "state": "Huanuco",
+   "country": "PER",
+   "street": "San Martin",
+   "number": null,
+   "neighborhood": "Huánuco",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -76.2421875,
+    -9.9260625
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios066mio_pp002S066RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroios093mio_pp002S093RetiroenSucursal": {
+  "friendlyName": "Metro Lambramani - Arequipa",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S093RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "04002",
+   "city": "Arequipa",
+   "state": "Arequipa",
+   "country": "PER",
+   "street": "Avenida Lambramani",
+   "number": "325",
+   "neighborhood": null,
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -71.52133,
+    -16.41109
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios093mio_pp002S093RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroios081mio_pp002S081RetiroenSucursal": {
+  "friendlyName": "Metro Ejercito - Arequipa",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S081RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "04013",
+   "city": "Arequipa",
+   "state": "Arequipa",
+   "country": "PER",
+   "street": "Avenida Ejército",
+   "number": "601",
+   "neighborhood": null,
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -71.54487,
+    -16.39083
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios081mio_pp002S081RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroios054mio_pp002S054RetiroenSucursal": {
+  "friendlyName": "Retiro en Metro Hunter (AQP)",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S054RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "040107",
+   "city": "Arequipa",
+   "state": "Arequipa",
+   "country": "PER",
+   "street": "Av. Las Americas Mz J Urb. La Colina - Jacobo Hunter, Arequipa ",
+   "number": "S/N",
+   "neighborhood": "Jacobo Hunter",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -71.56101559999999,
+    -16.4381625
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios054mio_pp002S054RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   }
+  ]
+ },
+ "metroios062mio_pp002S062RetiroenSucursal": {
+  "friendlyName": "Metro Cerro Colorado - Arequipa",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S062RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "04017",
+   "city": "Arequipa",
+   "state": "Arequipa",
+   "country": "PER",
+   "street": "Avenida Aviación",
+   "number": "602",
+   "neighborhood": "",
+   "complement": "",
+   "reference": null,
+   "geoCoordinates": [
+    -71.55733,
+    -16.37515
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios062mio_pp002S062RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "metroios076mio_pp002S076RetiroenSucursal": {
+  "friendlyName": "Metro Plaza Norte (AQP)",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002S076RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "040104",
+   "city": "Arequipa",
+   "state": "Arequipa",
+   "country": "PER",
+   "street": "Carretera Yura",
+   "number": "km 9",
+   "neighborhood": "Cerro Colorado",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -71.5844816,
+    -16.3422323
+   ]
+  },
+  "additionalInfo": null,
+  "id": "metroios076mio_pp002S076RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   }
+  ]
+ }
+}

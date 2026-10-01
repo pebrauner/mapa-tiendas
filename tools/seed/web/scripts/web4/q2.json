@@ -1,0 +1,1 @@
+{"operationName":"getStoresForStoreSelector","variables":{"websiteId":"EjKfjv3RYEXX9Puqa"},"query":"query getStoresForStoreSelector($websiteId: ID) { stores(websiteId: $websiteId) { _id items { _id acceptDelivery acceptGo acceptServe name address { streetAddress extendedAddress locality subLocality location } } } }"}

@@ -1,0 +1,45 @@
+{
+  "id": "maxiahorro",
+  "name": "Maxiahorro",
+  "legendName": "MAXIAHORRO",
+  "group": "discount",
+  "color": "#D41F28",
+  "ringColor": "#D41F28",
+  "owner": "SMU S.A. (Chile)",
+  "website": "https://maxiahorro.com.pe",
+  "storeLocator": "https://maxiahorro.com.pe/tiendas/",
+  "defaultOn": true,
+  "osm": {
+    "wikidata": ["Q136408748"],
+    "nameRegex": "^maxi\\s*-?\\s*ahorro\\b",
+    "excludeNameRegex": "",
+    "label": "Maxiahorro",
+    "prefixRegex": "^maxi\\s*-?\\s*ahorro\\b",
+    "shops": ["supermarket", "convenience", "wholesale", "discount"],
+    "requireShopLike": true,
+    "dense": true,
+    "uniqueName": true,
+    "weakNameRegex": "",
+    "weakNameShops": [],
+    "excludeTags": []
+  },
+  "logo": { "badge": true, "wide": true },
+  "logoSources": [
+    {
+      "file": "logos/maxiahorro.png",
+      "url": "https://graph.facebook.com/MaxiahorroPE/picture?type=large&width=720&height=720",
+      "notes": "Official Facebook page avatar of MaxiahorroPE (page linked from maxiahorro.com.pe): white 'maxi' + yellow 'ahorro' on red, 720x720 JPEG. Zoomed so the wordmark fills the circle-safe area; background stays the avatar red. Local copy: tools/seed/logo-src/maxiahorro/facebook-avatar-MaxiahorroPE.jpg."
+    },
+    {
+      "file": "logos/maxiahorro-wide.png",
+      "url": "https://graph.facebook.com/MaxiahorroPE/picture?type=large&width=720&height=720",
+      "notes": "Same avatar, cropped to the wordmark with a red margin (the official wordmark is white/yellow and only works on red, so the wide logo keeps its red box). The site header logo https://maxiahorro.com.pe/wp-content/uploads/2021/05/logo.png is the same wordmark but only 192x75 px, so it was not used."
+    }
+  ],
+  "storeCountReported": {
+    "value": 32,
+    "source": "https://maxiahorro.com.pe/tiendas/",
+    "date": "2026-09-30"
+  },
+  "notes": "Discount supermarket chain operated in Peru by the Chilean group SMU (Peru Retail, 2026-02-09: 'operada por la empresa chilena SMU'; Wikidata parent Q121140448 = SMU). storeCountReported = stores listed on the official 'Nuestras Tiendas' page on 2026-09-30: 32 (Lima 4: Rímac, Lince, La Victoria, SMP; Barranca; Huacho; Ica; Piura region 25 incl. Sullana x2, Paita, Chulucanas, Sechura). Raw snapshot with coordinates and addresses: tools/seed/raw/maxiahorro-locator-2026-09-30.json. Brand colours: red #D41F28 (avatar/signage; site CSS also uses #DE0900), yellow #FFF836. OSM (probe 2026-10-01): ~24 named features ('MaxiAhorro <branch>', 'Maxi Ahorro'), almost all shop=supermarket, none brand-tagged; some OSM ones may be closed or renamed (e.g. 'MaxiAhorro Chorrillos', 'Canto Grande', 'México', 'Cayetano Heredia', 'Pisco' have no same-name entry on the current locator; note 'Piura (Arequipa)' on the locator is Av. Arequipa in Piura, not Arequipa city) -> verify by distance, not by name. Low false-positive risk for the regex."
+}

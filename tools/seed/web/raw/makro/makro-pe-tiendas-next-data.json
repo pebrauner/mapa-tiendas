@@ -1,0 +1,482 @@
+{
+ "props": {
+  "pageProps": {
+   "pageData": {
+    "page": {
+     "id": 10,
+     "title": "Tiendas",
+     "description": "<p>Obligatorio</p>",
+     "url": "https://www.google.com/maps/d/embed?mid=1yaw2-hOdKMgzZ870qyfy4dvSw5Lx56Aj&hl=es&ehbc=2E312F",
+     "image": null,
+     "video": null,
+     "url_page": [],
+     "og_description": "Tiendas makro",
+     "og_image": null
+    },
+    "stores": [
+     {
+      "id": 30,
+      "code": "261",
+      "name": "Makro San Juan de Miraflores",
+      "manager": ".",
+      "email": "contacto@makro.pe",
+      "address": "Alt. cdra. 8 de Av. Pedro Miotta - Av. Belisario Suarez 181",
+      "latitud": "-12.1604503",
+      "longitud": "-76.9783665",
+      "province": "Lima",
+      "phone": "01 5160063",
+      "attention": [
+       "Lunes a domingo de 7:30am a 9:00pm"
+      ],
+      "og_description": null,
+      "og_image": null
+     },
+     {
+      "id": 29,
+      "code": "27",
+      "name": "Makro Cercado de Lima",
+      "manager": ".",
+      "email": "contacto@makro.pe",
+      "address": "Jr. Manuel del Mar y Bernedo S/N Lote A",
+      "latitud": null,
+      "longitud": null,
+      "province": null,
+      "phone": "01-5160052",
+      "attention": [
+       "Lunes a Domingo de 7:00 am a 9:30 pm"
+      ],
+      "og_description": null,
+      "og_image": null
+     },
+     {
+      "id": 28,
+      "code": "26",
+      "name": "Makro Chimbote",
+      "manager": ".",
+      "email": "contacto@makro.pe",
+      "address": "Av. Los pescadores s/n zona lotización Gran Trapecio Parcela 3, Mz. C.",
+      "latitud": null,
+      "longitud": null,
+      "province": null,
+      "phone": "01-5170061 anexo 25349",
+      "attention": [
+       "Lunes a Domingo de 7:00 am. a 10:00 pm."
+      ],
+      "og_description": null,
+      "og_image": null
+     },
+     {
+      "id": 27,
+      "code": "25",
+      "name": "Makro San Martin de Porres",
+      "manager": ".",
+      "email": "contacto@makro.pe",
+      "address": "PLAZA CENTER REX",
+      "latitud": null,
+      "longitud": null,
+      "province": null,
+      "phone": "(01) 5160059 anexo 201",
+      "attention": [
+       "Lunes a Domingo de 7:30 am. a 10:00 pm."
+      ],
+      "og_description": null,
+      "og_image": null
+     },
+     {
+      "id": 26,
+      "code": "24",
+      "name": "Makro Cañete",
+      "manager": ".",
+      "email": "contacto@makro.pe",
+      "address": "Parcela 6 del proyecto Chilca - San Vicente de Cañete",
+      "latitud": null,
+      "longitud": null,
+      "province": null,
+      "phone": "01-5160058 anexo 25347",
+      "attention": [
+       "Lunes a Domingo de 8:00 am a 10:00 pm"
+      ],
+      "og_description": null,
+      "og_image": null
+     },
+     {
+      "id": 25,
+      "code": "23",
+      "name": "Makro Huacho",
+      "manager": ".",
+      "email": "contacto@makro.pe",
+      "address": "AV. PANAMERICANA CRUCE CON AV. SAN MARTIN – SANTA MARIA, HUACHO, LIMA",
+      "latitud": null,
+      "longitud": null,
+      "province": "Huacho",
+      "phone": "01-6804010 anexo 201",
+      "attention": [
+       "Lunes a Sábado de 8:00 am a 9:00 pm | Domingos CERRADO"
+      ],
+      "og_description": null,
+      "og_image": null
+     },
+     {
+      "id": 24,
+      "code": "22",
+      "name": "Makro Ica",
+      "manager": ".",
+      "email": "contacto@makro.pe",
+      "address": "AV. NICOLÁS DE RIVERO EL VIEJO 1105 - ICA",
+      "latitud": null,
+      "longitud": null,
+      "province": null,
+      "phone": "056-600020 anexo 201",
+      "attention": [
+       "Lunes a Domingo de 8:00 am a 10:00 pm"
+      ],
+      "og_description": null,
+      "og_image": null
+     },
+     {
+      "id": 23,
+      "code": "21",
+      "name": "Makro Chincha",
+      "manager": ".",
+      "email": "contacto@makro.pe",
+      "address": "CARRETERA PANAMERICANA SUR KM. 195 - Chincha",
+      "latitud": null,
+      "longitud": null,
+      "province": null,
+      "phone": "056-602260 anexo 201",
+      "attention": [
+       "Lunes a Domingo de 8:00 am a 10:00 pm"
+      ],
+      "og_description": null,
+      "og_image": null
+     },
+     {
+      "id": 22,
+      "code": "20",
+      "name": "Makro Huancayo",
+      "manager": ".",
+      "email": "contacto@makro.pe",
+      "address": "AV. PROLONGACIÓN JOSÉ CARLOS MARIATEGUI S/N, HUANCAYO, HUANCAYO",
+      "latitud": null,
+      "longitud": null,
+      "province": null,
+      "phone": "064-602200 anexo 201",
+      "attention": [
+       "Lunes a Domingo de 7:30 am a 9:00 pm"
+      ],
+      "og_description": null,
+      "og_image": null
+     },
+     {
+      "id": 21,
+      "code": "19",
+      "name": "Makro Sullana",
+      "manager": ".",
+      "email": "contacto@makro.pe",
+      "address": "ZONA INDUSTRIAL MUNICIPAL N2 MZE Lt2",
+      "latitud": null,
+      "longitud": null,
+      "province": null,
+      "phone": "01-6188000 Anexo 26737",
+      "attention": [
+       "Lunes a Domingo de 7:00 am a 10:00 pm"
+      ],
+      "og_description": null,
+      "og_image": null
+     },
+     {
+      "id": 20,
+      "code": "18",
+      "name": "Makro Textil - Piura",
+      "manager": ".",
+      "email": "contacto@makro.pe",
+      "address": "AV. SÁNCHEZ CERRO SUB LOTE B, 1A DISTRITO 26 DE OCTUBRE",
+      "latitud": null,
+      "longitud": null,
+      "province": "Piura",
+      "phone": "01-6188000 anexo 24531",
+      "attention": [
+       "Lunes a Domingo de 7:00 am a 10:00 pm"
+      ],
+      "og_description": null,
+      "og_image": null
+     },
+     {
+      "id": 19,
+      "code": "17",
+      "name": "Makro Sánchez Cerro - Piura",
+      "manager": ".",
+      "email": "contacto@makro.pe",
+      "address": "AV. SANCHEZ CERRO S/N",
+      "latitud": null,
+      "longitud": null,
+      "province": null,
+      "phone": "73-606200 anexo 201",
+      "attention": [
+       "Lunes a Domingo de 7:00 am a 10:00 pm"
+      ],
+      "og_description": null,
+      "og_image": null
+     },
+     {
+      "id": 18,
+      "code": "16",
+      "name": "Makro El Bosque - Trujillo",
+      "manager": ".",
+      "email": "contacto@makro.pe",
+      "address": "AV. INDUSTRIAL CRUCE CON AV. FEDERICO VILLAREAL – EL BOSQUE, TRUJILLO,",
+      "latitud": null,
+      "longitud": null,
+      "province": "Trujillo",
+      "phone": "044-458020 anexo 204/205",
+      "attention": [
+       "Lunes a Domingo de 7:00 am a 9:00 pm"
+      ],
+      "og_description": null,
+      "og_image": null
+     },
+     {
+      "id": 17,
+      "code": "15",
+      "name": "Makro La Esperanza - Trujillo",
+      "manager": ".",
+      "email": "contacto@makro.pe",
+      "address": "AV. NICOLAS DE PIEROLA CON AV. MICAELA BASTIDAS , TRUJILLO",
+      "latitud": null,
+      "longitud": null,
+      "province": "Trujillo",
+      "phone": "044- 606700 anexo 201",
+      "attention": [
+       "Lunes a Domingo de 7:00 am a 9:00 pm"
+      ],
+      "og_description": null,
+      "og_image": null
+     },
+     {
+      "id": 16,
+      "code": "14",
+      "name": "Makro Chiclayo",
+      "manager": ".",
+      "email": "contacto@makro.pe",
+      "address": "AV. JORGE BASADRE #299 ,CHICLAYO",
+      "latitud": null,
+      "longitud": null,
+      "province": null,
+      "phone": "074-605900 anexo 201",
+      "attention": [
+       "Lunes a Domingo de 7:00 am a 10:00 pm"
+      ],
+      "og_description": null,
+      "og_image": null
+     },
+     {
+      "id": 15,
+      "code": "13",
+      "name": "Makro Cusco",
+      "manager": ".",
+      "email": "contacto@makro.pe",
+      "address": "PROLONGACIÓN AV DE LA CULTURA 2620 CUSCO",
+      "latitud": null,
+      "longitud": null,
+      "province": null,
+      "phone": "084-300037 Anexo 26187",
+      "attention": [
+       "Lunes a Domingo de 7:00 am. a 9:00 pm."
+      ],
+      "og_description": null,
+      "og_image": null
+     },
+     {
+      "id": 14,
+      "code": "12",
+      "name": "Makro Yanahuara - Arequipa",
+      "manager": ".",
+      "email": "contacto@makro.pe",
+      "address": "AV. METROPOLITANA 63, DISTRITO YANAHUARA, AREQUIPA",
+      "latitud": null,
+      "longitud": null,
+      "province": "AREQUIPA",
+      "phone": "054-605404",
+      "attention": [
+       "Lunes a Domingo de 6:30 am. a 9:00 pm."
+      ],
+      "og_description": null,
+      "og_image": null
+     },
+     {
+      "id": 13,
+      "code": "11",
+      "name": "Makro El Avelino - Arequipa",
+      "manager": ".",
+      "email": "contacto@makro.pe",
+      "address": "AV. AVELINO CACERES S/N , DISTRITO DE BUSTAMANTE Y RIVERO, AREQUIPA",
+      "latitud": null,
+      "longitud": null,
+      "province": "AREQUIPA",
+      "phone": "054-606400 anexo 201 / 203",
+      "attention": [
+       "Lunes a Domingo de 6:30 am. a 8:30 pm."
+      ],
+      "og_description": null,
+      "og_image": null
+     },
+     {
+      "id": 12,
+      "code": "10",
+      "name": "Makro Comas",
+      "manager": ".",
+      "email": "contacto@makro.pe",
+      "address": "AV. CHACRA CERRO S/N LOTE 115, LIMA",
+      "latitud": null,
+      "longitud": null,
+      "province": null,
+      "phone": "01-6260400 anexo 201",
+      "attention": [
+       "Lunes a Domingo de 7:30 am. a 9:00 pm."
+      ],
+      "og_description": null,
+      "og_image": null
+     },
+     {
+      "id": 11,
+      "code": "9",
+      "name": "Makro San Juan de Lurigancho",
+      "manager": ".",
+      "email": "contacto@makro.pe",
+      "address": "AV. GRAN PAJATÉN CRUCE CON JR. SANTUARIO, LIMA, LIMA",
+      "latitud": null,
+      "longitud": null,
+      "province": null,
+      "phone": null,
+      "attention": [
+       "Lunes a Domingo de 7:30 am. a 9:00 pm."
+      ],
+      "og_description": null,
+      "og_image": null
+     },
+     {
+      "id": 10,
+      "code": "8",
+      "name": "Makro Zárate",
+      "manager": ".",
+      "email": "contacto@makro.pe",
+      "address": "URB. PARCELACIÓN RÚSTICA ZÁRATE, MZ B LT 23",
+      "latitud": null,
+      "longitud": null,
+      "province": null,
+      "phone": "01-6125407",
+      "attention": [
+       "Lunes a Domingo de 7:30 am. a 9:00 pm."
+      ],
+      "og_description": null,
+      "og_image": null
+     },
+     {
+      "id": 9,
+      "code": "6",
+      "name": "Makro Chorrillos",
+      "manager": ".",
+      "email": "contacto@makro.pe",
+      "address": "AV. DEFENSORES DEL MORRO, CUADRA 11 s/n. Urbanización Fundo Villa, Cho",
+      "latitud": null,
+      "longitud": null,
+      "province": "Lima",
+      "phone": "01-5160055",
+      "attention": [
+       "Lunes a Domingo de 7:00 am. a 9:00 pm."
+      ],
+      "og_description": null,
+      "og_image": null
+     },
+     {
+      "id": 8,
+      "code": "5",
+      "name": "Makro Villa el Salvador",
+      "manager": ".",
+      "email": "contacto@makro.pe",
+      "address": "Cruce Panamericana Sur con Av. Mateo Pumacahua, LIMA",
+      "latitud": null,
+      "longitud": null,
+      "province": "Lima",
+      "phone": "01-6171230 anexo 201",
+      "attention": [
+       "Lunes a Domingo de 7:30 am. a 9:00 pm."
+      ],
+      "og_description": null,
+      "og_image": null
+     },
+     {
+      "id": 5,
+      "code": "359",
+      "name": "Makro Independencia",
+      "manager": "Freddy Pozo",
+      "email": "gerente.independencia@makro.pe",
+      "address": "C.C. PLAZA NORTE, AV. TOMÁS VALLE CON PANAMERICANA NORTE ,  LIMA,",
+      "latitud": "-77.05882125",
+      "longitud": "-12.00621719",
+      "province": "LIMA",
+      "phone": "01-6139400 Anexo 201",
+      "attention": [
+       "Lunes a Domingo de 7:30 am. a 10:00 pm."
+      ],
+      "og_description": null,
+      "og_image": null
+     },
+     {
+      "id": 4,
+      "code": "361",
+      "name": "Makro Santa Anita",
+      "manager": "Luis Martín Navarro Vásquez",
+      "email": "gerente.santaanita@makro.pe",
+      "address": "CARRETERA CENTRAL # 345 KM 1 -  ( A 1 CDRA.DEL ÓVALO SANTA ANITA ),  L",
+      "latitud": "-76.96780605",
+      "longitud": "-12.05464534",
+      "province": "LIMA",
+      "phone": "01-6163810 Anexo 201",
+      "attention": [
+       "Lunes a Domingo de 7:30 am. a 10:00 pm."
+      ],
+      "og_description": null,
+      "og_image": null
+     },
+     {
+      "id": 3,
+      "code": "360",
+      "name": "Makro Surco",
+      "manager": "Dante Ortiz",
+      "email": "gerente.surco@makro.pe",
+      "address": "AV. JORGE CHÁVEZ N.1218,  LIMA,",
+      "latitud": "-77.00927483",
+      "longitud": "-12.14879596",
+      "province": "LIMA",
+      "phone": "01-6149300 Anexo 201",
+      "attention": [
+       "Lunes a Domingo de 7:30 am. a 10:00 pm."
+      ],
+      "og_description": null,
+      "og_image": null
+     },
+     {
+      "id": 2,
+      "code": "358",
+      "name": "Makro Callao",
+      "manager": "Juan pedro lopez - Aliaga Arrieta",
+      "email": "gerente.callao@makro.pe",
+      "address": "AV. ELMER FAUCETT (ENTRE LA AV. COLONIAL Y AV. ARGENTINA ),  LIMA,  LI",
+      "latitud": "-77.09897068",
+      "longitud": "-12.0505312",
+      "province": "CALLAO",
+      "phone": "6257110 Anexo 201",
+      "attention": [
+       "Lunes a Domingo de 7:30 am. a 10:00 pm."
+      ],
+      "og_description": null,
+      "og_image": null
+     }
+    ]
+   }
+  }
+ },
+ "page": "/tiendas",
+ "note": "Extract of __NEXT_DATA__ from https://www.makro.pe/tiendas retrieved 2026-10-01 (token/appearance fields removed)"
+}

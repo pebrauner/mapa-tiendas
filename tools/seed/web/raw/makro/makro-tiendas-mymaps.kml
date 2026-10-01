@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Makro Tiendas</name>
+    <description><![CDATA[Encuentra tu Makro tienda más cercana<br>¡En Makro, la hacemos juntos!]]></description>
+    <Style id="icon-1899-1A237E-normal">
+      <IconStyle>
+        <color>ff7e231a</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+    </Style>
+    <Style id="icon-1899-1A237E-highlight">
+      <IconStyle>
+        <color>ff7e231a</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+    </Style>
+    <StyleMap id="icon-1899-1A237E">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1899-1A237E-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1899-1A237E-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Folder>
+      <name>Makro Tiendas</name>
+      <Placemark>
+        <name>Makro Callao</name>
+        <description><![CDATA[AV. ELMER FAUCETT <br>Horario de atención: Lunes a Domingo de 7:30 am. a 10:00 pm.<br>www.makro.pe<br>Teléfono: 6257110 anexo 201]]></description>
+        <styleUrl>#icon-1899-1A237E</styleUrl>
+        <Point>
+          <coordinates>
+            -77.0989875,-12.0506704,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Makro Independencia</name>
+        <description><![CDATA[C.C. PLAZA NORTE, AV. TOMÁS VALLE CON PANAMERICANA NORTE <br>Horario de atención: Lunes a Domingo de 7:30 am. a 10:00 pm.<br>www.makro.pe<br>Teléfono: 6139400 Anexo 201]]></description>
+        <styleUrl>#icon-1899-1A237E</styleUrl>
+        <Point>
+          <coordinates>
+            -77.0587676,-12.0063851,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Makro Cercado</name>
+        <description><![CDATA[AV. VENEZUELA CUADRA 8, LIMA<br>Horario de atención: Lunes a Domingo de 7:00 am. a 9:30 pm.<br>www.makro.pe]]></description>
+        <styleUrl>#icon-1899-1A237E</styleUrl>
+        <Point>
+          <coordinates>
+            -77.0595129,-12.0563644,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Makro Surco</name>
+        <description><![CDATA[AV. JORGE CHÁVEZ N°1218, LIMA<br>Horario de atención: Lunes a Domingo de 7:30 am. a 10:00 pm.<br>www.makro.pe<br>Teléfono: 614 9300 Anexo 201]]></description>
+        <styleUrl>#icon-1899-1A237E</styleUrl>
+        <Point>
+          <coordinates>
+            -77.0092635,-12.1489164,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Makro Villa Salvador</name>
+        <description><![CDATA[Cruce Panamericana Sur con Av. Mateo Pumacahua, LIMA<br>Horario de atención: Lunes a Domingo de 7:30 am. a 9:00 pm.<br>www.makro.pe<br>Teléfono: 6172300 anexo 201]]></description>
+        <styleUrl>#icon-1899-1A237E</styleUrl>
+        <Point>
+          <coordinates>
+            -76.9708293,-12.1930564,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Makro Chorrillos</name>
+        <description><![CDATA[AV. DEFENSORES DEL MORRO, CUADRA 11 s/n. Urbanización Fundo Villa, Chorrillos, Lima<br>Horario de atención: Lunes a Domingo de 7:00 am. a 9:00 pm.<br>www.makro.pe]]></description>
+        <styleUrl>#icon-1899-1A237E</styleUrl>
+        <Point>
+          <coordinates>
+            -77.0193013,-12.1744347,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Makro Santa Anita</name>
+        <description><![CDATA[CARRETERA CENTRAL # 345 KM 1, LIMA<br>Horario de atención: Lunes a Domingo de 7:30 am. a 10:00 pm.<br>www.makro.pe<br>Teléfono: 616 3800 Anexo 201]]></description>
+        <styleUrl>#icon-1899-1A237E</styleUrl>
+        <Point>
+          <coordinates>
+            -76.9677954,-12.054774,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Makro Zárate</name>
+        <description><![CDATA[URB. PARCELACIÓN RÚSTICA ZÁRATE, MZ B LT 23 <br>Horario de atención: Lunes a Domingo de 7:30 am. a 9:00 pm.<br>www.makro.pe]]></description>
+        <styleUrl>#icon-1899-1A237E</styleUrl>
+        <Point>
+          <coordinates>
+            -76.9927802,-12.0165809,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Makro San Juan de Lurigancho</name>
+        <description><![CDATA[AV. GRAN PAJATÉN CRUCE CON JR. SANTUARIO, LIMA, LIMA<br>Horario de atención: Lunes a Domingo de 7:30 am. a 10:00 pm.<br>www.makro.pe<br>Teléfono: 6308200 Anexo 201]]></description>
+        <styleUrl>#icon-1899-1A237E</styleUrl>
+        <Point>
+          <coordinates>
+            -76.9867,-12.0219033,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Makro Comas</name>
+        <description><![CDATA[AV. CHACRA CERRO S/N LOTE 115, LIMA<br>Horario de atención: Lunes a Domingo de 7:30 am. a 9:00 pm.<br>www.makro.pe<br>Teléfono: 6260400 anexo 201]]></description>
+        <styleUrl>#icon-1899-1A237E</styleUrl>
+        <Point>
+          <coordinates>
+            -77.0572559,-11.9098535,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Makro Arequipa</name>
+        <description><![CDATA[AV. AVELINO CACERES S/N , DISTRITO DE BUSTAMANTE Y RIVERO, AREQUIPA<br>Horario de atención: Lunes a Domingo de 6:30 am. a 8:30 pm.<br>www.makro.pe<br>Teléfono: 054-606400 anexo 201]]></description>
+        <styleUrl>#icon-1899-1A237E</styleUrl>
+        <Point>
+          <coordinates>
+            -71.5390252,-16.4230535,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Makro Arequipa 2 </name>
+        <description><![CDATA[AV. METROPOLITANA 63, DISTRITO YANAHUARA, AREQUIPA<br>Horario de atención: Lunes a Domingo de 6:30 am. a 9:00 pm.<br>www.makro.pe]]></description>
+        <styleUrl>#icon-1899-1A237E</styleUrl>
+        <Point>
+          <coordinates>
+            -71.5548194,-16.3935982,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Makro Cusco </name>
+        <description><![CDATA[PROLONGACIÓN AV DE LA CULTURA 2620 CUSCO<br>Horario de atención: Lunes a Domingo de 7:00 am. a 9:00 pm.<br>www.makro.pe]]></description>
+        <styleUrl>#icon-1899-1A237E</styleUrl>
+        <Point>
+          <coordinates>
+            -71.9424211,-13.5276734,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Makro Chiclayo</name>
+        <description><![CDATA[AV. JORGE BASADRE #299 ,CHICLAYO<br>Horario de atención: Lunes a Domingo de 7:00 am a 10:00 pm<br>www.makro.pe<br>Teléfono: 074-605900 anexo 201]]></description>
+        <styleUrl>#icon-1899-1A237E</styleUrl>
+        <Point>
+          <coordinates>
+            -79.8298447,-6.7597902,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Makro Trujillo</name>
+        <description><![CDATA[AV. NICOLAS DE PIEROLA CON AV. MICAELA BASTIDAS , TRUJILLO<br>Horario de atención: Lunes a Domingo de 7:00 am a 9:00 pm<br>www.makro.pe<br>Teléfono: 044-606700 anexo 201]]></description>
+        <styleUrl>#icon-1899-1A237E</styleUrl>
+        <Point>
+          <coordinates>
+            -79.044751,-8.0852671,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Makro Trujillo 2</name>
+        <description><![CDATA[AV. INDUSTRIAL CRUCE CON AV. FEDERICO VILLAREAL – EL BOSQUE, TRUJILLO, <br>Horario de atención: Lunes a Domingo de 7:00 am a 9:00 pm<br>www.makro.pe<br>Teléfono: 044-458020]]></description>
+        <styleUrl>#icon-1899-1A237E</styleUrl>
+        <Point>
+          <coordinates>
+            -78.9963047,-8.1090398,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Makro Piura</name>
+        <description><![CDATA[AV. SANCHEZ CERRO S/N <br>Horario de atención: Lunes a Domingo de 7:00 am a 10:00 pm<br>www.makro.pe<br>Teléfono: 073-606200 anexo 201]]></description>
+        <styleUrl>#icon-1899-1A237E</styleUrl>
+        <Point>
+          <coordinates>
+            -80.6550851,-5.1814318,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Makro Piura 2</name>
+        <description><![CDATA[AV. SÁNCHEZ CERRO SUB LOTE B, 1A DISTRITO 26 DE OCTUBRE<br>Horario de atención: Lunes a Domingo de 7:00 am a 10:00 pm<br>www.makro.pe]]></description>
+        <styleUrl>#icon-1899-1A237E</styleUrl>
+        <Point>
+          <coordinates>
+            -80.6596104,-5.1806134,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Makro Sullana</name>
+        <description><![CDATA[ZONA INDUSTRIAL MUNICIPAL N2 MZE Lt2<br>Horario de atención: Lunes a Domingo de 7:00 am a 10:00 pm<br>www.makro.pe]]></description>
+        <styleUrl>#icon-1899-1A237E</styleUrl>
+        <Point>
+          <coordinates>
+            -80.692453,-4.9163792,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Makro Huancayo</name>
+        <description><![CDATA[AV. PROLONGACIÓN JOSÉ CARLOS MARIATEGUI S/N, HUANCAYO, HUANCAYO<br>Horario de atención: Lunes a Domingo de 7:30 am a 9:00 pm<br>www.makro.pe<br>Teléfono: 064-602200 anexo 201]]></description>
+        <styleUrl>#icon-1899-1A237E</styleUrl>
+        <Point>
+          <coordinates>
+            -75.207461,-12.046906,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Makro Chincha</name>
+        <description><![CDATA[CARRETERA PANAMERICANA SUR KM. 195 - Chincha<br>Horario de atención: Lunes a Domingo de 8:00 am a 10:00 pm<br>www.makro.pe<br>Teléfono: 056-602260]]></description>
+        <styleUrl>#icon-1899-1A237E</styleUrl>
+        <Point>
+          <coordinates>
+            -76.152743,-13.4128695,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Makro Ica</name>
+        <description><![CDATA[AV. NICOLÁS DE RIVERO EL VIEJO 1117 - ICA<br>Horario de atención: Lunes a Domingo de 8:00 am a 10:00 pm<br>www.makro.pe<br>Teléfono: 056-60020]]></description>
+        <styleUrl>#icon-1899-1A237E</styleUrl>
+        <Point>
+          <coordinates>
+            -75.723518,-14.0819009,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Makro Huacho</name>
+        <description><![CDATA[AV. PANAMERICANA CRUCE CON AV. SAN MARTIN – SANTA MARIA, HUACHO, LIMA<br>Horario de atención: Lunes a Sábado de 8:30 am a 7:00 pm. Domingos cerrado<br>www.makro.pe]]></description>
+        <styleUrl>#icon-1899-1A237E</styleUrl>
+        <Point>
+          <coordinates>
+            -77.5869412,-11.0936336,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Makro Cañete</name>
+        <description><![CDATA[Parcela 6 del proyecto Chilca - San Vicente de Cañete<br>Horario de atención: Lunes a Domingo de 7:00 am a 10:00 pm<br>www.makro.pe]]></description>
+        <styleUrl>#icon-1899-1A237E</styleUrl>
+        <Point>
+          <coordinates>
+            -76.3623055,-13.0677064,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Makro San Martin de Porres</name>
+        <description><![CDATA[PLAZA CENTER REX<br>Horario de atención: Lunes a Domingo de 7:30 am. a 10:00 pm.<br>www.makro.pe]]></description>
+        <styleUrl>#icon-1899-1A237E</styleUrl>
+        <Point>
+          <coordinates>
+            -77.0629542,-12.0096132,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Makro Chimbote</name>
+        <description><![CDATA[Av. Los pescadores s/n zona lotización Gran Trapecio Parcela 3, Mz. C. Lt 4, 5, 6, 7, 8<br>Horario de atención: Lunes a Domingo de 7:00 am. a 10:00 pm.<br>www.makro.pe]]></description>
+        <styleUrl>#icon-1899-1A237E</styleUrl>
+        <Point>
+          <coordinates>
+            -78.5595944,-9.1039125,0
+          </coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

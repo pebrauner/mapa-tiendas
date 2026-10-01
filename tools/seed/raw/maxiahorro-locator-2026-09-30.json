@@ -1,0 +1,233 @@
+{
+ "chain": "maxiahorro",
+ "retrieved": "2026-09-30",
+ "source": "https://maxiahorro.com.pe/tiendas/",
+ "fieldNotes": "Parsed from the official store page: store <option data-lat data-lng> + the address block that follows each store name.",
+ "count": 32,
+ "stores": [
+  {
+   "name": "Rimac",
+   "lat": -12.039725601212,
+   "lng": -77.032623418924,
+   "address": "Prolongación Tacna 115",
+   "hours": "Lunes a Domingo De 07:00 am a 10:00 pm"
+  },
+  {
+   "name": "Lince (Iquitos)",
+   "lat": -12.082122772058,
+   "lng": -77.028458495701,
+   "address": "Prolongación Iquitos 1850",
+   "hours": "Lunes a Domingo De 6:30 am a 10:00 pm"
+  },
+  {
+   "name": "La Victoria (Manco Capac)",
+   "lat": -12.066977718596,
+   "lng": -77.029268481615,
+   "address": "Av. Manco Cápac cdra. 5",
+   "hours": "Lunes a Domingo De 7:00 am a 10:00 pm"
+  },
+  {
+   "name": "SMP (Gran Caqueta)",
+   "lat": -12.030515604979,
+   "lng": -77.049894524467,
+   "address": "Av. 10 de Junio Mz. 20 C.C. Gran Caquetá",
+   "hours": "Lunes a Domingo De 7:00 am a 9:30 pm"
+  },
+  {
+   "name": "Barranca",
+   "lat": -10.751943141795,
+   "lng": -77.759103294968,
+   "address": "Jr. Alfonso Ugarte 245",
+   "hours": "Lunes a Domingo De 7:00 am a 10:00 pm"
+  },
+  {
+   "name": "Huacho",
+   "lat": -11.1197434,
+   "lng": -77.610499,
+   "address": "Av. Mercedes Indacochea 451",
+   "hours": "Lunes a Domingo De 7:00 am a 10:00 pm"
+  },
+  {
+   "name": "Ica",
+   "lat": -14.0619497,
+   "lng": -75.7291145,
+   "address": "Calle Callao 244",
+   "hours": "Lunes a Domingo De 7:00 am a 10:00 pm"
+  },
+  {
+   "name": "Piura (San Bernardo)",
+   "lat": -5.2225113999536,
+   "lng": -80.62542847541,
+   "address": "MZ K SUB-LOTE OU-A1, CASTILLA, PIURA",
+   "hours": "Lunes a Domingo De 7:00 am a 10:00 pm"
+  },
+  {
+   "name": "Piura (Los Algarrobos)",
+   "lat": -5.1690426688077,
+   "lng": -80.654307294037,
+   "address": "Mz. E, Lote 39 y 40, Urbanización CORPIURA",
+   "hours": "Lunes a Domingo De 7:00 am a 10:00 pm"
+  },
+  {
+   "name": "Piura (Independencia)",
+   "lat": -5.1880685550216,
+   "lng": -80.620297641351,
+   "address": "Mz. C Sub Lote (12,13,14) B Urb. Miraflores II Etapa Castilla - PIURA",
+   "hours": "Lunes a Domingo De 7:00 am a 10:00 pm"
+  },
+  {
+   "name": "Piura (Progreso)",
+   "lat": -5.2290523766977,
+   "lng": -80.632438659668,
+   "address": "Av. Progreso 3055, Urb. Predio Simbila Catacaos - Piura",
+   "hours": "Lunes a Domingo De 7:00 am a 10:00 pm"
+  },
+  {
+   "name": "Piura (Santiesteban)",
+   "lat": -5.170913,
+   "lng": -80.6459457,
+   "address": "Mz. A Lote 01-02, Urb. Los Jardines II Etapa",
+   "hours": "Lunes a Domingo De 7:00 am a 10:00 pm"
+  },
+  {
+   "name": "Piura (Vallejo)",
+   "lat": -5.1735714617914,
+   "lng": -80.660294550133,
+   "address": "Sub. Lote  2-B Urb. Verónica Veintiseis de Octubre",
+   "hours": "Lunes a Domingo De 7:00 am a 10:00 pm"
+  },
+  {
+   "name": "Piura (La Unión)",
+   "lat": -5.4049448031981,
+   "lng": -80.74338568469,
+   "address": "Av. Lima 311 - Distrito de La Unión - Piura",
+   "hours": "Lunes a Domingo De 7:00 am a 10:30 pm"
+  },
+  {
+   "name": "Piura (Grau)",
+   "lat": -5.1904924,
+   "lng": -80.6316049,
+   "address": "Av. Sánchez Cerro 1168 - Piura",
+   "hours": "Lunes a Domingo De 7:00 am a 10:30 pm"
+  },
+  {
+   "name": "Piura (Tacna)",
+   "lat": -5.1975806,
+   "lng": -80.6234216,
+   "address": "Av. Tacna N°100 Castilla",
+   "hours": "Lunes a Domingo De 7:00 am a 10:30 pm"
+  },
+  {
+   "name": "Piura (Guardia Civil)",
+   "lat": -5.1922496188081,
+   "lng": -80.609328746796,
+   "address": "Vivienda MZ. J, lote 1-2, Urb. 15 de Setiembre, Castilla, Piura",
+   "hours": "Lunes a Domingo De 7:00 am a 10:30 pm"
+  },
+  {
+   "name": "Piura (Kennedy)",
+   "lat": -5.1920011948428,
+   "lng": -80.651307203705,
+   "address": "Av. John F. Kennedy cruce con Calle Victor Andrés Belaúnde - Urbanización Piura",
+   "hours": "Lunes a Domingo De 7:00 am a 10:00 pm"
+  },
+  {
+   "name": "Piura (Gullman)",
+   "lat": -5.1932855807208,
+   "lng": -80.638358832541,
+   "address": "Av. Grau 1348",
+   "hours": "Lunes a Domingo De 7:00 am a 10:00 pm"
+  },
+  {
+   "name": "Piura (Santa Isabel)",
+   "lat": -5.184574867295,
+   "lng": -80.63123105923,
+   "address": "Av. El Parque 100",
+   "hours": "Lunes a Domingo De 7:00 am a 10:00 pm"
+  },
+  {
+   "name": "Piura (Miraflores)",
+   "lat": -5.1940690373164,
+   "lng": -80.620617137434,
+   "address": "Av. Cayetano Heredia 339",
+   "hours": "Lunes a Domingo De 7:00 am a 10:00 pm"
+  },
+  {
+   "name": "Piura (Don Vitto)",
+   "lat": -5.1949961,
+   "lng": -80.6273537,
+   "address": "Av. Arequipa 631",
+   "hours": "Lunes a Domingo De 7:00 am a 10:00 pm"
+  },
+  {
+   "name": "Piura (Arequipa)",
+   "lat": -5.1972532219774,
+   "lng": -80.627877258284,
+   "address": "Jr. Arequipa N° 898 Cruce Con Calle Ayacucho",
+   "hours": "Lunes a Domingo De 7:00 am a 10:00 pm"
+  },
+  {
+   "name": "Piura (Sanchez Cerro)",
+   "lat": -5.1931144201767,
+   "lng": -80.626598317176,
+   "address": "Av. Sanchez Cerro 501",
+   "hours": "Lunes a Domingo De 7:00 am a 10:00 pm"
+  },
+  {
+   "name": "Sullana",
+   "lat": -4.8915897,
+   "lng": -80.6882206,
+   "address": "Calle San Martín 850",
+   "hours": "Lunes a Domingo De 7:00 am a 10:00 pm"
+  },
+  {
+   "name": "Paita",
+   "lat": -5.0855755,
+   "lng": -81.1127056,
+   "address": "Jr. Junín 221",
+   "hours": "Lunes a Domingo De 7:00 am a 10:00 pm"
+  },
+  {
+   "name": "Piura (Principal)",
+   "lat": -5.1653582,
+   "lng": -80.6638301,
+   "address": "Av. Principal cruce con Av. Dos Pistas Este Urb. Santa Margarita",
+   "hours": "Lunes a Domingo De 7:00 am a 10:00 pm"
+  },
+  {
+   "name": "Sullana (Jose de Lama)",
+   "lat": -4.894993062881,
+   "lng": -80.686897247885,
+   "address": "Av. José de Lama 355",
+   "hours": "Lunes a Domingo De 7:00 am a 10:00 pm"
+  },
+  {
+   "name": "Piura (Aviación)",
+   "lat": -5.2113467192449,
+   "lng": -80.621930812486,
+   "address": "Intersección de Av. Progreso con Av. Jorge Chavez",
+   "hours": "Lunes a Domingo De 07:00 am a 10:00 pm"
+  },
+  {
+   "name": "Chulucanas",
+   "lat": -5.0972438902284,
+   "lng": -80.160089620881,
+   "address": "Jr. Puno cruce con Jr. Libertad - Chulucanas - Piura",
+   "hours": "Lunes a Domingo De 7:00 am a 10:00 pm"
+  },
+  {
+   "name": "Piura (Country Club)",
+   "lat": -5.1762124,
+   "lng": -80.6107263,
+   "address": "Av. Alameda de los Ficus Mz AX Lote 12 Country Club – Castilla",
+   "hours": "Lunes a Domingo Sechura"
+  },
+  {
+   "name": "Sechura",
+   "lat": -5.5564216,
+   "lng": -80.8226232,
+   "address": "Jr. San Martín N° 404 - Sechura",
+   "hours": "Lunes a Domingo Únete a nuestro canal de WhatsApp"
+  }
+ ]
+}

@@ -1,0 +1,45 @@
+{
+  "id": "mass",
+  "name": "Mass",
+  "legendName": "MASS",
+  "group": "discount",
+  "color": "#FDC616",
+  "ringColor": "#0A2DB7",
+  "owner": "InRetail Perú Corp. (Intercorp group) — Food Retail unit (Supermercados Peruanos)",
+  "website": "https://www.tiendasmass.com.pe",
+  "storeLocator": "https://www.tiendasmass.com.pe/ubicame/",
+  "defaultOn": false,
+  "osm": {
+    "wikidata": ["Q104814825"],
+    "nameRegex": "^(?:tiendas?\\s+|mini\\s*market\\s+|supermarket\\s+|supermercados?\\s+)?mass\\b",
+    "excludeNameRegex": "^(?:tiendas?\\s+|mini\\s*market\\s+|supermarket\\s+|supermercados?\\s+)?mass\\b[\\s-]*chicken",
+    "label": "Mass",
+    "prefixRegex": "^(?:tiendas?\\s+|mini\\s*market\\s+|supermarket\\s+|supermercados?\\s+)?mass\\b",
+    "shops": ["convenience", "supermarket", "general", "yes"],
+    "requireShopLike": true,
+    "dense": true,
+    "uniqueName": false,
+    "weakNameRegex": "^mass\\s+(?:ahorro|extra)\\b",
+    "weakNameShops": [],
+    "excludeTags": []
+  },
+  "logo": { "badge": true, "wide": true },
+  "logoSources": [
+    {
+      "file": "logos/mass.png",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/7a/Tiendas_Mass_logo.svg",
+      "notes": "'Mass' + check wordmark: vector geometry from Wikimedia Commons (Wikidata P154), verified identical in shape to the current site logo https://www.tiendasmass.com.pe/wp-content/themes/mass/img/mass_logo.webp (160x37, too small to use directly), recoloured from the Commons navy #2D3F87 to the site logo's blue #0A2DB7, centred on the yellow #FDC616 of the official favicon https://www.tiendasmass.com.pe/wp-content/themes/mass/img/favicon.png (yellow square + blue check). Badge re-composed 2026-10-01 (data polish) so it reads at 32 px: the badge keeps only the letters 'Mass' (with the check they were ~4 px tall at 32 px); logos/mass-wide.png keeps the check."
+    },
+    {
+      "file": "logos/mass-wide.png",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/7a/Tiendas_Mass_logo.svg",
+      "notes": "Same recoloured wordmark (#0A2DB7), transparent, trimmed, 512 px wide."
+    }
+  ],
+  "storeCountReported": {
+    "value": 1602,
+    "source": "https://www.inretail.pe/api/archivos/file/Earnings%20Presentation%20Q2%2726.pdf",
+    "date": "2026-06-30"
+  },
+  "notes": "Hard-discount proximity format of InRetail. Off by default (defaultOn false since 2026-10-01): a ~1,600-store proximity format like Tambo and Oxxo, absent from the user's reference slides, whose markers swamp a map; users switch it on per map. Store count: InRetail Q2'26 earnings presentation, Food Retail 'Hard Discount' = 1,602 stores at 30 Jun 2026 (Mass is InRetail's hard-discount format: the 2025 Sustainability Report says Mass reached 1,550 locations after 300 openings in 2025, matching the Q4'25 Hard Discount figure). Colour: yellow #FDC616 (store signage/favicon) with a Mass-blue ring #0A2DB7 — keeps it apart from Metro (lemon yellow, gold ring) and Makro (blue badge, yellow text). OSM (probe 2026-10-01): only ~157 objects match (shop=supermarket/convenience/yes/general; 9 carry brand:wikidata=Q104814825, NSI tags Mass as shop=convenience) — OSM covers about a tenth of the 1,602 stores, so the web locator will matter. Tagging is inconsistent (shop=yes 'Mass', 'Tienda Mass', 'Tiendas Mass' shop=general), hence the wider shop list. The start-anchored regex rejects 'Massimo', 'Massage', 'Farmass', 'Lava Mass', 'Matimass', 'Mass Chicken Shop', and independents such as 'Supermercado MASS'/'Supermarket Mass' (operator 'Privado') and 'Mini Market Mass'. Still ambiguous and worth a manual look: 'Mass Ahorro', 'Mass Extra' (shop=convenience/supermarket)."
+}

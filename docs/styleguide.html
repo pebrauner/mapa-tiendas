@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mapa de Tiendas — Guía de componentes</title>
+<!-- Live catalogue of css/core.css + js/ui.js for module builders. Open it by double-click (file://).
+     Everything here uses only core files; copy the markup patterns into your module. -->
+<link rel="stylesheet" href="../vendor/fonts/fonts.css">
+<link rel="stylesheet" href="../css/core.css">
+<style>
+  /* Page-only layout (not part of the design system). */
+  body { overflow: auto; }
+  .sg { max-width: 1180px; margin: 0 auto; padding: 32px 28px 80px; }
+  .sg h1 { font-family: var(--mt-font-display); font-size: 30px; letter-spacing: -0.03em; }
+  .sg h2 { font-family: var(--mt-font-display); font-size: 19px; margin: 40px 0 6px; }
+  .sg > p, .sg .lead { color: var(--mt-g600); max-width: 760px; }
+  .sg-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+  .sg-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 10px 0; }
+  .sg-swatch { display: grid; gap: 6px; font-size: 12px; color: var(--mt-g600); }
+  .sg-swatch i { display: block; height: 44px; border-radius: 8px; border: 1px solid rgba(0,0,0,.06); }
+  .sg-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 12px; }
+  .sg-icons { display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: 8px; }
+  .sg-icons div { display: grid; justify-items: center; gap: 6px; padding: 12px 6px; background: var(--mt-surface); border: 1px solid var(--mt-border); border-radius: 8px; font-size: 11.5px; color: var(--mt-g600); }
+  .sg-demo-split { height: 420px; border: 1px solid var(--mt-border); border-radius: var(--mt-r-lg); overflow: hidden; background: var(--mt-bg); }
+  .sg-code { font-family: var(--mt-font-mono); font-size: 12px; color: var(--mt-g600); }
+  .sg-topline { display: flex; align-items: center; gap: 12px; }
+</style>
+</head>
+<body>
+<div class="sg" id="sg"></div>
+<script src="../js/mt.js"></script>
+<script src="../js/theme.js"></script>
+<script src="../js/i18n.js"></script>
+<script src="../js/i18n/core.js"></script>
+<script src="../js/ui.js"></script>
+<script>
+(function () {
+  'use strict';
+  var U = MT.util, h = U.h, ui = MT.ui, root = document.getElementById('sg');
+  var sec = function (title, note) { root.appendChild(h('h2', null, title)); if (note) root.appendChild(h('p', { class: 'sg-code' }, note)); };
+  var row = function () { var r = h('div', { class: 'sg-row' }); U.append(r, Array.prototype.slice.call(arguments)); root.appendChild(r); return r; };
+
+  root.appendChild(h('div', { class: 'sg-topline' },
+    h('h1', null, 'Guía de componentes'),
+    h('span', { class: 'mt-badge mt-badge--accent' }, 'core.css'),
+    h('span', { class: 'mt-spacer' }),
+    (function () { var s = ui.segmented({ value: MT.i18n.lang, options: [{ value: 'es', label: 'ES' }, { value: 'en', label: 'EN' }], onChange: function (v) { MT.i18n.setLang(v); } }); s.classList.add('mt-seg--compact'); return s; })()));
+  root.appendChild(h('p', { class: 'lead' }, 'Catálogo vivo del sistema de diseño de Mapa de Tiendas. Los módulos reutilizan estas clases (prefijo mt-) y los constructores de MT.ui; los colores y medidas salen de variables CSS (--mt-…).'));
+
+  /* Tokens */
+  sec('Color', '--mt-accent · --mt-g0…--mt-g900 · --mt-success/warn/danger/info');
+  var sw = h('div', { class: 'sg-swatches' });
+  [['--mt-accent', 'accent'], ['--mt-accent-hover', 'accent-hover'], ['--mt-accent-press', 'accent-press'], ['--mt-accent-soft', 'accent-soft'], ['--mt-navy', 'navy (Peso)'],
+    ['--mt-g900', 'g900'], ['--mt-g700', 'g700'], ['--mt-g500', 'g500'], ['--mt-g300', 'g300'], ['--mt-g200', 'g200'], ['--mt-g100', 'g100 (fondo)'], ['--mt-g0', 'g0 (superficie)'],
+    ['--mt-success', 'success'], ['--mt-warn', 'warn'], ['--mt-danger', 'danger'], ['--mt-info', 'info']].forEach(function (c) {
+    sw.appendChild(h('div', { class: 'sg-swatch' }, h('i', { style: { background: 'var(' + c[0] + ')' } }), c[1]));
+  });
+  sw.insertBefore(h('div', { class: 'sg-swatch' }, h('i', { style: { background: 'var(--mt-accent-gradient)' } }), 'accent-gradient (panel)'), sw.firstChild);
+  root.appendChild(sw);
+
+  sec('Tipografía', "--mt-font (Instrument Sans) · --mt-font-display (Bricolage Grotesque) · --mt-font-slide (Calibri → Carlito)");
+  root.appendChild(h('div', { class: 'mt-card mt-stack' },
+    h('div', { style: { fontFamily: 'var(--mt-font-display)', fontSize: '28px', fontWeight: 650, letterSpacing: '-0.03em' } }, 'Lima Metropolitana Sur'),
+    h('div', { style: { fontSize: 'var(--mt-fs-lg)', fontWeight: 600 } }, 'Título de panel — 17 px'),
+    h('div', null, 'Texto base 14 px: busca distritos de todo el Perú, elige cadenas y exporta la lámina.'),
+    h('div', { class: 'mt-small mt-muted' }, 'Texto secundario 12,5 px · tabular 1 234 567,89'),
+    h('div', { class: 'mt-section-title' }, 'Título de sección'),
+    h('div', { style: { fontFamily: 'var(--mt-font-slide)', fontSize: '22px', fontWeight: 700 } }, 'Lámina (Carlito ≈ Calibri): PLAZA VEA (6)')));
+
+  /* Buttons */
+  sec('Botones', '.mt-btn + --primary | --secondary | --ghost | --danger | --soft, --sm, --icon, --block · MT.ui.button({...})');
+  row(ui.button({ kind: 'primary', icon: 'download', label: 'Exportar PowerPoint' }), ui.button({ kind: 'secondary', icon: 'plus', label: 'Agregar mapa' }),
+    ui.button({ kind: 'ghost', icon: 'copy', label: 'Duplicar' }), ui.button({ kind: 'soft', icon: 'target', label: 'Agregar radio' }),
+    ui.button({ kind: 'danger', icon: 'trash', label: 'Eliminar' }), ui.button({ kind: 'secondary', label: 'Deshabilitado', disabled: true }));
+  row(ui.button({ kind: 'primary', size: 'sm', label: 'Pequeño' }), ui.button({ kind: 'secondary', size: 'sm', icon: 'search', label: 'Buscar' }),
+    ui.button({ kind: 'ghost', icon: 'more', title: 'Más opciones' }), ui.button({ kind: 'secondary', icon: 'up', title: 'Subir' }), ui.button({ kind: 'secondary', icon: 'down', title: 'Bajar' }),
+    h('div', { class: 'mt-btn-group' }, ui.button({ kind: 'secondary', size: 'sm', label: 'PNG' }), ui.button({ kind: 'secondary', size: 'sm', label: 'PPTX' }), ui.button({ kind: 'secondary', size: 'sm', label: 'HTML' })));
+
+  /* Forms */
+  sec('Formularios', '.mt-field > .mt-label + .mt-input|.mt-select|.mt-textarea (+ .mt-hint, .mt-field__error) · .mt-input-group · MT.ui.switchEl · MT.ui.segmented');
+  var grid = h('div', { class: 'sg-grid' });
+  grid.appendChild(h('div', { class: 'mt-card mt-stack' },
+    h('label', { class: 'mt-field' }, h('span', { class: 'mt-label' }, 'Título del mapa'), h('input', { class: 'mt-input', value: 'Lima Metropolitana Sur' })),
+    h('label', { class: 'mt-field' }, h('span', { class: 'mt-label' }, 'Peso ', h('small', null, '(texto libre)')), h('input', { class: 'mt-input mt-input--num', placeholder: '15.8%' })),
+    h('div', { class: 'mt-field' }, h('span', { class: 'mt-label' }, 'Distritos'),
+      h('div', { class: 'mt-input-group' }, ui.iconEl('search', { size: 16 }), h('input', { class: 'mt-input', placeholder: 'Buscar distrito o provincia…' })),
+      h('span', { class: 'mt-hint' }, 'Escribe y elige de la lista. Enter agrega el primero.'))));
+  grid.appendChild(h('div', { class: 'mt-card mt-stack' },
+    h('label', { class: 'mt-field' }, h('span', { class: 'mt-label' }, 'Estilo de marcador'), h('select', { class: 'mt-select' }, h('option', null, 'Logo en círculo'), h('option', null, 'Tarjeta'), h('option', null, 'Punto'), h('option', null, 'Número'))),
+    h('label', { class: 'mt-field' }, h('span', { class: 'mt-label' }, 'Coordenadas'), h('input', { class: 'mt-input is-invalid', value: 'maps.app.goo.gl/xyz' }), h('span', { class: 'mt-field__error' }, 'Los enlaces cortos no traen coordenadas.')),
+    h('label', { class: 'mt-field' }, h('span', { class: 'mt-label' }, 'Notas'), h('textarea', { class: 'mt-textarea', placeholder: 'Observaciones…' }))));
+  grid.appendChild(h('div', { class: 'mt-card mt-stack' },
+    ui.switchEl({ label: 'Solo tiendas dentro de los distritos', checked: true }),
+    ui.switchEl({ label: 'Mostrar límites distritales', checked: false }),
+    h('label', { class: 'mt-check' }, h('input', { type: 'checkbox', checked: true }), 'Plaza Vea'),
+    h('div', { class: 'mt-field' }, h('span', { class: 'mt-label' }, 'Encuadre'), ui.segmented({ value: 'stores', options: [{ value: 'stores', label: 'Tiendas' }, { value: 'districts', label: 'Distritos' }] })),
+    (function () { var s = ui.segmented({ value: 'alpha', options: [{ value: 'alpha', label: 'A–Z', icon: 'table' }, { value: 'count', label: 'Cantidad', icon: 'layers' }] }); s.classList.add('mt-seg--block'); return s; })(),
+    h('div', { class: 'mt-field' }, h('span', { class: 'mt-label' }, 'Tamaño de marcador'), h('input', { class: 'mt-range', type: 'range', min: 0.6, max: 1.6, step: 0.1, value: 1 }))));
+  root.appendChild(grid);
+
+  /* Chips & badges */
+  sec('Chips e insignias', '.mt-chip (+ __label, __sub, __x, --accent, --plain) · .mt-badge (--success|warn|danger|info|accent, --dot) · .mt-swatch');
+  var chip = function (t, sub, cls) { return h('span', { class: 'mt-chip' + (cls ? ' ' + cls : '') }, h('span', { class: 'mt-chip__label' }, t, sub ? h('span', { class: 'mt-chip__sub' }, ' · ' + sub) : null), h('button', { class: 'mt-chip__x', type: 'button', 'aria-label': 'Quitar', html: ui.icon('close', { size: 14 }) })); };
+  row(chip('Miraflores', 'Lima'), chip('San Isidro', 'Lima'), chip('Víctor Larco Herrera', 'Trujillo'), chip('Provincia de Santa', '9 distritos', 'mt-chip--accent'), h('span', { class: 'mt-chip mt-chip--plain' }, h('span', { class: 'mt-swatch', style: { background: '#E30613' } }), 'Plaza Vea · 6'));
+  row(h('span', { class: 'mt-badge mt-badge--success mt-badge--dot' }, 'Verificada'), h('span', { class: 'mt-badge mt-badge--warn mt-badge--dot' }, 'Por verificar'), h('span', { class: 'mt-badge mt-badge--danger mt-badge--dot' }, 'Cerrada'),
+    h('span', { class: 'mt-badge mt-badge--info' }, 'OSM'), h('span', { class: 'mt-badge mt-badge--accent' }, 'Editada (local)'), h('span', { class: 'mt-badge' }, 'Manual'), h('kbd', null, 'Ctrl'), h('kbd', null, 'S'));
+
+  /* Split layout demo with list, sections and table */
+  sec('Diseño de pestaña', '.mt-split > .mt-sidebar (+ .mt-section, .mt-section-title, .mt-list) + .mt-content · .mt-toolbar · .mt-table-wrap > .mt-table');
+  var list = h('ul', { class: 'mt-list' });
+  [['Lima Metropolitana Sur', '4 distritos · 31 tiendas'], ['Lima Cono Sur', '6 distritos · 48 tiendas'], ['Trujillo', '1 distrito · 14 tiendas'], ['Chimbote', '1 distrito · 7 tiendas']].forEach(function (m, i) {
+    list.appendChild(h('li', { class: 'mt-list__item' + (i === 0 ? ' is-active' : ''), tabindex: '0' },
+      h('span', { class: 'mt-list__index' }, String(i + 1)),
+      h('div', { class: 'mt-list__main' }, h('div', { class: 'mt-list__title' }, m[0]), h('div', { class: 'mt-list__sub' }, m[1])),
+      h('div', { class: 'mt-list__actions' }, ui.button({ kind: 'ghost', size: 'sm', icon: 'copy', title: 'Duplicar' }), ui.button({ kind: 'ghost', size: 'sm', icon: 'more', title: 'Más' }))));
+  });
+  var table = h('table', { class: 'mt-table' },
+    h('thead', null, h('tr', null, h('th', { class: 'is-sortable', 'aria-sort': 'ascending' }, 'Cadena'), h('th', null, 'Nombre'), h('th', null, 'Distrito'), h('th', null, 'Estado'), h('th', { class: 'is-num' }, 'Latitud'))),
+    h('tbody', null, [['#E30613', 'Plaza Vea', 'Plaza Vea Arequipa', 'Miraflores', ['success', 'Verificada'], '-12.112090'],
+      ['#D52B1E', 'Wong', 'Wong Dos de Mayo', 'San Isidro', ['success', 'Verificada'], '-12.092102'],
+      ['#7A1E3A', 'Vivanda', 'Vivanda Roca y Boloña', 'Miraflores', ['warn', 'Por verificar'], '-12.120320'],
+      ['#5B2C83', 'Tambo', 'Tambo Schell', 'Miraflores', ['danger', 'Cerrada'], '-12.123161']].map(function (r, i) {
+      return h('tr', { class: i === 1 ? 'is-selected' : (i === 3 ? 'is-muted' : '') },
+        h('td', null, h('span', { class: 'mt-row' }, h('span', { class: 'mt-swatch', style: { background: r[0] } }), r[1])), h('td', null, r[2]), h('td', null, r[3]),
+        h('td', null, h('span', { class: 'mt-badge mt-badge--dot mt-badge--' + r[4][0] }, r[4][1])), h('td', { class: 'is-num' }, r[5]));
+    })));
+  root.appendChild(h('div', { class: 'sg-demo-split' }, h('div', { class: 'mt-split', style: { height: '100%' } },
+    h('aside', { class: 'mt-sidebar' },
+      h('div', { class: 'mt-section' }, h('div', { class: 'mt-section-title' }, 'Mapas del proyecto', h('span', { class: 'mt-count' }, '4')), list,
+        h('div', { style: { marginTop: '10px' } }, ui.button({ kind: 'secondary', size: 'sm', icon: 'plus', label: 'Agregar mapa', className: 'mt-btn--block' }))),
+      h('div', { class: 'mt-section mt-stack' }, h('div', { class: 'mt-section-title' }, 'Opciones'), ui.switchEl({ label: 'Mostrar límites distritales' }))),
+    h('div', { style: { display: 'flex', flexDirection: 'column', minWidth: 0 } },
+      h('div', { class: 'mt-toolbar' }, h('div', { class: 'mt-input-group', style: { width: '260px' } }, ui.iconEl('search', { size: 16 }), h('input', { class: 'mt-input mt-input--sm', placeholder: 'Buscar tienda…' })),
+        h('span', { class: 'mt-toolbar__sep' }), h('span', { class: 'mt-count' }, '62 tiendas'), h('span', { class: 'mt-spacer' }),
+        ui.button({ kind: 'secondary', size: 'sm', icon: 'upload', label: 'Importar' }), ui.button({ kind: 'primary', size: 'sm', icon: 'plus', label: 'Agregar tienda' })),
+      h('div', { class: 'mt-table-wrap', style: { flex: 1 } }, table)))));
+
+  /* Feedback */
+  sec('Diálogos, menús y avisos', 'MT.ui.modal · confirm · prompt · menu · toast · busy');
+  var menuBtn = ui.button({ kind: 'secondary', icon: 'more', label: 'Menú' });
+  menuBtn.addEventListener('click', function () {
+    ui.menu(menuBtn, [{ heading: 'Exportar' }, { label: 'PowerPoint (.pptx)', icon: 'slides', shortcut: 'Ctrl+E' }, { label: 'Imagen del mapa (PNG)', icon: 'image', hint: '3× · 3000 px' }, { label: 'Mapa interactivo (HTML)', icon: 'code' }, { separator: true }, { label: 'Eliminar mapa', icon: 'trash', danger: true }]);
+  });
+  row(
+    ui.button({ kind: 'secondary', label: 'Modal', onClick: function () { ui.modal({ title: 'Importar tiendas', body: h('p', { class: 'mt-modal__text' }, 'Se encontraron 124 filas: 98 nuevas y 26 que ya existen.'), actions: [{ label: 'Cancelar' }, { label: 'Importar 124 filas', kind: 'primary', autofocus: true }] }); } }),
+    ui.button({ kind: 'secondary', label: 'Confirmar', onClick: function () { ui.confirm('Se eliminará «Lima Cono Sur» del proyecto.', { title: '¿Eliminar mapa?', okLabel: 'Eliminar', danger: true }); } }),
+    ui.button({ kind: 'secondary', label: 'Pedir texto', onClick: function () { ui.prompt('Nombre del proyecto', { title: 'Cambiar nombre', value: 'Estudio X' }); } }),
+    menuBtn,
+    ui.button({ kind: 'secondary', label: 'Avisos', onClick: function () { ui.toast('Proyecto guardado.', { type: 'success' }); ui.toast('3 tiendas sin coordenadas.', { type: 'warn', action: { label: 'Revisar', onClick: function () {} } }); } }),
+    ui.button({ kind: 'secondary', label: 'Progreso', onClick: function () { var b = ui.busy({ title: 'Geocodificando direcciones', message: '0 de 40', progress: true, cancellable: true }); var i = 0; var t = setInterval(function () { i += 4; b.update({ progress: i / 40, message: i + ' de 40' }); if (i >= 40) { clearInterval(t); b.close(); } }, 300); } }));
+  root.appendChild(h('div', { class: 'sg-grid' },
+    h('div', { class: 'mt-card' }, ui.emptyState({ icon: 'map', title: 'Aún no hay distritos', text: 'Busca un distrito o una provincia para empezar el mapa.' })),
+    h('div', { class: 'mt-card mt-stack' }, h('div', { class: 'mt-section-title' }, 'Progreso'), h('div', { class: 'mt-progress' }, h('div', { class: 'mt-progress__bar', style: { width: '62%' } })), h('div', { class: 'mt-progress is-indeterminate' }, h('div', { class: 'mt-progress__bar' })), h('div', { class: 'mt-row' }, h('div', { class: 'mt-spinner' }), h('span', { class: 'mt-muted' }, 'Cargando mosaicos…'))),
+    h('div', { class: 'mt-popover' }, h('div', { class: 'mt-popover__title' }, 'Plaza Vea Arequipa'), h('div', { class: 'mt-popover__sub' }, 'Av. Arequipa 4651 · Miraflores'),
+      h('div', { class: 'mt-popover__actions' }, ui.button({ kind: 'secondary', size: 'sm', icon: 'eyeOff', label: 'Ocultar en este mapa' }), ui.button({ kind: 'soft', size: 'sm', icon: 'target', label: 'Radio 1 km' })))));
+
+  /* Icons */
+  sec('Iconos', "MT.ui.icon(name) → SVG string · MT.ui.iconEl(name) → <span class='mt-icon'>");
+  var ig = h('div', { class: 'sg-icons' });
+  ui.icons.forEach(function (n) { ig.appendChild(h('div', null, h('span', { class: 'mt-icon', html: ui.icon(n, { size: 22 }) }), n)); });
+  root.appendChild(ig);
+})();
+</script>
+</body>
+</html>

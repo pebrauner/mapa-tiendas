@@ -1,0 +1,73 @@
+{
+  "generated": "2026-10-01T04:56:59.067Z",
+  "count": 1891,
+  "sources": {
+    "geometry": "https://geosdot.servicios.gob.pe/geoserver/geoportal/wfs?typeName=geoportal:v_distritos_2023 (INEI límites censales 2023)",
+    "names": "OpenStreetMap boundary relations (pe:ubigeo), via Overpass API"
+  },
+  "settings": {
+    "HI_INTERVAL_M": 3,
+    "LO_K": 4.5,
+    "LO_MIN_M": 12,
+    "LO_MAX_M": 400,
+    "LO_QUANTIZATION": 1000000,
+    "mapshaper": "mapshaper@0.6.121"
+  },
+  "sizes": {
+    "districtsJsBytes": 2930358,
+    "districtsGeojsonBytes": 34824677
+  },
+  "names": {
+    "districts": {
+      "osm": 1875,
+      "titlecase": [
+        "010110 LEIMEBAMBA -> Leimebamba",
+        "030214 SAN MIGUEL DE CHACCRAMPA -> San Miguel de Chaccrampa",
+        "030407 IHUAYLLO -> Ihuayllo",
+        "051010 HUALLA -> Hualla",
+        "061111 SAN SILVESTRE DE COCHAN -> San Silvestre de Cochan",
+        "080807 SUYCKUTAMBO -> Suyckutambo",
+        "100106 QUISQUI (KICHKI) -> Quisqui (Kichki)",
+        "120129 SAN AGUSTIN -> San Agustín",
+        "120127 QUICHUAY -> Quichuay",
+        "150612 VEINTISIETE DE NOVIEMBRE -> Veintisiete de Noviembre",
+        "151003 ALLAUCA -> Allauca",
+        "200115 VEINTISEIS DE OCTUBRE -> Veintiséis de Octubre",
+        "220709 TINGO DE PONASA -> Tingo de Ponasa",
+        "250201 RAIMONDI -> Raimondi"
+      ]
+    },
+    "provinces": {
+      "osm": 195,
+      "titlecase": [
+        "0503 HUANCA SANCOS -> Huanca Sancos"
+      ]
+    },
+    "departments": {
+      "osm": 25,
+      "titlecase": []
+    },
+    "overrides": [
+      "060506 SANTA CRUZ DE TOLED -> Santa Cruz de Toledo (was \"Santa Cruz de Toled\")",
+      "070103 CARMEN DE LA LEGUA REYNOSO -> Carmen de la Legua Reynoso (was \"Carmen de La Legua Reynoso\")"
+    ],
+    "osmNameDiffers": [
+      "010110 INEI \"LEIMEBAMBA\" vs OSM \"Leymebamba\"",
+      "030214 INEI \"SAN MIGUEL DE CHACCRAMPA\" vs OSM \"San Miguel de Chaccrapampa\"",
+      "030407 INEI \"IHUAYLLO\" vs OSM \"Huayllo\"",
+      "051010 INEI \"HUALLA\" vs OSM \"Huaya\"",
+      "061111 INEI \"SAN SILVESTRE DE COCHAN\" vs OSM \"San Silvestre de Conchán\"",
+      "080807 INEI \"SUYCKUTAMBO\" vs OSM \"Suykutambo\"",
+      "100106 INEI \"QUISQUI (KICHKI)\" vs OSM \"Quisqui\"",
+      "120129 INEI \"SAN AGUSTIN\" vs OSM \"San Agustín de Cajas\"",
+      "120127 INEI \"QUICHUAY\" vs OSM \"Qhichuay\"",
+      "150612 INEI \"VEINTISIETE DE NOVIEMBRE\" vs OSM \"27 de noviembre\"",
+      "151003 INEI \"ALLAUCA\" vs OSM \"Ayauca\"",
+      "200115 INEI \"VEINTISEIS DE OCTUBRE\" vs OSM \"26 de Octubre\"",
+      "220709 INEI \"TINGO DE PONASA\" vs OSM \"Tingo de Ponaza\"",
+      "250201 INEI \"RAIMONDI\" vs OSM \"Raymondi\""
+    ],
+    "missingInOsm": [],
+    "extraInOsm": []
+  }
+}

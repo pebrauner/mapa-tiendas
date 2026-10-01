@@ -1,0 +1,48 @@
+{
+  "id": "vega",
+  "name": "Vega",
+  "legendName": "VEGA",
+  "group": "wholesale",
+  "color": "#C12A21",
+  "ringColor": "#C12A21",
+  "owner": "Corporación Vega S.A.C. (Grupo Vega, Vega family)",
+  "website": "https://www.vega.pe",
+  "storeLocator": "https://www.vega.pe/nuestras-tiendas",
+  "defaultOn": true,
+  "osm": {
+    "wikidata": ["Q139603395"],
+    "nameRegex": "^(?:(?:corporaci[oó]n|tiendas?|mayorista|supermercados?|market)\\s+)?vega(?:\\s+(?:market|mayorista|supermayorista|supermercado|cash\\s*(?:&|and|y)\\s*carry|express|mini\\s*market)\\b.*)?$",
+    "excludeNameRegex": "",
+    "label": "Vega",
+    "prefixRegex": "^(?:corporaci[oó]n\\s+)?vega\\b",
+    "shops": ["supermarket", "wholesale", "convenience", "yes"],
+    "requireShopLike": true,
+    "dense": true,
+    "uniqueName": false,
+    "weakNameRegex": "^vega$",
+    "weakNameShops": ["yes"],
+    "excludeTags": []
+  },
+  "logo": {
+    "badge": true,
+    "wide": true
+  },
+  "logoSources": [
+    {
+      "file": "logos/vega.png",
+      "url": "https://vegaperu.vtexassets.com/assets/vtex.file-manager-graphql/images/4f584fc8-0d19-47eb-aad2-f8ff7b8a104c___a855f559083bcc5494dd1e37e7962e87.png",
+      "notes": "Official white header logo of vega.pe (heart symbol + 'vega', transparent PNG 1029x226). Split into symbol and wordmark and re-stacked (heart above 'vega') on Vega red #C12A21 — the stacked lockup seen on the Vega store logo in the user's Lima Cono Sur slide. No recolouring. Local copy: tools/seed/logo-src/vega/vega-logo-white.png."
+    },
+    {
+      "file": "logos/vega-wide.png",
+      "url": "https://vegaperu.vtexassets.com/assets/vtex.file-manager-graphql/images/e3042c88-d0e9-473a-8862-d209a70ce135___cf167beb94ada40c6d4e3b4aa661a505.png",
+      "notes": "Official footer logo of vega.pe (red heart + 'vega', transparent PNG 2058x452), trimmed, 512 px wide. Local copy: tools/seed/logo-src/vega/vega-logo-red.png. (The vega.pe header also shows a 'vega.pe' e-commerce lockup with a cart, not used.)"
+    }
+  ],
+  "storeCountReported": {
+    "value": 62,
+    "source": "https://gestion.pe/economia/empresas/el-cash-and-carry-mas-markets-y-marcas-propias-la-estrategia-del-grupo-vega-este-ano-comercio-retail-tiendas-por-conveniencia-tiendas-mayoristas-noticia/",
+    "date": "2024-05-06"
+  },
+  "notes": "Peruvian grocery retailer/wholesaler of the Vega family (Corporación Vega; contact domain corporacionvega.pe). Formats under the same brand: 'Vega Supermayorista' (cash & carry), 'Vega Mayorista' (wholesale) and 'Vega Market' (small proximity supermarkets, incl. franchises) — all are included in this chain; the group is 'wholesale' per project config even though most outlets are Vega Market. Gestión 2024-05-06: 62 stores in Lima (43 market, 3 mayoristas, 16 cash & carry) — the most recent official breakdown found. The official store page (checked 2026-09-30) embeds two lists that disagree: the map list has 58 stores (42 Market, 13 Supermayorista, 3 Mayorista) and a second list has 70 named entries (+9 blank) -> raw snapshot in tools/seed/raw/vega-locator-2026-09-30.json; treat the union as candidates to verify. Brand colour from the official logo: #C12A21 (site UI also uses #F11713/#E40616). The old favicon (red check mark, /arquivos/vega-favicon.png) is outdated and was not used. OSM (probe 2026-10-01): only ~6 chain features ('Vega Market' convenience, 'Vega mayorista' brand=Vega, 'Vega Supermayorista' operator=Corporación Vega, 'Corporación Vega'), none with brand:wikidata. 'Vega' is a very common surname/place word in Peru ('Inca Garcilaso de la Vega' schools, 'Las Vegas', 'Bodega Vega', 'Vega Sports', 'Frávega'…): the regex only accepts plain 'Vega', 'Vega <format>…' or 'Corporación Vega…', and only with shop=supermarket/wholesale/convenience/yes (shop=yes is kept because one 'Vega Market' is tagged that way, so a plain 'Vega' shop=yes also matches -> verify against the locator; 'Vega' jewelry/tailor/dentist are not matched)."
+}

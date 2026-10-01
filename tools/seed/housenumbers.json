@@ -1,0 +1,2746 @@
+{
+ "about": "OSM house numbers (addr:street + addr:housenumber) on Lima streets where geocoded stores were checked by tools/merge.mjs (house-number sanity check / interpolation). One Overpass query; data © OpenStreetMap contributors, ODbL.",
+ "retrieved": "2026-10-01",
+ "endpoint": "https://overpass-api.de/api/interpreter",
+ "osmBase": "2026-10-01T07:08:39Z",
+ "query": "[out:json][timeout:90];\nnwr[\"addr:housenumber\"][\"addr:street\"~\"Comandante Espinar|Carlos Mari[aá]tegui|Pr[oó]ceres de la Independencia|Riva ?Ag[uü]ero|Retablo|Manuel Gonz[aá]le[sz]|S[aá]enz Pe[nñ]a|La Marina|Nicol[aá]s Ayll[oó]n\",i](-12.35,-77.20,-11.80,-76.85);\nout center tags;",
+ "elements": [
+  {
+   "ref": "w435190889",
+   "street": "Avenida Comandante Espinar",
+   "housenumber": "240",
+   "lat": -12.1175711,
+   "lng": -77.0366686
+  },
+  {
+   "ref": "w436593043",
+   "street": "Avenida Comandante Espinar",
+   "housenumber": "260",
+   "lat": -12.1173072,
+   "lng": -77.0366646
+  },
+  {
+   "ref": "w436595498",
+   "street": "Avenida Comandante Espinar",
+   "housenumber": "450",
+   "lat": -12.1153697,
+   "lng": -77.0366037
+  },
+  {
+   "ref": "w435690074",
+   "street": "Avenida Comandante Espinar",
+   "housenumber": "529",
+   "lat": -12.1146237,
+   "lng": -77.0371887
+  },
+  {
+   "ref": "w436595499",
+   "street": "Avenida Comandante Espinar",
+   "housenumber": "560",
+   "lat": -12.1145188,
+   "lng": -77.0366264
+  },
+  {
+   "ref": "n2993858015",
+   "street": "Avenida Comandante Espinar",
+   "housenumber": "611",
+   "lat": -12.1137173,
+   "lng": -77.0371448
+  },
+  {
+   "ref": "w454740043",
+   "street": "Avenida Comandante Espinar",
+   "housenumber": "689",
+   "lat": -12.1124229,
+   "lng": -77.0372477
+  },
+  {
+   "ref": "w435338678",
+   "street": "Avenida Comandante Espinar",
+   "housenumber": "730 - 750",
+   "lat": -12.1124062,
+   "lng": -77.03647
+  },
+  {
+   "ref": "w435338677",
+   "street": "Avenida Comandante Espinar",
+   "housenumber": "754",
+   "lat": -12.1121394,
+   "lng": -77.0364867
+  },
+  {
+   "ref": "n3379539168",
+   "street": "Avenida Comandante Espinar",
+   "housenumber": "780",
+   "lat": -12.1123181,
+   "lng": -77.0366917
+  },
+  {
+   "ref": "n3379539548",
+   "street": "Avenida Comandante Espinar",
+   "housenumber": "780",
+   "lat": -12.1123643,
+   "lng": -77.0366805
+  },
+  {
+   "ref": "n6226166527",
+   "street": "Avenida Comandante Espinar",
+   "housenumber": "844",
+   "lat": -12.1112152,
+   "lng": -77.0365801
+  },
+  {
+   "ref": "n5597512421",
+   "street": "Avenida Comandante Espinar",
+   "housenumber": "849",
+   "lat": -12.1110577,
+   "lng": -77.0370661
+  },
+  {
+   "ref": "w445400066",
+   "street": "Avenida El Retablo",
+   "housenumber": "520",
+   "lat": -11.9353616,
+   "lng": -77.058395
+  },
+  {
+   "ref": "w445399632",
+   "street": "Avenida El Retablo",
+   "housenumber": "690",
+   "lat": -11.9334212,
+   "lng": -77.0578159
+  },
+  {
+   "ref": "n4446995608",
+   "street": "Avenida José Carlos Mariategui",
+   "housenumber": "1510",
+   "lat": -12.1498333,
+   "lng": -76.9504244
+  },
+  {
+   "ref": "w447333370",
+   "street": "Avenida José Carlos Mariategui",
+   "housenumber": "3119",
+   "lat": -12.1370704,
+   "lng": -76.9445299
+  },
+  {
+   "ref": "n5484831322",
+   "street": "Avenida José Carlos Mariátegui",
+   "housenumber": "199",
+   "lat": -12.04513,
+   "lng": -76.984926
+  },
+  {
+   "ref": "n5597221858",
+   "street": "Avenida José Carlos Mariátegui",
+   "housenumber": "717",
+   "lat": -12.1556344,
+   "lng": -76.9535722
+  },
+  {
+   "ref": "n5754771321",
+   "street": "Avenida José Carlos Mariátegui",
+   "housenumber": "797",
+   "lat": -12.0260876,
+   "lng": -76.9128329
+  },
+  {
+   "ref": "n10174761557",
+   "street": "Avenida José Carlos Mariátegui",
+   "housenumber": "1199",
+   "lat": -12.0347128,
+   "lng": -76.9974585
+  },
+  {
+   "ref": "n8139543903",
+   "street": "Avenida José Carlos Mariátegui",
+   "housenumber": "1500",
+   "lat": -12.1498951,
+   "lng": -76.9504303
+  },
+  {
+   "ref": "n5105618576",
+   "street": "Avenida José Carlos Mariátegui",
+   "housenumber": "2104",
+   "lat": -12.1450112,
+   "lng": -76.9495335
+  },
+  {
+   "ref": "n5266970021",
+   "street": "Avenida José Carlos Mariátegui",
+   "housenumber": "2122",
+   "lat": -12.037717,
+   "lng": -76.9972441
+  },
+  {
+   "ref": "n10174729156",
+   "street": "Avenida José Carlos Mariátegui",
+   "housenumber": "2132",
+   "lat": -12.0370041,
+   "lng": -76.9971802
+  },
+  {
+   "ref": "n10174764214",
+   "street": "Avenida José Carlos Mariátegui",
+   "housenumber": "2206",
+   "lat": -12.0358329,
+   "lng": -76.9971548
+  },
+  {
+   "ref": "n10174720798",
+   "street": "Avenida José Carlos Mariátegui",
+   "housenumber": "2236",
+   "lat": -12.0355863,
+   "lng": -76.997185
+  },
+  {
+   "ref": "n10174729836",
+   "street": "Avenida José Carlos Mariátegui",
+   "housenumber": "2274",
+   "lat": -12.0351599,
+   "lng": -76.9972758
+  },
+  {
+   "ref": "n10174753709",
+   "street": "Avenida José Carlos Mariátegui",
+   "housenumber": "2346",
+   "lat": -12.0341595,
+   "lng": -76.9976671
+  },
+  {
+   "ref": "n5266995521",
+   "street": "Avenida José Carlos Mariátegui",
+   "housenumber": "2415",
+   "lat": -12.0322035,
+   "lng": -76.9967226
+  },
+  {
+   "ref": "n10585958400",
+   "street": "Avenida José Carlos Mariátegui",
+   "housenumber": "2490",
+   "lat": -12.0316996,
+   "lng": -76.9989549
+  },
+  {
+   "ref": "n4462137189",
+   "street": "Avenida José Carlos Mariátegui",
+   "housenumber": "2498",
+   "lat": -12.0319401,
+   "lng": -76.998781
+  },
+  {
+   "ref": "n5980150054",
+   "street": "Avenida José Carlos Mariátegui",
+   "housenumber": "2587",
+   "lat": -12.0306096,
+   "lng": -77.0001436
+  },
+  {
+   "ref": "w179510507",
+   "street": "Avenida José de la Riva Aguero",
+   "housenumber": "1358",
+   "lat": -12.0484041,
+   "lng": -77.0003402
+  },
+  {
+   "ref": "w440232351",
+   "street": "Avenida José de la Riva Aguero",
+   "housenumber": "1419",
+   "lat": -12.0476211,
+   "lng": -77.0004558
+  },
+  {
+   "ref": "n5597143173",
+   "street": "Avenida José de la Riva Aguero",
+   "housenumber": "1570",
+   "lat": -12.0458,
+   "lng": -76.9986
+  },
+  {
+   "ref": "n10174729835",
+   "street": "Avenida José de la Riva Aguero",
+   "housenumber": "1896",
+   "lat": -12.0403491,
+   "lng": -76.9973997
+  },
+  {
+   "ref": "n5567158892",
+   "street": "Avenida José de la Riva Agüero",
+   "housenumber": "272",
+   "lat": -12.0835066,
+   "lng": -77.0853297
+  },
+  {
+   "ref": "n13293600647",
+   "street": "Avenida José de la Riva Agüero",
+   "housenumber": "1002",
+   "lat": -12.0723281,
+   "lng": -77.0828698
+  },
+  {
+   "ref": "n13293600648",
+   "street": "Avenida José de la Riva Agüero",
+   "housenumber": "1502",
+   "lat": -12.0696782,
+   "lng": -77.0819446
+  },
+  {
+   "ref": "n9268840293",
+   "street": "Avenida José de la Riva Agüero",
+   "housenumber": "1502",
+   "lat": -12.0696856,
+   "lng": -77.0818656
+  },
+  {
+   "ref": "n13293600649",
+   "street": "Avenida José de la Riva Agüero",
+   "housenumber": "1506",
+   "lat": -12.0694082,
+   "lng": -77.0818669
+  },
+  {
+   "ref": "n9289175395",
+   "street": "Avenida José de la Riva Agüero",
+   "housenumber": "1506",
+   "lat": -12.0694371,
+   "lng": -77.0818419
+  },
+  {
+   "ref": "n13293600650",
+   "street": "Avenida José de la Riva Agüero",
+   "housenumber": "1802",
+   "lat": -12.0671506,
+   "lng": -77.0816241
+  },
+  {
+   "ref": "n9268840295",
+   "street": "Avenida José de la Riva Agüero",
+   "housenumber": "1802",
+   "lat": -12.0671825,
+   "lng": -77.0815931
+  },
+  {
+   "ref": "n5623305768",
+   "street": "Avenida Jóse de la Riva Agüero",
+   "housenumber": "728",
+   "lat": -12.0755241,
+   "lng": -77.083965
+  },
+  {
+   "ref": "n10281412005",
+   "street": "Avenida La Marina",
+   "housenumber": "248",
+   "lat": -12.0847587,
+   "lng": -77.0642749
+  },
+  {
+   "ref": "w635855925",
+   "street": "Avenida La Marina",
+   "housenumber": "330",
+   "lat": -12.0841457,
+   "lng": -77.064453
+  },
+  {
+   "ref": "n10281366560",
+   "street": "Avenida La Marina",
+   "housenumber": "368",
+   "lat": -12.0838511,
+   "lng": -77.0647146
+  },
+  {
+   "ref": "n4139697957",
+   "street": "Avenida La Marina",
+   "housenumber": "375",
+   "lat": -12.0841499,
+   "lng": -77.065253
+  },
+  {
+   "ref": "n10281415531",
+   "street": "Avenida La Marina",
+   "housenumber": "402",
+   "lat": -12.0835929,
+   "lng": -77.0652926
+  },
+  {
+   "ref": "n10281400328",
+   "street": "Avenida La Marina",
+   "housenumber": "470",
+   "lat": -12.083377,
+   "lng": -77.065686
+  },
+  {
+   "ref": "n4254309394",
+   "street": "Avenida La Marina",
+   "housenumber": "586",
+   "lat": -12.083026,
+   "lng": -77.0668532
+  },
+  {
+   "ref": "n5079951826",
+   "street": "Avenida La Marina",
+   "housenumber": "649",
+   "lat": -12.0678343,
+   "lng": -77.1144956
+  },
+  {
+   "ref": "w436450845",
+   "street": "Avenida La Marina",
+   "housenumber": "1021",
+   "lat": -12.0813914,
+   "lng": -77.0725815
+  },
+  {
+   "ref": "w442975521",
+   "street": "Avenida La Marina",
+   "housenumber": "1100",
+   "lat": -12.0799102,
+   "lng": -77.0743239
+  },
+  {
+   "ref": "n10281422550",
+   "street": "Avenida La Marina",
+   "housenumber": "1176",
+   "lat": -12.0799842,
+   "lng": -77.0749884
+  },
+  {
+   "ref": "n2827531470",
+   "street": "Avenida La Marina",
+   "housenumber": "1602",
+   "lat": -12.0780691,
+   "lng": -77.0789402
+  },
+  {
+   "ref": "n4406247036",
+   "street": "Avenida La Marina",
+   "housenumber": "1604",
+   "lat": -12.0784022,
+   "lng": -77.0790422
+  },
+  {
+   "ref": "n5591978324",
+   "street": "Avenida La Marina",
+   "housenumber": "1662",
+   "lat": -12.0781351,
+   "lng": -77.0803325
+  },
+  {
+   "ref": "n2722757527",
+   "street": "Avenida La Marina",
+   "housenumber": "2000",
+   "lat": -12.0762536,
+   "lng": -77.0828589
+  },
+  {
+   "ref": "n2722752623",
+   "street": "Avenida La Marina",
+   "housenumber": "2100",
+   "lat": -12.0771977,
+   "lng": -77.082908
+  },
+  {
+   "ref": "n2722757649",
+   "street": "Avenida La Marina",
+   "housenumber": "2100",
+   "lat": -12.0767175,
+   "lng": -77.0834859
+  },
+  {
+   "ref": "n1273982015",
+   "street": "Avenida La Marina",
+   "housenumber": "2355",
+   "lat": -12.0788309,
+   "lng": -77.0876651
+  },
+  {
+   "ref": "n2116516462",
+   "street": "Avenida La Marina",
+   "housenumber": "2355",
+   "lat": -12.0792883,
+   "lng": -77.0884094
+  },
+  {
+   "ref": "n2187492143",
+   "street": "Avenida La Marina",
+   "housenumber": "2500",
+   "lat": -12.0764717,
+   "lng": -77.0885699
+  },
+  {
+   "ref": "n5819364579",
+   "street": "Avenida La Marina",
+   "housenumber": "T237",
+   "lat": -12.0768254,
+   "lng": -77.0824561
+  },
+  {
+   "ref": "w635855444",
+   "street": "Avenida La Marina",
+   "housenumber": "1176 – 1180",
+   "lat": -12.0798965,
+   "lng": -77.0749828
+  },
+  {
+   "ref": "w635855450",
+   "street": "Avenida La Marina",
+   "housenumber": "1190",
+   "lat": -12.0795404,
+   "lng": -77.0753506
+  },
+  {
+   "ref": "w47700095",
+   "street": "Avenida La Marina",
+   "housenumber": "1200",
+   "lat": -12.0809731,
+   "lng": -77.0747478
+  },
+  {
+   "ref": "w442975094",
+   "street": "Avenida La Marina",
+   "housenumber": "1600",
+   "lat": -12.0781105,
+   "lng": -77.0789245
+  },
+  {
+   "ref": "w436784563",
+   "street": "Avenida La Marina",
+   "housenumber": "1632",
+   "lat": -12.0782186,
+   "lng": -77.0793958
+  },
+  {
+   "ref": "n8073263369",
+   "street": "Avenida La Marina",
+   "housenumber": "1725",
+   "lat": -12.0786258,
+   "lng": -77.0806445
+  },
+  {
+   "ref": "w201423241",
+   "street": "Avenida La Marina",
+   "housenumber": "2000",
+   "lat": -12.0769091,
+   "lng": -77.0826211
+  },
+  {
+   "ref": "w435212009",
+   "street": "Avenida La Marina",
+   "housenumber": "2287",
+   "lat": -12.0784031,
+   "lng": -77.0867434
+  },
+  {
+   "ref": "w201624518",
+   "street": "Avenida La Marina",
+   "housenumber": "2355",
+   "lat": -12.0796558,
+   "lng": -77.0886905
+  },
+  {
+   "ref": "w436454980",
+   "street": "Avenida La Marina",
+   "housenumber": "2469",
+   "lat": -12.0784331,
+   "lng": -77.0890064
+  },
+  {
+   "ref": "w208457358",
+   "street": "Avenida La Marina",
+   "housenumber": "2500",
+   "lat": -12.0760809,
+   "lng": -77.0890123
+  },
+  {
+   "ref": "n10148708594",
+   "street": "Avenida La Marina",
+   "housenumber": "2530",
+   "lat": -12.0776117,
+   "lng": -77.0898515
+  },
+  {
+   "ref": "w436457015",
+   "street": "Avenida La Marina",
+   "housenumber": "2955",
+   "lat": -12.0767414,
+   "lng": -77.0957401
+  },
+  {
+   "ref": "w436795388",
+   "street": "Avenida La Marina",
+   "housenumber": "3140",
+   "lat": -12.0751441,
+   "lng": -77.0974101
+  },
+  {
+   "ref": "n10114657959",
+   "street": "Avenida La Marina",
+   "housenumber": "3219",
+   "lat": -12.0750473,
+   "lng": -77.0990943
+  },
+  {
+   "ref": "w436795389",
+   "street": "Avenida La Marina",
+   "housenumber": "3240",
+   "lat": -12.0742134,
+   "lng": -77.0983909
+  },
+  {
+   "ref": "w435842001",
+   "street": "Avenida La Marina",
+   "housenumber": "3429",
+   "lat": -12.0739538,
+   "lng": -77.1017088
+  },
+  {
+   "ref": "w435842004",
+   "street": "Avenida La Marina",
+   "housenumber": "3491",
+   "lat": -12.0733474,
+   "lng": -77.1025208
+  },
+  {
+   "ref": "w435869553",
+   "street": "Avenida La Marina (auxiliar)",
+   "housenumber": "495",
+   "lat": -12.0674716,
+   "lng": -77.1151205
+  },
+  {
+   "ref": "n3736709096",
+   "street": "Avenida La Marina (auxiliar)",
+   "housenumber": "665",
+   "lat": -12.0680017,
+   "lng": -77.1142208
+  },
+  {
+   "ref": "w436921609",
+   "street": "Avenida La Marina (auxiliar)",
+   "housenumber": "3429",
+   "lat": -12.073685,
+   "lng": -77.1017543
+  },
+  {
+   "ref": "w693659691",
+   "street": "Avenida Manuel Gonzales Prada",
+   "housenumber": "986",
+   "lat": -11.991827,
+   "lng": -77.0701349
+  },
+  {
+   "ref": "w439400825",
+   "street": "Avenida Nicolas Ayllon",
+   "housenumber": "209",
+   "lat": -12.0557828,
+   "lng": -77.0119493
+  },
+  {
+   "ref": "w439397576",
+   "street": "Avenida Nicolas Ayllon",
+   "housenumber": "641",
+   "lat": -12.0618713,
+   "lng": -77.0044755
+  },
+  {
+   "ref": "w1460293401",
+   "street": "Avenida Nicolas Ayllon",
+   "housenumber": "900",
+   "lat": -12.064215,
+   "lng": -76.9989843
+  },
+  {
+   "ref": "w320415894",
+   "street": "Avenida Nicolas Ayllon",
+   "housenumber": "5880",
+   "lat": -12.0263522,
+   "lng": -76.919855
+  },
+  {
+   "ref": "n7872995492",
+   "street": "Avenida Nicolas Ayllón",
+   "housenumber": "877",
+   "lat": -12.0642385,
+   "lng": -76.9997625
+  },
+  {
+   "ref": "n4906141532",
+   "street": "Avenida Nicolás Ayllon",
+   "housenumber": "2340",
+   "lat": -12.0634702,
+   "lng": -76.9806976
+  },
+  {
+   "ref": "n5222547035",
+   "street": "Avenida Nicolás Ayllón",
+   "housenumber": "Lado 2224",
+   "lat": -12.0629349,
+   "lng": -76.9814072
+  },
+  {
+   "ref": "w478973604",
+   "street": "Avenida Nicolás Ayllón",
+   "housenumber": "137",
+   "lat": -12.055039,
+   "lng": -77.0126606
+  },
+  {
+   "ref": "w443692595",
+   "street": "Avenida Nicolás Ayllón",
+   "housenumber": "212",
+   "lat": -12.056331,
+   "lng": -77.0124024
+  },
+  {
+   "ref": "w804817582",
+   "street": "Avenida Nicolás Ayllón",
+   "housenumber": "226",
+   "lat": -12.0563232,
+   "lng": -77.0122148
+  },
+  {
+   "ref": "n6797583690",
+   "street": "Avenida Nicolás Ayllón",
+   "housenumber": "500",
+   "lat": -12.0250408,
+   "lng": -76.9170696
+  },
+  {
+   "ref": "w1195043272",
+   "street": "Avenida Nicolás Ayllón",
+   "housenumber": "1215",
+   "lat": -12.062843,
+   "lng": -76.9970661
+  },
+  {
+   "ref": "n5222547143",
+   "street": "Avenida Nicolás Ayllón",
+   "housenumber": "1979",
+   "lat": -12.0635081,
+   "lng": -76.9851348
+  },
+  {
+   "ref": "n6510240158",
+   "street": "Avenida Nicolás Ayllón",
+   "housenumber": "2018-A",
+   "lat": -12.0637465,
+   "lng": -76.9842004
+  },
+  {
+   "ref": "w384203094",
+   "street": "Avenida Nicolás Ayllón",
+   "housenumber": "3900",
+   "lat": -12.0457887,
+   "lng": -76.9479003
+  },
+  {
+   "ref": "n12009199587",
+   "street": "Avenida Nicolás Ayllón",
+   "housenumber": "4351",
+   "lat": -12.0377999,
+   "lng": -76.9319001
+  },
+  {
+   "ref": "w250476665",
+   "street": "Avenida Nicolás Ayllón",
+   "housenumber": "5818",
+   "lat": -12.0261906,
+   "lng": -76.9193466
+  },
+  {
+   "ref": "n1966842222",
+   "street": "Avenida Proceres de la Independencia",
+   "housenumber": "136",
+   "lat": -12.0297074,
+   "lng": -77.0116055
+  },
+  {
+   "ref": "n1966842539",
+   "street": "Avenida Proceres de la Independencia",
+   "housenumber": "136",
+   "lat": -12.0296721,
+   "lng": -77.0115902
+  },
+  {
+   "ref": "n1966842220",
+   "street": "Avenida Proceres de la Independencia",
+   "housenumber": "164",
+   "lat": -12.02811,
+   "lng": -77.01104
+  },
+  {
+   "ref": "w437349723",
+   "street": "Avenida Proceres de la Independencia",
+   "housenumber": "223",
+   "lat": -12.0254238,
+   "lng": -77.0101811
+  },
+  {
+   "ref": "n4274673901",
+   "street": "Avenida Proceres de la Independencia",
+   "housenumber": "580",
+   "lat": -12.0224377,
+   "lng": -77.0065354
+  },
+  {
+   "ref": "w437352801",
+   "street": "Avenida Proceres de la Independencia",
+   "housenumber": "1015",
+   "lat": -12.0175955,
+   "lng": -77.0028434
+  },
+  {
+   "ref": "w437360400",
+   "street": "Avenida Proceres de la Independencia",
+   "housenumber": "1571",
+   "lat": -12.0083512,
+   "lng": -77.0049216
+  },
+  {
+   "ref": "n1966842230",
+   "street": "Avenida Proceres de la Independencia",
+   "housenumber": "1621",
+   "lat": -12.00788,
+   "lng": -77.00523
+  },
+  {
+   "ref": "n3649707272",
+   "street": "Avenida Proceres de la Independencia",
+   "housenumber": "1623",
+   "lat": -12.0078708,
+   "lng": -77.0051215
+  },
+  {
+   "ref": "n1966842402",
+   "street": "Avenida Proceres de la Independencia",
+   "housenumber": "1722",
+   "lat": -12.005115,
+   "lng": -77.0060868
+  },
+  {
+   "ref": "n1966842279",
+   "street": "Avenida Proceres de la Independencia",
+   "housenumber": "1758",
+   "lat": -12.00434,
+   "lng": -77.00656
+  },
+  {
+   "ref": "n1966842470",
+   "street": "Avenida Proceres de la Independencia",
+   "housenumber": "1918",
+   "lat": -12.00126,
+   "lng": -77.00811
+  },
+  {
+   "ref": "n1966842224",
+   "street": "Avenida Proceres de la Independencia",
+   "housenumber": "2015",
+   "lat": -11.999551,
+   "lng": -77.0094551
+  },
+  {
+   "ref": "n1966842232",
+   "street": "Avenida Proceres de la Independencia",
+   "housenumber": "2252",
+   "lat": -11.9940528,
+   "lng": -77.0101968
+  },
+  {
+   "ref": "n1966842228",
+   "street": "Avenida Proceres de la Independencia",
+   "housenumber": "2362;2364",
+   "lat": -11.9922224,
+   "lng": -77.0106913
+  },
+  {
+   "ref": "n4353127450",
+   "street": "Avenida Proceres de la Independencia",
+   "housenumber": "2666",
+   "lat": -11.9876646,
+   "lng": -77.0082908
+  },
+  {
+   "ref": "w437497388",
+   "street": "Avenida Proceres de la Independencia",
+   "housenumber": "2674-2680",
+   "lat": -11.9875324,
+   "lng": -77.0079788
+  },
+  {
+   "ref": "n9276293523",
+   "street": "Avenida Proceres de la Independencia",
+   "housenumber": "2717",
+   "lat": -11.9863579,
+   "lng": -77.0079582
+  },
+  {
+   "ref": "n9419917322",
+   "street": "Avenida Proceres de la Independencia",
+   "housenumber": "2916",
+   "lat": -11.9828014,
+   "lng": -77.0057943
+  },
+  {
+   "ref": "w1021349399",
+   "street": "Avenida Proceres de la Independencia",
+   "housenumber": "2948",
+   "lat": -11.9823726,
+   "lng": -77.005381
+  },
+  {
+   "ref": "n9419917318",
+   "street": "Avenida Proceres de la Independencia",
+   "housenumber": "2980",
+   "lat": -11.9817467,
+   "lng": -77.0054148
+  },
+  {
+   "ref": "n9419917320",
+   "street": "Avenida Proceres de la Independencia",
+   "housenumber": "2984",
+   "lat": -11.9816693,
+   "lng": -77.0053867
+  },
+  {
+   "ref": "w437501557",
+   "street": "Avenida Proceres de la Independencia",
+   "housenumber": "2998 A",
+   "lat": -11.9814629,
+   "lng": -77.0052485
+  },
+  {
+   "ref": "n9419943238",
+   "street": "Avenida Proceres de la Independencia",
+   "housenumber": "3028",
+   "lat": -11.980709,
+   "lng": -77.0050715
+  },
+  {
+   "ref": "n9419943236",
+   "street": "Avenida Proceres de la Independencia",
+   "housenumber": "3048",
+   "lat": -11.9804988,
+   "lng": -77.0049865
+  },
+  {
+   "ref": "n9419943230",
+   "street": "Avenida Proceres de la Independencia",
+   "housenumber": "3066",
+   "lat": -11.980243,
+   "lng": -77.0048915
+  },
+  {
+   "ref": "n9419943231",
+   "street": "Avenida Proceres de la Independencia",
+   "housenumber": "3066",
+   "lat": -11.9803147,
+   "lng": -77.0049253
+  },
+  {
+   "ref": "n9419943227",
+   "street": "Avenida Proceres de la Independencia",
+   "housenumber": "3074",
+   "lat": -11.9800097,
+   "lng": -77.0047771
+  },
+  {
+   "ref": "w1104002950",
+   "street": "Avenida Proceres de la Independencia",
+   "housenumber": "3076",
+   "lat": -11.9799901,
+   "lng": -77.0045152
+  },
+  {
+   "ref": "w446932300",
+   "street": "Avenida Prolongación José Carlos Mariátegui",
+   "housenumber": "3467",
+   "lat": -12.1338078,
+   "lng": -76.9412344
+  },
+  {
+   "ref": "n9211472977",
+   "street": "Avenida Próceres de la Independencia",
+   "housenumber": "104",
+   "lat": -12.0314618,
+   "lng": -77.0118106
+  },
+  {
+   "ref": "n10224960408",
+   "street": "Avenida Próceres de la Independencia",
+   "housenumber": "182",
+   "lat": -12.0282912,
+   "lng": -77.0111523
+  },
+  {
+   "ref": "n10580545653",
+   "street": "Avenida Próceres de la Independencia",
+   "housenumber": "192",
+   "lat": -12.0280171,
+   "lng": -77.0109965
+  },
+  {
+   "ref": "w996775366",
+   "street": "Avenida Próceres de la Independencia",
+   "housenumber": "197;199",
+   "lat": -12.0266603,
+   "lng": -77.0109777
+  },
+  {
+   "ref": "n7719087756",
+   "street": "Avenida Próceres de la Independencia",
+   "housenumber": "480",
+   "lat": -12.0234911,
+   "lng": -77.0076023
+  },
+  {
+   "ref": "n6448466885",
+   "street": "Avenida Próceres de la Independencia",
+   "housenumber": "750",
+   "lat": -12.0205581,
+   "lng": -77.0045628
+  },
+  {
+   "ref": "n2486775474",
+   "street": "Avenida Próceres de la Independencia",
+   "housenumber": "850",
+   "lat": -12.0171037,
+   "lng": -77.0016901
+  },
+  {
+   "ref": "w554937547",
+   "street": "Avenida Próceres de la Independencia",
+   "housenumber": "955",
+   "lat": -12.0184683,
+   "lng": -77.003429
+  },
+  {
+   "ref": "n10281343603",
+   "street": "Avenida Próceres de la Independencia",
+   "housenumber": "1267",
+   "lat": -12.0137531,
+   "lng": -77.0023725
+  },
+  {
+   "ref": "n12077793139",
+   "street": "Avenida Próceres de la Independencia",
+   "housenumber": "1698",
+   "lat": -12.0059374,
+   "lng": -77.0053656
+  },
+  {
+   "ref": "n9676166114",
+   "street": "Avenida Próceres de la Independencia",
+   "housenumber": "1724",
+   "lat": -12.0050035,
+   "lng": -77.0061216
+  },
+  {
+   "ref": "w1052885232",
+   "street": "Avenida Próceres de la Independencia",
+   "housenumber": "1724",
+   "lat": -12.0049972,
+   "lng": -77.0061131
+  },
+  {
+   "ref": "n7717870289",
+   "street": "Avenida Próceres de la Independencia",
+   "housenumber": "1850",
+   "lat": -12.0022349,
+   "lng": -77.0077976
+  },
+  {
+   "ref": "n4700505890",
+   "street": "Avenida Próceres de la Independencia",
+   "housenumber": "2024",
+   "lat": -11.9991951,
+   "lng": -77.0086413
+  },
+  {
+   "ref": "n8297119126",
+   "street": "Avenida Próceres de la Independencia",
+   "housenumber": "2081",
+   "lat": -11.9981848,
+   "lng": -77.0097741
+  },
+  {
+   "ref": "n5354957715",
+   "street": "Avenida Próceres de la Independencia",
+   "housenumber": "2181",
+   "lat": -11.9959642,
+   "lng": -77.010428
+  },
+  {
+   "ref": "n11048729122",
+   "street": "Avenida Próceres de la Independencia",
+   "housenumber": "2517",
+   "lat": -11.989028,
+   "lng": -77.010628
+  },
+  {
+   "ref": "n8365226540",
+   "street": "Avenida Próceres de la Independencia",
+   "housenumber": "2590",
+   "lat": -11.9884262,
+   "lng": -77.0091944
+  },
+  {
+   "ref": "n11048735847",
+   "street": "Avenida Próceres de la Independencia",
+   "housenumber": "2603",
+   "lat": -11.9879823,
+   "lng": -77.009694
+  },
+  {
+   "ref": "n11048696198",
+   "street": "Avenida Próceres de la Independencia",
+   "housenumber": "2613",
+   "lat": -11.9879072,
+   "lng": -77.0096054
+  },
+  {
+   "ref": "n11048744972",
+   "street": "Avenida Próceres de la Independencia",
+   "housenumber": "2631",
+   "lat": -11.9877295,
+   "lng": -77.0094007
+  },
+  {
+   "ref": "n11048751326",
+   "street": "Avenida Próceres de la Independencia",
+   "housenumber": "2649",
+   "lat": -11.9874902,
+   "lng": -77.0091283
+  },
+  {
+   "ref": "n11048750010",
+   "street": "Avenida Próceres de la Independencia",
+   "housenumber": "2653",
+   "lat": -11.9873512,
+   "lng": -77.0089844
+  },
+  {
+   "ref": "n11048729121",
+   "street": "Avenida Próceres de la Independencia",
+   "housenumber": "2657",
+   "lat": -11.9872789,
+   "lng": -77.0089188
+  },
+  {
+   "ref": "n11048719076",
+   "street": "Avenida Próceres de la Independencia",
+   "housenumber": "2663",
+   "lat": -11.9871681,
+   "lng": -77.0087984
+  },
+  {
+   "ref": "n11048750134",
+   "street": "Avenida Próceres de la Independencia",
+   "housenumber": "2671",
+   "lat": -11.9870546,
+   "lng": -77.0086504
+  },
+  {
+   "ref": "n11048744326",
+   "street": "Avenida Próceres de la Independencia",
+   "housenumber": "2679",
+   "lat": -11.9869409,
+   "lng": -77.0085278
+  },
+  {
+   "ref": "n9747680893",
+   "street": "Avenida Próceres de la Independencia",
+   "housenumber": "2682",
+   "lat": -11.9874219,
+   "lng": -77.0078724
+  },
+  {
+   "ref": "n11048726278",
+   "street": "Avenida Próceres de la Independencia",
+   "housenumber": "2689",
+   "lat": -11.9867327,
+   "lng": -77.0083148
+  },
+  {
+   "ref": "n11048716013",
+   "street": "Avenida Próceres de la Independencia",
+   "housenumber": "2693",
+   "lat": -11.9866409,
+   "lng": -77.00819
+  },
+  {
+   "ref": "n11048725112",
+   "street": "Avenida Próceres de la Independencia",
+   "housenumber": "2701",
+   "lat": -11.9864464,
+   "lng": -77.0080411
+  },
+  {
+   "ref": "n11048752005",
+   "street": "Avenida Próceres de la Independencia",
+   "housenumber": "2721",
+   "lat": -11.9861957,
+   "lng": -77.007844
+  },
+  {
+   "ref": "n11048748560",
+   "street": "Avenida Próceres de la Independencia",
+   "housenumber": "2757",
+   "lat": -11.9855715,
+   "lng": -77.0073472
+  },
+  {
+   "ref": "n9298326247",
+   "street": "Avenida Próceres de la Independencia",
+   "housenumber": "2778",
+   "lat": -11.9853243,
+   "lng": -77.0064571
+  },
+  {
+   "ref": "n9747681377",
+   "street": "Avenida Próceres de la Independencia",
+   "housenumber": "2780",
+   "lat": -11.9852813,
+   "lng": -77.0064479
+  },
+  {
+   "ref": "w445542942",
+   "street": "Avenida Riva Aguero",
+   "housenumber": "350",
+   "lat": -12.0825848,
+   "lng": -77.0846796
+  },
+  {
+   "ref": "n4347524698",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "164",
+   "lat": -12.0616064,
+   "lng": -77.1461858
+  },
+  {
+   "ref": "n4347524484",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "184",
+   "lat": -12.0615587,
+   "lng": -77.1458743
+  },
+  {
+   "ref": "w436781191",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "201",
+   "lat": -12.0610462,
+   "lng": -77.1455795
+  },
+  {
+   "ref": "n4347524474",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "230",
+   "lat": -12.0614882,
+   "lng": -77.1454484
+  },
+  {
+   "ref": "n4346521541",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "241",
+   "lat": -12.0610746,
+   "lng": -77.1445803
+  },
+  {
+   "ref": "w384895062",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "253",
+   "lat": -12.0611174,
+   "lng": -77.1453422
+  },
+  {
+   "ref": "n4347524464",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "280",
+   "lat": -12.0613759,
+   "lng": -77.1446699
+  },
+  {
+   "ref": "n1846411788",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "285",
+   "lat": -12.0610538,
+   "lng": -77.1444167
+  },
+  {
+   "ref": "n1846376298",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "290",
+   "lat": -12.0614192,
+   "lng": -77.1444887
+  },
+  {
+   "ref": "n6329391522",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "323",
+   "lat": -12.0608139,
+   "lng": -77.1442298
+  },
+  {
+   "ref": "n4347524459",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "350",
+   "lat": -12.0612435,
+   "lng": -77.1437177
+  },
+  {
+   "ref": "n4346479115",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "351",
+   "lat": -12.0609777,
+   "lng": -77.1438695
+  },
+  {
+   "ref": "n4346479112",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "367",
+   "lat": -12.0609743,
+   "lng": -77.1438167
+  },
+  {
+   "ref": "n4343155925",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "400",
+   "lat": -12.0610872,
+   "lng": -77.1427943
+  },
+  {
+   "ref": "n1846293206",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "401",
+   "lat": -12.0608244,
+   "lng": -77.1427691
+  },
+  {
+   "ref": "n1846293196",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "460",
+   "lat": -12.0610031,
+   "lng": -77.1421371
+  },
+  {
+   "ref": "n4346479092",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "467",
+   "lat": -12.0607026,
+   "lng": -77.1420611
+  },
+  {
+   "ref": "n1846293191",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "691",
+   "lat": -12.0601958,
+   "lng": -77.1385294
+  },
+  {
+   "ref": "n4346630747",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "759",
+   "lat": -12.0603278,
+   "lng": -77.1377475
+  },
+  {
+   "ref": "n4346630755",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "763",
+   "lat": -12.0603145,
+   "lng": -77.1376667
+  },
+  {
+   "ref": "n4346630758",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "769",
+   "lat": -12.0603138,
+   "lng": -77.1376312
+  },
+  {
+   "ref": "n4346630752",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "779",
+   "lat": -12.0603053,
+   "lng": -77.1375561
+  },
+  {
+   "ref": "w436795859",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "789",
+   "lat": -12.0604167,
+   "lng": -77.1373537
+  },
+  {
+   "ref": "n1846376329",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "791",
+   "lat": -12.0602584,
+   "lng": -77.1372016
+  },
+  {
+   "ref": "n4346612178",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "791",
+   "lat": -12.0602484,
+   "lng": -77.1371617
+  },
+  {
+   "ref": "n4346324634",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "821",
+   "lat": -12.0599116,
+   "lng": -77.1365741
+  },
+  {
+   "ref": "n1846433113",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "831",
+   "lat": -12.0598829,
+   "lng": -77.1364237
+  },
+  {
+   "ref": "n4346324629",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "841",
+   "lat": -12.0598488,
+   "lng": -77.1362466
+  },
+  {
+   "ref": "n4346324624",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "901",
+   "lat": -12.0597335,
+   "lng": -77.1354845
+  },
+  {
+   "ref": "n1846411779",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "936",
+   "lat": -12.060048,
+   "lng": -77.1379535
+  },
+  {
+   "ref": "n4346324596",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "985",
+   "lat": -12.059646,
+   "lng": -77.1348785
+  },
+  {
+   "ref": "w436757255",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "1030",
+   "lat": -12.0593951,
+   "lng": -77.13398
+  },
+  {
+   "ref": "n4346612129",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "1046",
+   "lat": -12.059782,
+   "lng": -77.1336686
+  },
+  {
+   "ref": "n4346612128",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "1050",
+   "lat": -12.0597663,
+   "lng": -77.1335948
+  },
+  {
+   "ref": "n4346297672",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "1083",
+   "lat": -12.059407,
+   "lng": -77.1332102
+  },
+  {
+   "ref": "w521108996",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "1115",
+   "lat": -12.059319,
+   "lng": -77.1329649
+  },
+  {
+   "ref": "w298244352",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "1330",
+   "lat": -12.059987,
+   "lng": -77.1314231
+  },
+  {
+   "ref": "w436757248",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "1343",
+   "lat": -12.0590012,
+   "lng": -77.1308609
+  },
+  {
+   "ref": "w436757247",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "1451",
+   "lat": -12.0589133,
+   "lng": -77.1292519
+  },
+  {
+   "ref": "w421930268",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "1460",
+   "lat": -12.0597448,
+   "lng": -77.1297374
+  },
+  {
+   "ref": "n4346297644",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "1463",
+   "lat": -12.0590082,
+   "lng": -77.1290141
+  },
+  {
+   "ref": "n4346297649",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "1467",
+   "lat": -12.0590067,
+   "lng": -77.1289296
+  },
+  {
+   "ref": "n5077969023",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "1480",
+   "lat": -12.0592911,
+   "lng": -77.1284333
+  },
+  {
+   "ref": "r6484519",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "1490",
+   "lat": -12.0588796,
+   "lng": -77.1287069
+  },
+  {
+   "ref": "w436284607",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "1490",
+   "lat": -12.0592379,
+   "lng": -77.1281531
+  },
+  {
+   "ref": "n5077963314",
+   "street": "Avenida Saenz Peña",
+   "housenumber": "1910",
+   "lat": -12.0593778,
+   "lng": -77.1294194
+  },
+  {
+   "ref": "n1844751688",
+   "street": "Avenida Sáenz Peña",
+   "housenumber": "107",
+   "lat": -12.1435076,
+   "lng": -77.0223266
+  },
+  {
+   "ref": "n4990723094",
+   "street": "Avenida Sáenz Peña",
+   "housenumber": "107",
+   "lat": -12.1435534,
+   "lng": -77.0223162
+  },
+  {
+   "ref": "w379598570",
+   "street": "Avenida Sáenz Peña",
+   "housenumber": "116",
+   "lat": -12.1426861,
+   "lng": -77.0224987
+  },
+  {
+   "ref": "n4990723093",
+   "street": "Avenida Sáenz Peña",
+   "housenumber": "129",
+   "lat": -12.1435367,
+   "lng": -77.0228832
+  },
+  {
+   "ref": "w246510709",
+   "street": "Avenida Sáenz Peña",
+   "housenumber": "186",
+   "lat": -12.1427031,
+   "lng": -77.0229186
+  },
+  {
+   "ref": "n4547437889",
+   "street": "Avenida Sáenz Peña",
+   "housenumber": "204",
+   "lat": -12.1431038,
+   "lng": -77.0232806
+  },
+  {
+   "ref": "n11608838469",
+   "street": "Avenida Sáenz Peña",
+   "housenumber": "205",
+   "lat": -12.1435958,
+   "lng": -77.0233234
+  },
+  {
+   "ref": "n4725097189",
+   "street": "Avenida Sáenz Peña",
+   "housenumber": "206",
+   "lat": -12.1430482,
+   "lng": -77.0236431
+  },
+  {
+   "ref": "w400487747",
+   "street": "Avenida Sáenz Peña",
+   "housenumber": "261",
+   "lat": -12.1436566,
+   "lng": -77.023708
+  },
+  {
+   "ref": "n1844751684",
+   "street": "Avenida Sáenz Peña",
+   "housenumber": "295",
+   "lat": -12.1436943,
+   "lng": -77.023911
+  },
+  {
+   "ref": "w436436651",
+   "street": "Avenida Sáenz Peña",
+   "housenumber": "345",
+   "lat": -12.0606564,
+   "lng": -77.1435245
+  },
+  {
+   "ref": "n1846433102",
+   "street": "Avenida Sáenz Peña",
+   "housenumber": "621",
+   "lat": -12.0603417,
+   "lng": -77.1395008
+  },
+  {
+   "ref": "n4346478680",
+   "street": "Avenida Sáenz Peña",
+   "housenumber": "632",
+   "lat": -12.0603083,
+   "lng": -77.1393247
+  },
+  {
+   "ref": "n4346478676",
+   "street": "Avenida Sáenz Peña",
+   "housenumber": "642",
+   "lat": -12.0602643,
+   "lng": -77.1391302
+  },
+  {
+   "ref": "n4346630759",
+   "street": "Avenida Sáenz Peña",
+   "housenumber": "650",
+   "lat": -12.0605057,
+   "lng": -77.1389037
+  },
+  {
+   "ref": "n4346630762",
+   "street": "Avenida Sáenz Peña",
+   "housenumber": "650",
+   "lat": -12.0605791,
+   "lng": -77.1393378
+  },
+  {
+   "ref": "w387346104",
+   "street": "Avenida Sáenz Peña",
+   "housenumber": "650",
+   "lat": -12.06098,
+   "lng": -77.1389925
+  },
+  {
+   "ref": "n1846293183",
+   "street": "Avenida Sáenz Peña",
+   "housenumber": "653",
+   "lat": -12.0602469,
+   "lng": -77.1389579
+  },
+  {
+   "ref": "n4346478665",
+   "street": "Avenida Sáenz Peña",
+   "housenumber": "661",
+   "lat": -12.0602356,
+   "lng": -77.1388469
+  },
+  {
+   "ref": "n4346478662",
+   "street": "Avenida Sáenz Peña",
+   "housenumber": "675",
+   "lat": -12.0602238,
+   "lng": -77.1387537
+  },
+  {
+   "ref": "n4346478657",
+   "street": "Avenida Sáenz Peña",
+   "housenumber": "687",
+   "lat": -12.0602159,
+   "lng": -77.1386042
+  },
+  {
+   "ref": "n4346612196",
+   "street": "Avenida Sáenz Peña",
+   "housenumber": "700",
+   "lat": -12.0604219,
+   "lng": -77.1383243
+  },
+  {
+   "ref": "n4346478647",
+   "street": "Avenida Sáenz Peña",
+   "housenumber": "701",
+   "lat": -12.0601619,
+   "lng": -77.1383352
+  },
+  {
+   "ref": "n4346324680",
+   "street": "Avenida Sáenz Peña",
+   "housenumber": "710",
+   "lat": -12.0601344,
+   "lng": -77.1381656
+  },
+  {
+   "ref": "n4346630732",
+   "street": "Avenida Sáenz Peña",
+   "housenumber": "711",
+   "lat": -12.0603974,
+   "lng": -77.1381495
+  },
+  {
+   "ref": "n4346324673",
+   "street": "Avenida Sáenz Peña",
+   "housenumber": "720",
+   "lat": -12.0601113,
+   "lng": -77.1379039
+  },
+  {
+   "ref": "n4346630740",
+   "street": "Avenida Sáenz Peña",
+   "housenumber": "721",
+   "lat": -12.0603656,
+   "lng": -77.1380294
+  },
+  {
+   "ref": "n4346324666",
+   "street": "Avenida Sáenz Peña",
+   "housenumber": "730",
+   "lat": -12.0600773,
+   "lng": -77.1377691
+  },
+  {
+   "ref": "n4346324657",
+   "street": "Avenida Sáenz Peña",
+   "housenumber": "750",
+   "lat": -12.06004,
+   "lng": -77.1375164
+  },
+  {
+   "ref": "n1846293200",
+   "street": "Avenida Sáenz Peña",
+   "housenumber": "753",
+   "lat": -12.0603355,
+   "lng": -77.1378032
+  },
+  {
+   "ref": "n4346324649",
+   "street": "Avenida Sáenz Peña",
+   "housenumber": "770",
+   "lat": -12.0600015,
+   "lng": -77.1372873
+  },
+  {
+   "ref": "n4346612183",
+   "street": "Avenida Sáenz Peña",
+   "housenumber": "789",
+   "lat": -12.0602652,
+   "lng": -77.1372487
+  },
+  {
+   "ref": "w436757266",
+   "street": "Avenida Sáenz Peña",
+   "housenumber": "798",
+   "lat": -12.0599438,
+   "lng": -77.137142
+  },
+  {
+   "ref": "n1846376272",
+   "street": "Avenida Sáenz Peña",
+   "housenumber": "799",
+   "lat": -12.0602599,
+   "lng": -77.1370756
+  },
+  {
+   "ref": "n4346612173",
+   "street": "Avenida Sáenz Peña",
+   "housenumber": "800",
+   "lat": -12.0602016,
+   "lng": -77.1368308
+  },
+  {
+   "ref": "n4346324641",
+   "street": "Avenida Sáenz Peña",
+   "housenumber": "811",
+   "lat": -12.0599477,
+   "lng": -77.1368077
+  },
+  {
+   "ref": "w387346105",
+   "street": "Avenida Sáenz Peña",
+   "housenumber": "850",
+   "lat": -12.0603282,
+   "lng": -77.1360571
+  },
+  {
+   "ref": "w436795849",
+   "street": "Avenida Sáenz Peña",
+   "housenumber": "1030",
+   "lat": -12.0598786,
+   "lng": -77.1339207
+  },
+  {
+   "ref": "n4346297681",
+   "street": "Avenida Sáenz Peña",
+   "housenumber": "1041",
+   "lat": -12.0594949,
+   "lng": -77.133676
+  },
+  {
+   "ref": "n1846433101",
+   "street": "Avenida Sáenz Peña",
+   "housenumber": "1051",
+   "lat": -12.0594702,
+   "lng": -77.1334922
+  },
+  {
+   "ref": "w401693655",
+   "street": "Avenida de La Marina",
+   "housenumber": "2630",
+   "lat": -12.0774391,
+   "lng": -77.0916666
+  },
+  {
+   "ref": "w1357914907",
+   "street": "Avenida de La Marina",
+   "housenumber": "2650",
+   "lat": -12.0771724,
+   "lng": -77.0925966
+  },
+  {
+   "ref": "w418674556",
+   "street": "Avenida de La Marina",
+   "housenumber": "2810",
+   "lat": -12.0764289,
+   "lng": -77.0935526
+  },
+  {
+   "ref": "n12009245989",
+   "street": "Avenida proceres de la independencia",
+   "housenumber": "3491",
+   "lat": -11.9721998,
+   "lng": -76.9970001
+  },
+  {
+   "ref": "n12009248075",
+   "street": "Avenida proceres de la independencia",
+   "housenumber": "4083",
+   "lat": -11.963,
+   "lng": -76.9902002
+  },
+  {
+   "ref": "n5090519866",
+   "street": "Calle Saenz Peña",
+   "housenumber": "100",
+   "lat": -12.0606945,
+   "lng": -77.0303719
+  },
+  {
+   "ref": "n5090519867",
+   "street": "Calle Saenz Peña",
+   "housenumber": "199",
+   "lat": -12.0617679,
+   "lng": -77.0302266
+  },
+  {
+   "ref": "n5090519864",
+   "street": "Calle Saenz Peña",
+   "housenumber": "200",
+   "lat": -12.0620306,
+   "lng": -77.0302172
+  },
+  {
+   "ref": "w298243985",
+   "street": "Calle Saenz Peña",
+   "housenumber": "298",
+   "lat": -12.0728115,
+   "lng": -77.1634182
+  },
+  {
+   "ref": "n5090519865",
+   "street": "Calle Saenz Peña",
+   "housenumber": "299",
+   "lat": -12.0631039,
+   "lng": -77.0300719
+  },
+  {
+   "ref": "n5732885406",
+   "street": "Calle Saenz Peña",
+   "housenumber": "400",
+   "lat": -12.0713314,
+   "lng": -77.1649139
+  },
+  {
+   "ref": "n5732885407",
+   "street": "Calle Saenz Peña",
+   "housenumber": "499",
+   "lat": -12.0706945,
+   "lng": -77.1654281
+  },
+  {
+   "ref": "n4704407222",
+   "street": "Jirón José Carlos Mariátegui",
+   "housenumber": "100",
+   "lat": -12.0383386,
+   "lng": -77.0893291
+  },
+  {
+   "ref": "n4704407224",
+   "street": "Jirón José Carlos Mariátegui",
+   "housenumber": "101",
+   "lat": -12.0383065,
+   "lng": -77.0892507
+  },
+  {
+   "ref": "n4704407221",
+   "street": "Jirón José Carlos Mariátegui",
+   "housenumber": "198",
+   "lat": -12.0386567,
+   "lng": -77.0892272
+  },
+  {
+   "ref": "n4704407223",
+   "street": "Jirón José Carlos Mariátegui",
+   "housenumber": "199",
+   "lat": -12.0386475,
+   "lng": -77.0891373
+  },
+  {
+   "ref": "n4704407218",
+   "street": "Jirón José Carlos Mariátegui",
+   "housenumber": "200",
+   "lat": -12.0388075,
+   "lng": -77.0891541
+  },
+  {
+   "ref": "n4704407220",
+   "street": "Jirón José Carlos Mariátegui",
+   "housenumber": "201",
+   "lat": -12.0387754,
+   "lng": -77.0890756
+  },
+  {
+   "ref": "n4704407217",
+   "street": "Jirón José Carlos Mariátegui",
+   "housenumber": "298",
+   "lat": -12.0391826,
+   "lng": -77.0890528
+  },
+  {
+   "ref": "n4704407219",
+   "street": "Jirón José Carlos Mariátegui",
+   "housenumber": "299",
+   "lat": -12.0391603,
+   "lng": -77.0889529
+  },
+  {
+   "ref": "n4704407216",
+   "street": "Jirón José Carlos Mariátegui",
+   "housenumber": "300",
+   "lat": -12.0393279,
+   "lng": -77.0889905
+  },
+  {
+   "ref": "n4704407214",
+   "street": "Jirón José Carlos Mariátegui",
+   "housenumber": "301",
+   "lat": -12.0393049,
+   "lng": -77.088906
+  },
+  {
+   "ref": "n4704407215",
+   "street": "Jirón José Carlos Mariátegui",
+   "housenumber": "398",
+   "lat": -12.0397542,
+   "lng": -77.0888718
+  },
+  {
+   "ref": "n4704407213",
+   "street": "Jirón José Carlos Mariátegui",
+   "housenumber": "399",
+   "lat": -12.0397483,
+   "lng": -77.0887779
+  },
+  {
+   "ref": "n4704407210",
+   "street": "Jirón José Carlos Mariátegui",
+   "housenumber": "400",
+   "lat": -12.0399096,
+   "lng": -77.0888316
+  },
+  {
+   "ref": "n4704407212",
+   "street": "Jirón José Carlos Mariátegui",
+   "housenumber": "401",
+   "lat": -12.0398866,
+   "lng": -77.0887471
+  },
+  {
+   "ref": "n4704407209",
+   "street": "Jirón José Carlos Mariátegui",
+   "housenumber": "498",
+   "lat": -12.0402991,
+   "lng": -77.0887316
+  },
+  {
+   "ref": "n4704407211",
+   "street": "Jirón José Carlos Mariátegui",
+   "housenumber": "499",
+   "lat": -12.0402998,
+   "lng": -77.0886565
+  },
+  {
+   "ref": "n4704407208",
+   "street": "Jirón José Carlos Mariátegui",
+   "housenumber": "500",
+   "lat": -12.0404496,
+   "lng": -77.0887135
+  },
+  {
+   "ref": "n4704407206",
+   "street": "Jirón José Carlos Mariátegui",
+   "housenumber": "501",
+   "lat": -12.0404306,
+   "lng": -77.0886317
+  },
+  {
+   "ref": "n4704407207",
+   "street": "Jirón José Carlos Mariátegui",
+   "housenumber": "598",
+   "lat": -12.0408294,
+   "lng": -77.0886123
+  },
+  {
+   "ref": "n4704407205",
+   "street": "Jirón José Carlos Mariátegui",
+   "housenumber": "599",
+   "lat": -12.0408123,
+   "lng": -77.0885466
+  },
+  {
+   "ref": "n5577014921",
+   "street": "Jirón Manuel Gonzales Prada",
+   "housenumber": "287-A",
+   "lat": -11.9960022,
+   "lng": -77.0666267
+  },
+  {
+   "ref": "w1386036665",
+   "street": "Jirón Manuel Gonzales Prada",
+   "housenumber": "287-A",
+   "lat": -11.9965763,
+   "lng": -77.0666465
+  },
+  {
+   "ref": "n12879942726",
+   "street": "Jirón Manuel González Prada",
+   "housenumber": "537",
+   "lat": -11.9945334,
+   "lng": -77.0681576
+  },
+  {
+   "ref": "n12879942727",
+   "street": "Jirón Manuel González Prada",
+   "housenumber": "558",
+   "lat": -11.9943198,
+   "lng": -77.0680219
+  },
+  {
+   "ref": "n4398300059",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "100",
+   "lat": -12.0737498,
+   "lng": -77.162764
+  },
+  {
+   "ref": "n12600829815",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "158",
+   "lat": -12.0979952,
+   "lng": -77.0704441
+  },
+  {
+   "ref": "n12600783946",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "175",
+   "lat": -12.0979538,
+   "lng": -77.0705588
+  },
+  {
+   "ref": "n12600821730",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "185",
+   "lat": -12.0977695,
+   "lng": -77.0704955
+  },
+  {
+   "ref": "n12600821822",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "190",
+   "lat": -12.0978595,
+   "lng": -77.0703875
+  },
+  {
+   "ref": "n4398300064",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "199",
+   "lat": -12.0735208,
+   "lng": -77.1629588
+  },
+  {
+   "ref": "n4398300069",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "200",
+   "lat": -12.0733674,
+   "lng": -77.1630691
+  },
+  {
+   "ref": "n12600822099",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "206",
+   "lat": -12.0975482,
+   "lng": -77.0702714
+  },
+  {
+   "ref": "n12600830570",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "230",
+   "lat": -12.0974092,
+   "lng": -77.0702319
+  },
+  {
+   "ref": "n4600943389",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "249",
+   "lat": -12.1453993,
+   "lng": -77.0039815
+  },
+  {
+   "ref": "w529335284",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "261",
+   "lat": -12.1448551,
+   "lng": -77.0041
+  },
+  {
+   "ref": "n12600795895",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "285",
+   "lat": -12.0972437,
+   "lng": -77.0703419
+  },
+  {
+   "ref": "n12600774591",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "290",
+   "lat": -12.0971976,
+   "lng": -77.0701315
+  },
+  {
+   "ref": "n5047016679",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "291",
+   "lat": -12.0972455,
+   "lng": -77.0703369
+  },
+  {
+   "ref": "n4398300074",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "299",
+   "lat": -12.0728461,
+   "lng": -77.1635106
+  },
+  {
+   "ref": "n4398300079",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "300",
+   "lat": -12.0726579,
+   "lng": -77.1636632
+  },
+  {
+   "ref": "n12600822098",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "310",
+   "lat": -12.0969918,
+   "lng": -77.0700941
+  },
+  {
+   "ref": "n12600827466",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "320",
+   "lat": -12.0969006,
+   "lng": -77.0700299
+  },
+  {
+   "ref": "n5047016666",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "344",
+   "lat": -12.096772,
+   "lng": -77.070004
+  },
+  {
+   "ref": "n5047016687",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "349",
+   "lat": -12.0967954,
+   "lng": -77.0701682
+  },
+  {
+   "ref": "n5047016665",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "350",
+   "lat": -12.096613,
+   "lng": -77.0699586
+  },
+  {
+   "ref": "n12600821821",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "355",
+   "lat": -12.0966439,
+   "lng": -77.0701243
+  },
+  {
+   "ref": "n5047016688",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "359",
+   "lat": -12.0965632,
+   "lng": -77.0701009
+  },
+  {
+   "ref": "n5047016683",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "363",
+   "lat": -12.096428,
+   "lng": -77.0700653
+  },
+  {
+   "ref": "n5047016684",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "381",
+   "lat": -12.0963253,
+   "lng": -77.0700315
+  },
+  {
+   "ref": "n12600735470",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "394",
+   "lat": -12.0964596,
+   "lng": -77.0699114
+  },
+  {
+   "ref": "n12600773542",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "395",
+   "lat": -12.0961449,
+   "lng": -77.0699466
+  },
+  {
+   "ref": "n4398300084",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "399",
+   "lat": -12.0720933,
+   "lng": -77.1641343
+  },
+  {
+   "ref": "n4398300189",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "400",
+   "lat": -12.0719117,
+   "lng": -77.1642627
+  },
+  {
+   "ref": "n12594130693",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "430",
+   "lat": -12.0958121,
+   "lng": -77.0696468
+  },
+  {
+   "ref": "n12594149616",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "450",
+   "lat": -12.0957305,
+   "lng": -77.0696189
+  },
+  {
+   "ref": "n12594178454",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "456",
+   "lat": -12.095632,
+   "lng": -77.0695885
+  },
+  {
+   "ref": "n12594179652",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "468",
+   "lat": -12.0955165,
+   "lng": -77.0695491
+  },
+  {
+   "ref": "n12594157341",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "476",
+   "lat": -12.0954416,
+   "lng": -77.0695147
+  },
+  {
+   "ref": "n12594133776",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "489",
+   "lat": -12.0952853,
+   "lng": -77.0696565
+  },
+  {
+   "ref": "n4398300194",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "499",
+   "lat": -12.0713839,
+   "lng": -77.1646908
+  },
+  {
+   "ref": "n4398300199",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "500",
+   "lat": -12.0712481,
+   "lng": -77.1648246
+  },
+  {
+   "ref": "w537497600",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "505",
+   "lat": -12.0712427,
+   "lng": -77.1650322
+  },
+  {
+   "ref": "w537497603",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "510",
+   "lat": -12.0711904,
+   "lng": -77.1647954
+  },
+  {
+   "ref": "w537497623",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "520",
+   "lat": -12.071153,
+   "lng": -77.1648372
+  },
+  {
+   "ref": "w537497581",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "525",
+   "lat": -12.0711765,
+   "lng": -77.1650968
+  },
+  {
+   "ref": "w537497640",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "540",
+   "lat": -12.0711179,
+   "lng": -77.1648682
+  },
+  {
+   "ref": "w537497658",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "550",
+   "lat": -12.0710727,
+   "lng": -77.1649118
+  },
+  {
+   "ref": "w537497563",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "555",
+   "lat": -12.0711217,
+   "lng": -77.1651387
+  },
+  {
+   "ref": "w537497578",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "560",
+   "lat": -12.0709766,
+   "lng": -77.1649727
+  },
+  {
+   "ref": "w537497634",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "565",
+   "lat": -12.071075,
+   "lng": -77.165218
+  },
+  {
+   "ref": "w537497588",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "571",
+   "lat": -12.071014,
+   "lng": -77.1652838
+  },
+  {
+   "ref": "w537497565",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "575",
+   "lat": -12.0709682,
+   "lng": -77.165289
+  },
+  {
+   "ref": "w537497642",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "581",
+   "lat": -12.0709421,
+   "lng": -77.1653408
+  },
+  {
+   "ref": "w424622175",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "585",
+   "lat": -12.0709155,
+   "lng": -77.16538
+  },
+  {
+   "ref": "n4398300204",
+   "street": "Jirón Saenz Peña",
+   "housenumber": "599",
+   "lat": -12.0706271,
+   "lng": -77.1653212
+  },
+  {
+   "ref": "w340215071",
+   "street": "Jose Carlos Mariategui",
+   "housenumber": "16",
+   "lat": -11.956241,
+   "lng": -76.992902
+  },
+  {
+   "ref": "w454578964",
+   "street": "Jose Carlos Mariategui",
+   "housenumber": "835",
+   "lat": -12.0257463,
+   "lng": -76.9124063
+  },
+  {
+   "ref": "n4391173789",
+   "street": "Jose Carlos Mariategui",
+   "housenumber": "1768",
+   "lat": -12.0252077,
+   "lng": -76.9046984
+  },
+  {
+   "ref": "n10281405413",
+   "street": "José de la Riva Agüero",
+   "housenumber": "258",
+   "lat": -12.0837997,
+   "lng": -77.0854636
+  },
+  {
+   "ref": "n10281366562",
+   "street": "José de la Riva Agüero",
+   "housenumber": "262",
+   "lat": -12.0837177,
+   "lng": -77.0854435
+  },
+  {
+   "ref": "n10281369606",
+   "street": "José de la Riva Agüero",
+   "housenumber": "268",
+   "lat": -12.0836101,
+   "lng": -77.0853965
+  },
+  {
+   "ref": "n10281408979",
+   "street": "José de la Riva Agüero",
+   "housenumber": "284",
+   "lat": -12.0834105,
+   "lng": -77.0853707
+  },
+  {
+   "ref": "n10281415533",
+   "street": "José de la Riva Agüero",
+   "housenumber": "286",
+   "lat": -12.0833465,
+   "lng": -77.085326
+  },
+  {
+   "ref": "n10281366561",
+   "street": "José de la Riva Agüero",
+   "housenumber": "290",
+   "lat": -12.0832792,
+   "lng": -77.0852983
+  },
+  {
+   "ref": "n10281404852",
+   "street": "José de la Riva Agüero",
+   "housenumber": "296",
+   "lat": -12.0831833,
+   "lng": -77.0852676
+  },
+  {
+   "ref": "w432966419",
+   "street": "Malecon De La Marina",
+   "housenumber": "1580",
+   "lat": -12.1186487,
+   "lng": -77.0436296
+  },
+  {
+   "ref": "w632310299",
+   "street": "Malecón de la Marina",
+   "housenumber": "81",
+   "lat": -12.1146322,
+   "lng": -77.0487801
+  },
+  {
+   "ref": "w435203375",
+   "street": "Malecón de la Marina",
+   "housenumber": "240",
+   "lat": -12.1183189,
+   "lng": -77.0442867
+  },
+  {
+   "ref": "w435198403",
+   "street": "Malecón de la Marina",
+   "housenumber": "264",
+   "lat": -12.1108098,
+   "lng": -77.0514031
+  },
+  {
+   "ref": "w435203374",
+   "street": "Malecón de la Marina",
+   "housenumber": "266",
+   "lat": -12.1183104,
+   "lng": -77.0444643
+  },
+  {
+   "ref": "w435203372",
+   "street": "Malecón de la Marina",
+   "housenumber": "316",
+   "lat": -12.118123,
+   "lng": -77.0453414
+  },
+  {
+   "ref": "n12601531783",
+   "street": "Malecón de la Marina",
+   "housenumber": "360",
+   "lat": -12.1180638,
+   "lng": -77.0455352
+  },
+  {
+   "ref": "w435202509",
+   "street": "Malecón de la Marina",
+   "housenumber": "450",
+   "lat": -12.1169773,
+   "lng": -77.0464823
+  },
+  {
+   "ref": "w435202506",
+   "street": "Malecón de la Marina",
+   "housenumber": "570",
+   "lat": -12.1165155,
+   "lng": -77.0469836
+  },
+  {
+   "ref": "w435202505",
+   "street": "Malecón de la Marina",
+   "housenumber": "610",
+   "lat": -12.1160837,
+   "lng": -77.0473647
+  },
+  {
+   "ref": "w435202504",
+   "street": "Malecón de la Marina",
+   "housenumber": "624",
+   "lat": -12.1159941,
+   "lng": -77.0474253
+  },
+  {
+   "ref": "n12601574780",
+   "street": "Malecón de la Marina",
+   "housenumber": "638",
+   "lat": -12.1160143,
+   "lng": -77.0475229
+  },
+  {
+   "ref": "n12601570547",
+   "street": "Malecón de la Marina",
+   "housenumber": "640",
+   "lat": -12.1158874,
+   "lng": -77.0476389
+  },
+  {
+   "ref": "n5970437372",
+   "street": "Malecón de la Marina",
+   "housenumber": "644",
+   "lat": -12.1158072,
+   "lng": -77.0476959
+  },
+  {
+   "ref": "n5970437371",
+   "street": "Malecón de la Marina",
+   "housenumber": "652",
+   "lat": -12.1157329,
+   "lng": -77.0477719
+  },
+  {
+   "ref": "n12601566011",
+   "street": "Malecón de la Marina",
+   "housenumber": "682",
+   "lat": -12.1156054,
+   "lng": -77.0479012
+  },
+  {
+   "ref": "w435202502",
+   "street": "Malecón de la Marina",
+   "housenumber": "770",
+   "lat": -12.1150121,
+   "lng": -77.0484864
+  },
+  {
+   "ref": "w435202501",
+   "street": "Malecón de la Marina",
+   "housenumber": "790",
+   "lat": -12.1148935,
+   "lng": -77.0486058
+  },
+  {
+   "ref": "w432964959",
+   "street": "Malecón de la Marina",
+   "housenumber": "880",
+   "lat": -12.1142175,
+   "lng": -77.0489031
+  },
+  {
+   "ref": "w435202500",
+   "street": "Malecón de la Marina",
+   "housenumber": "1048",
+   "lat": -12.1125822,
+   "lng": -77.0498568
+  },
+  {
+   "ref": "w435202499",
+   "street": "Malecón de la Marina",
+   "housenumber": "1060",
+   "lat": -12.1125039,
+   "lng": -77.0499875
+  },
+  {
+   "ref": "n9118641575",
+   "street": "Malecón de la Marina",
+   "housenumber": "1124",
+   "lat": -12.1120655,
+   "lng": -77.0503646
+  },
+  {
+   "ref": "w435202498",
+   "street": "Malecón de la Marina",
+   "housenumber": "1132",
+   "lat": -12.1119005,
+   "lng": -77.0505945
+  },
+  {
+   "ref": "w435198405",
+   "street": "Malecón de la Marina",
+   "housenumber": "1176",
+   "lat": -12.1117522,
+   "lng": -77.050906
+  },
+  {
+   "ref": "w435198404",
+   "street": "Malecón de la Marina",
+   "housenumber": "1192",
+   "lat": -12.1116263,
+   "lng": -77.0511205
+  },
+  {
+   "ref": "n3197171591",
+   "street": "Manuel Gonzalez Olaechea",
+   "housenumber": "159-161",
+   "lat": -12.1020915,
+   "lng": -77.0259323
+  },
+  {
+   "ref": "n3649747562",
+   "street": "Nicolas Ayllon",
+   "housenumber": "111",
+   "lat": -12.0565617,
+   "lng": -76.9708235
+  },
+  {
+   "ref": "n4329803190",
+   "street": "Nicolas Ayllon",
+   "housenumber": "1912",
+   "lat": -12.0643329,
+   "lng": -76.9867748
+  },
+  {
+   "ref": "w438440291",
+   "street": "Nicolas Ayllon",
+   "housenumber": "2142",
+   "lat": -12.0635039,
+   "lng": -76.9824687
+  },
+  {
+   "ref": "n2496090968",
+   "street": "Nicolas Ayllon",
+   "housenumber": "2691",
+   "lat": -12.0598858,
+   "lng": -76.9767702
+  },
+  {
+   "ref": "w419337856",
+   "street": "Nicolas Ayllón",
+   "housenumber": "3820",
+   "lat": -12.0500604,
+   "lng": -76.9494518
+  },
+  {
+   "ref": "n1107576588",
+   "street": "Proceres de la Independencia",
+   "housenumber": "1632",
+   "lat": -12.0060801,
+   "lng": -77.0047883
+  },
+  {
+   "ref": "n10012296308",
+   "street": "Sáenz Peña",
+   "housenumber": "475",
+   "lat": -12.0486532,
+   "lng": -76.9701587
+  },
+  {
+   "ref": "w805228809",
+   "street": "nicolas ayllon",
+   "housenumber": "234-240",
+   "lat": -12.056378,
+   "lng": -77.0120213
+  },
+  {
+   "ref": "w805228810",
+   "street": "nicolas ayllon",
+   "housenumber": "248-250",
+   "lat": -12.0564778,
+   "lng": -77.0118689
+  },
+  {
+   "ref": "w805228811",
+   "street": "nicolas ayllon",
+   "housenumber": "272-298",
+   "lat": -12.0565838,
+   "lng": -77.0116822
+  }
+ ]
+}

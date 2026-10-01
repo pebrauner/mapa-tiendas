@@ -1,0 +1,407 @@
+{
+  "generated": "2026-10-01",
+  "source": "tools/seed/districts.geojson (tools/build-districts.mjs: INEI límites censales 2023 + OSM names)",
+  "districtCount": 1891,
+  "checkpoints": [
+    {
+      "name": "Larcomar",
+      "lat": -12.1318,
+      "lng": -77.0305,
+      "expect": "Miraflores",
+      "ubigeo": "150122",
+      "district": "Miraflores",
+      "province": "Lima",
+      "department": "Lima",
+      "ok": true
+    },
+    {
+      "name": "Plaza de Armas de Trujillo",
+      "lat": -8.1116,
+      "lng": -79.0297,
+      "expect": "Trujillo",
+      "ubigeo": "130101",
+      "district": "Trujillo",
+      "province": "Trujillo",
+      "department": "La Libertad",
+      "ok": true
+    },
+    {
+      "name": "Real Plaza San Borja area",
+      "lat": -12.0898,
+      "lng": -77.005,
+      "expect": "San Borja",
+      "ubigeo": "150130",
+      "district": "San Borja",
+      "province": "Lima",
+      "department": "Lima",
+      "ok": true
+    },
+    {
+      "name": "Chimbote Plaza de Armas",
+      "lat": -9.0745,
+      "lng": -78.5936,
+      "expect": "Chimbote",
+      "ubigeo": "021801",
+      "district": "Chimbote",
+      "province": "Santa",
+      "department": "Áncash",
+      "ok": true
+    },
+    {
+      "name": "Nuevo Chimbote",
+      "lat": -9.1258,
+      "lng": -78.5245,
+      "expect": "Nuevo Chimbote",
+      "ubigeo": "021809",
+      "district": "Nuevo Chimbote",
+      "province": "Santa",
+      "department": "Áncash",
+      "ok": true
+    },
+    {
+      "name": "Lurín",
+      "lat": -12.2747,
+      "lng": -76.8706,
+      "expect": "Lurín",
+      "ubigeo": "150119",
+      "district": "Lurín",
+      "province": "Lima",
+      "department": "Lima",
+      "ok": true
+    },
+    {
+      "name": "Punta Hermosa",
+      "lat": -12.3367,
+      "lng": -76.824,
+      "expect": "Punta Hermosa",
+      "ubigeo": "150126",
+      "district": "Punta Hermosa",
+      "province": "Lima",
+      "department": "Lima",
+      "ok": true
+    }
+  ],
+  "named": {
+    "Miraflores (Lima)": "150122",
+    "San Borja (Lima)": "150130",
+    "San Isidro (Lima)": "150131",
+    "Surquillo (Lima)": "150141",
+    "Chorrillos (Lima)": "150108",
+    "San Juan de Miraflores (Lima)": "150133",
+    "Villa El Salvador (Lima)": "150142",
+    "Villa María del Triunfo (Lima)": "150143",
+    "Lurín (Lima)": "150119",
+    "Punta Hermosa (Lima)": "150126",
+    "Trujillo (Trujillo)": "130101",
+    "Chimbote (Santa)": "021801",
+    "Nuevo Chimbote (Santa)": "021809"
+  },
+  "provinces": {
+    "Lima (1501)": [
+      {
+        "ubigeo": "150101",
+        "district": "Lima"
+      },
+      {
+        "ubigeo": "150102",
+        "district": "Ancón"
+      },
+      {
+        "ubigeo": "150103",
+        "district": "Ate"
+      },
+      {
+        "ubigeo": "150104",
+        "district": "Barranco"
+      },
+      {
+        "ubigeo": "150105",
+        "district": "Breña"
+      },
+      {
+        "ubigeo": "150106",
+        "district": "Carabayllo"
+      },
+      {
+        "ubigeo": "150107",
+        "district": "Chaclacayo"
+      },
+      {
+        "ubigeo": "150108",
+        "district": "Chorrillos"
+      },
+      {
+        "ubigeo": "150109",
+        "district": "Cieneguilla"
+      },
+      {
+        "ubigeo": "150110",
+        "district": "Comas"
+      },
+      {
+        "ubigeo": "150111",
+        "district": "El Agustino"
+      },
+      {
+        "ubigeo": "150112",
+        "district": "Independencia"
+      },
+      {
+        "ubigeo": "150113",
+        "district": "Jesús María"
+      },
+      {
+        "ubigeo": "150114",
+        "district": "La Molina"
+      },
+      {
+        "ubigeo": "150115",
+        "district": "La Victoria"
+      },
+      {
+        "ubigeo": "150116",
+        "district": "Lince"
+      },
+      {
+        "ubigeo": "150117",
+        "district": "Los Olivos"
+      },
+      {
+        "ubigeo": "150118",
+        "district": "Lurigancho"
+      },
+      {
+        "ubigeo": "150119",
+        "district": "Lurín"
+      },
+      {
+        "ubigeo": "150120",
+        "district": "Magdalena del Mar"
+      },
+      {
+        "ubigeo": "150121",
+        "district": "Pueblo Libre"
+      },
+      {
+        "ubigeo": "150122",
+        "district": "Miraflores"
+      },
+      {
+        "ubigeo": "150123",
+        "district": "Pachacámac"
+      },
+      {
+        "ubigeo": "150124",
+        "district": "Pucusana"
+      },
+      {
+        "ubigeo": "150125",
+        "district": "Puente Piedra"
+      },
+      {
+        "ubigeo": "150126",
+        "district": "Punta Hermosa"
+      },
+      {
+        "ubigeo": "150127",
+        "district": "Punta Negra"
+      },
+      {
+        "ubigeo": "150128",
+        "district": "Rímac"
+      },
+      {
+        "ubigeo": "150129",
+        "district": "San Bartolo"
+      },
+      {
+        "ubigeo": "150130",
+        "district": "San Borja"
+      },
+      {
+        "ubigeo": "150131",
+        "district": "San Isidro"
+      },
+      {
+        "ubigeo": "150132",
+        "district": "San Juan de Lurigancho"
+      },
+      {
+        "ubigeo": "150133",
+        "district": "San Juan de Miraflores"
+      },
+      {
+        "ubigeo": "150134",
+        "district": "San Luis"
+      },
+      {
+        "ubigeo": "150135",
+        "district": "San Martín de Porres"
+      },
+      {
+        "ubigeo": "150136",
+        "district": "San Miguel"
+      },
+      {
+        "ubigeo": "150137",
+        "district": "Santa Anita"
+      },
+      {
+        "ubigeo": "150138",
+        "district": "Santa María del Mar"
+      },
+      {
+        "ubigeo": "150139",
+        "district": "Santa Rosa"
+      },
+      {
+        "ubigeo": "150140",
+        "district": "Santiago de Surco"
+      },
+      {
+        "ubigeo": "150141",
+        "district": "Surquillo"
+      },
+      {
+        "ubigeo": "150142",
+        "district": "Villa El Salvador"
+      },
+      {
+        "ubigeo": "150143",
+        "district": "Villa María del Triunfo"
+      }
+    ],
+    "Callao (0701)": [
+      {
+        "ubigeo": "070101",
+        "district": "Callao"
+      },
+      {
+        "ubigeo": "070102",
+        "district": "Bellavista"
+      },
+      {
+        "ubigeo": "070103",
+        "district": "Carmen de la Legua Reynoso"
+      },
+      {
+        "ubigeo": "070104",
+        "district": "La Perla"
+      },
+      {
+        "ubigeo": "070105",
+        "district": "La Punta"
+      },
+      {
+        "ubigeo": "070106",
+        "district": "Ventanilla"
+      },
+      {
+        "ubigeo": "070107",
+        "district": "Mi Perú"
+      }
+    ],
+    "Trujillo (1301)": [
+      {
+        "ubigeo": "130101",
+        "district": "Trujillo"
+      },
+      {
+        "ubigeo": "130102",
+        "district": "El Porvenir"
+      },
+      {
+        "ubigeo": "130103",
+        "district": "Florencia de Mora"
+      },
+      {
+        "ubigeo": "130104",
+        "district": "Huanchaco"
+      },
+      {
+        "ubigeo": "130105",
+        "district": "La Esperanza"
+      },
+      {
+        "ubigeo": "130106",
+        "district": "Laredo"
+      },
+      {
+        "ubigeo": "130107",
+        "district": "Moche"
+      },
+      {
+        "ubigeo": "130108",
+        "district": "Poroto"
+      },
+      {
+        "ubigeo": "130109",
+        "district": "Salaverry"
+      },
+      {
+        "ubigeo": "130110",
+        "district": "Simbal"
+      },
+      {
+        "ubigeo": "130111",
+        "district": "Víctor Larco Herrera"
+      },
+      {
+        "ubigeo": "130112",
+        "district": "Alto Trujillo"
+      }
+    ],
+    "Santa (0218)": [
+      {
+        "ubigeo": "021801",
+        "district": "Chimbote"
+      },
+      {
+        "ubigeo": "021802",
+        "district": "Cáceres del Perú"
+      },
+      {
+        "ubigeo": "021803",
+        "district": "Coishco"
+      },
+      {
+        "ubigeo": "021804",
+        "district": "Macate"
+      },
+      {
+        "ubigeo": "021805",
+        "district": "Moro"
+      },
+      {
+        "ubigeo": "021806",
+        "district": "Nepeña"
+      },
+      {
+        "ubigeo": "021807",
+        "district": "Samanco"
+      },
+      {
+        "ubigeo": "021808",
+        "district": "Santa"
+      },
+      {
+        "ubigeo": "021809",
+        "district": "Nuevo Chimbote"
+      }
+    ]
+  },
+  "simplifiedAgreement": {
+    "Lima Metropolitana": {
+      "samples": 13402,
+      "agreePct": 99.94
+    },
+    "Trujillo": {
+      "samples": 17295,
+      "agreePct": 99.98
+    },
+    "Chimbote": {
+      "samples": 14838,
+      "agreePct": 99.92
+    }
+  }
+}

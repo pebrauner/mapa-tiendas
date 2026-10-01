@@ -1,0 +1,48 @@
+{
+  "id": "florayfauna",
+  "name": "Flora y Fauna",
+  "legendName": "FLORA Y FAUNA",
+  "group": "specialty",
+  "color": "#232522",
+  "ringColor": "#232522",
+  "owner": "Wong Seaone family (Erasmo Wong, Eileen Wong)",
+  "website": "https://www.florayfauna.pe",
+  "storeLocator": "https://www.florayfauna.pe/institucional/nuestras-tiendas",
+  "defaultOn": true,
+  "osm": {
+    "wikidata": [],
+    "nameRegex": "^(?:supermercados?\\s+)?flora\\s*(?:y|&|and|e)?\\s*fauna\\b",
+    "excludeNameRegex": "",
+    "label": "Flora y Fauna",
+    "prefixRegex": "^(?:supermercados?\\s+)?flora\\s*(?:y|&|and|e)?\\s*fauna\\b",
+    "shops": ["supermarket", "health_food", "organic", "convenience", "greengrocer", "deli"],
+    "requireShopLike": true,
+    "dense": true,
+    "uniqueName": true,
+    "weakNameRegex": "",
+    "weakNameShops": [],
+    "excludeTags": []
+  },
+  "logo": {
+    "badge": true,
+    "wide": true
+  },
+  "logoSources": [
+    {
+      "file": "logos/florayfauna.png",
+      "url": "https://graph.facebook.com/florayfauna.pe/picture?type=large&width=720&height=720",
+      "notes": "Official Facebook page avatar of florayfauna.pe (page linked from the official site): cream 'F&F' monogram (ampersand with leaf) on near-black #232522 — the same black 'F&F' square used on the user's Lima Sur slide. Zoomed to fill the circle-safe area. Local copy: tools/seed/logo-src/florayfauna/facebook-avatar-florayfauna.pe.jpg."
+    },
+    {
+      "file": "logos/florayfauna-wide.png",
+      "url": "https://florayfauna.vtexassets.com/arquivos/logo.svg",
+      "notes": "Official site logo SVG ('FLORA & FAUNA' slab-serif wordmark, paths filled #212721). The site applies a CSS/SVG filter that turns it cream for its dark header; it was rasterised with headless Chrome WITHOUT that filter, i.e. in its native dark colour, so it reads on white. Trimmed, 512 px wide. Local copies: tools/seed/logo-src/florayfauna/florayfauna-logo.svg (+ -dark-render.png)."
+    }
+  ],
+  "storeCountReported": {
+    "value": 13,
+    "source": "https://gestion.pe/economia/empresas/familia-wong-flora-fauna-suma-nueva-tienda-con-inversion-de-us-500-mil-en-dos-de-mayo-de-san-isidro-noticia/",
+    "date": "2026-04-24"
+  },
+  "notes": "Healthy/organic supermarket chain of the Wong Seaone family (Gestión 2026-04-24); brand written 'Flora & Fauna', abbreviated 'F&F'. IDENTIFICATION on the user's slides: the black square 'F&F' logo on the Lima Sur slide = Flora y Fauna (matches this chain's official avatar). The red/pink ring with two green leaves (radish/fruit-like) on the same slide is NOT Flora y Fauna: it is Vivanda's official icon (https://www.vivanda.com.pe/ico_vivanda-180x180.png). Store count: Gestión 2026-04-24, new San Isidro store on Av. Dos de Mayo is 'el número 13 de la cadena'; a later 14th store in Magdalena was mentioned by a search snippet but could not be verified (source page returned 403). The official store page loads its list client-side (not captured). Site contact e-mail domain is produsana.com (legal entity name not verified). No Wikidata item found (searched 2026-09-30/10-01). Colours from the official avatar: near-black #232522, cream #EBE8E3. OSM (probe 2026-10-01): ~4 features ('Flora & Fauna', 'Flora y Fauna', 'Flora Y Fauna'; shop=supermarket or health_food). Regex is anchored to avoid 'Flora Tristán' schools/markets, 'Bodega Flora', 'Veterinaria Fauna Urbana', etc."
+}

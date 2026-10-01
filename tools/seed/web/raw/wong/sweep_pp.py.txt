@@ -1,0 +1,35 @@
+import json, time, urllib.request, sys
+UA="mapa-tiendas-seed/1.0 (github.com/pebrauner/mapa-tiendas)"
+pts = {
+ 'Tumbes':(-3.567,-80.451),'Piura':(-5.194,-80.632),'Sullana':(-4.903,-80.685),'Talara':(-4.577,-81.272),
+ 'Chiclayo':(-6.771,-79.840),'Jaen':(-5.708,-78.808),'Cajamarca':(-7.163,-78.500),'Chachapoyas':(-6.231,-77.869),
+ 'Moyobamba':(-6.034,-76.971),'Tarapoto':(-6.488,-76.360),'Yurimaguas':(-5.900,-76.120),'Iquitos':(-3.749,-73.253),
+ 'Trujillo':(-8.112,-79.029),'Chimbote':(-9.075,-78.593),'Huaraz':(-9.527,-77.528),'Barranca':(-10.754,-77.761),
+ 'Huacho':(-11.108,-77.610),'LimaCentro':(-12.046,-77.043),'LimaNorte':(-11.85,-77.10),'LimaEste':(-12.00,-76.85),
+ 'LimaSur':(-12.30,-76.80),'Canete':(-13.077,-76.387),'Chincha':(-13.418,-76.132),'Pisco':(-13.710,-76.203),
+ 'Ica':(-14.068,-75.726),'Nazca':(-14.835,-74.938),'Huancayo':(-12.065,-75.205),'Tarma':(-11.419,-75.690),
+ 'CerroDePasco':(-10.683,-76.256),'Huanuco':(-9.930,-76.242),'TingoMaria':(-9.295,-75.998),'Pucallpa':(-8.379,-74.554),
+ 'Ayacucho':(-13.163,-74.224),'Huancavelica':(-12.787,-74.976),'Abancay':(-13.634,-72.881),'Andahuaylas':(-13.656,-73.387),
+ 'Cusco':(-13.532,-71.967),'PuertoMaldonado':(-12.593,-69.189),'Puno':(-15.840,-70.022),'Juliaca':(-15.500,-70.133),
+ 'Arequipa':(-16.409,-71.537),'Mollendo':(-17.023,-72.015),'Moquegua':(-17.194,-70.935),'Ilo':(-17.646,-71.345),
+ 'Tacna':(-18.013,-70.250),'Camana':(-16.624,-72.711),'Bagua':(-5.639,-78.531),'Satipo':(-11.254,-74.638),
+}
+site = sys.argv[1]
+out = {}
+for name,(lat,lng) in pts.items():
+    page=1
+    while True:
+        url=f"https://www.{site}/api/checkout/pub/pickup-points?geoCoordinates={lng};{lat}&page={page}&pageSize=100"
+        req=urllib.request.Request(url,headers={'User-Agent':UA,'Accept':'application/json'})
+        try:
+            d=json.load(urllib.request.urlopen(req,timeout=40))
+        except Exception as e:
+            print(name,'ERR',e); break
+        for it in d.get('items',[]):
+            pp=it['pickupPoint']; out.setdefault(pp['id'],pp)
+        print(name,page,d['paging'],len(out),flush=True)
+        time.sleep(1.0)
+        if page>=d['paging']['pages']: break
+        page+=1
+json.dump(out,open(f'pp_{site}.json','w',encoding='utf-8'),ensure_ascii=False,indent=1)
+print('unique',len(out))

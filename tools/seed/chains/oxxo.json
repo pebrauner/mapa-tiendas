@@ -1,0 +1,48 @@
+{
+  "id": "oxxo",
+  "name": "Oxxo",
+  "legendName": "OXXO",
+  "group": "convenience",
+  "color": "#E70020",
+  "ringColor": "#E70020",
+  "owner": "FEMSA (FEMSA Comercio / Proximity division; operating company in Peru reported as Cadena Comercial Oxxo)",
+  "website": "https://oxxo.pe",
+  "storeLocator": null,
+  "defaultOn": false,
+  "osm": {
+    "wikidata": ["Q1342538"],
+    "nameRegex": "^oxxo\\b",
+    "excludeNameRegex": "^oxxo\\s+gas",
+    "label": "Oxxo",
+    "prefixRegex": "^oxxo\\b",
+    "shops": ["convenience", "supermarket", "kiosk"],
+    "requireShopLike": true,
+    "dense": true,
+    "uniqueName": true,
+    "weakNameRegex": "",
+    "weakNameShops": [],
+    "excludeTags": []
+  },
+  "logo": {
+    "badge": true,
+    "wide": true
+  },
+  "logoSources": [
+    {
+      "file": "logos/oxxo.png",
+      "url": "https://commons.wikimedia.org/wiki/File:Oxxo_Logo.svg",
+      "notes": "Wikimedia Commons 'Oxxo Logo.svg' (Commons licence tag: public domain; trademarked) — the red/yellow OXXO logo, same artwork as the oxxo.pe favicon (https://oxxo.pe/frontend/images/oxxo.png, 174x90). Rasterised with headless Chrome at 1600 px, placed on white inside the circle-safe area. Local copies: tools/seed/logo-src/oxxo/."
+    },
+    {
+      "file": "logos/oxxo-wide.png",
+      "url": "https://commons.wikimedia.org/wiki/File:Oxxo_Logo.svg",
+      "notes": "Same rasterisation, trimmed (the logo's own white rounded border is kept), 512 px wide."
+    }
+  ],
+  "storeCountReported": {
+    "value": 200,
+    "source": "https://www.peru-retail.com/un-nuevo-hito-oxxo-inaugura-9-nuevas-tiendas-y-supera-las-200-sucursales-en-peru/",
+    "date": "2024-12-17"
+  },
+  "notes": "Mexican convenience chain (FEMSA); in Peru: Lima plus Arequipa and Ica (Peru Retail 2024). Default OFF per project config. Store count is a LOWER BOUND and dated: Peru Retail 2024-12-17 says Oxxo 'supera las 200 sucursales en Perú' (as of Nov 2024); no more recent official Peru total was found (Peru Retail 2024-06-11: 166 stores). Official Peru site oxxo.pe shows only an 'en construcción' page (with links to peru.oxxodomicilios.com delivery app and RUC 20602743960); no public store list/locator was found -> storeLocator null. Colours from the logo: red #E70020, yellow #FBB110. OSM (probe 2026-10-01): 48 features, 41 already brand=Oxxo + brand:wikidata=Q1342538 (NSI preset), all shop=convenience except one supermarket. 'Oxxo Gas' fuel stations (amenity=fuel, Mexico brand) are excluded by requiring a shop tag."
+}

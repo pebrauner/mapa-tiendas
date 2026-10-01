@@ -1,0 +1,45 @@
+{
+  "name": "Vivanda Online - Piensa Fresco",
+  "short_name": "Vivanda",
+  "description": "Compra online todo Frutas y Verduras desde donde estés en Vivanda.com.pe",
+  "theme_color": "#00a160",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "start_url": "/",
+  "lang": "es-PE",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "16x16 32x32 48x48",
+      "type": "image/x-icon",
+      "purpose": "any"
+    },
+    {
+      "src": "/ico_vivanda-80x80.png",
+      "sizes": "80x80",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/ico_vivanda-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/ico_vivanda-167x167.png",
+      "sizes": "167x167",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/ico_vivanda-180x180.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["shopping", "food"]
+}

@@ -1,0 +1,55 @@
+{
+  "id": "plazavea",
+  "name": "Plaza Vea",
+  "legendName": "PLAZA VEA",
+  "group": "super",
+  "color": "#EE3037",
+  "ringColor": "#CC292E",
+  "owner": "InRetail Perú Corp. (Intercorp group) — Supermercados Peruanos S.A.",
+  "website": "https://www.plazavea.com.pe",
+  "storeLocator": "https://vea.plazavea.com.pe/principal/nuestras-tiendas",
+  "defaultOn": true,
+  "osm": {
+    "wikidata": ["Q7203672"],
+    "nameRegex": "^(?:hiper(?:mercado)?\\s+|super(?:mercado)?\\s+)?plaza\\s*vea\\b",
+    "excludeNameRegex": "",
+    "label": "Plaza Vea",
+    "prefixRegex": "^(?:hiper(?:mercado)?\\s+|super(?:mercado)?\\s+)?plaza\\s*vea\\b",
+    "shops": ["supermarket", "hypermarket", "mall", "department_store"],
+    "requireShopLike": false,
+    "dense": false,
+    "uniqueName": true,
+    "weakNameRegex": "",
+    "weakNameShops": [],
+    "excludeTags": []
+  },
+  "logo": { "badge": true, "wide": true },
+  "logoSources": [
+    {
+      "file": "logos/plazavea.png",
+      "url": "https://plazavea.vteximg.com.br/arquivos/LogoPlazaVea.svg",
+      "notes": "Badge re-composed 2026-10-01 (data polish) so it reads at 32 px: official white 'plazavea' wordmark (white letters, yellow #FFC700 'V' swoosh) from the plazavea.com.pe header SVG, rasterized with headless Chrome (tools/seed/logo-src/hi/plazavea-wordmark-white.png), re-stacked as 'plaza' over 'vea' on the red #EE3037 of the official PWA icon. The user's slides use the wordmark; on one line its 8 letters are a ~3 px squiggle at 32-40 px, stacked they read."
+    },
+    {
+      "file": "logos/plazavea-alt.png",
+      "url": "https://plazavea.vteximg.com.br/arquivos/IconLogov2.svg",
+      "notes": "Alternative badge, not used by the app (logos.js ships logos/plazavea.png): the official plazaVea app symbol (yellow 'V' swoosh) from the plazavea.com.pe header, keyed out of its red disc and centred on #EE3037 (the badge shipped before the 2026-10-01 polish). Clean at any size but reads only as a tick at 40 px. To use it, upload it as the chain badge in the app (Cadenas) or copy it over logos/plazavea.png and run node tools/build-logos.mjs."
+    },
+    {
+      "file": "logos/plazavea-wide.png",
+      "url": "https://plazavea.vteximg.com.br/arquivos/LogoPlazaVeaV2.svg",
+      "notes": "Official red 'plazaVea' wordmark (red #CC292E, yellow #FEC600) from the plazavea.com.pe header, rasterized with headless Chrome, transparent, trimmed, 512 px wide."
+    },
+    {
+      "file": "(reference only)",
+      "url": "https://commons.wikimedia.org/wiki/File:Plaza_Vea_nuevo_logo.svg",
+      "notes": "Wikidata P154 logo (white wordmark on red box, as used on the user's slides). Not used; the site assets above are the primary source."
+    }
+  ],
+  "storeCountReported": {
+    "value": 104,
+    "source": "https://www.peru-retail.com/cuantas-tiendas-tienen-las-principales-cadenas-en-peru-y-cuanto-creceran-en-2026/",
+    "date": "2026-05-08"
+  },
+  "notes": "Hypermarket/supermarket format of InRetail's Food Retail unit. Store count: Perú Retail (press, 8 May 2026) says Plaza Vea 'cuenta actualmente con 104 tiendas'. InRetail does not publish a Plaza Vea-only figure: its Q2'26 corporate presentation (https://www.inretail.pe/api/archivos/file/InRetail%20Q2%2726%20Corporate%20Presentation.pdf) reports 113 'Hypermarket & Supermarket' + 'High-end Supermarket' stores (Plaza Vea + Vivanda) at 30 Jun 2026 (112 at Q1'26), consistent with 104 Plaza Vea + 8-9 Vivanda. storeLocator is the legacy (2016-design) 'Nuestras Tiendas' page (department/province/district selector) still linked from the plazavea.com.pe code; the footer 'Ver tiendas' link on www.plazavea.com.pe has no static href, and www.plazavea.com.pe/tiendas is a product search, not a locator. OSM (probe 2026-10-01): 97 shop=supermarket objects match (79 carry brand:wikidata=Q7203672). Several real stores are mis-tagged in OSM as shop=mall / building / amenity=marketplace named exactly 'Plaza Vea' or 'Plaza Vea Hiper' (e.g. w128137348, w396093363, w401854652) — worth a manual review rather than auto-accept; bus stops and parkings named 'Plaza Vea' are excluded by the shop filter. 'Plaza Vea Express' and 'Plaza Vea Hiper' names also occur. Match name before brand (e.g. n13125700954 is name='Tiendas Mass', brand='Plaza Vea')."
+}

@@ -1,0 +1,48 @@
+{
+ "id": "holi",
+ "name": "Holi",
+ "legendName": "HOLI",
+ "group": "specialty",
+ "color": "#6FB74C",
+ "ringColor": "#6FB74C",
+ "owner": "Supermercados Holi (founders Eduardo Wong and Theo Lozano)",
+ "website": "https://holisupermercado.com",
+ "storeLocator": "https://holisupermercado.com/",
+ "defaultOn": true,
+ "osm": {
+  "wikidata": ["Q139603397"],
+  "nameRegex": "^(?:supermercados?\\s+)?holi\\b",
+  "excludeNameRegex": "^(?:supermercados?\\s+)?holi\\b\\s*day",
+  "label": "Holi",
+  "prefixRegex": "^(?:supermercados?\\s+)?holi\\b",
+  "shops": ["supermarket", "convenience"],
+  "requireShopLike": true,
+  "dense": true,
+  "uniqueName": false,
+  "weakNameRegex": "",
+  "weakNameShops": [],
+  "excludeTags": []
+ },
+ "logo": {
+  "badge": true,
+  "wide": false
+ },
+ "logoSources": [
+  {
+   "file": "logos/holi.png",
+   "url": "https://holisupermercado.com/wp-temp/wp-content/uploads/2025/10/logo-holi-e1764281326813.png",
+   "notes": "Official logo from holisupermercado.com (site logo / apple-touch-icon / og:image): green 'H' 'L' 'i', orange power-button 'o' with leaf, two green+orange arcs; transparent PNG 2195x1752. Placed on white, scaled to the circle-safe area (the arcs follow the circle). Local copy: tools/seed/logo-src/holi/logo-holi.png."
+  },
+  {
+   "file": "(none) logos/holi-wide.png removed 2026-10-01",
+   "url": "https://holisupermercado.com/wp-temp/wp-content/uploads/2025/10/logo-holi-e1764281326813.png",
+   "notes": "The official Holi logo exists only as the stacked mark (HōLi with two arcs, aspect ~0.9:1); there is no horizontal wordmark, so there is no -wide.png and the card marker style falls back to the badge (SPEC §3.3: -wide.png is optional). The trimmed stacked copy that was used as the wide logo is kept for reference at tools/seed/logo-src/holi/holi-wide-stacked-unused.png."
+  }
+ ],
+ "storeCountReported": {
+  "value": 12,
+  "source": "https://gestion.pe/economia/empresas/supermercados-holi-alcanza-las-12-tiendas-en-lima-con-nueva-apertura-en-san-miguel-noticia/",
+  "date": "2026-08-03"
+ },
+ "notes": "Small-format ('supermercado express') omnichannel supermarket chain in Lima, first store 2023 in Surquillo; founders Eduardo Wong (CEO) and Theo Lozano (Peru Retail 2023-02-18, https://www.peru-retail.com/supermercado-holi-planea-abrir-50-locales-en-peru-en-dos-anos-y-alista-su-internacionalizacion/). IDENTIFICATION: the green/orange 'HōLi' logo on the user's Lima Sur slide = this chain (identical to the official logo). Official site: holisupermercado.com (holi.pe is a parked domain). Store count: Gestión 2026-08-03, 'alcanzó las 12 tiendas operativas con la apertura de un nuevo establecimiento en San Miguel'. There is no store list on the site: its 'find your nearest Holi' section is only a Google Maps search embed for 'Holi supermercado' (storeLocator points to that homepage section). Wikidata: Q139603397 (Holi, cadena de supermercados peruana) — NOTE for the scan stage: tools/scan-osm.mjs currently says no QID exists for Holi. Colours from the official logo: green #6FB74C, orange #F08215. OSM (probe 2026-10-01): ~6 features ('Holi Supermercado' x4, 'Holi' x2; shop=supermarket/convenience), none brand-tagged. Regex requires the name to START with 'Holi' as a separate word (excludes 'Holiday', 'Perricholi', 'Cholita', 'Catholic'), and only shop=supermarket/convenience."
+}

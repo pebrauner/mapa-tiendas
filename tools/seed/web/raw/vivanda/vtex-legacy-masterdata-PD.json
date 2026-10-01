@@ -1,0 +1,82 @@
+[
+ {
+  "name": "Vivanda Pezet",
+  "address": "Av. Juan Antonio Pezet 1340 – 1360, San Isidro",
+  "sc": "5",
+  "warehouse_id": null,
+  "district": "150131",
+  "lat": null,
+  "lon": null,
+  "state": false
+ },
+ {
+  "name": "Vivanda Javier Prado",
+  "address": "Av. Javier Prado Oeste 999, Magdalena del Mar",
+  "sc": "7",
+  "warehouse_id": null,
+  "district": "150120",
+  "lat": null,
+  "lon": null,
+  "state": false
+ },
+ {
+  "name": "Vivanda Pardo",
+  "address": "Av. José Pardo 715, Miraflores.",
+  "sc": "6",
+  "warehouse_id": null,
+  "district": "150122",
+  "lat": null,
+  "lon": null,
+  "state": false
+ },
+ {
+  "name": "Vivanda Dos de Mayo",
+  "address": "Av. Dos de Mayo 1410, esquina con Nogales, San Isidro.",
+  "sc": "8",
+  "warehouse_id": null,
+  "district": "150131",
+  "lat": null,
+  "lon": null,
+  "state": false
+ },
+ {
+  "name": "Vivanda Benavides",
+  "address": "Esquina de la avenida Benavides con la calle Alcanfores, Miraflores.",
+  "sc": "2",
+  "warehouse_id": null,
+  "district": "150122",
+  "lat": null,
+  "lon": null,
+  "state": false
+ },
+ {
+  "name": "Vivanda Asia",
+  "address": "Av. Cayma S/N, KM 97.5 panamerica sur. Refd: Al lado del grifo Primax, Al lado del Boluevard.",
+  "sc": "3",
+  "warehouse_id": null,
+  "district": "150502",
+  "lat": null,
+  "lon": null,
+  "state": false
+ },
+ {
+  "name": "Vivanda Libertadores",
+  "address": "Av. Libertadores 596 San Isidro.",
+  "sc": "1",
+  "warehouse_id": null,
+  "district": "150131",
+  "lat": null,
+  "lon": null,
+  "state": false
+ },
+ {
+  "name": "Vivanda Monterrico",
+  "address": "Av. La Encalada cuadra 5, esquina con av. Angamos Este cuadra 15, Monterrico.",
+  "sc": "9",
+  "warehouse_id": null,
+  "district": "150140",
+  "lat": null,
+  "lon": null,
+  "state": false
+ }
+]

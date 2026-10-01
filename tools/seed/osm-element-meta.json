@@ -1,0 +1,246 @@
+{
+ "about": "Current version and last-edit timestamp of the OSM elements that were OSM-only rows on 2026-10-01 (OSM API 0.6 multi-fetch: /api/0.6/nodes.json?nodes=… and /api/0.6/ways.json?ways=…). Used by tools/merge.mjs for the notes of OSM-only rows. A recent edit may only have touched tags such as brand=*, so it does not by itself confirm that the store exists.",
+ "retrieved": "2026-10-01T07:21:08.397Z",
+ "elements": {
+  "n1107564688": {
+   "version": 4,
+   "timestamp": "2022-12-13T22:21:06Z"
+  },
+  "n11374305087": {
+   "version": 1,
+   "timestamp": "2023-11-24T20:25:16Z"
+  },
+  "n12431485301": {
+   "version": 1,
+   "timestamp": "2024-12-18T18:34:33Z"
+  },
+  "n12437928601": {
+   "version": 1,
+   "timestamp": "2024-12-21T00:05:05Z"
+  },
+  "n12599684460": {
+   "version": 1,
+   "timestamp": "2025-02-19T01:21:07Z"
+  },
+  "n13697073413": {
+   "version": 2,
+   "timestamp": "2026-05-29T02:48:33Z"
+  },
+  "n13697073414": {
+   "version": 1,
+   "timestamp": "2026-04-01T01:50:20Z"
+  },
+  "n14208047522": {
+   "version": 1,
+   "timestamp": "2026-09-23T00:17:56Z"
+  },
+  "n14232788501": {
+   "version": 1,
+   "timestamp": "2026-09-29T20:53:15Z"
+  },
+  "n2644956629": {
+   "version": 14,
+   "timestamp": "2024-09-11T16:39:02Z"
+  },
+  "n2922674739": {
+   "version": 2,
+   "timestamp": "2020-01-14T15:07:13Z"
+  },
+  "n3141079282": {
+   "version": 2,
+   "timestamp": "2023-12-03T11:38:40Z"
+  },
+  "n3638063599": {
+   "version": 3,
+   "timestamp": "2023-12-02T20:03:45Z"
+  },
+  "n3759586691": {
+   "version": 3,
+   "timestamp": "2026-02-24T22:40:31Z"
+  },
+  "n4172178398": {
+   "version": 3,
+   "timestamp": "2023-10-20T02:16:13Z"
+  },
+  "n4182111589": {
+   "version": 7,
+   "timestamp": "2026-09-29T10:59:16Z"
+  },
+  "n4232489513": {
+   "version": 3,
+   "timestamp": "2025-08-16T18:14:51Z"
+  },
+  "n4278875491": {
+   "version": 4,
+   "timestamp": "2026-04-01T18:11:35Z"
+  },
+  "n4308090578": {
+   "version": 2,
+   "timestamp": "2026-09-30T06:07:55Z"
+  },
+  "n4335836186": {
+   "version": 2,
+   "timestamp": "2016-08-05T20:48:36Z"
+  },
+  "n4341361305": {
+   "version": 3,
+   "timestamp": "2026-07-31T00:05:16Z"
+  },
+  "n4353251890": {
+   "version": 2,
+   "timestamp": "2016-08-19T22:43:37Z"
+  },
+  "n4356572811": {
+   "version": 2,
+   "timestamp": "2016-08-19T22:24:42Z"
+  },
+  "n4453923987": {
+   "version": 2,
+   "timestamp": "2019-07-05T21:11:59Z"
+  },
+  "n4477147437": {
+   "version": 2,
+   "timestamp": "2024-12-27T01:36:34Z"
+  },
+  "n4537859291": {
+   "version": 1,
+   "timestamp": "2016-12-04T15:25:16Z"
+  },
+  "n4949929723": {
+   "version": 2,
+   "timestamp": "2021-11-29T17:46:27Z"
+  },
+  "n5591615727": {
+   "version": 2,
+   "timestamp": "2021-12-14T00:09:07Z"
+  },
+  "n6547620077": {
+   "version": 1,
+   "timestamp": "2019-06-14T12:38:18Z"
+  },
+  "n6725518670": {
+   "version": 2,
+   "timestamp": "2023-10-27T16:31:45Z"
+  },
+  "n6725566998": {
+   "version": 3,
+   "timestamp": "2023-11-04T04:22:05Z"
+  },
+  "n6725584581": {
+   "version": 2,
+   "timestamp": "2023-11-07T14:48:40Z"
+  },
+  "n7091051785": {
+   "version": 2,
+   "timestamp": "2021-07-13T16:26:25Z"
+  },
+  "n7561587085": {
+   "version": 1,
+   "timestamp": "2020-05-27T06:13:46Z"
+  },
+  "n7891288147": {
+   "version": 1,
+   "timestamp": "2020-09-09T20:52:11Z"
+  },
+  "n9342088754": {
+   "version": 2,
+   "timestamp": "2021-12-15T22:41:33Z"
+  },
+  "n9701879275": {
+   "version": 1,
+   "timestamp": "2022-04-29T01:10:11Z"
+  },
+  "n9757207617": {
+   "version": 2,
+   "timestamp": "2022-11-15T01:50:21Z"
+  },
+  "w1018725192": {
+   "version": 2,
+   "timestamp": "2022-01-06T17:40:53Z"
+  },
+  "w1376181759": {
+   "version": 1,
+   "timestamp": "2025-04-09T17:52:14Z"
+  },
+  "w331336356": {
+   "version": 3,
+   "timestamp": "2025-10-10T07:15:51Z"
+  },
+  "w358983535": {
+   "version": 9,
+   "timestamp": "2023-12-13T17:50:51Z"
+  },
+  "w375878761": {
+   "version": 3,
+   "timestamp": "2026-09-28T05:18:16Z"
+  },
+  "w408909647": {
+   "version": 4,
+   "timestamp": "2025-12-19T01:05:59Z"
+  },
+  "w422886835": {
+   "version": 4,
+   "timestamp": "2019-09-25T02:02:57Z"
+  },
+  "w435044936": {
+   "version": 7,
+   "timestamp": "2026-08-30T04:00:32Z"
+  },
+  "w436266436": {
+   "version": 3,
+   "timestamp": "2017-08-23T20:22:00Z"
+  },
+  "w436297821": {
+   "version": 4,
+   "timestamp": "2022-01-07T22:01:59Z"
+  },
+  "w436474198": {
+   "version": 4,
+   "timestamp": "2026-09-26T14:38:30Z"
+  },
+  "w436598550": {
+   "version": 5,
+   "timestamp": "2025-08-15T04:15:49Z"
+  },
+  "w436955829": {
+   "version": 3,
+   "timestamp": "2026-09-30T12:29:38Z"
+  },
+  "w437375221": {
+   "version": 2,
+   "timestamp": "2016-08-19T21:22:11Z"
+  },
+  "w437649833": {
+   "version": 7,
+   "timestamp": "2024-04-19T11:37:01Z"
+  },
+  "w439031080": {
+   "version": 7,
+   "timestamp": "2019-03-19T00:28:41Z"
+  },
+  "w446742869": {
+   "version": 2,
+   "timestamp": "2017-02-14T21:56:40Z"
+  },
+  "w468947755": {
+   "version": 5,
+   "timestamp": "2026-04-01T18:11:35Z"
+  },
+  "w517417460": {
+   "version": 3,
+   "timestamp": "2017-08-24T22:25:14Z"
+  },
+  "w519743482": {
+   "version": 3,
+   "timestamp": "2026-04-01T18:11:35Z"
+  },
+  "w553326990": {
+   "version": 1,
+   "timestamp": "2018-01-15T18:33:58Z"
+  },
+  "w913884129": {
+   "version": 1,
+   "timestamp": "2021-03-05T15:01:26Z"
+  }
+ }
+}

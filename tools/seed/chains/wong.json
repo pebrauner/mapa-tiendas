@@ -1,0 +1,50 @@
+{
+  "id": "wong",
+  "name": "Wong",
+  "legendName": "WONG",
+  "group": "super",
+  "color": "#F20E00",
+  "ringColor": "#F20E00",
+  "owner": "Cencosud S.A. (Chile) — Cencosud Retail Perú S.A.",
+  "website": "https://www.wong.pe",
+  "storeLocator": null,
+  "defaultOn": true,
+  "osm": {
+    "wikidata": ["Q28604866"],
+    "nameRegex": "^(?:supermercados?\\s+)?(?:e\\.\\s*)?wong\\b",
+    "excludeNameRegex": "",
+    "label": "Wong",
+    "prefixRegex": "^(?:supermercados?\\s+)?(?:e\\.\\s*)?wong\\b",
+    "shops": ["supermarket", "hypermarket"],
+    "requireShopLike": false,
+    "dense": false,
+    "uniqueName": false,
+    "weakNameRegex": "",
+    "weakNameShops": [],
+    "excludeTags": []
+  },
+  "logo": { "badge": true, "wide": true },
+  "logoSources": [
+    {
+      "file": "logos/wong.png",
+      "url": "https://play-lh.googleusercontent.com/9iI_Auy8GqFq5higalD7BoQ0TR2EDlfJzIX76ubsNBbGUW0l3P5TSKDxNXezkvpMFSBKt0oNxjBeNZSCvSL7=s512",
+      "notes": "Official app icon (512 px) of 'Supermercados Wong' by Cencosud SA on Google Play (https://play.google.com/store/apps/details?id=com.cencosud.pe.wong): red disc with white 'Wong' wordmark, white outer ring and red dot. Only the white wordmark was lifted (outer ring and dot dropped) and centred on the icon red #F20E00 inside the circle-safe area. 2026-10-01: wordmark enlarged to ~88% of the badge square (it was ~72%)."
+    },
+    {
+      "file": "logos/wong-wide.png",
+      "url": "https://play-lh.googleusercontent.com/9iI_Auy8GqFq5higalD7BoQ0TR2EDlfJzIX76ubsNBbGUW0l3P5TSKDxNXezkvpMFSBKt0oNxjBeNZSCvSL7=s512",
+      "notes": "Added 2026-10-01 so the card style shows a wordmark like the other chains: the same white 'Wong' wordmark lifted from the official Google Play icon (wong.pe itself only shows the Cencosud logo), painted in the icon red #F20E00, transparent, trimmed, 406x104 (the icon is 512 px; no upscaling)."
+    },
+    {
+      "file": "(reference only)",
+      "url": "https://commons.wikimedia.org/wiki/File:Logo_Wong_Cencosud.png",
+      "notes": "Wikidata P154 logo (500 px, same circular design with 'cencosud' subline). Also File:Logo_Wong_(2005).svg (red wordmark): not used, its letterforms are older (the dot over the W, the round O and the spacing differ from the current app icon)."
+    }
+  ],
+  "storeCountReported": {
+    "value": 20,
+    "source": "https://www.cencosud.com/cencosud/site/docs/20260410/20260410085306/memoria_integrada_2025_cencosud.pdf",
+    "date": "2025-12-31"
+  },
+  "notes": "Premium supermarket chain (founded 1942, Cencosud since 2007). Store count: Cencosud Memoria Integrada 2025, annex 'Perú | Supermercados' store list (name, address, owned/leased, m2) lists 20 'Wong ...' stores (Lima, Asia, Km40, Trujillo x2) — useful as an official address list for verification. Perú Retail (8 May 2026) also says 20. No store-locator page found on wong.pe (VTEX site; /tiendas is a product search). OSM (probe 2026-10-01): exactly 20 shop=supermarket objects match; none carry brand:wikidata. 'Wong' is a common surname in Peru: restaurants ('Chifa Wong ...'), clinics, a hotel, 'Wong Express' laundry, ATMs and parkings must not match — hence the start-anchored regex plus the shop filter; malls tagged operator 'Corporación Wong'/'Grupo Wong' (Plaza Norte, Mall del Sur) are unrelated to the supermarket chain. Match name before brand: w289710415 is name='Vivanda' with a stray Wong tag. The Memoria's Peru store list (names + addresses as printed) is extracted to tools/seed/chains/cencosud-peru-stores-2025.csv (88 rows: 68 Metro, 20 Wong; script tools/seed/logo-src/extract_cencosud_list.py)."
+}

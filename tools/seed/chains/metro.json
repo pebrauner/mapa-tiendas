@@ -1,0 +1,45 @@
+{
+  "id": "metro",
+  "name": "Metro",
+  "legendName": "METRO",
+  "group": "super",
+  "color": "#F9E014",
+  "ringColor": "#C79A00",
+  "owner": "Cencosud S.A. (Chile) — Cencosud Retail Perú S.A.",
+  "website": "https://www.metro.pe",
+  "storeLocator": null,
+  "defaultOn": true,
+  "osm": {
+    "wikidata": ["Q16640217"],
+    "nameRegex": "^(?:hiper(?:mercados?)?\\s+|super(?:mercados?)?\\s+)?metro\\b",
+    "excludeNameRegex": "^(?:hiper(?:mercados?)?\\s+|super(?:mercados?)?\\s+)?metro\\b\\s*(?:de\\s+lima|l[ií]nea|l\\.\\s*\\d|\\d|visi[oó]n|station|estaci[oó]n|gas)",
+    "label": "Metro",
+    "prefixRegex": "^(?:hiper(?:mercados?)?\\s+|super(?:mercados?)?\\s+)?metro\\b",
+    "shops": ["supermarket", "hypermarket", "department_store"],
+    "requireShopLike": false,
+    "dense": false,
+    "uniqueName": false,
+    "weakNameRegex": "",
+    "weakNameShops": [],
+    "excludeTags": []
+  },
+  "logo": { "badge": true, "wide": true },
+  "logoSources": [
+    {
+      "file": "logos/metro.png",
+      "url": "https://play-lh.googleusercontent.com/S29BtIs1xng5iQ4WTWtJ1aZSu0ly_t3xrEt538gAfzDdSurw5uAK5JFpopW6AUEw8rFMeCuQERcb3lMNksbNj7o=s512",
+      "notes": "Official app icon (512 px) of 'Supermercados Metro' by Cencosud SA on Google Play (https://play.google.com/store/apps/details?id=com.cencosud.pe.metro): yellow disc, red 'Metro', small 'cencosud' subline, white ring + red dot. Only the red 'Metro' wordmark (#E22113) was lifted and centred on the icon yellow #F9E014; the tiny 'cencosud' subline, ring and dot were dropped so nothing illegible remains at 40 px. Ring colour is a darker gold (#C79A00) because the yellow alone has too little contrast on the light-grey basemap. 2026-10-01: wordmark enlarged to ~88% of the badge square (it was ~72%)."
+    },
+    {
+      "file": "logos/metro-wide.png",
+      "url": "https://metroio.vtexassets.com/assets/vtex/assets-builder/metroio.store-theme/13.0.283/svg/logo-metro___19ecf64e9f98f0564f96d3856f640d6c.svg",
+      "notes": "metro.pe header logo: an SVG that embeds a 1122x794 raster page of Metro's brand manual ('Versiones del imagotipo'). Since 2026-10-01 the source of logos/metro-wide.png: its 'Metro' wordmark (~1000 px wide in tools/seed/logo-src/metro/logo-metro.render.png, pure #FF0000 on #FFFF00) lifted by red-ness (yellow background, white ring, dot and 'cencosud' excluded), painted in the app-icon red #E22113, transparent, trimmed, 512x127. Added so the card style shows a wordmark like the other chains."
+    }
+  ],
+  "storeCountReported": {
+    "value": 68,
+    "source": "https://www.cencosud.com/cencosud/site/docs/20260410/20260410085306/memoria_integrada_2025_cencosud.pdf",
+    "date": "2025-12-31"
+  },
+  "notes": "Hyper/supermarket chain of Cencosud. Store count: Cencosud Memoria Integrada 2025, annex 'Perú | Supermercados' store list, 68 'Metro ...' stores (incl. two distinct 'Metro San Juan de Miraflores'), with addresses — usable for verification. Perú Retail (8 May 2026) says 'opera 70 locales a nivel nacional' (press, more recent). No store-locator page found on metro.pe (VTEX; /tiendas is a product search). OSM (probe 2026-10-01): 72 shop=supermarket + 1 shop=department_store match (46 carry brand:wikidata=Q16640217). 'Metro' is extremely ambiguous in OSM Peru (~1,000 hits: Metro de Lima railway=subway, Metropolitano busway stations/platforms, streets, hospitals, banks, 'Metro La Molina'/'Metro Yanahuara' bus platforms): the regex is start-anchored, '\\bmetro\\b' never matches 'Metropolitano', and the shop filter is what really excludes transit objects. Do not use NSI's Metro wholesale QID Q13610282 (METRO AG, not in Peru). The Memoria's Peru store list (names + addresses as printed) is extracted to tools/seed/chains/cencosud-peru-stores-2025.csv (88 rows: 68 Metro, 20 Wong; script tools/seed/logo-src/extract_cencosud_list.py)."
+}

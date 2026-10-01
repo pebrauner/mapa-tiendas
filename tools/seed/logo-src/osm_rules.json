@@ -1,0 +1,86 @@
+{
+  "plazavea": {
+    "wikidata": [
+      "Q7203672"
+    ],
+    "nameRegex": "\\bplaza\\s*vea\\b",
+    "shops": [
+      "supermarket",
+      "hypermarket"
+    ]
+  },
+  "tottus": {
+    "wikidata": [
+      "Q7828510"
+    ],
+    "nameRegex": "\\btottus\\b",
+    "shops": [
+      "supermarket",
+      "hypermarket"
+    ]
+  },
+  "wong": {
+    "wikidata": [
+      "Q28604866"
+    ],
+    "nameRegex": "^\\s*(supermercados?\\s+)?(e\\.\\s*)?wong\\b",
+    "shops": [
+      "supermarket",
+      "hypermarket"
+    ]
+  },
+  "metro": {
+    "wikidata": [
+      "Q16640217"
+    ],
+    "nameRegex": "^\\s*((super|hiper)\\s*mercados?\\s+)?metro\\b(?!\\s*(de\\s+lima|l[ií]nea|station|estaci))",
+    "shops": [
+      "supermarket",
+      "hypermarket",
+      "department_store"
+    ]
+  },
+  "vivanda": {
+    "wikidata": [
+      "Q7937539"
+    ],
+    "nameRegex": "\\bvivanda\\b",
+    "shops": [
+      "supermarket"
+    ]
+  },
+  "mass": {
+    "wikidata": [
+      "Q104814825"
+    ],
+    "nameRegex": "^\\s*(tiendas?\\s+)?mass\\b(?!\\s+chicken)",
+    "shops": [
+      "convenience",
+      "supermarket",
+      "yes",
+      "general"
+    ]
+  },
+  "preciouno": {
+    "wikidata": [
+      "Q109657737"
+    ],
+    "nameRegex": "\\bprecio\\s*uno\\b",
+    "shops": [
+      "supermarket",
+      "hypermarket",
+      "wholesale"
+    ]
+  },
+  "makro": {
+    "wikidata": [
+      "Q704606"
+    ],
+    "nameRegex": "^\\s*makro\\b",
+    "shops": [
+      "wholesale",
+      "supermarket",
+      "hypermarket"
+    ]
+  }
+}

@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mapa de Tiendas</title>
+<meta name="description" content="Base de datos de tiendas del Perú y mapas listos para presentación (PowerPoint, PNG, HTML).">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23B3203D'/%3E%3Cpath d='M16 25s-6-5.2-6-10a6 6 0 0 1 12 0c0 4.8-6 10-6 10Z' fill='%23fff'/%3E%3Ccircle cx='16' cy='15' r='2.2' fill='%23B3203D'/%3E%3C/svg%3E">
+
+<!-- Load order (docs/ARCHITECTURE.md §3): vendor → data globals → core → module dictionaries →
+     modules → MT.app.start(). Classic scripts only: the app must run from file:// with no server. -->
+
+<!-- Any app file that fails to load (index.html opened inside the ZIP, partial copy) is recorded
+     here so the page can explain the problem instead of hanging on the splash (see the end). -->
+<script>window.MT_LOAD_ERRORS = []; window.addEventListener('error', function (e) { var t = e.target; if (t && (t.tagName === 'SCRIPT' || t.tagName === 'LINK') && !t.hasAttribute('data-optional')) MT_LOAD_ERRORS.push(t.getAttribute('src') || t.getAttribute('href')); }, true);</script>
+<!-- Vendor styles + inlined fonts -->
+<link rel="stylesheet" href="vendor/maplibre/maplibre-gl.css">
+<link rel="stylesheet" href="vendor/fonts/fonts.css">
+<!-- App styles: core design system, then one stylesheet per module -->
+<link rel="stylesheet" href="css/core.css">
+<link rel="stylesheet" href="css/maps.css">
+<link rel="stylesheet" href="css/maps-ui.css">
+<link rel="stylesheet" href="css/db.css">
+</head>
+<body>
+<div id="mt-splash" class="mt-splash" aria-live="polite">
+  <div class="mt-splash__box">
+    <div class="mt-splash__mark" aria-hidden="true"></div>
+    <div class="mt-splash__title" data-i18n="app.loading">Cargando Mapa de Tiendas…</div>
+  </div>
+</div>
+<div id="mt-app"></div>
+
+<noscript>Mapa de Tiendas necesita JavaScript.</noscript>
+
+<!-- Vendor libraries (pinned, see vendor/VERSIONS.md). SheetJS and PptxGenJS load lazily
+     through MT.vendor.xlsx() / MT.vendor.pptx() to keep start-up fast. -->
+<script src="vendor/maplibre/maplibre-gl.js"></script>
+<script src="vendor/turf/turf.min.js"></script>
+<script src="vendor/topojson/topojson-client.min.js"></script>
+
+<!-- Data globals. Any of them may be missing while data is regenerated: onerror records it and
+     the app shows a banner instead of breaking. -->
+<script>window.MT_MISSING = [];</script>
+<script src="data/chains.js" onerror="MT_MISSING.push('data/chains.js')"></script>
+<script src="data/stores.js" onerror="MT_MISSING.push('data/stores.js')"></script>
+<script src="data/districts.js" onerror="MT_MISSING.push('data/districts.js')"></script>
+<script src="logos/logos.js" onerror="MT_MISSING.push('logos/logos.js')"></script>
+<!-- Main avenue names of Peru's main cities (window.MT_ROAD_NAMES, tools/build-road-names.mjs): the
+     basemap tiles name them only from zoom 14. Optional: without it slides simply show fewer names. -->
+<script src="data/road-names.js" data-optional></script>
+<!-- Built-in example project (window.MT_EXAMPLE_PROJECT, "Abrir proyecto de ejemplo"), generated from
+     tools/fixtures/demo.mapa.json by tools/fixtures/build-example.mjs. Optional: without it the
+     example entries are simply disabled. -->
+<script src="js/example-project.js" data-optional></script>
+
+<!-- Core -->
+<script src="js/mt.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/i18n/core.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/geo.js"></script>
+<script src="js/io.js"></script>
+<script src="js/data.js"></script>
+<script src="js/project.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/app.js"></script>
+
+<!-- Module dictionaries -->
+<script src="js/i18n/map.js"></script>
+<script src="js/i18n/maps-ui.js"></script>
+<script src="js/i18n/db.js"></script>
+<script src="js/i18n/export.js"></script>
+
+<!-- M1 map core & rendering -->
+<script src="js/layout.js"></script>
+<script src="js/markers.js"></script>
+<script src="js/legend.js"></script>
+<script src="js/radius.js"></script>
+<script src="js/mapview.js"></script>
+<script src="js/slide.js"></script>
+<script src="js/render.js"></script>
+<!-- M3 database, chains, OSM -->
+<script src="js/osm.js"></script>
+<script src="js/ui-db.js"></script>
+<script src="js/ui-chains.js"></script>
+<!-- M4 exports -->
+<script src="js/export-png.js"></script>
+<script src="js/export-pptx.js"></script>
+<script src="js/export-html.js"></script>
+<!-- M2 maps tab (last: uses everything above) -->
+<script src="js/ui-maps.js"></script>
+
+<!-- Boot. If the app's own files did not load, replace the splash with a bilingual explanation
+     (inline styles: css/ may be missing too). Data files missing is handled by the app itself. -->
+<script>
+(function () {
+  var broken = (window.MT_LOAD_ERRORS || []).filter(function (f) { return /^(js|vendor|css)\//.test(f || ''); });
+  if (!broken.length && window.MT && MT.app && MT.data && MT.ui) {
+    try { MT.app.start(); return; } catch (err) { broken.push(String(err && err.message || err)); }
+  }
+  var box = document.getElementById('mt-splash') || document.body;
+  var p = 'margin:0 0 10px;line-height:1.5;';
+  box.setAttribute('style', 'position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#F4F4F5;font:15px/1.5 Segoe UI,Arial,sans-serif;color:#18181B;padding:16px;');
+  box.innerHTML = '<div role="alert" style="max-width:620px;background:#fff;border:1px solid #E4E4E7;border-top:4px solid #B3203D;border-radius:10px;padding:24px 28px;box-shadow:0 8px 24px rgba(0,0,0,.08)">' +
+    '<h1 style="font-size:20px;margin:0 0 12px">Faltan archivos de la aplicación</h1>' +
+    '<p style="' + p + '">Mapa de Tiendas necesita toda su carpeta (index.html junto con las carpetas <b>js</b>, <b>css</b>, <b>vendor</b>, <b>data</b> y <b>logos</b>).</p>' +
+    '<p style="' + p + '"><b>Si abriste index.html dentro del ZIP:</b> cierra esta pestaña, haz clic derecho en el archivo ZIP → <b>Extraer todo…</b>, y abre <b>index.html</b> desde la carpeta extraída.</p>' +
+    '<hr style="border:0;border-top:1px solid #E4E4E7;margin:16px 0">' +
+    '<h2 style="font-size:16px;margin:0 0 8px">Some app files are missing</h2>' +
+    '<p style="' + p + 'color:#52525B">Mapa de Tiendas needs its whole folder. If you opened index.html inside the ZIP, right-click the ZIP → <b>Extract All…</b> and open index.html from the extracted folder.</p>' +
+    '<p style="margin:12px 0 0;font:12px/1.4 Consolas,monospace;color:#71717A;word-break:break-all"></p></div>';
+  box.querySelector('p:last-child').textContent = broken.slice(0, 6).join(' · ');
+})();
+</script>
+</body>
+</html>

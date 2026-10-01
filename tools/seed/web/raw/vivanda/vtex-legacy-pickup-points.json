@@ -1,0 +1,622 @@
+{
+ "1_PUP140A": {
+  "friendlyName": "Recojo en auto Vivanda Libertadores",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "PUP140A",
+   "isDisposable": true,
+   "postalCode": "150131",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Calle Los Libertadores 596",
+   "number": "596",
+   "neighborhood": "San Isidro",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.03784,
+    -12.10382
+   ]
+  },
+  "additionalInfo": null,
+  "id": "1_PUP140A",
+  "isActive": false,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   }
+  ]
+ },
+ "1_PUP140": {
+  "friendlyName": "Recojo en tienda Vivanda Libertadores",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "PUP140",
+   "isDisposable": true,
+   "postalCode": "150131",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Calle Los Libertadores",
+   "number": "596",
+   "neighborhood": "San Isidro",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.03796,
+    -12.1038
+   ]
+  },
+  "additionalInfo": null,
+  "id": "1_PUP140",
+  "isActive": false,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   }
+  ]
+ },
+ "1_PUP019": {
+  "friendlyName": "Recojo en tienda Vivanda Pardo",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "PUP019",
+   "isDisposable": true,
+   "postalCode": "150122",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Av. José Pardo",
+   "number": "715",
+   "neighborhood": "Miraflores",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.03606,
+    -12.11947
+   ]
+  },
+  "additionalInfo": null,
+  "id": "1_PUP019",
+  "isActive": false,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   }
+  ]
+ },
+ "1_PUP094": {
+  "friendlyName": "Recojo en tienda Vivanda Benavides",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "PUP094",
+   "isDisposable": true,
+   "postalCode": "150122",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Esquina de Av. Benavides",
+   "number": " con Alcanfores",
+   "neighborhood": "Miraflores",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.02824,
+    -12.12456
+   ]
+  },
+  "additionalInfo": null,
+  "id": "1_PUP094",
+  "isActive": false,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   }
+  ]
+ },
+ "1_PUP094A": {
+  "friendlyName": "Recojo en auto Vivanda Benavides",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "PUP094A",
+   "isDisposable": true,
+   "postalCode": "150122",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Esquina de la avenida Benavides",
+   "number": "con la calle Alcanfores",
+   "neighborhood": "Miraflores",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.02824,
+    -12.12456
+   ]
+  },
+  "additionalInfo": null,
+  "id": "1_PUP094A",
+  "isActive": false,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   }
+  ]
+ },
+ "1_PUP090": {
+  "friendlyName": "Recojo en tienda Vivanda Pezet",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "PUP090",
+   "isDisposable": true,
+   "postalCode": "150131",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Av. Juan Antonio Pezet",
+   "number": "1340-1360",
+   "neighborhood": "San Isidro",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.05221,
+    -12.10269
+   ]
+  },
+  "additionalInfo": null,
+  "id": "1_PUP090",
+  "isActive": false,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   }
+  ]
+ },
+ "1_PUP093": {
+  "friendlyName": "Recojo en tienda Vivanda Dos de Mayo",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "PUP093",
+   "isDisposable": true,
+   "postalCode": "150131",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Dos de Mayo",
+   "number": "1410",
+   "neighborhood": "San Isidro",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.04543,
+    -12.09216
+   ]
+  },
+  "additionalInfo": null,
+  "id": "1_PUP093",
+  "isActive": false,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "21:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "21:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "21:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "21:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "21:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "21:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "21:00:00"
+   }
+  ]
+ },
+ "1_PUP116": {
+  "friendlyName": "Recojo en tienda Vivanda Javier Prado",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "PUP116",
+   "isDisposable": true,
+   "postalCode": "150120",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Javier Prado Oeste",
+   "number": "999",
+   "neighborhood": "Magdalena Del Mar",
+   "complement": "",
+   "reference": null,
+   "geoCoordinates": [
+    -77.05791,
+    -12.09317
+   ]
+  },
+  "additionalInfo": null,
+  "id": "1_PUP116",
+  "isActive": false,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "21:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "21:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "21:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "21:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "21:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "21:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "21:00:00"
+   }
+  ]
+ },
+ "1_PUP095": {
+  "friendlyName": "Recojo en tienda Vivanda Monterrico",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "PUP095",
+   "isDisposable": true,
+   "postalCode": "150140",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida La Encalada",
+   "number": "Cdra. 5",
+   "neighborhood": "Santiago De Surco",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -76.97209,
+    -12.10899
+   ]
+  },
+  "additionalInfo": null,
+  "id": "1_PUP095",
+  "isActive": false,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "21:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "21:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "21:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "21:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "21:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "21:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "21:00:00"
+   }
+  ]
+ },
+ "1_PUP290": {
+  "friendlyName": "Recojo en tienda Vivanda Asia",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "PUP290",
+   "isDisposable": true,
+   "postalCode": "150502",
+   "city": "Cañete",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Acceso al Boulevard de Asia",
+   "number": "S/N",
+   "neighborhood": "Asia",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -76.60123,
+    -12.76051
+   ]
+  },
+  "additionalInfo": null,
+  "id": "1_PUP290",
+  "isActive": false,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "09:00:00",
+    "ClosingTime": "22:00:00"
+   }
+  ]
+ }
+}

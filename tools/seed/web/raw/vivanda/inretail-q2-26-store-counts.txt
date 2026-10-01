@@ -1,0 +1,78 @@
+Source: InRetail Peru Corp - Earnings Report Q2'26 (MD&A), https://www.inretail.pe/api/archivos/file/MDA%20InRetail%20Q2'26_ENG.pdf
+Retrieved 2026-10-01. Extracted text (PyMuPDF) of the 'Operating Metrics' table; columns = Q2'25, Q3'25, Q4'25, Q1'26, Q2'26.
+Corporate presentation Q2'26 p.13: Hypermarket & Supermarket 113 / Cash & Carry 27 / Hard Discount 1,602 (Food Retail 1,742; 'Includes only Peru').
+
+ 
+ 
+  Earnings Report  Q2’26 
+  5 
+Meanwhile, our Shopping Malls segment recorded a 15.3% increase in revenues, mainly driven by 
+GLA expansion and higher variable rents on strong tenant sales performance. Adjusted EBITDA 
+grew 37.5% YoY, with Net Rental Margin expanding to 81.2%, reflecting solid operating leverage 
+and a still-favorable comparison basis related to the Real Plaza Trujillo incident. 
+During the second quarter, we continued executing our strategic priorities with discipline, 
+advancing our organic footprint expansion, reinforcing our value proposition across formats, and 
+further building out our logistics platform. Regarding our physical footprint, we reopened 1 
+Supermarket store (Vivanda), 20 net new Hard Discount stores and 27 net new pharmacies 
+during the quarter, while also completing the renovation of 166 Hard Discount stores under our 
+reinforced value proposition. 
+In April 2026, InRetail and Intercorp Financial Services (IFS) completed the acquisition of 100% of 
+InFinance XP1/ (formerly Financiera Oh!), with InRetail investing US$65 million to complete its 50% 
+...
+Operating Metrics 
+ 
+Key indicators 
+Q2’25 
+Q3’25 
+Q4’25 
+Q1’26 
+Q2’26 
+Same store sales growth (%) 
+4.2% 
+1.5% 
+4.4% 
+8.9%2/ 
+11.6% 
+ 
+ 
+ 
+ 
+ 
+ 
+Number of stores (#) 
+ 
+ 
+ 
+ 
+ 
+Cash & Carry 
+27 
+27 
+27 
+27 
+27 
+Supermarkets 
+110 
+110 
+112 
+112 
+113 
+Hard Discount 
+1,414 
+1,467 
+1,550 
+1,582 
+1,602 
+Food Retail 
+1,551 
+1,604 
+1,689 
+1,721 
+1,742 
+  
+  
+  
+  
+  
+ 
+Sales area ('000 sqm) 

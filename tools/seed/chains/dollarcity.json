@@ -1,0 +1,45 @@
+{
+  "id": "dollarcity",
+  "name": "Dollarcity",
+  "legendName": "DOLLARCITY",
+  "group": "discount",
+  "color": "#00552E",
+  "ringColor": "#00552E",
+  "owner": "Dollarcity (Latin American variety-store chain; Dollarama Inc. holds 60.1%, jointly controlled with the founding stockholders)",
+  "website": "https://dollarcity.com",
+  "storeLocator": "https://dollarcity.com/ubicaciones",
+  "defaultOn": true,
+  "osm": {
+    "wikidata": ["Q107120814"],
+    "nameRegex": "^dol+ar\\s*-?\\s*city\\b",
+    "excludeNameRegex": "",
+    "label": "Dollarcity",
+    "prefixRegex": "^dol+ar\\s*-?\\s*city\\b",
+    "shops": ["variety_store", "discount", "general", "department_store", "supermarket", "yes"],
+    "requireShopLike": true,
+    "dense": true,
+    "uniqueName": true,
+    "weakNameRegex": "",
+    "weakNameShops": [],
+    "excludeTags": []
+  },
+  "logo": { "badge": true, "wide": true },
+  "logoSources": [
+    {
+      "file": "logos/dollarcity.png",
+      "url": "https://dollarcity.com/wp-content/uploads/2023/07/LOGO_Dollarcity.svg",
+      "notes": "Official site logo. The SVG only wraps an embedded 3963x880 PNG (yellow wordmark with dark-green outline), which was extracted losslessly and placed on the brand green #00552E, reproducing the official Dollarcity Peru avatar (https://graph.facebook.com/DollarcityPeru/picture?type=large&width=720&height=720, kept for reference). Local copies: tools/seed/logo-src/dollarcity/. Badge re-composed 2026-10-01 (data polish) so it reads at 32 px: the wordmark is re-stacked as 'Dollar' over 'city' (cut between 'r' and 'c', where no yellow letter pixel is); on one line its 10 letters were ~3 px tall at 32 px."
+    },
+    {
+      "file": "logos/dollarcity-wide.png",
+      "url": "https://dollarcity.com/wp-content/uploads/2023/07/LOGO_Dollarcity.svg",
+      "notes": "Same embedded PNG, trimmed, transparent background, 512 px wide."
+    }
+  ],
+  "storeCountReported": {
+    "value": 116,
+    "source": "https://www.peru-retail.com/dollarcity-alcanza-las-116-tiendas-en-peru-con-una-nueva-apertura-donde-esta-ubicada/",
+    "date": "2026-07-02"
+  },
+  "notes": "Variety / 'dollar store' chain. Ownership: Dollarama raised its equity interest in Dollarcity to 60.1% in 2025 under joint control with the founding stockholders (Dollarama press release, e.g. https://www.tipranks.com/news/press-releases/dollarama-increases-equity-interest-and-expands-partnership-in-latin-america); Wikidata parent organisation Q3033947 = Dollarama. Brand colours from the official logo: green #00552E, yellow #EBDB32. Store count: Peru Retail 2026-07-02, 'alcanzando un total de 116 tiendas operativas en el país'. The store locator (dollarcity.com/ubicaciones, Mapbox app) has no Peru-specific listing URL that could be found (only es-gt/locations exists), so no locator snapshot was taken. OSM (probe 2026-10-01): 12 features, 8 with brand=Dollarcity + brand:wikidata=Q107120814 (NSI preset, shop=variety_store); 2 'Dollarcity' tagged shop=supermarket; one 'Dollar City' is amenity=bureau_de_change (exchange office, NOT the chain) -> requiring a shop=* tag excludes it."
+}

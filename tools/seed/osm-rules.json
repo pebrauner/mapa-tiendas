@@ -1,0 +1,50 @@
+{
+ "about": "Cross-chain OpenStreetMap classification rules (schema and evaluation order: tools/seed/OSM-RULES.md). Source of truth for window.MT_OSM_RULES in data/chains.js, which tools/merge.mjs writes and then classifies with (tools/seed/osm-classify.mjs). Per-chain rules live in the \"osm\" object of tools/seed/chains/<id>.json. Every regex is a JavaScript source compiled with flags 'iu' and tested against fold(text) = NFD, combining marks removed, lower-case, runs of white space collapsed to one space, trimmed — unless a key below says it is tested against tag KEYS.",
+ "version": 1,
+ "nameKeys": ["name", "name:es"],
+ "brandKeys": ["brand"],
+ "wikidataKeys": ["brand:wikidata"],
+ "genericNameRegex": "^(?:supermercados?|supermarket|hipermercados?|minimarket|tienda|bodega)$",
+ "notChain": {
+  "keys": ["description", "note", "fixme", "FIXME", "comment", "description:es", "note:es"],
+  "textRegex": "\\bnot\\s+(?:the|a|part\\s+of\\s+(?:the|a))\\s+(?:chain|brand|franchise)\\b|\\bnot\\s+(?:related|affiliated)\\s+(?:to|with)\\b|\\bno\\s+(?:es|forma\\s+parte\\s+de|pertenece\\s+a)\\s+(?:la|una|de\\s+la)\\s+(?:cadena|marca|franquicia)\\b|\\bno\\s+(?:es\\s+)?(?:de\\s+)?la\\s+cadena\\b|\\bsin\\s+relacion\\s+con\\s+la\\s+(?:cadena|marca)\\b"
+ },
+ "closed": {
+  "lifecycleKeyRegex": "^(?:disused|was|abandoned|removed|demolished|razed|closed|destroyed):(?:shop|amenity|name|brand)",
+  "shopValues": ["vacant", "no"],
+  "operationalStatusRegex": "^(?:closed|abandoned|disused)$",
+  "openingHoursRegex": "^(?:closed|off)$",
+  "nameRegex": "\\b(?:cerrad[oa]|clausurad[oa]|closed)\\b"
+ },
+ "notStore": {
+  "keys": ["railway", "public_transport", "highway", "place", "tourism", "leisure", "office", "healthcare", "historic", "craft", "man_made", "natural",
+   "aeroway", "emergency", "advertising", "club", "power", "waterway", "boundary", "military", "barrier", "route", "education"],
+  "keysEvenIfBranded": ["railway", "public_transport", "highway", "place", "advertising"],
+  "amenityAllowed": ["marketplace"],
+  "nameRegex": "\\b(?:estacionamientos?|parqueo|parking|paradero|puente|deck|cajeros?|agentes?|interbank|bcp|bbva|scotiabank|money\\s*market|al\\s+paso|chicken|eventos?|centro\\s+de\\s+distribucion|almacen(?:es)?|oficinas?|cochera|colegio|instituto|clinica|banco)\\b",
+  "landuseAllowedWithoutShop": ["retail", "commercial"],
+  "buildingExcludedWithoutShop": ["residential", "house", "apartments", "school", "university", "church", "hospital", "public", "industrial", "warehouse",
+   "train_station", "transportation", "government", "civic", "office", "hotel", "garage", "garages", "roof", "construction"]
+ },
+ "doubtfulPosition": {
+  "schoolImportKeys": ["isced:level"],
+  "sourceRegex": "minedu",
+  "fixmeKeys": ["fixme", "FIXME"],
+  "positionWordsRegex": "\\b(?:posicion|posisicon|ubicacion|position|location|coordenadas|lugar\\s+correcto)\\b",
+  "noteKey": "note",
+  "noteFixWordsRegex": "\\b(?:corregir|actualizar|verificar|revisar|incorrect[ao]?|wrong|approximate|aproximad[ao]|check)\\b"
+ },
+ "genericShops": ["supermarket", "convenience", "general", "yes", "mall", "department_store", "variety_store", "wholesale", "hypermarket", "discount",
+  "grocery", "food", "kiosk", "greengrocer", "health_food", "deli", "organic"],
+ "retailArea": {
+  "amenity": ["marketplace"],
+  "building": ["retail", "commercial", "supermarket", "yes", "mall"],
+  "keys": ["building:part"],
+  "landuse": ["retail", "commercial"]
+ },
+ "entranceNameRegex": "\\b(?:entrada|ingreso|puerta)\\b",
+ "radii": {
+  "big": { "dedupe": 200, "link": 250, "match": 250, "match2": 600, "geo": 1000 },
+  "dense": { "dedupe": 40, "link": 80, "match": 120, "match2": 250, "geo": 250 }
+ }
+}

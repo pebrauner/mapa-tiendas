@@ -1,0 +1,466 @@
+[
+ {
+  "NOMBRE": "Vega Mayorista Collique",
+  "DIRECCION": "Av. Andrés Avelino Cáceres N°236,Lt. 01. A.H. Collique",
+  "TELEFONO": "981447496",
+  "Correo": "tiendamycollique@corporacionvega.pe",
+  "Latitud": "-11.913586811296451",
+  "Longitud": "-77.03157724269649"
+ },
+ {
+  "NOMBRE": "Vega Mayorista Infantas",
+  "DIRECCION": "Av. Gerardo Unger N° 6531 Urb. Infantas",
+  "TELEFONO": "924493221",
+  "Correo": "tiendamyinfantas@corporacionvega.pe",
+  "Latitud": "-11.945305283176683",
+  "Longitud": "-77.06669732887826"
+ },
+ {
+  "NOMBRE": "Vega Mayorista Productores",
+  "DIRECCION": "Asociación de Productores Agricolas Mercado Santa Anita, Pj. B 13",
+  "TELEFONO": "981173291",
+  "Correo": "tiendamyproductores@corporacionvega.pe",
+  "Latitud": "-12.040767989379031",
+  "Longitud": "-76.948008588956"
+ },
+ {
+  "NOMBRE": "Vega Supermayorista Belaunde",
+  "DIRECCION": "Av. Belaunde Oeste 198, Urb. Huaquillay, (A 1 cdra de la Av. Túpac Amaru)",
+  "TELEFONO": "981445804",
+  "Correo": "tiendasmbelaunde@corporacionvega.pe",
+  "Latitud": "-11.939644247204237",
+  "Longitud": "-77.05097850353803"
+ },
+ {
+  "NOMBRE": "Vega Supermayorista Santa Clara",
+  "DIRECCION": "Av. Estrella 286 Urb. Santa Clara, (Centro Comercial Qhatu Plaza)",
+  "TELEFONO": "998321529",
+  "Correo": "tiendasmsantaclara@corporacionvega.pe",
+  "Latitud": "-12.01796413683621",
+  "Longitud": "-76.88389867576056"
+ },
+ {
+  "NOMBRE": "Vega Supermayorista San Antonio",
+  "DIRECCION": "Fundo Punchauca Caudeguilla Mz. D, Lt. 1, (Alt. KM. 22 de la Av. Túpac Amaru)",
+  "TELEFONO": "981480643",
+  "Correo": "tiendasmsanantonio@corporacionvega.pe",
+  "Latitud": "-11.862281552645127",
+  "Longitud": "-77.00840447301294"
+ },
+ {
+  "NOMBRE": "Vega Supermayorista Chorrillos",
+  "DIRECCION": "Jr. Genaro Numa Llona N °200, (Alt. de la cdras 4 y 5 de la Av Huaylas)",
+  "TELEFONO": "981445804",
+  "Correo": "tiendasmchorrillos@corporacionvega.pe",
+  "Latitud": "-12.167826896361756",
+  "Longitud": "-77.02391626226566"
+ },
+ {
+  "NOMBRE": "Vega Supermayorista Año Nuevo",
+  "DIRECCION": "Jr. Jupiter Mz. 6, LT. 65-66, Urb. Villa Collique ",
+  "TELEFONO": "981446596",
+  "Correo": "tiendasmanonuevo@corporacionvega.pe",
+  "Latitud": "-11.923926352893673",
+  "Longitud": "-77.04052907391312"
+ },
+ {
+  "NOMBRE": "Vega Supermayorista Colonial",
+  "DIRECCION": "Av. Colonial 679, (Entre la Av. Colonial y Av. Carcamo)",
+  "TELEFONO": "981444354",
+  "Correo": "tiendasmcolonial@corporacionvega.pe",
+  "Latitud": "-11.93960226028498",
+  "Longitud": "-77.05095704507747"
+ },
+ {
+  "NOMBRE": "Vega Supermayorista Huamantanga",
+  "DIRECCION": "Av. Puente Piedra 200, (MERCADO HUAMANTANGA)",
+  "TELEFONO": "981023282",
+  "Correo": "tiendasmhuamantanga@corporacionvega.pe",
+  "Latitud": "-11.861195597008185",
+  "Longitud": "-77.07709941809122"
+ },
+ {
+  "NOMBRE": "Vega Supermayorista Ciudad y Campo",
+  "DIRECCION": "Av. Armando Filomeno N° 145, (Espalda del Mcdo Ciudad y Campo)",
+  "TELEFONO": "981445079",
+  "Correo": "tiendasmfilomeno@corporacionvega.pe",
+  "Latitud": "-12.024138129240775",
+  "Longitud": "-77.0291140892541"
+ },
+ {
+  "NOMBRE": "Vega Supermayorista Sol De Naranjal",
+  "DIRECCION": "Av. Pacasmayo Mz. A, lote. 01 (Frente al Grifo Olimpo)",
+  "TELEFONO": "981166984",
+  "Correo": "tiendasmnaranjal@corporacionvega.pe",
+  "Latitud": "-11.968253174294631",
+  "Longitud": "-77.09674293338014"
+ },
+ {
+  "NOMBRE": "Vega Supermayorista San Diego",
+  "DIRECCION": "Sta Maria De Los Angeles Mz. Ñ1, Lt. 3, Urb. San Diego (Mcdo Modelo San Diego)",
+  "TELEFONO": "933596376",
+  "Correo": "tiendasmsandiego@corporacionvega.pe",
+  "Latitud": "-11.945648104355245",
+  "Longitud": "-77.08774050429759"
+ },
+ {
+  "NOMBRE": "Vega Supermayorista Tomas Marsano",
+  "DIRECCION": "Av. Tomas Marsano Cdra 48 MZ. G4, Lt. 23",
+  "TELEFONO": "998131795",
+  "Correo": "tiendasmsurcobenavides@corporacionvega.pe",
+  "Latitud": "-12.145240762797584",
+  "Longitud": "-76.98820784507551"
+ },
+ {
+  "NOMBRE": "Vega Supermayorista Lima VES",
+  "DIRECCION": "Av. Lima 2500 Lote A2, (Costado de MegaPlaza Express)",
+  "TELEFONO": "998299321",
+  "Correo": "tiendasmlimavilla@corporacionvega.pe",
+  "Latitud": "-12.230584584969675",
+  "Longitud": "-76.91005894507468"
+ },
+ {
+  "NOMBRE": "Vega Supermayorista Minka",
+  "DIRECCION": "Av. Argentina 3093 Int. 97, (Centro Comercial Minka)",
+  "TELEFONO": "994190675",
+  "Correo": "tiendasmminka@corporacionvega.pe",
+  "Latitud": "-12.047678829289437",
+  "Longitud": "-77.11182089186687"
+ },
+ {
+  "NOMBRE": "Vega Market Aymaras",
+  "DIRECCION": "Las Aymaras Cdra 3 - Cerca al Arco",
+  "TELEFONO": "933064090",
+  "Correo": "calderon.m@corporacionvega.pe",
+  "Latitud": "-12.074493444947596",
+  "Longitud": "-76.98835464507613"
+ },
+ {
+  "NOMBRE": "Vega Market Olimpo",
+  "DIRECCION": "Calle Efestos Mz w Lt4 - Olimpo",
+  "TELEFONO": "995119125",
+  "Correo": "calderon.m@corporacionvega.pe",
+  "Latitud": "-12.074625787728875",
+  "Longitud": "-76.97829984507618"
+ },
+ {
+  "NOMBRE": "Vega Market Bocanegra",
+  "DIRECCION": "AV. BOCANEGRA Mz. A, Lote 30, Urb. Alvino Herrera - Cerca al Cruce con Av. Dominicos.",
+  "TELEFONO": "933109000",
+  "Correo": " tiendamkbocanegra@corporacionvega.pe ",
+  "Latitud": "-12.006705417612341",
+  "Longitud": "-77.09933875762476"
+ },
+ {
+  "NOMBRE": "Vega Market Canta Callao",
+  "DIRECCION": "PARCELA 2A, 110, EX FUNDO TABOADA - Frente al Open Plaza de Canta Callao.",
+  "TELEFONO": "933121837",
+  "Correo": "tiendamkcantacallao@corporacionvega.pe",
+  "Latitud": "-11.997561313978778",
+  "Longitud": "-77.11392220504324"
+ },
+ {
+  "NOMBRE": "Vega Market Mi Perú",
+  "DIRECCION": "Av. Ayacucho Mza. A9, Lt. 22",
+  "TELEFONO": "924699772",
+  "Correo": "tiendamkmiperu@corporacionvega.pe",
+  "Latitud": "-11.855877662101152",
+  "Longitud": "-77.125050061331"
+ },
+ {
+  "NOMBRE": "Vega Market Progreso",
+  "DIRECCION": "Av. Tupac Amaru N° 3160 (Alt Km. 20.5 de la Av. Tupac Amaru)",
+  "TELEFONO": "981446668",
+  "Correo": "tiendamkprogreso@corporacionvega.pe",
+  "Latitud": "-11.876040101627781",
+  "Longitud": "-77.01669873373383"
+ },
+ {
+  "NOMBRE": "Vega Market Santo Domingo",
+  "DIRECCION": "Av. Mariano Condorcanqui Lt. 5, Mz. T, Quinta Etapa Urb. Santo Domingo. Ref. Mcdo La Frontera.",
+  "TELEFONO": "994062180",
+  "Correo": "tiendamksantodomingo@corporacionvega.pe",
+  "Latitud": "-11.887022145673392",
+  "Longitud": "-77.03556773308686"
+ },
+ {
+  "NOMBRE": "Vega Market Tungasuca",
+  "DIRECCION": "Av. Universitaria Mz. F-1 Lt 26 Urb. Tungasuca - a 2 Cdras. del cruce de Av. Chimpu ocllo y Av. Universitaria Norte.",
+  "TELEFONO": "924493280",
+  "Correo": "tiendamktungasuca@corporacionvega.pe",
+  "Latitud": "-11.895746708902607",
+  "Longitud": "-77.0376406450053"
+ },
+ {
+  "NOMBRE": "Vega Market Amaranto",
+  "DIRECCION": "Jr. Amaranto 108 - 110, Urb. Santa Isabel - CARABAYLLO",
+  "TELEFONO": "981403872",
+  "Correo": "tiendamkamaranto@corporacionvega.pe",
+  "Latitud": "-11.899764127955427",
+  "Longitud": "-77.03688402973593"
+ },
+ {
+  "NOMBRE": "Vega Market Chorrillos Tupac",
+  "DIRECCION": "Av. 24 de Octubre Mz G-5 Lote 6A (Mercado Tupac Amaru) Chorrillos.",
+  "TELEFONO": "922021603",
+  "Correo": "tiendamkchorrillos@corporacionvega.pe",
+  "Latitud": "-12.196250046511489",
+  "Longitud": "-76.98320672698705"
+ },
+ {
+  "NOMBRE": "Vega Market Malvinas",
+  "DIRECCION": "Av. Argentina cdra. 6 (Centro Comercial Via Mix)",
+  "TELEFONO": "936760427",
+  "Correo": "tiendamkmalvinas@corporacionvega.pe",
+  "Latitud": "-12.04410694559947",
+  "Longitud": "-77.04991974507645"
+ },
+ {
+  "NOMBRE": "Vega Market Año Nuevo",
+  "DIRECCION": "Jr. Neptuno Mz 9 Lt 89, (Espalda del Mcdo Año Nuevo )",
+  "TELEFONO": "981446596",
+  "Correo": "tiendamkanonuevo@corporacionvega.pe",
+  "Latitud": "-11.924116154014351",
+  "Longitud": "-77.0408051722538"
+ },
+ {
+  "NOMBRE": "Vega Market Mall Comas",
+  "DIRECCION": "Avenida Los Angeles cruce con El Retablo. (Mall Comas)",
+  "TELEFONO": "919469433",
+  "Correo": "tiendamkmallcomas@corporacionvega.pe",
+  "Latitud": "-11.923957844904384",
+  "Longitud": "-77.04057198925508"
+ },
+ {
+  "NOMBRE": "Vega Market Canevaro",
+  "DIRECCION": "Av. Canevaro Nro. 1405 - 1409",
+  "TELEFONO": "950106098",
+  "Correo": "tiendamkcanevaro@corporacionvega.pe",
+  "Latitud": "-12.08505970607397",
+  "Longitud": "-77.046346845076"
+ },
+ {
+  "NOMBRE": "Vega Market Merino",
+  "DIRECCION": "Avenida Ignacio Merino 1999",
+  "TELEFONO": "922901639",
+  "Correo": "tiendamkmerino@corporacionvega.pe",
+  "Latitud": "-12.08404714277432",
+  "Longitud": "-77.03242888925344"
+ },
+ {
+  "NOMBRE": "Vega Market Rospigliosi",
+  "DIRECCION": "Av. Ignacio Merino Nro. 1502 esq. con Manuel Segura",
+  "TELEFONO": "936515629",
+  "Correo": "calderon.m@corporacionvega.pe",
+  "Latitud": "-12.079328083240386",
+  "Longitud": "-77.03334570274707"
+ },
+ {
+  "NOMBRE": "Vega Market Alayza",
+  "DIRECCION": "Avenida General, Av César Canevaro 213 - 217",
+  "TELEFONO": "963349334",
+  "Correo": " tiendamkalayza@corporacionvega.pe",
+  "Latitud": "-12.083701275967407",
+  "Longitud": "-77.0367885622665"
+ },
+ {
+  "NOMBRE": "Vega Market Husares De Junin",
+  "DIRECCION": "Av. Húsares de Junín N° 366-376",
+  "TELEFONO": "970175458",
+  "Correo": "tiendamkhusaresjunin@corporacionvega.pe",
+  "Latitud": "-12.077042278874464",
+  "Longitud": "-77.05149037973125"
+ },
+ {
+  "NOMBRE": "Vega Market Colegio Santo Domingo",
+  "DIRECCION": "Calle los Algarrobos Mz A lote 3 y 4 los Jardines de Naranjal",
+  "TELEFONO": "994062180",
+  "Correo": "calderon.m@corporacionvega.pe",
+  "Latitud": "-11.887131373228998",
+  "Longitud": "-77.03553824766068"
+ },
+ {
+  "NOMBRE": "Vega Market Marañon",
+  "DIRECCION": "Av. Huandoy s/n Urb. Alameda Villa Sol",
+  "TELEFONO": "950289764",
+  "Correo": "tiendamkmaranon@corporacionvega.pe",
+  "Latitud": "-11.971077967964797",
+  "Longitud": "-77.08095337352685"
+ },
+ {
+  "NOMBRE": "Vega Market Huandoy",
+  "DIRECCION": "Av. Huandoy N° 5032, Unidad Inmobiliaria N° 2",
+  "TELEFONO": "936087278",
+  "Correo": "tiendamkhuandoy@corporacionvega.pe",
+  "Latitud": "-11.975521253411577",
+  "Longitud": "-77.08251166678133"
+ },
+ {
+  "NOMBRE": "Vega Market Las Palmeras",
+  "DIRECCION": "AV. LAS PALMERAS 5345",
+  "TELEFONO": "955261940",
+  "Correo": "tiendamkpalmeras@corporacionvega.pe",
+  "Latitud": "-11.973453598584229",
+  "Longitud": "-77.07266686191751"
+ },
+ {
+  "NOMBRE": "Vega Market Magdalena",
+  "DIRECCION": "Jr. Bolognesi Nro. 639 - Magdalena",
+  "TELEFONO": "979411871",
+  "Correo": "calderon.m@corporacionvega.pe",
+  "Latitud": "-12.091209595161049",
+  "Longitud": "-77.07421579114092"
+ },
+ {
+  "NOMBRE": "Vega Market Benavides",
+  "DIRECCION": "Av. Benavides N° 1615",
+  "TELEFONO": "960135900",
+  "Correo": "tiendamkbenavides@corporacionvega.pe",
+  "Latitud": "-12.126399719881475",
+  "Longitud": "-77.01591927616367"
+ },
+ {
+  "NOMBRE": "Vega Market Reducto",
+  "DIRECCION": "Av. Reducto N° 1155",
+  "TELEFONO": "972002337",
+  "Correo": "tiendamkreducto@corporacionvega.pe",
+  "Latitud": "-12.126.312.602.650.800",
+  "Longitud": "-77.01617290320355"
+ },
+ {
+  "NOMBRE": "Vega Market Clement",
+  "DIRECCION": "José Leguía Meléndez N° 1040",
+  "TELEFONO": "962239349",
+  "Correo": "calderon.m@corporacionvega.pe",
+  "Latitud": "-12.075469325745015",
+  "Longitud": "-77.06466259462943"
+ },
+ {
+  "NOMBRE": "Vega Market Amancaes",
+  "DIRECCION": "AV. AMANCAES 204",
+  "TELEFONO": "940664761",
+  "Correo": "tiendamkamancaes@corporacionvega.pe",
+  "Latitud": "-12.0252528519478",
+  "Longitud": "-77.03297368458075"
+ },
+ {
+  "NOMBRE": "Vega Market Aviación",
+  "DIRECCION": "Av. Aviación N° 3536 - 3540",
+  "TELEFONO": "960814794",
+  "Correo": "tiendamkaviacion@corporacionvega.pe",
+  "Latitud": "-12.107480577749051",
+  "Longitud": "-77.00128406737848"
+ },
+ {
+  "NOMBRE": "Vega Market La Cultura",
+  "DIRECCION": "Av. Aviación N° 2347",
+  "TELEFONO": "",
+  "Correo": "tiendamklacultura@corporacionvega.pe",
+  "Latitud": "-12.084908832618279",
+  "Longitud": "-77.00371428442676"
+ },
+ {
+  "NOMBRE": "Vega Market Chimu",
+  "DIRECCION": "LOTE 12 MZ K-7 SECTOR C",
+  "TELEFONO": "981219210",
+  "Correo": "tiendamkchimu@corporacionvega.pe",
+  "Latitud": "-12.023801048392695",
+  "Longitud": "-76.98581978652307"
+ },
+ {
+  "NOMBRE": "Vega Market Montenegro",
+  "DIRECCION": "Jr. Mar de Flores Oeste Nro. 127, P.J. Enrique Montenegro",
+  "TELEFONO": "998367335",
+  "Correo": "tiendamkmontenegro@corporacionvega.pe",
+  "Latitud": "-11.936286012892445",
+  "Longitud": "-76.97210241037081"
+ },
+ {
+  "NOMBRE": "Vega Market El Muro",
+  "DIRECCION": "Av. El Muro Mza. C1, Lote. 23 A.H. 10 De Octubre",
+  "TELEFONO": "926780142",
+  "Correo": "tiendamkelmuro@corporacionvega.pe",
+  "Latitud": "-11.94477166100985",
+  "Longitud": "-76.98907813237345"
+ },
+ {
+  "NOMBRE": "Vega Market Izaguirre",
+  "DIRECCION": "AV. CARLOS IZAGUIRRRE, MZ A LT 30 ASOC. VIVIENDA LOS ANDES",
+  "TELEFONO": "955262639",
+  "Correo": "tiendamkizaguirre@corporacionvega.pe",
+  "Latitud": "-11.989752891487573",
+  "Longitud": "-77.09792791905521"
+ },
+ {
+  "NOMBRE": "Vega Market Riobamba",
+  "DIRECCION": "Jr. Riobamba Nº 501 con Pasaje San José Nº 1175, Urb. Perú",
+  "TELEFONO": "946228284",
+  "Correo": "tiendamkriobamba@corporacionvega.pe",
+  "Latitud": "-12.033320452831957",
+  "Longitud": "-77.05827009262147"
+ },
+ {
+  "NOMBRE": "Vega Market San Miguel",
+  "DIRECCION": "Av. Libertad N° 2394",
+  "TELEFONO": "927063170",
+  "Correo": "calderon.m@corporacionvega.pe",
+  "Latitud": "-12.079348455908473",
+  "Longitud": "-77.10376812877645"
+ },
+ {
+  "NOMBRE": "Vega Market Escardó",
+  "DIRECCION": "Av. Rafael Escardo Salazar Nº 454 urbanización Maranga",
+  "TELEFONO": "923864933",
+  "Correo": "tiendamkescardo@corporacionvega.pe",
+  "Latitud": "-12.07807726124102",
+  "Longitud": "-77.09363484495555"
+ },
+ {
+  "NOMBRE": "Vega Market Maranga",
+  "DIRECCION": "Av. Los Precursores N° 362-366",
+  "TELEFONO": "991156654",
+  "Correo": "tiendamkmaranga@corporacionvega.pe",
+  "Latitud": "-12.069984914589973",
+  "Longitud": "-77.091945069703"
+ },
+ {
+  "NOMBRE": "Vega Market Santa Anita",
+  "DIRECCION": "Jr. César Vallejo N° 356 – 360 Mz.B-1, Lt. 07, Urb. Universal",
+  "TELEFONO": "922901603",
+  "Correo": "tiendamkuniversal@corporacionvega.pe",
+  "Latitud": "-12.043454252382874",
+  "Longitud": "-76.97957047470122"
+ },
+ {
+  "NOMBRE": "Vega Market Roosevelt",
+  "DIRECCION": "JR. Franklin Roosevelt 812",
+  "TELEFONO": "998131795",
+  "Correo": "tiendamkroosvelt@corporacionvega",
+  "Latitud": "-12.146928450572373",
+  "Longitud": "-77.01328384928486"
+ },
+ {
+  "NOMBRE": "Vega Market Higuereta",
+  "DIRECCION": "Av. Santiago de Surco N° 3004 local 101 Mz. H Lt.1",
+  "TELEFONO": "945347906",
+  "Correo": "tiendamkhiguereta@corporacionvega.pe",
+  "Latitud": "-12.129457033776461",
+  "Longitud": "-77.00098486496458"
+ },
+ {
+  "NOMBRE": "Vega Market Villa 2",
+  "DIRECCION": "PUEBLO JOVEN SECTOR 2 GRUPO RESIDENCIAL 9 MZ N LOTE 11",
+  "TELEFONO": "933676897 / 981292945",
+  "Correo": "tiendamkvillasector2@corporacionvega.pe",
+  "Latitud": "-12.154410971465303",
+  "Longitud": "-76.95261754586434"
+ },
+ {
+  "NOMBRE": "Vega Market Villa Maria",
+  "DIRECCION": "Av. José Carlos Mariátegui N° 798, Pueblo Joven Jose Carlos Mariategui",
+  "TELEFONO": "981400423",
+  "Correo": "tiendamkvillamareategui@corporacionvega.pe",
+  "Latitud": "-12.154658721448097",
+  "Longitud": "-76.95261171668263"
+ }
+]

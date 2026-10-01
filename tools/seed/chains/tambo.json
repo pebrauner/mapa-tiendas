@@ -1,0 +1,47 @@
+{
+  "id": "tambo",
+  "name": "Tambo",
+  "legendName": "TAMBO",
+  "group": "convenience",
+  "color": "#A51890",
+  "ringColor": "#A51890",
+  "owner": "Grupo Lindcorp (Tiendas Tambo S.A.C.)",
+  "website": "https://www.tambo.pe",
+  "storeLocator": "https://www.tambo.pe/locales/",
+  "defaultOn": false,
+  "osm": {
+    "wikidata": ["Q64516439"],
+    "nameRegex": "^(?:tiendas?\\s+)?tambo\\s*(?:\\+|plus|m[aá]s)?(?:\\s+\\S.*)?$",
+    "excludeNameRegex": "^(?:tiendas?\\s+)?tambo(?:\\+|plus|m[aá]s)?\\s+del?\\b",
+    "label": "Tambo",
+    "prefixRegex": "^(?:tiendas?\\s+)?tambo\\s*(?:\\+|plus\\b|m[aá]s\\b)?",
+    "shops": ["convenience", "supermarket", "general", "variety_store", "kiosk", "yes"],
+    "requireShopLike": true,
+    "dense": true,
+    "uniqueName": false,
+    "weakNameRegex": "",
+    "weakNameShops": [],
+    "excludeTags": [
+      { "key": "operator", "valueRegex": "programa nacional|plataformas? de acci[oó]n|\\bpais\\b|midis", "why": "government \"Tambo\" social centres of Programa Nacional PAIS (MIDIS)" }
+    ]
+  },
+  "logo": { "badge": true, "wide": true },
+  "logoSources": [
+    {
+      "file": "logos/tambo.png",
+      "url": "https://graph.facebook.com/PractitiendasTambo/picture?type=large&width=720&height=720",
+      "notes": "Official Facebook page avatar of PractitiendasTambo (linked from tambo.pe): yellow 'TAMBO+' wordmark on magenta, 720x720 JPEG; zoomed so the wordmark fills the circle-safe width. Chosen over the official 'M+' seal (https://tofuu.getjusto.com/orioneat-prod/5h2nELFH9mq6kTjSm-sello-Tambo-01.png, yellow circle, 296 px) because a yellow circle could be confused with Metro's yellow badge. Local copies: tools/seed/logo-src/tambo/."
+    },
+    {
+      "file": "logos/tambo-wide.png",
+      "url": "https://tofuu.getjusto.com/orioneat-prod/muJ3pjm6Lh7G2k6Dm-tambo-web-logo-entrega-express-retiro-en-tienda-gratis.png",
+      "notes": "Official web logo used on tambo.pe (magenta 'TAMBO+' wordmark, transparent PNG 1000x563), trimmed, 512 px wide."
+    }
+  ],
+  "storeCountReported": {
+    "value": 902,
+    "source": "https://www.peru-retail.com/tambo-inaugura-20-nuevas-tiendas-y-supera-las-900-a-nivel-nacional-donde-estan-sus-nuevos-locales/",
+    "date": "2026-09-09"
+  },
+  "notes": "Convenience-store chain of Grupo Lindcorp ('Tambo+' brand; Wikidata alias 'Tiendas Tambo S.A.C.'). Default OFF per project config. Store count: Peru Retail 2026-09-09, 'supera las 900 tiendas a nivel nacional' (902). The official locator page tambo.pe/locales (Justo ordering platform) listed 787 stores on 2026-10-01 (lima.PE 687, chiclayo.PE 44, ica.PE 26, arequipa.PE 21, piura.PE 9) — fewer than reported, probably only stores enabled for pickup/ordering; raw snapshot with coordinates in tools/seed/raw/tambo-locator-2026-10-01.json. Colours: magenta #A51890 (vector web logo; avatar background renders #C21195), yellow #FFE202. OSM (probe 2026-10-01): 87 features brand=Tambo+ / brand:wikidata=Q64516439 (NSI), ~55 more named 'Tambo'/'Tambo+'/'TAMBO' (shop=convenience mostly, a few supermarket/yes/variety_store). FALSE POSITIVES to avoid: 'Tambo' is a common Quechua place word — government 'Tambo <village>' centres (amenity=social_facility, PAIS programme), villages/districts (Tambo, Tambogrande, Tambopata, Ollantaytambo…), restaurants 'El Tambo', 'Tambo del Inca', 'Tambo pesquero…' (seafood), 'Tambo - Licorería…' (alcohol). The regex needs the name to start with 'Tambo' as a word (optional +/plus), rejects 'Tambo de…/del…', and the shop list excludes amenity/seafood/alcohol features."
+}

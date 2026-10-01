@@ -1,0 +1,352 @@
+{
+ "plazavea/icon-pwa-512x512.png": {
+  "url": "https://plazavea.vteximg.com.br/arquivos/icon-pwa-512x512.png",
+  "status": 200,
+  "type": "image/png",
+  "bytes": 8842,
+  "fetched": "2026-10-01T05:00:26.920Z"
+ },
+ "plazavea/pvfood-256x256.png": {
+  "url": "https://plazavea.vteximg.com.br/arquivos/pvfood-256x256.png",
+  "status": 200,
+  "type": "image/png",
+  "bytes": 426,
+  "fetched": "2026-10-01T05:00:27.834Z"
+ },
+ "plazavea/IconLogov2.svg": {
+  "url": "https://plazavea.vteximg.com.br/arquivos/IconLogov2.svg",
+  "status": 200,
+  "type": "image/svg+xml",
+  "bytes": 926,
+  "fetched": "2026-10-01T05:00:29.069Z"
+ },
+ "plazavea/LogoPlazaVea.svg": {
+  "url": "https://plazavea.vteximg.com.br/arquivos/LogoPlazaVea.svg",
+  "status": 200,
+  "type": "image/svg+xml",
+  "bytes": 4335,
+  "fetched": "2026-10-01T05:00:30.397Z"
+ },
+ "plazavea/LogoPlazaVeaV2.svg": {
+  "url": "https://plazavea.vteximg.com.br/arquivos/LogoPlazaVeaV2.svg",
+  "status": 200,
+  "type": "image/svg+xml",
+  "bytes": 4298,
+  "fetched": "2026-10-01T05:00:31.541Z"
+ },
+ "plazavea/manifest--pwa.json": {
+  "url": "https://www.plazavea.com.pe/files/manifest--pwa.json",
+  "status": 200,
+  "type": "application/json",
+  "bytes": 1414,
+  "fetched": "2026-10-01T05:00:32.298Z"
+ },
+ "plazavea/commons-Plaza_Vea_nuevo_logo.svg": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Plaza_Vea_nuevo_logo.svg",
+  "status": 200,
+  "type": "image/svg+xml",
+  "bytes": 4667,
+  "fetched": "2026-10-01T05:00:33.261Z"
+ },
+ "tottus/Tottus@180x.png": {
+  "url": "https://images.falabella.com/v3/assets/blt7c5c2f2f888a7cc3/blt12137dde9c3944ce/Tottus@180x.png",
+  "status": 200,
+  "type": "image/png",
+  "bytes": 2955,
+  "fetched": "2026-10-01T05:00:34.079Z"
+ },
+ "tottus/Tottus@192px.png": {
+  "url": "https://images.falabella.com/v3/assets/blt7c5c2f2f888a7cc3/blt731539d15505e022/Tottus@192px.png",
+  "status": 200,
+  "type": "image/png",
+  "bytes": 3439,
+  "fetched": "2026-10-01T05:00:34.820Z"
+ },
+ "tottus/commons-Logotipo_Tottus.svg": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Logotipo_Tottus.svg",
+  "status": 200,
+  "type": "image/svg+xml",
+  "bytes": 7150,
+  "fetched": "2026-10-01T05:00:35.745Z"
+ },
+ "wong/logo-cenco.svg": {
+  "url": "https://wongio.vtexassets.com/assets/vtex/assets-builder/wongio.store-theme/7.0.450/svg/logo-cenco___99a985eecb92c4d6323d0fb548d6cfd4.svg",
+  "status": 200,
+  "type": "image/svg+xml",
+  "bytes": 38501,
+  "fetched": "2026-10-01T05:00:37.426Z"
+ },
+ "wong/wong_favicon.png": {
+  "url": "https://www.wong.pe/arquivos/wong_favicon.png",
+  "status": 200,
+  "type": "image/png",
+  "bytes": 725,
+  "fetched": "2026-10-01T05:00:38.342Z"
+ },
+ "wong/commons-Logo_Wong_Cencosud.png": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/7/76/Logo_Wong_Cencosud.png",
+  "status": 200,
+  "type": "image/png",
+  "bytes": 36310,
+  "fetched": "2026-10-01T05:00:39.245Z"
+ },
+ "wong/commons-Logo_Wong_2005.svg": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/f/fc/Logo_Wong_%282005%29.svg",
+  "status": 200,
+  "type": "image/svg+xml",
+  "bytes": 1545,
+  "fetched": "2026-10-01T05:00:40.686Z"
+ },
+ "metro/logo-metro.svg": {
+  "url": "https://metroio.vtexassets.com/assets/vtex/assets-builder/metroio.store-theme/13.0.283/svg/logo-metro___19ecf64e9f98f0564f96d3856f640d6c.svg",
+  "status": 200,
+  "type": "image/svg+xml",
+  "bytes": 100163,
+  "fetched": "2026-10-01T05:00:42.235Z"
+ },
+ "metro/metro_favicon.png": {
+  "url": "https://www.metro.pe/arquivos/metro_favicon.png",
+  "status": 200,
+  "type": "image/png",
+  "bytes": 1658,
+  "fetched": "2026-10-01T05:00:43.259Z"
+ },
+ "metro/commons-Logo_Metro_Cencosud.png": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/c/c0/Logo_Metro_Cencosud.png",
+  "status": 200,
+  "type": "image/png",
+  "bytes": 12299,
+  "fetched": "2026-10-01T05:00:44.058Z"
+ },
+ "vivanda/ico_vivanda-180x180.png": {
+  "url": "https://www.vivanda.com.pe/ico_vivanda-180x180.png",
+  "status": 200,
+  "type": "image/png",
+  "bytes": 7952,
+  "fetched": "2026-10-01T05:00:44.885Z"
+ },
+ "vivanda/manifest.json": {
+  "url": "https://www.vivanda.com.pe/manifest.json",
+  "status": 200,
+  "type": "application/json; charset=UTF-8",
+  "bytes": 1086,
+  "fetched": "2026-10-01T05:00:45.641Z"
+ },
+ "vivanda/ctf-logo-1S0P.svg": {
+  "url": "https://images.ctfassets.net/i8ovmbx499sn/1S0PkOVc0hIy6Zbxu3y8HY/ad7199f4bf423afcebd410df4ea01ee7/logo.svg",
+  "status": 200,
+  "type": "image/svg+xml",
+  "bytes": 7760,
+  "fetched": "2026-10-01T05:00:46.392Z"
+ },
+ "vivanda/ctf-logoVivanda.svg": {
+  "url": "https://images.ctfassets.net/i8ovmbx499sn/arTXywH3bVoatken3nyHP/129a9c2d61f48f5e2103c3c467d5e4b9/logoVivanda.svg",
+  "status": 200,
+  "type": "image/svg+xml",
+  "bytes": 1188,
+  "fetched": "2026-10-01T05:00:47.104Z"
+ },
+ "vivanda/ctf-logo-7JTy.svg": {
+  "url": "https://images.ctfassets.net/i8ovmbx499sn/7JTy6PVn4OeVokDSY7ZghM/6f57449012b4af53e04d267a0d92de88/logo.svg",
+  "status": 200,
+  "type": "image/svg+xml",
+  "bytes": 7676,
+  "fetched": "2026-10-01T05:00:47.813Z"
+ },
+ "mass/mass_logo.webp": {
+  "url": "https://www.tiendasmass.com.pe/wp-content/themes/mass/img/mass_logo.webp",
+  "status": 200,
+  "type": "image/webp",
+  "bytes": 1518,
+  "fetched": "2026-10-01T05:00:48.863Z"
+ },
+ "mass/favicon.png": {
+  "url": "https://www.tiendasmass.com.pe/wp-content/themes/mass/img/favicon.png",
+  "status": 200,
+  "type": "image/png",
+  "bytes": 2849,
+  "fetched": "2026-10-01T05:00:49.681Z"
+ },
+ "mass/mass_og.webp": {
+  "url": "https://www.tiendasmass.com.pe/wp-content/uploads/2023/06/mass_og-jpg.webp",
+  "status": 200,
+  "type": "image/webp",
+  "bytes": 47884,
+  "fetched": "2026-10-01T05:00:50.723Z"
+ },
+ "mass/commons-Tiendas_Mass_logo.svg": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/7/7a/Tiendas_Mass_logo.svg",
+  "status": 200,
+  "type": "image/svg+xml",
+  "bytes": 7873,
+  "fetched": "2026-10-01T05:00:51.695Z"
+ },
+ "makro/apple-touch-icon.png": {
+  "url": "https://www.makro.pe/assets/favicon/apple-touch-icon.png",
+  "status": 200,
+  "type": "image/png",
+  "bytes": 2577,
+  "fetched": "2026-10-01T05:01:32.281Z"
+ },
+ "makro/site.webmanifest": {
+  "url": "https://www.makro.pe/assets/favicon/site.webmanifest",
+  "status": 200,
+  "type": "application/manifest+json",
+  "bytes": 455,
+  "fetched": "2026-10-01T05:01:33.105Z"
+ },
+ "makro/safari-pinned-tab.svg": {
+  "url": "https://www.makro.pe/assets/favicon/safari-pinned-tab.svg",
+  "status": 200,
+  "type": "image/svg+xml",
+  "bytes": 1176,
+  "fetched": "2026-10-01T05:01:33.930Z"
+ },
+ "makro/logo_makro_yellow.webp": {
+  "url": "https://files.makro.pe/logo/image/logo_makro_yellow_whj2AdH.webp",
+  "status": 200,
+  "type": "image/webp",
+  "bytes": 1264,
+  "fetched": "2026-10-01T05:01:35.004Z"
+ },
+ "makro/makro_logo_azul.webp": {
+  "url": "https://files.makro.pe/logo/image/makro_logo_azul.webp",
+  "status": 200,
+  "type": "image/webp",
+  "bytes": 1198,
+  "fetched": "2026-10-01T05:01:35.828Z"
+ },
+ "makro/commons-Makro_logo_la.svg": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/1/1a/Makro_logo_la.svg",
+  "status": 200,
+  "type": "image/svg+xml",
+  "bytes": 4529,
+  "fetched": "2026-10-01T05:01:36.783Z"
+ },
+ "preciouno/logo-hbpu.png": {
+  "url": "https://www.hiperbodegapreciouno.com.pe/wp-content/uploads/2022/08/logo-hbpu.png",
+  "status": 200,
+  "type": "image/png",
+  "bytes": 8892,
+  "fetched": "2026-10-01T05:04:45.389Z"
+ },
+ "preciouno/cropped-logo-PU-192x192.jpg": {
+  "url": "https://www.hiperbodegapreciouno.com.pe/wp-content/uploads/2022/12/cropped-logo-PU-192x192.jpg",
+  "status": 200,
+  "type": "image/jpeg",
+  "bytes": 5795,
+  "fetched": "2026-10-01T05:05:06.061Z"
+ },
+ "makro/android-chrome-256x256-b.png": {
+  "url": "https://www.makro.pe/assets/favicon/android-chrome-256x256.png",
+  "status": 200,
+  "type": "image/png",
+  "bytes": 3744,
+  "fetched": "2026-10-01T05:05:46.357Z"
+ },
+ "plazavea/LogoPlazaVea-white.svg": {
+  "url": "https://plazavea.vteximg.com.br/arquivos/LogoPlazaVea.svg",
+  "status": 200,
+  "type": "image/svg+xml",
+  "bytes": 4335,
+  "fetched": "2026-10-01T05:05:47.352Z"
+ },
+ "tottus/tottus-standalone-logo.svg": {
+  "url": "https://images.falabella.com/v3/assets/blt422ac29cebae1d64/blt662e0623f1ca5f16/66bf846499b2ac306590ee62/tottus-standalone-logo.svg",
+  "status": 200,
+  "type": "image/svg+xml",
+  "bytes": 5117,
+  "fetched": "2026-10-01T05:06:28.395Z"
+ },
+ "tottus/MARCA_TOTTUS_1.png": {
+  "url": "https://images.falabella.com/v3/assets/blt422ac29cebae1d64/blt3b5e2d3947b211bf/689d3aa2a21355cc264fce5c/MARCA_TOTTUS.png",
+  "status": 200,
+  "type": "image/png",
+  "bytes": 73041,
+  "fetched": "2026-10-01T05:06:29.183Z"
+ },
+ "tottus/MARCA_TOTTUS_2.png": {
+  "url": "https://images.falabella.com/v3/assets/blt422ac29cebae1d64/blt9665933c3630ec71/689d3aaaf271e971506f4f5d/MARCA_TOTTUS.png",
+  "status": 200,
+  "type": "image/png",
+  "bytes": 73041,
+  "fetched": "2026-10-01T05:06:29.941Z"
+ },
+ "tottus/MARCA_TOTTUS_3.png": {
+  "url": "https://images.falabella.com/v3/assets/blt422ac29cebae1d64/blt7fc685caeb924945/689d3ab21f0a564534045b98/MARCA_TOTTUS.png",
+  "status": 200,
+  "type": "image/png",
+  "bytes": 73041,
+  "fetched": "2026-10-01T05:06:30.699Z"
+ },
+ "metro/googleplay-icon-512.png": {
+  "url": "https://play-lh.googleusercontent.com/S29BtIs1xng5iQ4WTWtJ1aZSu0ly_t3xrEt538gAfzDdSurw5uAK5JFpopW6AUEw8rFMeCuQERcb3lMNksbNj7o=s512",
+  "status": 200,
+  "type": "image/png",
+  "bytes": 62068,
+  "fetched": "2026-10-01T05:07:37.939Z"
+ },
+ "wong/googleplay-icon-512.png": {
+  "url": "https://play-lh.googleusercontent.com/9iI_Auy8GqFq5higalD7BoQ0TR2EDlfJzIX76ubsNBbGUW0l3P5TSKDxNXezkvpMFSBKt0oNxjBeNZSCvSL7=s512",
+  "status": 200,
+  "type": "image/png",
+  "bytes": 93517,
+  "fetched": "2026-10-01T05:07:38.726Z"
+ },
+ "makro/pv-logo-makro-active.svg": {
+  "url": "https://plazavea.vteximg.com.br/arquivos/logo-makro-active.svg",
+  "status": 200,
+  "type": "image/svg+xml",
+  "bytes": 4031,
+  "fetched": "2026-10-01T05:08:12.076Z"
+ },
+ "makro/pv-logo-makro-blue-inactive.svg": {
+  "url": "https://plazavea.vteximg.com.br/arquivos/logo-makro-blue-inactive.svg",
+  "status": 200,
+  "type": "image/svg+xml",
+  "bytes": 3962,
+  "fetched": "2026-10-01T05:08:12.883Z"
+ },
+ "makro/pv-logo-makro-desktop.svg": {
+  "url": "https://plazavea.vteximg.com.br/arquivos/logo-makro-desktop.svg",
+  "status": 200,
+  "type": "image/svg+xml",
+  "bytes": 4013,
+  "fetched": "2026-10-01T05:08:13.685Z"
+ },
+ "makro/pv-logo-makro-mobile.svg": {
+  "url": "https://plazavea.vteximg.com.br/arquivos/logo-makro-mobile.svg",
+  "status": 200,
+  "type": "image/svg+xml",
+  "bytes": 4846,
+  "fetched": "2026-10-01T05:08:14.494Z"
+ },
+ "mass/inretail-mass.png": {
+  "url": "https://90htxsbh8dth9rbf.public.blob.vercel-storage.com/mass.png",
+  "status": 200,
+  "type": "image/png",
+  "bytes": 3870,
+  "fetched": "2026-10-01T05:09:01.816Z"
+ },
+ "makro/inretail-makro.png": {
+  "url": "https://90htxsbh8dth9rbf.public.blob.vercel-storage.com/makro.png",
+  "status": 200,
+  "type": "image/png",
+  "bytes": 3496,
+  "fetched": "2026-10-01T05:09:02.618Z"
+ },
+ "plazavea/inretail-plazavea.png": {
+  "url": "https://90htxsbh8dth9rbf.public.blob.vercel-storage.com/plazavea.png",
+  "status": 200,
+  "type": "image/png",
+  "bytes": 4804,
+  "fetched": "2026-10-01T05:09:03.424Z"
+ },
+ "vivanda/inretail-vivanda.png": {
+  "url": "https://90htxsbh8dth9rbf.public.blob.vercel-storage.com/vivanda.png",
+  "status": 200,
+  "type": "image/png",
+  "bytes": 3396,
+  "fetched": "2026-10-01T05:09:04.260Z"
+ }
+}

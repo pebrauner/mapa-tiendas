@@ -1,0 +1,3345 @@
+{
+ "wongiononfood_S049": {
+  "friendlyName": "Retiro en tienda Metro Piura",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "S049",
+   "isDisposable": true,
+   "postalCode": "200101",
+   "city": "Piura",
+   "state": "Piura",
+   "country": "PER",
+   "street": "Avenida Grau",
+   "number": "1460",
+   "neighborhood": "Piura",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -80.63993169999999,
+    -5.192840299999999
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_S049",
+  "isActive": true,
+  "businessHours": []
+ },
+ "wongiononfood_CYCPIURA": {
+  "friendlyName": "Click&Collect Open Plaza Piura",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "CYCPIURA",
+   "isDisposable": true,
+   "postalCode": "200101",
+   "city": "Piura",
+   "state": "Piura",
+   "country": "PER",
+   "street": "Avenida Andrés Avelino Cáceres",
+   "number": "147",
+   "neighborhood": "Piura",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -80.62328219999999,
+    -5.182208699999999
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_CYCPIURA",
+  "isActive": false,
+  "businessHours": []
+ },
+ "wongiot118wio_pp002T118RetiroenSucursal": {
+  "friendlyName": "WONG LARCO",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002T118RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "13008",
+   "city": "Trujillo",
+   "state": "La Libertad",
+   "country": "PER",
+   "street": "Avenida Larco",
+   "number": "857",
+   "neighborhood": null,
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -79.03644849999999,
+    -8.1221138
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiot118wio_pp002T118RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "wongiononfood_H016": {
+  "friendlyName": "Retiro en tienda  Metro Ovalo Papal - Trujillo",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "H016",
+   "isDisposable": true,
+   "postalCode": "130101",
+   "city": "Trujillo",
+   "state": "La Libertad",
+   "country": "PER",
+   "street": "Avenida Juan Pablo II",
+   "number": "102",
+   "neighborhood": "Trujillo",
+   "complement": "Lote 1, Mz. J, Urb. Vista Hermoza",
+   "reference": null,
+   "geoCoordinates": [
+    -79.041828,
+    -8.1207596
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_H016",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   }
+  ]
+ },
+ "wongiononfood_CYCTRUJILLO": {
+  "friendlyName": " Click&Collect Mall Plaza Trujillo",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "CYCTRUJILLO",
+   "isDisposable": true,
+   "postalCode": "130101",
+   "city": "Trujillo",
+   "state": "La Libertad",
+   "country": "PER",
+   "street": "Avenida América Oeste",
+   "number": "S/N",
+   "neighborhood": "Trujillo",
+   "complement": "Mall Plaza Trujillo",
+   "reference": null,
+   "geoCoordinates": [
+    -79.0466744,
+    -8.1066944
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_CYCTRUJILLO",
+  "isActive": false,
+  "businessHours": [
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   }
+  ]
+ },
+ "wongiononfood_CYCOPT": {
+  "friendlyName": "C&C Open Plaza Trujillo",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "CYCOPT",
+   "isDisposable": true,
+   "postalCode": "130101",
+   "city": "Trujillo",
+   "state": "La Libertad",
+   "country": "PER",
+   "street": "Avenida América Norte",
+   "number": "1179",
+   "neighborhood": "Trujillo",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -79.0226974,
+    -8.0945325
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_CYCOPT",
+  "isActive": false,
+  "businessHours": []
+ },
+ "wongiot117wio_pp002T117RetiroenSucursal": {
+  "friendlyName": "Wong California",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002T117RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "13009",
+   "city": "Trujillo",
+   "state": "La Libertad",
+   "country": "PER",
+   "street": "Avenida Los Angeles",
+   "number": "388",
+   "neighborhood": "Distrito de Víctor Larco Herrera",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -79.0375337,
+    -8.131624
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiot117wio_pp002T117RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "wongiot127wio_pp002T127RetiroenSucursal": {
+  "friendlyName": "Wong El Golf",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002T127RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "130101",
+   "city": "Trujillo",
+   "state": "La Libertad",
+   "country": "PER",
+   "street": "Avenida El Golf",
+   "number": "443",
+   "neighborhood": "Trujillo",
+   "complement": "",
+   "reference": null,
+   "geoCoordinates": [
+    -79.0356333,
+    -8.1356808
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiot127wio_pp002T127RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "wongiononfood_H009": {
+  "friendlyName": "PP Metro Cercado Emancipación",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "H009",
+   "isDisposable": true,
+   "postalCode": "150101",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Jirón Cuzco",
+   "number": "245",
+   "neighborhood": "Lima",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.031725,
+    -12.049636
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_H009",
+  "isActive": false,
+  "businessHours": []
+ },
+ "wongiononfood_H002": {
+  "friendlyName": "Retiro en tienda Metro Breña",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "H002",
+   "isDisposable": true,
+   "postalCode": "150101",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida República de Venezuela",
+   "number": "sn",
+   "neighborhood": "Lima",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.0650655,
+    -12.0572801
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_H002",
+  "isActive": true,
+  "businessHours": []
+ },
+ "wongiononfood_H014": {
+  "friendlyName": "Retiro en tienda  Metro Plaza Norte",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "H014",
+   "isDisposable": true,
+   "postalCode": "150112",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Tomas Valle",
+   "number": "s/n",
+   "neighborhood": "Independencia",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.05769149999999,
+    -12.0080342
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_H014",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   }
+  ]
+ },
+ "wongiononfood_H008": {
+  "friendlyName": "Retiro en tienda Metro Canadá",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "H008",
+   "isDisposable": true,
+   "postalCode": "150115",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Canadá",
+   "number": "654",
+   "neighborhood": "La Victoria",
+   "complement": "esquina con Av. Nicolás Arriola",
+   "reference": null,
+   "geoCoordinates": [
+    -77.0202194,
+    -12.0814656
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_H008",
+  "isActive": true,
+  "businessHours": []
+ },
+ "wongiononfood_T101": {
+  "friendlyName": "Retiro en tienda Wong Dos de Mayo",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "T101",
+   "isDisposable": true,
+   "postalCode": "150131",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Dos de Mayo",
+   "number": "1099",
+   "neighborhood": "San Isidro",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.041915,
+    -12.0920142
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_T101",
+  "isActive": true,
+  "businessHours": []
+ },
+ "wongiot101wio_pp002T101RetiroenSucursal": {
+  "friendlyName": "Wong Dos de Mayo",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002T101RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "150131",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida dos de Mayo",
+   "number": "1099",
+   "neighborhood": "San Isidro",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.041915,
+    -12.0920142
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiot101wio_pp002T101RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "wongiot109wio_pp002T109RetiroenSucursal": {
+  "friendlyName": "Wong San Miguel",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002T109RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "15088",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Universitaria",
+   "number": "41894",
+   "neighborhood": "Lima",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.0808433,
+    -12.0766089
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiot109wio_pp002T109RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "wongiononfood_S032": {
+  "friendlyName": "Retiro en tienda Metro Faucett",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "S032",
+   "isDisposable": true,
+   "postalCode": "150136",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida República de Venezuela",
+   "number": "5415",
+   "neighborhood": "San Miguel",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.095342,
+    -12.0624197
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_S032",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   }
+  ]
+ },
+ "wongiononfood_H006": {
+  "friendlyName": "Retiro en tienda  Metro San Juan de Lurigancho",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "H006",
+   "isDisposable": true,
+   "postalCode": "15431",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Próceres de la Independencia",
+   "number": "1632",
+   "neighborhood": "San Juan de Lurigancho",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.0041876,
+    -12.0065248
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_H006",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   }
+  ]
+ },
+ "wongiononfood_CYCARAIND": {
+  "friendlyName": "Click&Collect MegaPlaza Independencia",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "CYCARAIND",
+   "isDisposable": true,
+   "postalCode": "150101",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Alfredo Mendiola",
+   "number": "3698",
+   "neighborhood": "Lima",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.0632708,
+    -11.9932977
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_CYCARAIND",
+  "isActive": false,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   }
+  ]
+ },
+ "wongiononfood_H005": {
+  "friendlyName": "Retiro en tienda  Metro La Marina",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "H005",
+   "isDisposable": true,
+   "postalCode": "150136",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida la Marina",
+   "number": "2500",
+   "neighborhood": "San Miguel",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.0904685,
+    -12.0777163
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_H005",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   }
+  ]
+ },
+ "wongiot135wio_pp002T135RetiroenSucursal": {
+  "friendlyName": "Wong Marina",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002T135RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "150136",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Rafael Escardó",
+   "number": "530",
+   "neighborhood": "San Miguel",
+   "complement": "",
+   "reference": null,
+   "geoCoordinates": [
+    -77.092558,
+    -12.0762222
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiot135wio_pp002T135RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "wongiot107wio_pp002T107RetiroenSucursal": {
+  "friendlyName": "Wong San Borja",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002T107RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "15036",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Jirón Ucello",
+   "number": null,
+   "neighborhood": "Lima",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.00534449999999,
+    -12.0900456
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiot107wio_pp002T107RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "wongiononfood_T109": {
+  "friendlyName": "Retiro en tienda Wong San Miguel",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "T109",
+   "isDisposable": true,
+   "postalCode": "150136",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida la Marina",
+   "number": "2000",
+   "neighborhood": "San Miguel",
+   "complement": "Plaza San Miguel",
+   "reference": null,
+   "geoCoordinates": [
+    -77.09234339999999,
+    -12.0776778
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_T109",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "20:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "20:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "20:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "20:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "20:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "20:00:00"
+   }
+  ]
+ },
+ "wongiononfood_CYCBELLA": {
+  "friendlyName": "Click&Collect Mall Plaza Bellavista",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "CYCBELLA",
+   "isDisposable": true,
+   "postalCode": "070102",
+   "city": "Callao",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Óscar R. Benavides",
+   "number": "3866",
+   "neighborhood": "Bellavista",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.1026137,
+    -12.0551289
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_CYCBELLA",
+  "isActive": false,
+  "businessHours": [
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "09:30:00",
+    "ClosingTime": "20:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "09:30:00",
+    "ClosingTime": "20:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "09:30:00",
+    "ClosingTime": "20:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "09:30:00",
+    "ClosingTime": "20:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "09:30:00",
+    "ClosingTime": "20:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "09:30:00",
+    "ClosingTime": "20:00:00"
+   }
+  ]
+ },
+ "wongiononfood_S003": {
+  "friendlyName": "Retiro en tienda  Metro Aramburu",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "S003",
+   "isDisposable": true,
+   "postalCode": "150141",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Calle Las Tiendas",
+   "number": "290",
+   "neighborhood": "Surquillo",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.0203949,
+    -12.1032713
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_S003",
+  "isActive": true,
+  "businessHours": []
+ },
+ "wongiot102wio_pp002T102RetiroenSucursal": {
+  "friendlyName": "Wong Óvalo Gutierrez",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002T102RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "150122",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Santa Cruz",
+   "number": "771",
+   "neighborhood": "Lima",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.03617580000001,
+    -12.110135
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiot102wio_pp002T102RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "wongiononfood_T102": {
+  "friendlyName": "Retiro en tienda Wong Ovalo Gutierrez",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "T102",
+   "isDisposable": true,
+   "postalCode": "150122",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Santa Cruz",
+   "number": "771",
+   "neighborhood": "Miraflores",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.0362742,
+    -12.1103184
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_T102",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   }
+  ]
+ },
+ "wongiononfood_CYCPAF": {
+  "friendlyName": "Click&Collect  Parque Arauco Faucett",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "CYCPAF",
+   "isDisposable": true,
+   "postalCode": "070101",
+   "city": "Callao",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Elmer Faucett",
+   "number": "3443",
+   "neighborhood": "Callao",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.1080197,
+    -12.0189108
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_CYCPAF",
+  "isActive": false,
+  "businessHours": []
+ },
+ "wongiononfood_CYCANGA": {
+  "friendlyName": "Click&Collect Open Plaza Angamos",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "CYCANGA",
+   "isDisposable": true,
+   "postalCode": "150141",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Tomás Marsano",
+   "number": "1805",
+   "neighborhood": "Surquillo",
+   "complement": "Open Plaza Angamos",
+   "reference": null,
+   "geoCoordinates": [
+    -77.01259759999999,
+    -12.111631
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_CYCANGA",
+  "isActive": false,
+  "businessHours": []
+ },
+ "wongiononfood_H003": {
+  "friendlyName": "Retiro en tienda Metro Limatambo",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "H003",
+   "isDisposable": true,
+   "postalCode": "15036",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Benjamín Doig",
+   "number": "s/n",
+   "neighborhood": "San Borja",
+   "complement": "Real Plaza Primavera",
+   "reference": null,
+   "geoCoordinates": [
+    -77.0039827,
+    -12.1097941
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_H003",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   }
+  ]
+ },
+ "wongiononfood_T120": {
+  "friendlyName": "Retiro en tienda Wong Bajada Balta",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "T120",
+   "isDisposable": true,
+   "postalCode": "150122",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Calle Bajada Balta",
+   "number": "626",
+   "neighborhood": "Miraflores",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.03240149999999,
+    -12.1225851
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_T120",
+  "isActive": true,
+  "businessHours": []
+ },
+ "wongiot120wio_pp002T120RetiroenSucursal": {
+  "friendlyName": "WONG BAJADA BALTA",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002T120RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "15074",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Bajada Balta",
+   "number": "626",
+   "neighborhood": "Lima",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.03240149999999,
+    -12.1225851
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiot120wio_pp002T120RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "wongiononfood_TH12": {
+  "friendlyName": "Retiro en tienda Wong Ate NF",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "TH12",
+   "isDisposable": true,
+   "postalCode": "150103",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida la Molina",
+   "number": "378",
+   "neighborhood": "Ate",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -76.96412600000001,
+    -12.0605035
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_TH12",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "09:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "09:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   }
+  ]
+ },
+ "wongioth12wio_pp002TH12RetiroenSucursal": {
+  "friendlyName": "WONG ATE",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002TH12RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "150103",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida la Molina",
+   "number": "378",
+   "neighborhood": "Ate",
+   "complement": "",
+   "reference": null,
+   "geoCoordinates": [
+    -76.96412600000001,
+    -12.0605035
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongioth12wio_pp002TH12RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "wongiot103wio_pp002T103RetiroenSucursal": {
+  "friendlyName": "Wong Aurora",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002T103RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "150122",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Coronel Luis Arias Schreiber",
+   "number": "270",
+   "neighborhood": "Miraflores",
+   "complement": "",
+   "reference": null,
+   "geoCoordinates": [
+    -77.011266,
+    -12.1212426
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiot103wio_pp002T103RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "wongiononfood_T103": {
+  "friendlyName": "Retiro en tienda Wong Aurora",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "T103",
+   "isDisposable": true,
+   "postalCode": "150122",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Calle A. Schereiber",
+   "number": "270",
+   "neighborhood": "Miraflores",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.0110598,
+    -12.1213926
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_T103",
+  "isActive": true,
+  "businessHours": []
+ },
+ "wongiononfood_T111": {
+  "friendlyName": "Retiro en tienda Wong Camacho",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "T111",
+   "isDisposable": true,
+   "postalCode": "150114",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Javier Prado Este",
+   "number": "5193",
+   "neighborhood": "La Molina",
+   "complement": "Wong Camacho",
+   "reference": null,
+   "geoCoordinates": [
+    -76.9672875,
+    -12.0804454
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_T111",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   }
+  ]
+ },
+ "wongiot131wio_pp002T131RetiroenSucursal": {
+  "friendlyName": "Wong Panorama",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002T131RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "15023",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Circunvalación del Golf los Incas",
+   "number": "158",
+   "neighborhood": "Santiago de Surco",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -76.9683591,
+    -12.0829135
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiot131wio_pp002T131RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "wongiot111wio_pp002T111RetiroenSucursal": {
+  "friendlyName": "Wong Camacho",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002T111RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "15023",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Javier Prado Este",
+   "number": "4921",
+   "neighborhood": "Lima",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -76.96735149999999,
+    -12.0811587
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiot111wio_pp002T111RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "wongiononfood_T106": {
+  "friendlyName": "Retiro en tienda Wong Chacarilla",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "T106",
+   "isDisposable": true,
+   "postalCode": "150140",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Monte Bello",
+   "number": "150",
+   "neighborhood": "Santiago De Surco",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -76.9927924,
+    -12.1121752
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_T106",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   }
+  ]
+ },
+ "wongiot106wio_pp002T106RetiroenSucursal": {
+  "friendlyName": "Wong Chacarilla",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002T106RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "150140",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Monte Bello",
+   "number": "150",
+   "neighborhood": "Santiago De Surco",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -76.9927924,
+    -12.1121752
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiot106wio_pp002T106RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "wongiononfood_T104": {
+  "friendlyName": "Retiro en tienda Wong Benavides",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "T104",
+   "isDisposable": true,
+   "postalCode": "150122",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Alfredo Benavides",
+   "number": "1475",
+   "neighborhood": "Miraflores",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.0177977,
+    -12.1260991
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_T104",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "21:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "21:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   }
+  ]
+ },
+ "wongiot104wio_pp002T104RetiroenSucursal": {
+  "friendlyName": "Wong Benavides",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002T104RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "15047",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Alfredo Benavides",
+   "number": "1475",
+   "neighborhood": "Lima",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.0177977,
+    -12.1260991
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiot104wio_pp002T104RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "wongiononfood_CYCCANTA": {
+  "friendlyName": "Click&Collect Open Plaza Canta Callao",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "CYCCANTA",
+   "isDisposable": true,
+   "postalCode": "070101",
+   "city": "Callao",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Canta Callao",
+   "number": "378",
+   "neighborhood": "Callao",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.1137062,
+    -11.9991983
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_CYCCANTA",
+  "isActive": false,
+  "businessHours": []
+ },
+ "wongiot126wio_pp002T126RetiroenSucursal": {
+  "friendlyName": "Wong Larcomar",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002T126RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "150122",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Malecón de la Reserva",
+   "number": "610",
+   "neighborhood": "Miraflores",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.03009469999999,
+    -12.1314074
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiot126wio_pp002T126RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "wongiononfood_CYCARALAR": {
+  "friendlyName": "Click&Collect Larcomar",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "CYCARALAR",
+   "isDisposable": true,
+   "postalCode": "150122",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Malecon de la Reserva",
+   "number": "610",
+   "neighborhood": "Miraflores",
+   "complement": "Larcomar",
+   "reference": null,
+   "geoCoordinates": [
+    -77.0304742,
+    -12.1318858
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_CYCARALAR",
+  "isActive": false,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "10:00:00",
+    "ClosingTime": "19:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "10:00:00",
+    "ClosingTime": "19:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "10:00:00",
+    "ClosingTime": "19:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "10:00:00",
+    "ClosingTime": "19:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   }
+  ]
+ },
+ "wongiot134wio_pp002T134RetiroenSucursal": {
+  "friendlyName": "Wong Primavera",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002T134RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "15023",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Primavera",
+   "number": "2205",
+   "neighborhood": "Santiago de Surco",
+   "complement": "",
+   "reference": null,
+   "geoCoordinates": [
+    -76.9662254,
+    -12.1055586
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiot134wio_pp002T134RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "wongiononfood_T121": {
+  "friendlyName": "Retiro en tienda Wong Tomas Marsano",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "T121",
+   "isDisposable": true,
+   "postalCode": "15039",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Santiago de Surco",
+   "number": "15039",
+   "neighborhood": "Santiago de Surco",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -76.9959353,
+    -12.1359245
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_T121",
+  "isActive": true,
+  "businessHours": []
+ },
+ "wongiononfood_T108": {
+  "friendlyName": "Retiro en Wong Las Viñas",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "T108",
+   "isDisposable": true,
+   "postalCode": "150114",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Las Retamas",
+   "number": "190",
+   "neighborhood": "La Molina",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -76.951039,
+    -12.0913225
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_T108",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   }
+  ]
+ },
+ "wongiot108wio_pp002T108RetiroenSucursal": {
+  "friendlyName": "Wong Cenco La Molina",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002T108RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "150114",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Las Retamas",
+   "number": "190",
+   "neighborhood": "Lima",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -76.9509566,
+    -12.0920105
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiot108wio_pp002T108RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "06:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "wongiot115wio_pp002T115RetiroenSucursal": {
+  "friendlyName": "WONG ALDABAS",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002T115RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "15039",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Alfredo Benavides",
+   "number": "52",
+   "neighborhood": "Lima",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -76.98227279999999,
+    -12.1297872
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiot115wio_pp002T115RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "wongiononfood_T115": {
+  "friendlyName": "Retiro en tienda Wong Aldabas",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "T115",
+   "isDisposable": true,
+   "postalCode": "150140",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Alfredo Benavides",
+   "number": "5250",
+   "neighborhood": "Santiago De Surco",
+   "complement": "Wong gardenias",
+   "reference": null,
+   "geoCoordinates": [
+    -76.9822804,
+    -12.1298011
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_T115",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "07:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   }
+  ]
+ },
+ "wongiononfood_CYCARAMOL": {
+  "friendlyName": "Click&Collect Parque La Molina",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "CYCARAMOL",
+   "isDisposable": true,
+   "postalCode": "150114",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida la Universidad",
+   "number": null,
+   "neighborhood": "La Molina",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -76.9401511,
+    -12.0761347
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_CYCARAMOL",
+  "isActive": false,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "10:00:00",
+    "ClosingTime": "19:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "10:00:00",
+    "ClosingTime": "20:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "10:00:00",
+    "ClosingTime": "20:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "10:00:00",
+    "ClosingTime": "20:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "10:00:00",
+    "ClosingTime": "20:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "10:00:00",
+    "ClosingTime": "20:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "10:00:00",
+    "ClosingTime": "20:00:00"
+   }
+  ]
+ },
+ "wongiot121wio_pp002T121RetiroenSucursal1": {
+  "friendlyName": "WONG MARSANO",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002T121RetiroenSucursal1",
+   "isDisposable": true,
+   "postalCode": "15039",
+   "city": "Lima Province",
+   "state": "Lima Province",
+   "country": "PER",
+   "street": "Avenida Santiago de Surco",
+   "number": null,
+   "neighborhood": "Santiago de Surco",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -76.99031250000002,
+    -12.1426875
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiot121wio_pp002T121RetiroenSucursal1",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "22:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "22:00:00"
+   }
+  ]
+ },
+ "wongiononfood_CYCCOMAS": {
+  "friendlyName": "Click&Collect Mall Plaza Comas",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "CYCCOMAS",
+   "isDisposable": true,
+   "postalCode": "150110",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Los Angeles",
+   "number": "602",
+   "neighborhood": "Comas",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.06615380000001,
+    -11.9372
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_CYCCOMAS",
+  "isActive": false,
+  "businessHours": [
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "09:30:00",
+    "ClosingTime": "20:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "09:30:00",
+    "ClosingTime": "20:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "09:30:00",
+    "ClosingTime": "20:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "09:30:00",
+    "ClosingTime": "20:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "20:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "09:30:00",
+    "ClosingTime": "20:00:00"
+   }
+  ]
+ },
+ "wongiononfood_H011": {
+  "friendlyName": "Retiro en tienda Metro Pascana",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "H011",
+   "isDisposable": true,
+   "postalCode": "150110",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Túpac Amaru",
+   "number": "3.5",
+   "neighborhood": "Comas",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.0444815,
+    -11.9319711
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_H011",
+  "isActive": true,
+  "businessHours": []
+ },
+ "wongiononfood_T130": {
+  "friendlyName": "Retiro en tienda  Wong Sol de la Molina",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "T130",
+   "isDisposable": true,
+   "postalCode": "150114",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida la Molina",
+   "number": "39",
+   "neighborhood": "La Molina",
+   "complement": "Urbanización El Sol de la Molina",
+   "reference": null,
+   "geoCoordinates": [
+    -76.9302548,
+    -12.0783261
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_T130",
+  "isActive": true,
+  "businessHours": []
+ },
+ "wongiononfood_CYCATOC": {
+  "friendlyName": "Click&Collect Open Plaza Atocongo",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "CYCATOC",
+   "isDisposable": true,
+   "postalCode": "15803",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Circunvalación",
+   "number": "1803",
+   "neighborhood": "San Juan de Miraflores",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -76.9815519,
+    -12.14667
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_CYCATOC",
+  "isActive": false,
+  "businessHours": []
+ },
+ "wongiononfood_S010": {
+  "friendlyName": "Retiro en tienda Metro Atocongo",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "S010",
+   "isDisposable": true,
+   "postalCode": "15803",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida los Héroes",
+   "number": "100",
+   "neighborhood": "San Juan de Miraflores",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -76.9805976,
+    -12.1498626
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_S010",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   }
+  ]
+ },
+ "wongiot114wio_pp002T114RetiroenSucursal": {
+  "friendlyName": "Wong La Planicie",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002T114RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "150114",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Ricardo Elías Aparicio",
+   "number": "715",
+   "neighborhood": "La Molina",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -76.9178383,
+    -12.0773509
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiot114wio_pp002T114RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "wongiononfood_H001": {
+  "friendlyName": "Retiro en tienda  Metro Chorrillos",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "H001",
+   "isDisposable": true,
+   "postalCode": "150108",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Paseo de la República",
+   "number": "s/n",
+   "neighborhood": "Chorrillos",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.013092,
+    -12.1754481
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_H001",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   }
+  ]
+ },
+ "wongiononfood_S038": {
+  "friendlyName": "Retiro en tienda Metro Huaylas",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "S038",
+   "isDisposable": true,
+   "postalCode": "150108",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Defensores del Morro",
+   "number": "2070",
+   "neighborhood": "Chorrillos",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.01327739999999,
+    -12.1809233
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_S038",
+  "isActive": true,
+  "businessHours": []
+ },
+ "wongiononfood_S029": {
+  "friendlyName": "PP Metro Miotta",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "S029",
+   "isDisposable": true,
+   "postalCode": "150101",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Pedro Miotta",
+   "number": "407",
+   "neighborhood": "Lima",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -76.9778564,
+    -12.1686
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_S029",
+  "isActive": false,
+  "businessHours": []
+ },
+ "wongiot130wio_pp002T130RetiroenSucursal": {
+  "friendlyName": "WONG SOL DE LA MOLINA",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002T130RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "15026",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida la Molina Este",
+   "number": null,
+   "neighborhood": "Lima",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -76.9021078,
+    -12.0858401
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiot130wio_pp002T130RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "wongiononfood_CYCARACHO": {
+  "friendlyName": "Click&Collect Mega Plaza Chorrillos",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "CYCARACHO",
+   "isDisposable": true,
+   "postalCode": "150108",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Alameda Sur",
+   "number": "5",
+   "neighborhood": "Chorrillos",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.01104860000001,
+    -12.197219
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_CYCARACHO",
+  "isActive": false,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   }
+  ]
+ },
+ "wongiot132wio_pp002T132RetiroenSucursal": {
+  "friendlyName": "Wong KM40",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002T132RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "150126",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Calle El Pulpo",
+   "number": "C. El Pulpo Lurín 15846 Peru",
+   "neighborhood": "Punta Hermosa",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -76.8360522,
+    -12.3113187
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiot132wio_pp002T132RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "wongiononfood_S067": {
+  "friendlyName": "Retiro en tienda Metro Chosica",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "S067",
+   "isDisposable": true,
+   "postalCode": "15468",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Prolongación 28 de Julio",
+   "number": "501",
+   "neighborhood": "Lurigancho-Chosica",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -76.6960946,
+    -11.9384248
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_S067",
+  "isActive": true,
+  "businessHours": []
+ },
+ "wongiot116wio_pp002T116RetiroenSucursal": {
+  "friendlyName": "WONG ASIA",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "pp002T116RetiroenSucursal",
+   "isDisposable": true,
+   "postalCode": "15690",
+   "city": "Provincia de Cañete",
+   "state": "Gobierno Regional de Lima",
+   "country": "PER",
+   "street": "Interplayas",
+   "number": "403",
+   "neighborhood": null,
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -76.6012848,
+    -12.7619982
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiot116wio_pp002T116RetiroenSucursal",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "18:00:00"
+   }
+  ]
+ },
+ "wongiononfood_T116": {
+  "friendlyName": "Retiro en tienda Wong Asia",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "T116",
+   "isDisposable": true,
+   "postalCode": "150502",
+   "city": "Cañete",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Carretera Panamericana Sur",
+   "number": "97",
+   "neighborhood": "Asia",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -76.6011324,
+    -12.7616774
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_T116",
+  "isActive": true,
+  "businessHours": []
+ },
+ "wongiononfood_S058": {
+  "friendlyName": "Retiro en tienda Metro Los Maestros Ica",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "S058",
+   "isDisposable": true,
+   "postalCode": "110101",
+   "city": "Ica",
+   "state": "Ica",
+   "country": "PER",
+   "street": "Carretera Panamericana Sur",
+   "number": "774",
+   "neighborhood": "Ica",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -75.7387613,
+    -14.0739559
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_S058",
+  "isActive": true,
+  "businessHours": []
+ },
+ "wongiononfood_CYCHUAN": {
+  "friendlyName": "Click&Collect Open Plaza Huancayo",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "CYCHUAN",
+   "isDisposable": true,
+   "postalCode": "120101",
+   "city": "Huancayo",
+   "state": "Junín",
+   "country": "PER",
+   "street": "Prologación San Carlos",
+   "number": "107",
+   "neighborhood": "Huancayo",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -75.2086942,
+    -12.0623526
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_CYCHUAN",
+  "isActive": false,
+  "businessHours": []
+ },
+ "wongiononfood_S064": {
+  "friendlyName": "Retiro en tienda Metro Huancayo",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "S064",
+   "isDisposable": true,
+   "postalCode": "12003",
+   "city": "Huancayo",
+   "state": "Junín",
+   "country": "PER",
+   "street": "Avenida 9 de Diciembre",
+   "number": "517",
+   "neighborhood": null,
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -75.2048683,
+    -12.0846189
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_S064",
+  "isActive": true,
+  "businessHours": []
+ },
+ "wongiononfood_S066": {
+  "friendlyName": "Retiro en tienda Metro Huánuco",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "S066",
+   "isDisposable": true,
+   "postalCode": "10001",
+   "city": "Huánuco",
+   "state": "Huánuco",
+   "country": "PER",
+   "street": "San Martin",
+   "number": "1171",
+   "neighborhood": "Huánuco",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -76.2424621,
+    -9.9263579
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_S066",
+  "isActive": true,
+  "businessHours": []
+ },
+ "wongiononfood_S093": {
+  "friendlyName": "Retiro en tienda Metro Lambramani",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "S093",
+   "isDisposable": true,
+   "postalCode": "040101",
+   "city": "Arequipa",
+   "state": "Arequipa",
+   "country": "PER",
+   "street": "Avenida Lambramani",
+   "number": "325",
+   "neighborhood": "Arequipa",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -71.5214269,
+    -16.4110736
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_S093",
+  "isActive": true,
+  "businessHours": []
+ },
+ "wongiononfood_CYCAREQUIPA": {
+  "friendlyName": "Click&Collect Mall Plaza Arequipa",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "CYCAREQUIPA",
+   "isDisposable": true,
+   "postalCode": "040103",
+   "city": "Arequipa",
+   "state": "Arequipa",
+   "country": "PER",
+   "street": "Avenida Ejército",
+   "number": "793",
+   "neighborhood": "Cayma",
+   "complement": "Mall Plaza Arequipa",
+   "reference": null,
+   "geoCoordinates": [
+    -71.5462683,
+    -16.3906877
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_CYCAREQUIPA",
+  "isActive": false,
+  "businessHours": [
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "00:00:00",
+    "ClosingTime": "00:00:00"
+   }
+  ]
+ },
+ "wongiononfood_S062": {
+  "friendlyName": "Retiro en tienda Metro Cerro Colorado",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "S062",
+   "isDisposable": true,
+   "postalCode": "040104",
+   "city": "Arequipa",
+   "state": "Arequipa",
+   "country": "PER",
+   "street": "Avenida Aviación",
+   "number": "Nro. 602",
+   "neighborhood": "Cerro Colorado",
+   "complement": "",
+   "reference": null,
+   "geoCoordinates": [
+    -71.5573318,
+    -16.375158
+   ]
+  },
+  "additionalInfo": null,
+  "id": "wongiononfood_S062",
+  "isActive": true,
+  "businessHours": []
+ }
+}

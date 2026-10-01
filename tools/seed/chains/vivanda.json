@@ -1,0 +1,45 @@
+{
+  "id": "vivanda",
+  "name": "Vivanda",
+  "legendName": "VIVANDA",
+  "group": "super",
+  "color": "#E5115B",
+  "ringColor": "#E5115B",
+  "owner": "InRetail Perú Corp. (Intercorp group) — Supermercados Peruanos S.A.",
+  "website": "https://www.vivanda.com.pe",
+  "storeLocator": null,
+  "defaultOn": true,
+  "osm": {
+    "wikidata": ["Q7937539"],
+    "nameRegex": "^(?:supermercados?\\s+)?vivanda\\b",
+    "excludeNameRegex": "",
+    "label": "Vivanda",
+    "prefixRegex": "^(?:supermercados?\\s+)?vivanda\\b",
+    "shops": ["supermarket"],
+    "requireShopLike": false,
+    "dense": false,
+    "uniqueName": true,
+    "weakNameRegex": "",
+    "weakNameShops": [],
+    "excludeTags": []
+  },
+  "logo": { "badge": true, "wide": true },
+  "logoSources": [
+    {
+      "file": "logos/vivanda.png",
+      "url": "https://images.ctfassets.net/i8ovmbx499sn/arTXywH3bVoatken3nyHP/129a9c2d61f48f5e2103c3c467d5e4b9/logoVivanda.svg",
+      "notes": "Official radish symbol (magenta #F31644 ring, green #00A160/#00703C leaves) from vivanda.com.pe, rasterized with headless Chrome and centred on white — the same composition as the official touch icon https://www.vivanda.com.pe/ico_vivanda-180x180.png."
+    },
+    {
+      "file": "logos/vivanda-wide.png",
+      "url": "https://images.ctfassets.net/i8ovmbx499sn/1S0PkOVc0hIy6Zbxu3y8HY/ad7199f4bf423afcebd410df4ea01ee7/logo.svg",
+      "notes": "Official vivanda.com.pe header logo (radish + green 'Vivanda'), transparent, trimmed, 512 px wide."
+    }
+  ],
+  "storeCountReported": {
+    "value": null,
+    "source": "https://www.inretail.pe/api/archivos/file/InRetail%20Q2%2726%20Corporate%20Presentation.pdf",
+    "date": "2026-06-30"
+  },
+  "notes": "High-end supermarket format of InRetail (Lima wealthier districts + Asia). Identification: the red/magenta radish with green leaves on the user's 'Lima Metropolitana Sur' slide is Vivanda's symbol (matches the official vivanda.com.pe logo/touch icon); the black 'F&F' square on the same slide is Flora & Fauna (same slab-serif '&' as https://florayfauna.vtexassets.com/arquivos/logo.svg). Colour: #E5115B is the radish magenta of the official touch icon, chosen so the ring stands apart from Tottus green; the site theme/wordmark green #00A160 (manifest theme_color) is the alternative. Store count: no official Vivanda-only figure found. InRetail reports Plaza Vea + Vivanda together: 113 stores at 30 Jun 2026 (Q2'26 corporate presentation, 'Hypermarket & Supermarket' + 'High-end Supermarket'); the Q2'26 MD&A (https://www.inretail.pe/api/archivos/file/MDA%20InRetail%20Q2%2726_ENG.pdf) notes 1 Vivanda store reopened in the quarter (Vivanda Pardo, Miraflores, reopened 26 Jun 2026 after remodelling per https://www.peru-retail.com/vivanda-reabre-uno-de-sus-establecimientos-asi-luce-el-renovado-supermercado/). 113 − 104 Plaza Vea (Perú Retail, 8 May 2026) suggests about 9 Vivanda stores — derived, not reported. No store-locator page found (vivanda.com.pe/tiendas and /nuestras-tiendas render 'No pudimos encontrar esta categoría'). OSM (probe 2026-10-01): 6 shop=supermarket objects match, none with brand:wikidata; some carry wrong brand/operator tags ('Cencosud', 'Wong') — match on name first."
+}

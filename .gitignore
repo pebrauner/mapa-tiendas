@@ -1,0 +1,32 @@
+# Dev tooling
+tools/node_modules/
+tools/test/out/
+tools/fixtures/.cache/
+# Download caches of the data build scripts (re-creatable)
+tools/seed/.cache*/
+# Derived district polygons (34 MB): re-create with `node tools/build-districts.mjs` (needed by tools/merge.mjs;
+# see tools/seed/districts-README.md). The app reads data/districts.js, which is committed.
+tools/seed/districts.geojson
+# Review-run outputs (screenshots, decks; 145 MB on 2026-10-01), like tools/test/out/
+tools/test/review/out/
+
+# OS / editors
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+.vscode/
+.idea/
+
+# User project files are kept on the user's PC, never in the repo
+*.mapa.json
+!tools/fixtures/*.mapa.json
+
+# Left over if "Guardar en carpeta" is interrupted while checking the folder
+mt-folder-check.js
+
+# Throwaway probe scripts written by review passes
+tools/test/review/
+
+# Local preview server config
+.claude/

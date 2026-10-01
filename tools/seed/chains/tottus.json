@@ -1,0 +1,50 @@
+{
+  "id": "tottus",
+  "name": "Tottus",
+  "legendName": "TOTTUS",
+  "group": "super",
+  "color": "#5AAE40",
+  "ringColor": "#08813C",
+  "owner": "Falabella S.A. (Grupo Falabella, Chile) — Tottus business unit",
+  "website": "https://www.tottus.com.pe",
+  "storeLocator": "https://www.tottus.com.pe/tottus-pe/content/horario-tiendas-all",
+  "defaultOn": true,
+  "osm": {
+    "wikidata": ["Q7828510"],
+    "nameRegex": "^(?:hiper(?:mercados?)?\\s+|super(?:mercados?)?\\s+)?tott?us\\b",
+    "excludeNameRegex": "^(?:hiper(?:mercados?)?\\s+|super(?:mercados?)?\\s+)?tott?us\\s+al\\s+paso",
+    "label": "Tottus",
+    "prefixRegex": "^(?:hiper(?:mercados?)?\\s+|super(?:mercados?)?\\s+)?tott?us\\b",
+    "shops": ["supermarket", "hypermarket", "mall", "department_store"],
+    "requireShopLike": false,
+    "dense": false,
+    "uniqueName": true,
+    "weakNameRegex": "",
+    "weakNameShops": [],
+    "excludeTags": []
+  },
+  "logo": { "badge": true, "wide": true },
+  "logoSources": [
+    {
+      "file": "logos/tottus.png",
+      "url": "https://images.falabella.com/v3/assets/blt422ac29cebae1d64/blt662e0623f1ca5f16/66bf846499b2ac306590ee62/tottus-standalone-logo.svg",
+      "notes": "Badge re-composed 2026-10-01 (data polish) so it reads at 32 px: official tottus.com.pe header logo (vector), rasterized with headless Chrome: the 3x3 dot-grid symbol over the 'TOTTUS' wordmark, both in white on Tottus green #08813C (the store-sign version the user's slides use). Until 2026-10-01 the multicolour grid on white, which read as a few specks at 32 px."
+    },
+    {
+      "file": "logos/tottus-wide.png",
+      "url": "https://images.falabella.com/v3/assets/blt422ac29cebae1d64/blt662e0623f1ca5f16/66bf846499b2ac306590ee62/tottus-standalone-logo.svg",
+      "notes": "Same official header logo (dots + 'TOTTUS'), transparent, trimmed, 512 px wide."
+    },
+    {
+      "file": "(reference only)",
+      "url": "https://commons.wikimedia.org/wiki/File:Logotipo_Tottus.svg",
+      "notes": "Wikidata P154 logo (slightly different greens #75C045/#3F752F/#DAE254). Not used."
+    }
+  ],
+  "storeCountReported": {
+    "value": 58,
+    "source": "https://www.peru-retail.com/cuantas-tiendas-tienen-las-principales-cadenas-en-peru-y-cuanto-creceran-en-2026/",
+    "date": "2026-05-08"
+  },
+  "notes": "Hypermarket/supermarket chain of Grupo Falabella. Store count: Perú Retail (press, 8 May 2026) 'cuenta con 58 tiendas a nivel nacional'. Official figure is only published combined with Precio Uno: Falabella 2Q26 Earnings Release (https://investors.grupofalabella.com/app/uploads/2026/08/Earnings-Release-2Q26-ESP.pdf, table 7.7) reports 92 stores / 301,529 m2 for 'Tottus Perú' at June 2026 (90 at June 2025), where 'Tottus considera ... Perú, bajo las marcas Tottus y Precio Uno'. 92 − 34 Precio Uno (Perú Retail, 19 May 2026) = 58, consistent. storeLocator page title: 'Tiendas y Horarios de Tottus | Tottus Perú' (does not list Precio Uno). OSM (probe 2026-10-01): 56 shop=supermarket objects match (40 carry brand:wikidata=Q7828510). Excluded by the shop filter: bus stops, taxi stands, parkings, distribution centre (w392343881), 'Tottus Express' (shop=yes) and 'Tottus al Paso' (shop=deli). Precio Uno stores are tagged separately (name 'Hiperbodega Precio Uno ...', operator Grupo Falabella) — keep them out of this chain."
+}

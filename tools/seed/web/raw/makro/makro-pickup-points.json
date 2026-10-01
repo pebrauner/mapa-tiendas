@@ -1,0 +1,648 @@
+{
+ "plazaveamko1033_1033": {
+  "friendlyName": "Makro Cercado-Lima",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "1033",
+   "isDisposable": true,
+   "postalCode": "150101",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Juan Manuel del Mar Y Bernedo",
+   "number": "150101",
+   "neighborhood": "Lima",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.05982809999999,
+    -12.0567625
+   ]
+  },
+  "additionalInfo": null,
+  "id": "plazaveamko1033_1033",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   }
+  ]
+ },
+ "plazaveamko710_710": {
+  "friendlyName": "Makro Zarate",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "710",
+   "isDisposable": true,
+   "postalCode": "150118",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Gran Pajaten",
+   "number": "150132",
+   "neighborhood": "Lurigancho",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -76.9867031,
+    -12.0218875
+   ]
+  },
+  "additionalInfo": null,
+  "id": "plazaveamko710_710",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   }
+  ]
+ },
+ "plazaveamko360_360": {
+  "friendlyName": "Makro Surco",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "360",
+   "isDisposable": true,
+   "postalCode": "150140",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Jorge Chávez",
+   "number": "1218",
+   "neighborhood": "Santiago De Surco",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.00912509999999,
+    -12.1489939
+   ]
+  },
+  "additionalInfo": null,
+  "id": "plazaveamko360_360",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "13:00:00",
+    "ClosingTime": "20:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "13:00:00",
+    "ClosingTime": "20:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "13:00:00",
+    "ClosingTime": "20:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "13:00:00",
+    "ClosingTime": "20:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "13:00:00",
+    "ClosingTime": "20:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "13:00:00",
+    "ClosingTime": "20:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "13:00:00",
+    "ClosingTime": "20:00:00"
+   }
+  ]
+ },
+ "plazaveamko893_893": {
+  "friendlyName": "Makro Comas",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "893",
+   "isDisposable": true,
+   "postalCode": "150110",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenida Chacra Cerro",
+   "number": "150110",
+   "neighborhood": "Comas",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.0572656,
+    -11.9096875
+   ]
+  },
+  "additionalInfo": null,
+  "id": "plazaveamko893_893",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   }
+  ]
+ },
+ "plazaveamko898_898": {
+  "friendlyName": "Makro Huacho",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "898",
+   "isDisposable": true,
+   "postalCode": "150101",
+   "city": "Lima",
+   "state": "Lima",
+   "country": "PER",
+   "street": "Avenue San Martin",
+   "number": "150801",
+   "neighborhood": "Lima",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -77.5867344,
+    -11.0932625
+   ]
+  },
+  "additionalInfo": null,
+  "id": "plazaveamko898_898",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   }
+  ]
+ },
+ "plazaveamko897_897": {
+  "friendlyName": "Makro Ica",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "897",
+   "isDisposable": true,
+   "postalCode": "110101",
+   "city": "Ica",
+   "state": "Ica",
+   "country": "PER",
+   "street": "Avenida Nicolas de Rivera el Viejo",
+   "number": "110101",
+   "neighborhood": "Ica",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -75.7237656,
+    -14.0818875
+   ]
+  },
+  "additionalInfo": null,
+  "id": "plazaveamko897_897",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   }
+  ]
+ },
+ "plazaveamko510_510-2": {
+  "friendlyName": "Makro Arequipa-2",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "510-2",
+   "isDisposable": true,
+   "postalCode": "040126",
+   "city": "Arequipa",
+   "state": "Arequipa",
+   "country": "PER",
+   "street": "Avenida Metropolitana",
+   "number": "040100",
+   "neighborhood": "Yanahuara",
+   "complement": "",
+   "reference": null,
+   "geoCoordinates": [
+    -71.5547656,
+    -16.3935625
+   ]
+  },
+  "additionalInfo": null,
+  "id": "plazaveamko510_510-2",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   }
+  ]
+ },
+ "plazaveamko510_510": {
+  "friendlyName": "Makro Arequipa",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "510",
+   "isDisposable": true,
+   "postalCode": "040126",
+   "city": "Arequipa",
+   "state": "Arequipa",
+   "country": "PER",
+   "street": "Avenida Metropolitana",
+   "number": "63",
+   "neighborhood": "Yanahuara",
+   "complement": "",
+   "reference": null,
+   "geoCoordinates": [
+    -71.5552632,
+    -16.3931978
+   ]
+  },
+  "additionalInfo": null,
+  "id": "plazaveamko510_510",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "12:00:00",
+    "ClosingTime": "20:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "12:00:00",
+    "ClosingTime": "20:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "12:00:00",
+    "ClosingTime": "20:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "12:00:00",
+    "ClosingTime": "20:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "12:00:00",
+    "ClosingTime": "20:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "12:00:00",
+    "ClosingTime": "20:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "12:00:00",
+    "ClosingTime": "20:00:00"
+   }
+  ]
+ },
+ "plazaveamko509_509": {
+  "friendlyName": "Makro Piura",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "509",
+   "isDisposable": true,
+   "postalCode": "200101",
+   "city": "Piura",
+   "state": "Piura",
+   "country": "PER",
+   "street": "Avenida sanches cerro lateral",
+   "number": "s/n",
+   "neighborhood": "Piura",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -80.6597031,
+    -5.1802625
+   ]
+  },
+  "additionalInfo": null,
+  "id": "plazaveamko509_509",
+  "isActive": true,
+  "businessHours": []
+ },
+ "plazaveamko509_509-2": {
+  "friendlyName": "Makro Piura-2",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "509-2",
+   "isDisposable": true,
+   "postalCode": "200101",
+   "city": "Piura",
+   "state": "Piura",
+   "country": "PER",
+   "street": "AV. SANCHEZ CERRO SUB LOTE B-1A DISTRITO 26 DE OCTUBRE, PIURA",
+   "number": "Veintiséis de Octubre",
+   "neighborhood": "Piura",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -80.6597031,
+    -5.1801625
+   ]
+  },
+  "additionalInfo": null,
+  "id": "plazaveamko509_509-2",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   }
+  ]
+ },
+ "plazaveamko1250_1250": {
+  "friendlyName": "Makro Chimbote",
+  "address": {
+   "addressType": "pickup",
+   "receiverName": null,
+   "addressId": "1250",
+   "isDisposable": true,
+   "postalCode": "021801",
+   "city": "Santa",
+   "state": "Áncash",
+   "country": "PER",
+   "street": "GRAN TRAPECIO PARCELA 3 Mz C ",
+   "number": "021801",
+   "neighborhood": "Chimbote",
+   "complement": null,
+   "reference": null,
+   "geoCoordinates": [
+    -78.5596406,
+    -9.1029375
+   ]
+  },
+  "additionalInfo": null,
+  "id": "plazaveamko1250_1250",
+  "isActive": true,
+  "businessHours": [
+   {
+    "DayOfWeek": 0,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 1,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 2,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 3,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 4,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 5,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   },
+   {
+    "DayOfWeek": 6,
+    "OpeningTime": "08:00:00",
+    "ClosingTime": "13:00:00"
+   }
+  ]
+ }
+}

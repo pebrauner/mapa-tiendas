@@ -1,0 +1,10 @@
+# Keep bytes stable across Windows/macOS/Linux: the app's "Guardar en carpeta"
+# writes these files and the tests compare them byte-for-byte.
+* text=auto eol=lf
+# The store database stays CRLF + BOM so Excel opens it cleanly.
+*.csv text eol=crlf
+*.png binary
+*.jpg binary
+*.woff2 binary
+*.pptx binary
+*.xlsx binary

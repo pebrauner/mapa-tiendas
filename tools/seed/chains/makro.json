@@ -1,0 +1,53 @@
+{
+  "id": "makro",
+  "name": "Makro",
+  "legendName": "MAKRO",
+  "group": "wholesale",
+  "color": "#26469D",
+  "ringColor": "#26469D",
+  "owner": "InRetail Perú Corp. (Intercorp group) — Makro Supermayorista S.A. (acquired from SHV, Dec 2020)",
+  "website": "https://www.makro.pe",
+  "storeLocator": "https://www.makro.pe/tiendas",
+  "defaultOn": true,
+  "osm": {
+    "wikidata": ["Q704606"],
+    "nameRegex": "^makro\\b",
+    "excludeNameRegex": "",
+    "label": "Makro",
+    "prefixRegex": "^makro\\b",
+    "shops": ["wholesale", "supermarket", "hypermarket"],
+    "requireShopLike": false,
+    "dense": false,
+    "uniqueName": true,
+    "weakNameRegex": "",
+    "weakNameShops": [],
+    "excludeTags": []
+  },
+  "logo": {
+    "badge": true,
+    "wide": true
+  },
+  "logoSources": [
+    {
+      "file": "logos/makro.png",
+      "url": "https://plazavea.vteximg.com.br/arquivos/logo-makro-desktop.svg",
+      "notes": "Official yellow 'makro' wordmark (#FFD206) served by InRetail's plazavea.com.pe for its Makro tab, rasterized with headless Chrome and centred on #26469D, the blue of makro.pe's own touch icon https://www.makro.pe/assets/favicon/apple-touch-icon.png (yellow 'm' on blue). Alternative symbol: that 'm' icon (also https://www.makro.pe/assets/favicon/android-chrome-256x256.png); the full wordmark was preferred because it is still legible at 40 px and more recognizable."
+    },
+    {
+      "file": "logos/makro-wide.png",
+      "url": "https://plazavea.vteximg.com.br/arquivos/logo-makro-blue-inactive.svg",
+      "notes": "Official blue 'makro' wordmark (#00269A), transparent, trimmed, 512 px wide (reads on the white card)."
+    },
+    {
+      "file": "(reference only)",
+      "url": "https://commons.wikimedia.org/wiki/File:Makro_logo_la.svg",
+      "notes": "Wikidata P154 'Latin America' logo is the old red SHV-era wordmark — not the current Peruvian identity, not used."
+    }
+  ],
+  "storeCountReported": {
+    "value": 27,
+    "source": "https://www.inretail.pe/api/archivos/file/Earnings%20Presentation%20Q2%2726.pdf",
+    "date": "2026-06-30"
+  },
+  "notes": "Cash & carry / wholesale ('supermayorista'). InRetail bought Makro Supermayorista S.A. from SHV Group; InRetail's corporate presentation dates the acquisition 23 Dec 2020. Store count: InRetail Q2'26 earnings presentation, Food Retail 'Cash & Carry' = 27 stores at 30 Jun 2026 (unchanged since Q2'25); Perú Retail (8 May 2026) also says 27. legendName is 'MAKRO' by default; the user's slides label it 'CASH & CARRY' (editable). makro.pe/tiendas lists the stores by name (e.g. Makro Callao, Chiclayo, Chimbote, Cusco, Huancayo, El Bosque, Yanahuara, Santa Anita, Surco). OSM (probe 2026-10-01): 24 shop=wholesale objects match, 23 already carry brand:wikidata=Q704606 (NSI: Makro worldwide brand, all countries except TH). Excluded: 'MAKRO DE San Juan de Miraflores' (shop=hardware, unrelated), 'Fiesta Makro' (shop=yes), parkings, a CrediScotia agency, 'Makro - Promart' building."
+}

@@ -1,0 +1,45 @@
+{
+  "id": "preciouno",
+  "name": "Hiperbodega Precio Uno",
+  "legendName": "PRECIO UNO",
+  "group": "discount",
+  "color": "#D31F2F",
+  "ringColor": "#D31F2F",
+  "owner": "Falabella S.A. (Grupo Falabella, Chile) — Tottus business unit (Precio Uno format)",
+  "website": "https://www.hiperbodegapreciouno.com.pe",
+  "storeLocator": null,
+  "defaultOn": true,
+  "osm": {
+    "wikidata": ["Q109657737"],
+    "nameRegex": "^(?:hiper\\s*bodega\\s+)?precio\\s*(?:uno|1)\\b|^hiper\\s*bodega\\s+precio\\b",
+    "excludeNameRegex": "",
+    "label": "Precio Uno",
+    "prefixRegex": "^(?:hiper\\s*bodega\\s+)?precio\\s*(?:uno|1)\\b",
+    "shops": ["supermarket", "hypermarket", "wholesale"],
+    "requireShopLike": false,
+    "dense": false,
+    "uniqueName": true,
+    "weakNameRegex": "",
+    "weakNameShops": [],
+    "excludeTags": []
+  },
+  "logo": { "badge": true, "wide": true },
+  "logoSources": [
+    {
+      "file": "logos/preciouno.png",
+      "url": "https://www.hiperbodegapreciouno.com.pe/wp-content/uploads/2022/08/logo-hbpu.png",
+      "notes": "Official site header logo (271x181 px: white 'PRECIO uno' on red #D31F2F). White lettering keyed out and centred on #D31F2F; upscaled about 1.6x, so the 512 px master is slightly soft (fine at the 40-128 px display sizes). The larger WordPress site icon (…/2022/12/cropped-logo-PU.jpg) returned HTTP 522 (origin timeout) on several tries; the 192 px version …/2022/12/cropped-logo-PU-192x192.jpg was retrieved but has smaller lettering."
+    },
+    {
+      "file": "logos/preciouno-wide.png",
+      "url": "https://www.hiperbodegapreciouno.com.pe/wp-content/uploads/2022/08/logo-hbpu.png",
+      "notes": "Same official logo as-is (natural shape is a red rectangle, not a transparent wordmark), 271x181."
+    }
+  ],
+  "storeCountReported": {
+    "value": 34,
+    "source": "https://www.peru-retail.com/precio-uno-inaugura-nueva-tienda-en-lima-norte-y-suma-un-total-de-34-locales-a-nivel-nacional/",
+    "date": "2026-05-19"
+  },
+  "notes": "Owned by Grupo Falabella, NOT InRetail: Falabella reports it inside Tottus ('Tottus considera los negocios de supermercados en Chile y Perú, bajo las marcas Tottus y Precio Uno'; 2025 annual report: 'formatos de precio conveniente como Hiperbodega y Superbodega Precio Uno'). Store count: Perú Retail (19 May 2026) 'Precio Uno suma 34 locales a nivel nacional' after opening Tungasuca (Carabayllo); the Falabella 2Q26 Earnings Release lists the Precio Uno Tungasuca opening (May 2026) and 92 Tottus+Precio Uno stores in Peru at June 2026. legendName follows the user's slides ('PRECIO UNO'). No store locator on hiperbodegapreciouno.com.pe (WordPress site with catalogues/news; several paths return Cloudflare 522). OSM (probe 2026-10-01): 23 objects match, all shop=wholesale (15) or shop=supermarket (8), typically 'Hiperbodega Precio Uno <place>' with operator 'Grupo Falabella'; none carry brand:wikidata (Wikidata item Q109657737 exists, not in NSI)."
+}

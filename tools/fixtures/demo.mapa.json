@@ -1,0 +1,100 @@
+{
+  "type": "mapa-tiendas-project",
+  "version": 1,
+  "name": "Ejemplo — Lima, Trujillo y Chimbote",
+  "updated": "2026-10-01T00:00:00.000Z",
+  "maps": [
+    {
+      "id": "demo-lima-sur",
+      "title": "Lima Metropolitana Sur",
+      "subtitle": "",
+      "subtitleAuto": true,
+      "peso": "15.8%",
+      "districts": ["150122", "150130", "150131", "150141"],
+      "chains": {
+        "plazavea": true, "tottus": true, "wong": true, "metro": true, "vivanda": true,
+        "tiendas3a": true, "mass": false, "preciouno": false, "maxiahorro": false, "dollarcity": true,
+        "makro": false, "vega": false, "florayfauna": true, "holi": true, "tambo": false, "oxxo": false
+      },
+      "onlyInside": true,
+      "showBorders": false,
+      "fitTo": "stores",
+      "markerStyle": "badge",
+      "markerSize": 1,
+      "legendSort": "alpha",
+      "view": null,
+      "hiddenStores": [],
+      "markerOffsets": {},
+      "radius": [{ "storeId": "osm-w129822354", "meters": 1000 }]
+    },
+    {
+      "id": "demo-lima-cono-sur",
+      "title": "Lima Cono Sur",
+      "subtitle": "(Chorrillos, Lurín, Punta Hermosa, SJM, Villa el Salvador, VMT)",
+      "subtitleAuto": false,
+      "peso": "12.4%",
+      "districts": ["150108", "150119", "150126", "150133", "150142", "150143"],
+      "chains": {
+        "plazavea": true, "tottus": true, "wong": true, "metro": true, "vivanda": false,
+        "tiendas3a": true, "mass": false, "preciouno": true, "maxiahorro": true, "dollarcity": true,
+        "makro": true, "vega": true, "florayfauna": true, "holi": true, "tambo": false, "oxxo": false
+      },
+      "onlyInside": true,
+      "showBorders": false,
+      "fitTo": "stores",
+      "markerStyle": "badge",
+      "markerSize": 1,
+      "legendSort": "alpha",
+      "view": null,
+      "hiddenStores": [],
+      "markerOffsets": {},
+      "radius": []
+    },
+    {
+      "id": "demo-trujillo",
+      "title": "Trujillo",
+      "subtitle": "",
+      "subtitleAuto": false,
+      "peso": "16.1%",
+      "districts": ["130101", "130111", "130105", "130102", "130103", "130106"],
+      "chains": {
+        "plazavea": true, "tottus": true, "wong": true, "metro": true, "vivanda": false,
+        "tiendas3a": false, "mass": false, "preciouno": true, "maxiahorro": false, "dollarcity": false,
+        "makro": true, "vega": false, "florayfauna": false, "holi": false, "tambo": false, "oxxo": false
+      },
+      "onlyInside": true,
+      "showBorders": false,
+      "fitTo": "stores",
+      "markerStyle": "badge",
+      "markerSize": 1,
+      "legendSort": "alpha",
+      "view": null,
+      "hiddenStores": [],
+      "markerOffsets": {},
+      "radius": []
+    },
+    {
+      "id": "demo-chimbote",
+      "title": "Chimbote",
+      "subtitle": "",
+      "subtitleAuto": false,
+      "peso": "16.1%",
+      "districts": ["021801", "021809"],
+      "chains": {
+        "plazavea": true, "tottus": true, "wong": false, "metro": true, "vivanda": false,
+        "tiendas3a": false, "mass": false, "preciouno": false, "maxiahorro": false, "dollarcity": false,
+        "makro": true, "vega": false, "florayfauna": false, "holi": false, "tambo": false, "oxxo": false
+      },
+      "onlyInside": true,
+      "showBorders": false,
+      "fitTo": "stores",
+      "markerStyle": "badge",
+      "markerSize": 1,
+      "legendSort": "alpha",
+      "view": null,
+      "hiddenStores": [],
+      "markerOffsets": {},
+      "radius": []
+    }
+  ]
+}

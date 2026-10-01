@@ -1,0 +1,5627 @@
+{
+ "about": "Nominatim answers cached by tools/merge.mjs (key = sorted query parameters). Data © OpenStreetMap contributors, ODbL. Delete an entry to re-query it.",
+ "entries": {
+  "city=Ate&country=Perú&street=Avenida NN-1 102": {
+   "params": {
+    "street": "Avenida NN-1 102",
+    "city": "Ate",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "city=Bellavista&country=Perú&street=Avenida Sáenz Peña 1088": {
+   "params": {
+    "street": "Avenida Sáenz Peña 1088",
+    "city": "Bellavista",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0593992,
+     "lng": -77.131018,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Sáenz Peña",
+     "display_name": "Avenida Sáenz Peña, Bellavista, Callao, Lima Metropolitana, Callao, 07001, Perú"
+    }
+   ]
+  },
+  "city=Bellavista&country=Perú&street=Avenida Óscar R. Benavides 5324": {
+   "params": {
+    "street": "Avenida Óscar R. Benavides 5324",
+    "city": "Bellavista",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.052084,
+     "lng": -77.088166,
+     "category": "man_made",
+     "type": "works",
+     "addresstype": "man_made",
+     "place_rank": 30,
+     "name": "Mipersa",
+     "display_name": "Mipersa, 5324, Avenida Óscar Raimundo Benavides, Bellavista, Callao, Lima Metropolitana, Callao, 06011, Perú"
+    }
+   ]
+  },
+  "city=Bellavista&country=Perú&street=Jirón Miguel Grau 485": {
+   "params": {
+    "street": "Jirón Miguel Grau 485",
+    "city": "Bellavista",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -7.2755175,
+     "lng": -76.4628513,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Jirón Miguel Grau",
+     "display_name": "Jirón Miguel Grau, Barranca, Alto Biavo, Bellavista, San Martín, Perú"
+    },
+    {
+     "lat": -8.3887657,
+     "lng": -74.5431937,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Jirón Miguel Grau",
+     "display_name": "Jirón Miguel Grau, Área Metropolitana de Pucallpa, Centro Urbano de Pucallpa, Pucallpa, Callería, Coronel Portillo, Ucayali, 25000, Perú"
+    }
+   ]
+  },
+  "city=Breña&country=Perú&street=Avenida Alfonso Ugarte 1444": {
+   "params": {
+    "street": "Avenida Alfonso Ugarte 1444",
+    "city": "Breña",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0526727,
+     "lng": -77.0423476,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Alfonso Ugarte",
+     "display_name": "Avenida Alfonso Ugarte, Huerta La Virreyna, Chacra Colorada, Breña, Lima, Lima Metropolitana, Lima, 15082, Perú"
+    },
+    {
+     "lat": -12.0571576,
+     "lng": -77.0419649,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Alfonso Ugarte",
+     "display_name": "Avenida Alfonso Ugarte, Huerta La Virreyna, Chacra Colorada, Breña, Lima, Lima Metropolitana, Lima, 15083, Perú"
+    },
+    {
+     "lat": -12.0553726,
+     "lng": -77.0421234,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Alfonso Ugarte",
+     "display_name": "Avenida Alfonso Ugarte, Huerta La Virreyna, Chacra Colorada, Breña, Lima, Lima Metropolitana, Lima, 15001, Perú"
+    },
+    {
+     "lat": -12.0590045,
+     "lng": -77.0418066,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Alfonso Ugarte",
+     "display_name": "Avenida Alfonso Ugarte, Chacra Colorada, Breña, Lima, Lima Metropolitana, Lima, 15083, Perú"
+    },
+    {
+     "lat": -12.0589597,
+     "lng": -77.0417194,
+     "category": "highway",
+     "type": "service",
+     "addresstype": "road",
+     "place_rank": 27,
+     "name": "Avenida Alfonso Ugarte",
+     "display_name": "Avenida Alfonso Ugarte, Chacra Colorada, Breña, Lima, Lima Metropolitana, Lima, 15083, Perú"
+    }
+   ]
+  },
+  "city=Breña&country=Perú&street=Jirón Loreto 478": {
+   "params": {
+    "street": "Jirón Loreto 478",
+    "city": "Breña",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0599104,
+     "lng": -77.0496674,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Jirón Loreto",
+     "display_name": "Jirón Loreto, Residencial La Salle II, Azcona, Breña, Lima, Lima Metropolitana, Lima, 15083, Perú"
+    },
+    {
+     "lat": -12.0640467,
+     "lng": -77.0532767,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Jirón Loreto",
+     "display_name": "Jirón Loreto, Nosiglia Etapa Dos, Azcona, Breña, Lima, Lima Metropolitana, Lima, 15083, Perú"
+    },
+    {
+     "lat": -12.0582024,
+     "lng": -77.0482867,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Jirón Loreto",
+     "display_name": "Jirón Loreto, Residencial La Salle II, Chacra Colorada, Breña, Lima, Lima Metropolitana, Lima, 15083, Perú"
+    }
+   ]
+  },
+  "city=Callao&country=Perú&street=Avenida Canadá": {
+   "params": {
+    "street": "Avenida Canadá",
+    "city": "Callao",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -11.9982575,
+     "lng": -77.1180884,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Canadá",
+     "display_name": "Avenida Canadá, Alameda Portuaria, Taboada, Callao, Lima Metropolitana, Callao, 15112, Perú"
+    },
+    {
+     "lat": -11.9975573,
+     "lng": -77.1156492,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Canadá",
+     "display_name": "Avenida Canadá, Ciudad Nueva, Taboada, Callao, Lima Metropolitana, Callao, 15112, Perú"
+    }
+   ]
+  },
+  "city=Callao&country=Perú&street=Avenida Venezuela": {
+   "params": {
+    "street": "Avenida Venezuela",
+    "city": "Callao",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0643518,
+     "lng": -77.1137762,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida República de Venezuela",
+     "display_name": "Avenida República de Venezuela, La Huaca, La Perla, Callao, Lima Metropolitana, Callao, 07011, Perú"
+    },
+    {
+     "lat": -12.0620174,
+     "lng": -77.0923927,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida República de Venezuela",
+     "display_name": "Avenida República de Venezuela, Condominio Nuevavista, Bellavista, Callao, Lima Metropolitana, Callao, 06011, Perú"
+    },
+    {
+     "lat": -12.063232,
+     "lng": -77.1069222,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida República de Venezuela",
+     "display_name": "Avenida República de Venezuela, La Perla, Callao, Lima Metropolitana, Callao, 07011, Perú"
+    },
+    {
+     "lat": -12.0631182,
+     "lng": -77.1083368,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Auxiliar Avenida República de Venezuela",
+     "display_name": "Auxiliar Avenida República de Venezuela, Confecciones Militares, Bellavista, Callao, Lima Metropolitana, Callao, 07011, Perú"
+    },
+    {
+     "lat": -12.0628819,
+     "lng": -77.1027371,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Auxiliar Avenida República de Venezuela",
+     "display_name": "Auxiliar Avenida República de Venezuela, Bellavista, Callao, Lima Metropolitana, Callao, 07011, Perú"
+    }
+   ]
+  },
+  "city=Carabayllo&country=Perú&street=Avenida Chillón Trapiche": {
+   "params": {
+    "street": "Avenida Chillón Trapiche",
+    "city": "Carabayllo",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -11.8895829,
+     "lng": -77.0435312,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Chillón Trapiche",
+     "display_name": "Avenida Chillón Trapiche, Santo Domingo, Carabayllo, Lima, Lima Metropolitana, Lima, 15316, Perú"
+    },
+    {
+     "lat": -11.8904442,
+     "lng": -77.0440237,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Chillón Trapiche",
+     "display_name": "Avenida Chillón Trapiche, Carabayllo, Lima, Lima Metropolitana, Lima, 15316, Perú"
+    },
+    {
+     "lat": -11.888626,
+     "lng": -77.0432658,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Chillón Trapiche",
+     "display_name": "Avenida Chillón Trapiche, Santo Domingo, Carabayllo, Lima, Lima Metropolitana, Lima, 15316, Perú"
+    }
+   ]
+  },
+  "city=Carabayllo&country=Perú&street=Avenida José Carlos Mariátegui 263": {
+   "params": {
+    "street": "Avenida José Carlos Mariátegui 263",
+    "city": "Carabayllo",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -11.8967191,
+     "lng": -77.033948,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida José Carlos Maríategui",
+     "display_name": "Avenida José Carlos Maríategui, Carabayllo, Lima, Lima Metropolitana, Lima, 15316, Perú"
+    },
+    {
+     "lat": -11.8969243,
+     "lng": -77.033961,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida José Carlos Maríategui",
+     "display_name": "Avenida José Carlos Maríategui, AH La Voz de Israel, Carabayllo, Lima, Lima Metropolitana, Lima, 15316, Perú"
+    },
+    {
+     "lat": -11.89437,
+     "lng": -77.0323471,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida José Carlos Maríategui",
+     "display_name": "Avenida José Carlos Maríategui, La Flor, Raúl Porras Barrenechea, Carabayllo, Lima, Lima Metropolitana, Lima, 15318, Perú"
+    },
+    {
+     "lat": -11.8898008,
+     "lng": -77.0279152,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida José Carlos Maríategui",
+     "display_name": "Avenida José Carlos Maríategui, Raúl Porras Barrenechea, Carabayllo, Lima, Lima Metropolitana, Lima, 15318, Perú"
+    }
+   ]
+  },
+  "city=Carabayllo&country=Perú&street=Cjto. Hab. Edwin Vásquez": {
+   "params": {
+    "street": "Cjto. Hab. Edwin Vásquez",
+    "city": "Carabayllo",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "city=Carmen de la Legua Reynoso&country=Perú&street=Avenida Primero de Mayo 400": {
+   "params": {
+    "street": "Avenida Primero de Mayo 400",
+    "city": "Carmen de la Legua Reynoso",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0398485,
+     "lng": -77.0921704,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida 1º de Mayo",
+     "display_name": "Avenida 1º de Mayo, 22 de Octubre, Villa Señor De Los Milagros, Carmen de la Legua Reynoso, Carmen de La Legua-Reynoso, Callao, Lima Metropolitana, Callao, 07006, Perú"
+    },
+    {
+     "lat": -12.0392476,
+     "lng": -77.0889527,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida 1º de Mayo",
+     "display_name": "Avenida 1º de Mayo, Villa Señor De Los Milagros, Carmen de la Legua Reynoso, Carmen de La Legua-Reynoso, Callao, Lima Metropolitana, Callao, 07006, Perú"
+    }
+   ]
+  },
+  "city=Casma&country=Perú&street=Avenida Luis Ormeño": {
+   "params": {
+    "street": "Avenida Luis Ormeño",
+    "city": "Casma",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -9.4749332,
+     "lng": -78.3010325,
+     "category": "highway",
+     "type": "trunk",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Luis Ormeño",
+     "display_name": "Avenida Luis Ormeño, Casma Villahermosa, Casma, Áncash, 02661, Perú"
+    }
+   ]
+  },
+  "city=Chanchamayo&country=Perú&street=Avenida Perú 438": {
+   "params": {
+    "street": "Avenida Perú 438",
+    "city": "Chanchamayo",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -11.0695602,
+     "lng": -75.336543,
+     "category": "highway",
+     "type": "trunk",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Perú",
+     "display_name": "Avenida Perú, La Merced, Chanchamayo, Junín, Perú"
+    }
+   ]
+  },
+  "city=Chepén&country=Perú&street=C. Trujillo 302": {
+   "params": {
+    "street": "C. Trujillo 302",
+    "city": "Chepén",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -7.2307392,
+     "lng": -79.4271461,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Calle Trujillo",
+     "display_name": "Calle Trujillo, Chepén, La Libertad, Perú"
+    },
+    {
+     "lat": -7.2264009,
+     "lng": -79.4306622,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Calle Trujillo",
+     "display_name": "Calle Trujillo, Chepén, La Libertad, Perú"
+    }
+   ]
+  },
+  "city=Chiclayo&country=Perú&street=Avenida Felipe Santiago Salaverry 945": {
+   "params": {
+    "street": "Avenida Felipe Santiago Salaverry 945",
+    "city": "Chiclayo",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -6.7709748,
+     "lng": -79.8481203,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Felipe Santiago Salaverry",
+     "display_name": "Avenida Felipe Santiago Salaverry, Chiclayo, Lambayeque, 14009, Perú"
+    },
+    {
+     "lat": -6.7703234,
+     "lng": -79.8536559,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Felipe Santiago Salaverry",
+     "display_name": "Avenida Felipe Santiago Salaverry, Condominio Colibrí, Chiclayo, Lambayeque, 14009, Perú"
+    }
+   ]
+  },
+  "city=Chorrillos&country=Perú&street=Avenida Alameda Los Cedros 214": {
+   "params": {
+    "street": "Avenida Alameda Los Cedros 214",
+    "city": "Chorrillos",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.2047454,
+     "lng": -77.013248,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Alameda Los Cedros",
+     "display_name": "Avenida Alameda Los Cedros, La Encantada de Villa, Los Cedros, Chorrillos, Lima, Lima Metropolitana, Lima, 15067, Perú"
+    },
+    {
+     "lat": -12.2028944,
+     "lng": -77.015381,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Alameda Los Cedros",
+     "display_name": "Avenida Alameda Los Cedros, Los Cedros, Chorrillos, Lima, Lima Metropolitana, Lima, 15067, Perú"
+    }
+   ]
+  },
+  "city=Comas&country=Perú&street=Avenida Alamedas del Retablo 167": {
+   "params": {
+    "street": "Avenida Alamedas del Retablo 167",
+    "city": "Comas",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "city=Comas&country=Perú&street=Avenida El Retablo 1131": {
+   "params": {
+    "street": "Avenida El Retablo 1131",
+    "city": "Comas",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -11.9363254,
+     "lng": -77.0602869,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida El Retablo",
+     "display_name": "Avenida El Retablo, El Retablo 2, Comas, Lima, Lima Metropolitana, Lima, 15314, Perú"
+    },
+    {
+     "lat": -11.9313787,
+     "lng": -77.0573949,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida El Retablo",
+     "display_name": "Avenida El Retablo, El Retablo 4, Comas, Lima, Lima Metropolitana, Lima, 15314, Perú"
+    },
+    {
+     "lat": -11.9389303,
+     "lng": -77.061649,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida El Retablo",
+     "display_name": "Avenida El Retablo, El Retablo 3, Comas, Lima, Lima Metropolitana, Lima, 15314, Perú"
+    }
+   ]
+  },
+  "city=Comas&country=Perú&street=Avenida El Retablo 1378": {
+   "params": {
+    "street": "Avenida El Retablo 1378",
+    "city": "Comas",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -11.9363254,
+     "lng": -77.0602869,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida El Retablo",
+     "display_name": "Avenida El Retablo, El Retablo 2, Comas, Lima, Lima Metropolitana, Lima, 15314, Perú"
+    },
+    {
+     "lat": -11.9313787,
+     "lng": -77.0573949,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida El Retablo",
+     "display_name": "Avenida El Retablo, El Retablo 4, Comas, Lima, Lima Metropolitana, Lima, 15314, Perú"
+    },
+    {
+     "lat": -11.9389303,
+     "lng": -77.061649,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida El Retablo",
+     "display_name": "Avenida El Retablo, El Retablo 3, Comas, Lima, Lima Metropolitana, Lima, 15314, Perú"
+    }
+   ]
+  },
+  "city=Comas&country=Perú&street=Avenida Guillermo de la Fuente 601": {
+   "params": {
+    "street": "Avenida Guillermo de la Fuente 601",
+    "city": "Comas",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -11.94169,
+     "lng": -77.0637804,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Guillermo de la Fuente",
+     "display_name": "Avenida Guillermo de la Fuente, Urbanización Infantas, Infantas, Comas, Lima, Lima Metropolitana, Lima, 15314, Perú"
+    },
+    {
+     "lat": -11.9471918,
+     "lng": -77.0529815,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Guillermo de la Fuente",
+     "display_name": "Avenida Guillermo de la Fuente, Viñedos de Carabayllo, Comas, Lima, Lima Metropolitana, Lima, 15312, Perú"
+    },
+    {
+     "lat": -11.9417043,
+     "lng": -77.0646611,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Guillermo de la Fuente",
+     "display_name": "Avenida Guillermo de la Fuente, Santa Luzmila, Infantas, Comas, Lima, Lima Metropolitana, Lima, 15314, Perú"
+    }
+   ]
+  },
+  "city=Comas&country=Perú&street=Avenida Honduras 388": {
+   "params": {
+    "street": "Avenida Honduras 388",
+    "city": "Comas",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "city=Comas&country=Perú&street=Avenida Micaela Bastidas": {
+   "params": {
+    "street": "Avenida Micaela Bastidas",
+    "city": "Comas",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -11.9318019,
+     "lng": -77.0501527,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Micaela Bastidas",
+     "display_name": "Avenida Micaela Bastidas, San Augstín 1, El Carmen, Comas, Lima, Lima Metropolitana, Lima, 15326, Perú"
+    },
+    {
+     "lat": -11.9273609,
+     "lng": -77.0587364,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Micaela Bastidas",
+     "display_name": "Avenida Micaela Bastidas, El Retablo 4, Comas, Lima, Lima Metropolitana, Lima, 15314, Perú"
+    },
+    {
+     "lat": -11.9294439,
+     "lng": -77.054839,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Micaela Bastidas",
+     "display_name": "Avenida Micaela Bastidas, El Retablo 4, Comas, Lima, Lima Metropolitana, Lima, 15326, Perú"
+    },
+    {
+     "lat": -11.9337557,
+     "lng": -77.0467459,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Micaela Bastidas",
+     "display_name": "Avenida Micaela Bastidas, La Pascana, El Carmen, Comas, Lima, Lima Metropolitana, Lima, 15326, Perú"
+    }
+   ]
+  },
+  "city=Comas&country=Perú&street=Avenida Túpac Amaru 8517": {
+   "params": {
+    "street": "Avenida Túpac Amaru 8517",
+    "city": "Comas",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -11.9445072,
+     "lng": -77.0506204,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Túpac Amaru",
+     "display_name": "Avenida Túpac Amaru, Huaquillay 1, El Carmen, Comas, Lima, Lima Metropolitana, Lima, 15312, Perú"
+    },
+    {
+     "lat": -11.9594854,
+     "lng": -77.0536108,
+     "category": "highway",
+     "type": "trunk",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Túpac Amaru",
+     "display_name": "Avenida Túpac Amaru, Nueva Florida, Comas, Lima, Lima Metropolitana, Lima, 15328, Perú"
+    },
+    {
+     "lat": -11.9230443,
+     "lng": -77.0424954,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Túpac Amaru",
+     "display_name": "Avenida Túpac Amaru, Villa Oropeza, Año Nuevo, Comas, Lima, Lima Metropolitana, Lima, 15326, Perú"
+    },
+    {
+     "lat": -11.9606184,
+     "lng": -77.0542117,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Túpac Amaru",
+     "display_name": "Avenida Túpac Amaru, Huaquillay 1, Comas, Lima, Lima Metropolitana, Lima, 15328, Perú"
+    },
+    {
+     "lat": -11.947269,
+     "lng": -77.0498697,
+     "category": "highway",
+     "type": "trunk",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Túpac Amaru",
+     "display_name": "Avenida Túpac Amaru, Huaquillay 1, El Carmen, Comas, Lima, Lima Metropolitana, Lima, 15312, Perú"
+    }
+   ]
+  },
+  "city=Comas&country=Perú&street=Avenida Universitaria Norte 5743": {
+   "params": {
+    "street": "Avenida Universitaria Norte 5743",
+    "city": "Comas",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "city=Comas&country=Perú&street=Jirón Francisco Alvariño 803": {
+   "params": {
+    "street": "Jirón Francisco Alvariño 803",
+    "city": "Comas",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -11.9321842,
+     "lng": -77.0571038,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Jirón Francisco Alvariño",
+     "display_name": "Jirón Francisco Alvariño, El Retablo 4, Comas, Lima, Lima Metropolitana, Lima, 15314, Perú"
+    }
+   ]
+  },
+  "city=Comas&country=Perú&street=Jirón MANUEL GONZALES 716": {
+   "params": {
+    "street": "Jirón MANUEL GONZALES 716",
+    "city": "Comas",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -11.9176573,
+     "lng": -77.0354178,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Jirón Manuel Gonzales Prada",
+     "display_name": "Jirón Manuel Gonzales Prada, Collique Zona 1, Año Nuevo, Comas, Lima, Lima Metropolitana, Lima, 15313, Perú"
+    },
+    {
+     "lat": -11.9177526,
+     "lng": -77.0389718,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Jirón Manuel Gonzales Prada",
+     "display_name": "Jirón Manuel Gonzales Prada, Año Nuevo Zona C, Año Nuevo, Comas, Lima, Lima Metropolitana, Lima, 15313, Perú"
+    },
+    {
+     "lat": -11.9410244,
+     "lng": -77.0589535,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Jirón Manuel González",
+     "display_name": "Jirón Manuel González, Santa Luzmila, Comas, Lima, Lima Metropolitana, Lima, 15314, Perú"
+    }
+   ]
+  },
+  "city=El Agustino&country=Perú&street=Avenida Nicolás Ayllon 549": {
+   "params": {
+    "street": "Avenida Nicolás Ayllon 549",
+    "city": "El Agustino",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0600101,
+     "lng": -76.9769668,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Nicolás Ayllón",
+     "display_name": "Avenida Nicolás Ayllón, El Agustino, Lima, Lima Metropolitana, Lima, 15002, Perú"
+    },
+    {
+     "lat": -12.0587845,
+     "lng": -76.9742506,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Nicolás Ayllón",
+     "display_name": "Avenida Nicolás Ayllón, El Agustino, Lima, Lima Metropolitana, Lima, 15008, Perú"
+    }
+   ]
+  },
+  "city=El Agustino&country=Perú&street=Calle Las Guindas 348": {
+   "params": {
+    "street": "Calle Las Guindas 348",
+    "city": "El Agustino",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0373015,
+     "lng": -76.9931981,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Calle Las Guindas",
+     "display_name": "Calle Las Guindas, Urbanización Residencial Primavera, Ancieta Alta, El Agustino, Lima, Lima Metropolitana, Lima, 15006, Perú"
+    },
+    {
+     "lat": -12.0365315,
+     "lng": -76.9909562,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Calle Las Guindas",
+     "display_name": "Calle Las Guindas, El Agustino, Lima, Lima Metropolitana, Lima, 15006, Perú"
+    }
+   ]
+  },
+  "city=Independencia&country=Perú&street=Avenida Gerardo Unger 3601": {
+   "params": {
+    "street": "Avenida Gerardo Unger 3601",
+    "city": "Independencia",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -11.9863266,
+     "lng": -77.0581727,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Gerardo Unger",
+     "display_name": "Avenida Gerardo Unger, Urbanización El Naranjal, Tahuantinsuyo, Independencia, Lima, Lima Metropolitana, Lima, 15311, Perú"
+    },
+    {
+     "lat": -12.0097356,
+     "lng": -77.0530585,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Gerardo Unger",
+     "display_name": "Avenida Gerardo Unger, El Volante, Independencia, Lima, Lima Metropolitana, Lima, 15333, Perú"
+    },
+    {
+     "lat": -11.9891162,
+     "lng": -77.0572078,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Gerardo Unger",
+     "display_name": "Avenida Gerardo Unger, Independencia, Lima, Lima Metropolitana, Lima, 15311, Perú"
+    },
+    {
+     "lat": -12.0109891,
+     "lng": -77.0527634,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Gerardo Unger",
+     "display_name": "Avenida Gerardo Unger, Rímac, Lima, Lima Metropolitana, Lima, 15333, Perú"
+    },
+    {
+     "lat": -11.9827969,
+     "lng": -77.0589349,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Túpac Amaru",
+     "display_name": "Avenida Túpac Amaru, Urbanización Industrial El Naranjal, Tahuantinsuyo, Independencia, Lima, Lima Metropolitana, Lima, 15311, Perú"
+    }
+   ]
+  },
+  "city=Jesús María&country=Perú&street=Avenida 28 de Julio 300": {
+   "params": {
+    "street": "Avenida 28 de Julio 300",
+    "city": "Jesús María",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0651705,
+     "lng": -77.0433714,
+     "category": "place",
+     "type": "house",
+     "addresstype": "place",
+     "place_rank": 30,
+     "name": "",
+     "display_name": "300, Avenida 28 de Julio, Jesús María, Lima, Lima Metropolitana, Lima, 15083, Perú"
+    }
+   ]
+  },
+  "city=Jesús María&country=Perú&street=Avenida Brasil 2007": {
+   "params": {
+    "street": "Avenida Brasil 2007",
+    "city": "Jesús María",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0768665,
+     "lng": -77.0551624,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Brasil",
+     "display_name": "Avenida Brasil, Oyague, Jesús María, Lima, Lima Metropolitana, Lima, 15072, Perú"
+    },
+    {
+     "lat": -12.0855329,
+     "lng": -77.0622681,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Brasil",
+     "display_name": "Avenida Brasil, Los Patricios, Jesús María, Lima, Lima Metropolitana, Lima, 15088, Perú"
+    },
+    {
+     "lat": -12.0666118,
+     "lng": -77.0466945,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Brasil",
+     "display_name": "Avenida Brasil, Jesús María, Lima, Lima Metropolitana, Lima, 15083, Perú"
+    },
+    {
+     "lat": -12.0865331,
+     "lng": -77.0630847,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Brasil",
+     "display_name": "Avenida Brasil, Jesús María, Lima, Lima Metropolitana, Lima, 15088, Perú"
+    },
+    {
+     "lat": -12.0653054,
+     "lng": -77.045598,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Brasil",
+     "display_name": "Avenida Brasil, Urbanización Cercado de Lima, Jesús María, Lima, Lima Metropolitana, Lima, 15083, Perú"
+    }
+   ]
+  },
+  "city=Jesús María&country=Perú&street=Avenida General Felipe Salaverry 1880": {
+   "params": {
+    "street": "Avenida General Felipe Salaverry 1880",
+    "city": "Jesús María",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0917858,
+     "lng": -77.0527384,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida General Felipe Santiago Salaverry",
+     "display_name": "Avenida General Felipe Santiago Salaverry, Jesús María, Lima, Lima Metropolitana, Lima, 15076, Perú"
+    },
+    {
+     "lat": -12.089575,
+     "lng": -77.05161,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida General Felipe Santiago Salaverry",
+     "display_name": "Avenida General Felipe Santiago Salaverry, Jesús María, Lima, Lima Metropolitana, Lima, 15976, Perú"
+    }
+   ]
+  },
+  "city=Jesús María&country=Perú&street=Avenida San Felipe 884": {
+   "params": {
+    "street": "Avenida San Felipe 884",
+    "city": "Jesús María",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0829593,
+     "lng": -77.0554243,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida San Felipe",
+     "display_name": "Avenida San Felipe, Los Patricios, Jesús María, Lima, Lima Metropolitana, Lima, 15088, Perú"
+    },
+    {
+     "lat": -12.0807563,
+     "lng": -77.0582194,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida San Felipe",
+     "display_name": "Avenida San Felipe, Jesús María, Lima, Lima Metropolitana, Lima, 15084, Perú"
+    },
+    {
+     "lat": -12.083074,
+     "lng": -77.0549388,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida San Felipe",
+     "display_name": "Avenida San Felipe, Los Patricios, Jesús María, Lima, Lima Metropolitana, Lima, 15072, Perú"
+    },
+    {
+     "lat": -12.0821105,
+     "lng": -77.049183,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida San Felipe",
+     "display_name": "Avenida San Felipe, Jesús María, Lima, Lima Metropolitana, Lima, 15072, Perú"
+    }
+   ]
+  },
+  "city=Jesús María&country=Perú&street=Jirón Estados Unidos 108": {
+   "params": {
+    "street": "Jirón Estados Unidos 108",
+    "city": "Jesús María",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0808568,
+     "lng": -77.0547239,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Jirón Estados Unidos",
+     "display_name": "Jirón Estados Unidos, Los Patricios, Jesús María, Lima, Lima Metropolitana, Lima, 15072, Perú"
+    },
+    {
+     "lat": -12.0865795,
+     "lng": -77.0565017,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Jirón Estados Unidos",
+     "display_name": "Jirón Estados Unidos, Los Patricios, Jesús María, Lima, Lima Metropolitana, Lima, 15076, Perú"
+    },
+    {
+     "lat": -12.0874722,
+     "lng": -77.0571576,
+     "category": "highway",
+     "type": "living_street",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Jirón Estados Unidos",
+     "display_name": "Jirón Estados Unidos, Los Patricios, Jesús María, Lima, Lima Metropolitana, Lima, 15076, Perú"
+    }
+   ]
+  },
+  "city=Jesús María&country=Perú&street=Jirón General Luis Sánchez Cerro 1699": {
+   "params": {
+    "street": "Jirón General Luis Sánchez Cerro 1699",
+    "city": "Jesús María",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "city=La Molina&country=Perú&street=Avenida Alameda de los Cóndores 638": {
+   "params": {
+    "street": "Avenida Alameda de los Cóndores 638",
+    "city": "La Molina",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "city=La Molina&country=Perú&street=Avenida Javier Prado Este 7072": {
+   "params": {
+    "street": "Avenida Javier Prado Este 7072",
+    "city": "La Molina",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0681242,
+     "lng": -76.9461725,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Javier Prado Este",
+     "display_name": "Avenida Javier Prado Este, Santa Patricia 2da Etapa, La Molina, Lima, Lima Metropolitana, Lima, 15012, Perú"
+    },
+    {
+     "lat": -12.0714607,
+     "lng": -76.956702,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Javier Prado Este",
+     "display_name": "Avenida Javier Prado Este, La Molina, Lima, Lima Metropolitana, Lima, 14024, Perú"
+    },
+    {
+     "lat": -12.0740075,
+     "lng": -76.9617566,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Javier Prado Este",
+     "display_name": "Avenida Javier Prado Este, La Molina, Lima, Lima Metropolitana, Lima, 10051, Perú"
+    },
+    {
+     "lat": -12.076566,
+     "lng": -76.964115,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Javier Prado Este",
+     "display_name": "Avenida Javier Prado Este, Camacho, La Molina, Lima, Lima Metropolitana, Lima, 10051, Perú"
+    },
+    {
+     "lat": -12.0838091,
+     "lng": -76.9743417,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Javier Prado Este",
+     "display_name": "Avenida Javier Prado Este, Santa Constanza, Monterrico, Santiago de Surco, Lima, Lima Metropolitana, Lima, 10051, Perú"
+    }
+   ]
+  },
+  "city=La Molina&country=Perú&street=Avenida Los Constructores 545": {
+   "params": {
+    "street": "Avenida Los Constructores 545",
+    "city": "La Molina",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0663119,
+     "lng": -76.9557468,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Los Constructores",
+     "display_name": "Avenida Los Constructores, La Molina, Lima, Lima Metropolitana, Lima, 15012, Perú"
+    },
+    {
+     "lat": -12.061711,
+     "lng": -76.9441604,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Los Constructores",
+     "display_name": "Avenida Los Constructores, Santa Patricia 3ra Etapa, La Molina, Lima, Lima Metropolitana, Lima, 00051, Perú"
+    },
+    {
+     "lat": -12.0626406,
+     "lng": -76.9486896,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Los Constructores",
+     "display_name": "Avenida Los Constructores, Santa Patricia 3ra Etapa, La Molina, Lima, Lima Metropolitana, Lima, 15012, Perú"
+    }
+   ]
+  },
+  "city=La Molina&country=Perú&street=Calle 7 510": {
+   "params": {
+    "street": "Calle 7 510",
+    "city": "La Molina",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0649652,
+     "lng": -76.9475858,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Calle Micaela Bastidas",
+     "display_name": "Calle Micaela Bastidas, Santa Patricia 3ra Etapa, La Molina, Lima, Lima Metropolitana, Lima, 15012, Perú"
+    },
+    {
+     "lat": -12.0655026,
+     "lng": -76.9475921,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Calle María Parado de Belido",
+     "display_name": "Calle María Parado de Belido, Santa Patricia 3ra Etapa, La Molina, Lima, Lima Metropolitana, Lima, 15012, Perú"
+    },
+    {
+     "lat": -12.0642742,
+     "lng": -76.9427506,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Calle Mercedes Cabello",
+     "display_name": "Calle Mercedes Cabello, Santa Patricia 3ra Etapa, La Molina, Lima, Lima Metropolitana, Lima, 15012, Perú"
+    },
+    {
+     "lat": -12.098679,
+     "lng": -76.9410054,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Calle Española",
+     "display_name": "Calle Española, Las Lomas de Molina Vieja, La Molina, Lima, Lima Metropolitana, Lima, 15024, Perú"
+    },
+    {
+     "lat": -12.074651,
+     "lng": -76.938684,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Calle Curazao",
+     "display_name": "Calle Curazao, Haras de la Molina, La Molina, Lima, Lima Metropolitana, Lima, 15012, Perú"
+    }
+   ]
+  },
+  "city=La Victoria&country=Perú&street=Avenida Carlos Villarán 500": {
+   "params": {
+    "street": "Avenida Carlos Villarán 500",
+    "city": "La Victoria",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "city=Lima&country=Perú&street=Avenida Alejandro Bertello 846": {
+   "params": {
+    "street": "Avenida Alejandro Bertello 846",
+    "city": "Lima",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0636284,
+     "lng": -77.0710246,
+     "category": "building",
+     "type": "apartments",
+     "addresstype": "building",
+     "place_rank": 30,
+     "name": "Duetto 846",
+     "display_name": "Duetto 846, 846, Avenida Alejandro Bertello, Urbanizacion Las Brisas, Lima, Lima Metropolitana, Lima, 15088, Perú"
+    }
+   ]
+  },
+  "city=Lima&country=Perú&street=Avenida Elmer Faucett 582": {
+   "params": {
+    "street": "Avenida Elmer Faucett 582",
+    "city": "Lima",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0725173,
+     "lng": -77.0988795,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Elmer Faucett",
+     "display_name": "Avenida Elmer Faucett, Maranga 4, San Miguel, Lima, Lima Metropolitana, Lima, 15087, Perú"
+    },
+    {
+     "lat": -12.0650968,
+     "lng": -77.0971293,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Elmer Faucett",
+     "display_name": "Avenida Elmer Faucett, Maranga 5, San Miguel, Lima, Lima Metropolitana, Lima, 06011, Perú"
+    },
+    {
+     "lat": -12.0684863,
+     "lng": -77.0977996,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Elmer Faucett",
+     "display_name": "Avenida Elmer Faucett, Maranga 5, San Miguel, Lima, Lima Metropolitana, Lima, 15087, Perú"
+    },
+    {
+     "lat": -12.0686024,
+     "lng": -77.0976318,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Elmer Faucett",
+     "display_name": "Avenida Elmer Faucett, Maranga 5, San Miguel, Lima, Lima Metropolitana, Lima, 15087, Perú"
+    },
+    {
+     "lat": -12.07391,
+     "lng": -77.1001077,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Elmer Faucett",
+     "display_name": "Avenida Elmer Faucett, Maranga 4, San Miguel, Lima, Lima Metropolitana, Lima, 15087, Perú"
+    }
+   ]
+  },
+  "city=Lima&country=Perú&street=Jirón García Villón 639": {
+   "params": {
+    "street": "Jirón García Villón 639",
+    "city": "Lima",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0467591,
+     "lng": -77.0488036,
+     "category": "place",
+     "type": "house",
+     "addresstype": "place",
+     "place_rank": 30,
+     "name": "",
+     "display_name": "639, Jirón Presbítero García Villón, Lima, Lima Metropolitana, Lima, 15079, Perú"
+    }
+   ]
+  },
+  "city=Lima&country=Perú&street=Pasaje Melchora Balandra 100": {
+   "params": {
+    "street": "Pasaje Melchora Balandra 100",
+    "city": "Lima",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "city=Lince&country=Perú&street=Avenida Petit Thouars 2307": {
+   "params": {
+    "street": "Avenida Petit Thouars 2307",
+    "city": "Lince",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0869445,
+     "lng": -77.0330653,
+     "category": "place",
+     "type": "house",
+     "addresstype": "place",
+     "place_rank": 30,
+     "name": "",
+     "display_name": "2307, Avenida Petit Thouars, Lince, Lima, Lima Metropolitana, Lima, 15046, Perú"
+    }
+   ]
+  },
+  "city=Los Olivos&country=Perú&street=Avenida Universitaria Norte": {
+   "params": {
+    "street": "Avenida Universitaria Norte",
+    "city": "Los Olivos",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "city=Lurigancho&country=Perú&street=Avenida Bernardo Balaguer 101": {
+   "params": {
+    "street": "Avenida Bernardo Balaguer 101",
+    "city": "Lurigancho",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "city=Lurín&country=Perú&street=U.C. 10579": {
+   "params": {
+    "street": "U.C. 10579",
+    "city": "Lurín",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "city=Magdalena del Mar&country=Perú&street=Avenida Alberto del Campo 1006": {
+   "params": {
+    "street": "Avenida Alberto del Campo 1006",
+    "city": "Magdalena del Mar",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0962774,
+     "lng": -77.0592255,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Alberto del Campo",
+     "display_name": "Avenida Alberto del Campo, Magdalena, Magdalena del Mar, Lima, Lima Metropolitana, Lima, 15076, Perú"
+    },
+    {
+     "lat": -12.0972046,
+     "lng": -77.0574109,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Alberto del Campo",
+     "display_name": "Avenida Alberto del Campo, Campo de Polo, Orrantia del Mar, San Isidro, Lima, Lima Metropolitana, Lima, 15076, Perú"
+    }
+   ]
+  },
+  "city=Miraflores&country=Perú&street=Avenida Alfredo Benavides 1871": {
+   "params": {
+    "street": "Avenida Alfredo Benavides 1871",
+    "city": "Miraflores",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.1264983,
+     "lng": -77.0162666,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Alfredo Benavides",
+     "display_name": "Avenida Alfredo Benavides, El Rosedal, Miraflores, Lima, Lima Metropolitana, Lima, 15048, Perú"
+    },
+    {
+     "lat": -12.1251116,
+     "lng": -77.025197,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Alfredo Benavides",
+     "display_name": "Avenida Alfredo Benavides, Miraflores, Lima, Lima Metropolitana, Lima, 10574, Perú"
+    },
+    {
+     "lat": -12.1242116,
+     "lng": -77.0310906,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Alfredo Benavides",
+     "display_name": "Avenida Alfredo Benavides, Cocharcas, Miraflores, Lima, Lima Metropolitana, Lima, 15074, Perú"
+    },
+    {
+     "lat": -12.1253915,
+     "lng": -77.024172,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Alfredo Benavides",
+     "display_name": "Avenida Alfredo Benavides, Miraflores, Lima, Lima Metropolitana, Lima, 10574, Perú"
+    },
+    {
+     "lat": -12.1276632,
+     "lng": -77.0095392,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Alfredo Benavides",
+     "display_name": "Avenida Alfredo Benavides, Los Tulipanes, Miraflores, Lima, Lima Metropolitana, Lima, 15048, Perú"
+    }
+   ]
+  },
+  "city=Miraflores&country=Perú&street=Avenida Augusto Pérez Araníbar 1183": {
+   "params": {
+    "street": "Avenida Augusto Pérez Araníbar 1183",
+    "city": "Miraflores",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.1094543,
+     "lng": -77.0523225,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Augusto Pérez Araníbar",
+     "display_name": "Avenida Augusto Pérez Araníbar, Miraflores, Lima, Lima Metropolitana, Lima, 15076, Perú"
+    },
+    {
+     "lat": -12.1075914,
+     "lng": -77.0539457,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Augusto Pérez Araníbar",
+     "display_name": "Avenida Augusto Pérez Araníbar, Santa Mónica, Orrantia del Mar, San Isidro, Lima, Lima Metropolitana, Lima, 15076, Perú"
+    }
+   ]
+  },
+  "city=Nuevo Chimbote&country=Perú&street=Avenida Naciones Unidas": {
+   "params": {
+    "street": "Avenida Naciones Unidas",
+    "city": "Nuevo Chimbote",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -9.11754,
+     "lng": -78.5114534,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Naciones Unidas",
+     "display_name": "Avenida Naciones Unidas, Bellamar, Nuevo Chimbote, Santa, Áncash, 02711, Perú"
+    },
+    {
+     "lat": -9.1176358,
+     "lng": -78.5113414,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Naciones Unidas",
+     "display_name": "Avenida Naciones Unidas, Garatea, Nuevo Chimbote, Santa, Áncash, 02711, Perú"
+    },
+    {
+     "lat": -9.1138805,
+     "lng": -78.5078107,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Naciones Unidas",
+     "display_name": "Avenida Naciones Unidas, El Pescador, Garatea, Nuevo Chimbote, Santa, Áncash, 02711, Perú"
+    },
+    {
+     "lat": -9.1119306,
+     "lng": -78.5059995,
+     "category": "highway",
+     "type": "unclassified",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Naciones Unidas",
+     "display_name": "Avenida Naciones Unidas, El Pescador, Garatea, Nuevo Chimbote, Santa, Áncash, 02711, Perú"
+    },
+    {
+     "lat": -9.1195253,
+     "lng": -78.5133041,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Naciones Unidas",
+     "display_name": "Avenida Naciones Unidas, Urb. San Rafael, Nuevo Chimbote, Santa, Áncash, 02711, Perú"
+    }
+   ]
+  },
+  "city=Pisco&country=Perú&street=Avenida Fermín Tangüis 301": {
+   "params": {
+    "street": "Avenida Fermín Tangüis 301",
+    "city": "Pisco",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -13.7108762,
+     "lng": -76.1966876,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Fermín Tangüis",
+     "display_name": "Avenida Fermín Tangüis, Pisco, Ica, 11601, Perú"
+    },
+    {
+     "lat": -13.7116993,
+     "lng": -76.1799928,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Fermín Tangüis",
+     "display_name": "Avenida Fermín Tangüis, Complejo Residencial Mapfre, Niño Ayavi, San Andrés, Pisco, Ica, 11620, Perú"
+    },
+    {
+     "lat": -13.7115977,
+     "lng": -76.1799831,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Fermín Tangüis",
+     "display_name": "Avenida Fermín Tangüis, Pachinga, Alto El Molino, Pachinga Baja, Pisco, Ica, 11620, Perú"
+    },
+    {
+     "lat": -13.7126056,
+     "lng": -76.1596376,
+     "category": "highway",
+     "type": "trunk",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Fermín Tangüis",
+     "display_name": "Avenida Fermín Tangüis, Niño Ayavi, San Andrés, Pisco, Ica, 11620, Perú"
+    },
+    {
+     "lat": -13.7129026,
+     "lng": -76.1534892,
+     "category": "highway",
+     "type": "trunk",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Fermín Tangüis",
+     "display_name": "Avenida Fermín Tangüis, San Andrés, Pisco, Ica, 11620, Perú"
+    }
+   ]
+  },
+  "city=Pueblo Libre&country=Perú&street=Avenida Mariano Cornejo 1407": {
+   "params": {
+    "street": "Avenida Mariano Cornejo 1407",
+    "city": "Pueblo Libre",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.068302,
+     "lng": -77.0764104,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Mariano Cornejo",
+     "display_name": "Avenida Mariano Cornejo, Pueblo Libre, Lima, Lima Metropolitana, Lima, 15084, Perú"
+    },
+    {
+     "lat": -12.0676422,
+     "lng": -77.0622034,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Mariano Cornejo",
+     "display_name": "Avenida Mariano Cornejo, Pueblo Libre, Lima, Lima Metropolitana, Lima, 15081, Perú"
+    },
+    {
+     "lat": -12.067562,
+     "lng": -77.0639208,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Mariano Cornejo",
+     "display_name": "Avenida Mariano Cornejo, Las Brisas Etapa Uno, Lima, Lima Metropolitana, Lima, 15081, Perú"
+    },
+    {
+     "lat": -12.068427,
+     "lng": -77.0774369,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Mariano Cornejo",
+     "display_name": "Avenida Mariano Cornejo, Lima, Lima Metropolitana, Lima, 15084, Perú"
+    },
+    {
+     "lat": -12.0685675,
+     "lng": -77.0778189,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Mariano Cornejo",
+     "display_name": "Avenida Mariano Cornejo, San Miguel, Lima, Lima Metropolitana, Lima, 15032, Perú"
+    }
+   ]
+  },
+  "city=Pueblo Libre&country=Perú&street=Calle Mariano Pastor Sevilla 194": {
+   "params": {
+    "street": "Calle Mariano Pastor Sevilla 194",
+    "city": "Pueblo Libre",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "city=Puente Piedra&country=Perú&street=Avenida Famesa": {
+   "params": {
+    "street": "Avenida Famesa",
+    "city": "Puente Piedra",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -11.8854377,
+     "lng": -77.0704401,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Famesa",
+     "display_name": "Avenida Famesa, Puente Piedra, Lima, Lima Metropolitana, Lima, 15117, Perú"
+    }
+   ]
+  },
+  "city=Puente Piedra&country=Perú&street=Vía Laderas de Chillón": {
+   "params": {
+    "street": "Vía Laderas de Chillón",
+    "city": "Puente Piedra",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "city=Punta Hermosa&country=Perú&street=Avenida García Rada 911": {
+   "params": {
+    "street": "Avenida García Rada 911",
+    "city": "Punta Hermosa",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.3333455,
+     "lng": -76.8248117,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Gaston Garcia Rada",
+     "display_name": "Avenida Gaston Garcia Rada, Punta Hermosa, Lima, Lima Metropolitana, Lima, 15846, Perú"
+    },
+    {
+     "lat": -12.3371431,
+     "lng": -76.824809,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida G. Garcia Rada",
+     "display_name": "Avenida G. Garcia Rada, Punta Hermosa, Lima, Lima Metropolitana, Lima, 15846, Perú"
+    }
+   ]
+  },
+  "city=Rímac&country=Perú&street=Avenida Carlos Valderrama 401": {
+   "params": {
+    "street": "Avenida Carlos Valderrama 401",
+    "city": "Rímac",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0197227,
+     "lng": -77.0309654,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Carlos Valderrama",
+     "display_name": "Avenida Carlos Valderrama, Asentamiento Humano San Juan de Amancaes, Rimac, Rímac, Lima, Lima Metropolitana, Lima, 15096, Perú"
+    },
+    {
+     "lat": -12.0177601,
+     "lng": -77.0326015,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Carlos Valderrama",
+     "display_name": "Avenida Carlos Valderrama, Asentamiento Humano Mariscal Castilla, Rimac, Rímac, Lima, Lima Metropolitana, Lima, 15096, Perú"
+    }
+   ]
+  },
+  "city=San Borja&country=Perú&street=Avenida San Borja Norte 1263": {
+   "params": {
+    "street": "Avenida San Borja Norte 1263",
+    "city": "San Borja",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0966537,
+     "lng": -76.9825791,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida San Borja Norte",
+     "display_name": "Avenida San Borja Norte, Mariscal Ramón Castilla, San Borja, Lima, Lima Metropolitana, Lima, 15023, Perú"
+    },
+    {
+     "lat": -12.0960122,
+     "lng": -77.0093872,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida San Borja Norte",
+     "display_name": "Avenida San Borja Norte, San Borja, Lima, Lima Metropolitana, Lima, 15036, Perú"
+    },
+    {
+     "lat": -12.0975335,
+     "lng": -76.9809483,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Calle 20",
+     "display_name": "Calle 20, Mariscal Ramón Castilla, San Borja, Lima, Lima Metropolitana, Lima, 15023, Perú"
+    },
+    {
+     "lat": -12.0934158,
+     "lng": -76.9988586,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida San Borja Norte",
+     "display_name": "Avenida San Borja Norte, San Borja, Lima, Lima Metropolitana, Lima, 15041, Perú"
+    }
+   ]
+  },
+  "city=San Juan de Lurigancho&country=Perú&street=Avenida Los Jardines Este": {
+   "params": {
+    "street": "Avenida Los Jardines Este",
+    "city": "San Juan de Lurigancho",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0039412,
+     "lng": -77.002674,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Los Jardines Este",
+     "display_name": "Avenida Los Jardines Este, Inca Manco Capac, El Sauce, San Juan de Lurigancho, Lima, Lima Metropolitana, Lima, 15431, Perú"
+    },
+    {
+     "lat": -12.0021156,
+     "lng": -76.9954069,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Los Jardines Este",
+     "display_name": "Avenida Los Jardines Este, Inca Manco Capac, El Sauce, San Juan de Lurigancho, Lima, Lima Metropolitana, Lima, 15431, Perú"
+    },
+    {
+     "lat": -12.0058398,
+     "lng": -77.0058724,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Los Jardines Este",
+     "display_name": "Avenida Los Jardines Este, San Juan de Lurigancho, Lima, Lima Metropolitana, Lima, 15431, Perú"
+    }
+   ]
+  },
+  "city=San Juan de Lurigancho&country=Perú&street=Avenida Los Jardines Este 587": {
+   "params": {
+    "street": "Avenida Los Jardines Este 587",
+    "city": "San Juan de Lurigancho",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0039412,
+     "lng": -77.002674,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Los Jardines Este",
+     "display_name": "Avenida Los Jardines Este, Inca Manco Capac, El Sauce, San Juan de Lurigancho, Lima, Lima Metropolitana, Lima, 15431, Perú"
+    },
+    {
+     "lat": -12.0021156,
+     "lng": -76.9954069,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Los Jardines Este",
+     "display_name": "Avenida Los Jardines Este, Inca Manco Capac, El Sauce, San Juan de Lurigancho, Lima, Lima Metropolitana, Lima, 15431, Perú"
+    },
+    {
+     "lat": -12.0059188,
+     "lng": -77.0060207,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Los Jardines Este",
+     "display_name": "Avenida Los Jardines Este, San Juan de Lurigancho, Lima, Lima Metropolitana, Lima, 15431, Perú"
+    }
+   ]
+  },
+  "city=San Juan de Lurigancho&country=Perú&street=Avenida Los Tusílagos Oeste 307": {
+   "params": {
+    "street": "Avenida Los Tusílagos Oeste 307",
+    "city": "San Juan de Lurigancho",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0128686,
+     "lng": -77.0069104,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Los Tusilagos Oeste",
+     "display_name": "Avenida Los Tusilagos Oeste, San Juan de Lurigancho, Lima, Lima Metropolitana, Lima, 15431, Perú"
+    },
+    {
+     "lat": -12.0120974,
+     "lng": -77.0124468,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Los Tusilagos Oeste",
+     "display_name": "Avenida Los Tusilagos Oeste, San Juan de Lurigancho, Lima, Lima Metropolitana, Lima, 15431, Perú"
+    }
+   ]
+  },
+  "city=San Juan de Lurigancho&country=Perú&street=Avenida Próceres de la Independencia 5540": {
+   "params": {
+    "street": "Avenida Próceres de la Independencia 5540",
+    "city": "San Juan de Lurigancho",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0207024,
+     "lng": -77.0052684,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Próceres de la Independencia",
+     "display_name": "Avenida Próceres de la Independencia, El Pueblito, Zárate, San Juan de Lurigancho, Lima, Lima Metropolitana, Lima, 15401, Perú"
+    },
+    {
+     "lat": -11.9873946,
+     "lng": -77.0088619,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Próceres de la Independencia",
+     "display_name": "Avenida Próceres de la Independencia, Los Ángeles, San Juan de Lurigancho, Lima, Lima Metropolitana, Lima, 15419, Perú"
+    },
+    {
+     "lat": -11.9928773,
+     "lng": -77.0108263,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Próceres de la Independencia",
+     "display_name": "Avenida Próceres de la Independencia, Asociación Pro Vivienda Las Begonias, San Juan de Lurigancho, Lima, Lima Metropolitana, Lima, 15419, Perú"
+    },
+    {
+     "lat": -11.9993536,
+     "lng": -77.0088256,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Próceres de la Independencia",
+     "display_name": "Avenida Próceres de la Independencia, Asociación Pro Vivienda Las Begonias, San Juan de Lurigancho, Lima, Lima Metropolitana, Lima, 15419, Perú"
+    },
+    {
+     "lat": -11.9917514,
+     "lng": -77.0113352,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Próceres de la Independencia",
+     "display_name": "Avenida Próceres de la Independencia, Urbanización San Ignacio, San Juan de Lurigancho, Lima, Lima Metropolitana, Lima, 15419, Perú"
+    }
+   ]
+  },
+  "city=San Juan de Lurigancho&country=Perú&street=Avenida Túpac Amaru 154": {
+   "params": {
+    "street": "Avenida Túpac Amaru 154",
+    "city": "San Juan de Lurigancho",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0212927,
+     "lng": -77.0099161,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Túpac Amaru",
+     "display_name": "Avenida Túpac Amaru, Chacarilla de Otero, San Juan de Lurigancho, Lima, Lima Metropolitana, Lima, 15401, Perú"
+    },
+    {
+     "lat": -11.8992373,
+     "lng": -76.9618872,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Túpac Amaru",
+     "display_name": "Avenida Túpac Amaru, San Juan de Lurigancho, Lima, Lima Metropolitana, Lima, Perú"
+    }
+   ]
+  },
+  "city=San Juan de Lurigancho&country=Perú&street=Prog. Ciudad Mariscal Cáceres": {
+   "params": {
+    "street": "Prog. Ciudad Mariscal Cáceres",
+    "city": "San Juan de Lurigancho",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "city=San Juan de Lurigancho&country=Perú&street=Prolongación Malecón Checa": {
+   "params": {
+    "street": "Prolongación Malecón Checa",
+    "city": "San Juan de Lurigancho",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "city=San Juan de Miraflores&country=Perú&street=Avenida César Canevaro 604": {
+   "params": {
+    "street": "Avenida César Canevaro 604",
+    "city": "San Juan de Miraflores",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.1694847,
+     "lng": -76.9684806,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida César Canevaro",
+     "display_name": "Avenida César Canevaro, Valle de Sharon, San Juan de Miraflores, Lima, Lima Metropolitana, Lima, 15801, Perú"
+    },
+    {
+     "lat": -12.158612,
+     "lng": -76.9668879,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida César Canevaro",
+     "display_name": "Avenida César Canevaro, Zona D, San Juan de Miraflores, Lima, Lima Metropolitana, Lima, 15801, Perú"
+    },
+    {
+     "lat": -12.1624577,
+     "lng": -76.9687244,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida César Canevaro",
+     "display_name": "Avenida César Canevaro, Zona E, San Juan de Miraflores, Lima, Lima Metropolitana, Lima, 15801, Perú"
+    },
+    {
+     "lat": -12.1543936,
+     "lng": -76.9654674,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida César Canevaro",
+     "display_name": "Avenida César Canevaro, El Arenal, San Juan de Miraflores, Lima, Lima Metropolitana, Lima, 15801, Perú"
+    },
+    {
+     "lat": -12.1793677,
+     "lng": -76.9658574,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida César Canevaro",
+     "display_name": "Avenida César Canevaro, Trebol Azul, San Juan de Miraflores, Lima, Lima Metropolitana, Lima, 15828, Perú"
+    }
+   ]
+  },
+  "city=San Juan de Miraflores&country=Perú&street=Avenida Guillermo Billinghurst 1089": {
+   "params": {
+    "street": "Avenida Guillermo Billinghurst 1089",
+    "city": "San Juan de Miraflores",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.1609746,
+     "lng": -76.9667662,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Guillermo Billinghurst",
+     "display_name": "Avenida Guillermo Billinghurst, San Antonio de Padua, San Juan de Miraflores, Lima, Lima Metropolitana, Lima, 15801, Perú"
+    },
+    {
+     "lat": -12.1599955,
+     "lng": -76.9689198,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Guillermo Billinghurst",
+     "display_name": "Avenida Guillermo Billinghurst, Zona D, San Juan de Miraflores, Lima, Lima Metropolitana, Lima, 15801, Perú"
+    },
+    {
+     "lat": -12.162715,
+     "lng": -76.9621924,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Guillermo Billinghurst",
+     "display_name": "Avenida Guillermo Billinghurst, San Antonio de Padua, San Juan de Miraflores, Lima, Lima Metropolitana, Lima, 15811, Perú"
+    },
+    {
+     "lat": -12.1579774,
+     "lng": -76.9760686,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Guillermo Billinghurst",
+     "display_name": "Avenida Guillermo Billinghurst, Zona A, San Juan de Miraflores, Lima, Lima Metropolitana, Lima, 15801, Perú"
+    },
+    {
+     "lat": -12.1584037,
+     "lng": -76.9740666,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Guillermo Billinghurst",
+     "display_name": "Avenida Guillermo Billinghurst, Zona A, San Juan de Miraflores, Lima, Lima Metropolitana, Lima, 15801, Perú"
+    }
+   ]
+  },
+  "city=San Juan de Miraflores&country=Perú&street=Avenida Los Lirios 301": {
+   "params": {
+    "street": "Avenida Los Lirios 301",
+    "city": "San Juan de Miraflores",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.1522593,
+     "lng": -76.9823925,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Los Lirios",
+     "display_name": "Avenida Los Lirios, Entel, San Juan de Miraflores, Lima, Lima Metropolitana, Lima, 15029, Perú"
+    },
+    {
+     "lat": -12.150697,
+     "lng": -76.9811704,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Los Lirios",
+     "display_name": "Avenida Los Lirios, Jesús Poderoso, San Juan de Miraflores, Lima, Lima Metropolitana, Lima, 15029, Perú"
+    }
+   ]
+  },
+  "city=San Luis&country=Perú&street=Jirón Río Tumbes 290": {
+   "params": {
+    "street": "Jirón Río Tumbes 290",
+    "city": "San Luis",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "city=San Martín de Porres&country=Perú&street=Avenida Alfredo Mendiola 900": {
+   "params": {
+    "street": "Avenida Alfredo Mendiola 900",
+    "city": "San Martín de Porres",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0298721,
+     "lng": -77.0570564,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Alfredo Mendiola",
+     "display_name": "Avenida Alfredo Mendiola, Zarumilla Derecha, Urbanización Ingeniería, San Martín de Porres, Lima, Lima Metropolitana, Lima, 15102, Perú"
+    },
+    {
+     "lat": -12.0242724,
+     "lng": -77.0585685,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Alfredo Mendiola",
+     "display_name": "Avenida Alfredo Mendiola, Palao, San Martín de Porres, Lima, Lima Metropolitana, Lima, 15102, Perú"
+    },
+    {
+     "lat": -12.0108691,
+     "lng": -77.0604813,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Alfredo Mendiola",
+     "display_name": "Avenida Alfredo Mendiola, Fiori, San Martín de Porres, Lima, Lima Metropolitana, Lima, 15302, Perú"
+    },
+    {
+     "lat": -12.0128537,
+     "lng": -77.0600408,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Alfredo Mendiola",
+     "display_name": "Avenida Alfredo Mendiola, Fiori, Palao, San Martín de Porres, Lima, Lima Metropolitana, Lima, 15302, Perú"
+    },
+    {
+     "lat": -12.0187487,
+     "lng": -77.0597895,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Alfredo Mendiola",
+     "display_name": "Avenida Alfredo Mendiola, Palao, San Martín de Porres, Lima, Lima Metropolitana, Lima, 15103, Perú"
+    }
+   ]
+  },
+  "city=San Martín de Porres&country=Perú&street=Avenida Carlos Izaguirre 2838": {
+   "params": {
+    "street": "Avenida Carlos Izaguirre 2838",
+    "city": "San Martín de Porres",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -11.9895653,
+     "lng": -77.1010457,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Carlos Alberto Izaguirre",
+     "display_name": "Avenida Carlos Alberto Izaguirre, Santa Rosa, San Martín de Porres, Lima, Lima Metropolitana, Lima, 15109, Perú"
+    },
+    {
+     "lat": -11.9898273,
+     "lng": -77.100765,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Carlos Alberto Izaguirre",
+     "display_name": "Avenida Carlos Alberto Izaguirre, Santa Rosa, San Martín de Porres, Lima, Lima Metropolitana, Lima, 15109, Perú"
+    },
+    {
+     "lat": -11.9895685,
+     "lng": -77.1019097,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Carlos Alberto Izaguirre",
+     "display_name": "Avenida Carlos Alberto Izaguirre, Santa Rosa, San Martín de Porres, Lima, Lima Metropolitana, Lima, 15112, Perú"
+    },
+    {
+     "lat": -11.9893537,
+     "lng": -77.1016314,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Carlos Alberto Izaguirre",
+     "display_name": "Avenida Carlos Alberto Izaguirre, Santa Rosa, San Martín de Porres, Lima, Lima Metropolitana, Lima, 15112, Perú"
+    }
+   ]
+  },
+  "city=San Martín de Porres&country=Perú&street=Avenida Los Olivos 210": {
+   "params": {
+    "street": "Avenida Los Olivos 210",
+    "city": "San Martín de Porres",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -11.9861531,
+     "lng": -77.090242,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Los Olivos",
+     "display_name": "Avenida Los Olivos, Urbanización Virgen del Rosario ll Etapa, Santa Rosa, San Martín de Porres, Lima, Lima Metropolitana, Lima, 15109, Perú"
+    },
+    {
+     "lat": -11.9789725,
+     "lng": -77.0905835,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Los Olivos",
+     "display_name": "Avenida Los Olivos, Urbanización Virgen del Rosario ll Etapa, Naranjal, San Martín de Porres, Lima, Lima Metropolitana, Lima, 15109, Perú"
+    },
+    {
+     "lat": -11.9884567,
+     "lng": -77.0814558,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Los Olivos",
+     "display_name": "Avenida Los Olivos, Urbanización Rosario del Norte, San Martín de Porres, Lima, Lima Metropolitana, Lima, 15301, Perú"
+    },
+    {
+     "lat": -11.9778963,
+     "lng": -77.0926915,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Los Olivos",
+     "display_name": "Avenida Los Olivos, Naranjal, San Martín de Porres, Lima, Lima Metropolitana, Lima, 15109, Perú"
+    },
+    {
+     "lat": -11.9837691,
+     "lng": -77.099359,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Los Olivos",
+     "display_name": "Avenida Los Olivos, Santa Rosa, San Martín de Porres, Lima, Lima Metropolitana, Lima, 15109, Perú"
+    }
+   ]
+  },
+  "city=San Martín de Porres&country=Perú&street=Avenida San José": {
+   "params": {
+    "street": "Avenida San José",
+    "city": "San Martín de Porres",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -11.976398,
+     "lng": -77.0987437,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida San José",
+     "display_name": "Avenida San José, Naranjal, San Martín de Porres, Lima, Lima Metropolitana, Lima, 15109, Perú"
+    }
+   ]
+  },
+  "city=San Martín de Porres&country=Perú&street=Avenida Tantamayo": {
+   "params": {
+    "street": "Avenida Tantamayo",
+    "city": "San Martín de Porres",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -11.9575173,
+     "lng": -77.0988553,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Tantamayo",
+     "display_name": "Avenida Tantamayo, Chuquitanta, San Martín de Porres, Lima, Lima Metropolitana, Lima, 15113, Perú"
+    },
+    {
+     "lat": -11.9655512,
+     "lng": -77.0912792,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Tantamayo",
+     "display_name": "Avenida Tantamayo, Urbanización Vipol de Naranjal, Naranjal, San Martín de Porres, Lima, Lima Metropolitana, Lima, 15113, Perú"
+    },
+    {
+     "lat": -11.9657306,
+     "lng": -77.0886861,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Tantamayo",
+     "display_name": "Avenida Tantamayo, Naranjal, San Martín de Porres, Lima, Lima Metropolitana, Lima, 15113, Perú"
+    }
+   ]
+  },
+  "city=San Miguel&country=Perú&street=Avenida JUAN BERTOLOTTO 720": {
+   "params": {
+    "street": "Avenida JUAN BERTOLOTTO 720",
+    "city": "San Miguel",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.092562,
+     "lng": -77.0810759,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Juan Bertolotto Negro",
+     "display_name": "Avenida Juan Bertolotto Negro, San Miguel, Lima, Lima Metropolitana, Lima, 15086, Perú"
+    }
+   ]
+  },
+  "city=San Miguel&country=Perú&street=Avenida La Marina 2895": {
+   "params": {
+    "street": "Avenida La Marina 2895",
+    "city": "San Miguel",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0729123,
+     "lng": -77.1031775,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida de La Marina",
+     "display_name": "Avenida de La Marina, Rafael Escardó, San Miguel, Lima, Lima Metropolitana, Lima, 15087, Perú"
+    },
+    {
+     "lat": -12.0756959,
+     "lng": -77.0961127,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida La Marina",
+     "display_name": "Avenida La Marina, Maranga 2, San Miguel, Lima, Lima Metropolitana, Lima, 15087, Perú"
+    },
+    {
+     "lat": -12.0714721,
+     "lng": -77.1074006,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida de La Marina",
+     "display_name": "Avenida de La Marina, La Perla, Callao, Lima Metropolitana, Callao, 07011, Perú"
+    }
+   ]
+  },
+  "city=San Miguel&country=Perú&street=Avenida La Marina 3205": {
+   "params": {
+    "street": "Avenida La Marina 3205",
+    "city": "San Miguel",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0729123,
+     "lng": -77.1031775,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida de La Marina",
+     "display_name": "Avenida de La Marina, Rafael Escardó, San Miguel, Lima, Lima Metropolitana, Lima, 15087, Perú"
+    },
+    {
+     "lat": -12.0756959,
+     "lng": -77.0961127,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida La Marina",
+     "display_name": "Avenida La Marina, Maranga 2, San Miguel, Lima, Lima Metropolitana, Lima, 15087, Perú"
+    },
+    {
+     "lat": -12.0714721,
+     "lng": -77.1074006,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida de La Marina",
+     "display_name": "Avenida de La Marina, La Perla, Callao, Lima Metropolitana, Callao, 07011, Perú"
+    }
+   ]
+  },
+  "city=San Miguel&country=Perú&street=Avenida Libertad": {
+   "params": {
+    "street": "Avenida Libertad",
+    "city": "San Miguel",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -7.1272721,
+     "lng": -79.2739903,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Libertad",
+     "display_name": "Avenida Libertad, Casa Blanca, San Gregorio, San Miguel, Cajamarca, Perú"
+    },
+    {
+     "lat": -12.0811306,
+     "lng": -77.0999799,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Jirón Libertad",
+     "display_name": "Jirón Libertad, Miramar, San Miguel, Lima, Lima Metropolitana, Lima, 15087, Perú"
+    },
+    {
+     "lat": -12.0796531,
+     "lng": -77.103308,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Jirón Libertad",
+     "display_name": "Jirón Libertad, San Miguel, Lima, Lima Metropolitana, Lima, 15087, Perú"
+    },
+    {
+     "lat": -12.0780199,
+     "lng": -77.1063116,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Jirón Libertad",
+     "display_name": "Jirón Libertad, Chepén, San Miguel, Lima, Lima Metropolitana, Lima, 15087, Perú"
+    },
+    {
+     "lat": -12.0761097,
+     "lng": -77.1098863,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Jirón Libertad",
+     "display_name": "Jirón Libertad, La Perla, Callao, Lima Metropolitana, Callao, 15087, Perú"
+    }
+   ]
+  },
+  "city=Santa Anita&country=Perú&street=Carretera Central 135": {
+   "params": {
+    "street": "Carretera Central 135",
+    "city": "Santa Anita",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0454441,
+     "lng": -76.9421245,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Nicolás de Ayllón",
+     "display_name": "Avenida Nicolás de Ayllón, Santa Anita, Lima, Lima Metropolitana, Lima, 15498, Perú"
+    },
+    {
+     "lat": -12.0502569,
+     "lng": -76.9542455,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Nicolás de Ayllón",
+     "display_name": "Avenida Nicolás de Ayllón, Santa Anita, Lima, Lima Metropolitana, Lima, 15009, Perú"
+    },
+    {
+     "lat": -12.0554191,
+     "lng": -76.9664407,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Nicolás de Ayllón",
+     "display_name": "Avenida Nicolás de Ayllón, Santa Anita, Lima, Lima Metropolitana, Lima, 15008, Perú"
+    },
+    {
+     "lat": -12.0463911,
+     "lng": -76.9444971,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Nicolás de Ayllón",
+     "display_name": "Avenida Nicolás de Ayllón, Santa Anita, Lima, Lima Metropolitana, Lima, 00051, Perú"
+    }
+   ]
+  },
+  "city=Santa María&country=Perú&street=Avenida Panamericana Norte 1177": {
+   "params": {
+    "street": "Avenida Panamericana Norte 1177",
+    "city": "Santa María",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -11.1160308,
+     "lng": -77.5942607,
+     "category": "highway",
+     "type": "trunk",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Antigua Panamericana Norte",
+     "display_name": "Avenida Antigua Panamericana Norte, Los Pinos, Santa María, Huaura, Lima, 15135, Perú"
+    },
+    {
+     "lat": -6.7596773,
+     "lng": -79.8618339,
+     "category": "highway",
+     "type": "trunk",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Panamericana Norte",
+     "display_name": "Avenida Panamericana Norte, Chiclayo, Lambayeque, 14013, Perú"
+    },
+    {
+     "lat": -11.1097817,
+     "lng": -77.5951594,
+     "category": "highway",
+     "type": "trunk",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Antigua Panamericana Norte",
+     "display_name": "Avenida Antigua Panamericana Norte, Huacho, Huaura, Lima, 15135, Perú"
+    },
+    {
+     "lat": -11.0825381,
+     "lng": -77.5968961,
+     "category": "highway",
+     "type": "trunk",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Antigua Panamericana Norte",
+     "display_name": "Avenida Antigua Panamericana Norte, Hualmay, Huaura, Lima, 15138, Perú"
+    }
+   ]
+  },
+  "city=Santiago de Surco&country=Perú&street=Jirón Aldebarán 594": {
+   "params": {
+    "street": "Jirón Aldebarán 594",
+    "city": "Santiago de Surco",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.1040069,
+     "lng": -76.9679042,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Jirón Aldebarán",
+     "display_name": "Jirón Aldebarán, Aldebaran, Monterrico, Santiago de Surco, Lima, Lima Metropolitana, Lima, 15023, Perú"
+    },
+    {
+     "lat": -12.1036232,
+     "lng": -76.9703075,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Jirón Aldebarán",
+     "display_name": "Jirón Aldebarán, Polo Sur, Monterrico, Santiago de Surco, Lima, Lima Metropolitana, Lima, 15023, Perú"
+    }
+   ]
+  },
+  "city=Santiago de Surco&country=Perú&street=Jirón Batalla de Ayacucho 182": {
+   "params": {
+    "street": "Jirón Batalla de Ayacucho 182",
+    "city": "Santiago de Surco",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.1446694,
+     "lng": -77.0036067,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Jirón Batalla de Ayacucho",
+     "display_name": "Jirón Batalla de Ayacucho, 13 de Octubre, Surco Viejo, Santiago de Surco, Lima, Lima Metropolitana, Lima, 15049, Perú"
+    },
+    {
+     "lat": -12.1410595,
+     "lng": -77.0010816,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Ayacucho",
+     "display_name": "Avenida Ayacucho, Virreynas, Surco Viejo, Santiago de Surco, Lima, Lima Metropolitana, Lima, 15049, Perú"
+    },
+    {
+     "lat": -12.1372771,
+     "lng": -76.9988817,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Ayacucho",
+     "display_name": "Avenida Ayacucho, Los Morochucos, Surco Viejo, Santiago de Surco, Lima, Lima Metropolitana, Lima, 15049, Perú"
+    },
+    {
+     "lat": -12.142943,
+     "lng": -77.0026235,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Ayacucho",
+     "display_name": "Avenida Ayacucho, Los Rosales, Surco Viejo, Santiago de Surco, Lima, Lima Metropolitana, Lima, 15049, Perú"
+    },
+    {
+     "lat": -12.1368765,
+     "lng": -76.9989239,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Ayacucho",
+     "display_name": "Avenida Ayacucho, Los Morochucos, Surco Viejo, Santiago de Surco, Lima, Lima Metropolitana, Lima, 15039, Perú"
+    }
+   ]
+  },
+  "city=Sullana&country=Perú&street=Calle Sucre 601": {
+   "params": {
+    "street": "Calle Sucre 601",
+    "city": "Sullana",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -4.8933587,
+     "lng": -80.6896382,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Calle Sucre",
+     "display_name": "Calle Sucre, Centro Poblado Barrio Sur, Sullana, Piura, 20100, Perú"
+    },
+    {
+     "lat": -4.9044409,
+     "lng": -80.7429604,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Calle Sucre",
+     "display_name": "Calle Sucre, Jíbito, Miguel Checa, Sullana, Piura, 20100, Perú"
+    },
+    {
+     "lat": -4.861277,
+     "lng": -80.6843518,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Calle Sucre",
+     "display_name": "Calle Sucre, Pedrera, Salitral, Sullana, Piura, 20100, Perú"
+    },
+    {
+     "lat": -4.8973539,
+     "lng": -80.8133467,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Calle Sucre",
+     "display_name": "Calle Sucre, El Prado, Sojo, Miguel Checa, Sullana, Piura, Perú"
+    },
+    {
+     "lat": -4.9057415,
+     "lng": -80.7469048,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Calle Sucre",
+     "display_name": "Calle Sucre, Jíbito, Miguel Checa, Sullana, Piura, Perú"
+    }
+   ]
+  },
+  "city=Trujillo&country=Perú&street=Avenida Prolongación César Vallejo 1390": {
+   "params": {
+    "street": "Avenida Prolongación César Vallejo 1390",
+    "city": "Trujillo",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -8.1210034,
+     "lng": -79.0274789,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Prolongación César Vallejo",
+     "display_name": "Avenida Prolongación César Vallejo, Urbanización Torres Araujo, Trujillo, La Libertad, 13008, Perú"
+    },
+    {
+     "lat": -8.1278588,
+     "lng": -79.0304072,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Prolongación César Vallejo",
+     "display_name": "Avenida Prolongación César Vallejo, Asentamiento Humano San Luis, Trujillo, La Libertad, 13008, Perú"
+    },
+    {
+     "lat": -8.1300777,
+     "lng": -79.0321644,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Prolongación César Vallejo",
+     "display_name": "Avenida Prolongación César Vallejo, Trujillo, La Libertad, 13008, Perú"
+    },
+    {
+     "lat": -8.1317245,
+     "lng": -79.0336122,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Prolongación César Vallejo",
+     "display_name": "Avenida Prolongación César Vallejo, Víctor Larco Herrera, Trujillo, La Libertad, 13009, Perú"
+    }
+   ]
+  },
+  "city=Trujillo&country=Perú&street=Avenida Víctor Larco Herrera 184": {
+   "params": {
+    "street": "Avenida Víctor Larco Herrera 184",
+    "city": "Trujillo",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -8.1162802,
+     "lng": -79.0317704,
+     "category": "place",
+     "type": "house",
+     "addresstype": "place",
+     "place_rank": 30,
+     "name": "",
+     "display_name": "184, Avenida Víctor Larco Herrera, Urbanización El Recreo 1ª Etapa, Trujillo, La Libertad, 13008, Perú"
+    }
+   ]
+  },
+  "city=Villa El Salvador&country=Perú&street=P.J. Villa El Salvador": {
+   "params": {
+    "street": "P.J. Villa El Salvador",
+    "city": "Villa El Salvador",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "city=Villa El Salvador&country=Perú&street=Pasaje Pachacámac": {
+   "params": {
+    "street": "Pasaje Pachacámac",
+    "city": "Villa El Salvador",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "city=Villa María del Triunfo&country=Perú&street=Avenida 26 de Noviembre 1993": {
+   "params": {
+    "street": "Avenida 26 de Noviembre 1993",
+    "city": "Villa María del Triunfo",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.1688238,
+     "lng": -76.9277061,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida 26 de Noviembre",
+     "display_name": "Avenida 26 de Noviembre, Virgen de Lourdes, Nueva Esperanza, Villa María del Triunfo, Lima, Lima Metropolitana, Lima, 15809, Perú"
+    },
+    {
+     "lat": -12.178026,
+     "lng": -76.9400908,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida 26 de Noviembre",
+     "display_name": "Avenida 26 de Noviembre, Comité Vecinal 15A, Nueva Esperanza, Villa María del Triunfo, Lima, Lima Metropolitana, Lima, 15809, Perú"
+    },
+    {
+     "lat": -12.1720886,
+     "lng": -76.9321517,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida 26 de Noviembre",
+     "display_name": "Avenida 26 de Noviembre, Nueva Esperanza, Villa María del Triunfo, Lima, Lima Metropolitana, Lima, 15809, Perú"
+    },
+    {
+     "lat": -12.1687075,
+     "lng": -76.918667,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida 26 de Noviembre",
+     "display_name": "Avenida 26 de Noviembre, Virgen de Lourdes, Villa María del Triunfo, Lima, Lima Metropolitana, Lima, 15818, Perú"
+    },
+    {
+     "lat": -12.1740929,
+     "lng": -76.915756,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida 26 de Noviembre",
+     "display_name": "Avenida 26 de Noviembre, Villa María del Triunfo, Lima, Lima Metropolitana, Lima, 15818, Perú"
+    }
+   ]
+  },
+  "city=Villa María del Triunfo&country=Perú&street=Avenida Jose Carlos Mariátegui 2524": {
+   "params": {
+    "street": "Avenida Jose Carlos Mariátegui 2524",
+    "city": "Villa María del Triunfo",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.2257247,
+     "lng": -76.9134718,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida José Carlos Mariátegui",
+     "display_name": "Avenida José Carlos Mariátegui, Villa Poeta José Galvéz Barrenechea, Villa María del Triunfo, Lima, Lima Metropolitana, Lima, 15822, Perú"
+    },
+    {
+     "lat": -12.1485498,
+     "lng": -76.9507859,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida José Carlos Mariátegui",
+     "display_name": "Avenida José Carlos Mariátegui, Villa Limatambo, Vallecito, Villa María del Triunfo, Lima, Lima Metropolitana, Lima, 15811, Perú"
+    },
+    {
+     "lat": -12.1347212,
+     "lng": -76.9412052,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida José Carlos Mariátegui",
+     "display_name": "Avenida José Carlos Mariátegui, Villa Limatambo, San Gabriel Alto, Villa María del Triunfo, Lima, Lima Metropolitana, Lima, 15811, Perú"
+    },
+    {
+     "lat": -12.1372877,
+     "lng": -76.944576,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida José Carlos Mariátegui",
+     "display_name": "Avenida José Carlos Mariátegui, Villa Limatambo, San Gabriel Alto, Villa María del Triunfo, Lima, Lima Metropolitana, Lima, 15088, Perú"
+    },
+    {
+     "lat": -12.1366325,
+     "lng": -76.9432862,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida José Carlos Mariátegui",
+     "display_name": "Avenida José Carlos Mariátegui, Villa Limatambo, San Gabriel Alto, Villa María del Triunfo, Lima, Lima Metropolitana, Lima, 15811, Perú"
+    }
+   ]
+  },
+  "city=Víctor Larco Herrera&country=Perú&street=Avenida Víctor Larco Herrera 374": {
+   "params": {
+    "street": "Avenida Víctor Larco Herrera 374",
+    "city": "Víctor Larco Herrera",
+    "country": "Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -8.1297136,
+     "lng": -79.0433136,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Víctor Larco Herrera",
+     "display_name": "Avenida Víctor Larco Herrera, Víctor Larco Herrera, Trujillo, La Libertad, 13009, Perú"
+    },
+    {
+     "lat": -8.143919,
+     "lng": -79.0553835,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Víctor Larco Herrera",
+     "display_name": "Avenida Víctor Larco Herrera, Buenos Aires, Víctor Larco Herrera, Trujillo, La Libertad, 13009, Perú"
+    },
+    {
+     "lat": -8.1403758,
+     "lng": -79.0523677,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Víctor Larco Herrera",
+     "display_name": "Avenida Víctor Larco Herrera, Vista Alegre, Víctor Larco Herrera, Trujillo, La Libertad, 13009, Perú"
+    },
+    {
+     "lat": -8.1340807,
+     "lng": -79.0471619,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Víctor Larco Herrera",
+     "display_name": "Avenida Víctor Larco Herrera, Víctor Larco Herrera, Trujillo, La Libertad, 13009, Perú"
+    }
+   ]
+  },
+  "q=Av. Alameda de los Cóndores 638, Urb. Valle de la Molina, La Molina, Perú": {
+   "params": {
+    "q": "Av. Alameda de los Cóndores 638, Urb. Valle de la Molina, La Molina, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Av. Alamedas del Retablo 167, Comas, Perú": {
+   "params": {
+    "q": "Av. Alamedas del Retablo 167, Comas, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Av. Alejandro Bertello 846, Lima, Perú": {
+   "params": {
+    "q": "Av. Alejandro Bertello 846, Lima, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0636284,
+     "lng": -77.0710246,
+     "category": "building",
+     "type": "apartments",
+     "addresstype": "building",
+     "place_rank": 30,
+     "name": "Duetto 846",
+     "display_name": "Duetto 846, 846, Avenida Alejandro Bertello, Urbanizacion Las Brisas, Lima, Lima Metropolitana, Lima, 15088, Perú"
+    }
+   ]
+  },
+  "q=Av. Bernardo Balaguer 101, Lurigancho, Perú": {
+   "params": {
+    "q": "Av. Bernardo Balaguer 101, Lurigancho, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Av. Carlos Villarán 500 - espalda Cdra 2 Av. Javier Prado Este, Centro Comercial Santa Catalina, La Victoria, Perú": {
+   "params": {
+    "q": "Av. Carlos Villarán 500 - espalda Cdra 2 Av. Javier Prado Este, Centro Comercial Santa Catalina, La Victoria, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Av. Elmer Faucett 582, Lima, Perú": {
+   "params": {
+    "q": "Av. Elmer Faucett 582, Lima, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.072814,
+     "lng": -77.0990345,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Elmer Faucett",
+     "display_name": "Avenida Elmer Faucett, Maranga 4, San Miguel, Lima, Lima Metropolitana, Lima, 15087, Perú"
+    },
+    {
+     "lat": -12.0662619,
+     "lng": -77.0973872,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Elmer Faucett",
+     "display_name": "Avenida Elmer Faucett, Maranga 5, San Miguel, Lima, Lima Metropolitana, Lima, 06011, Perú"
+    },
+    {
+     "lat": -12.0686024,
+     "lng": -77.0976318,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Elmer Faucett",
+     "display_name": "Avenida Elmer Faucett, Maranga 5, San Miguel, Lima, Lima Metropolitana, Lima, 15087, Perú"
+    },
+    {
+     "lat": -12.0677286,
+     "lng": -77.0975948,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Elmer Faucett",
+     "display_name": "Avenida Elmer Faucett, Maranga 5, San Miguel, Lima, Lima Metropolitana, Lima, 15087, Perú"
+    },
+    {
+     "lat": -12.0624578,
+     "lng": -77.0970964,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Elmer Faucett",
+     "display_name": "Avenida Elmer Faucett, Bellavista, Callao, Lima Metropolitana, Callao, 06011, Perú"
+    }
+   ]
+  },
+  "q=Av. Honduras 388, Urb. El Parral, Comas, Perú": {
+   "params": {
+    "q": "Av. Honduras 388, Urb. El Parral, Comas, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Av. Javier Prado Este 4010, Lima, Perú": {
+   "params": {
+    "q": "Av. Javier Prado Este 4010, Lima, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0681242,
+     "lng": -76.9461725,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Javier Prado Este",
+     "display_name": "Avenida Javier Prado Este, Santa Patricia 2da Etapa, La Molina, Lima, Lima Metropolitana, Lima, 15012, Perú"
+    },
+    {
+     "lat": -12.0459087,
+     "lng": -76.9354065,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Javier Prado Este",
+     "display_name": "Avenida Javier Prado Este, Micaela Bastidas 1, Santa Ana, Ate, Lima, Lima Metropolitana, Lima, 15498, Perú"
+    },
+    {
+     "lat": -12.0504077,
+     "lng": -76.9377056,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Javier Prado Este",
+     "display_name": "Avenida Javier Prado Este, Mayorazgo, Ate, Lima, Lima Metropolitana, Lima, 00051, Perú"
+    },
+    {
+     "lat": -12.0723151,
+     "lng": -76.9581325,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Javier Prado Este",
+     "display_name": "Avenida Javier Prado Este, La Molina, Lima, Lima Metropolitana, Lima, 10051, Perú"
+    },
+    {
+     "lat": -12.086092,
+     "lng": -76.9898867,
+     "category": "highway",
+     "type": "motorway",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Javier Prado Este",
+     "display_name": "Avenida Javier Prado Este, Jacaranda Etapa Dos, San Borja, Lima, Lima Metropolitana, Lima, 15041, Perú"
+    }
+   ]
+  },
+  "q=Av. José Pardo 200, Lima, Perú": {
+   "params": {
+    "q": "Av. José Pardo 200, Lima, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -11.9356698,
+     "lng": -77.0410669,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida José Pardo",
+     "display_name": "Avenida José Pardo, Almirante Miguel Grau, El Carmen, Comas, Lima, Lima Metropolitana, Lima, 15326, Perú"
+    },
+    {
+     "lat": -11.8891456,
+     "lng": -77.0220658,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida José Pardo",
+     "display_name": "Avenida José Pardo, Asentamiento Humano Lomas de Carabayllo, Raúl Porras Barrenechea, Carabayllo, Lima, Lima Metropolitana, Lima, 15318, Perú"
+    },
+    {
+     "lat": -12.1773006,
+     "lng": -76.9469821,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida José Pardo",
+     "display_name": "Avenida José Pardo, Mariano Melgar, Villa María del Triunfo, Lima, Lima Metropolitana, Lima, 15809, Perú"
+    },
+    {
+     "lat": -11.9345278,
+     "lng": -77.0442934,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida José Pardo",
+     "display_name": "Avenida José Pardo, La Pascana, El Carmen, Comas, Lima, Lima Metropolitana, Lima, 15326, Perú"
+    },
+    {
+     "lat": -12.1191136,
+     "lng": -77.0358301,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida José Pardo",
+     "display_name": "Avenida José Pardo, Miraflores, Lima, Lima Metropolitana, Lima, 15074, Perú"
+    }
+   ]
+  },
+  "q=Av. La Paz 971, Lima, Perú": {
+   "params": {
+    "q": "Av. La Paz 971, Lima, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0459808,
+     "lng": -77.0305912,
+     "category": "place",
+     "type": "city",
+     "addresstype": "city",
+     "place_rank": 15,
+     "name": "Lima",
+     "display_name": "Lima, Lima Metropolitana, Lima, 15001, Perú"
+    },
+    {
+     "lat": -12.2001093,
+     "lng": -76.2850579,
+     "category": "boundary",
+     "type": "administrative",
+     "addresstype": "state",
+     "place_rank": 8,
+     "name": "Lima",
+     "display_name": "Lima, Perú"
+    },
+    {
+     "lat": -12.0002116,
+     "lng": -76.8330796,
+     "category": "boundary",
+     "type": "administrative",
+     "addresstype": "region",
+     "place_rank": 12,
+     "name": "Lima",
+     "display_name": "Lima, Lima Metropolitana, Lima, Perú"
+    },
+    {
+     "lat": -12.0550759,
+     "lng": -77.0265431,
+     "category": "boundary",
+     "type": "administrative",
+     "addresstype": "city",
+     "place_rank": 16,
+     "name": "Lima",
+     "display_name": "Lima, Lima Metropolitana, Lima, Perú"
+    }
+   ]
+  },
+  "q=Av. Mansiche s/n, Caserío El Cortijo, Trujillo, Perú": {
+   "params": {
+    "q": "Av. Mansiche s/n, Caserío El Cortijo, Trujillo, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Av. NN-1 N° 102 Av. Daniel Alcides Carrión N° 593, 599 - Fundo La Estrella - Ate, Ate, Perú": {
+   "params": {
+    "q": "Av. NN-1 N° 102 Av. Daniel Alcides Carrión N° 593, 599 - Fundo La Estrella - Ate, Ate, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Av. Perú 438 -448 La Merced - Chanchamayo, Chanchamayo, Perú": {
+   "params": {
+    "q": "Av. Perú 438 -448 La Merced - Chanchamayo, Chanchamayo, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -11.0695602,
+     "lng": -75.336543,
+     "category": "highway",
+     "type": "trunk",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Perú",
+     "display_name": "Avenida Perú, La Merced, Chanchamayo, Junín, Perú"
+    }
+   ]
+  },
+  "q=Av. Petit Thouars 1261, Lima, Perú": {
+   "params": {
+    "q": "Av. Petit Thouars 1261, Lima, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0780043,
+     "lng": -77.0342797,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Petit Thouars",
+     "display_name": "Avenida Petit Thouars, Santa Beatriz, Lima, Lima Metropolitana, Lima, 15046, Perú"
+    },
+    {
+     "lat": -12.0808627,
+     "lng": -77.0338442,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Petit Thouars",
+     "display_name": "Avenida Petit Thouars, Lince, Lima, Lima Metropolitana, Lima, 15046, Perú"
+    },
+    {
+     "lat": -12.1001011,
+     "lng": -77.0310272,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Petit Thouars",
+     "display_name": "Avenida Petit Thouars, Chacarilla, San Isidro, Lima, Lima Metropolitana, Lima, 15073, Perú"
+    },
+    {
+     "lat": -12.0668655,
+     "lng": -77.0359697,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Petit Thouars",
+     "display_name": "Avenida Petit Thouars, Santa Beatriz, Lima, Lima Metropolitana, Lima, 15083, Perú"
+    },
+    {
+     "lat": -12.0921189,
+     "lng": -77.0322296,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Petit Thouars",
+     "display_name": "Avenida Petit Thouars, San Isidro, Lima, Lima Metropolitana, Lima, 15494, Perú"
+    }
+   ]
+  },
+  "q=Av. San Martín 763, Ica, Perú": {
+   "params": {
+    "q": "Av. San Martín 763, Ica, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -14.0749575,
+     "lng": -75.727181,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida San Martín",
+     "display_name": "Avenida San Martín, Sol de Ica, Santo Domingo de Marcona, Cachiche, Ica, 11001, Perú"
+    },
+    {
+     "lat": -14.0680904,
+     "lng": -75.7294506,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida San Martín",
+     "display_name": "Avenida San Martín, San Antonio, San Isidro, Ica, 11002, Perú"
+    },
+    {
+     "lat": -14.0887194,
+     "lng": -75.7282175,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida San Martín",
+     "display_name": "Avenida San Martín, Urbanización Santa Rosa del Palmar, Santo Domingo de Marcona, Cachiche, Ica, 11004, Perú"
+    },
+    {
+     "lat": -14.0864245,
+     "lng": -75.7275614,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida San Martín",
+     "display_name": "Avenida San Martín, Santo Domingo de Marcona, Cachiche, Ica, 11004, Perú"
+    },
+    {
+     "lat": -14.020188,
+     "lng": -75.7531287,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida San Martín",
+     "display_name": "Avenida San Martín, C.P. Anquisa, Arrabales, Lovera, Buenos Aires, Subtanjalla, Ica, 11000, Perú"
+    }
+   ]
+  },
+  "q=Av. Universitaria Norte 5743, Urb. San Isolina, Comas, Perú": {
+   "params": {
+    "q": "Av. Universitaria Norte 5743, Urb. San Isolina, Comas, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Av. Universitaria Norte, Los Olivos, Perú": {
+   "params": {
+    "q": "Av. Universitaria Norte, Los Olivos, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -11.9841075,
+     "lng": -77.0784214,
+     "category": "highway",
+     "type": "cycleway",
+     "addresstype": "road",
+     "place_rank": 27,
+     "name": "Ciclovía Universitaria",
+     "display_name": "Ciclovía Universitaria, Daniel Alcides Carrión, Chavarría, Los Olivos, Lima, Lima Metropolitana, Lima, 15301, Perú"
+    }
+   ]
+  },
+  "q=Av. Venezuela, cdra. 34 s/n, Callao, Perú": {
+   "params": {
+    "q": "Av. Venezuela, cdra. 34 s/n, Callao, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Av. Óscar R. Benavides 5324, Urb. San Joaquín, Bellavista, Perú": {
+   "params": {
+    "q": "Av. Óscar R. Benavides 5324, Urb. San Joaquín, Bellavista, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Avenida Alameda de los Cóndores 638, La Molina, Lima, Perú": {
+   "params": {
+    "q": "Avenida Alameda de los Cóndores 638, La Molina, Lima, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Avenida Alamedas del Retablo 167, Comas, Lima, Perú": {
+   "params": {
+    "q": "Avenida Alamedas del Retablo 167, Comas, Lima, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Avenida Alejandro Bertello 846, Lima, Lima, Perú": {
+   "params": {
+    "q": "Avenida Alejandro Bertello 846, Lima, Lima, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0636284,
+     "lng": -77.0710246,
+     "category": "building",
+     "type": "apartments",
+     "addresstype": "building",
+     "place_rank": 30,
+     "name": "Duetto 846",
+     "display_name": "Duetto 846, 846, Avenida Alejandro Bertello, Urbanizacion Las Brisas, Lima, Lima Metropolitana, Lima, 15088, Perú"
+    }
+   ]
+  },
+  "q=Avenida América Norte 1245, Trujillo, Perú": {
+   "params": {
+    "q": "Avenida América Norte 1245, Trujillo, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -8.0944299,
+     "lng": -79.0267105,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida América Norte",
+     "display_name": "Avenida América Norte, Trujillo, La Libertad, 13001, Perú"
+    },
+    {
+     "lat": -8.1053149,
+     "lng": -79.0346183,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida América Norte",
+     "display_name": "Avenida América Norte, Urbanización Santa Inés, Trujillo, La Libertad, 13011, Perú"
+    },
+    {
+     "lat": -8.0975224,
+     "lng": -79.0162894,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida América Norte",
+     "display_name": "Avenida América Norte, Trujillo, La Libertad, 13006, Perú"
+    }
+   ]
+  },
+  "q=Avenida Bernardo Balaguer 101, Lurigancho, Lima, Perú": {
+   "params": {
+    "q": "Avenida Bernardo Balaguer 101, Lurigancho, Lima, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Avenida Carlos Villarán 500, La Victoria, Lima, Perú": {
+   "params": {
+    "q": "Avenida Carlos Villarán 500, La Victoria, Lima, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Avenida Elmer Faucett 582, Lima, Lima, Perú": {
+   "params": {
+    "q": "Avenida Elmer Faucett 582, Lima, Lima, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0718588,
+     "lng": -77.0989473,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Elmer Faucett",
+     "display_name": "Avenida Elmer Faucett, Maranga 4, San Miguel, Lima, Lima Metropolitana, Lima, 15087, Perú"
+    },
+    {
+     "lat": -12.0711566,
+     "lng": -77.0985154,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Elmer Faucett",
+     "display_name": "Avenida Elmer Faucett, Maranga 4, San Miguel, Lima, Lima Metropolitana, Lima, 15087, Perú"
+    },
+    {
+     "lat": -12.067356,
+     "lng": -77.0973118,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Elmer Faucett",
+     "display_name": "Avenida Elmer Faucett, Maranga 5, San Miguel, Lima, Lima Metropolitana, Lima, 15087, Perú"
+    },
+    {
+     "lat": -12.0630316,
+     "lng": -77.0973026,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Elmer Faucett",
+     "display_name": "Avenida Elmer Faucett, Villalba, San Miguel, Lima, Lima Metropolitana, Lima, 06011, Perú"
+    },
+    {
+     "lat": -12.063252,
+     "lng": -77.0972486,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Elmer Faucett",
+     "display_name": "Avenida Elmer Faucett, Villalba, San Miguel, Lima, Lima Metropolitana, Lima, 06011, Perú"
+    }
+   ]
+  },
+  "q=Avenida Honduras 388, Comas, Lima, Perú": {
+   "params": {
+    "q": "Avenida Honduras 388, Comas, Lima, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Avenida Javier Prado Este 4010, Lima, Perú": {
+   "params": {
+    "q": "Avenida Javier Prado Este 4010, Lima, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0838091,
+     "lng": -76.9743417,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Javier Prado Este",
+     "display_name": "Avenida Javier Prado Este, Santa Constanza, Monterrico, Santiago de Surco, Lima, Lima Metropolitana, Lima, 10051, Perú"
+    },
+    {
+     "lat": -12.0504077,
+     "lng": -76.9377056,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Javier Prado Este",
+     "display_name": "Avenida Javier Prado Este, Mayorazgo, Ate, Lima, Lima Metropolitana, Lima, 00051, Perú"
+    },
+    {
+     "lat": -12.0887444,
+     "lng": -77.0086845,
+     "category": "highway",
+     "type": "motorway",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Javier Prado Este",
+     "display_name": "Avenida Javier Prado Este, San Juan Macías, San Borja, Lima, Lima Metropolitana, Lima, 15033, Perú"
+    },
+    {
+     "lat": -12.085389,
+     "lng": -76.9871246,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Javier Prado Este",
+     "display_name": "Avenida Javier Prado Este, Jacaranda Etapa Dos, San Borja, Lima, Lima Metropolitana, Lima, 15041, Perú"
+    },
+    {
+     "lat": -12.0868444,
+     "lng": -76.994435,
+     "category": "highway",
+     "type": "motorway",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Javier Prado Este",
+     "display_name": "Avenida Javier Prado Este, Jacaranda, San Borja, Lima, Lima Metropolitana, Lima, 15041, Perú"
+    }
+   ]
+  },
+  "q=Avenida José Pardo 200, Lima, Perú": {
+   "params": {
+    "q": "Avenida José Pardo 200, Lima, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -11.8891456,
+     "lng": -77.0220658,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida José Pardo",
+     "display_name": "Avenida José Pardo, Asentamiento Humano Lomas de Carabayllo, Raúl Porras Barrenechea, Carabayllo, Lima, Lima Metropolitana, Lima, 15318, Perú"
+    },
+    {
+     "lat": -12.1773006,
+     "lng": -76.9469821,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida José Pardo",
+     "display_name": "Avenida José Pardo, Mariano Melgar, Villa María del Triunfo, Lima, Lima Metropolitana, Lima, 15809, Perú"
+    },
+    {
+     "lat": -12.1190043,
+     "lng": -77.0330387,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida José Pardo",
+     "display_name": "Avenida José Pardo, Miraflores, Lima, Lima Metropolitana, Lima, 15074, Perú"
+    },
+    {
+     "lat": -11.9345278,
+     "lng": -77.0442934,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida José Pardo",
+     "display_name": "Avenida José Pardo, La Pascana, El Carmen, Comas, Lima, Lima Metropolitana, Lima, 15326, Perú"
+    },
+    {
+     "lat": -12.1191751,
+     "lng": -77.0295466,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida José Pardo",
+     "display_name": "Avenida José Pardo, Miraflores, Lima, Lima Metropolitana, Lima, 10574, Perú"
+    }
+   ]
+  },
+  "q=Avenida La Paz 971, Lima, Perú": {
+   "params": {
+    "q": "Avenida La Paz 971, Lima, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.1328968,
+     "lng": -77.0255751,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida La Paz",
+     "display_name": "Avenida La Paz, Armendáriz, Miraflores, Lima, Lima Metropolitana, Lima, 15074, Perú"
+    },
+    {
+     "lat": -12.0848867,
+     "lng": -77.0947881,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida La Paz",
+     "display_name": "Avenida La Paz, Miramar, San Miguel, Lima, Lima Metropolitana, Lima, 15087, Perú"
+    },
+    {
+     "lat": -12.0830443,
+     "lng": -77.0989005,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida La Paz",
+     "display_name": "Avenida La Paz, San Miguel, Lima, Lima Metropolitana, Lima, 15087, Perú"
+    },
+    {
+     "lat": -12.0874806,
+     "lng": -77.0890974,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida La Paz",
+     "display_name": "Avenida La Paz, Miramar, San Miguel, Lima, Lima Metropolitana, Lima, 15032, Perú"
+    },
+    {
+     "lat": -12.089533,
+     "lng": -77.0846381,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida La Paz",
+     "display_name": "Avenida La Paz, San Miguel, Lima, Lima Metropolitana, Lima, 15032, Perú"
+    }
+   ]
+  },
+  "q=Avenida La marina 451, Maynas, Perú": {
+   "params": {
+    "q": "Avenida La marina 451, Maynas, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -3.7162646,
+     "lng": -73.2446958,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida La Marina",
+     "display_name": "Avenida La Marina, Bellavista Nanay, Santo Tomás, Punchana, Maynas, Loreto, 16001, Perú"
+    },
+    {
+     "lat": -3.7332877,
+     "lng": -73.2408734,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida La Marina",
+     "display_name": "Avenida La Marina, Iquitos, Maynas, Loreto, 16001, Perú"
+    },
+    {
+     "lat": -3.7038334,
+     "lng": -73.2490113,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida La Marina",
+     "display_name": "Avenida La Marina, Bellavista Nanay, Santo Tomás, Punchana, Maynas, Loreto, 16001, Perú"
+    }
+   ]
+  },
+  "q=Avenida La marina 451,455, 457, Maynas, Perú": {
+   "params": {
+    "q": "Avenida La marina 451,455, 457, Maynas, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Avenida Lima 4208, Callao, Perú": {
+   "params": {
+    "q": "Avenida Lima 4208, Callao, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0280123,
+     "lng": -77.0938778,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Lima",
+     "display_name": "Avenida Lima, Bocanegra, Callao, Lima Metropolitana, Callao, 51131, Perú"
+    },
+    {
+     "lat": -12.0284353,
+     "lng": -77.0899898,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Lima",
+     "display_name": "Avenida Lima, Perú 7ma Zona, Perú 4ta Zona, San Martín de Porres, Lima, Lima Metropolitana, Lima, 51131, Perú"
+    }
+   ]
+  },
+  "q=Avenida Los Tallanes, Piura, Perú": {
+   "params": {
+    "q": "Avenida Los Tallanes, Piura, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -5.1677605,
+     "lng": -80.6292404,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Los Tallanes",
+     "display_name": "Avenida Los Tallanes, Urbanización Los Universitarios, Los Ejidos del Norte, Piura, 20002, Perú"
+    },
+    {
+     "lat": -5.1748781,
+     "lng": -80.6280757,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Los Tallanes",
+     "display_name": "Avenida Los Tallanes, Los Geranios, Piura, 20002, Perú"
+    },
+    {
+     "lat": -5.1777796,
+     "lng": -80.6271726,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Los Tallanes",
+     "display_name": "Avenida Los Tallanes, Los Cocos del Chipe, Piura, 20002, Perú"
+    },
+    {
+     "lat": -5.1815511,
+     "lng": -80.6291327,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Los Tallanes",
+     "display_name": "Avenida Los Tallanes, Condominio Las Arenas, Piura, 20001, Perú"
+    },
+    {
+     "lat": -5.178635,
+     "lng": -80.628575,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Los Tallanes",
+     "display_name": "Avenida Los Tallanes, Condominio Las Arenas, Piura, 20002, Perú"
+    }
+   ]
+  },
+  "q=Avenida Mansiche, Trujillo, Perú": {
+   "params": {
+    "q": "Avenida Mansiche, Trujillo, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -8.103649,
+     "lng": -79.0374751,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Mansiche",
+     "display_name": "Avenida Mansiche, Urbanización Santa Inés, Trujillo, La Libertad, 13011, Perú"
+    },
+    {
+     "lat": -8.1009528,
+     "lng": -79.0563327,
+     "category": "highway",
+     "type": "trunk",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Mansiche",
+     "display_name": "Avenida Mansiche, Trujillo, La Libertad, 13013, Perú"
+    },
+    {
+     "lat": -8.1073053,
+     "lng": -79.0318761,
+     "category": "highway",
+     "type": "trunk",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Mansiche",
+     "display_name": "Avenida Mansiche, Trujillo, La Libertad, 13001, Perú"
+    },
+    {
+     "lat": -8.1009866,
+     "lng": -79.0556396,
+     "category": "highway",
+     "type": "trunk",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Mansiche",
+     "display_name": "Avenida Mansiche, Trujillo, La Libertad, 13011, Perú"
+    },
+    {
+     "lat": -8.101001,
+     "lng": -79.0574938,
+     "category": "highway",
+     "type": "trunk",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Mansiche",
+     "display_name": "Avenida Mansiche, Villa del Mar, Huanchaco, Trujillo, La Libertad, 13013, Perú"
+    }
+   ]
+  },
+  "q=Avenida NN-1 102, Ate, Lima, Perú": {
+   "params": {
+    "q": "Avenida NN-1 102, Ate, Lima, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0500966,
+     "lng": -76.9460006,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Aragón",
+     "display_name": "Avenida Aragón, Mayorazgo, Ate, Lima, Lima Metropolitana, Lima, 00051, Perú"
+    },
+    {
+     "lat": -12.0517335,
+     "lng": -76.94781,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Huarochirí",
+     "display_name": "Avenida Huarochirí, Ate, Lima, Lima Metropolitana, Lima, 00051, Perú"
+    },
+    {
+     "lat": -12.058891,
+     "lng": -76.9741043,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Nicolás Ayllón",
+     "display_name": "Avenida Nicolás Ayllón, Ate, Lima, Lima Metropolitana, Lima, 15008, Perú"
+    },
+    {
+     "lat": -12.0656969,
+     "lng": -76.969591,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Los Castillos",
+     "display_name": "Avenida Los Castillos, Ate, Lima, Lima Metropolitana, Lima, 15008, Perú"
+    },
+    {
+     "lat": -12.021489,
+     "lng": -76.9064374,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Nicolás de Ayllón",
+     "display_name": "Avenida Nicolás de Ayllón, Vitarte, Ate, Lima, Lima Metropolitana, Lima, 15487, Perú"
+    }
+   ]
+  },
+  "q=Avenida Perú 438, Chanchamayo, Chanchamayo, Perú": {
+   "params": {
+    "q": "Avenida Perú 438, Chanchamayo, Chanchamayo, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -11.0695602,
+     "lng": -75.336543,
+     "category": "highway",
+     "type": "trunk",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Perú",
+     "display_name": "Avenida Perú, La Merced, Chanchamayo, Junín, Perú"
+    }
+   ]
+  },
+  "q=Avenida Petit Thouars 1261, Lima, Perú": {
+   "params": {
+    "q": "Avenida Petit Thouars 1261, Lima, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0780043,
+     "lng": -77.0342797,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Petit Thouars",
+     "display_name": "Avenida Petit Thouars, Santa Beatriz, Lima, Lima Metropolitana, Lima, 15046, Perú"
+    },
+    {
+     "lat": -12.0808627,
+     "lng": -77.0338442,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Petit Thouars",
+     "display_name": "Avenida Petit Thouars, Lince, Lima, Lima Metropolitana, Lima, 15046, Perú"
+    },
+    {
+     "lat": -12.1001011,
+     "lng": -77.0310272,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Petit Thouars",
+     "display_name": "Avenida Petit Thouars, Chacarilla, San Isidro, Lima, Lima Metropolitana, Lima, 15073, Perú"
+    },
+    {
+     "lat": -12.0897799,
+     "lng": -77.0325841,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Petit Thouars",
+     "display_name": "Avenida Petit Thouars, Lince, Lima, Lima Metropolitana, Lima, 15494, Perú"
+    },
+    {
+     "lat": -12.0649919,
+     "lng": -77.0362343,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Petit Thouars",
+     "display_name": "Avenida Petit Thouars, Santa Beatriz, Lima, Lima Metropolitana, Lima, 15083, Perú"
+    }
+   ]
+  },
+  "q=Avenida Pumacahua 110, Arequipa, Perú": {
+   "params": {
+    "q": "Avenida Pumacahua 110, Arequipa, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -16.3779311,
+     "lng": -71.5570695,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Pumacahua",
+     "display_name": "Avenida Pumacahua, La Castellana, La Libertad, Cerro Colorado, Arequipa, 04100, Perú"
+    },
+    {
+     "lat": -16.3792686,
+     "lng": -71.5569327,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Pumacahua",
+     "display_name": "Avenida Pumacahua, Urbanización Colegio de Ingenieros, Las Bungavillas, La Libertad, Cerro Colorado, Arequipa, 04100, Perú"
+    }
+   ]
+  },
+  "q=Avenida San Martín 763, Ica, Perú": {
+   "params": {
+    "q": "Avenida San Martín 763, Ica, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -14.0749575,
+     "lng": -75.727181,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida San Martín",
+     "display_name": "Avenida San Martín, Sol de Ica, Santo Domingo de Marcona, Cachiche, Ica, 11001, Perú"
+    },
+    {
+     "lat": -14.0680904,
+     "lng": -75.7294506,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida San Martín",
+     "display_name": "Avenida San Martín, San Antonio, San Isidro, Ica, 11002, Perú"
+    },
+    {
+     "lat": -14.0887194,
+     "lng": -75.7282175,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida San Martín",
+     "display_name": "Avenida San Martín, Urbanización Santa Rosa del Palmar, Santo Domingo de Marcona, Cachiche, Ica, 11004, Perú"
+    },
+    {
+     "lat": -14.0864245,
+     "lng": -75.7275614,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida San Martín",
+     "display_name": "Avenida San Martín, Santo Domingo de Marcona, Cachiche, Ica, 11004, Perú"
+    },
+    {
+     "lat": -14.020188,
+     "lng": -75.7531287,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida San Martín",
+     "display_name": "Avenida San Martín, C.P. Anquisa, Arrabales, Lovera, Buenos Aires, Subtanjalla, Ica, 11000, Perú"
+    }
+   ]
+  },
+  "q=Avenida Tacna 665, Lima, Perú": {
+   "params": {
+    "q": "Avenida Tacna 665, Lima, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0480721,
+     "lng": -77.0389061,
+     "category": "place",
+     "type": "house",
+     "addresstype": "place",
+     "place_rank": 30,
+     "name": "",
+     "display_name": "665, Avenida Tacna, Urbanización Cercado de Lima, Lima, Lima Metropolitana, Lima, 15001, Perú"
+    }
+   ]
+  },
+  "q=Avenida Tantamayo, Lima, Perú": {
+   "params": {
+    "q": "Avenida Tantamayo, Lima, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -11.9655512,
+     "lng": -77.0912792,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Tantamayo",
+     "display_name": "Avenida Tantamayo, Urbanización Vipol de Naranjal, Naranjal, San Martín de Porres, Lima, Lima Metropolitana, Lima, 15113, Perú"
+    },
+    {
+     "lat": -11.9700724,
+     "lng": -77.0870261,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Tantamayo",
+     "display_name": "Avenida Tantamayo, Naranjal, San Martín de Porres, Lima, Lima Metropolitana, Lima, 15306, Perú"
+    },
+    {
+     "lat": -11.9657306,
+     "lng": -77.0886861,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Tantamayo",
+     "display_name": "Avenida Tantamayo, Naranjal, San Martín de Porres, Lima, Lima Metropolitana, Lima, 15113, Perú"
+    },
+    {
+     "lat": -11.9678505,
+     "lng": -77.089347,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Tantamayo",
+     "display_name": "Avenida Tantamayo, Naranjal, San Martín de Porres, Lima, Lima Metropolitana, Lima, 15113, Perú"
+    },
+    {
+     "lat": -11.961721,
+     "lng": -77.0945109,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Tantamayo",
+     "display_name": "Avenida Tantamayo, Chuquitanta, San Martín de Porres, Lima, Lima Metropolitana, Lima, 15113, Perú"
+    }
+   ]
+  },
+  "q=Avenida Universitaria Norte 5743, Comas, Lima, Perú": {
+   "params": {
+    "q": "Avenida Universitaria Norte 5743, Comas, Lima, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Avenida Universitaria Norte, Los Olivos, Perú": {
+   "params": {
+    "q": "Avenida Universitaria Norte, Los Olivos, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Avenida Venezuela, Callao, Callao, Perú": {
+   "params": {
+    "q": "Avenida Venezuela, Callao, Callao, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0644376,
+     "lng": -77.1137542,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida República de Venezuela",
+     "display_name": "Avenida República de Venezuela, La Huaca, La Perla, Callao, Lima Metropolitana, Callao, 07011, Perú"
+    },
+    {
+     "lat": -12.0641945,
+     "lng": -77.1135853,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Auxiliar Avenida República de Venezuela",
+     "display_name": "Auxiliar Avenida República de Venezuela, Confecciones Militares, Bellavista, Callao, Lima Metropolitana, Callao, 07011, Perú"
+    },
+    {
+     "lat": -12.0638208,
+     "lng": -77.1095177,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Auxiliar Avenida República de Venezuela",
+     "display_name": "Auxiliar Avenida República de Venezuela, La Perla, Callao, Lima Metropolitana, Callao, 07011, Perú"
+    },
+    {
+     "lat": -12.0649692,
+     "lng": -77.1179038,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Auxiliar Avenida República de Venezuela",
+     "display_name": "Auxiliar Avenida República de Venezuela, Bellavista, Callao, Lima Metropolitana, Callao, 07016, Perú"
+    },
+    {
+     "lat": -12.0631729,
+     "lng": -77.1063564,
+     "category": "highway",
+     "type": "tertiary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Auxiliar Avenida República de Venezuela",
+     "display_name": "Auxiliar Avenida República de Venezuela, Bellavista, Callao, Lima Metropolitana, Callao, 07011, Perú"
+    }
+   ]
+  },
+  "q=Avenida Óscar R. Benavides 5324, Bellavista, Callao, Perú": {
+   "params": {
+    "q": "Avenida Óscar R. Benavides 5324, Bellavista, Callao, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.052084,
+     "lng": -77.088166,
+     "category": "man_made",
+     "type": "works",
+     "addresstype": "man_made",
+     "place_rank": 30,
+     "name": "Mipersa",
+     "display_name": "Mipersa, 5324, Avenida Óscar Raimundo Benavides, Bellavista, Callao, Lima Metropolitana, Callao, 06011, Perú"
+    }
+   ]
+  },
+  "q=C.C. Mall Aventura Iquitos, Maynas, Perú": {
+   "params": {
+    "q": "C.C. Mall Aventura Iquitos, Maynas, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Calle 7 510, La Molina, La Molina, Perú": {
+   "params": {
+    "q": "Calle 7 510, La Molina, La Molina, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0649652,
+     "lng": -76.9475858,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Calle Micaela Bastidas",
+     "display_name": "Calle Micaela Bastidas, Santa Patricia 3ra Etapa, La Molina, Lima, Lima Metropolitana, Lima, 15012, Perú"
+    },
+    {
+     "lat": -12.0655026,
+     "lng": -76.9475921,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Calle María Parado de Belido",
+     "display_name": "Calle María Parado de Belido, Santa Patricia 3ra Etapa, La Molina, Lima, Lima Metropolitana, Lima, 15012, Perú"
+    },
+    {
+     "lat": -12.0642742,
+     "lng": -76.9427506,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Calle Mercedes Cabello",
+     "display_name": "Calle Mercedes Cabello, Santa Patricia 3ra Etapa, La Molina, Lima, Lima Metropolitana, Lima, 15012, Perú"
+    },
+    {
+     "lat": -12.098679,
+     "lng": -76.9410054,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Calle Española",
+     "display_name": "Calle Española, Las Lomas de Molina Vieja, La Molina, Lima, Lima Metropolitana, Lima, 15024, Perú"
+    },
+    {
+     "lat": -12.074651,
+     "lng": -76.938684,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Calle Curazao",
+     "display_name": "Calle Curazao, Haras de la Molina, La Molina, Lima, Lima Metropolitana, Lima, 15012, Perú"
+    }
+   ]
+  },
+  "q=Calle 7 510, La Molina, Lima, Perú": {
+   "params": {
+    "q": "Calle 7 510, La Molina, Lima, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0649652,
+     "lng": -76.9475858,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Calle Micaela Bastidas",
+     "display_name": "Calle Micaela Bastidas, Santa Patricia 3ra Etapa, La Molina, Lima, Lima Metropolitana, Lima, 15012, Perú"
+    },
+    {
+     "lat": -12.0655026,
+     "lng": -76.9475921,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Calle María Parado de Belido",
+     "display_name": "Calle María Parado de Belido, Santa Patricia 3ra Etapa, La Molina, Lima, Lima Metropolitana, Lima, 15012, Perú"
+    },
+    {
+     "lat": -12.0658904,
+     "lng": -76.934861,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Calle La Habana",
+     "display_name": "Calle La Habana, La Molina, Lima, Lima Metropolitana, Lima, 15012, Perú"
+    },
+    {
+     "lat": -12.0642742,
+     "lng": -76.9427506,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Calle Mercedes Cabello",
+     "display_name": "Calle Mercedes Cabello, Santa Patricia 3ra Etapa, La Molina, Lima, Lima Metropolitana, Lima, 15012, Perú"
+    },
+    {
+     "lat": -12.0680935,
+     "lng": -76.9389906,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Calle Lima",
+     "display_name": "Calle Lima, Santa Patricia 1era Etapa, La Molina, Lima, Lima Metropolitana, Lima, 15012, Perú"
+    }
+   ]
+  },
+  "q=Calle Castilla 496, Callao, Perú": {
+   "params": {
+    "q": "Calle Castilla 496, Callao, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0649662,
+     "lng": -77.12915,
+     "category": "place",
+     "type": "house",
+     "addresstype": "place",
+     "place_rank": 30,
+     "name": "",
+     "display_name": "496, Jirón Mariscal Castilla, Bellavista, Callao, Lima Metropolitana, Callao, 07016, Perú"
+    },
+    {
+     "lat": -12.0601754,
+     "lng": -77.1448973,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Calle Castilla",
+     "display_name": "Calle Castilla, Castilla-Pasamayo, Callao, Lima Metropolitana, Callao, 07021, Perú"
+    },
+    {
+     "lat": -12.0566602,
+     "lng": -77.1342723,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Calle Castilla",
+     "display_name": "Calle Castilla, Callao, Lima Metropolitana, Callao, 07001, Perú"
+    }
+   ]
+  },
+  "q=Calle Mariano Pastor Sevilla 194 ., Pueblo Libre, Perú": {
+   "params": {
+    "q": "Calle Mariano Pastor Sevilla 194 ., Pueblo Libre, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Calle Mariano Pastor Sevilla 194, Pueblo Libre, Lima, Perú": {
+   "params": {
+    "q": "Calle Mariano Pastor Sevilla 194, Pueblo Libre, Lima, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Calle María Nieves Bustamante 100, Arequipa, Perú": {
+   "params": {
+    "q": "Calle María Nieves Bustamante 100, Arequipa, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -16.3991994,
+     "lng": -71.500062,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Calle Maria Nieves Bustamante",
+     "display_name": "Calle Maria Nieves Bustamante, Santo Domingo, Mariano Melgar, Arequipa, 04007, Perú"
+    },
+    {
+     "lat": -16.3987027,
+     "lng": -71.4980443,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Calle Maria Nieves Bustamante",
+     "display_name": "Calle Maria Nieves Bustamante, Buena Vista, Mariano Melgar, Arequipa, 04007, Perú"
+    }
+   ]
+  },
+  "q=Calle Mercaderes 107, Arequipa, Perú": {
+   "params": {
+    "q": "Calle Mercaderes 107, Arequipa, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -16.3984637,
+     "lng": -71.5359433,
+     "category": "building",
+     "type": "yes",
+     "addresstype": "building",
+     "place_rank": 30,
+     "name": "",
+     "display_name": "107, Calle Mercaderes, 7 Esquinas, Arequipa, 04001, Perú"
+    },
+    {
+     "lat": -16.3984894,
+     "lng": -71.535953,
+     "category": "amenity",
+     "type": "cafe",
+     "addresstype": "amenity",
+     "place_rank": 30,
+     "name": "Sarcletti",
+     "display_name": "Sarcletti, 107, Calle Mercaderes, 7 Esquinas, Arequipa, 04001, Perú"
+    }
+   ]
+  },
+  "q=Carretera Central 135 , Santa Anita, Santa Anita, Perú": {
+   "params": {
+    "q": "Carretera Central 135 , Santa Anita, Santa Anita, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0502569,
+     "lng": -76.9542455,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Nicolás de Ayllón",
+     "display_name": "Avenida Nicolás de Ayllón, Santa Anita, Lima, Lima Metropolitana, Lima, 15009, Perú"
+    },
+    {
+     "lat": -12.0554191,
+     "lng": -76.9664407,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Nicolás de Ayllón",
+     "display_name": "Avenida Nicolás de Ayllón, Santa Anita, Lima, Lima Metropolitana, Lima, 15008, Perú"
+    }
+   ]
+  },
+  "q=Carretera Central 135, Santa Anita, Lima, Perú": {
+   "params": {
+    "q": "Carretera Central 135, Santa Anita, Lima, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0502569,
+     "lng": -76.9542455,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Nicolás de Ayllón",
+     "display_name": "Avenida Nicolás de Ayllón, Santa Anita, Lima, Lima Metropolitana, Lima, 15009, Perú"
+    },
+    {
+     "lat": -12.0554191,
+     "lng": -76.9664407,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Nicolás de Ayllón",
+     "display_name": "Avenida Nicolás de Ayllón, Santa Anita, Lima, Lima Metropolitana, Lima, 15008, Perú"
+    },
+    {
+     "lat": -12.0441088,
+     "lng": -76.938788,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Nicolás de Ayllón",
+     "display_name": "Avenida Nicolás de Ayllón, Santa Anita, Lima, Lima Metropolitana, Lima, 15498, Perú"
+    },
+    {
+     "lat": -12.0464448,
+     "lng": -76.9446378,
+     "category": "highway",
+     "type": "primary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Avenida Nicolás de Ayllón",
+     "display_name": "Avenida Nicolás de Ayllón, Santa Anita, Lima, Lima Metropolitana, Lima, 00051, Perú"
+    }
+   ]
+  },
+  "q=Cjto. Hab. Edwin Vásquez Mz. Q Lt. 24, Carabayllo, Perú": {
+   "params": {
+    "q": "Cjto. Hab. Edwin Vásquez Mz. Q Lt. 24, Carabayllo, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Cjto. Hab. Edwin Vásquez, Carabayllo, Lima, Perú": {
+   "params": {
+    "q": "Cjto. Hab. Edwin Vásquez, Carabayllo, Lima, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Estación Gamarra, La Victoria, Perú": {
+   "params": {
+    "q": "Estación Gamarra, La Victoria, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0656658,
+     "lng": -77.012206,
+     "category": "building",
+     "type": "train_station",
+     "addresstype": "building",
+     "place_rank": 30,
+     "name": "Estacion \"Gamarra\"",
+     "display_name": "Estacion \"Gamarra\", Avenida Aviación, San Cosme, La Victoria, Lima, Lima Metropolitana, Lima, 15018, Perú"
+    },
+    {
+     "lat": -12.0656281,
+     "lng": -77.012505,
+     "category": "building",
+     "type": "train_station",
+     "addresstype": "building",
+     "place_rank": 30,
+     "name": "Estacion \"Gamarra\"",
+     "display_name": "Estacion \"Gamarra\", Avenida Aviación, Urbanización El Porvenir, La Victoria, Lima, Lima Metropolitana, Lima, 15011, Perú"
+    },
+    {
+     "lat": -12.0656159,
+     "lng": -77.0121783,
+     "category": "highway",
+     "type": "bus_stop",
+     "addresstype": "highway",
+     "place_rank": 30,
+     "name": "Estación \"Gamarra\"",
+     "display_name": "Estación \"Gamarra\", Avenida Aviación, San Cosme, La Victoria, Lima, Lima Metropolitana, Lima, 15018, Perú"
+    },
+    {
+     "lat": -12.0656478,
+     "lng": -77.0124618,
+     "category": "highway",
+     "type": "bus_stop",
+     "addresstype": "highway",
+     "place_rank": 30,
+     "name": "Estación \"Gamarra\"",
+     "display_name": "Estación \"Gamarra\", Avenida Aviación, Urbanización El Porvenir, La Victoria, Lima, Lima Metropolitana, Lima, 15011, Perú"
+    },
+    {
+     "lat": -12.0653179,
+     "lng": -77.0123564,
+     "category": "railway",
+     "type": "stop",
+     "addresstype": "railway",
+     "place_rank": 30,
+     "name": "Estacion Gamarra",
+     "display_name": "Estacion Gamarra, Avenida Aviación, San Cosme, La Victoria, Lima, Lima Metropolitana, Lima, 15018, Perú"
+    }
+   ]
+  },
+  "q=Estación Villa El Salvador, Lima, Perú": {
+   "params": {
+    "q": "Estación Villa El Salvador, Lima, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.2074601,
+     "lng": -76.9331388,
+     "category": "building",
+     "type": "train_station",
+     "addresstype": "building",
+     "place_rank": 30,
+     "name": "Estación Villa El Salvador",
+     "display_name": "Estación Villa El Salvador, Avenida Separadora Industrial, Villa El Salvador, Lima, Lima Metropolitana, Lima, 15834, Perú"
+    },
+    {
+     "lat": -12.2073505,
+     "lng": -76.9333063,
+     "category": "railway",
+     "type": "stop",
+     "addresstype": "railway",
+     "place_rank": 30,
+     "name": "Estación Villa El Salvador",
+     "display_name": "Estación Villa El Salvador, Avenida Separadora Industrial, Villa El Salvador, Lima, Lima Metropolitana, Lima, 15834, Perú"
+    }
+   ]
+  },
+  "q=Huarupampa, Huaraz, Áncash, Perú": {
+   "params": {
+    "q": "Huarupampa, Huaraz, Áncash, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -9.529096,
+     "lng": -77.5307761,
+     "category": "place",
+     "type": "quarter",
+     "addresstype": "quarter",
+     "place_rank": 20,
+     "name": "Urbanización Huarupampa",
+     "display_name": "Urbanización Huarupampa, Huaraz, Áncash, 02000, Perú"
+    },
+    {
+     "lat": -9.5254999,
+     "lng": -77.5299561,
+     "category": "amenity",
+     "type": "school",
+     "addresstype": "amenity",
+     "place_rank": 30,
+     "name": "I. E. I. Cisea Huarupampa",
+     "display_name": "I. E. I. Cisea Huarupampa, 520, Jirón Hualcan, Urbanización Antonio Raimondi, Huaraz, Áncash, 02000, Perú"
+    },
+    {
+     "lat": -9.5298424,
+     "lng": -77.5308739,
+     "category": "leisure",
+     "type": "sports_centre",
+     "addresstype": "leisure",
+     "place_rank": 30,
+     "name": "Complejo Pro Ornato Huarupampa",
+     "display_name": "Complejo Pro Ornato Huarupampa, Jirón Alberto Gridilla, Urbanización Villasol, Huacapampa, Huaraz, Áncash, 02000, Perú"
+    },
+    {
+     "lat": -9.525825,
+     "lng": -77.5302617,
+     "category": "amenity",
+     "type": "clinic",
+     "addresstype": "amenity",
+     "place_rank": 30,
+     "name": "Centro de Salud Huarupampa",
+     "display_name": "Centro de Salud Huarupampa, Jirón Hualcan, Urbanización Antonio Raimondi, Huaraz, Áncash, 02000, Perú"
+    }
+   ]
+  },
+  "q=Jirón General Luis Sánchez Cerro 1699, Jesús María, Lima, Perú": {
+   "params": {
+    "q": "Jirón General Luis Sánchez Cerro 1699, Jesús María, Lima, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Jirón Miguel Grau 485, Bellavista, Callao, Perú": {
+   "params": {
+    "q": "Jirón Miguel Grau 485, Bellavista, Callao, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0655766,
+     "lng": -77.1292537,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Jirón Almirante Miguel Grau",
+     "display_name": "Jirón Almirante Miguel Grau, Bellavista, Callao, Lima Metropolitana, Callao, 07016, Perú"
+    },
+    {
+     "lat": -12.0592412,
+     "lng": -77.1269241,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Jirón Almirante Miguel Grau",
+     "display_name": "Jirón Almirante Miguel Grau, Bellavista, Callao, Lima Metropolitana, Callao, 07001, Perú"
+    }
+   ]
+  },
+  "q=Jirón Río Tumbes 290, San Luis, Lima, Perú": {
+   "params": {
+    "q": "Jirón Río Tumbes 290, San Luis, Lima, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Jirón Zorritos, Lima, Perú": {
+   "params": {
+    "q": "Jirón Zorritos, Lima, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0507037,
+     "lng": -77.0446441,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Jirón Zorritos",
+     "display_name": "Jirón Zorritos, Lima, Lima Metropolitana, Lima, 15082, Perú"
+    },
+    {
+     "lat": -12.0501665,
+     "lng": -77.0482719,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Jirón Zorritos",
+     "display_name": "Jirón Zorritos, Huerta La Virreyna, Chacra Colorada, Breña, Lima, Lima Metropolitana, Lima, 15082, Perú"
+    },
+    {
+     "lat": -12.0487611,
+     "lng": -77.0574924,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Jirón Zorritos",
+     "display_name": "Jirón Zorritos, Chacra Ríos Norte, Lima, Lima Metropolitana, Lima, 15082, Perú"
+    },
+    {
+     "lat": -12.0498891,
+     "lng": -77.0494839,
+     "category": "highway",
+     "type": "secondary",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Jirón Zorritos",
+     "display_name": "Jirón Zorritos, Chacra Colorada, Breña, Lima, Lima Metropolitana, Lima, 15082, Perú"
+    }
+   ]
+  },
+  "q=Jockey Plaza, Lima, Perú": {
+   "params": {
+    "q": "Jockey Plaza, Lima, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0862037,
+     "lng": -76.9753818,
+     "category": "shop",
+     "type": "department_store",
+     "addresstype": "shop",
+     "place_rank": 30,
+     "name": "Ripley",
+     "display_name": "Ripley, T32, Estacionamiento Jockey, Santa Constanza, Monterrico, Santiago de Surco, Lima, Lima Metropolitana, Lima, 10051, Perú"
+    },
+    {
+     "lat": -12.0849103,
+     "lng": -76.9757476,
+     "category": "amenity",
+     "type": "cinema",
+     "addresstype": "amenity",
+     "place_rank": 30,
+     "name": "Cinemark",
+     "display_name": "Cinemark, 4200, Javier Prado Este, Jacaranda Etapa Dos, Santiago de Surco, Lima, Lima Metropolitana, Lima, 15041, Perú"
+    }
+   ]
+  },
+  "q=Jr. Gral. Luis Sánchez Cerro 1699, Jesús María, Perú": {
+   "params": {
+    "q": "Jr. Gral. Luis Sánchez Cerro 1699, Jesús María, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Jr. Río Tumbes 290, Urb. Las Moras, San Luis, Perú": {
+   "params": {
+    "q": "Jr. Río Tumbes 290, Urb. Las Moras, San Luis, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Jr. Zorritos cuadra 15, Lima, Perú": {
+   "params": {
+    "q": "Jr. Zorritos cuadra 15, Lima, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Mall Aventura Iquitos, Maynas, Perú": {
+   "params": {
+    "q": "Mall Aventura Iquitos, Maynas, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Mz. A Lt. 12, Urb. Santa Luisa, Carabayllo, Perú": {
+   "params": {
+    "q": "Mz. A Lt. 12, Urb. Santa Luisa, Carabayllo, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Mz. A, Lt. 01, Programa de Vivienda HUP Villa María, Nuevo Chimbote, Perú": {
+   "params": {
+    "q": "Mz. A, Lt. 01, Programa de Vivienda HUP Villa María, Nuevo Chimbote, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Mz. A, Lt. 02, Asoc. de Vivienda Palmas de Barbadillo, Sec. 13, Zona 3, Ate, Perú": {
+   "params": {
+    "q": "Mz. A, Lt. 02, Asoc. de Vivienda Palmas de Barbadillo, Sec. 13, Zona 3, Ate, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Mz. B, Lt. 15, Asoc. Los Olivos de San Vicente, San Martín de Porres, Perú": {
+   "params": {
+    "q": "Mz. B, Lt. 15, Asoc. Los Olivos de San Vicente, San Martín de Porres, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Mz. C Lt. 1, Asoc. Viv. Rosa Luz I Et., Puente Piedra, Perú": {
+   "params": {
+    "q": "Mz. C Lt. 1, Asoc. Viv. Rosa Luz I Et., Puente Piedra, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Mz. D Lote 3, Zona Agropecuaria, Villa El Salvador, Villa El Salvador, Perú": {
+   "params": {
+    "q": "Mz. D Lote 3, Zona Agropecuaria, Villa El Salvador, Villa El Salvador, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Mz. F, Lt. 07, Programa de Vivienda Santa Rosa, Carabayllo, Perú": {
+   "params": {
+    "q": "Mz. F, Lt. 07, Programa de Vivienda Santa Rosa, Carabayllo, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Mz. G, Lt. 25, Urb. La Planicie de Canto Grande, San Juan de Lurigancho, Perú": {
+   "params": {
+    "q": "Mz. G, Lt. 25, Urb. La Planicie de Canto Grande, San Juan de Lurigancho, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Mz. O Lt. 17, Urb. Magisterial Amauta, San Juan de Miraflores, Perú": {
+   "params": {
+    "q": "Mz. O Lt. 17, Urb. Magisterial Amauta, San Juan de Miraflores, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.1608117,
+     "lng": -76.9806232,
+     "category": "place",
+     "type": "neighbourhood",
+     "addresstype": "neighbourhood",
+     "place_rank": 24,
+     "name": "Urbanización Magisterial Amauta",
+     "display_name": "Urbanización Magisterial Amauta, San Juan de Miraflores, Lima, Lima Metropolitana, Lima, 15801, Perú"
+    }
+   ]
+  },
+  "q=Mz. ZC Lt. 1, Sector 3, Grupo 16, Villa El Salvador, Perú": {
+   "params": {
+    "q": "Mz. ZC Lt. 1, Sector 3, Grupo 16, Villa El Salvador, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.2223642,
+     "lng": -76.934588,
+     "category": "place",
+     "type": "quarter",
+     "addresstype": "quarter",
+     "place_rank": 20,
+     "name": "Sector 3",
+     "display_name": "Sector 3, Villa El Salvador, Lima, Lima Metropolitana, Lima, Perú"
+    }
+   ]
+  },
+  "q=P.J. Villa El Salvador, Sect. 01, Gpo. 06, Lt. 05, Villa El Salvador, Perú": {
+   "params": {
+    "q": "P.J. Villa El Salvador, Sect. 01, Gpo. 06, Lt. 05, Villa El Salvador, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=P.J. Villa El Salvador, Villa El Salvador, Lima, Perú": {
+   "params": {
+    "q": "P.J. Villa El Salvador, Villa El Salvador, Lima, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.2239165,
+     "lng": -76.9248412,
+     "category": "place",
+     "type": "city_block",
+     "addresstype": "city_block",
+     "place_rank": 25,
+     "name": "P",
+     "display_name": "P, Urbanización Pachacámac III Etapa, Sector 4, Villa El Salvador, Lima, Lima Metropolitana, Lima, Perú"
+    },
+    {
+     "lat": -12.2170836,
+     "lng": -76.9284562,
+     "category": "place",
+     "type": "city_block",
+     "addresstype": "city_block",
+     "place_rank": 25,
+     "name": "P",
+     "display_name": "P, Sector 3 Grupo 3, Sector 3, Villa El Salvador, Lima, Lima Metropolitana, Lima, Perú"
+    },
+    {
+     "lat": -12.2295233,
+     "lng": -76.9458388,
+     "category": "place",
+     "type": "city_block",
+     "addresstype": "city_block",
+     "place_rank": 25,
+     "name": "P",
+     "display_name": "P, Sector 9 Grupo 1, Sector 9, Villa El Salvador, Lima, Lima Metropolitana, Lima, Perú"
+    },
+    {
+     "lat": -12.2019012,
+     "lng": -76.944942,
+     "category": "place",
+     "type": "city_block",
+     "addresstype": "city_block",
+     "place_rank": 25,
+     "name": "P",
+     "display_name": "P, Sector 2 Grupo 11, Sector 2, Villa El Salvador, Lima, Lima Metropolitana, Lima, Perú"
+    },
+    {
+     "lat": -12.191424,
+     "lng": -76.9446797,
+     "category": "place",
+     "type": "city_block",
+     "addresstype": "city_block",
+     "place_rank": 25,
+     "name": "P",
+     "display_name": "P, Sector 1 Grupo 3, Sector 1, Villa El Salvador, Lima, Lima Metropolitana, Lima, Perú"
+    }
+   ]
+  },
+  "q=Pasaje Melchora Balandra 100, Lima, Lima, Perú": {
+   "params": {
+    "q": "Pasaje Melchora Balandra 100, Lima, Lima, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Pasaje Pachacámac, Villa El Salvador, Lima, Perú": {
+   "params": {
+    "q": "Pasaje Pachacámac, Villa El Salvador, Lima, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.2159597,
+     "lng": -76.9270287,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Pasaje 16",
+     "display_name": "Pasaje 16, Agrupación Pachacámac Parcela 3A, Sector 4, Villa El Salvador, Lima, Lima Metropolitana, Lima, 15816, Perú"
+    },
+    {
+     "lat": -12.2133716,
+     "lng": -76.9283747,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Pasaje 8",
+     "display_name": "Pasaje 8, Agrupación Pachacámac Parcela 3A, Sector 4, Villa El Salvador, Lima, Lima Metropolitana, Lima, 15816, Perú"
+    },
+    {
+     "lat": -12.2144762,
+     "lng": -76.9253343,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Pasaje 23",
+     "display_name": "Pasaje 23, Agrupación Pachacámac Parcela 3A, Sector 4, Villa El Salvador, Lima, Lima Metropolitana, Lima, 15816, Perú"
+    },
+    {
+     "lat": -12.2159792,
+     "lng": -76.9258739,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Pasaje D",
+     "display_name": "Pasaje D, Agrupación Pachacámac Parcela 3A, Sector 4, Villa El Salvador, Lima, Lima Metropolitana, Lima, 15816, Perú"
+    },
+    {
+     "lat": -12.2132497,
+     "lng": -76.9289927,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Pasaje 9",
+     "display_name": "Pasaje 9, Agrupación Pachacámac Parcela 3A, Sector 4, Villa El Salvador, Lima, Lima Metropolitana, Lima, 15816, Perú"
+    }
+   ]
+  },
+  "q=Pasaje Pachacámac, Virgen de la Candelaria Mz. E Lt. 01, Villa El Salvador, Perú": {
+   "params": {
+    "q": "Pasaje Pachacámac, Virgen de la Candelaria Mz. E Lt. 01, Villa El Salvador, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Plaza San Miguel, San Miguel, Perú": {
+   "params": {
+    "q": "Plaza San Miguel, San Miguel, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.0769403,
+     "lng": -77.0827179,
+     "category": "shop",
+     "type": "mall",
+     "addresstype": "shop",
+     "place_rank": 30,
+     "name": "Plaza San Miguel",
+     "display_name": "Plaza San Miguel, 2000, Avenida La Marina, Maranga 2, San Miguel, Lima, Lima Metropolitana, Lima, 15088, Perú"
+    },
+    {
+     "lat": -11.6250385,
+     "lng": -75.9926892,
+     "category": "leisure",
+     "type": "park",
+     "addresstype": "park",
+     "place_rank": 24,
+     "name": "Plaza San Miguel",
+     "display_name": "Plaza San Miguel, San Miguel, Yauli, Junín, Perú"
+    },
+    {
+     "lat": -6.7017273,
+     "lng": -79.7618819,
+     "category": "leisure",
+     "type": "park",
+     "addresstype": "park",
+     "place_rank": 24,
+     "name": "Plaza San Miguel",
+     "display_name": "Plaza San Miguel, San Miguel, Picsi, Chiclayo, Lambayeque, Perú"
+    },
+    {
+     "lat": -12.0777019,
+     "lng": -77.083444,
+     "category": "highway",
+     "type": "steps",
+     "addresstype": "road",
+     "place_rank": 27,
+     "name": "Plaza San Miguel",
+     "display_name": "Plaza San Miguel, San Miguel, Lima, Lima Metropolitana, Lima, 15032, Perú"
+    }
+   ]
+  },
+  "q=Prog. Ciudad Mariscal Cáceres, San Juan de Lurigancho, Lima, Perú": {
+   "params": {
+    "q": "Prog. Ciudad Mariscal Cáceres, San Juan de Lurigancho, Lima, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Prog. Ciudad Mariscal Cáceres, Sector III, Mz. K3 Lt. 24, San Juan de Lurigancho, Perú": {
+   "params": {
+    "q": "Prog. Ciudad Mariscal Cáceres, Sector III, Mz. K3 Lt. 24, San Juan de Lurigancho, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Prolong. Malecón Checa Mz. L Sub Lote 1A, Urb. Campoy, San Juan de Lurigancho, San Juan de Lurigancho, Perú": {
+   "params": {
+    "q": "Prolong. Malecón Checa Mz. L Sub Lote 1A, Urb. Campoy, San Juan de Lurigancho, San Juan de Lurigancho, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Prolongación Malecón Checa, San Juan de Lurigancho, Lima, Perú": {
+   "params": {
+    "q": "Prolongación Malecón Checa, San Juan de Lurigancho, Lima, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Psj. Melchora Balandra 100, Lima, Perú": {
+   "params": {
+    "q": "Psj. Melchora Balandra 100, Lima, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Real Plaza Puruchuco, Ate, Perú": {
+   "params": {
+    "q": "Real Plaza Puruchuco, Ate, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.040852,
+     "lng": -76.932244,
+     "category": "shop",
+     "type": "mall",
+     "addresstype": "shop",
+     "place_rank": 30,
+     "name": "Real Plaza Puruchuco",
+     "display_name": "Real Plaza Puruchuco, 4770, Avenida Nicolás de Ayllón, Vitarte, Ate, Lima, Lima Metropolitana, Lima, 15498, Perú"
+    }
+   ]
+  },
+  "q=U.C. 10579, Lurín, Lima, Perú": {
+   "params": {
+    "q": "U.C. 10579, Lurín, Lima, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": [
+    {
+     "lat": -12.2298903,
+     "lng": -76.899879,
+     "category": "place",
+     "type": "city_block",
+     "addresstype": "city_block",
+     "place_rank": 25,
+     "name": "C",
+     "display_name": "C, Villa Poeta José Galvéz Barrenechea, Lurín, Lima, Lima Metropolitana, Lima, Perú"
+    },
+    {
+     "lat": -12.2531363,
+     "lng": -76.8651979,
+     "category": "place",
+     "type": "neighbourhood",
+     "addresstype": "neighbourhood",
+     "place_rank": 24,
+     "name": "Vista Alegre Zona C",
+     "display_name": "Vista Alegre Zona C, Rinconada del Puruhuay, Villa Libertad Casica, Lurín, Lima, Lima Metropolitana, Lima, 15823, Perú"
+    },
+    {
+     "lat": -12.2720085,
+     "lng": -76.8828567,
+     "category": "highway",
+     "type": "unclassified",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Calle Las Perlas",
+     "display_name": "Calle Las Perlas, Vicente Morales, Lurín, Lima, Lima Metropolitana, Lima, 15823, Perú"
+    },
+    {
+     "lat": -12.293907,
+     "lng": -76.8469774,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Calle Las Casuarinas",
+     "display_name": "Calle Las Casuarinas, Lurín, Lima, Lima Metropolitana, Lima, 15823, Perú"
+    },
+    {
+     "lat": -12.2996585,
+     "lng": -76.8542693,
+     "category": "highway",
+     "type": "residential",
+     "addresstype": "road",
+     "place_rank": 26,
+     "name": "Calle Islas Ballenas",
+     "display_name": "Calle Islas Ballenas, Lurín, Lima, Lima Metropolitana, Lima, 15823, Perú"
+    }
+   ]
+  },
+  "q=U.C. N° 10579 - 10714 Sub Lote 17 Sección B Fundo San Vicente - Lurín, Lurín, Perú": {
+   "params": {
+    "q": "U.C. N° 10579 - 10714 Sub Lote 17 Sección B Fundo San Vicente - Lurín, Lurín, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Urbanización Huarupampa Zona H, MZ 32, Lote 1, Lote 2 y Lote 12, Huaraz, Perú": {
+   "params": {
+    "q": "Urbanización Huarupampa Zona H, MZ 32, Lote 1, Lote 2 y Lote 12, Huaraz, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Vía Laderas de Chillón, Explanada, Mz. E Lt. 8, Psje. Laderas de Chillón, Puente Piedra, Perú": {
+   "params": {
+    "q": "Vía Laderas de Chillón, Explanada, Mz. E Lt. 8, Psje. Laderas de Chillón, Puente Piedra, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=Vía Laderas de Chillón, Puente Piedra, Lima, Perú": {
+   "params": {
+    "q": "Vía Laderas de Chillón, Puente Piedra, Lima, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=WX8J+2PV, Ica, Perú": {
+   "params": {
+    "q": "WX8J+2PV, Ica, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  },
+  "q=WX8J+2PV, La Victoria, Ica, Perú": {
+   "params": {
+    "q": "WX8J+2PV, La Victoria, Ica, Perú"
+   },
+   "retrieved": "2026-10-01",
+   "results": []
+  }
+ }
+}

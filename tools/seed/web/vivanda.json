@@ -1,0 +1,123 @@
+{
+ "chain": "vivanda",
+ "retrieved": "2026-10-01",
+ "sources": [
+  "https://vivanda.vtexcommercestable.com.br/api/checkout/pub/pickup-points?geoCoordinates={lng};{lat}",
+  "https://vivanda.vtexcommercestable.com.br/api/dataentities/PD/search?_fields=name,address,sc,warehouse_id,district,lat,lon,state",
+  "https://www.vivanda.com.pe/institucional/preguntas-frecuentes",
+  "https://www.inretail.pe/api/archivos/file/MDA%20InRetail%20Q2'26_ENG.pdf"
+ ],
+ "reportedCount": {
+  "value": null,
+  "source": "No official Vivanda-only count found. InRetail Peru Corp Q2'26 Earnings Report (MD&A) reports 113 'Supermarkets' at 2026-06-30 = Plaza Vea + Vivanda combined, and says 1 Vivanda store was reopened during Q2'26 (https://www.inretail.pe/api/archivos/file/MDA%20InRetail%20Q2'26_ENG.pdf).",
+  "date": "2026-06-30"
+ },
+ "complete": false,
+ "method": "vivanda.com.pe was rebuilt on a new platform (Next.js + Cord API, store/warehouse endpoints require a session token) and has no public store list. Vivanda's previous VTEX account (\"vivanda\") is still reachable: its public pickup-points API (queried around Lima and Asia; 10 pickup configs = 8 stores, store + drive-through variants) and its master-data entity PD (8 store rows, no coordinates) give 8 stores with official addresses and coordinates. All these legacy configs are inactive (the online shop moved), so the list is official but possibly stale: it cannot confirm stores opened/closed after the migration. Only Libertadores and Asia are mentioned on the current site.",
+ "stores": [
+  {
+   "name": "Vivanda Libertadores",
+   "address": "Av. Libertadores 596 San Isidro",
+   "district": "San Isidro",
+   "province": "Lima",
+   "department": "Lima",
+   "lat": -12.1038,
+   "lng": -77.03796,
+   "coordsSource": "official",
+   "url": "https://vivanda.vtexcommercestable.com.br/api/checkout/pub/pickup-points",
+   "secondary": false,
+   "notes": "legacy VTEX store sc=1; coords from legacy pickup point 1_PUP140; pickup configs: 1_PUP140A (active=False), 1_PUP140 (active=False); legacy PD state=False; current vivanda.com.pe FAQ confirms \"nuestra tienda Libertadores: Av. Libertadores 594-596, San Isidro\""
+  },
+  {
+   "name": "Vivanda Benavides",
+   "address": "Esquina de la avenida Benavides con la calle Alcanfores, Miraflores",
+   "district": "Miraflores",
+   "province": "Lima",
+   "department": "Lima",
+   "lat": -12.12456,
+   "lng": -77.02824,
+   "coordsSource": "official",
+   "url": "https://vivanda.vtexcommercestable.com.br/api/checkout/pub/pickup-points",
+   "secondary": false,
+   "notes": "legacy VTEX store sc=2; coords from legacy pickup point 1_PUP094; pickup configs: 1_PUP094 (active=False), 1_PUP094A (active=False); legacy PD state=False"
+  },
+  {
+   "name": "Vivanda Asia",
+   "address": "Av. Cayma S/N, KM 97.5 panamerica sur. Refd: Al lado del grifo Primax, Al lado del Boluevard",
+   "district": "Asia",
+   "province": "Cañete",
+   "department": "Lima",
+   "lat": -12.76051,
+   "lng": -76.60123,
+   "coordsSource": "official",
+   "url": "https://vivanda.vtexcommercestable.com.br/api/checkout/pub/pickup-points",
+   "secondary": false,
+   "notes": "legacy VTEX store sc=3; coords from legacy pickup point 1_PUP290; pickup configs: 1_PUP290 (active=False); legacy PD state=False; current vivanda.com.pe FAQ still mentions pickup \"en la tienda de Asia\" (no address/hours given; opening may be seasonal - verify)"
+  },
+  {
+   "name": "Vivanda Pezet",
+   "address": "Av. Juan Antonio Pezet 1340 – 1360, San Isidro",
+   "district": "San Isidro",
+   "province": "Lima",
+   "department": "Lima",
+   "lat": -12.10269,
+   "lng": -77.05221,
+   "coordsSource": "official",
+   "url": "https://vivanda.vtexcommercestable.com.br/api/checkout/pub/pickup-points",
+   "secondary": false,
+   "notes": "legacy VTEX store sc=5; coords from legacy pickup point 1_PUP090; pickup configs: 1_PUP090 (active=False); legacy PD state=False"
+  },
+  {
+   "name": "Vivanda Pardo",
+   "address": "Av. José Pardo 715, Miraflores",
+   "district": "Miraflores",
+   "province": "Lima",
+   "department": "Lima",
+   "lat": -12.11947,
+   "lng": -77.03606,
+   "coordsSource": "official",
+   "url": "https://vivanda.vtexcommercestable.com.br/api/checkout/pub/pickup-points",
+   "secondary": false,
+   "notes": "legacy VTEX store sc=6; coords from legacy pickup point 1_PUP019; pickup configs: 1_PUP019 (active=False); legacy PD state=False"
+  },
+  {
+   "name": "Vivanda Javier Prado",
+   "address": "Av. Javier Prado Oeste 999, Magdalena del Mar",
+   "district": "Magdalena del Mar",
+   "province": "Lima",
+   "department": "Lima",
+   "lat": -12.09317,
+   "lng": -77.05791,
+   "coordsSource": "official",
+   "url": "https://vivanda.vtexcommercestable.com.br/api/checkout/pub/pickup-points",
+   "secondary": false,
+   "notes": "legacy VTEX store sc=7; coords from legacy pickup point 1_PUP116; pickup configs: 1_PUP116 (active=False); legacy PD state=False"
+  },
+  {
+   "name": "Vivanda Dos de Mayo",
+   "address": "Av. Dos de Mayo 1410, esquina con Nogales, San Isidro",
+   "district": "San Isidro",
+   "province": "Lima",
+   "department": "Lima",
+   "lat": -12.09216,
+   "lng": -77.04543,
+   "coordsSource": "official",
+   "url": "https://vivanda.vtexcommercestable.com.br/api/checkout/pub/pickup-points",
+   "secondary": false,
+   "notes": "legacy VTEX store sc=8; coords from legacy pickup point 1_PUP093; pickup configs: 1_PUP093 (active=False); legacy PD state=False"
+  },
+  {
+   "name": "Vivanda Monterrico",
+   "address": "Av. La Encalada cuadra 5, esquina con av. Angamos Este cuadra 15, Monterrico",
+   "district": "Santiago de Surco",
+   "province": "Lima",
+   "department": "Lima",
+   "lat": -12.10899,
+   "lng": -76.97209,
+   "coordsSource": "official",
+   "url": "https://vivanda.vtexcommercestable.com.br/api/checkout/pub/pickup-points",
+   "secondary": false,
+   "notes": "legacy VTEX store sc=9; coords from legacy pickup point 1_PUP095; pickup configs: 1_PUP095 (active=False); legacy PD state=False"
+  }
+ ]
+}

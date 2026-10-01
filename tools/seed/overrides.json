@@ -1,0 +1,83 @@
+{
+ "about": "Per-store decisions applied by tools/merge.mjs that need evidence no automatic rule can see. Every entry names the official record (chain + exact name in tools/seed/web/<chain>.json) or the OSM element, says what to do and carries its evidence. Added 2026-10-01 after an independent verification of the seed database; each entry was re-checked before it was added. REPORT.md lists every entry and whether it applied. Rules that apply to all stores live in tools/merge.mjs, not here. The texts that end up in data/stores.csv (links[].why, official[].set.how, official[].note, official[].rename.address, osm[].note) are written in Spanish, like every generated note; evidence stays in English (REPORT.md).",
+ "links": [
+  {
+   "chain": "tottus",
+   "official": "Tottus Ica",
+   "osm": "n2922674739",
+   "why": "misma dirección que Dollarcity Plaza del Sol Ica, cuyas coordenadas oficiales están a 108 m de este nodo",
+   "evidence": "Tottus's only Ica store is 'Av. San Martín 763 (cruce con Calle Ayabaca)'. Dollarcity's official locator lists 'Dollarcity Plaza del Sol Ica' at 'Avenida San Martín #727-763, Centro Comercial Plaza del Sol Ica' with official coordinates -14.070509,-75.728439, which are 108 m from OSM node 2922674739 (brand=Tottus, shop=supermarket) and 490 m from the other Ica node 4308090578 (Calle Lima)."
+  },
+  {
+   "chain": "tiendas3a",
+   "official": "Tiendas 3A Independencia 2",
+   "osm": "w436474198",
+   "why": "es el único elemento de 3A en Barranco, a 18 m del Jirón Independencia; las coordenadas oficiales estaban corruptas",
+   "evidence": "Official record: 'AV. INDEPENDENCIA 296', district Barranco, with coordinates -11.9852537,-77.072062 (Los Olivos, 17 km away). 'Tiendas 3A Independencia 27' (Av. Próceres 2771, SJL) has -11.9852537,-77.0072062: the same latitude and the same longitude with one '0' dropped, so merge.mjs discards the coordinates. OSM way 436474198 ('3A Hard Discount', shop=convenience, Barranco) is 18 m from Jirón Independencia (OSM way 430635759, Barranco), per OSM street geometry fetched 2026-10-01 (Overpass, overpass.kumi.systems, data as of 2026-07-28)."
+  },
+  {
+   "chain": "holi",
+   "official": "Holi 28 de Julio",
+   "osm": "n14232788501",
+   "why": "al interpolar la numeración, Av. La Paz 971 (Miraflores) cae a unos 20 m de este nodo",
+   "evidence": "Official address 'Av. La Paz 971' (no district). OSM house numbers on Avenida La Paz, Miraflores (Overpass, 2026-10-01): #838 at -12.126213,-77.027059 and #1025 at -12.128237,-77.026725; #971 interpolates to about -12.12765,-77.02684, about 20 m from OSM node 14232788501 ('Holi', shop=convenience, -12.127792,-77.026894, created 2026-09-29). Holi has no other store on that stretch."
+  }
+ ],
+ "official": [
+  {
+   "chain": "preciouno",
+   "official": "Precio Uno El Agustino",
+   "set": {
+    "lat": -12.059091,
+    "lng": -77.007089,
+    "how": "esquina de Av. Nicolás Ayllón y Av. José de la Riva Agüero según la geometría de calles de OSM (intersección -12.059417,-77.007787, vías 280881724 × 134895477), que los polígonos distritales del proyecto dejan 72 m fuera de El Agustino; se ubicó 84 m al noreste, ya dentro de El Agustino, porque la dirección oficial dice El Agustino"
+   },
+   "evidence": "Official address 'Av. Nicolás Ayllon N° 549 - Av. Jose de la Rivaguero N° 037 - El Agustino' is a corner store. Nominatim's street point (-12.060010,-76.976967) was 3.3 km east of that corner. OSM house numbers on Ayllón (#226 at -77.0122, #641 at -77.0045) put #549 about 180 m from the corner, which agrees. Street geometry: one Overpass query, 2026-10-01."
+  },
+  {
+   "chain": "preciouno",
+   "official": "Precio Uno Comas",
+   "set": {
+    "lat": -11.928225,
+    "lng": -77.056967,
+    "how": "cruce de Av. Micaela Bastidas y Av. Manuel González Prada en Comas según la geometría de calles de OSM (el único cruce de ambas avenidas; son vías de doble calzada: centro de los cuatro puntos de cruce)"
+   },
+   "evidence": "Press address 'Esq. Av. Micaela Bastidas con Av. Manuel Gonzales Prada, Urb. Los Parques de Comas'. Nominatim's street point (-11.931802,-77.050153, 'Avenida Micaela Bastidas, El Carmen') was 0.8 km east of the crossing. Street geometry: one Overpass query, 2026-10-01. Lower confidence: the official Tottus report calls the store 'Precio Uno Collique'."
+  },
+  {
+   "chain": "dollarcity",
+   "official": "Dollarcity 28 de Julio",
+   "geocode": {
+    "queries": [
+     {
+      "q": "Huarupampa, Huaraz, Áncash, Perú"
+     }
+    ]
+   },
+   "status": "to_verify",
+   "note": "coordenadas oficiales (-9.596356, -77.836728) descartadas: caen en Pampas Grande, a 34 km al oeste de Huaraz, mientras que la dirección es Urb. Huarupampa y la localidad del buscador oficial es Huaraz",
+   "evidence": "Official record: address 'Urbanización Huarupampa Zona H, MZ 32, Lote 1, Lote 2 y Lote 12', locator locality 'Huaraz', coordinates -9.596356,-77.836728. Point-in-polygon gives Pampas Grande (ubigeo 020109), 20.8 km outside Huaraz district and about 34 km from central Huaraz. Huarupampa is a neighbourhood of central Huaraz."
+  },
+  {
+   "chain": "mass",
+   "official": "Mass Boulevard De Paracas",
+   "address": "Boulevard De Paracas (Al Lado Del Hotel El Viajero KokoPelli)",
+   "rename": {
+    "name": "Mass Av. Juan Velasco Alvarado",
+    "address": "Av. Juan Velasco Alvarado (calle de las coordenadas oficiales; el texto de dirección oficial es el de la tienda de Paracas)"
+   },
+   "status": "to_verify",
+   "note": "el registro oficial copia el nombre y la dirección de la tienda de Paracas (que tiene su propia fila, 'Mass Boulevar De Paracas'), pero sus coordenadas y su código interno 'Juan21 HCO MS' (HCO = Huánuco, como en las demás tiendas Mass de Huánuco) corresponden a una tienda en Pillco Marca; nombre de la calle obtenido por geocodificación inversa (Nominatim) de las coordenadas oficiales",
+   "evidence": "tools/seed/web/mass.json: 'Mass Boulevard De Paracas', district Paracas (Ica), coordinates -9.965524,-76.247495, internal code 'Juan21 HCO MS'. 'Mass Boulevar De Paracas' (code 'Paracas2 PI MS') is at -13.834367,-76.250139 in Paracas. Nominatim reverse of -9.965524,-76.247495 (2026-10-01): 'Avenida Juan Velasco Alvarado, Potracancha, Cayhuayna, Pillco Marca, Huánuco'."
+  }
+ ],
+ "osm": [
+  {
+   "chain": "tottus",
+   "osm": "n4308090578",
+   "status": "closed",
+   "note": "oculta como probable duplicado o local anterior: la lista oficial de Tottus tiene una sola tienda en Ica (Av. San Martín 763, CC Plaza del Sol), que es osm-n2922674739, a 490 m; este nodo (Calle Lima) se creó en 2016 y su edición del 2026-09-30 (v2) solo agregó etiquetas de marca",
+   "evidence": "Tottus official list (tools/seed/web/tottus.json): one Ica store. OSM API: node 4308090578 v2, last edited 2026-09-30 (tools/seed/osm-element-meta.json)."
+  }
+ ]
+}

@@ -1,0 +1,45 @@
+{
+  "id": "tiendas3a",
+  "name": "Tiendas 3A",
+  "legendName": "3 A",
+  "group": "discount",
+  "color": "#FF6A00",
+  "ringColor": "#FF6A00",
+  "owner": "Grupo AJE (operating company: Ajiles Perú S.A.C.)",
+  "website": "https://www.tiendas3a.pe",
+  "storeLocator": "https://www.tiendas3a.pe/ubicanos",
+  "defaultOn": true,
+  "osm": {
+    "wikidata": ["Q136373411"],
+    "nameRegex": "^(?:tiendas?\\s*(?:de\\s+ahorro\\s+)?(?:3|tres)\\s*a\\b.*|(?:3|tres)\\s?a(?:\\s+hard\\s+discount\\b.*)?)$",
+    "excludeNameRegex": "",
+    "label": "Tiendas 3A",
+    "prefixRegex": "^(?:tiendas?\\s*(?:de\\s+ahorro\\s+)?)?(?:3|tres)\\s*a\\b(?:\\s+hard\\s+discount\\b)?",
+    "shops": ["convenience", "supermarket", "discount"],
+    "requireShopLike": true,
+    "dense": true,
+    "uniqueName": false,
+    "weakNameRegex": "",
+    "weakNameShops": [],
+    "excludeTags": []
+  },
+  "logo": { "badge": true, "wide": true },
+  "logoSources": [
+    {
+      "file": "logos/tiendas3a.png",
+      "url": "https://www.tiendas3a.pe/favicon.jpg",
+      "notes": "Official site favicon (750x750 JPEG: blue '3A' with white outline on orange). Scaled down so the mark sits inside the circle-safe area, on the favicon's own orange (#EB6B00). Local copy: tools/seed/logo-src/tiendas3a/tiendas3a-favicon.jpg."
+    },
+    {
+      "file": "logos/tiendas3a-wide.png",
+      "url": "https://www.tiendas3a.pe/brand/01_Logo_3A_Nav.png",
+      "notes": "Official site header logo (orange house shape, '3A' + cart + 'HARD DISCOUNT', transparent PNG 1000x575), trimmed and resized to 512 px wide. Local copy: tools/seed/logo-src/tiendas3a/01_Logo_3A_Nav.png."
+    }
+  ],
+  "storeCountReported": {
+    "value": 268,
+    "source": "https://8eegp3sdde.execute-api.us-east-1.amazonaws.com/prod/v1/informacion-general/tiendas",
+    "date": "2026-09-30"
+  },
+  "notes": "Hard-discount chain of Grupo AJE (site footer: 'Compañía AJILES PERU S.A.C.'); brand also styled 'Tiendas de Ahorro 3A' / '3A Hard Discount'. Brand colours from the official logo PNG: orange #FF6A00, blue #1226AB. storeCountReported = number of stores returned by the official store-locator API behind tiendas3a.pe/ubicanos on 2026-09-30 (268: province LIMA 247, CALLAO 19, CAÑETE 1, HUAROCHIRI 1); raw snapshot saved in tools/seed/raw/tiendas3a-locator-2026-09-30.json (API field coordenadax = latitude, coordenaday = longitude). Press: Peru Retail, 2026-04-24, 'sumar 240 tiendas en Lima' (https://www.peru-retail.com/tiendas-3a-acelera-su-expansion-con-la-apertura-de-un-nuevo-local-cuantos-ya-suma/). OSM (Overpass probe 2026-10-01): only ~3 tagged stores in all Peru ('Tiendas 3A', '3A', '3A Hard Discount', all shop=convenience, none with brand:wikidata) -> the official locator is the main source for this chain. Name regex is anchored on purpose: '3A' alone is very common ('3A Dent' dentist, '3A Salón & Estética', '3A Amseq', street addresses like '3A-11'); it only accepts '3A', '3 A', '3A Hard Discount…', 'Tienda(s) [de Ahorro] 3A…'. Legend name '3 A' as written on the user's Lima slides."
+}
