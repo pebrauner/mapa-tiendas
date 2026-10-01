@@ -30,3 +30,6 @@ tools/test/review/
 
 # Local preview server config
 .claude/
+
+# Sample exports shown to the user (regenerate with node tools/test/demo-slides.mjs)
+ejemplos/
