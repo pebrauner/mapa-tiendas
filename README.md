@@ -17,6 +17,9 @@ pegar logos a mano sobre capturas de mapas.
   - Necesita internet solo para el mapa base, la búsqueda de direcciones y el escaneo de
     OpenStreetMap. Las tiendas, los logos y los distritos vienen dentro de la carpeta.
 - **En línea:** <https://pebrauner.github.io/mapa-tiendas/>
+  - Si aparece **«Hay una versión nueva de la herramienta»**, pulsa **Recargar**: se publicó una
+    versión nueva y la app la carga completa (tu proyecto queda guardado). Si el aviso vuelve a
+    aparecer, recarga sin caché con **Ctrl+F5**.
 
 Usa **una sola pestaña** a la vez: si abres la app dos veces, la pestaña anterior queda en pausa
 para que ninguna borre los cambios de la otra (botón «Seguir en esta pestaña» para retomarla).
@@ -157,6 +160,7 @@ logos/         logos de las cadenas (PNG + logos.js con data URIs)
 vendor/        MapLibre GL, PptxGenJS, SheetJS, Turf, topojson-client, fuentes
 tools/         scripts de datos y pruebas (Node; no los necesita quien usa la app)
 docs/          arquitectura, notas técnicas, guía de estilo, informe de pruebas
+.github/       publicación en GitHub Pages (workflows/pages.yml, sellado con tools/stamp-assets.mjs)
 ```
 
 ## Para desarrolladores
@@ -188,6 +192,33 @@ publica en la app con `build-example.mjs`.
 Las pruebas abren la app desde `file://` en Chrome sin ventana y fallan ante cualquier error de
 consola. Capturas y archivos exportados quedan en `tools/test/out/`.
 
+**Publicación en GitHub Pages.** Cada push a `main` publica el sitio con
+`.github/workflows/pages.yml` (en GitHub: *Settings → Pages → Build and deployment → Source: GitHub
+Actions* — cámbialo **antes** del push que trae el flujo: con la fuente aún en *Deploy from a branch*,
+GitHub publica también la copia sin sellar y las dos publicaciones compiten; el sitio actual sigue en línea
+hasta la primera publicación del flujo. Para comprobarla: `<sitio>/version.json` existe e `index.html`
+contiene `window.MT_BUILD`). El flujo copia solo lo que el sitio sirve
+(`node tools/stamp-assets.mjs --copy-to _site`) y lo «sella» (`node tools/stamp-assets.mjs _site`): cada
+archivo que carga `index.html` lleva `?v=<hash del contenido>`, cada archivo .js / .css termina declarando
+ese mismo hash, `index.html` lleva el número de versión (`MT_BUILD`) y se escribe `version.json`. Así una
+página nueva nunca carga un archivo viejo de la caché (GitHub Pages los guarda 10 minutos), una página
+vieja de la caché que recibe archivos nuevos muestra el aviso con **Recargar** en vez de mezclarlos, y la
+app abierta avisa «Hay una versión nueva de la herramienta». Los archivos del repositorio no se sellan: la
+app de la carpeta (`file://`) sigue igual. Probarlo localmente:
+
+```bash
+node tools/stamp-assets.mjs --copy-to /tmp/site && node tools/stamp-assets.mjs /tmp/site && node tools/stamp-assets.mjs /tmp/site --check
+node tools/test/pages-smoke.mjs --stamped   # la copia sellada servida como en GitHub Pages
+node tools/test/version-guard.test.mjs      # aviso de versión nueva, caché vieja del navegador, errores aislados
+```
+
+Cada script de la app declara su versión de contrato en su primera línea
+(`(window.MT.modules = …)['i18n'] = { api: '1' }`) y `index.html` la repite en `data-api`: si el navegador
+trae un archivo de otra versión, la app muestra el aviso con **Recargar** en vez de abrirse a medias. Si
+cambias la API de un módulo, sube ambos números (`tools/test/stamp.test.mjs` lo comprueba). Una parte de
+la interfaz que falla muestra un recuadro de error con **Recargar** y el resto sigue funcionando
+(`MT.app.guard`, `docs/ARCHITECTURE.md` §16).
+
 ## Próximamente
 
 Ya están las distancias a un punto y la matriz de cercanía (fase 2a, arriba). Quedan para más
@@ -211,7 +242,9 @@ PowerPoint, PNG or interactive HTML map**. It replaces hand-placing logos on map
   Edge). If you downloaded the GitHub ZIP, right-click it → **Extract All…** first and open
   `index.html` from the extracted folder. Internet is needed only for the base map, address search
   and the OpenStreetMap scan.
-- **Online:** <https://pebrauner.github.io/mapa-tiendas/>
+- **Online:** <https://pebrauner.github.io/mapa-tiendas/> — if **“A new version of the tool is available”**
+  appears, click **Reload** (your project stays saved); if it comes back, reload without the cache with
+  **Ctrl+F5**.
 
 Use **one tab** at a time: opening the app again pauses the older tab so neither overwrites the
 other’s work (“Keep working in this tab” resumes it).
@@ -310,7 +343,26 @@ exact order and format of `tools/build-data.mjs`, and `data/chains.js` (with the
 the format of `tools/merge.mjs`, so saving without edits leaves them byte-identical. The in-app OSM scan
 classifies with the same rules as the seed merge (`tools/seed/OSM-RULES.md`; `node tools/test/osm-rules.test.mjs`).
 The example project lives in `tools/fixtures/demo.mapa.json` and is shipped as
-`js/example-project.js` by `node tools/fixtures/build-example.mjs`. Docs: [`SPEC.md`](SPEC.md), [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md),
+`js/example-project.js` by `node tools/fixtures/build-example.mjs`.
+
+**GitHub Pages deploy.** Every push to `main` publishes the site through `.github/workflows/pages.yml`
+(on GitHub: *Settings → Pages → Build and deployment → Source: GitHub Actions* — switch it **before**
+pushing the commit that adds the workflow: with the source still *Deploy from a branch*, GitHub also
+publishes the unstamped repo and the two deploys race; the current site stays live until the workflow's
+first deploy. To confirm it: `<site>/version.json` exists and `index.html` contains `window.MT_BUILD`).
+It copies only the served files (`node tools/stamp-assets.mjs --copy-to _site`) and stamps them
+(`node tools/stamp-assets.mjs _site`): every file `index.html` loads gets `?v=<content hash>` and ends by
+declaring that hash (a one-line trailer), `index.html` gets the build id (`MT_BUILD`) and a `version.json`
+is written. A new page therefore never loads an old cached file (GitHub Pages lets browsers cache them for
+10 minutes), an old cached page that receives newer files shows the update notice with **Reload** instead
+of running a mix, and an open app is told “A new version of the tool is available”. The repo's files are
+not stamped, so the folder app (`file://`) is unchanged. Each app script
+declares its contract version on its first line and `index.html` repeats it in `data-api`: a file of
+another version in the browser cache gets the update notice with **Reload** instead of a half-working app
+(bump both when a module's API changes; `tools/test/stamp.test.mjs` checks them). A part of the UI that
+fails shows an inline error box with **Reload** while the rest keeps working (`docs/ARCHITECTURE.md` §16).
+Tests: `node tools/test/stamp.test.mjs`, `node tools/test/pages-smoke.mjs --stamped`,
+`node tools/test/version-guard.test.mjs`, `node tools/test/analysis-matrix.test.mjs`. Docs: [`SPEC.md`](SPEC.md), [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md),
 [`docs/TEST-REPORT.md`](docs/TEST-REPORT.md).
 
 ## Coming next

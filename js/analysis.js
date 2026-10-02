@@ -58,6 +58,8 @@
  */
 (function () {
   'use strict';
+  // Contract version of this file (index.html data-api; the boot check refuses a mix of versions, ARCHITECTURE §16).
+  (window.MT.modules = window.MT.modules || {})['analysis'] = { api: '1' };
   const MT = window.MT, U = MT.util;
 
   const R = 6371008.8;                 // = MT.geo.distanceMeters' sphere (metres)

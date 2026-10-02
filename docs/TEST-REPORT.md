@@ -216,3 +216,39 @@ as is. Nothing rejected outright.
 **Known limitations (this round).** The pair list is capped at 50,000 (the counts are not); the 22 % map strip
 on short windows is an overview (selecting a store or pair zooms to it); the PPTX pin picture leaves out the
 halo sliver and shadow under its tip (≈ 1 pt, within the PNG ↔ PowerPoint tolerance).
+
+## 6. "The cannibalization matrix is not working" (2026-10-02)
+
+`node tools/test/run-all.mjs` → **1,438 checks, 23/23 suites green**, zero console errors: smoke 38 · pages 6 ·
+**stamp 36 (new)** · **pages-stamped 11 (new)** · core-api 84 · contracts 18 · analysis 92 · roundtrip 46 · i18n 15 ·
+layout 60 · maps-core 76 · maps-ui 94 · db 213 · osm-rules 43 · export 145 · analysis-slide 76 · analysis-ui 108 ·
+**analysis-matrix 34 (new)** · **version-guard 48 (new)** · robustness 21 · styleguide 4 · e2e 86 · analysis-e2e 84.
+
+**Cause** (ARCHITECTURE §16): GitHub Pages serves every file with `max-age=600` and a reload revalidates only
+`index.html`; right after the phase 2a deploy the new `index.html` ran with the v1 `js/i18n.js` and
+`data/stores.js` from the browser cache, `ui-analysis.js` called the missing `MT.i18n.formatDistanceExact` and
+the throws left half-built parts. Reproduced in `version-guard` (B) with the real v1 files (`git ab04721`): the
+index came from the server, `js/i18n.js` from the cache.
+
+| Area | Before | After (checked by) |
+|---|---|---|
+| Deploy | plain URLs, `max-age=600`: new index + old cached scripts | `.github/workflows/pages.yml` + `tools/stamp-assets.mjs`: 48 URLs of `index.html` (+ 7 of `docs/styleguide.html`) carry `?v=<sha256, 8 hex>`, `MT_BUILD`, `MT_ASSET_V` (SheetJS, PptxGenJS), `version.json`; same files → same build, one edited file → only its hash, its URL and the build change; `--check` names a stale or unstamped URL (`stamp`, `pages-stamped`) |
+| Stale cache, any host | half-built Análisis tab, "3,532 stores", no message | every app script declares its contract version (`data-api`); a mix shows only "A new version of the tool is available · Reload · Ctrl+F5" — no tabs, no half tab; **Reload** refreshes the cached files (`fetch cache:'reload'`) → the new version boots whole (3,557 stores, 32 modules), the matrix works (`version-guard` B, v1 and synthetic) |
+| Old cached page, newer files (stamped) | a navigation within the cache window (F5 renewed `index.html`, its files stale) ran build A's page with build B's files; a module B added missing → "This section failed to load" + banner | every stamped .js / .css ends with a one-line trailer declaring its hash (`window.MT_V[path]`, `--mt-v-<path>`); the boot check compares each `?v=` with it → the update notice (ES), not booted, it names the files; **Recargar** → build B whole with its new module, the matrix works (`version-guard` D, cache window compressed to 16 s; it fails with the round-1 boot check); `--check` fails on a lost or wrong trailer (`stamp`) |
+| Deploy while open | nothing | `version.json` read past every cache at boot and on return to the tab (≤ 1 per 5 min): banner "Hay una versión nueva de la herramienta. … Recargar" (ES/EN), non-blocking; Recargar → build B (`version-guard` A) |
+| Error isolation | one throw = half panel, empty main area, empty legend pill, silent | each part guarded: with `formatDistanceExact` missing the side shows Region / Stores to include / an error box, the header, map and computation still work, 5 inline boxes with «Reload»; a failing matrix / distance computation → "No se pudo calcular…" + «Reintentar» (no spinner, no stale numbers); a throwing mount → the tab's error state only, no `onShow` (`version-guard` C) |
+| Line to nowhere | 7 of 32 Surco stores: nearest same-chain store not drawn (Plaza Vea Caminos del Inca → Plaza Vea Primavera, 1.7 km); R 2 km / 250 m: neighbours within R not drawn | every store the matrix refers to is drawn (faded, "outside the region"): 0 missing, also at R 2 km / 250 m (`analysis-matrix` 2–3) |
+| Labels | "1.7 ki282 m" at line midpoints, on the selected dot, no legend | "Plaza Vea Primavera · 1.7 km" at the far end (ringed dot, variable anchors: both drawn, never overlapping), legend rows for both dashed lines |
+| Outside dot | click closed the card, kept the old lines; tip silent | tip "… · outside the region"; read-only card "Nearest same-chain store to Plaza Vea Caminos del Inca · 1.7 km", selection kept |
+| Store card | 19 % visible at 1366 × 768, 46 % at 1440 × 900 | wholly inside the map at 1590 × 1190 and 1440 × 900 (the map pans); not opened on the 115 px strip of 1366 × 768 (the selected row has the facts); legend one row along the strip's bottom |
+| Card placement | the card (above its store) hid the "Wong Chacarilla · 282 m" competitor line end and label; the outside card's tip sat on "Plaza Vea Pri▲avera · 1.7 km" | the card takes the side that leaves both ringed ends, their labels, the selected store, the legend and the map controls clear (zoom 13.6, 14, store next to the legend); the outside card hides its own end label while open, back on close (`analysis-matrix` 3–4) |
+| Units | "A MENOS DE 500 M"; "…1" / "km" on two lines | "A MENOS DE 1 km", `.mt-unit` never breaks |
+| Keyboard | focus fell to `<body>` after chips, tabs, headers, mode radios | focus stays on the same control (`analysis-matrix` 7) |
+
+Mode A was already consistent (every line ends on a drawn store: 12 / 12 checked). Switching *Settings → Pages →
+Build and deployment → Source* to *GitHub Actions* is a repository setting still to be made — **before** the push
+that adds the workflow (else GitHub's branch deploy publishes the unstamped repo and races it); until then the
+site is served unstamped from the branch and the boot check (`data-api`) + error isolation are what protect
+users after a deploy. After the first Actions deploy, `<site>/version.json` exists and `index.html` has
+`window.MT_BUILD`. The workflow's actions run on Node 24 (checkout@v5, setup-node@v5 / Node 24,
+configure-pages@v6, upload-pages-artifact@v5 with `include-hidden-files`, deploy-pages@v5).

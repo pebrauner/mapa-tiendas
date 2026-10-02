@@ -25,6 +25,8 @@ const list = (v) => (typeof v === 'string' ? v.split(',').map((s) => s.trim()).f
 const SUITES = [
   ['smoke', 'smoke.mjs', [], 'boot, tabs, language, missing data, 1280 px'],
   ['pages', 'pages-smoke.mjs', [], 'served over HTTP like GitHub Pages: boot, map, tabs, autosave'],
+  ['stamp', 'stamp.test.mjs', [], 'deploy cache-busting: module contracts, ?v=<hash> on every asset, version.json, --check, workflow'],
+  ['pages-stamped', 'pages-smoke.mjs', ['--stamped'], 'the stamped deploy of .github/workflows/pages.yml served like GitHub Pages'],
   ['core-api', 'core-api.mjs', [], 'core APIs on fixtures (data, geo, io, project, logos)'],
   ['contracts', 'contracts.mjs', [], 'every MT.* path used by a module exists; events wired'],
   ['analysis', 'analysis.test.mjs', [], 'phase 2a engine: distances vs Vincenty, rings, grid = brute force, analysis slides'],
@@ -38,6 +40,8 @@ const SUITES = [
   ['export', 'export.test.mjs', [], 'M4 PNG / PPTX / HTML exports'],
   ['analysis-slide', 'analysis-slide.test.mjs', [], 'analysis slides: reference, rings, distance list, inspector; preview, PNG, PPTX, HTML'],
   ['analysis-ui', 'analysis-ui.test.mjs', [], 'Análisis tab: distances to a store/point, proximity matrix, Excel, "Agregar como lámina"'],
+  ['analysis-matrix', 'analysis-matrix.test.mjs', [], 'proximity matrix regressions (2026-10-02 report): user flow, line ends, labels, cards, focus'],
+  ['version-guard', 'version-guard.test.mjs', [], 'new-version banner, stale browser cache after a deploy, error isolation'],
   ['robustness', 'robustness.test.mjs', [], 'review fixes: import encodings, tabs, folder copies, missing files'],
   ['styleguide', 'styleguide.mjs', [], 'design-system catalogue renders'],
   ['e2e', 'e2e.mjs', [], 'full user journey in ES and EN'],

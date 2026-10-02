@@ -4,6 +4,8 @@
  */
 (function () {
   'use strict';
+  // Contract version of this file (index.html data-api; the boot check refuses a mix of versions, ARCHITECTURE §16).
+  (MT.modules = MT.modules || {})['i18n/core'] = { api: '1' };
   MT.i18n.add('es', {
     app: {
       name: 'Mapa de Tiendas',
@@ -12,6 +14,20 @@
       language: 'Idioma',
       bootError: 'No se pudo iniciar la aplicación. Recarga la página; si el problema sigue, avisa al equipo con el detalle de abajo.',
       tabError: 'Esta sección tuvo un problema al cargar.',
+      // A newer deploy is online (MT.app.checkVersion) — ARCHITECTURE §16
+      update: {
+        title: 'Hay una versión nueva de la herramienta.',
+        text: 'Recarga para usarla; el proyecto abierto se conserva.',
+        reload: 'Recargar',
+      },
+      // Inline error box of a part of the UI that failed (MT.app.guard)
+      error: {
+        title: 'No se pudo mostrar esta parte.',
+        text: 'Si la herramienta se acaba de actualizar, recarga la página.',
+        details: 'Detalle',
+        retry: 'Reintentar',
+        reload: 'Recargar',
+      },
       localChanges: { one: '{n} cambio local', other: '{n} cambios locales' },
       localChangesHint: 'Cambios guardados solo en este navegador. Ve a Base de datos → Guardar en carpeta para incorporarlos a los archivos del proyecto.',
       paused: {
@@ -140,6 +156,18 @@
       language: 'Language',
       bootError: 'The app could not start. Reload the page; if it keeps failing, send the team the details below.',
       tabError: 'This section failed to load.',
+      update: {
+        title: 'A new version of the tool is available.',
+        text: 'Reload to use it; the open project is kept.',
+        reload: 'Reload',
+      },
+      error: {
+        title: 'This part could not be displayed.',
+        text: 'If the tool was just updated, reload the page.',
+        details: 'Details',
+        retry: 'Try again',
+        reload: 'Reload',
+      },
       localChanges: { one: '{n} local change', other: '{n} local changes' },
       localChangesHint: 'Changes saved only in this browser. Go to Database → Save to folder to write them into the project files.',
       paused: {

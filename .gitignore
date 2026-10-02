@@ -31,5 +31,8 @@ tools/test/review/
 # Local preview server config
 .claude/
 
+# Stamped copy of the site the Pages workflow builds (node tools/stamp-assets.mjs --copy-to _site): never committed
+_site/
+
 # Sample exports shown to the user (regenerate with node tools/test/demo-slides.mjs)
 ejemplos/

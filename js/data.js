@@ -13,6 +13,8 @@
  */
 (function () {
   'use strict';
+  // Contract version of this file (index.html data-api; the boot check refuses a mix of versions, ARCHITECTURE §16).
+  (window.MT.modules = window.MT.modules || {})['data'] = { api: '1' };
   var MT = window.MT, U = MT.util;
 
   var COLUMNS = ['id', 'chain', 'name', 'address', 'district', 'province', 'department', 'ubigeo',

@@ -20,6 +20,8 @@
  */
 (function () {
   'use strict';
+  // Contract version of this file (index.html data-api; the boot check refuses a mix of versions, ARCHITECTURE §16).
+  (window.MT.modules = window.MT.modules || {})['radius'] = { api: '1' };
   const MT = window.MT, U = MT.util;
 
   /** Geodesic circle polygon (turf when available; same maths otherwise). */

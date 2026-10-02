@@ -265,6 +265,13 @@
 .mt-analysis-maplegend__sw { display: inline-block; width: 22px; height: 0; border-top: 3px solid #D92D3A; border-radius: 2px; }
 .mt-analysis-maplegend__sw.is-comp { border-top-color: #8B8F98; border-top-width: 2px; }
 .mt-analysis-maplegend__sw.is-outside { width: 9px; height: 9px; border: 0; border-radius: 50%; background: #A1A1AA; opacity: .55; margin: 0 6.5px; }
+/* The selected store's dashed lines (nearest same-chain store / nearest competitor). */
+.mt-analysis-maplegend__sw.is-dash-same, .mt-analysis-maplegend__sw.is-dash-comp { height: 2.5px; border: 0; border-radius: 0; background: repeating-linear-gradient(90deg, #D92D3A 0 5px, transparent 5px 8px); }
+.mt-analysis-maplegend__sw.is-dash-comp { background: repeating-linear-gradient(90deg, #52525B 0 5px, transparent 5px 8px); }
+/* A part of the map that failed (layers, legend, a card): a compact error box over the map (§16). */
+.mt-analysis-maperror { position: absolute; left: 10px; top: 10px; z-index: 4; max-width: min(420px, calc(100% - 20px)); }
+/* A side-panel section that failed to build keeps its place, as an error box. */
+.mt-analysis-sec--error > .mt-errbox { margin: 0; }
 
 .mt-analysis-results { position: relative; display: flex; flex-direction: column; min-width: 0; min-height: 0; background: var(--mt-surface); }
 .mt-analysis-respane { flex: 1; display: flex; flex-direction: column; min-height: 0; }
@@ -384,6 +391,7 @@
 .mt-analysis-card__nearlabel { font-size: var(--mt-fs-xs); color: var(--mt-g500); }
 .mt-analysis-card__nearval { font-weight: 600; }
 .mt-analysis-card__chains { display: flex; flex-wrap: wrap; gap: 8px; }
+.mt-analysis-card__note { font-size: var(--mt-fs-xs); line-height: 1.4; color: var(--mt-g500); max-width: 280px; }
 .mt-analysis-card__chain { display: inline-flex; align-items: center; gap: 4px; font-size: var(--mt-fs-xs); font-weight: 700; font-variant-numeric: tabular-nums; }
 .mt-analysis-tip .maplibregl-popup-content { padding: 6px 10px; border-radius: 8px; background: var(--mt-g900); color: #F4F4F5; font-family: var(--mt-font); font-size: var(--mt-fs-sm); box-shadow: var(--mt-shadow); }
 .mt-analysis-tip.maplibregl-popup-anchor-bottom .maplibregl-popup-tip { border-top-color: var(--mt-g900); }
@@ -425,6 +433,9 @@
   .mt-analysis[data-mode='matrix'] .mt-analysis-stat__value { font-size: 20px; }
   .mt-analysis[data-mode='matrix'] .mt-analysis-stat__sub { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .mt-analysis[data-mode='matrix'] .mt-analysis-body { grid-template-rows: minmax(110px, 22%) minmax(0, 1fr); }
+  /* The map strip is short: the legend runs along its bottom edge (one or two rows) instead of a block over half of it. */
+  .mt-analysis[data-mode='matrix'] .mt-analysis-maplegend { display: flex; flex-wrap: wrap; gap: 2px 14px; bottom: 6px; padding: 4px 9px; max-width: calc(100% - 330px); }
+  .mt-analysis[data-mode='matrix'] .mt-analysis-maplegend__item { white-space: nowrap; }
   .mt-analysis-table--b td { height: 40px; }
   .mt-analysis-table--pairs td { height: 46px; }
   .mt-analysis-table--pairs .mt-analysis-pair { gap: 1px; }

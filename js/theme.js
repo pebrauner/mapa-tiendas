@@ -10,6 +10,8 @@
  */
 (function () {
   'use strict';
+  // Contract version of this file (index.html data-api; the boot check refuses a mix of versions, ARCHITECTURE §16).
+  (window.MT.modules = window.MT.modules || {})['theme'] = { api: '1' };
   var MT = window.MT;
 
   var SLIDE_W = 13.333, SLIDE_H = 7.5;

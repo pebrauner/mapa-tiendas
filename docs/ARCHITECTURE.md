@@ -70,8 +70,14 @@ A future module may start as a stub that sets `stub: true` on its namespace and 
   M4:      export-png.js · export-pptx.js · export-html.js
   M2:      ui-maps.js
   2a:      ui-analysis.js   (Análisis tab, §8)
-  boot:    <script>MT.app.start();</script>
+  boot:    <script>MT.app.start();</script>   (after the consistency check of §16)
 ```
+
+Every app script tag carries `data-api="<contract version>"` and the file declares the same version on
+its first line — `(window.MT.modules = window.MT.modules || {})['i18n'] = { api: '1' };` (dictionaries:
+`(MT.modules = …)['i18n/core']`). The boot script refuses to start a mix of versions (§16). The GitHub
+Pages deploy serves a stamped copy of these files (`?v=<content hash>` on every URL); the repo's files
+stay as they are.
 
 At **script-evaluation time** a module may only *define* things (namespaces, functions, tab and menu
 registrations, bus listeners). Data is available after `MT.data.ready` resolves; `MT.app.start()`
@@ -79,7 +85,8 @@ awaits it, restores the project, renders the shell, then mounts the first tab. C
 (tab `mount`, event handlers) can use everything synchronously.
 
 Adding a file: add the `<script>`/`<link>` tag in the right group of `index.html` (ask the foundation
-owner) and add it to the list above.
+owner) and add it to the list above. An app script also gets `data-api="1"` on its tag and the matching
+declaration on its first line (`tools/test/stamp.test.mjs` checks both).
 
 ---
 
@@ -104,7 +111,9 @@ owner) and add it to the list above.
 | `MT.util.slug(s)` | `"Plaza Vea Angamos"` → `"plaza-vea-angamos"` |
 | `MT.util.collator`, `MT.util.compare(a, b)`, `MT.util.sortBy(arr, keyFn) → new array` | Spanish collation (Ñ after N, accents ignored), stable |
 | `MT.util.clamp`, `round(v, digits)`, `clone` (JSON), `isEqual` (JSON), `todayISO()`, `luminance(hex)`, `isHexColor(s)` | |
-| `MT.loadScript(src) → Promise` | classic script injection (works on file://), deduplicated |
+| `MT.loadScript(src) → Promise` | classic script injection (works on file://), deduplicated; the URL goes through `MT.assetUrl` |
+| `MT.assetUrl(path)` | `path?v=<hash>` on the stamped deploy (`window.MT_ASSET_V`, §16), the bare path elsewhere |
+| `MT.modules` | `{name: {api}}`: the contract version each loaded app script declared (index.html's boot check, §16) |
 | `MT.vendor.xlsx() → Promise<XLSX>`, `MT.vendor.pptx() → Promise<PptxGenJS>` | lazy vendor loading |
 
 ### 4.2 `MT.theme` — js/theme.js
@@ -342,6 +351,8 @@ grouping of nearby stores (§6.1), `'auto'` by default.
 | `newProject()`, `openProject()`, `saveProject({saveAs?})` | with confirmations + toasts (Ctrl+O / Ctrl+S) |
 | `openExampleProject() → Promise<bool>`, `exampleAvailable()`, `isBlankProject()` | the built-in example (`window.MT_EXAMPLE_PROJECT` from `js/example-project.js`, generated from `tools/fixtures/demo.mapa.json` by `node tools/fixtures/build-example.mjs`). Opens straight away on a blank project (or the unchanged example); unsaved changes → dialog *Cancelar / Abrir sin guardar / Guardar y abrir el ejemplo* (a cancelled or failed save keeps the project); a project already saved to a file → a confirmation. Entry points: project menu *Abrir proyecto de ejemplo* (`id:'example'`), the Mapas empty state (no slides) and the *Elige los distritos* notice of a blank project (*Ver ejemplo con 4 regiones*) |
 | `openProjectMenu(anchor?, menuOpts?)`, `renameProject()` | the one project menu (core + module entries) and the rename prompt — the Mapas rail reuses them so every project menu lists the same actions |
+| `guard(el, where, fn, opts)`, `showError(el, where, err, opts)`, `errorBox(err, opts)` | error isolation (§16): run `fn`; if it throws, log it and replace `el`'s content by an inline error box (ES/EN, «Recargar», `opts.retry` → «Reintentar», `opts.compact`, `opts.onClose`, `opts.titleKey`, `opts.onError(err)`). A tab whose `mount` throws shows the box as its whole content (`tab.failed`) and gets no `onShow` |
+| `reload({fresh})`, `build`, `checkVersion({force}) → Promise`, `updateAvailable()`, `versionCheckInterval` | updates (§16): reload after writing the autosave (`fresh`: refresh the cached app files first, index.html's `MT_RELOAD`); `build` = `window.MT_BUILD` of a stamped deploy (null elsewhere); `checkVersion` reads `version.json` past every cache at boot and when the tab comes back into view (at most every `versionCheckInterval` ms, 5 min) and shows the "new version" banner |
 | `start()`, `booted`, `paused` | boot (index.html calls it; if the app's own scripts did not load — index.html opened inside the ZIP, a partial copy — index.html replaces the splash with a bilingual "extract the whole folder" message instead) |
 
 **One working tab.** Every tab keeps the project and the database overlay in memory and writes the
@@ -373,6 +384,7 @@ Tab panels are `section.mt-tabpanel#panel-<id>` filling the area under the top b
 | `project:dirty` | `{dirty}` | project.js |
 | `app:ready` | `{}` | app.js |
 | `app:paused` | `{}` | app.js (the app was opened in another tab; write pending edits now) |
+| `app:update` | `{current, latest, outdated}` | app.js (a newer deploy is online; the banner is shown) |
 | `layout:places` | `{ubigeos}` | layout.js (basemap district-name positions learnt; layouts recomputed) |
 | `tab:shown` | `{id}` | app.js |
 | `app:showChanges` | `{}` | app.js (local-changes chip clicked → M3 shows the DB tab/changes) |
@@ -995,6 +1007,12 @@ node tools/test/run-all.mjs        # EVERYTHING below in sequence + summary (log
 node tools/test/smoke.mjs          # boot, tabs, language, missing-data path, 1280 px
 node tools/test/core-api.mjs       # core API behaviour on fixtures
 node tools/test/pages-smoke.mjs    # the app served over HTTP (as on GitHub Pages): boot, map, tabs, autosave
+node tools/test/pages-smoke.mjs --stamped  # the same on the deploy's stamped copy (?v=<hash>, MT_BUILD, version.json)
+node tools/test/stamp.test.mjs     # tools/stamp-assets.mjs + the workflow + the module contracts (Node only)
+node tools/test/version-guard.test.mjs  # §16: "new version" banner, stale browser cache after a deploy (v1 → now; an old
+                                   #   cached index.html with newer stamped files),
+                                   #   error isolation in the Análisis tab (fault injection)
+node tools/test/analysis-matrix.test.mjs # proximity matrix regressions of the 2026-10-02 report (EN user flow)
 node tools/test/contracts.mjs      # every MT.* path used by any module exists at runtime; events wired
 node tools/test/analysis.test.mjs  # phase 2a engine on the real data: distances vs Vincenty, rings, grid = brute force,
                                    #   performance, the project `analysis` key, analysis slides' stores/bounds/subtitle
@@ -1221,9 +1239,23 @@ table (mode B). Every number comes from `MT.analysis`; nothing is computed diffe
   same-chain pairs < threshold (*Posible canibalización*), stores with another of their chain within R,
   with a competitor within R. Tabs *Por tienda* (sorted by nearest same-chain distance; nearest same /
   competitor with distance pills, counts within R) and *Pares cercanos* (tag, the two stores, distance).
-  Map: region outlines, dots (out-of-region neighbours faded), red lines = same-chain pairs, grey =
-  competitor pairs, a selected store's dashed lines to its nearest same / competitor, legend; framed on
-  the region's stores. **Pair threshold ≤ 5 km** (chips + a custom value, `PAIR_MAX`); the pairs are
+  Map: region outlines, dots, red lines = same-chain pairs, grey = competitor pairs, legend; framed on
+  the region's stores. **Every store the matrix refers to is drawn** (`b.shown`, faded "outside the
+  region"): the pairs' neighbours within the threshold, the neighbours the "within R" counts include, and
+  each store's nearest same-chain store and nearest competitor (searched in all of Peru) — no line or
+  count points at an empty spot. A selected store's dashed lines (red: nearest same chain, dark grey:
+  nearest competitor) end on a ringed dot labelled there "Plaza Vea Primavera · 1.7 km" (variable anchors:
+  the two labels never cover each other or the selected dot); the legend adds both dashed lines while a
+  store is selected. An outside dot has a hover tip "… · fuera de la región" and a read-only card
+  (*Fuera de la región*, *Misma cadena más cercana a <tienda> · 1.7 km* when it is a line's end, why it is
+  on the map). A mode B card takes the side of its store that covers none of the selection's line ends
+  (ringed dots and their labels), the selected store, the map legend or the map's controls (`placePopup`:
+  each MapLibre anchor's card box is scored against them, after the pan that keeps the card inside the
+  map; after a later camera move the side is chosen again without panning). While a card is open on a
+  line end, that end's label is hidden (the card says the same; its tip would sit on the text). Cards are
+  kept wholly inside the map (it pans), and not opened when the map is shorter than the card (1366 × 768:
+  the selected row has the same facts). The card's "A MENOS DE 1 km" keeps the
+  unit's case. **Pair threshold ≤ 5 km** (chips + a custom value, `PAIR_MAX`); the pairs are
   computed in idle chunks too (`closePairs(chunk, {candidates: pool})`, re-sorted with `comparePairs`);
   the counts (cards, tab, Parámetros) cover every pair, while the list, the map lines and the Excel keep
   the first **50,000** (same chain first, then the closest) with a notice *Se muestran los primeros
@@ -1594,3 +1626,125 @@ owners know what changed under them:
 - **Wording:** ES "Alertas" (flags column), "Ninguna entre las cadenas elegidas", "Líneas a la tienda más
   cercana de cada cadena"; EN "Your chain (optional)", and "cannibalisation" with the British spelling
   the rest of the English UI uses (colour, centre, neighbouring, analysed).
+
+## 16. Deploys, stale browser caches and error isolation (2026-10-02)
+
+**The report.** "The cannibalization matrix is not working": right after the phase 2a deploy a user saw
+the Análisis tab half-built — "3,532 stores" (v1 data), the side panel cut after "Closed stores are never
+included.", no title, cards, table or store card, and a dashed "1.7 km" line ending on an empty spot.
+Cause: GitHub Pages serves every file with `Cache-Control: max-age=600`, and a reload revalidates only
+`index.html`. The new `index.html` ran with the v1 `js/i18n.js` and `data/stores.js` still in the browser
+cache; `ui-analysis.js` called `MT.i18n.formatDistanceExact` (new in phase 2a) and threw in four places,
+and the throws left half-cleared parts with no message. The line to nowhere was a separate bug of the
+current code (the map did not draw the store the line went to, §8.4).
+
+**1. Cache-busting deploy** — `tools/stamp-assets.mjs` + `.github/workflows/pages.yml` (Pages source
+"GitHub Actions"). On every push to `main` the workflow copies the served files (`--copy-to _site`:
+`index.html`, `LICENSE`, `.nojekyll`, `css/`, `js/`, `vendor/`, `data/`, `logos/`, `docs/styleguide.html` —
+no `tools/`, tests, docs sources or `*.md`), stamps the copy and checks it (`--check`), then uploads it.
+Stamping rewrites every local `<script src>` / `<link href>` / `<img src>` of every HTML page to
+`path?v=<first 8 hex of the file's sha256>` (attributes such as `data-api`, `onerror`, `data-optional` are
+kept; `data:` and remote URLs untouched), puts
+`<script id="mt-build">window.MT_BUILD = "<build>"; window.MT_ASSET_V = {lazy script: hash}</script>` right
+after `<meta charset>` in `index.html` (`MT.assetUrl` stamps `MT.loadScript`'s SheetJS / PptxGenJS), and
+writes `version.json` `{build, generated, commit, files: {path: hash}}`. The build id (10 hex) is a hash of
+the files' hashes and the pages, so an unchanged site keeps its id and re-stamping is idempotent. A new
+`index.html` therefore only ever names new URLs: it can no longer meet an old cached script. The repo's
+files are never stamped (the script refuses the repo folder): `file://` and "Guardar en carpeta" use them
+as they are, and `?v=` query strings would be harmless there anyway.
+
+**2. Version guard.** *New deploy while the app is open* (http(s) with `MT_BUILD` only):
+`MT.app.checkVersion()` reads `version.json?t=…` with `cache:'no-store'` at start-up and whenever the tab
+comes back into view (`visibilitychange` / `focus`, at most every `versionCheckInterval` = 5 min); another
+build → a non-blocking banner under the top bar, *Hay una versión nueva de la herramienta. Recarga para
+usarla; el proyecto abierto se conserva.* **Recargar** (EN *A new version of the tool is available …
+Reload*), event `app:update`. *Files of another version at boot* (any host, also `file://` and an
+unstamped deploy): every app script declares its contract version and `index.html` lists the expected one
+in `data-api` (§3); the boot script compares them before `MT.app.start()` and, on any mismatch, shows only
+an update notice (*Hay una versión nueva de la herramienta*, the stale files, **Recargar**, hint *recarga
+sin caché: Ctrl+F5*) instead of a half-working app. Its texts live in `index.html` (a dictionary may be the
+stale file), in the UI language (`?lang=`, the saved choice, the browser). **Recargar** there calls
+`window.MT_RELOAD(true)` (defined first thing in `index.html`): on http(s) it fetches every script /
+stylesheet of the page (and `version.json` on a stamped deploy) with `cache:'reload'`, which refreshes the
+browser cache, then reloads — a plain reload would reuse the stale copies for up to 10 minutes. Bump a
+module's `api` (in the file and in `data-api`) whenever its public API changes;
+`tools/test/stamp.test.mjs` fails while the two differ or an app script lacks either.
+
+*The other way round: an old cached `index.html` with the files of a newer deploy* (stamped deploys).
+`?v=` alone protects one way only: a new `index.html` names new URLs, so it never meets an old cached
+file. But GitHub Pages ignores the query string, and F5 revalidates `index.html` only (a 304 renews its 10
+minutes) while the files keep their own cache time. After a deploy, opening the tool again (a new tab, a
+bookmark) can then take build A's `index.html` from the cache while A's file URLs, now stale, revalidate
+to build B's content — A's page would run B's scripts (with a module B added missing: *Esta sección tuvo
+un problema al cargar*). So every stamped file proves its own version: stamping appends one last line,
+the **version trailer**, declaring the hash its URL carries — scripts (app, data, vendor, the lazy
+SheetJS / PptxGenJS) `/*mt-v*/;(window.MT_V=window.MT_V||{})["js/app.js"]="f744b217";`, stylesheets
+`/*mt-v*/:root{--mt-v-css-core-css:"18f15a30"}`. The hash is of the file without the trailer (= the repo's
+file), so `?v=`, `version.json` and the build id are unchanged by it, and re-stamping replaces the
+trailer instead of stacking one. The boot check compares every `script[src]` / stylesheet `?v=` with
+`MT_V[path]` / `--mt-v-<path>` (stylesheets have loaded by then: an inline script waits for them); any
+mismatch or missing declaration → the same update notice (*El navegador guardó partes de la versión
+anterior…*), whose **Recargar** refetches `index.html` past the cache and so gets build B's page. A file
+that did not load at all (`MT_LOAD_FAILED`, also the optional ones) is not counted, nor a script that
+threw while loading before its last line ran (`MT_SCRIPT_THREW`: an error, not a version). A lazily
+loaded script whose trailer is not `MT_ASSET_V[path]` makes `MT.loadScript` force `checkVersion()`
+(the banner). `--check` fails on a missing trailer or one of another hash.
+
+What stays possible: a page left open across a deploy (its files are already in memory: the
+`version.json` banner tells it to reload), and an old page that lazily loads SheetJS after a deploy (the
+banner again). Content-hashed file names would close even that, at the cost of renaming every file of
+a `file://` app — not worth it.
+
+**3. Error isolation.** `MT.app.guard(el, where, fn, opts)` runs one part of the UI; a throw is logged
+(`[app] <where> failed`) and `el` gets an inline error box (`.mt-errbox`, `role=alert`, ES/EN with built-in
+fallbacks: *No se pudo mostrar esta parte.* / *Si la herramienta se acaba de actualizar, recarga la
+página.* / *Detalle* / **Reintentar** / **Recargar** = `MT.app.reload({fresh:true})`). A tab whose `mount`
+throws shows only that box (`.mt-errbox--tab`, *Esta sección tuvo un problema al cargar.*) and gets no
+`onShow`. The Análisis tab renders every part on its own: the header, each side section
+(`sideSection`: a failing one becomes an error section, the next ones still come), the link bar, the
+results header, the cards, each results pane, the map hint, and the map's layers / camera / legend /
+selection / cards / click handler (compact, closable box over the map, `.mt-analysis-maperror`). Lists are
+built before the container is cleared (no half-cleared parts). A failed computation is never a spinner
+forever nor stale numbers under new controls: mode B (`computeB`) and mode A (`computeA`) clear their
+results and the results pane says *No se pudo calcular la matriz.* / *No se pudieron calcular las
+distancias.* with **Reintentar** and **Recargar** (`state().matrix.error`, `state().error`).
+
+**4. Bugs of the current code found with it** (§8.4): every store the matrix refers to is drawn, the dashed
+lines are labelled at their far end, the outside dots have a card and a tip, the legend names the dashed
+lines (and runs along the bottom of the short-window map strip), cards are kept inside the map (or not
+opened on a map shorter than the card), "A MENOS DE 1 km" keeps the unit's case, `.mt-unit` never breaks
+between number and unit, and keyboard focus stays on the control just used — radius / threshold /
+universe chips, results tabs, sortable column headers and the mode radios are rebuilt on each change and
+`refocus` puts the focus back on the same control. Mode A already ended every line on a drawn store
+(lines go only to stores of the universe; a nearest store past it is a card tagged *Fuera del universo*).
+
+**Tests:** `stamp` (Node: module contracts, copy, every URL stamped with the right hash, MT_BUILD /
+MT_ASSET_V / version.json, every .js / .css = the repo's file + its version trailer, idempotent, only the
+edited file's hash changes, `--check` failures (also a lost or wrong trailer), repo refused, workflow
+steps and versions), `pages-stamped` (the stamped copy served like Pages: every URL stamped, version.json read
+past the cache, SheetJS loaded from its stamped URL, tabs, autosave), `version-guard` (A: build A open, B
+deployed → throttled, then the banner in EN and ES, **Recargar** → B; D: build A's `index.html` kept fresh
+by an F5, its files stale, build B deployed (it changes `js/analysis.js` and adds a module the Análisis tab
+needs), the tool opened again — A's page from the cache with B's files: the update notice in Spanish, not
+booted, **Recargar** → B whole with the matrix working; the cache window compressed with
+`servePages(dir, {maxAge: 16})`; it fails with the boot check of round 1; B: an unstamped deploy over a v1
+browser cache — `git ab04721` when the history has it — and over a synthetic older `i18n.js`: the update
+notice instead of the app, **Recargar** → the new version whole, the matrix working; C: fault injection
+under the Análisis tab — the missing `formatDistanceExact`, a failing matrix / distance computation, a
+throwing mount), `analysis-matrix` (the report's user flow in English; line ends, labels, legend, outside
+card, card fit at 1590 / 1440 / 1366 px, the store card clear of the line ends, their labels, the legend and the
+map controls at zoom 13.6 / 14, the outside card hiding its own end label, units, keyboard focus, mode A
+lines).
+
+**Switching the Pages source** (*Settings → Pages → Build and deployment → Source: GitHub Actions*) is a
+repository setting: until it is switched, the site is still served from the branch, unstamped, and only
+the boot check (2, `data-api`) and the error isolation (3) protect users after a deploy — and a later
+unstamped deploy that changes a module's behaviour without bumping its `api` would get past the check.
+**Order:** switch the source *before* pushing the commit that adds the workflow. The site served until
+then stays live until the first deploy from Actions; pushed while the source is still "Deploy from a
+branch", GitHub's own *pages-build-deployment* publishes the unstamped repo and races the workflow
+(whichever finishes last is served). Then check the deploy: `<site>/version.json` exists and
+`index.html` contains `window.MT_BUILD` (or run the workflow again by hand: *Actions → Deploy to GitHub
+Pages → Run workflow*). The workflow pins actions that run on Node 24 (`checkout@v5`, `setup-node@v5` with
+Node 24, `configure-pages@v6`, `upload-pages-artifact@v5` with `include-hidden-files: true` — from v4 dotfiles
+such as `.nojekyll` are left out by default —, `deploy-pages@v5`). `_site/` is in `.gitignore`.

@@ -32,6 +32,8 @@
  */
 (function () {
   'use strict';
+  // Contract version of this file (index.html data-api; the boot check refuses a mix of versions, ARCHITECTURE §16).
+  (window.MT.modules = window.MT.modules || {})['export-pptx'] = { api: '1' };
   const MT = window.MT, U = MT.util;
   const X = (MT.export = MT.export || {});
 

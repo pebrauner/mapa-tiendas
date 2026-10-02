@@ -10,6 +10,8 @@
  */
 (function () {
   'use strict';
+  // Contract version of this file (index.html data-api; the boot check refuses a mix of versions, ARCHITECTURE §16).
+  (window.MT.modules = window.MT.modules || {})['geo'] = { api: '1' };
   var MT = window.MT;
 
   // Peru's bounding box (with a small margin) — used to flag suspicious coordinates.

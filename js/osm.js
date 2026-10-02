@@ -39,6 +39,8 @@
  */
 (function () {
   'use strict';
+  // Contract version of this file (index.html data-api; the boot check refuses a mix of versions, ARCHITECTURE §16).
+  (window.MT.modules = window.MT.modules || {})['osm'] = { api: '1' };
   var MT = window.MT, U = MT.util;
 
   var MATCH_METERS = 120;   // fallback match radius (chains without rules radii)

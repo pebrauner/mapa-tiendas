@@ -7,6 +7,8 @@
  */
 (function () {
   'use strict';
+  // Contract version of this file (index.html data-api; the boot check refuses a mix of versions, ARCHITECTURE §16).
+  (MT.modules = MT.modules || {})['i18n/export'] = { api: '1' };
   MT.i18n.add('es', {
     export: {
       menu: {

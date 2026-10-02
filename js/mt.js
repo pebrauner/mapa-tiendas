@@ -6,6 +6,8 @@
 (function () {
   'use strict';
   var MT = (window.MT = window.MT || {});
+  // Contract version of this file (index.html data-api; the boot check refuses a mix of versions, ARCHITECTURE §16).
+  (window.MT.modules = window.MT.modules || {})['mt'] = { api: '1' };
 
   MT.version = '1.0.0';
 
@@ -179,13 +181,29 @@
   /* ------------------------------------------------------------------------------------------
    * Lazy script loading (classic <script> injection works from file://).
    * ---------------------------------------------------------------------------------------- */
+  /**
+   * URL of a local file loaded after start-up. On the stamped GitHub Pages deploy (tools/stamp-assets.mjs,
+   * ARCHITECTURE §16) it carries the file's content hash, like every URL of index.html, so a cached copy
+   * of another version is never used: 'vendor/xlsx/xlsx.full.min.js?v=1a2b3c4d'. Elsewhere (file://, an
+   * unstamped copy) the path as it is.
+   */
+  MT.assetUrl = function (path) {
+    var v = window.MT_ASSET_V && Object.prototype.hasOwnProperty.call(window.MT_ASSET_V, path) ? window.MT_ASSET_V[path] : '';
+    return v ? path + (path.indexOf('?') < 0 ? '?' : '&') + 'v=' + v : path;
+  };
   var scriptPromises = {};
   MT.loadScript = function (src) {
     if (scriptPromises[src]) return scriptPromises[src];
     scriptPromises[src] = new Promise(function (resolve, reject) {
       var s = document.createElement('script');
-      s.src = src;
-      s.onload = function () { resolve(); };
+      s.src = MT.assetUrl(src);
+      s.onload = function () {
+        // Stamped deploy: the file declares its own hash (window.MT_V, tools/stamp-assets.mjs). Another one
+        // means a newer deploy answered this page's old URL (Pages ignores ?v=): offer the reload.
+        var want = window.MT_ASSET_V && Object.prototype.hasOwnProperty.call(window.MT_ASSET_V, src) ? window.MT_ASSET_V[src] : '';
+        if (want && (window.MT_V || {})[src] !== want && MT.app && typeof MT.app.checkVersion === 'function') MT.app.checkVersion({ force: true });
+        resolve();
+      };
       s.onerror = function () { delete scriptPromises[src]; reject(new Error('No se pudo cargar ' + src)); };
       document.head.appendChild(s);
     });

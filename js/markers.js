@@ -33,6 +33,8 @@
  */
 (function () {
   'use strict';
+  // Contract version of this file (index.html data-api; the boot check refuses a mix of versions, ARCHITECTURE §16).
+  (window.MT.modules = window.MT.modules || {})['markers'] = { api: '1' };
   const MT = window.MT, U = MT.util;
   const TM = () => MT.theme.marker;
   const TAU = Math.PI * 2;

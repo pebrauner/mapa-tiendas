@@ -1,0 +1,72 @@
+# Deploy Mapa de Tiendas to GitHub Pages with cache-busting (docs/ARCHITECTURE.md §16).
+#
+# GitHub Pages serves every file with Cache-Control: max-age=600. Served as they are in the repo, a
+# reload after a deploy can pair the new index.html with old copies of js/*.js from the browser cache
+# (a half-working app). This workflow publishes a STAMPED copy instead: every local URL in the HTML
+# pages carries ?v=<content hash>, index.html sets window.MT_BUILD and the site gets a version.json
+# (the open app compares the two and offers to reload). The repo's files stay unstamped (file://).
+#
+# Needs: Settings → Pages → Build and deployment → Source = "GitHub Actions" — switch it BEFORE pushing this
+# file: with the source still "Deploy from a branch", GitHub's own pages-build-deployment publishes the
+# unstamped repo and races this workflow. The site served until then stays live until the first deploy
+# from Actions; check it at <site>/version.json (and MT_BUILD in index.html).
+#
+# Actions pinned to majors that run on the Node 24 runtime (Node 20 reached end of life on 2026-04-30).
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deploy at a time; a newer push waits for the running one instead of cancelling it mid-way.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Set up Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+
+      # Only what the site serves: index.html, LICENSE, css/, js/, vendor/, data/, logos/ and
+      # docs/styleguide.html (no tools/, tests, docs sources or *.md). Node built-ins only: no npm install.
+      - name: Copy the site into _site
+        run: node tools/stamp-assets.mjs --copy-to _site
+
+      - name: Stamp asset URLs (?v=<hash>), MT_BUILD and version.json
+        run: node tools/stamp-assets.mjs _site --commit=${{ github.sha }}
+
+      - name: Check the stamped site
+        run: node tools/stamp-assets.mjs _site --check
+
+      - name: No Jekyll
+        run: touch _site/.nojekyll
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v6
+
+      - name: Upload the site
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+          include-hidden-files: true      # since v4 dotfiles are left out by default (.nojekyll)
+
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v5

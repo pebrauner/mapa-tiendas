@@ -39,6 +39,10 @@ Local folder: `Z:\mapa-tiendas`.
    - **No `fetch()` of local files.** Local data ships as `.js` files assigning globals (see §3).
    - **Images drawn on canvas must be data URIs** (file:// images taint the canvas). Logos are
      bundled as data URIs in `logos/logos.js`.
+   - **GitHub Pages serves a stamped copy** (`.github/workflows/pages.yml`, `tools/stamp-assets.mjs`): every
+     local URL carries `?v=<content hash>` and every file declares that hash, so a new page never loads an
+     old cached file and an old cached page that gets newer files shows "Hay una versión nueva" instead of
+     running them; an open app is told to reload when a newer deploy is online (ARCHITECTURE §16).
 2. **Libraries vendored** in `vendor/` (pinned versions, with their LICENSE files). Runtime network
    needs only: OpenFreeMap (tiles/style/fonts/sprites), Overpass API (scan), Nominatim (address search).
 3. **Respect public-service policies**: Nominatim max 1 request/second, no search-as-you-type

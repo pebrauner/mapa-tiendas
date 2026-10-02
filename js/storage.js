@@ -13,6 +13,8 @@
  */
 (function () {
   'use strict';
+  // Contract version of this file (index.html data-api; the boot check refuses a mix of versions, ARCHITECTURE §16).
+  (window.MT.modules = window.MT.modules || {})['storage'] = { api: '1' };
   var MT = window.MT;
   var DB_NAME = 'mapa-tiendas', DB_VERSION = 1;
   var STORES = { stores: 'id', chains: 'id', logos: 'id', kv: 'key' };

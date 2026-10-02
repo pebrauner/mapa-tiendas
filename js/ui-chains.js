@@ -19,6 +19,8 @@
  */
 (function () {
   'use strict';
+  // Contract version of this file (index.html data-api; the boot check refuses a mix of versions, ARCHITECTURE §16).
+  (window.MT.modules = window.MT.modules || {})['ui-chains'] = { api: '1' };
   var MT = window.MT, U = MT.util, h = U.h;
   var t = function (k, v) { return MT.t(k, v); };
 

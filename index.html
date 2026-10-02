@@ -8,11 +8,39 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23B3203D'/%3E%3Cpath d='M16 25s-6-5.2-6-10a6 6 0 0 1 12 0c0 4.8-6 10-6 10Z' fill='%23fff'/%3E%3Ccircle cx='16' cy='15' r='2.2' fill='%23B3203D'/%3E%3C/svg%3E">
 
 <!-- Load order (docs/ARCHITECTURE.md §3): vendor → data globals → core → module dictionaries →
-     modules → MT.app.start(). Classic scripts only: the app must run from file:// with no server. -->
+     modules → MT.app.start(). Classic scripts only: the app must run from file:// with no server.
+     The GitHub Pages deploy serves a stamped copy (tools/stamp-assets.mjs, §16): every local URL
+     below gets ?v=<content hash> and window.MT_BUILD is set; the files here stay unstamped. -->
 
 <!-- Any app file that fails to load (index.html opened inside the ZIP, partial copy) is recorded
-     here so the page can explain the problem instead of hanging on the splash (see the end). -->
-<script>window.MT_LOAD_ERRORS = []; window.addEventListener('error', function (e) { var t = e.target; if (t && (t.tagName === 'SCRIPT' || t.tagName === 'LINK') && !t.hasAttribute('data-optional')) MT_LOAD_ERRORS.push(t.getAttribute('src') || t.getAttribute('href')); }, true);</script>
+     here so the page can explain the problem instead of hanging on the splash (see the end).
+     MT_LOAD_FAILED also has the optional ones; MT_SCRIPT_THREW the scripts that threw while the page
+     was loading (their last line, the version trailer of a stamped deploy, never ran). -->
+<script>window.MT_LOAD_ERRORS = []; window.MT_LOAD_FAILED = []; window.MT_SCRIPT_THREW = [];
+window.addEventListener('error', function (e) {
+  var t = e.target;
+  if (t && (t.tagName === 'SCRIPT' || t.tagName === 'LINK')) {
+    var f = (t.getAttribute('src') || t.getAttribute('href') || '').replace(/[?#].*$/, '');
+    MT_LOAD_FAILED.push(f);
+    if (!t.hasAttribute('data-optional')) MT_LOAD_ERRORS.push(f);
+  } else if (e.filename && document.readyState === 'loading') MT_SCRIPT_THREW.push(e.filename);
+}, true);</script>
+<!-- A reload that never reuses a stale cached file (§16): with fresh=true, on http(s), every file of
+     this page is first fetched again with cache:'reload' (which refreshes the browser cache); a plain
+     reload keeps cached scripts for up to 10 minutes on GitHub Pages. Used by MT.app.reload and the
+     boot check at the end; defined here so it works even when the app's own scripts do not. -->
+<script>window.MT_RELOAD = function (fresh) {
+  var done = false, go = function () { if (!done) { done = true; location.reload(); } };
+  if (!fresh || !/^https?:$/.test(location.protocol) || !window.fetch || !window.Promise) { go(); return; }
+  var urls = [location.href.replace(/#.*$/, '')].concat(window.MT_BUILD ? ['version.json'] : []);
+  [].forEach.call(document.querySelectorAll('script[src],link[rel~="stylesheet"][href]'), function (el) { urls.push(el.src || el.href); });
+  setTimeout(go, 20000);                                  // never wait forever on a slow network
+  Promise.all(urls.map(function (u) {
+    var a = new URL(u, location.href);
+    // Read each body: the refreshed copy is in the cache once it has fully arrived.
+    return a.origin === location.origin ? fetch(a.href, { cache: 'reload', credentials: 'same-origin' }).then(function (r) { return r.arrayBuffer(); }).catch(function () {}) : null;
+  })).then(go, go);
+};</script>
 <!-- Vendor styles + inlined fonts -->
 <link rel="stylesheet" href="vendor/maplibre/maplibre-gl.css">
 <link rel="stylesheet" href="vendor/fonts/fonts.css">
@@ -55,57 +83,120 @@
      example entries are simply disabled. -->
 <script src="js/example-project.js" data-optional></script>
 
-<!-- Core -->
-<script src="js/mt.js"></script>
-<script src="js/theme.js"></script>
-<script src="js/i18n.js"></script>
-<script src="js/i18n/core.js"></script>
-<script src="js/storage.js"></script>
-<script src="js/geo.js"></script>
-<script src="js/io.js"></script>
-<script src="js/data.js"></script>
-<script src="js/project.js"></script>
-<script src="js/analysis.js"></script>
-<script src="js/ui.js"></script>
-<script src="js/app.js"></script>
+<!-- Core. data-api = the contract version each app script declares, (MT.modules = …)['i18n'] = {api: '1'}:
+     the boot check at the end refuses to start a mix of versions (old copies kept by the browser cache
+     after an update, a partially copied folder). Bump both when a module's API changes (§16). -->
+<script src="js/mt.js" data-api="1"></script>
+<script src="js/theme.js" data-api="1"></script>
+<script src="js/i18n.js" data-api="1"></script>
+<script src="js/i18n/core.js" data-api="1"></script>
+<script src="js/storage.js" data-api="1"></script>
+<script src="js/geo.js" data-api="1"></script>
+<script src="js/io.js" data-api="1"></script>
+<script src="js/data.js" data-api="1"></script>
+<script src="js/project.js" data-api="1"></script>
+<script src="js/analysis.js" data-api="1"></script>
+<script src="js/ui.js" data-api="1"></script>
+<script src="js/app.js" data-api="1"></script>
 
 <!-- Module dictionaries -->
-<script src="js/i18n/map.js"></script>
-<script src="js/i18n/maps-ui.js"></script>
-<script src="js/i18n/db.js"></script>
-<script src="js/i18n/export.js"></script>
-<script src="js/i18n/analysis.js"></script>
+<script src="js/i18n/map.js" data-api="1"></script>
+<script src="js/i18n/maps-ui.js" data-api="1"></script>
+<script src="js/i18n/db.js" data-api="1"></script>
+<script src="js/i18n/export.js" data-api="1"></script>
+<script src="js/i18n/analysis.js" data-api="1"></script>
 
 <!-- M1 map core & rendering -->
-<script src="js/layout.js"></script>
-<script src="js/markers.js"></script>
-<script src="js/legend.js"></script>
-<script src="js/radius.js"></script>
-<script src="js/mapview.js"></script>
-<script src="js/slide.js"></script>
-<script src="js/render.js"></script>
+<script src="js/layout.js" data-api="1"></script>
+<script src="js/markers.js" data-api="1"></script>
+<script src="js/legend.js" data-api="1"></script>
+<script src="js/radius.js" data-api="1"></script>
+<script src="js/mapview.js" data-api="1"></script>
+<script src="js/slide.js" data-api="1"></script>
+<script src="js/render.js" data-api="1"></script>
 <!-- M3 database, chains, OSM -->
-<script src="js/osm.js"></script>
-<script src="js/ui-db.js"></script>
-<script src="js/ui-chains.js"></script>
+<script src="js/osm.js" data-api="1"></script>
+<script src="js/ui-db.js" data-api="1"></script>
+<script src="js/ui-chains.js" data-api="1"></script>
 <!-- M4 exports -->
-<script src="js/export-png.js"></script>
-<script src="js/export-pptx.js"></script>
-<script src="js/export-html.js"></script>
+<script src="js/export-png.js" data-api="1"></script>
+<script src="js/export-pptx.js" data-api="1"></script>
+<script src="js/export-html.js" data-api="1"></script>
 <!-- M2 maps tab (uses everything above) -->
-<script src="js/ui-maps.js"></script>
+<script src="js/ui-maps.js" data-api="1"></script>
 <!-- Análisis tab (phase 2a, SPEC §6: distances to a store/point, proximity between stores) -->
-<script src="js/ui-analysis.js"></script>
+<script src="js/ui-analysis.js" data-api="1"></script>
 
 <!-- Boot. If the app's own files did not load, replace the splash with a bilingual explanation
-     (inline styles: css/ may be missing too). Data files missing is handled by the app itself. -->
+     (inline styles: css/ may be missing too). Data files missing is handled by the app itself.
+     If they loaded but some are of another version (data-api above ≠ what the file declares, or on
+     the stamped deploy a ?v= ≠ the hash the file itself declares), the app does not start
+     half-broken: a notice offers a reload that refreshes the cached files. -->
 <script>
 (function () {
   var broken = (window.MT_LOAD_ERRORS || []).filter(function (f) { return /^(js|vendor|css)\//.test(f || ''); });
-  if (!broken.length && window.MT && MT.app && MT.data && MT.ui) {
+  var stale = [], failed = window.MT_LOAD_FAILED || [], threw = window.MT_SCRIPT_THREW || [];
+  var addStale = function (f) { if (stale.indexOf(f) < 0) stale.push(f); };
+  if (!broken.length) {
+    [].forEach.call(document.querySelectorAll('script[data-api]'), function (s) {
+      var src = (s.getAttribute('src') || '').replace(/[?#].*$/, ''), name = src.replace(/^js\//, '').replace(/\.js$/, '');
+      var m = window.MT && MT.modules && MT.modules[name];
+      if (!m || String(m.api) !== s.getAttribute('data-api')) addStale(src);
+    });
+    // Stamped deploy (tools/stamp-assets.mjs, ARCHITECTURE §16): each file ends by declaring the hash it
+    // was stamped with — scripts in window.MT_V[path], stylesheets in --mt-v-<path> on :root. GitHub
+    // Pages ignores ?v=, so a cached index.html of an older deploy can receive the files of a newer one
+    // under its old URLs: any ?v= that is not what its file declares is a mix of two builds.
+    var V = window.MT_V || {}, rootStyle = null;
+    [].forEach.call(document.querySelectorAll('script[src],link[rel~="stylesheet"][href]'), function (el) {
+      var css = el.tagName === 'LINK', m = /^([^?#]*)\?(?:[^#]*&)?v=([0-9a-f]{8})(?=[&#]|$)/.exec(el.getAttribute(css ? 'href' : 'src') || '');
+      if (!m || failed.indexOf(m[1]) >= 0) return;          // not stamped, or not loaded at all (reported above / optional)
+      var have;
+      if (css) {
+        rootStyle = rootStyle || getComputedStyle(document.documentElement);
+        have = rootStyle.getPropertyValue('--mt-v-' + m[1].replace(/[^A-Za-z0-9_-]/g, '-')).replace(/["'\s]/g, '');
+      } else {
+        have = V[m[1]];
+        if (have === undefined && threw.indexOf(el.src) >= 0) return;   // it threw before its last line: an error, not a version
+      }
+      if (have !== m[2]) addStale(m[1]);
+    });
+  }
+  if (!broken.length && !stale.length && window.MT && MT.app && MT.data && MT.ui) {
     try { MT.app.start(); return; } catch (err) { broken.push(String(err && err.message || err)); }
   }
   var box = document.getElementById('mt-splash') || document.body;
+  if (stale.length && !broken.length) {
+    // In the UI language (the dictionaries may be the stale files: the texts live here).
+    var lang = 'es';
+    try { lang = new URLSearchParams(location.search).get('lang') || localStorage.getItem('mt.lang') || ''; } catch (e) { lang = ''; }
+    if (lang !== 'es' && lang !== 'en') lang = /^es\b/i.test((navigator.languages && navigator.languages[0]) || navigator.language || 'es') ? 'es' : 'en';
+    var T = lang === 'es' ? {
+      title: 'Hay una versión nueva de la herramienta',
+      text: 'El navegador guardó partes de la versión anterior y no se pueden mezclar con la nueva. Recarga para usar la versión nueva: tu proyecto y tus cambios locales siguen guardados en este navegador.',
+      reload: 'Recargar', hint: 'Si este aviso vuelve a aparecer, recarga sin caché: Ctrl+F5 (en Mac, Cmd+Shift+R).', files: 'Archivos de otra versión:',
+    } : {
+      title: 'A new version of the tool is available',
+      text: 'Your browser kept parts of the previous version, and they cannot be mixed with the new one. Reload to use the new version: your project and local changes stay saved in this browser.',
+      reload: 'Reload', hint: 'If this notice comes back, reload without the cache: Ctrl+F5 (on a Mac, Cmd+Shift+R).', files: 'Files of another version:',
+    };
+    document.documentElement.lang = lang;
+    box.setAttribute('style', 'position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#F4F4F5;font:15px/1.5 Segoe UI,Arial,sans-serif;color:#18181B;padding:16px;');
+    box.innerHTML = '<div role="alert" data-mt-update="stale" style="max-width:600px;background:#fff;border:1px solid #E4E4E7;border-top:4px solid #2563EB;border-radius:10px;padding:24px 28px;box-shadow:0 8px 24px rgba(0,0,0,.08)">' +
+      '<h1 style="font-size:20px;margin:0 0 12px"></h1><p style="margin:0 0 16px;line-height:1.5"></p>' +
+      '<button type="button" style="font:600 14px/1 Segoe UI,Arial,sans-serif;padding:10px 18px;border:0;border-radius:8px;background:#B3203D;color:#fff;cursor:pointer"></button>' +
+      '<p style="margin:14px 0 0;font-size:13px;color:#52525B"></p>' +
+      '<p style="margin:10px 0 0;font:12px/1.4 Consolas,monospace;color:#71717A;word-break:break-all"></p></div>';
+    var ps = box.querySelectorAll('p'), btn = box.querySelector('button');
+    box.querySelector('h1').textContent = T.title;
+    ps[0].textContent = T.text;
+    btn.textContent = T.reload;
+    ps[1].textContent = T.hint;
+    ps[2].textContent = T.files + ' ' + stale.slice(0, 8).join(' · ') + (stale.length > 8 ? ' (+' + (stale.length - 8) + ')' : '');
+    btn.onclick = function () { btn.disabled = true; btn.style.opacity = '.6'; window.MT_RELOAD(true); };
+    btn.focus();
+    return;
+  }
   var p = 'margin:0 0 10px;line-height:1.5;';
   box.setAttribute('style', 'position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#F4F4F5;font:15px/1.5 Segoe UI,Arial,sans-serif;color:#18181B;padding:16px;');
   box.innerHTML = '<div role="alert" style="max-width:620px;background:#fff;border:1px solid #E4E4E7;border-top:4px solid #B3203D;border-radius:10px;padding:24px 28px;box-shadow:0 8px 24px rgba(0,0,0,.08)">' +

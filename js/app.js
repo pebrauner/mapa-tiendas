@@ -5,12 +5,19 @@
  *                       mount(panelEl), onShow(), onHide()})   // mount runs once, lazily
  *   MT.app.addProjectMenuItem({id, labelKey, icon, group:'file'|'export'|'data', order,
  *                       shortcut, onClick(), enabled()→bool})
- * Events: 'app:ready' {}, 'tab:shown' {id}, 'app:showChanges' {} (user clicked the local-changes chip).
+ * Events: 'app:ready' {}, 'tab:shown' {id}, 'app:showChanges' {} (user clicked the local-changes chip),
+ * 'app:update' {current, latest, outdated} (a newer deploy is online).
  * Built-in example: MT.app.openExampleProject() (asks before replacing work), exampleAvailable(),
  * isBlankProject().
+ * Robustness (ARCHITECTURE §16): MT.app.guard(el, where, fn, opts) / showError / errorBox (inline error
+ * box with «Recargar» instead of a half-built part; a tab whose mount throws shows it too),
+ * reload({fresh}), build (window.MT_BUILD of a stamped deploy), checkVersion({force}) → "new version"
+ * banner, updateAvailable(), versionCheckInterval.
  */
 (function () {
   'use strict';
+  // Contract version of this file (index.html data-api; the boot check refuses a mix of versions, ARCHITECTURE §16).
+  (window.MT.modules = window.MT.modules || {})['app'] = { api: '1' };
   var MT = window.MT, U = MT.util, h = U.h;
 
   var tabs = [];
@@ -54,9 +61,14 @@
       });
       if (!tab.mounted && tab.mount) {
         tab.mounted = true;
-        safe(function () { tab.mount(tab.panel); MT.i18n.applyDom(tab.panel); }, tab);
+        try { tab.mount(tab.panel); MT.i18n.applyDom(tab.panel); } catch (err) {
+          // Never leave a half-built tab: its panel shows the error (with «Recargar») instead, and its
+          // onShow is not called (ARCHITECTURE §16). Parts a module guards itself keep rendering.
+          tab.failed = err;
+          showError(tab.panel, 'tab "' + tab.id + '"', err, { tab: true });
+        }
       }
-      if (tab.onShow) safe(tab.onShow, tab);
+      if (tab.onShow && !tab.failed) safe(tab.onShow, tab);
       MT.storage.setPref('lastTab', tab.id);
       if (!opts || opts.updateHash !== false) {
         var hash = '#' + tab.hash;
@@ -84,6 +96,7 @@
         MT.bus.emit('app:ready', {});
         if (app.paused) showPaused();
         else if (otherTabPaused) noteOtherTabPaused();
+        app.checkVersion();
       }).catch(function (err) {
         console.error('[app] boot failed', err);
         var splash = U.$('#mt-splash');
@@ -101,11 +114,117 @@
   function safe(fn, tab) {
     try { fn(); } catch (err) {
       console.error('[app] tab "' + (tab && tab.id) + '" failed', err);
-      if (tab && tab.panel && !tab.panel.childNodes.length) {
-        tab.panel.appendChild(MT.ui.emptyState({ icon: 'warning', title: MT.t('app.tabError'), text: String(err.message || err) }));
-      }
+      if (tab && tab.panel && !tab.panel.childNodes.length) tab.panel.appendChild(errorBox(err, { tab: true, where: 'tab "' + tab.id + '"' }));
     }
   }
+
+  /* ---- Error isolation (ARCHITECTURE §16) ------------------------------------------------------
+   * One part of the UI that throws (a bug, or a file of another version) must not leave the rest
+   * half-built: MT.app.guard(el, where, fn) runs fn and, if it throws, logs it and replaces el's
+   * content by an inline error box (ES/EN, «Recargar», optional «Reintentar»). */
+  // The error box is the safety net when something is already wrong — even a dictionary may be the
+  // broken file — so its few texts have built-in ES/EN fallbacks.
+  var ERR_TEXT = {
+    'app.error.title': ['No se pudo mostrar esta parte.', 'This part could not be displayed.'],
+    'app.error.text': ['Si la herramienta se acaba de actualizar, recarga la página.', 'If the tool was just updated, reload the page.'],
+    'app.error.details': ['Detalle', 'Details'],
+    'app.error.retry': ['Reintentar', 'Try again'],
+    'app.error.reload': ['Recargar', 'Reload'],
+    'app.tabError': ['Esta sección tuvo un problema al cargar.', 'This section failed to load.'],
+  };
+  function errText(key) {
+    if (MT.i18n.has(key)) return MT.t(key);
+    var f = ERR_TEXT[key];
+    return f ? f[MT.i18n.lang === 'es' ? 0 : 1] : key;
+  }
+  /**
+   * The inline error box. opts: {where, tab (the whole tab failed), titleKey, retry() («Reintentar»),
+   * compact (one line, for small spots such as the map), onClose() (adds ×)}.
+   */
+  function errorBox(err, opts) {
+    opts = opts || {};
+    var titleKey = opts.titleKey || (opts.tab ? 'app.tabError' : 'app.error.title');
+    var msg = String((err && (err.message || err)) || '');
+    var btn = function (key, kind, onClick, cls) {
+      return MT.ui.button({ label: errText(key), i18n: key, kind: kind, size: 'sm', icon: 'refresh', className: cls, onClick: onClick });
+    };
+    var box = h('div', { class: 'mt-errbox' + (opts.compact ? ' mt-errbox--compact' : '') + (opts.tab ? ' mt-errbox--tab' : ''), role: 'alert', 'data-where': opts.where || null },
+      h('div', { class: 'mt-errbox__head' }, MT.ui.iconEl('warning', { size: 16 }), h('span', { 'data-i18n': titleKey }, errText(titleKey)),
+        opts.onClose ? h('button', { type: 'button', class: 'mt-btn mt-btn--ghost mt-btn--icon mt-btn--sm mt-errbox__x', title: MT.t('common.close'), 'aria-label': MT.t('common.close'),
+          html: MT.ui.icon('close', { size: 14 }), onclick: function () { box.remove(); opts.onClose(); } }) : null),
+      h('div', { class: 'mt-errbox__text', 'data-i18n': 'app.error.text' }, errText('app.error.text')),
+      msg && !opts.compact ? h('details', { class: 'mt-errbox__details' }, h('summary', { 'data-i18n': 'app.error.details' }, errText('app.error.details')), h('code', null, msg)) : null,
+      h('div', { class: 'mt-errbox__actions' },
+        opts.retry ? btn('app.error.retry', 'secondary', function () { opts.retry(); }, 'mt-errbox__retry') : null,
+        btn('app.error.reload', opts.retry ? 'ghost' : 'secondary', function () { app.reload({ fresh: true }); }, 'mt-errbox__reload')));
+    return box;
+  }
+  /** Log a failed part and show its error box in `el` (cleared first; el may be null: log only). Returns the box. */
+  function showError(el, where, err, opts) {
+    console.error('[app] ' + where + ' failed', err);
+    opts = Object.assign({ where: where }, opts || {});
+    if (opts.onError) { try { opts.onError(err); } catch (e) { /* the box still shows */ } }
+    if (!el) return null;
+    var box = errorBox(err, opts);
+    U.clear(el).appendChild(box);
+    el.hidden = false;
+    return box;
+  }
+  /** Run fn(); if it throws, showError(el, where, err, opts) and return undefined. Otherwise fn's value. */
+  app.guard = function (el, where, fn, opts) {
+    try { return fn(); } catch (err) { showError(el, where, err, opts); return undefined; }
+  };
+  app.showError = showError;
+  app.errorBox = errorBox;
+
+  /**
+   * Reload the page (the project autosave is written first). fresh: true refreshes the browser's
+   * cached copies of the app's files first (index.html's MT_RELOAD) — a plain reload can keep an
+   * old cached script for up to 10 minutes on GitHub Pages.
+   */
+  app.reload = function (opts) {
+    try { MT.project.flushAutosave(); } catch (e) { /* reload anyway */ }
+    if (typeof window.MT_RELOAD === 'function') window.MT_RELOAD(!!(opts && opts.fresh));
+    else location.reload();
+  };
+
+  /* ---- Updates (ARCHITECTURE §16) ------------------------------------------------------------
+   * The GitHub Pages deploy is stamped (tools/stamp-assets.mjs): index.html sets window.MT_BUILD and
+   * the site has a version.json. Over http(s), at start-up and whenever the tab comes back into view
+   * (at most every versionCheckInterval ms), version.json is read past every cache: another build
+   * there means a deploy happened since this page loaded → a banner offers to reload. Nothing happens
+   * on file:// or on an unstamped copy (no MT_BUILD). */
+  app.build = typeof window.MT_BUILD === 'string' && window.MT_BUILD ? window.MT_BUILD : null;
+  app.versionCheckInterval = 5 * 60 * 1000;
+  var lastVersionCheck = 0, versionPending = null, updateBuild = null, updateBannerClosed = false;
+  /** → Promise<{current, latest, outdated} | null> (null: not applicable, throttled or unreachable). opts.force skips the throttle. */
+  app.checkVersion = function (opts) {
+    if (!app.build || !/^https?:$/.test(location.protocol) || typeof fetch !== 'function') return Promise.resolve(null);
+    if (versionPending) return versionPending;
+    var now = Date.now();
+    if (!(opts && opts.force) && lastVersionCheck && now - lastVersionCheck < app.versionCheckInterval) return Promise.resolve(null);
+    lastVersionCheck = now;
+    versionPending = fetch('version.json?t=' + now, { cache: 'no-store', credentials: 'same-origin' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (v) {
+        if (!v || typeof v.build !== 'string') return null;
+        var res = { current: app.build, latest: v.build, outdated: v.build !== app.build };
+        if (res.outdated && updateBuild !== v.build) {
+          updateBuild = v.build;
+          updateBannerClosed = false;
+          if (els.banner) renderBanners();
+          MT.bus.emit('app:update', res);
+        }
+        return res;
+      }, function () { return null; })
+      .then(function (res) { versionPending = null; return res; });
+    return versionPending;
+  };
+  /** The build a newer deploy has (the "new version" banner is shown), or null. */
+  app.updateAvailable = function () { return updateBuild; };
+  function checkOnReturn() { if (app.booted && !app.paused) app.checkVersion(); }
+  document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'visible') checkOnReturn(); });
+  window.addEventListener('focus', checkOnReturn);
 
   /* ---- Shell ------------------------------------------------------------------------------- */
   function renderShell() {
@@ -180,8 +299,21 @@
   /* ---- Banners: browser storage not kept, data files missing --------------------------------- */
   function renderBanners() {
     U.clear(els.banner);
+    renderUpdateBanner();
     renderStorageBanner();
     renderDataBanner();
+  }
+  /** A newer deploy is online (app.checkVersion): non-blocking, «Recargar». */
+  function renderUpdateBanner() {
+    if (!updateBuild || updateBannerClosed) return;
+    var banner = h('div', { class: 'mt-banner mt-banner--info mt-banner--update', role: 'status', 'data-mt-update': 'newer' },
+      MT.ui.iconEl('refresh'),
+      h('div', { class: 'mt-banner__body mt-banner__body--row' },
+        h('span', null, h('strong', null, MT.t('app.update.title')), ' ', h('span', null, MT.t('app.update.text'))),
+        MT.ui.button({ icon: 'refresh', label: MT.t('app.update.reload'), kind: 'primary', size: 'sm', className: 'mt-update__reload', onClick: function () { app.reload(); } })),
+      h('button', { type: 'button', class: 'mt-btn mt-btn--ghost mt-btn--icon mt-btn--sm', title: MT.t('common.close'), 'aria-label': MT.t('common.close'), html: MT.ui.icon('close', { size: 16 }),
+        onclick: function () { updateBannerClosed = true; banner.remove(); } }));
+    els.banner.appendChild(banner);
   }
   /** Not kept between sessions: local database changes and the autosaved project would be lost. */
   function storageAtRisk() { return !MT.storage.persistent || !MT.storage.localUsable; }

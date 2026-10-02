@@ -20,6 +20,8 @@
  */
 (function () {
   'use strict';
+  // Contract version of this file (index.html data-api; the boot check refuses a mix of versions, ARCHITECTURE §16).
+  (window.MT.modules = window.MT.modules || {})['ui-maps'] = { api: '1' };
   const MT = window.MT, U = MT.util, h = U.h;
   const t = (k, v) => MT.t(k, v);
   const icon = (name, size) => MT.ui.icon(name, { size: size || 18 });

@@ -243,6 +243,43 @@ export function splitNetworkNoise(errors) {
 /** Small sleep helper (prefer explicit waits). */
 export const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
+/**
+ * A static server on 127.0.0.1 that caches like GitHub Pages (Cache-Control: max-age=600, ETag, 304 on
+ * If-None-Match; the query string is ignored, so ?v=… serves the file), with a switchable root folder
+ * to simulate a deploy (docs/ARCHITECTURE.md §16). opts.maxAge (seconds; default 600 as on Pages) shortens
+ * the cache window so that a test can live through it.
+ * → {origin, url(path), setRoot(dir), close(), log: [[status, path, time (ms), request URL]]}
+ */
+const PAGE_TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'application/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8',
+  '.json': 'application/json; charset=utf-8', '.png': 'image/png', '.svg': 'image/svg+xml', '.woff2': 'font/woff2', '.txt': 'text/plain; charset=utf-8', '.csv': 'text/csv' };
+export async function servePages(root, { maxAge = 600 } = {}) {
+  const http = await import('node:http');
+  const crypto = await import('node:crypto');
+  let cur = path.resolve(root);
+  const log = [];
+  const server = http.createServer((req, res) => {
+    let p = decodeURIComponent(new URL(req.url, 'http://x').pathname);
+    if (p.endsWith('/')) p += 'index.html';
+    const file = path.join(cur, path.normalize(p).replace(/^([/\\])+/, ''));
+    if (!file.startsWith(cur) || !existsSync(file) || statSync(file).isDirectory()) { res.writeHead(404); res.end('not found'); log.push([404, p, Date.now(), req.url]); return; }
+    const body = readFileSync(file);
+    const etag = '"' + crypto.createHash('md5').update(body).digest('hex').slice(0, 16) + '"';
+    if (req.headers['if-none-match'] === etag) { res.writeHead(304, { ETag: etag, 'Cache-Control': 'max-age=' + maxAge }); res.end(); log.push([304, p, Date.now(), req.url]); return; }
+    res.writeHead(200, { 'Content-Type': PAGE_TYPES[path.extname(file)] || 'application/octet-stream', 'Cache-Control': 'max-age=' + maxAge, ETag: etag,
+      'Last-Modified': new Date(statSync(file).mtimeMs).toUTCString() });
+    res.end(body);
+    log.push([200, p, Date.now(), req.url]);
+  });
+  await new Promise((r) => server.listen(0, '127.0.0.1', r));
+  const origin = `http://127.0.0.1:${server.address().port}`;
+  return {
+    origin, log,
+    url: (p = 'index.html') => `${origin}/${p.replace(/^\//, '')}`,
+    setRoot: (dir) => { cur = path.resolve(dir); },
+    close: () => new Promise((r) => { server.closeAllConnections && server.closeAllConnections(); server.close(r); }),
+  };
+}
+
 /** Print a compact pass/fail line and remember failures. */
 export function makeChecker(label = 'test') {
   const failures = [];

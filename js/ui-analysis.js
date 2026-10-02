@@ -13,6 +13,13 @@
  *     nearest same-chain store / nearest competitor / counts within R, close pairs (same chain first,
  *     "posible canibalización"), map with red lines for same-chain pairs (grey for competitor pairs),
  *     Excel export (Por tienda, Pares cercanos, Parámetros). Big regions are computed in idle chunks.
+ *     The map draws every store the matrix refers to (outside the region: faded, with a read-only card),
+ *     so a selected store's dashed lines always end on a dot, labelled there with the store's name.
+ *
+ * Error isolation (ARCHITECTURE §16): each part — header, each side section, link bar, results header,
+ * cards, results pane, map layers / legend / cards — renders on its own through MT.app.guard; a part that
+ * throws shows an inline error box with «Recargar» and the others still render. A failed computation
+ * says so in the results pane («Reintentar») instead of spinning or keeping stale numbers.
  *
  * Tab {id:'analysis', labelKey:'tab.analysis', icon:'target', order:15, hash:'analisis'} (Alt+2).
  * Strings 'analysis.*' (js/i18n/analysis.js) · styles .mt-analysis-* (css/analysis.css).
@@ -32,6 +39,8 @@
  */
 (function () {
   'use strict';
+  // Contract version of this file (index.html data-api; the boot check refuses a mix of versions, ARCHITECTURE §16).
+  (window.MT.modules = window.MT.modules || {})['ui-analysis'] = { api: '1' };
   const MT = window.MT, U = MT.util, h = U.h;
   const t = (k, v) => MT.t(k, v);
   const AN = () => MT.analysis;
@@ -56,6 +65,7 @@
   const BADGE = { kind: 'badge', size: 1 };
   const EMPTY = { type: 'FeatureCollection', features: [] };
   const COLOR_SAME = '#D92D3A', COLOR_COMP = '#8B8F98';
+  const COLOR_NEAR_COMP = '#52525B';                             // mode B: dashed line to the nearest competitor
   // Lima Metropolitana zones (APEIM grouping) + Callao — the same presets as the Mapas district picker.
   const LIMA_ZONES = [
     { id: 'moderna', ubigeos: ['150104', '150113', '150114', '150116', '150120', '150121', '150122', '150130', '150131', '150136', '150140', '150141'] },
@@ -197,6 +207,47 @@
   }
   function percent(n, d) { return d ? Math.round(n / d * 100) : 0; }
   const idle = () => new Promise((r) => (window.requestIdleCallback ? requestIdleCallback(() => r(), { timeout: 60 }) : setTimeout(r, 0)));
+
+  /* ---- Error isolation (ARCHITECTURE §16) -------------------------------------------------------
+   * Every part of the tab renders on its own: a part that throws (a bug, or a file of another version
+   * left in the browser cache) is replaced by an inline error box with «Recargar» (MT.app.guard) and
+   * logged, while the other parts — the other side sections, the cards, the table, the map — render. */
+  function guardIn(el, where, fn, opts) { return MT.app.guard(el, 'analysis: ' + where, fn, opts); }
+  /** fn as a guarded function: a throw becomes an error box in the element target() gives at call time. */
+  function guarded(where, target, fn, opts) {
+    return function () {
+      const self = this, args = arguments;
+      return guardIn(target ? target() : null, where, () => fn.apply(self, args), typeof opts === 'function' ? opts() : opts);
+    };
+  }
+  /** One side-panel section, built by build(); if that throws, an error section takes its place and the next sections still come. */
+  function sideSection(side, where, build) {
+    const slot = side.appendChild(h('section', { class: 'mt-analysis-sec mt-analysis-sec--error', hidden: true }));
+    guardIn(slot, 'side panel (' + where + ')', () => { slot.replaceWith(build()); });
+  }
+  /** Errors of the map's parts (layers, legend, cards): a compact, closable box over the map. */
+  const mapErrorOpts = () => ({ compact: true, onClose: () => { if (st.els.mapError) st.els.mapError.hidden = true; } });
+  const mapErrorEl = () => st.els.mapError;
+  /** A later successful map update clears a transient map error (not a failed layer install: that one stays until fixed). */
+  function hideMapError() { const el = st.els.mapError; if (el && !el.hidden && !st.layerError) { U.clear(el); el.hidden = true; } }
+  /**
+   * Re-render inside `container` keeping the keyboard focus on the same control — a chip, a results tab,
+   * a column header, a mode radio (matched by data-value / data-view / data-col / data-field / the radio's
+   * value). Those controls are rebuilt on every change; without this, focus fell back to the page.
+   */
+  function refocus(container, fn) {
+    const act = document.activeElement;
+    const key = container && act && act !== container && container.contains(act) ? focusKey(act) : null;
+    const out = fn();
+    if (key) { const el = container.querySelector(key); if (el && el !== document.activeElement) el.focus({ preventScroll: true }); }
+    return out;
+  }
+  function focusKey(el) {
+    const d = el.dataset || {};
+    for (const k of ['value', 'view', 'col', 'field']) if (d[k] !== undefined) return '[data-' + k + '="' + CSS.escape(d[k]) + '"]';
+    if (el.tagName === 'INPUT' && el.type === 'radio') return 'input[type="radio"][value="' + CSS.escape(el.value) + '"]';
+    return null;
+  }
 
   /* ---- References ------------------------------------------------------------------------ */
   function refName(r) {
@@ -472,19 +523,21 @@
    */
   function distChips(cfg) {
     const wrap = h('div', { class: 'mt-analysis-dchips', role: 'group', 'aria-label': cfg.ariaLabel || null });
-    function render() {
+    function render() { refocus(wrap, build); }      // the chip just pressed keeps the keyboard focus
+    function build() {
       const v = cfg.value();
-      U.clear(wrap);
+      // Labels first, then swap: a failing label never leaves the group half-built.
       const list = cfg.values.map((m) => ({ value: m, label: fmtRing(m) }));
       if (typeof v === 'number' && cfg.values.indexOf(v) < 0) list.push({ value: v, label: fmtRing(v), custom: true });
       list.sort((x, y) => x.value - y.value);
       (cfg.extra || []).forEach((x) => list.push(x));
+      U.clear(wrap);
       list.forEach((o) => {
         wrap.appendChild(h('button', { type: 'button', class: 'mt-analysis-chip' + (o.custom ? ' is-custom' : ''), 'aria-pressed': String(o.value === v), dataset: { value: String(o.value) },
           onclick: () => { if (o.value !== cfg.value()) cfg.onChange(o.value); } }, o.label));
       });
       if (cfg.custom) {
-        const input = h('input', { class: 'mt-input mt-input--sm mt-analysis-chip-input', type: 'text', inputmode: 'decimal', placeholder: t('analysis.matrix.custom'), 'aria-label': t('analysis.matrix.customLabel') });
+        const input = h('input', { class: 'mt-input mt-input--sm mt-analysis-chip-input', type: 'text', inputmode: 'decimal', placeholder: t('analysis.matrix.custom'), 'aria-label': t('analysis.matrix.customLabel'), dataset: { field: 'chipCustom' } });
         const apply = () => {
           const m = parseDistance(input.value), max = cfg.max || RING_MAX;
           if (!(m >= RING_MIN && m <= max)) { input.classList.add('is-invalid'); input.title = cfg.invalidText || t('analysis.rings.invalid'); return; }
@@ -541,7 +594,8 @@
       if (force || next.length !== visible.length) { visible = next; head(); return true; }
       return false;
     }
-    function head() {
+    function head() { refocus(thead, buildHead); }    // a header sorted from the keyboard keeps the focus
+    function buildHead() {
       U.clear(colgroup); U.clear(thead);
       visible.forEach((c) => colgroup.appendChild(h('col', { style: c.width ? { width: c.width + 'px' } : null })));
       const tr = h('tr');
@@ -679,7 +733,8 @@
     els.mapEl = h('div', { class: 'mt-analysis-map' });
     els.mapHint = h('div', { class: 'mt-analysis-maphint', hidden: true, role: 'status' });
     els.mapLegend = h('div', { class: 'mt-analysis-maplegend', hidden: true });
-    els.mapPane = h('div', { class: 'mt-analysis-mappane' }, els.mapEl, els.mapHint, els.mapLegend);
+    els.mapError = h('div', { class: 'mt-analysis-maperror', hidden: true });      // a map part that failed (§16)
+    els.mapPane = h('div', { class: 'mt-analysis-mappane' }, els.mapEl, els.mapHint, els.mapLegend, els.mapError);
     // One results pane per mode (kept while the other mode is shown: table sort and scroll survive).
     els.resA = h('div', { class: 'mt-analysis-respane', dataset: { mode: 'distance' } });
     els.resB = h('div', { class: 'mt-analysis-respane', dataset: { mode: 'matrix' }, hidden: true });
@@ -715,16 +770,17 @@
     renderMain();
   }
 
-  function renderHead() {
+  // The mode radios are rebuilt on a mode change: the one chosen from the keyboard keeps the focus.
+  const renderHead = guarded('header', () => st.els.head, function () { refocus(st.els.head, buildHead); });
+  function buildHead() {
     const els = st.els;
-    U.clear(els.head);
     const seg = MT.ui.segmented({
       options: [{ value: 'distance', label: t('analysis.mode.distance'), icon: 'target' }, { value: 'matrix', label: t('analysis.mode.matrix'), icon: 'table' }],
       value: st.mode, onChange: (v) => setMode(v), ariaLabel: t('analysis.mode.label'),
     });
     seg.classList.add('mt-analysis-modes');
     const n = MT.data.stores().length;
-    els.head.append(
+    U.clear(els.head).append(
       h('div', { class: 'mt-analysis-head__title' },
         h('h1', { class: 'mt-analysis-head__h' }, t('analysis.title')),
         h('span', { class: 'mt-analysis-head__meta' }, t('analysis.meta', { n: n, num: fmtNum(n) }))),
@@ -739,6 +795,7 @@
       h('div', { class: 'mt-analysis-sec__body' }, nodes));
   }
 
+  /** The side panel: each section is built on its own (sideSection) — one that fails leaves an error box, the others stay. */
   function renderSide() {
     closeTransient();
     U.clear(st.els.side);
@@ -747,6 +804,7 @@
     if (st.mode === 'distance') buildSideA(st.els.side); else buildSideB(st.els.side);
   }
 
+  /** The main area: link bar, results header, cards, results and map each render on their own (guarded). */
   function renderMain() {
     if (!st.mounted) return;
     st.els.root.dataset.mode = st.mode;
@@ -760,7 +818,7 @@
   }
 
   function closeTransient() {
-    if (st.side.chainField) st.side.chainField.close();
+    if (st.side.chainField) guardIn(null, 'chains popover', () => st.side.chainField.close());
     closePopup();
   }
 
@@ -785,87 +843,95 @@
   function buildSideA(side) {
     const a = st.a, S = st.side;
     /* Reference */
-    S.refCard = h('div', { class: 'mt-analysis-refwrap' });
-    const listId = U.uid('mt-an-ref');
-    S.refInput = h('input', { class: 'mt-input', type: 'text', role: 'combobox', 'aria-autocomplete': 'list', 'aria-expanded': 'false', 'aria-controls': listId,
-      'aria-label': t('analysis.ref.searchLabel'), placeholder: t('analysis.ref.searchPh'), autocomplete: 'off', spellcheck: 'false', dataset: { field: 'refSearch' } });
-    S.refList = h('ul', { class: 'mt-analysis-options', id: listId, role: 'listbox', 'aria-label': t('analysis.ref.resultsAria'), hidden: true });
-    S.refHint = h('div', { class: 'mt-hint mt-analysis-refhint' }, t('analysis.ref.hint'));
-    S.addr = h('div', { class: 'mt-analysis-addr', hidden: true, 'aria-live': 'polite' });
-    S.pickBtn = h('button', { type: 'button', class: 'mt-btn mt-btn--secondary mt-btn--sm mt-analysis-pickbtn', 'aria-pressed': String(st.picking), title: t('analysis.ref.pickOnMapHint'), disabled: st.mapFailed,
-      onclick: () => setPicking(!st.picking) }, iconSpan('pin', 15), h('span', null, t('analysis.ref.pickOnMap')));
-    S.recent = h('div', { class: 'mt-analysis-recent' });
-    side.appendChild(section('analysis.ref.section', 'target', [
-      S.refCard,
-      h('div', { class: 'mt-analysis-combo' }, h('div', { class: 'mt-input-group' }, iconSpan('search', 16), S.refInput), S.refList),
-      S.refHint, S.addr,
-      h('div', { class: 'mt-analysis-row' }, S.pickBtn),
-      S.recent,
-    ]));
-    S.refCombo = combobox(S.refInput, S.refList, {
-      options: refOptions,
-      render: renderRefOption,
-      onPick: pickRefOption,
-      onEnterEmpty: (q) => searchAddress(q),
+    sideSection(side, 'reference', () => {
+      S.refCard = h('div', { class: 'mt-analysis-refwrap' });
+      const listId = U.uid('mt-an-ref');
+      S.refInput = h('input', { class: 'mt-input', type: 'text', role: 'combobox', 'aria-autocomplete': 'list', 'aria-expanded': 'false', 'aria-controls': listId,
+        'aria-label': t('analysis.ref.searchLabel'), placeholder: t('analysis.ref.searchPh'), autocomplete: 'off', spellcheck: 'false', dataset: { field: 'refSearch' } });
+      S.refList = h('ul', { class: 'mt-analysis-options', id: listId, role: 'listbox', 'aria-label': t('analysis.ref.resultsAria'), hidden: true });
+      S.refHint = h('div', { class: 'mt-hint mt-analysis-refhint' }, t('analysis.ref.hint'));
+      S.addr = h('div', { class: 'mt-analysis-addr', hidden: true, 'aria-live': 'polite' });
+      S.pickBtn = h('button', { type: 'button', class: 'mt-btn mt-btn--secondary mt-btn--sm mt-analysis-pickbtn', 'aria-pressed': String(st.picking), title: t('analysis.ref.pickOnMapHint'), disabled: st.mapFailed,
+        onclick: () => setPicking(!st.picking) }, iconSpan('pin', 15), h('span', null, t('analysis.ref.pickOnMap')));
+      S.recent = h('div', { class: 'mt-analysis-recent' });
+      S.refCombo = combobox(S.refInput, S.refList, {
+        options: refOptions,
+        render: renderRefOption,
+        onPick: pickRefOption,
+        onEnterEmpty: (q) => searchAddress(q),
+      });
+      return section('analysis.ref.section', 'target', [
+        S.refCard,
+        h('div', { class: 'mt-analysis-combo' }, h('div', { class: 'mt-input-group' }, iconSpan('search', 16), S.refInput), S.refList),
+        S.refHint, S.addr,
+        h('div', { class: 'mt-analysis-row' }, S.pickBtn),
+        S.recent,
+      ]);
     });
 
     /* Universe */
-    const by = MT.ui.segmented({
-      options: [{ value: 'distance', label: t('analysis.universe.distance') }, { value: 'districts', label: t('analysis.universe.districts') }],
-      value: a.uniKind === 'districts' ? 'districts' : 'distance', ariaLabel: t('analysis.universe.by'),
-      onChange: (v) => setUniverseA(v === 'districts' ? { kind: 'districts' } : { kind: a.lastDist }),
+    sideSection(side, 'universe', () => {
+      const by = MT.ui.segmented({
+        options: [{ value: 'distance', label: t('analysis.universe.distance') }, { value: 'districts', label: t('analysis.universe.districts') }],
+        value: a.uniKind === 'districts' ? 'districts' : 'distance', ariaLabel: t('analysis.universe.by'),
+        onChange: (v) => setUniverseA(v === 'districts' ? { kind: 'districts' } : { kind: a.lastDist }),
+      });
+      by.classList.add('mt-seg--block', 'mt-analysis-by');
+      S.uniBy = by;
+      S.uniChips = distChips({
+        values: UNIVERSE_KM.map((k) => k * 1000), extra: [{ value: 'all', label: t('analysis.universe.all') }],
+        value: () => (a.uniKind === 'all' ? 'all' : a.uniMeters), ariaLabel: t('analysis.universe.maxLabel'),
+        onChange: (v) => setUniverseA(v === 'all' ? { kind: 'all' } : { kind: 'distance', meters: v }),
+      });
+      S.uniDist = field(t('analysis.universe.maxLabel'), S.uniChips.el);
+      S.uniDistricts = districtPicker({ get: () => a.districts, set: (list) => setUniverseA({ kind: 'districts', districts: list }) });
+      S.uniDistrictsBox = h('div', { class: 'mt-analysis-field' }, S.uniDistricts.el);
+      S.chainField = chainField({ get: () => a.chains, set: (set) => { a.chains = set; a.chainsTouched = true; onParamsA(); }, counts: () => a.counts, defaults: () => AN().defaultChains(a.ref) });
+      const tv = MT.ui.switchEl({ label: t('analysis.universe.toVerify'), checked: a.includeToVerify, onChange: (on) => { a.includeToVerify = on; onParamsA(); } });
+      return (S.uniSection = section('analysis.universe.section', 'layers', [
+        by, S.uniDist, S.uniDistrictsBox, S.chainField.el,
+        h('div', { class: 'mt-analysis-field' }, tv, h('div', { class: 'mt-hint mt-analysis-switchhint' }, t('analysis.universe.toVerifyHint') + ' ' + t('analysis.universe.closedNote'))),
+      ]));
     });
-    by.classList.add('mt-seg--block', 'mt-analysis-by');
-    S.uniBy = by;
-    S.uniChips = distChips({
-      values: UNIVERSE_KM.map((k) => k * 1000), extra: [{ value: 'all', label: t('analysis.universe.all') }],
-      value: () => (a.uniKind === 'all' ? 'all' : a.uniMeters), ariaLabel: t('analysis.universe.maxLabel'),
-      onChange: (v) => setUniverseA(v === 'all' ? { kind: 'all' } : { kind: 'distance', meters: v }),
-    });
-    S.uniDist = field(t('analysis.universe.maxLabel'), S.uniChips.el);
-    S.uniDistricts = districtPicker({ get: () => a.districts, set: (list) => setUniverseA({ kind: 'districts', districts: list }) });
-    S.uniDistrictsBox = h('div', { class: 'mt-analysis-field' }, S.uniDistricts.el);
-    S.chainField = chainField({ get: () => a.chains, set: (set) => { a.chains = set; a.chainsTouched = true; onParamsA(); }, counts: () => a.counts, defaults: () => AN().defaultChains(a.ref) });
-    const tv = MT.ui.switchEl({ label: t('analysis.universe.toVerify'), checked: a.includeToVerify, onChange: (on) => { a.includeToVerify = on; onParamsA(); } });
-    side.appendChild(section('analysis.universe.section', 'layers', [
-      by, S.uniDist, S.uniDistrictsBox, S.chainField.el,
-      h('div', { class: 'mt-analysis-field' }, tv, h('div', { class: 'mt-hint mt-analysis-switchhint' }, t('analysis.universe.toVerifyHint') + ' ' + t('analysis.universe.closedNote'))),
-    ]));
 
     /* Rings */
-    S.ringChips = h('div', { class: 'mt-chips mt-analysis-chips', role: 'list' });
-    S.ringInput = h('input', { class: 'mt-input mt-input--sm', type: 'text', inputmode: 'decimal', placeholder: t('analysis.rings.addPh'), 'aria-label': t('analysis.rings.addLabel'), dataset: { field: 'ringAdd' } });
-    S.ringMsg = h('div', { class: 'mt-field__error', role: 'alert' });
-    const addRing = () => {
-      const m = parseDistance(S.ringInput.value);
-      let err = '';
-      if (!(m >= RING_MIN && m <= RING_MAX)) err = t('analysis.rings.invalid');
-      else if (a.rings.indexOf(m) >= 0) err = t('analysis.rings.exists');
-      else if (a.rings.length >= MAX_RINGS) err = t('analysis.rings.max');
-      S.ringMsg.textContent = err;
-      S.ringInput.classList.toggle('is-invalid', !!err);
-      if (err) return;
-      S.ringInput.value = '';
-      setRingsA(a.rings.concat(m));
-    };
-    S.ringInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); addRing(); } });
-    side.appendChild(section('analysis.rings.section', 'target', [
-      h('div', { class: 'mt-hint' }, t('analysis.rings.hint')),
-      S.ringChips,
-      h('div', { class: 'mt-analysis-row mt-analysis-ringadd' }, S.ringInput, MT.ui.button({ icon: 'plus', label: t('analysis.rings.add'), kind: 'secondary', size: 'sm', onClick: addRing })),
-      S.ringMsg,
-    ], linkBtn(t('analysis.rings.reset'), () => { S.ringMsg.textContent = ''; setRingsA(DEFAULT_RINGS.slice()); })));
+    sideSection(side, 'rings', () => {
+      S.ringChips = h('div', { class: 'mt-chips mt-analysis-chips', role: 'list' });
+      S.ringInput = h('input', { class: 'mt-input mt-input--sm', type: 'text', inputmode: 'decimal', placeholder: t('analysis.rings.addPh'), 'aria-label': t('analysis.rings.addLabel'), dataset: { field: 'ringAdd' } });
+      S.ringMsg = h('div', { class: 'mt-field__error', role: 'alert' });
+      const addRing = () => {
+        const m = parseDistance(S.ringInput.value);
+        let err = '';
+        if (!(m >= RING_MIN && m <= RING_MAX)) err = t('analysis.rings.invalid');
+        else if (a.rings.indexOf(m) >= 0) err = t('analysis.rings.exists');
+        else if (a.rings.length >= MAX_RINGS) err = t('analysis.rings.max');
+        S.ringMsg.textContent = err;
+        S.ringInput.classList.toggle('is-invalid', !!err);
+        if (err) return;
+        S.ringInput.value = '';
+        setRingsA(a.rings.concat(m));
+      };
+      S.ringInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); addRing(); } });
+      return section('analysis.rings.section', 'target', [
+        h('div', { class: 'mt-hint' }, t('analysis.rings.hint')),
+        S.ringChips,
+        h('div', { class: 'mt-analysis-row mt-analysis-ringadd' }, S.ringInput, MT.ui.button({ icon: 'plus', label: t('analysis.rings.add'), kind: 'secondary', size: 'sm', onClick: addRing })),
+        S.ringMsg,
+      ], linkBtn(t('analysis.rings.reset'), () => { S.ringMsg.textContent = ''; setRingsA(DEFAULT_RINGS.slice()); }));
+    });
 
     /* Map options */
-    const lines = MT.ui.switchEl({ label: t('analysis.mapOpts.lines'), checked: a.showLines, onChange: (on) => { a.showLines = on; saveSettings(); updateMap(); } });
-    S.topInput = h('input', { class: 'mt-input mt-input--sm mt-input--num mt-analysis-topin', type: 'number', min: '0', max: String(TOP_MAX), step: '1', value: String(a.listTop), 'aria-label': t('analysis.mapOpts.topAria') });
-    const setTop = () => { const v = numOr(S.topInput.value, a.listTop, 0, TOP_MAX); S.topInput.value = String(v); if (v !== a.listTop) { a.listTop = v; saveSettings(); updateMap(); } };
-    S.topInput.addEventListener('change', setTop);
-    S.topInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); setTop(); } });
-    side.appendChild(section('analysis.mapOpts.section', 'map', [
-      h('div', { class: 'mt-analysis-field' }, lines),
-      h('label', { class: 'mt-analysis-inline' }, h('span', { class: 'mt-analysis-inline__text' }, h('span', null, t('analysis.mapOpts.top')), h('small', { class: 'mt-hint' }, t('analysis.mapOpts.topHint'))), S.topInput),
-    ]));
+    sideSection(side, 'map options', () => {
+      const lines = MT.ui.switchEl({ label: t('analysis.mapOpts.lines'), checked: a.showLines, onChange: (on) => { a.showLines = on; saveSettings(); updateMap(); } });
+      S.topInput = h('input', { class: 'mt-input mt-input--sm mt-input--num mt-analysis-topin', type: 'number', min: '0', max: String(TOP_MAX), step: '1', value: String(a.listTop), 'aria-label': t('analysis.mapOpts.topAria') });
+      const setTop = () => { const v = numOr(S.topInput.value, a.listTop, 0, TOP_MAX); S.topInput.value = String(v); if (v !== a.listTop) { a.listTop = v; saveSettings(); updateMap(); } };
+      S.topInput.addEventListener('change', setTop);
+      S.topInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); setTop(); } });
+      return section('analysis.mapOpts.section', 'map', [
+        h('div', { class: 'mt-analysis-field' }, lines),
+        h('label', { class: 'mt-analysis-inline' }, h('span', { class: 'mt-analysis-inline__text' }, h('span', null, t('analysis.mapOpts.top')), h('small', { class: 'mt-hint' }, t('analysis.mapOpts.topHint'))), S.topInput),
+      ]);
+    });
 
     renderRefCard();
     renderUniverseA();
@@ -950,7 +1016,7 @@
       return [];
     });
   }
-  function renderAddress() {
+  const renderAddress = guarded('address results', () => st.side.addr, function () {
     const S = st.side, a = st.a;
     if (!S.addr) return;
     U.clear(S.addr);
@@ -975,9 +1041,9 @@
       });
       S.addr.appendChild(ul);
     }
-  }
+  });
 
-  function renderRefCard() {
+  const renderRefCard = guarded('reference card', () => st.side.refCard, function () {
     const S = st.side, a = st.a, r = a.ref;
     if (!S.refCard) return;
     U.clear(S.refCard);
@@ -1033,9 +1099,9 @@
     S.refCard.appendChild(h('div', { class: 'mt-analysis-refcard__fields' },
       field(t('analysis.ref.labelLabel'), labelIn),
       field(t('analysis.ref.ownChain'), own, t('analysis.ref.ownChainHint'))));
-  }
+  });
 
-  function renderRecent() {
+  const renderRecent = guarded('recent references', () => st.side.recent, function () {
     const S = st.side, a = st.a;
     if (!S.recent) return;
     U.clear(S.recent);
@@ -1051,9 +1117,9 @@
         isStore && x.chainId ? logo(x.chainId, 18) : iconSpan('pin', 15, 'mt-analysis-recent__pin'), h('span', { class: 'mt-truncate' }, name)));
     });
     S.recent.appendChild(ul);
-  }
+  });
 
-  function renderUniverseA() {
+  const renderUniverseA = guarded('universe', () => st.side.uniSection, function () {
     const S = st.side, a = st.a;
     if (!S.uniDist) return;
     const byDistricts = a.uniKind === 'districts';
@@ -1063,8 +1129,8 @@
     S.uniChips.update();
     S.uniDistricts.update();
     S.chainField.update();
-  }
-  function renderRingChips() {
+  });
+  const renderRingChips = guarded('rings', () => st.side.ringChips, function () {
     const S = st.side, a = st.a;
     if (!S.ringChips) return;
     U.clear(S.ringChips);
@@ -1074,7 +1140,7 @@
         a.rings.length > 1 ? h('button', { type: 'button', class: 'mt-chip__x', 'aria-label': t('analysis.rings.remove', { d: fmtRing(m) }), title: t('analysis.rings.remove', { d: fmtRing(m) }),
           html: icon('close', 14), onclick: () => setRingsA(a.rings.filter((x) => x !== m)) }) : null));
     });
-  }
+  });
 
   /* ---- Mode A — state changes ---- */
   function setRef(ref, opts) {
@@ -1147,6 +1213,7 @@
   function emptyReasonA() {
     const a = st.a;
     if (!a.ref) return 'noRef';
+    if (a.error) return 'error';
     if (a.uniKind === 'districts' && !a.districts.length) return 'noDistricts';
     if (!a.chains || !a.chains.size) return 'noChains';
     if (!a.res || !a.res.rows.length) return 'noStores';
@@ -1167,7 +1234,19 @@
   }
   /** The rings left out because they lie past the distance universe ([] otherwise). */
   function ringsCut() { const a = st.a; return a.uniKind === 'distance' ? a.rings.filter((m) => m > a.uniMeters) : []; }
+  /**
+   * computeA() with error isolation: a failure (logged) leaves no stale numbers — the results pane
+   * says the distances could not be computed, with «Reintentar» and «Recargar» (§16).
+   */
   function computeA() {
+    const a = st.a;
+    a.error = null;
+    try { computeDistances(); } catch (err) {
+      console.error('[analysis] distances failed', err);
+      Object.assign(a, { res: null, ringSum: null, counts: {}, byId: null, near: null, selected: null, error: err });
+    }
+  }
+  function computeDistances() {
     const a = st.a;
     if (!a.ref) { a.res = null; a.ringSum = null; a.counts = {}; a.byId = null; a.near = null; return; }
     // A store reference follows the store's current position (or its last known one).
@@ -1217,7 +1296,7 @@
   /* =========================================================================================
    * Mode A — main area
    * ======================================================================================= */
-  function renderLinkBar() {
+  const renderLinkBar = guarded('slide link bar', () => st.els.linkBar, function () {
     const bar = st.els.linkBar;
     U.clear(bar);
     const m = st.linked ? MT.project.getMap(st.linked) : null;
@@ -1226,9 +1305,9 @@
     if (bar.hidden) return;
     bar.append(iconSpan('slides', 16), h('span', { class: 'mt-analysis-linkbar__text' }, t('analysis.actions.linked', { title: m.title || t('analysis.actions.untitled') })),
       h('span', { class: 'mt-spacer' }), linkBtn(t('analysis.actions.unlink'), () => { st.linked = null; renderMain(); }));
-  }
+  });
 
-  function renderMainHeadA() {
+  const renderMainHeadA = guarded('results header', () => st.els.mainHead, function () {
     const el = st.els.mainHead, a = st.a;
     if (!el || st.mode !== 'distance') return;
     U.clear(el);
@@ -1254,7 +1333,7 @@
           : a.ref.label ? t('analysis.results.title', { ref: a.ref.label }) : t('analysis.results.titlePoint', { coords: AN().formatCoords(a.ref.lat, a.ref.lng) })),
         h('div', { class: 'mt-analysis-mainhead__meta' }, meta)),
       actions);
-  }
+  });
 
   function statCard(cls, label, nodes) {
     return h('div', { class: 'mt-analysis-stat' + (cls ? ' ' + cls : '') }, h('div', { class: 'mt-analysis-stat__label', title: String(label) }, unitText(label)), nodes);
@@ -1285,7 +1364,7 @@
     }
     return statCard(cls + (inside ? '' : ' is-outside'), label, nodes);
   }
-  function renderSummaryA() {
+  const renderSummaryA = guarded('summary cards', () => st.els.summary, function () {
     const el = st.els.summary, a = st.a;
     U.clear(el);
     const reason = emptyReasonA();
@@ -1317,7 +1396,7 @@
     tbl.appendChild(body);
     cards.push(statCard('is-rings', t('analysis.summary.rings'), [h('div', { class: 'mt-analysis-ringsum__wrap' }, tbl), ringsNote()]));
     cards.forEach((c) => el.appendChild(c));
-  }
+  });
   /** Muted line under the ring counts: rings left out past the universe / counts limited to the districts. */
   function ringsNoteText() {
     const a = st.a, cut = ringsCut();
@@ -1394,15 +1473,16 @@
       onActivate: (id) => selectStoreA(id, { source: 'activate' }),
     });
   }
-  function renderResultsA() {
+  const renderResultsA = guarded('results', () => st.els.resA, function () {
     const a = st.a;
     if (st.mode !== 'distance') return;
     if (!a.ui) buildResultsA();
     const ui = a.ui, reason = emptyReasonA();
     const n = a.res ? a.res.rows.length : 0;
-    U.clear(ui.tabs);
-    ui.tabs.appendChild(tabStrip([{ id: 'stores', label: t('analysis.results.tabStores'), count: reason === 'noRef' ? undefined : n }, { id: 'rings', label: t('analysis.results.tabRings') }],
-      a.view, (v) => { a.view = v; renderResultsA(); }));
+    refocus(ui.tabs, () => {            // the tab chosen from the keyboard keeps the focus
+      U.clear(ui.tabs).appendChild(tabStrip([{ id: 'stores', label: t('analysis.results.tabStores'), count: reason === 'noRef' ? undefined : n }, { id: 'rings', label: t('analysis.results.tabRings') }],
+        a.view, (v) => { a.view = v; renderResultsA(); }));
+    });
     ui.bar.hidden = reason === 'noRef';
     U.clear(ui.content);
     if (reason && reason !== 'noStores') { ui.filterBox.hidden = true; ui.count.textContent = ''; ui.content.appendChild(emptyA(reason)); return; }
@@ -1422,9 +1502,10 @@
     ui.shown = a.res; ui.shownFilter = a.filter;
     a.table.setRows(rows, { keepScroll: same });
     a.table.select(a.selected, { scroll: false });
-  }
+  }, () => ({ onError: () => { st.a.ui = null; } }));
   function emptyA(reason) {
     const a = st.a;
+    if (reason === 'error') return MT.app.errorBox(a.error, { where: 'analysis: distances', titleKey: 'analysis.results.failed', retry: () => onParamsA() });
     if (reason === 'noRef') {
       return MT.ui.emptyState({ icon: 'target', title: t('analysis.ref.emptyTitle'), text: MT.data.stores().length ? t('analysis.ref.emptyText') : t('analysis.empty.noData'), className: 'mt-analysis-empty',
         action: MT.ui.button({ icon: 'search', label: t('analysis.ref.searchLabel'), kind: 'secondary', onClick: () => { if (st.side.refInput) st.side.refInput.focus(); } }) });
@@ -1518,29 +1599,41 @@
    * ======================================================================================= */
   function buildSideB(side) {
     const b = st.b, S = st.side;
-    S.regionPicker = districtPicker({ get: () => b.districts, set: (list) => { b.districts = list; onParamsB({ fit: true }); } });
-    side.appendChild(section('analysis.matrix.region', 'pin', [h('div', { class: 'mt-hint' }, t('analysis.matrix.regionHint')), S.regionPicker.el]));
-    S.chainField = chainField({ get: () => b.chains, set: (set) => { b.chains = set; onParamsB(); }, counts: () => b.counts, defaults: () => AN().defaultChains(null) });
-    const tv = MT.ui.switchEl({ label: t('analysis.universe.toVerify'), checked: b.includeToVerify, onChange: (on) => { b.includeToVerify = on; onParamsB(); } });
-    side.appendChild(section('analysis.universe.section', 'layers', [S.chainField.el,
-      h('div', { class: 'mt-analysis-field' }, tv, h('div', { class: 'mt-hint mt-analysis-switchhint' }, t('analysis.universe.closedNote')))]));
-    S.radius = distChips({ values: NEAR_PRESETS, value: () => b.radius, custom: true, ariaLabel: t('analysis.matrix.radius'), onChange: (v) => { b.radius = v; S.radius.update(); onParamsB(); } });
-    S.threshold = distChips({ values: NEAR_PRESETS, value: () => b.threshold, custom: true, max: PAIR_MAX, invalidText: t('analysis.matrix.thresholdInvalid', { max: fmtRing(PAIR_MAX) }),
-      ariaLabel: t('analysis.matrix.threshold'), onChange: (v) => { b.threshold = v; S.threshold.update(); onParamsB(); } });
-    const comp = MT.ui.switchEl({ label: t('analysis.matrix.showComp'), checked: b.showComp, onChange: (on) => { b.showComp = on; onParamsB(); } });
-    const nb = MT.ui.switchEl({ label: t('analysis.matrix.neighbors'), checked: b.neighbors, onChange: (on) => { b.neighbors = on; onParamsB(); } });
-    side.appendChild(section('analysis.matrix.title', 'sliders', [
-      field(t('analysis.matrix.radius'), S.radius.el, t('analysis.matrix.radiusHint')),
-      field(t('analysis.matrix.threshold'), S.threshold.el, t('analysis.matrix.thresholdHint', { max: fmtRing(PAIR_MAX) })),
-      h('div', { class: 'mt-analysis-field' }, comp),
-      h('div', { class: 'mt-analysis-field' }, nb, h('div', { class: 'mt-hint mt-analysis-switchhint' }, t('analysis.matrix.neighborsHint'))),
-    ]));
+    sideSection(side, 'region', () => {
+      S.regionPicker = districtPicker({ get: () => b.districts, set: (list) => { b.districts = list; onParamsB({ fit: true }); } });
+      return section('analysis.matrix.region', 'pin', [h('div', { class: 'mt-hint' }, t('analysis.matrix.regionHint')), S.regionPicker.el]);
+    });
+    sideSection(side, 'chains', () => {
+      S.chainField = chainField({ get: () => b.chains, set: (set) => { b.chains = set; onParamsB(); }, counts: () => b.counts, defaults: () => AN().defaultChains(null) });
+      const tv = MT.ui.switchEl({ label: t('analysis.universe.toVerify'), checked: b.includeToVerify, onChange: (on) => { b.includeToVerify = on; onParamsB(); } });
+      return section('analysis.universe.section', 'layers', [S.chainField.el,
+        h('div', { class: 'mt-analysis-field' }, tv, h('div', { class: 'mt-hint mt-analysis-switchhint' }, t('analysis.universe.closedNote')))]);
+    });
+    sideSection(side, 'parameters', () => {
+      S.radius = distChips({ values: NEAR_PRESETS, value: () => b.radius, custom: true, ariaLabel: t('analysis.matrix.radius'), onChange: (v) => { b.radius = v; S.radius.update(); onParamsB(); } });
+      S.threshold = distChips({ values: NEAR_PRESETS, value: () => b.threshold, custom: true, max: PAIR_MAX, invalidText: t('analysis.matrix.thresholdInvalid', { max: fmtRing(PAIR_MAX) }),
+        ariaLabel: t('analysis.matrix.threshold'), onChange: (v) => { b.threshold = v; S.threshold.update(); onParamsB(); } });
+      const comp = MT.ui.switchEl({ label: t('analysis.matrix.showComp'), checked: b.showComp, onChange: (on) => { b.showComp = on; onParamsB(); } });
+      const nb = MT.ui.switchEl({ label: t('analysis.matrix.neighbors'), checked: b.neighbors, onChange: (on) => { b.neighbors = on; onParamsB(); } });
+      return section('analysis.matrix.title', 'sliders', [
+        field(t('analysis.matrix.radius'), S.radius.el, t('analysis.matrix.radiusHint')),
+        field(t('analysis.matrix.threshold'), S.threshold.el, t('analysis.matrix.thresholdHint', { max: fmtRing(PAIR_MAX) })),
+        h('div', { class: 'mt-analysis-field' }, comp),
+        h('div', { class: 'mt-analysis-field' }, nb, h('div', { class: 'mt-hint mt-analysis-switchhint' }, t('analysis.matrix.neighborsHint'))),
+      ]);
+    });
+  }
+  /** The side panel's pickers follow the parameters (each one on its own: a broken section never stops the others). */
+  function updateSideB() {
+    const S = st.side;
+    if (S.regionPicker) guardIn(null, 'region picker', () => S.regionPicker.update());
+    if (S.chainField) guardIn(null, 'chains', () => S.chainField.update());
   }
   function onParamsB(opts) {
     saveSettings();
     st.b.selectedPair = null;                          // pair indices change with every recomputation
     closePopup();
-    if (st.side.regionPicker) { st.side.regionPicker.update(); st.side.chainField.update(); }
+    updateSideB();
     if (opts && opts.fit) st.b.fitPending = true;     // framed on the region's stores once computed
     scheduleB(0);
   }
@@ -1551,7 +1644,16 @@
     const gen = ++st.b.gen;                          // cancels a running chunked computation
     st.b.computing = true;
     timerB = setTimeout(() => {
-      computeB().catch((err) => { console.error('[analysis] matrix failed', err); st.b.computing = false; }).then(() => {
+      computeB().catch((err) => {
+        console.error('[analysis] matrix failed', err);
+        if (gen !== st.b.gen) return;                  // a newer run is on its way
+        // No stale numbers under the new controls: the cards, table and map lines go, the results
+        // pane says the matrix could not be computed («Reintentar», «Recargar»; ARCHITECTURE §16).
+        Object.assign(st.b, { rows: null, pairs: null, pairCounts: null, byId: null, region: null, inRegion: null, extra: null, shown: null,
+          selected: null, selectedPair: null, computing: false, progress: 0, error: err });
+        closePopup();
+        renderB();
+      }).then(() => {
         if (gen !== st.b.gen) return;                  // superseded: the newer run resolves the waiters
         const w = waitersB; waitersB = [];
         w.forEach((fn) => fn());
@@ -1569,9 +1671,10 @@
    */
   async function computeB() {
     const b = st.b, gen = b.gen, t0 = performance.now();
+    b.error = null;
     const ids = sortedChainIds(b.chains);
     if (!b.districts.length) {
-      Object.assign(b, { rows: null, pairs: null, pairCounts: null, byId: null, region: null, inRegion: null, extra: null, counts: {}, computing: false, fitPending: false });
+      Object.assign(b, { rows: null, pairs: null, pairCounts: null, byId: null, region: null, inRegion: null, extra: null, shown: null, counts: {}, computing: false, fitPending: false });
       renderB();
       return;
     }
@@ -1586,10 +1689,10 @@
     };
     const chunks = split(region);
     const inRegion = new Set(region.map((s) => s.id));
-    let pool = region;
+    let pool = region, idx = null;
     const extra = new Map();
     if (b.neighbors && region.length) {
-      const idx = AN().index(cands);
+      idx = AN().index(cands);
       region.forEach((s) => idx.within(s.lat, s.lng, b.threshold, (o) => !inRegion.has(o.id)).forEach((x) => extra.set(x.store.id, x.store)));
       pool = region.concat(Array.from(extra.values()));
     }
@@ -1624,15 +1727,28 @@
     const pairCounts = { total: pairs.length, same: same, comp: pairs.length - same };
     if (pairs.length > PAIR_LIST_MAX) pairs = pairs.slice(0, PAIR_LIST_MAX);
     pairs.forEach((p, i) => { p.key = String(i); });
-    Object.assign(b, { rows: rows, pairs: pairs, pairCounts: pairCounts, region: region, inRegion: inRegion, extra: extra, byId: new Map(rows.map((r) => [r.store.id, r])), computing: false, progress: 1, ms: Math.round(performance.now() - t0) });
+    const shown = outsideStoresB(rows, region, inRegion, extra, idx);
+    Object.assign(b, { rows: rows, pairs: pairs, pairCounts: pairCounts, region: region, inRegion: inRegion, extra: extra, shown: shown, byId: new Map(rows.map((r) => [r.store.id, r])), computing: false, progress: 1, ms: Math.round(performance.now() - t0) });
     if (b.selected && !b.byId.has(b.selected)) b.selected = null;
     if (b.selectedPair && !pairs[+b.selectedPair]) b.selectedPair = null;
     renderB();
-    if (b.fitPending && st.mode === 'matrix') { b.fitPending = false; fitB(true); }
+    if (b.fitPending && st.mode === 'matrix') { b.fitPending = false; guardIn(st.els.mapError, 'map camera', () => fitB(true), mapErrorOpts()); }
+  }
+  /**
+   * The stores outside the region the map draws (faded, "outside the region"): every store the matrix
+   * refers to — the neighbours of the close pairs (within the threshold, = extra), the neighbours the
+   * "within R" counts include, and each store's nearest same-chain store and nearest competitor (searched
+   * in all of Peru). A dashed line or a count never points at an empty spot of the map.
+   */
+  function outsideStoresB(rows, region, inRegion, extra, idx) {
+    const b = st.b, shown = new Map(extra);
+    if (idx && b.radius > b.threshold) region.forEach((s) => idx.within(s.lat, s.lng, b.radius, (o) => !inRegion.has(o.id)).forEach((x) => shown.set(x.store.id, x.store)));
+    rows.forEach((r) => [r.nearestSame, r.nearestCompetitor].forEach((x) => { if (x && !inRegion.has(x.store.id)) shown.set(x.store.id, x.store); }));
+    return shown;
   }
   function renderB() {
     if (!st.mounted || st.mode !== 'matrix') return;
-    if (st.side.chainField) st.side.chainField.update();
+    updateSideB();
     renderMainHeadB(); renderSummaryB(); renderResultsB(); renderMapHint(); updateMap();
     if (st.b.rows) announce(t('analysis.results.stores', { n: st.b.rows.length, num: fmtNum(st.b.rows.length) }));
   }
@@ -1655,7 +1771,7 @@
     if (ds.length <= 3) return ds.map((u) => (D.get(u) || {}).district || u).join(', ');
     return t('analysis.matrix.regionDistricts', { n: ds.length });
   }
-  function renderMainHeadB() {
+  const renderMainHeadB = guarded('results header', () => st.els.mainHead, function () {
     const el = st.els.mainHead, b = st.b;
     if (!el || st.mode !== 'matrix') return;
     U.clear(el);
@@ -1670,8 +1786,8 @@
         h('div', { class: 'mt-analysis-mainhead__meta' }, meta)),
       h('div', { class: 'mt-analysis-mainhead__actions' },
         MT.ui.button({ icon: 'table', label: t('analysis.actions.excel'), kind: 'secondary', size: 'sm', disabled: !b.rows || !b.rows.length || b.computing, onClick: () => exportXlsx(), className: 'mt-analysis-act-excel' })));
-  }
-  function renderSummaryB() {
+  });
+  const renderSummaryB = guarded('summary cards', () => st.els.summary, function () {
     const el = st.els.summary, b = st.b;
     U.clear(el);
     el.hidden = !b.rows || !b.rows.length;
@@ -1688,7 +1804,7 @@
       statCard('is-alert' + (samePairs ? ' is-hot' : ''), t('analysis.matrix.summary.samePairs', { d: fmtRing(b.threshold) }), [big(samePairs), sub(t('analysis.matrix.summary.samePairsSub'))]),
       statCard('is-count', t('analysis.matrix.summary.withSame', { d: fmtRing(b.radius) }), [big(withSame), sub(t('analysis.matrix.summary.share', { pct: percent(withSame, n) }))]),
       statCard('is-count', t('analysis.matrix.summary.withComp', { d: fmtRing(b.radius) }), [big(withComp), sub(t('analysis.matrix.summary.share', { pct: percent(withComp, n) }))]));
-  }
+  });
 
   function columnsB() {
     const b = st.b;
@@ -1762,15 +1878,16 @@
       return words.every((w) => hay.indexOf(w) >= 0);
     });
   }
-  function renderResultsB() {
+  const renderResultsB = guarded('results', () => st.els.resB, function () {
     const b = st.b;
     if (st.mode !== 'matrix') return;
     if (!b.ui) buildResultsB();
     const ui = b.ui;
-    U.clear(ui.tabs);
-    ui.tabs.appendChild(tabStrip([
-      { id: 'stores', label: t('analysis.matrix.tabStores'), count: b.rows ? b.rows.length : undefined },
-      { id: 'pairs', label: t('analysis.matrix.tabPairs'), count: b.pairCounts ? b.pairCounts.total : b.pairs ? b.pairs.length : undefined }], b.view, (v) => { b.view = v; renderResultsB(); updateMap(); }));
+    refocus(ui.tabs, () => {
+      U.clear(ui.tabs).appendChild(tabStrip([
+        { id: 'stores', label: t('analysis.matrix.tabStores'), count: b.rows ? b.rows.length : undefined },
+        { id: 'pairs', label: t('analysis.matrix.tabPairs'), count: b.pairCounts ? b.pairCounts.total : b.pairs ? b.pairs.length : undefined }], b.view, (v) => { b.view = v; renderResultsB(); updateMap(); }));
+    });
     ui.progress.hidden = !(b.computing && b.progress > 0 && b.progress < 1);
     U.clear(ui.content);
     if (!b.districts.length) {
@@ -1784,6 +1901,11 @@
       return;
     }
     ui.bar.hidden = false;
+    if (b.error && !b.computing) {
+      ui.filterBox.hidden = true; ui.count.textContent = '';
+      ui.content.appendChild(MT.app.errorBox(b.error, { where: 'analysis: matrix', titleKey: 'analysis.matrix.failed', retry: () => scheduleB(0) }));
+      return;
+    }
     if (!b.rows) { ui.filterBox.hidden = true; ui.count.textContent = ''; ui.content.appendChild(h('div', { class: 'mt-analysis-loading' }, h('span', { class: 'mt-spinner' }))); return; }
     if (!b.rows.length) {
       ui.filterBox.hidden = true; ui.count.textContent = '';
@@ -1816,7 +1938,7 @@
     b.table.setRows(rows, { keepScroll: true });
     b.table.refresh();               // header labels carry R
     b.table.select(b.selected, { scroll: false });
-  }
+  }, () => ({ onError: () => { st.b.ui = null; } }));
 
   function selectStoreB(id, opts) {
     opts = opts || {};
@@ -1830,7 +1952,7 @@
       b.table.select(id, { center: true, source: 'api' });
     }
     updateSelection();
-    if (opts.source !== 'map') ensureVisible(row.store, [row.nearestSame && row.nearestSame.store].filter(Boolean));
+    if (opts.source !== 'map') ensureVisible(row.store, [row.nearestSame, row.nearestCompetitor].filter(Boolean).map((x) => x.store));
     if (opts.source !== 'key') openPopupB(row); else closePopup();
   }
   function selectPair(key, opts) {
@@ -1872,7 +1994,15 @@
       if (!have.length) return [];
       return map.queryRenderedFeatures([[p.x - 6, p.y - 6], [p.x + 6, p.y + 6]], { layers: have });
     };
-    map.on('click', (e) => {
+    // Handlers are guarded: an error shows a box over the map instead of a dead click (§16).
+    map.on('click', (e) => guardIn(st.els.mapError, 'map click', () => onMapClick(e), mapErrorOpts()));
+    let tipFailed = false;
+    map.on('mousemove', (e) => {
+      if (tipFailed) return;
+      try { onMapMove(e); } catch (err) { tipFailed = true; if (st.tip) st.tip.remove(); console.error('[analysis] map hover failed', err); }
+    });
+    map.on('mouseout', () => { if (st.tip) st.tip.remove(); });
+    function onMapClick(e) {
       if (!st.mapReady) return;
       const feats = hit(e);
       const storeF = feats.find((f) => /stores|badges|all$/.test(f.layer.id));
@@ -1888,11 +2018,13 @@
         return;
       }
       if (storeF && st.b.byId && st.b.byId.has(storeF.properties.id)) { selectStoreB(storeF.properties.id, { source: 'map' }); return; }
+      // A faded dot outside the region (a neighbour, or the far end of a dashed line): its own card.
+      if (storeF && storeF.properties.id && st.b.shown && st.b.shown.has(storeF.properties.id)) { openOutsidePopupB(st.b.shown.get(storeF.properties.id)); return; }
       const pairF = feats.find((f) => /pairs/.test(f.layer.id));
       if (pairF) { selectPair(pairF.properties.key, { source: 'map' }); return; }
       closePopup();
-    });
-    map.on('mousemove', (e) => {
+    }
+    function onMapMove(e) {
       if (!st.mapReady) return;
       const feats = hit(e);
       const f = feats.find((x) => /stores|badges|all$/.test(x.layer.id)) || feats[0];
@@ -1902,9 +2034,9 @@
       if (!s) { st.tip.remove(); return; }
       let sub = storeSub(s);
       if (st.mode === 'distance' && st.a.byId && st.a.byId.has(s.id)) sub = fmtDist(st.a.byId.get(s.id).meters) + ' · ' + sub;
+      if (st.mode === 'matrix' && st.b.inRegion && !st.b.inRegion.has(s.id)) sub += ' · ' + t('analysis.matrix.outside');
       st.tip.setLngLat([s.lng, s.lat]).setDOMContent(h('div', null, h('strong', null, s.name), h('div', { class: 'mt-analysis-tip__sub' }, sub))).addTo(map);
-    });
-    map.on('mouseout', () => { if (st.tip) st.tip.remove(); });
+    }
   }
 
   function firstSymbolId(map) {
@@ -1917,8 +2049,20 @@
 
   /** (Re)create the analysis sources/layers — at the first style load and after a basemap retry. */
   function installLayers() {
-    const map = st.map;
     st.badges.clear();
+    try {
+      st.layerError = false;
+      guardIn(st.els.mapError, 'map layers', addLayers, Object.assign(mapErrorOpts(), { onError: () => { st.layerError = true; } }));
+      st.mapReady = true;
+      updateMap();
+    } finally {
+      // The camera is framed even when a part of the layers failed (a map that stays on its start view hides the problem).
+      st.pendingFit = false;
+      guardIn(st.els.mapError, 'map camera', () => { if (st.mode === 'distance') fitA(false); else fitB(false); }, mapErrorOpts());
+    }
+  }
+  function addLayers() {
+    const map = st.map;
     const before = firstSymbolId(map);
     const crimson = MT.theme.colors.crimson, dark = MT.theme.colors.crimsonDark;
     const font = MT.theme.fonts.mapLabelsBold;
@@ -1942,6 +2086,9 @@
     add({ id: 'mta-stores', type: 'circle', source: 'mta-stores', paint: { 'circle-radius': CIRCLE_R, 'circle-color': ['get', 'color'], 'circle-opacity': 0.95, 'circle-stroke-color': '#FFFFFF', 'circle-stroke-width': ['interpolate', ['linear'], ['zoom'], 5, 0.7, 12, 1.4] } });
     add({ id: 'mtb-hover', type: 'circle', source: 'mtb-stores', filter: ['==', ['get', 'id'], ''], paint: { 'circle-radius': HALO_R, 'circle-color': '#18181B', 'circle-opacity': 0.12 } });
     add({ id: 'mtb-sel', type: 'circle', source: 'mtb-stores', filter: ['==', ['get', 'id'], ''], paint: { 'circle-radius': HALO_R, 'circle-color': crimson, 'circle-opacity': 0.18, 'circle-stroke-color': crimson, 'circle-stroke-width': 2 } });
+    // The far ends of the selected store's dashed lines: a ring in the line's colour around that store's dot.
+    add({ id: 'mtb-sel-ends', type: 'circle', source: 'mtb-sel', filter: ['==', ['geometry-type'], 'Point'], paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 4, 6, 12, 8, 15, 10],
+      'circle-color': 'rgba(255,255,255,0)', 'circle-stroke-color': ['get', 'color'], 'circle-stroke-width': 2 } });
     add({ id: 'mtb-stores', type: 'circle', source: 'mtb-stores', paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 4, 2.6, 9, 3.6, 12, 5, 15, 7], 'circle-color': ['get', 'color'],
       'circle-opacity': ['case', ['get', 'inRegion'], 0.95, 0.4], 'circle-stroke-color': '#FFFFFF', 'circle-stroke-width': ['case', ['get', 'inRegion'], 1.3, 0.6] } });
     add({ id: 'mta-dist', type: 'symbol', source: 'mta-stores', filter: ['has', 'label'], layout: { 'text-field': ['get', 'label'], 'text-font': font, 'text-size': 11, 'text-anchor': 'top', 'text-offset': [0, 0.6],
@@ -1950,14 +2097,13 @@
       'icon-allow-overlap': true, 'icon-ignore-placement': true, 'symbol-sort-key': ['-', 0, ['get', 'rank']] } });
     add({ id: 'mta-ringlabels', type: 'symbol', source: 'mta-ringlabels', layout: { 'text-field': ['get', 'label'], 'text-font': font, 'text-size': 12, 'text-allow-overlap': true, 'text-ignore-placement': true },
       paint: { 'text-color': ['case', ['==', ['get', 'kind'], 'limit'], '#52525B', dark], 'text-halo-color': '#FFFFFF', 'text-halo-width': 2 } });
-    add({ id: 'mtb-sel-labels', type: 'symbol', source: 'mtb-sel', filter: ['has', 'label'], layout: { 'text-field': ['get', 'label'], 'text-font': font, 'text-size': 11.5, 'text-allow-overlap': true },
+    // "Plaza Vea Primavera · 1.7 km" at the far end of each dashed line (never on the selected store's own dot).
+    add({ id: 'mtb-sel-labels', type: 'symbol', source: 'mtb-sel', filter: ['has', 'label'], layout: { 'text-field': ['get', 'label'], 'text-font': font, 'text-size': 11.5, 'text-max-width': 22,
+      // Below its dot when there is room; else beside or above it (the two labels never cover each other).
+      'text-variable-anchor': ['top', 'bottom', 'right', 'left', 'top-right', 'top-left', 'bottom-right', 'bottom-left'], 'text-radial-offset': 0.95, 'text-justify': 'auto', 'text-padding': 2 },
       paint: { 'text-color': ['get', 'color'], 'text-halo-color': '#FFFFFF', 'text-halo-width': 2 } });
     if (!map.hasImage('mta-ref-pin')) map.addImage('mta-ref-pin', refPinImage(), { pixelRatio: 2 });
     add({ id: 'mta-ref', type: 'symbol', source: 'mta-ref', layout: { 'icon-image': 'mta-ref-pin', 'icon-anchor': 'bottom', 'icon-allow-overlap': true, 'icon-ignore-placement': true } });
-    st.mapReady = true;
-    updateMap();
-    st.pendingFit = false;
-    if (st.mode === 'distance') fitA(false); else fitB(false);
   }
 
   /** Reference pin (crimson drop, white centre) as RGBA for map.addImage (2× pixels). */
@@ -2014,13 +2160,14 @@
     (st.map.getStyle().layers || []).forEach((l) => { if (l.id.indexOf(prefix) === 0) st.map.setLayoutProperty(l.id, 'visibility', on ? 'visible' : 'none'); });
   }
 
-  function updateMap() {
+  const updateMap = guarded('map', mapErrorEl, function () {
     if (!st.mapReady || !st.map) return;
+    hideMapError();
     setVisible('mta-', st.mode === 'distance');
     setVisible('mtb-', st.mode === 'matrix');
     if (st.mode === 'distance') updateMapA(); else updateMapB();
     renderMapLegend();
-  }
+  }, mapErrorOpts);
 
   function updateMapA() {
     const a = st.a, r = a.ref, map = st.map;
@@ -2070,30 +2217,61 @@
     setData('mtb-districts', b.districts.length && MT.data.districts.available ? MT.data.districts.features(b.districts) : EMPTY);
     if (!b.rows) { ['mtb-pairs', 'mtb-stores', 'mtb-sel'].forEach((id) => setData(id, EMPTY)); return; }
     const feats = b.region.map((s) => pointF(s.lng, s.lat, { id: s.id, color: MT.data.chain(s.chain).color, inRegion: true }));
-    b.extra.forEach((s) => feats.push(pointF(s.lng, s.lat, { id: s.id, color: MT.data.chain(s.chain).color, inRegion: false })));
+    // Outside the region, faded: every store the matrix refers to (outsideStoresB), so no line or count points at an empty spot.
+    (b.shown || b.extra).forEach((s) => feats.push(pointF(s.lng, s.lat, { id: s.id, color: MT.data.chain(s.chain).color, inRegion: false })));
     setData('mtb-stores', fc(feats));
     setData('mtb-pairs', fc(b.pairs.map((p) => lineF(p.a, p.b, { key: p.key, same: p.sameChain, meters: p.meters }))));
     updateSelection();
   }
 
-  /** Selection halo (+ mode B: dashed lines to the selected store's nearest same-chain store and competitor). */
-  function updateSelection() {
+  /**
+   * Selection halo (+ mode B: dashed lines to the selected store's nearest same-chain store and nearest
+   * competitor). Each line ends on a drawn dot (outsideStoresB), ringed in the line's colour and labelled
+   * there with the store and its distance — "Plaza Vea Primavera · 1.7 km" —; the legend names the two
+   * kinds of dashed line while a store is selected.
+   */
+  const updateSelection = guarded('map selection', mapErrorEl, function () {
     if (!st.mapReady) return;
     const map = st.map;
     if (st.mode === 'distance') { map.setFilter('mta-sel', ['==', ['get', 'id'], st.a.selected || '']); return; }
     const b = st.b;
     map.setFilter('mtb-sel', ['==', ['get', 'id'], b.selected || '']);
-    const row = b.selected && b.byId ? b.byId.get(b.selected) : null;
+    const row = selectedRowB();
     const f = [];
     if (row) {
-      [[row.nearestSame, COLOR_SAME], [row.nearestCompetitor, '#52525B']].forEach(([x, color]) => {
+      [[row.nearestSame, COLOR_SAME, 'same'], [row.nearestCompetitor, COLOR_NEAR_COMP, 'comp']].forEach(([x, color, kind]) => {
         if (!x) return;
-        f.push(lineF(row.store, x.store, { color: color }));
-        f.push(pointF((row.store.lng + x.store.lng) / 2, (row.store.lat + x.store.lat) / 2, { color: color, label: fmtDist(x.meters) }));
+        f.push(lineF(row.store, x.store, { color: color, kind: kind }));
+        f.push(pointF(x.store.lng, x.store.lat, { color: color, kind: kind, id: x.store.id, label: endLabel(x) }));
       });
     }
     setData('mtb-sel', fc(f));
+    syncEndLabels();
     map.setFilter('mtb-pair-sel', ['==', ['get', 'key'], b.selectedPair || '']);
+    renderMapLegend();
+  }, mapErrorOpts);
+  function selectedRowB() { const b = st.b; return b.selected && b.byId ? b.byId.get(b.selected) || null : null; }
+  /** Label at the far end of a dashed line: "Plaza Vea Primavera · 1.7 km". */
+  function endLabel(x) { return x.store.name + ' · ' + fmtDist(x.meters); }
+  /**
+   * The selected store's line ends a card must leave in view (mode B): their ringed dots and labels, and
+   * the selected store itself — `except` (the store whose card it is) left out. [{lng, lat, label?}]
+   */
+  function selectionEnds(except) {
+    const row = selectedRowB();
+    if (!row) return [];
+    const out = row.store.id !== except ? [{ lng: row.store.lng, lat: row.store.lat }] : [];
+    [row.nearestSame, row.nearestCompetitor].forEach((x) => {
+      if (x && x.store.id !== except) out.push({ lng: x.store.lng, lat: x.store.lat, label: endLabel(x) });
+    });
+    return out;
+  }
+  /** While a card is open on a line end, that end's label is hidden: the card says the same, and its tip would sit on it. */
+  function syncEndLabels() {
+    const map = st.map;
+    if (!st.mapReady || !map || !map.getLayer('mtb-sel-labels')) return;
+    const id = st.popup && st.popup._id;
+    map.setFilter('mtb-sel-labels', id ? ['all', ['has', 'label'], ['!=', ['get', 'id'], id]] : ['has', 'label']);
   }
   function hoverStore(id) {
     if (!st.mapReady) return;
@@ -2105,7 +2283,7 @@
     st.map.setFilter('mtb-hover', ['in', ['get', 'id'], ['literal', p ? [p.a.id, p.b.id] : []]]);
   }
 
-  function renderMapHint() {
+  const renderMapHint = guarded('map hint', () => st.els.mapHint, function () {
     const el = st.els.mapHint;
     if (!el) return;
     U.clear(el);
@@ -2117,8 +2295,8 @@
       el.appendChild(h('span', { class: 'mt-analysis-maphint__esc' }, t('analysis.ref.pickEsc')));
       el.appendChild(h('button', { type: 'button', class: 'mt-analysis-maphint__btn', onclick: () => setPicking(false) }, t('analysis.ref.pickCancel')));
     }
-  }
-  function renderMapLegend() {
+  }, { compact: true });
+  const renderMapLegend = guarded('map legend', mapErrorEl, function () {
     const el = st.els.mapLegend;
     if (!el) return;
     U.clear(el);
@@ -2128,8 +2306,11 @@
     const item = (cls, text) => h('div', { class: 'mt-analysis-maplegend__item' }, h('span', { class: 'mt-analysis-maplegend__sw ' + cls }), h('span', null, text));
     el.append(item('is-same', t('analysis.matrix.tag') + ' · < ' + fmtRing(b.threshold)));
     if (b.showComp) el.append(item('is-comp', t('analysis.matrix.tagComp') + ' · < ' + fmtRing(b.threshold)));
-    if (b.extra && b.extra.size) el.append(item('is-outside', t('analysis.popup.outside')));
-  }
+    if ((b.shown || b.extra) && (b.shown || b.extra).size) el.append(item('is-outside', t('analysis.popup.outside')));
+    const row = selectedRowB();
+    if (row && row.nearestSame) el.append(item('is-dash-same', t('analysis.popup.nearestSame')));
+    if (row && row.nearestCompetitor) el.append(item('is-dash-comp', t('analysis.popup.nearestComp')));
+  }, () => Object.assign(mapErrorOpts(), { onError: () => { if (st.els.mapLegend) st.els.mapLegend.hidden = true; } }));
 
   function setPicking(on, silent) {
     st.picking = !!on && st.mode === 'distance';
@@ -2202,21 +2383,125 @@
   function closePopup() {
     if (st.popup) { const p = st.popup; st.popup = null; p.remove(); }
   }
-  function showPopup(lngLat, content, id) {
+  /**
+   * Open a card on the map. avoid: points the card must leave in view — mode B's dashed-line ends
+   * ({lng, lat, label}: the ringed dot and its "<store> · <distance>" label) and the selected store —;
+   * the card then takes the side of its store that covers none of them (placePopup).
+   */
+  function showPopup(lngLat, content, id, avoid) {
     if (!st.mapReady) return;
     closePopup();
-    const p = new maplibregl.Popup({ closeButton: true, closeOnClick: false, offset: 14, className: 'mt-analysis-popup', maxWidth: '320px', focusAfterOpen: false })
-      .setLngLat(lngLat).setDOMContent(content).addTo(st.map);
+    const map = st.map;
+    const p = new maplibregl.Popup({ closeButton: true, closeOnClick: false, offset: CARD_OFFSET, className: 'mt-analysis-popup', maxWidth: '320px', focusAfterOpen: false })
+      .setLngLat(lngLat).setDOMContent(content).addTo(map);
     p._id = id;
-    p.on('close', () => { if (st.popup === p) st.popup = null; });
+    p._avoid = avoid && avoid.length ? avoid : null;
     st.popup = p;
+    syncEndLabels();
     if (st.tip) st.tip.remove();
+    if (p._avoid) placePopup(p, true);              // at once, with the camera of now (no jump when it is not moving)
+    // After a later camera move (the user's pan or zoom, a fit) the side is chosen again — without panning
+    // the map for the card: that would undo the move.
+    const onMoveEnd = () => { if (p._avoid && st.popup === p) placePopup(p, false); };
+    // Once the camera rests (a selection may be easing to the store): the side again, then the whole card
+    // in view; from then on onMoveEnd (registered here, so it does not also run for this very moveend).
+    const settle = () => {
+      if (st.popup !== p) return;
+      if (p._avoid) placePopup(p, true);
+      fitPopup(p);
+      map.on('moveend', onMoveEnd);
+    };
+    if (map.isMoving()) map.once('moveend', settle); else requestAnimationFrame(settle);
+    p.on('close', () => {
+      map.off('moveend', onMoveEnd);
+      if (st.popup === p) st.popup = null;
+      syncEndLabels();
+    });
+  }
+  /** MapLibre card offset (px) and, per anchor, [x, y share of the card left/above the anchor point, offset x, offset y]. */
+  const CARD_OFFSET = 14;
+  const CARD_ANCHORS = (() => {
+    const o = CARD_OFFSET, c = Math.round(Math.sqrt(0.5 * o * o));     // MapLibre's corner offset for a number offset
+    return { bottom: [0.5, 1, 0, -o], top: [0.5, 0, 0, o], right: [1, 0.5, -o, 0], left: [0, 0.5, o, 0],
+      'bottom-right': [1, 1, -c, -c], 'bottom-left': [0, 1, c, -c], 'top-right': [1, 0, -c, c], 'top-left': [0, 0, c, c] };
+  })();
+  /**
+   * Put a card on the side of its store that keeps p._avoid in view. Each anchor's card box is scored
+   * against the ringed end dots (heaviest), their label (below the dot first — the label layer's first
+   * choice —, else above or beside it) and the selected store, after the pan fitPopup would make (an end
+   * panned out of the map counts as covered). canPan: false after a later camera move — the map is not
+   * panned then, so a card that would leave the map costs a lot. The current side wins near-ties (no flicker).
+   */
+  function placePopup(p, canPan) {
+    const map = st.map, el = p.getElement && p.getElement();
+    if (!map || !el || st.popup !== p || !el.isConnected) return;
+    const W = map.getContainer().clientWidth, H = map.getContainer().clientHeight, w = el.offsetWidth, hgt = el.offsetHeight, M = 8, G = 4;
+    if (!W || !H || !w || !hgt) return;
+    const at = map.project(p.getLngLat());
+    const obs = [];
+    p._avoid.forEach((o) => {
+      const q = map.project([o.lng, o.lat]);
+      obs.push({ x0: q.x - 14, y0: q.y - 14, x1: q.x + 14, y1: q.y + 14, wt: 4, q: q });
+      if (!o.label) return;
+      const lw = Math.min(280, 10 + o.label.length * 6.6), lh = 18;
+      obs.push({ x0: q.x - lw / 2, y0: q.y + 8, x1: q.x + lw / 2, y1: q.y + 8 + lh, wt: 2 });
+      obs.push({ x0: q.x - lw / 2, y0: q.y - 8 - lh, x1: q.x + lw / 2, y1: q.y - 8, wt: 1 });
+      obs.push({ x0: q.x + 10, y0: q.y - lh / 2, x1: q.x + 10 + lw, y1: q.y + lh / 2, wt: 0.5 });
+      obs.push({ x0: q.x - 10 - lw, y0: q.y - lh / 2, x1: q.x - 10, y1: q.y + lh / 2, wt: 0.5 });
+    });
+    // What sits over the map (the legend, the zoom buttons, the attribution) would cover the card: those
+    // boxes stay put when the map pans.
+    const cr = map.getContainer().getBoundingClientRect();
+    [st.els.mapLegend].concat([].slice.call(map.getContainer().querySelectorAll('.maplibregl-ctrl'))).forEach((x) => {
+      if (!x || x.hidden) return;
+      const r = x.getBoundingClientRect();
+      if (r.width && r.height) obs.push({ x0: r.left - cr.left, y0: r.top - cr.top, x1: r.right - cr.left, y1: r.bottom - cr.top, wt: 3, fixed: true });
+    });
+    const current = p.options.anchor;
+    let best = null;
+    Object.keys(CARD_ANCHORS).forEach((a, i) => {
+      const [tx, ty, ox, oy] = CARD_ANCHORS[a];
+      const x0 = at.x + ox - w * tx, y0 = at.y + oy - hgt * ty, x1 = x0 + w, y1 = y0 + hgt;
+      let dx = 0, dy = 0;                                   // the pan fitPopup makes to show the whole card
+      if (y0 < M) dy = y0 - M; else if (y1 > H - M) dy = y1 - (H - M);
+      if (x0 < M) dx = x0 - M; else if (x1 > W - M) dx = x1 - (W - M);
+      let score = i * 0.001 + (Math.abs(dx) + Math.abs(dy)) * (canPan ? 0.02 : 60) - (a === current ? (canPan ? 1 : 50) : 0);
+      const sx = (o) => (o.fixed && canPan ? dx : 0), sy = (o) => (o.fixed && canPan ? dy : 0);   // the card's box after the pan, against a fixed box
+      obs.forEach((o) => {
+        const ix = Math.min(x1 - sx(o) + G, o.x1) - Math.max(x0 - sx(o) - G, o.x0), iy = Math.min(y1 - sy(o) + G, o.y1) - Math.max(y0 - sy(o) - G, o.y0);
+        if (ix > 0 && iy > 0) score += ix * iy * o.wt;
+        if (o.q && canPan && (o.q.x - dx < 0 || o.q.x - dx > W || o.q.y - dy < 0 || o.q.y - dy > H)) score += 28 * 28 * 4;
+      });
+      if (!best || score < best.score) best = { a: a, score: score };
+    });
+    if (!best || best.a === current) return;
+    p.options.anchor = best.a;                            // read by MapLibre on each update
+    p.setLngLat(p.getLngLat());                           // re-positions the card now
+  }
+  /**
+   * Keep an open card inside the map. MapLibre places it beside its store, and the map's box clips
+   * it: on a short window the proximity matrix's map strip is shorter than the card was. The map pans
+   * just enough for the whole card to show; when the map is smaller than the card (1366 × 768: a
+   * 115 px strip) the card is not shown at all — the selected table row gives the same facts.
+   */
+  function fitPopup(p) {
+    const map = st.map, el = p && p.getElement && p.getElement();
+    if (!map || !el || st.popup !== p || !el.isConnected) return;
+    const box = map.getContainer().getBoundingClientRect(), r = el.getBoundingClientRect(), M = 8;
+    if (!r.height || !box.height) return;
+    if (r.height > box.height - 2 * M || r.width > box.width - 2 * M) { closePopup(); return; }
+    let dx = 0, dy = 0;
+    if (r.top < box.top + M) dy = r.top - (box.top + M);
+    else if (r.bottom > box.bottom - M) dy = r.bottom - (box.bottom - M);
+    if (r.left < box.left + M) dx = r.left - (box.left + M);
+    else if (r.right > box.right - M) dx = r.right - (box.right - M);
+    if (dx || dy) map.panBy([Math.round(dx), Math.round(dy)], { duration: 250 });
   }
   function cardHead(s) {
     return h('div', { class: 'mt-analysis-card__head' }, logo(s.chain, 30),
       h('div', { class: 'mt-analysis-card__titles' }, h('div', { class: 'mt-analysis-card__title' }, s.name), h('div', { class: 'mt-analysis-card__sub' }, storeSub(s))));
   }
-  function openPopupA(row) {
+  const openPopupA = guarded('store card', mapErrorEl, function (row) {
     const s = row.store;
     const text = row.dir ? t('analysis.popup.distance', { d: fmtDist(row.meters), dir: dirLong(row.dir).toLowerCase() }) : t('analysis.popup.distanceSame');
     showPopup([s.lng, s.lat], h('div', { class: 'mt-analysis-card' }, cardHead(s),
@@ -2227,16 +2512,16 @@
         row.flags.toVerify ? h('span', { class: 'mt-badge mt-badge--warn' }, t('analysis.flag.toVerify')) : null),
       h('div', { class: 'mt-analysis-card__actions' },
         MT.ui.button({ icon: 'target', label: t('analysis.popup.useAsRef'), kind: 'secondary', size: 'sm', className: 'mt-analysis-useref', onClick: () => setRef(AN().refFromStore(s.id)) }))), s.id);
-  }
-  function openRefPopup() {
+  }, () => Object.assign(mapErrorOpts(), { onError: closePopup }));
+  const openRefPopup = guarded('reference card', mapErrorEl, function () {
     const r = st.a.ref;
     if (!r) return;
     showPopup([r.lng, r.lat], h('div', { class: 'mt-analysis-card' },
       h('div', { class: 'mt-analysis-card__kicker' }, t('analysis.popup.isRef')),
       h('div', { class: 'mt-analysis-card__title' }, refName(r)),
       h('div', { class: 'mt-analysis-card__sub' }, r.type === 'store' ? chainName(r.chainId) : AN().formatCoords(r.lat, r.lng))), '__ref');
-  }
-  function openPopupB(row) {
+  }, () => Object.assign(mapErrorOpts(), { onError: closePopup }));
+  const openPopupB = guarded('store card', mapErrorEl, function (row) {
     const s = row.store, b = st.b;
     const near = (label, x) => h('div', { class: 'mt-analysis-card__near' }, h('span', { class: 'mt-analysis-card__nearlabel' }, label),
       x ? h('span', { class: 'mt-analysis-card__nearval' }, x.store.name + ' · ' + fmtDist(x.meters)) : h('span', { class: 'mt-muted' }, t('analysis.popup.none')));
@@ -2246,10 +2531,26 @@
     showPopup([s.lng, s.lat], h('div', { class: 'mt-analysis-card' }, cardHead(s),
       near(t('analysis.popup.nearestSame'), row.nearestSame),
       near(t('analysis.popup.nearestComp'), row.nearestCompetitor),
-      h('div', { class: 'mt-analysis-card__kicker' }, t('analysis.popup.within', { d: fmtRing(b.radius) })),
+      // Upper-case kicker: the distance keeps its case ("A MENOS DE 500 m", never "500 M" = 500 mil).
+      h('div', { class: 'mt-analysis-card__kicker' }, unitText(t('analysis.popup.within', { d: fmtRing(b.radius) }))),
       by.length ? h('div', { class: 'mt-analysis-card__chains' }, by.map((id) => h('span', { class: 'mt-analysis-card__chain', title: chainName(id) }, logo(id, 18), h('span', null, fmtNum(row.byChainWithin[id])))))
-        : h('div', { class: 'mt-muted mt-small' }, t('analysis.popup.none'))), s.id);
-  }
+        : h('div', { class: 'mt-muted mt-small' }, t('analysis.popup.none'))), s.id, selectionEnds(s.id));
+  }, () => Object.assign(mapErrorOpts(), { onError: closePopup }));
+  /**
+   * Card of a store outside the region (a faded dot): read-only — it is not one of the analysed stores —,
+   * saying why it is on the map and, when it is the far end of the selected store's dashed line, which
+   * one and how far ("Nearest same-chain store to Plaza Vea Caminos del Inca · 1.7 km").
+   */
+  const openOutsidePopupB = guarded('store card', mapErrorEl, function (s) {
+    const row = selectedRowB(), rel = [];
+    if (row && row.nearestSame && row.nearestSame.store.id === s.id) rel.push(['analysis.popup.nearestSameOf', row.nearestSame.meters]);
+    if (row && row.nearestCompetitor && row.nearestCompetitor.store.id === s.id) rel.push(['analysis.popup.nearestCompOf', row.nearestCompetitor.meters]);
+    showPopup([s.lng, s.lat], h('div', { class: 'mt-analysis-card is-outside' }, cardHead(s),
+      h('div', { class: 'mt-analysis-card__meta' }, h('span', { class: 'mt-badge' }, t('analysis.popup.outside'))),
+      rel.map(([key, m]) => h('div', { class: 'mt-analysis-card__near' }, h('span', { class: 'mt-analysis-card__nearlabel' }, t(key, { store: row.store.name })),
+        h('span', { class: 'mt-analysis-card__nearval' }, fmtDist(m)))),
+      h('div', { class: 'mt-analysis-card__note' }, t('analysis.popup.outsideNote'))), s.id, selectionEnds(s.id));
+  }, () => Object.assign(mapErrorOpts(), { onError: closePopup }));
 
   /* =========================================================================================
    * Excel
@@ -2669,10 +2970,11 @@
       universe: { kind: st.a.uniKind, meters: st.a.uniMeters, districts: st.a.districts.slice() },
       chains: st.a.chains ? sortedChainIds(st.a.chains) : [], rings: st.a.rings.slice(), includeToVerify: st.a.includeToVerify,
       showLines: st.a.showLines, listTop: st.a.listTop, view: st.a.view, filter: st.a.filter,
-      rows: st.a.res ? st.a.res.rows.length : 0, selected: st.a.selected, recent: st.recent.length,
+      rows: st.a.res ? st.a.res.rows.length : 0, selected: st.a.selected, recent: st.recent.length, error: st.a.error ? String(st.a.error.message || st.a.error) : null,
       matrix: { districts: st.b.districts.slice(), chains: st.b.chains ? sortedChainIds(st.b.chains) : [], radius: st.b.radius, threshold: st.b.threshold,
         showComp: st.b.showComp, neighbors: st.b.neighbors, computing: st.b.computing, rows: st.b.rows ? st.b.rows.length : 0, pairs: st.b.pairs ? st.b.pairs.length : 0,
-        view: st.b.view, selected: st.b.selected, selectedPair: st.b.selectedPair, ms: st.b.ms },
+        view: st.b.view, selected: st.b.selected, selectedPair: st.b.selectedPair, ms: st.b.ms,
+        outside: st.b.shown ? st.b.shown.size : 0, error: st.b.error ? String(st.b.error.message || st.b.error) : null },
     }),
   };
 })();

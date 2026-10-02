@@ -6,6 +6,8 @@
  */
 (function () {
   'use strict';
+  // Contract version of this file (index.html data-api; the boot check refuses a mix of versions, ARCHITECTURE §16).
+  (MT.modules = MT.modules || {})['i18n/analysis'] = { api: '1' };
   MT.i18n.add('es', {
     tab: { analysis: 'Análisis' },
     analysis: {
@@ -127,6 +129,7 @@
         chains: { one: '1 cadena', other: '{n} cadenas' },
         tabStores: 'Tiendas',
         tabRings: 'Por cadena y anillo',
+        failed: 'No se pudieron calcular las distancias.',
         tabsAria: 'Vista de resultados',
         filterPh: 'Filtrar por tienda, cadena o distrito…',
         filterLabel: 'Filtrar la tabla',
@@ -215,6 +218,9 @@
         within: 'A menos de {d}',
         none: 'Ninguna',
         outside: 'Fuera de la región',
+        nearestSameOf: 'Misma cadena más cercana a {store}',
+        nearestCompOf: 'Competencia más cercana a {store}',
+        outsideNote: 'No es una de las tiendas analizadas: está en el mapa porque una tienda de la región la tiene como vecina.',
       },
 
       xlsx: {
@@ -340,6 +346,7 @@
         tableLabel: 'Cercanía de cada tienda',
         pairsLabel: 'Pares de tiendas cercanas',
         computing: 'Calculando… {pct} %',
+        failed: 'No se pudo calcular la matriz.',
         none: '—',
         outside: 'fuera de la región',
         noPairs: 'Ningún par de tiendas a menos de {d}.',
@@ -473,6 +480,7 @@
         chains: { one: '1 chain', other: '{n} chains' },
         tabStores: 'Stores',
         tabRings: 'By chain and ring',
+        failed: 'The distances could not be computed.',
         tabsAria: 'Results view',
         filterPh: 'Filter by store, chain or district…',
         filterLabel: 'Filter the table',
@@ -561,6 +569,9 @@
         within: 'Within {d}',
         none: 'None',
         outside: 'Outside the region',
+        nearestSameOf: 'Nearest same-chain store to {store}',
+        nearestCompOf: 'Nearest competitor to {store}',
+        outsideNote: 'Not one of the analysed stores: it is on the map because a store of the region has it as a neighbour.',
       },
 
       xlsx: {
@@ -685,6 +696,7 @@
         tableLabel: 'Proximity of every store',
         pairsLabel: 'Pairs of close stores',
         computing: 'Computing… {pct} %',
+        failed: 'The matrix could not be computed.',
         none: '—',
         outside: 'outside the region',
         noPairs: 'No pair of stores closer than {d}.',
