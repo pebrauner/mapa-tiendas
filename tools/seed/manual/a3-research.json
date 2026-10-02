@@ -1,0 +1,336 @@
+{
+ "batch": "a3",
+ "generated": "2026-10-01",
+ "about": "Manual placement research for 9 Tambo press-only openings of REPORT.md §4 (Lima Norte / Este). Sources: Peru Retail trade press, OSM (Overpass/Nominatim, ODbL), the Carabayllo municipal license registry, RENIPRESS, the official Tambo (Justo) list in tools/seed/web/raw/tambo, and official short links resolved only through the HTTP Location header (coordinates, place label and the g_ep client-version date in the URL; no Google Maps page content). Every point was checked with tools/seed/pip.mjs.",
+ "summary": {
+  "placed": 8,
+  "unplaced": 1,
+  "byConfidence": {
+   "low": 4,
+   "medium": 4,
+   "none": 1
+  },
+  "possibleDuplicates": [
+   "Tambo Carabayllo - Cjto. Hab. Edwin Vásquez Mz. Q Lt. 24 -> official TAMBO CHIMPU-OCLLO-C10 - CALLAO (web-tambo-chimpu-ocllo), 444 m, probable",
+   "Tambo Carabayllo - Mz. F -> official TAMBO JOSESACO-CARABAYLLO (web-tambo-josesaco), 2.4 km, weak"
+  ],
+  "note": "No store is mapped in OSM yet (Overpass 2026-10-01). All are press-only openings (May-Aug 2026); keep to_verify."
+ },
+ "placements": [
+  {
+   "store": "Tambo Ate - Mz. A",
+   "chain": "tambo",
+   "reportRow": {
+    "address": "Mz. A, Lt. 02, Asoc. de Vivienda Palmas de Barbadillo, Sec. 13, Zona 3",
+    "district": "Ate",
+    "province": "Lima",
+    "department": "Lima"
+   },
+   "lat": -12.040039,
+   "lng": -76.911614,
+   "precision": "approx",
+   "confidence": "low",
+   "district": "Ate",
+   "province": "Lima",
+   "department": "Lima",
+   "ubigeo": "150103",
+   "status": "to_verify",
+   "existingId": null,
+   "duplicateCandidate": null,
+   "method": "Urbanization-level: the Asociación de Vivienda (Las) Palmas de Barbadillo is not in OSM nor in Nominatim; Sedapal lists it in the same service sector as the ex-Fundo Barbadillo. Point = center of OSM way 507687834 (DIROES compound, alt_name \"Fundo Barbadillo\"), core of the ex-fundo. Lot not locatable; error up to ~1 km.",
+   "evidence": [
+    "Press: Peru Retail, 2026-09-09 (aperturas de agosto) - https://www.peru-retail.com/tambo-inaugura-20-nuevas-tiendas-y-supera-las-900-a-nivel-nacional-donde-estan-sus-nuevos-locales/ - \"Ate (1): Mz. A, Lt. 02, Asoc. de Vivienda Palmas de Barbadillo, Sec. 13, Zona 3.\"",
+    "Nominatim 2026-10-01: \"Palmas de Barbadillo, Ate\" -> no result; \"Barbadillo, Ate, Lima\" -> only w507687831 Penal de Barbadillo and w507687834 DIROES. Geocode cache: the full address -> no result.",
+    "OSM (Overpass 2026-10-01, maps.mail.ru base 17:52Z): no element named Palmas de Barbadillo; w507687834 \"Dirección de Operaciones Especiales de la PNP\" alt_name \"Fundo Barbadillo\", addr:street Marcos Puente Llanos, center -12.040039,-76.911614 - https://www.openstreetmap.org/way/507687834 ; w507687831 \"Penal de Barbadillo\" -12.042708,-76.913562 (365 m) - https://www.openstreetmap.org/way/507687831",
+    "Infobae, 2025-06-10 (Sedapal water cut, Ate): \"Las Palmas de Barbadillo\" listed in the same sector as \"Ex-Fundo Barbadillo\", \"Barbadillo\", \"APV Las Palmeras\", \"Villa Los Portales\", \"Las Dalias II\"... - https://www.infobae.com/peru/2025/06/10/sedapal-9-distritos-de-lima-sufriran-corte-de-agua-el-miercoles-11-de-junio/",
+    "Municipalidad de Ate (obra): Av. Esperanza \"tramo que une el ex Fundo Barbadillo con Valle Amauta, en la sede de la DINOES\" -> the ex-fundo is the DINOES/DIROES site - https://www.muniate.gob.pe/obra/creacion-del-servicio-de-proteccion-a-traves-de-muro-perimetrico-torreones-y-sistema-de-video-vigilancia-en-la-av-esperanza-tramo-que-une-el-ex-fundo-barbadillo-con-valle-amauta-en-la-sede-de-la-di/",
+    "A Waze place \"Res las Palmas de Barbadillo, Ate\" exists (search result only; Google-Places based, coordinates not used).",
+    "Official list (Justo, 2026-09-30): no Tambo in the Barbadillo area; the only Ate Tambo added in 2026 (TAMBO MARIATEGUI-C16 - ATE, short link made with a 2026-04-20 client) is 1.9 km north at -12.025337,-76.905922 -> not this store. Overpass 2026-10-01: no Tambo shop mapped nearby.",
+    "pip (tools/seed/pip.mjs): Ate / Lima / Lima (150103)."
+   ],
+   "exists": "probably",
+   "noteEs": "Aproximada (baja confianza): zona del ex Fundo Barbadillo (OSM: sede DIROES «Fundo Barbadillo», junto al Penal de Barbadillo), Vitarte, Ate. La Asoc. de Vivienda Las Palmas de Barbadillo no está mapeada; Sedapal la ubica en el mismo sector que el ex Fundo Barbadillo (Infobae, 10 jun. 2025). Error posible de hasta ~1 km. Apertura reportada por Peru Retail (9 set. 2026); aún no figura en la lista oficial de Tambo."
+  },
+  {
+   "store": "Tambo Carabayllo - Cjto. Hab. Edwin Vásquez Mz. Q Lt. 24",
+   "chain": "tambo",
+   "reportRow": {
+    "address": "Cjto. Hab. Edwin Vásquez Mz. Q Lt. 24",
+    "district": "Carabayllo",
+    "province": "Lima",
+    "department": "Lima"
+   },
+   "lat": -11.891908,
+   "lng": -77.03796,
+   "precision": "approx",
+   "confidence": "medium",
+   "district": "Carabayllo",
+   "province": "Lima",
+   "department": "Lima",
+   "ubigeo": "150106",
+   "status": "to_verify",
+   "existingId": null,
+   "duplicateCandidate": {
+    "id": "web-tambo-chimpu-ocllo",
+    "official": "TAMBO CHIMPU-OCLLO-C10 - CALLAO",
+    "justoId": "Tnfw9BkSHMjmyZcw6",
+    "lat": -11.890013,
+    "lng": -77.04155,
+    "distanceM": 444,
+    "strength": "probable"
+   },
+   "method": "Block-level: OSM place=city_block node \"Q\" (n12442688259, source \"Plano de Carabayllo\") inside the ENACE complex = Conjunto Habitacional Edwin Vásquez Cam. The Carabayllo license registry ties Mz. Q of the C.H. Edwin Vásquez Cam (ENACE) to Av. Chimpu Ocllo (Lt. 90) and Av. Mariano Condorcanqui (Lt. 17): OSM block Q is exactly at the corner of those two avenues. Lot 24 not locatable inside the block.",
+   "evidence": [
+    "Press: Peru Retail, 2026-06-08 (aperturas de mayo) - https://www.peru-retail.com/tambo-amplia-su-presencia-con-18-nuevos-locales-donde-estan-ubicados-y-cuantos-acumula/ - \"Carabayllo (1): Cjto. Hab. Edwin Vásquez Mz. Q Lt. 24.\"",
+    "Municipalidad de Carabayllo, padrón de organizaciones y relación de licencias de funcionamiento (PDF) - https://web.municarabayllo.gob.pe/pte/padron_electoral-2018.pdf - license lines: \"C.H. EDWIN VASQUEZ CAM (ENACE) AV. CHIMPU OCLLO Mza. Q Lte. 90\"; \"AV. MARIANO CONDORCANQUI Q 17 URBANIZACIÓN ENACE\"; \"JR. CHINCHAYSUYO P 48 CONJUNTO HABITACIONAL EDWIN VASQUEZ CAM (ENACE)\"; \"CJTO.HABITACIONAL EDWIN VASQUEZ CAM JR CHINCHAYSUYO (Ca. 4)\"; \"C.H. EDWIN VASQUEZ CAM (ENACE) AV. CONDORCANQUI Mza. P Lte. 7\".",
+    "OSM n12442688259 place=city_block name=Q at -11.891908,-77.037960 (TuAmigoElEditor 2024-12-23, changeset 160521161 \"Añadiendo Manzanas Urbanas\", source \"Plano de Carabayllo\") - https://www.openstreetmap.org/node/12442688259 , https://www.openstreetmap.org/changeset/160521161 ; Jr. Chinchaysuyo (alt_name Calle 4) 33 m, Av. Mariano Condorcanqui ~120 m W, Av. Isabel Chimpu Ocllo ~125 m S, bus stop \"Entrada Enace\" (n4354631691) ~100 m.",
+    "RENIPRESS record via establecimientosdesalud.info: Hogar Protegido de Carabayllo, \"Calle Huaca Del Sol – Conjunto Habitacional Edwin Vasquez Cam 272 Frente Al 1Er Parque Enace\", -11.891315,-77.0359955 (224 m from block Q; OSM \"Calle Huaca de Sol\" alt_name Calle D, w170159656, at the same spot) - https://www.establecimientosdesalud.info/lima-norte/hogar-protegido-hogar-protegido-de-carabayllo-carabayllo/",
+    "PNP job postings: Policlínico PNP Carabayllo at \"Mz. G1, Lote N°15 – Urb. EDWIN VÁSQUEZ CAM – ENACE\" -> OSM block G1 (n12442688276, -11.887655,-77.037849) beside \"Calle Mártires de la Policía\" (w170159682) - https://www.convocatoriasdetrabajo.com/oportunidad-laboral-cas-421-medico-general-policia-nacional-pnp-lima-207880.html",
+    "POSSIBLE DUPLICATE of official entry \"TAMBO CHIMPU-OCLLO-C10 - CALLAO\" (Justo id Tnfw9BkSHMjmyZcw6; data/stores.csv web-tambo-chimpu-ocllo, address 4X55+X9W, -11.890013,-77.041550, 444 m away): its official short link https://maps.app.goo.gl/disxTmfwHYhhzjLQ9 (Location header only) is a dropped pin made with a Google Maps client of 2026-04-29 (g_ep) -> added around the May opening; it is the only Carabayllo Tambo added between 2026-01 and 2026-07; \"C10\" = Av. Chimpu Ocllo cuadra 10, and with the official numbers on that avenue (#386 at -11.896729,-77.033791, #753 at -11.894463,-77.037323 -> ~1.25 m/number) cuadra 10 begins at the Condorcanqui junction next to Mz. Q (~#980), while the official pin falls near ~#1200.",
+    "Overpass 2026-10-01: no Tambo shop mapped in the complex.",
+    "pip: Carabayllo / Lima / Lima (150106)."
+   ],
+   "exists": "probably",
+   "noteEs": "Aproximada: Mz. Q del Conj. Hab. Edwin Vásquez Cam (ENACE), en la esquina de las avenidas Mariano Condorcanqui e Isabel Chimpu Ocllo, según el plano de manzanas de Carabayllo (OSM) y el padrón municipal de licencias. Probablemente es la tienda oficial «TAMBO CHIMPU-OCLLO-C10» (web-tambo-chimpu-ocllo), cuyo punto oficial está a 444 m: revisar antes de agregarla como fila aparte. Apertura reportada por Peru Retail (8 jun. 2026)."
+  },
+  {
+   "store": "Tambo Carabayllo - Mz. A Lt. 12",
+   "chain": "tambo",
+   "reportRow": {
+    "address": "Mz. A Lt. 12, Urb. Santa Luisa",
+    "district": "Carabayllo",
+    "province": "Lima",
+    "department": "Lima"
+   },
+   "lat": null,
+   "lng": null,
+   "precision": "approx",
+   "confidence": "none",
+   "district": "Carabayllo",
+   "province": "Lima",
+   "department": "Lima",
+   "ubigeo": null,
+   "status": "to_verify",
+   "existingId": null,
+   "duplicateCandidate": null,
+   "method": "None defensible: Urb. Santa Luisa (de Carabayllo) is not in OSM nor in Nominatim; the only located fact is that its Mz. A touches Av. Universitaria (municipal registry), a ~5 km stretch in Carabayllo.",
+   "evidence": [
+    "Press: Peru Retail, 2026-07-09 (aperturas de junio) - https://www.peru-retail.com/tambo-suma-23-nuevos-locales-en-junio-y-queda-cerca-de-alcanzar-900-tiendas-a-nivel-nacional/ - \"Carabayllo (2): Av. José Carlos Mariátegui 263 y Mz. A Lt. 12, Urb. Santa Luisa.\"",
+    "Nominatim 2026-10-01 \"Santa Luisa, Carabayllo\" -> no result; geocode cache \"Mz. A Lt. 12, Urb. Santa Luisa, Carabayllo, Perú\" -> no result.",
+    "Overpass 2026-10-01 (area Carabayllo r1944701): no element named Santa Luisa. The OSM \"Urbanización Santa Luisa\" (n13027251114, -11.950477,-77.067744; Galería/Capilla/C.C. Santa Luisa, IEI 0348 Santa Luisa) is in Comas/Los Olivos, ~6 km south: a different urbanization.",
+    "Municipalidad de Carabayllo, padrón de organizaciones y relación de licencias de funcionamiento (PDF) - https://web.municarabayllo.gob.pe/pte/padron_electoral-2018.pdf - license line: \"URBANIZACION SANTA LUISA DE CARABAYLLO MZ. A LOTE 1 AV UNIVERSITARIA\" -> the urbanization exists in Carabayllo and its Mz. A touches Av. Universitaria, whose Carabayllo stretch runs ~5 km (OSM, -11.901 to -11.857); no source says where along it.",
+    "Plan Urbano de Carabayllo 2010 (CENEPRED/SIGRID) and the 2019-2022 JNE government plan: no mention of Santa Luisa.",
+    "Official list check (short-link client dates read from Location headers): the only Carabayllo Tambos added after 2026-04 are TAMBO CHIMPU-OCLLO-C10 (ENACE, see the Edwin Vásquez entry) and TAMBO JOSESACO-CARABAYLLO (online sales off, client 2026-07-15, Av. José Saco Rojas, -11.855812,-77.039825); neither is on Av. Universitaria -> no defensible match."
+   ],
+   "exists": "probably",
+   "noteEs": "Sin ubicación defendible: la Urb. Santa Luisa de Carabayllo no está en OSM ni en Nominatim; el padrón municipal solo indica que su Mz. A da a la Av. Universitaria (tramo de ~5 km en Carabayllo). Apertura reportada por Peru Retail (9 jul. 2026); ubicar a mano."
+  },
+  {
+   "store": "Tambo Carabayllo - Mz. F",
+   "chain": "tambo",
+   "reportRow": {
+    "address": "Mz. F, Lt. 07, Programa de Vivienda Santa Rosa",
+    "district": "Carabayllo",
+    "province": "Lima",
+    "department": "Lima"
+   },
+   "lat": -11.87405,
+   "lng": -77.0236,
+   "precision": "approx",
+   "confidence": "low",
+   "district": "Carabayllo",
+   "province": "Lima",
+   "department": "Lima",
+   "ubigeo": "150106",
+   "status": "to_verify",
+   "existingId": null,
+   "duplicateCandidate": {
+    "id": "web-tambo-josesaco",
+    "official": "TAMBO JOSESACO-CARABAYLLO",
+    "justoId": "4zLSK5KBssKJ5RBQB",
+    "lat": -11.855812,
+    "lng": -77.039825,
+    "distanceM": 2440,
+    "strength": "weak: new store (client 2026-07-15, online sales off) 600 m from the \"Santa Rosa\" bus stops on Prolongación Camino Real; nothing ties it to a Programa de Vivienda Santa Rosa"
+   },
+   "method": "Urbanization-level: midpoint of the Av. Universitaria stretch between Av. Camino Real (-11.8778,-77.0261) and Av. Manuel Prado (-11.8703,-77.0211), along which the municipal registry places the Programa de Vivienda Santa Rosa de Carabayllo and its \"Santa Rosa Norte\" sector. Mz. F not locatable; error ~0.5-1 km; other \"Santa Rosa\" groups exist in the district.",
+   "evidence": [
+    "Press: Peru Retail, 2026-09-09 (aperturas de agosto) - https://www.peru-retail.com/tambo-inaugura-20-nuevas-tiendas-y-supera-las-900-a-nivel-nacional-donde-estan-sus-nuevos-locales/ - \"Carabayllo (1): Mz. F, Lt. 07, Programa de Vivienda Santa Rosa.\"",
+    "Municipalidad de Carabayllo, padrón de organizaciones y relación de licencias de funcionamiento (PDF) - https://web.municarabayllo.gob.pe/pte/padron_electoral-2018.pdf - license lines: \"AV. CAMINO REAL PARC. 129 PROG. VIV. SANTA ROSA DE CARABAYLLO\"; \"AV. UNIVERSITARIA Q 1 PROGRAMA DE VIV. SANTA ROSA DE CARABAYLLO\"; \"PROG. VIV. SANTA ROSA NORTE AV. UNIVERSITARIA Mza. B Lte. 1\"; \"PROGRAMA DE VIVIENDA SANTA ROSA NORTE MZ. B LOTE 4, 5, 6, 7 y 8 ... AV UNIVERSITARIA / AV. MANUEL PRADO OESTE\"; \"PROG. DE VIVIENDA SANTA ROSA II Mza. I Lte. 05\".",
+    "OSM: n5574157525 IE Santa Rosa de Ponte, addr:full \"Avenida Camino Real S/n Mz Q Lote 12 13 Zona I\", addr:subdistrict \"Santa Rosa De Carabayllo\", -11.875820,-77.026997 (419 m) - https://www.openstreetmap.org/node/5574157525 ; Av. Universitaria x Av. Camino Real ~-11.8778,-77.0261; Av. Universitaria x Av. Manuel Prado ~-11.8703,-77.0211 (ways \"Avenida Universitaria\", \"Avenida Camino Real\", \"Avenida Manuel Prado\", Overpass 2026-10-01). Computed midpoint -11.874050,-77.023600.",
+    "Ambiguity: the registry and OSM also show Asoc. de Viv. Santa Rosa (Av. Camino Real Mz. N), Agrupación de Familias Santa Rosa (Av. José Saco Rojas km 8), Santa Rosa de Punchauca (Av. Túpac Amaru), AA.HH. Santa Rosa (n6100484315, -11.883754,-77.014512), Santa Rosa de Villa (n12445612189, -11.836114,-77.079836), bus stops \"Santa Rosa\" on Prolongación Camino Real (n13384513790, -11.856531,-77.034334).",
+    "Official list: TAMBO JOSESACO-CARABAYLLO (data/stores.csv web-tambo-josesaco, online sales off, short link https://maps.app.goo.gl/fnr5VXYcGfriWPNx7 made with a 2026-07-15 client) is a new store 2.4 km NW; it might be this opening but nothing ties it to a \"Programa de Vivienda Santa Rosa\".",
+    "pip: Carabayllo / Lima / Lima (150106)."
+   ],
+   "exists": "probably",
+   "noteEs": "Aproximada (baja confianza): tramo de la Av. Universitaria entre Av. Camino Real y Av. Manuel Prado, donde el padrón municipal de Carabayllo ubica el Programa de Vivienda Santa Rosa (de Carabayllo / Santa Rosa Norte); la Mz. F no está ubicada. Hay otros «Santa Rosa» en el distrito y la tienda oficial nueva «TAMBO JOSESACO-CARABAYLLO» podría ser esta: revisar. Apertura reportada por Peru Retail (9 set. 2026)."
+  },
+  {
+   "store": "Tambo Comas - Av. Honduras 388",
+   "chain": "tambo",
+   "reportRow": {
+    "address": "Av. Honduras 388, Urb. El Parral",
+    "district": "Comas",
+    "province": "Lima",
+    "department": "Lima"
+   },
+   "lat": -11.95104,
+   "lng": -77.0555,
+   "precision": "approx",
+   "confidence": "medium",
+   "district": "Comas",
+   "province": "Lima",
+   "department": "Lima",
+   "ubigeo": "150110",
+   "status": "to_verify",
+   "existingId": null,
+   "duplicateCandidate": null,
+   "method": "Street + cuadra: no OSM way is named Honduras; in Urb. El Parral Av. Honduras is the avenue OSM tags \"Avenida 22 de Agosto\" (Jr. Asunción -> Av. Carabayllo, ~340 m): the Mercado El Parral (\"Av. Honduras s/n, cuadra 3\") fronts it and the C.C. Honduras 2000 (\"Av. Honduras 217\" / \"Calle Asunción 895\") is OSM \"Honduras Center\" at its Asunción corner. #388 is in cuadra 3 -> point on the avenue axis in front of the Mercado El Parral; error ±200 m.",
+   "evidence": [
+    "Press: Peru Retail, 2026-08-14 (aperturas de julio) - https://www.peru-retail.com/tambo-inaugura-16-nuevas-tiendas-y-queda-cerca-de-alcanzar-los-900-locales-a-nivel-nacional/ - \"Comas (2): Av. Guillermo de la Fuente 601 y Av. Honduras 388, Urb. El Parral.\"",
+    "deperu.com, Mercado El Parral (Comas): \"La avenida Honduras s/n ... Cuadra 3 de Av. Honduras\" - https://www.deperu.com/mercados/mercado-el-parral_comas_1353.html",
+    "deperu.com, Asociación Centro Comercial Honduras 2000: \"Avenida Honduras 217 Urb. El Parral\" - https://www.deperu.com/comercios/sindicatos-federaciones-y-asociaciones-diversas/asociacion-centro-comercial-honduras-2000-994624 ; ruc.pe, Centro Comercial Honduras 2000: \"CAL. ASUNCION URB. EL PARRAL 895 COMAS\" - https://ruc.pe/centro-comercial-honduras-2000-honduras-2000/ -> corner of Av. Honduras and Calle Asunción.",
+    "OSM: w526297979 \"Honduras Center\" (shop=mall, addr:street Asuncion) at the corner of Jirón Asunción (w111821220) and \"Avenida 22 de Agosto\" (w25113781 / w627699870); Nominatim labels it \"777, Avenida 22 de Agosto, El Parral\". w438477040 \"El Parral\" (amenity=marketplace) fronts the same avenue ~200 m west, at Av. Carabayllo. El Parral streets are named after countries/capitals (Argentina, Bogotá, Asunción, Montevideo, Guayana, Japón, La Paz, Canadá) and none is named Honduras - https://www.openstreetmap.org/way/438477040 , https://www.openstreetmap.org/way/526297979",
+    "Computed: avenue axis in front of the market north side -11.951040,-77.055500 (interpolated on w627699870); 230 m from the Honduras Center; stretch Asunción -> Av. Carabayllo ~340 m.",
+    "Search-engine excerpt only (PDF returned 403): Kasnet agent \"Minimarket El Sicaino, Av Honduras 302 Urb El Parral, frente a la Feria Honduras 2000\" - consistent.",
+    "Nominatim 2026-10-01 \"Avenida Honduras, Comas\" -> no result.",
+    "Official list: nearest Tambo is TAMBO CARABAYLLO-C9-COMAS (web-tambo-carabayllo, 214 m), on Av. Carabayllo = the May opening \"Av. Carabayllo 968\", not Honduras; no other new Tambo in El Parral -> separate store.",
+    "pip: Comas / Lima / Lima (150110)."
+   ],
+   "exists": "probably",
+   "noteEs": "Aproximada: Av. Honduras cdra. 3, frente al Mercado El Parral (Av. Honduras cdra. 3 s/n), Urb. El Parral. En OSM este tramo figura como «Av. 22 de Agosto»; la identificación sale del Mercado El Parral y del C.C. Honduras 2000 (Av. Honduras 217, esq. Calle Asunción = «Honduras Center» en OSM). Apertura reportada por Peru Retail (14 ago. 2026)."
+  },
+  {
+   "store": "Tambo Comas - Av. Universitaria Norte 5743",
+   "chain": "tambo",
+   "reportRow": {
+    "address": "Av. Universitaria Norte 5743, Urb. San Isolina",
+    "district": "Comas",
+    "province": "Lima",
+    "department": "Lima"
+   },
+   "lat": -11.955649,
+   "lng": -77.05992,
+   "precision": "approx",
+   "confidence": "medium",
+   "district": "Comas",
+   "province": "Lima",
+   "department": "Lima",
+   "ubigeo": "150110",
+   "status": "to_verify",
+   "existingId": null,
+   "duplicateCandidate": null,
+   "method": "House-number interpolation along the OSM Av. Universitaria axis: from #5977 (Mass, official coordinates) 234 numbers south at 1.467 m/number (rate between #5977 and #8021, Tambo Universitaria C-80, both official) = 343 m. Matches the interpolation between #5400 (OSM, Escuela Nacional de Folclor) and #6102 (Trilce, MINEDU/OSM): -11.955617,-77.059914.",
+   "evidence": [
+    "Press: Peru Retail, 2026-09-09 (aperturas de agosto) - https://www.peru-retail.com/tambo-inaugura-20-nuevas-tiendas-y-supera-las-900-a-nivel-nacional-donde-estan-sus-nuevos-locales/ - \"Comas (1): Av. Universitaria Norte 5743, Urb. San Isolina.\" (Santa Isolina)",
+    "Official refs: Mass \"Av. Universitaria 5977\" (Comas) -11.95266,-77.06023 (https://www.tiendasmass.com.pe/ubicame/); TAMBO UNIVERSITARIA-C80 - COMAS \"Avenida Universitaria 8021\" -11.929478,-77.05368 (https://www.tambo.pe/tiendas).",
+    "OSM refs: w438477349 Escuela Nacional de Folclor José María Arguedas, addr Avenida Universitaria 5400 (-11.958150,-77.059910); n5574740112 IE Trilce Las Vegas, addr:full \"Avenida Universitaria 6102\" (-11.953384,-77.059601; MINEDU import, = OSM Colegio Trilce w435868417); n5380455721 car_repair, addr 5941 (-11.958809,-77.061020) is inconsistent with #5977 (36 numbers, 680 m) and was not used.",
+    "Computed along the axis (distance from the south end of the fetched stretch): #5400 s=1090 m, #6102 s=1581 m, #5977 s=1670 m, #8021 s=4668 m; rate 5977-8021 = 1.467 m/number; estimate s=1327 m -> -11.955649,-77.059920. Other pairs: 5400-6102 -> -11.955617,-77.059914; 5400-5977 -> -11.954682,-77.059877 (spread ~110 m).",
+    "Urbanization check: OSM place nodes Santa Isolina 1 (n12088213514, -11.957745,-77.061941), 2 (n12088213513, -11.956724,-77.059037), 3 (n12088213512, -11.958428,-77.059407) border the avenue from ~-11.9555 southward; official TAMBO MEXICO-C6 (Urb Santa Isolina Etapa 1) at -11.95575,-77.06355.",
+    "Nearby: official Tambo \"Mexico 400\" (web-tambo-mexico-2, short link client 2025-04-09) 114 m away at the Av. México junction - an older store, not this August 2026 opening; no new official Tambo on this stretch.",
+    "Nominatim 2026-10-01 \"Avenida Universitaria 5743, Comas\" -> street-level ways only (no number).",
+    "pip: Comas / Lima / Lima (150110)."
+   ],
+   "exists": "probably",
+   "noteEs": "Aproximada por numeración: interpolada sobre la Av. Universitaria desde el n.º 5977 (Mass, coordenadas oficiales) con el ritmo entre ese número y el n.º 8021 (Tambo Universitaria C-80); coincide con la interpolación entre el n.º 5400 (Escuela Nacional de Folclor, OSM) y el n.º 6102 (Trilce). Frente de la Urb. Santa Isolina, a 114 m del Tambo de Av. México 400. Apertura reportada por Peru Retail (9 set. 2026)."
+  },
+  {
+   "store": "Tambo Lurigancho - Av. Bernardo Balaguer 101 (Chosica)",
+   "chain": "tambo",
+   "reportRow": {
+    "address": "Av. Bernardo Balaguer 101 (Chosica)",
+    "district": "Lurigancho",
+    "province": "Lima",
+    "department": "Lima"
+   },
+   "lat": -11.979018,
+   "lng": -76.813563,
+   "precision": "approx",
+   "confidence": "low",
+   "district": "Lurigancho",
+   "province": "Lima",
+   "department": "Lima",
+   "ubigeo": "150118",
+   "status": "to_verify",
+   "existingId": null,
+   "duplicateCandidate": null,
+   "method": "Street-level geocode (the level tools/merge.mjs accepts): Nominatim structured query street=\"Avenida Bernard de Balaguer 101\", city=\"Lurigancho\" -> first result way 161894002. OSM spells the street \"Bernard de Balaguer\", which is why the original query failed. No house numbers exist on the ~5.6 km avenue, so #101 cannot be placed along it.",
+   "evidence": [
+    "Press: Peru Retail, 2026-07-09 (aperturas de junio) - https://www.peru-retail.com/tambo-suma-23-nuevos-locales-en-junio-y-queda-cerca-de-alcanzar-900-tiendas-a-nivel-nacional/ - \"Chosica (1): Av. Bernardo Balaguer 101.\"",
+    "Nominatim 2026-10-01 (street=Avenida Bernard de Balaguer 101, city=Lurigancho): way 161894002 -11.9790179,-76.8135625 (Los Jardines de Ñaña), then ways 162746815, 161894044, 314533330, 957398424, 144016137, all \"Avenida Bernard de Balaguer\", Lurigancho.",
+    "OSM geometry (Overpass 2026-10-01): the avenue runs from -11.98793,-76.83880 (UPeU / Colegio Unión, Carretera Central km 19) to -11.97632,-76.78571; the point is 2.9 km from the west end and 3.0 km from the east end. If the numbering starts at the Carretera Central (west) end, as usual, #101 would be near -11.987,-76.837 - not confirmed by any source.",
+    "Addresses found on the avenue are Mz/Lt or s/n only (Agencia Municipal de Ñaña \"Mz. B Lt. 10\"; ACENESPAR \"Av. Bernardo Balaguer Nº 50-51 Urb. Ñaña\" - https://acenespargc.com/sedes/sede-campo-nana/ ; OSM MINEDU \"S/n\"); Mass official \"Av. Bernardo Balaguer (a media cdra. de la Univ. Peruana Unión)\" -11.986406,-76.834996 (latitude flagged as copied).",
+    "Official list: no Tambo on the avenue; the closest, TAMBO CHOSICA2 (\"HUB Alameda\", -11.988012,-76.835548), has a short link made with a 2025-10-22 client, before the June 2026 opening -> not this store.",
+    "pip: the whole avenue is in Lurigancho / Lima / Lima (150118)."
+   ],
+   "exists": "probably",
+   "noteEs": "Aproximada (baja confianza): punto de calle de la Av. Bernard de Balaguer en Ñaña (Nominatim/OSM); la avenida mide ~5,6 km y no tiene numeración mapeada, así que el n.º 101 puede estar a 2–3 km de este punto (si la numeración empieza en la Carretera Central, quedaría cerca de la UPeU). Apertura reportada por Peru Retail (9 jul. 2026); aún no figura en la lista oficial."
+  },
+  {
+   "store": "Tambo Puente Piedra - Mz. C Lt. 1",
+   "chain": "tambo",
+   "reportRow": {
+    "address": "Mz. C Lt. 1, Asoc. Viv. Rosa Luz I Et.",
+    "district": "Puente Piedra",
+    "province": "Lima",
+    "department": "Lima"
+   },
+   "lat": -11.879859,
+   "lng": -77.071888,
+   "precision": "approx",
+   "confidence": "medium",
+   "district": "Puente Piedra",
+   "province": "Lima",
+   "department": "Lima",
+   "ubigeo": "150125",
+   "status": "to_verify",
+   "existingId": null,
+   "duplicateCandidate": null,
+   "method": "Urbanization-level: center of the A.V. Rosa Luz I Etapa estimated as the mean of the official Tiendas 3A store located in it (\"A.V. Rosa Luz I Etapa Mz R Lote 18\") and two \"Etapa I\" school addresses of the same flower-named street grid (MINEDU imports in OSM). Mz. C not locatable; error ~200 m.",
+   "evidence": [
+    "Press: Peru Retail, 2026-07-09 (aperturas de junio) - https://www.peru-retail.com/tambo-suma-23-nuevos-locales-en-junio-y-queda-cerca-de-alcanzar-900-tiendas-a-nivel-nacional/ - \"Puente Piedra (2): Mz. C Lt. 1, Asoc. Viv. Rosa Luz I Et.; y Vía Laderas de Chillón...\"",
+    "Official: Tiendas 3A \"Calle 9\" - \"A.V. ROSA LUZ I ETAPA MZ R LOTE 18\", -11.880110,-77.072194 (data/stores.csv web-tiendas3a-calle-9; https://www.tiendas3a.pe/ubicanos).",
+    "OSM: n5574104493 addr:full \"Mz H Lote 15-16 Etapa I\" (-11.880088,-77.069871); n5574104490 addr:full \"Jiron Pasionaria 190 Mz M-i Lote 39-40-41 Etapa I\" (-11.879380,-77.073604); Avenida Rosa Luz (w111927396, w388730809), I.E.N. Rosa Luz (w306146590, -11.880956,-77.072483); streets Las Rosas, Los Lirios, Las Orquídeas, Las Gardenias, Pasionaria.",
+    "Computed: mean of the three anchors = -11.879859,-77.071888 (anchors within ~200 m). It is 17 m from Mass Jr. Las Gardenias 221 and 43 m from the Tiendas 3A store (other chains).",
+    "Nominatim 2026-10-01 \"Rosa Luz, Puente Piedra\" -> only the \"Rosa Luz\" footbridge/bus stop on the Panamericana and a shop on Av. Rosa Luz.",
+    "Official list: no Tambo in Rosa Luz (closest TAMBO THORNE-C1, 1.4 km); the only Puente Piedra Tambos added in 2026 are PUENTEPIEDRA3 (client 2026-01-13, -11.865812,-77.07859) and LASACACIAS (client 2026-04-29, -11.933787,-77.096077) -> not this store.",
+    "pip: Puente Piedra / Lima / Lima (150125)."
+   ],
+   "exists": "probably",
+   "noteEs": "Aproximada: centro de la A.V. Rosa Luz I Etapa, estimado con la tienda oficial de Tiendas 3A ubicada en ella (Mz R Lt 18) y direcciones «Etapa I» de colegios (MINEDU/OSM); la Mz. C no está ubicada (error de unos 200 m). Apertura reportada por Peru Retail (9 jul. 2026)."
+  },
+  {
+   "store": "Tambo Puente Piedra - Vía Laderas de Chillón",
+   "chain": "tambo",
+   "reportRow": {
+    "address": "Vía Laderas de Chillón, Explanada, Mz. E Lt. 8, Psje. Laderas de Chillón",
+    "district": "Puente Piedra",
+    "province": "Lima",
+    "department": "Lima"
+   },
+   "lat": -11.9203,
+   "lng": -77.08607,
+   "precision": "approx",
+   "confidence": "low",
+   "district": "Puente Piedra",
+   "province": "Lima",
+   "department": "Lima",
+   "ubigeo": "150125",
+   "status": "to_verify",
+   "existingId": null,
+   "duplicateCandidate": null,
+   "method": "Sector-level: the only OSM addresses in an \"explanada\" of Laderas de Chillón are the lots of Mz. F of the \"1º explanada\" along Av. 15 de Junio (addr:neighbourhood \"1º explanada, Laderas de Chillón, Puente Piedra - zona sur\"); point = middle of Mz. F (lots 1-15). Mz. E, the \"Vía\" and the \"Psje. Laderas de Chillón\" are not mapped and the press does not say which explanada.",
+   "evidence": [
+    "Press: Peru Retail, 2026-07-09 (aperturas de junio) - https://www.peru-retail.com/tambo-suma-23-nuevos-locales-en-junio-y-queda-cerca-de-alcanzar-900-tiendas-a-nivel-nacional/ - \"Vía Laderas de Chillón, Explanada, Mz. E Lt. 8, Psje. Laderas de Chillón.\"",
+    "OSM (Zowphix, 2023-12): w1234665001 \"Mz. F lt. 1\" (-11.920344,-77.085660) ... w1234651095 \"Mz. F lt. 8-A\" (-11.920253,-77.086015) ... w1234672778 \"Mz. F lt. 14\" (-11.920246,-77.086424), all addr:street \"Avenida 15 de Junio\", addr:neighbourhood \"1º explanada, Laderas de Chillón, Puente Piedra - zona sur\" - https://www.openstreetmap.org/way/1234651095",
+    "OSM: Centro de Salud Laderas de Chillón w780575578 (-11.921188,-77.084379, 209 m), Estadio Laderas w623958524, IEI \"Mz A Lote 25 Sector Laderas De Chillon\" n5560414792 (-11.919670,-77.083683).",
+    "Facebook page \"Mz A'3 Laderas de Chillón 1ra explanada - Puente Piedra\" (search result) confirms \"explanadas\" as sectors of Laderas de Chillón.",
+    "Nominatim 2026-10-01 \"Laderas de Chillón, Puente Piedra\" -> Centro de Salud Laderas de Chillón and a \"Cr100 laderas de Chillon\" water point; geocode cache \"Vía Laderas de Chillón\" -> no result.",
+    "Official list: no Tambo in Laderas de Chillón (TAMBO LASACACIAS, 1.6 km SW, is a different store).",
+    "pip: Puente Piedra / Lima / Lima (150125). Error: a few hundred m if it is the 1ª explanada, up to ~1 km otherwise."
+   ],
+   "exists": "probably",
+   "noteEs": "Aproximada (baja confianza): Mz. F de la 1.ª explanada de Laderas de Chillón, sobre la Av. 15 de Junio (direcciones OSM); la Mz. E y el «Psje. Laderas de Chillón» no están mapeados y la nota no dice qué explanada es. Apertura reportada por Peru Retail (9 jul. 2026)."
+  }
+ ]
+}

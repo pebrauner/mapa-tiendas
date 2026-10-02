@@ -10,6 +10,9 @@
  * MT.markers, store dots, leader lines) · the crimson legend panel with per-chain toggles and counts
  * · popups with store details (address, district, status, radius results, Google Maps link) ·
  * attribution. Responsive: on phones the legend becomes a bottom sheet.
+ * Analysis maps (SPEC §6.3): dashed rings (MapLibre layer) with their pills, the reference pin (or the
+ * reference store's marker with its halo), lines to the nearest store of each chain, the distance to
+ * the reference in every popup, and the "Distancias a …" list in the legend panel (click → popup).
  *
  * Markers follow the zoom: the declutter (MT.layout.compute, deterministic) is pre-computed at the
  * export for a ladder of zoom levels around the slide's zoom; at the slide's own zoom the in-frame
@@ -171,6 +174,60 @@
     return out;
   }
 
+  /**
+   * An analysis map's data for the page: reference (point, label, the index of the reference store
+   * among the exported stores or -1, whether a pin marks it), rings (GeoJSON), the slide's ring
+   * pills (lng/lat, size in CSS px = reference units at the slide's zoom), lines (store indexes),
+   * every store's distance / direction / relation, the legend list, and the pictures (pin; the
+   * reference store's marker with its halo — the layout gave it that larger box at every level) —
+   * or, for the dot and number styles, `halo` (ring widths in CSS px) that the page draws around
+   * the reference store's marker.
+   */
+  function analysisData(cfg, stores, style, mstyle, addImg) {
+    const g = MT.layout.analysis(cfg), fa = g ? MT.analysis.forMap(cfg) : null;
+    if (!g || !fa) return null;
+    const th = MT.theme, idx = {};
+    stores.forEach((s, i) => { idx[s.id] = i; });
+    // The reference store keeps its logo (with a halo) when the slide draws it; otherwise a pin.
+    const refIdx = g.ref.onSlide && idx[g.ref.storeId] !== undefined ? idx[g.ref.storeId] : -1;
+    const pin = MT.markers.pinImage(MARKER_SCALE);
+    let refMk = null;
+    if (refIdx >= 0 && (style.kind === 'badge' || style.kind === 'card')) {
+      const s = stores[refIdx], d = MT.markers.dims(s.chain, mstyle), pad = MT.layout.refHaloPad(mstyle.size);
+      const it = { chainId: s.chain, w: d.w + 2 * pad, h: d.h + 2 * pad, pos: { x: 0, y: 0 }, isRef: true, refPad: pad, shape: style.kind === 'card' ? 'rect' : 'circle' };
+      const pic = MT.markers.image(it, style, MARKER_SCALE);
+      refMk = { i: addImg(pic.canvas.toDataURL('image/png')), w: rnd(it.w, 2), h: rnd(it.h, 2), ix: rnd(pic.x + it.w / 2, 2), iy: rnd(pic.y + it.h / 2, 2), iw: rnd(pic.w, 2), ih: rnd(pic.h, 2) };
+    }
+    // Dot / number styles: the reference store's marker gets the same halo rings (white gap, dark
+    // ring, white casing — theme analysis.halo) as on the slide, drawn by the page as CSS rings.
+    let halo = null;
+    if (refIdx >= 0 && !refMk) {
+      const H = th.analysis.halo || {}, k = Math.sqrt(mstyle.size || 1);
+      halo = { g: rnd((H.gap || 0) * k, 2), w: rnd((H.width || 0) * k, 2), c: rnd((H.casingWidth || 0) * k, 2), color: H.color || '#1F2937', casing: H.casing || '#FFFFFF' };
+    }
+    const dist = {};
+    fa.rows.forEach((r) => {
+      const i = idx[r.store.id];
+      if (i !== undefined) dist[i] = [MT.i18n.formatDistance(r.meters), r.sameChain === null ? null : r.sameChain ? 1 : 0];
+    });
+    const list = MT.legend.distances(cfg, stores.map((s) => ({ storeId: s.id, chainId: s.chain })));
+    const R = th.analysis.ring || {}, AL = th.analysis.line || {};
+    return {
+      ref: { ll: [rnd(g.ref.ll[0], 6), rnd(g.ref.ll[1], 6)], label: fa.label, i: refIdx, pin: refIdx < 0 },
+      pin: { i: addImg(pin.canvas.toDataURL('image/png')), dx: rnd(pin.dx, 2), dy: rnd(pin.dy, 2), w: rnd(pin.w, 2), h: rnd(pin.h, 2) },
+      refMk: refMk,
+      halo: halo,
+      rings: roundGeo(MT.analysis.ringFeatures({ lat: g.ref.ll[1], lng: g.ref.ll[0] }, fa.rings, { steps: 128 }), 6),
+      labels: g.rings.filter((r) => r.label).map((r) => ({ ll: [rnd(r.label.ll[0], 6), rnd(r.label.ll[1], 6)], text: r.label.text, w: rnd(r.label.w, 2), h: rnd(r.label.h, 2), fs: rnd(r.label.fs, 2) })),
+      lines: g.lines.map((l) => idx[l.storeId]).filter((i) => i !== undefined),
+      dist: dist,
+      heading: list ? list.heading : '',
+      top: list ? list.items.filter((x) => idx[x.storeId] !== undefined).map((x) => ({ i: idx[x.storeId], name: x.short, d: x.text })) : [],
+      style: { ring: R.color, ringWidth: R.width, ringAlpha: R.alpha === undefined ? 1 : R.alpha, ringDash: R.dash || null, pill: (R.label && R.label.color) || R.color,
+        line: AL.color, lineWidth: AL.width, lineAlpha: AL.alpha === undefined ? 0.5 : AL.alpha },
+    };
+  }
+
   /** The road-name lines (window.MT_ROAD_NAMES) near a map's stores and view (FeatureCollection). */
   function roadNamesNear(stores, view) {
     const rn = window.MT_ROAD_NAMES;
@@ -276,6 +333,10 @@
       const borders = cfg.showBorders && (cfg.districts || []).length && MT.data.districts.available ? roundGeo(MT.data.districts.features(cfg.districts), 5) : null;
       const rows = MT.legend.items(cfg, stores.map((s) => ({ chainId: s.chain })));
       rows.forEach((r) => chainInfo(r.chainId, style));
+      // Analysis map (SPEC §6.3): reference, rings, pills, lines, distances (and the reference
+      // store's own marker picture, with its halo).
+      const analysis = cfg.analysis ? analysisData(cfg, stores, style, mstyle, addImg) : null;
+      if (analysis) analysis.top.forEach((x) => chainInfo(stores[x.i].chain, style));
       const sizeK = style.size;
       outMaps.push({
         id: cfg.id, title: X.util.mapTitle(cfg), hasTitle: !!String(cfg.title || '').trim(),
@@ -285,7 +346,7 @@
           id: s.id, chain: s.chain, name: s.name || '', address: s.address || '', district: s.district || '', province: s.province || '', department: s.department || '',
           lat: rnd(s.lat, 6), lng: rnd(s.lng, 6), status: s.status || '', precision: s.precision || '', num: nums[s.id] || null,
         })),
-        levels: levels, mk: mk, radius: radius, borders: borders,
+        levels: levels, mk: mk, radius: radius, borders: borders, analysis: analysis,
         // The selected districts' names the app writes (MT.mapview 'mt-district-labels').
         labels: roundGeo(MT.mapview.basemap.districtLabelData(cfg), 6),
         // Main avenue names below zoom 14 (data/road-names.js) around the exported stores.
@@ -316,6 +377,8 @@
         placeLabelLayers: MT.mapview.basemap.PLACE_LABEL_LAYERS,
         anchorStroke: th.marker.anchorDot.stroke, dotStroke: th.marker.dot.stroke, numStroke: th.marker.number.stroke, numColor: th.marker.number.color,
         frameBg: th.mapFrame.background, fontSlide: th.fonts.slideCss,
+        // Analysis maps: rings and lines (reference units = CSS px at the slide's zoom).
+        anaRing: (th.analysis && th.analysis.ring) || null, anaLine: (th.analysis && th.analysis.line) || null,
       },
       img: imgs, chains: chains, maps: outMaps,
     };
@@ -384,6 +447,7 @@ button { font: inherit; color: inherit; }
 .mk img { position: absolute; display: block; max-width: none; pointer-events: none; transition: transform .14s var(--ease); }
 .mk--badge, .mk--pin, .mk--dot { border-radius: 50%; }
 .mk--card { border-radius: 6px; }
+.mk--ref { z-index: 1; }
 .mk:hover, .mk:focus-visible, .mk.is-active { z-index: 2; }
 .mk:hover img, .mk.is-active img, .mk:focus-visible img { transform: scale(1.08); }
 .mk:focus-visible { outline: 2.5px solid var(--to); outline-offset: 2px; }
@@ -398,6 +462,20 @@ button { font: inherit; color: inherit; }
 .dt.is-solo:focus-visible, .ov.is-dots .dt:focus-visible { outline: 2.5px solid var(--to); outline-offset: 2px; }
 .row__btn.is-zero .row__label { opacity: .62; }
 .rl { position: absolute; left: 0; top: 0; padding: 1px 8px; border: 1.5px solid; border-radius: 999px; background: rgba(255,255,255,.94); font-family: 'Segoe UI', system-ui, sans-serif; font-size: 11.5px; font-weight: 700; white-space: nowrap; pointer-events: none; }
+/* Analysis maps: the reference pin, the rings' pills (.rl), the nearest-stores list */
+.apin { position: absolute; left: 0; top: 0; width: 0; height: 0; z-index: 3; pointer-events: none; }
+.apin img { position: absolute; display: block; max-width: none; pointer-events: auto; cursor: help; }
+.dist { flex: 0 1 auto; display: flex; flex-direction: column; min-height: 0; margin: 12px 0 0; padding: 12px 8px 0; border-top: 1px solid rgba(255,255,255,.28); }
+.dist[hidden] { display: none; }
+.dist__title { margin: 0 0 6px; font-size: 15px; font-weight: 700; line-height: 1.25; }
+.dist__list { list-style: none; margin: 0; padding: 0; max-height: 34vh; overflow: auto; scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.35) transparent; }
+.dist__row { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 32px; padding: 3px 6px; border: 0; border-radius: 7px; background: none; text-align: left; cursor: pointer; font-size: 14px; line-height: 1.2; }
+.dist__row:hover { background: rgba(255,255,255,.10); }
+.dist__row:focus-visible { outline: 2px solid #fff; outline-offset: 1px; }
+.dist__row img { flex: none; height: 22px; width: auto; max-width: 44px; }
+.dist__name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dist__d { flex: none; font-weight: 700; opacity: .92; }
+.pop__dist { margin-top: 8px; font-size: 13.5px; font-weight: 700; color: var(--peso); }
 /* Popups */
 .maplibregl-popup.pop .maplibregl-popup-content { padding: 13px 15px 12px; border-radius: 11px; box-shadow: 0 14px 34px -10px rgba(17,24,39,.42), 0 2px 6px rgba(17,24,39,.08); font-family: var(--font, Calibri, Carlito, 'Segoe UI', system-ui, sans-serif); color: var(--ink); min-width: 220px; }
 .maplibregl-popup.pop .maplibregl-popup-close-button { width: 28px; height: 28px; font-size: 20px; color: #71717A; border-radius: 8px; right: 3px; top: 3px; }
@@ -495,6 +573,8 @@ button { font: inherit; color: inherit; }
     var rowsEl = h('ul', { class: 'rows', role: 'list' });
     // Key for grouped logos ("×N = N tiendas cercanas · • = ubicación exacta"), as on the slide.
     var noteEl = h('p', { class: 'panel__note', hidden: true });
+    // Analysis maps: "Distancias a <referencia>" — the nearest stores (click: their popup).
+    var distEl = h('div', { class: 'dist', hidden: true });
     var closeBtn = h('button', { class: 'panel__close', type: 'button', 'aria-label': t('close'), title: t('close') }, '×');
     var headEl = h('h2', { class: 'panel__title' }, TH.heading);
     var panel = h('aside', { class: 'panel', 'aria-label': t('legend') },
@@ -503,6 +583,7 @@ button { font: inherit; color: inherit; }
         h('div', { class: 'panel__head' }, headEl, h('span', { class: 'panel__meta' }, totalEl, closeBtn)),
         rowsEl,
         noteEl,
+        distEl,
         h('div', { class: 'panel__actions' },
           h('button', { type: 'button', onclick: function () { setAll(true); } }, t('showAll')),
           h('button', { type: 'button', onclick: function () { setAll(false); } }, t('hideAll'))),
@@ -565,6 +646,19 @@ button { font: inherit; color: inherit; }
       var grouped = m.levels.some(function (lv) { return !!lv.g; });
       noteEl.textContent = grouped && TH.footnote ? TH.footnote : '';
       noteEl.hidden = !(grouped && TH.footnote);
+      while (distEl.firstChild) distEl.removeChild(distEl.firstChild);
+      var A = m.analysis;
+      distEl.hidden = !(A && A.top.length);
+      if (A && A.top.length) {
+        distEl.appendChild(h('h3', { class: 'dist__title' }, A.heading));
+        var ul = h('ul', { class: 'dist__list', 'aria-label': t('distList') });
+        A.top.forEach(function (x) {
+          var s = m.stores[x.i], src = iconOf(s.chain, m.kind);
+          ul.appendChild(h('li', null, h('button', { class: 'dist__row', type: 'button', title: s.name, onclick: function () { if (map && ov.items[x.i]) openPopup(ov.items[x.i]); } },
+            src ? h('img', { src: src, alt: '' }) : null, h('span', { class: 'dist__name' }, x.name), h('span', { class: 'dist__d' }, x.d))));
+        });
+        distEl.appendChild(ul);
+      }
       recount();
       showNotice(state.failed ? t('noMap') : (!m.stores.length ? t('noStores') : ''));
     }
@@ -783,6 +877,14 @@ button { font: inherit; color: inherit; }
       map.addLayer({ id: 'mt-radius-fill', type: 'fill', source: 'mt-radius', paint: { 'fill-color': ['get', 'fill'], 'fill-opacity': ['get', 'fillOpacity'] } }, before);
       map.addLayer({ id: 'mt-radius-line', type: 'line', source: 'mt-radius', layout: { 'line-join': 'round' },
         paint: { 'line-color': ['get', 'stroke'], 'line-width': TH.radiusWidth, 'line-dasharray': (TH.radiusDash || [1, 0]).map(function (d) { return d / TH.radiusWidth; }) } }, before);
+      // Analysis maps: the distance rings around the reference (thin, dashed), as on the slide.
+      var ar = TH.anaRing;
+      if (ar) {
+        map.addSource('mt-analysis', { type: 'geojson', data: EMPTY });
+        var ap = { 'line-color': ar.color, 'line-width': ar.width, 'line-opacity': ar.alpha === undefined ? 1 : ar.alpha };
+        if (ar.dash) ap['line-dasharray'] = ar.dash.map(function (d) { return d / ar.width; });
+        map.addLayer({ id: 'mt-analysis-rings', type: 'line', source: 'mt-analysis', layout: { 'line-join': 'round' }, paint: ap }, before);
+      }
       // The selected districts' names the basemap does not write (as on the slides), on top.
       var dl = TH.districtLabel || {};
       var lo = function (prop, fb) { try { var v = map.getLayer('label_other') ? map.getLayoutProperty('label_other', prop) : undefined; return v === undefined ? fb : v; } catch (e) { return fb; } };
@@ -826,6 +928,7 @@ button { font: inherit; color: inherit; }
       map.getSource('mt-radius').setData({ type: 'FeatureCollection', features: m.radius.map(function (r) {
         return { type: 'Feature', properties: { chainId: r.chainId, stroke: r.stroke, fill: r.fill, fillOpacity: r.fillOpacity }, geometry: { type: 'Polygon', coordinates: [r.ring] } };
       }) });
+      if (map.getSource('mt-analysis')) map.getSource('mt-analysis').setData(m.analysis ? m.analysis.rings : EMPTY);
       setRadiusFilter();
     }
     function setRadiusFilter() {
@@ -846,9 +949,10 @@ button { font: inherit; color: inherit; }
       var m = cur();
       ov.root = h('div', { class: 'ov' });
       ov.svg = svg('svg', { class: 'ov__svg', 'aria-hidden': 'true' });
-      // Group spokes, then leader halos (white casing) under all the leaders.
-      ov.gs = svg('g', {}); ov.gh = svg('g', {}); ov.gl = svg('g', {});
-      ov.svg.appendChild(ov.gs); ov.svg.appendChild(ov.gh); ov.svg.appendChild(ov.gl);
+      // Analysis lines (reference → nearest store of each chain), group spokes, then leader halos
+      // (white casing) under all the leaders.
+      ov.ga = svg('g', {}); ov.gs = svg('g', {}); ov.gh = svg('g', {}); ov.gl = svg('g', {});
+      ov.svg.appendChild(ov.ga); ov.svg.appendChild(ov.gs); ov.svg.appendChild(ov.gh); ov.svg.appendChild(ov.gl);
       ov.spokes = [];
       ov.marks = h('div', { class: 'ov__layer' });
       ov.dots = h('div', { class: 'ov__layer' });
@@ -861,14 +965,17 @@ button { font: inherit; color: inherit; }
         var label = t('storeOf', { store: s.name, chain: c.name });
         var open = function (ev) { ev.stopPropagation(); openPopup(it); };
         if (m.kind === 'badge' || m.kind === 'card') {
-          var g = m.mk[s.chain];
+          // The analysis' reference store: its own picture, with the halo.
+          var isRef = !!(m.analysis && m.analysis.refMk && m.analysis.ref.i === i);
+          var g = isRef ? m.analysis.refMk : m.mk[s.chain];
+          if (isRef) label = t('refTitle', { name: label });
           if (g) {
             it.w = g.w; it.h = g.h;
             it.label = label;
             it.mk = h('button', { class: 'mk mk--' + m.kind, type: 'button', 'aria-label': label, title: label, style: { width: g.w + 'px', height: g.h + 'px' }, onclick: open },
               h('img', { src: D.img[g.i], alt: '', style: { left: g.ix + 'px', top: g.iy + 'px', width: g.iw + 'px', height: g.ih + 'px' } }));
             // Count pip of a grouped logo ("×4"), shown by place() at the zooms where it groups.
-            if (g.pip) {
+            if (g.pip && !isRef) {
               var pp = g.pip;
               it.pip = h('span', { class: 'pip', hidden: true, 'aria-hidden': 'true', style: { left: pp.x + 'px', top: pp.y + 'px', height: pp.h + 'px', minWidth: pp.h + 'px',
                 padding: '0 ' + (pp.h * 0.27) + 'px', lineHeight: (pp.h - 2 * pp.sw) + 'px', fontSize: pp.fs + 'px', borderWidth: pp.sw + 'px', borderColor: pp.line, background: pp.bg, color: pp.fg } });
@@ -885,6 +992,15 @@ button { font: inherit; color: inherit; }
           it.w = it.h = dd.d;
           it.mk = h('button', { class: 'mk mk--dot', type: 'button', 'aria-label': label, title: label, onclick: open,
             style: { width: dd.d + 'px', height: dd.d + 'px', background: c.mcolor || c.color, borderColor: TH.dotStroke, borderWidth: dd.sw + 'px' } });
+        }
+        // Dot / number styles: the analysis' reference store is ringed by its halo (as on the slide).
+        var AH = m.analysis && m.analysis.halo;
+        if (AH && it.mk && m.analysis.ref.i === i) {
+          var refLabel = t('refTitle', { name: label });
+          it.mk.classList.add('mk--ref');
+          it.mk.setAttribute('aria-label', (m.kind === 'number' ? (s.num || '') + ' · ' : '') + refLabel);
+          it.mk.title = refLabel;
+          it.mk.style.boxShadow = '0 0 0 ' + AH.g + 'px ' + AH.casing + ', 0 0 0 ' + (AH.g + AH.w) + 'px ' + AH.color + ', 0 0 0 ' + (AH.g + AH.w + AH.c) + 'px ' + AH.casing + ', 0 1px 4px ' + (AH.g + AH.w + AH.c) + 'px rgba(17,24,39,.3)';
         }
         if (it.mk) ov.marks.appendChild(it.mk);
         if (m.kind !== 'dot') {
@@ -909,6 +1025,31 @@ button { font: inherit; color: inherit; }
         var top = r.ring.reduce(function (b, p) { return p[1] > b[1] ? p : b; }, r.ring[0]);
         return { el: el, r: r, ll: top };
       });
+      // Analysis map: lines to the nearest store of each chain, the rings' pills, the reference pin.
+      var A = m.analysis;
+      ov.alines = []; ov.apills = []; ov.apin = null;
+      if (A) {
+        var AL = TH.anaLine || {}, AR = TH.anaRing || {};
+        if (AL.width > 0) {
+          ov.alines = A.lines.map(function (i) {
+            var ln = svg('line', { stroke: AL.color, 'stroke-width': AL.width, 'stroke-opacity': AL.alpha === undefined ? 0.5 : AL.alpha, 'stroke-linecap': 'round' });
+            ov.ga.appendChild(ln);
+            return { i: i, el: ln };
+          });
+        }
+        var pc = (AR.label && AR.label.color) || AR.color;
+        ov.apills = A.labels.map(function (l) {
+          var el = h('span', { class: 'rl', style: { color: pc, borderColor: AR.color, fontFamily: TH.fontSlide, fontSize: l.fs + 'px', padding: '0 ' + (l.fs * 0.45) + 'px',
+            height: l.h + 'px', lineHeight: (l.h - 3) + 'px', borderWidth: Math.max(0.8, (AR.width || 1.6) * 0.6) + 'px', boxSizing: 'border-box' } }, l.text);
+          ov.lbl.appendChild(el);
+          return { el: el, ll: l.ll };
+        });
+        if (A.ref.pin) {
+          var P = A.pin, nm = t('refTitle', { name: A.ref.label });
+          ov.apin = h('div', { class: 'apin' }, h('img', { src: D.img[P.i], alt: nm, title: nm, style: { left: P.dx + 'px', top: P.dy + 'px', width: P.w + 'px', height: P.h + 'px' } }));
+          ov.root.appendChild(ov.apin);
+        }
+      }
       ov.level = null; state.levelKey = null;
       applyVisibility();
     }
@@ -1008,6 +1149,24 @@ button { font: inherit; color: inherit; }
         var p = map.project(l.ll);
         l.el.style.transform = 'translate(' + p.x + 'px,' + p.y + 'px) translate(-50%, -50%)';
       });
+      // Analysis map: lines from the reference (its store's dot, or the point) to the stores' dots.
+      var A = cur().analysis;
+      if (A) {
+        var ri = A.ref.i, rit = ri >= 0 ? ov.items[ri] : null;
+        var from = rit && !rit.off ? dotAt(ri) : map.project(A.ref.ll);
+        ov.alines.forEach(function (l) {
+          var it = ov.items[l.i];
+          if (!it || it.off) { l.el.style.display = 'none'; return; }
+          var d = dotAt(l.i);
+          l.el.style.display = '';
+          l.el.setAttribute('x1', from.x); l.el.setAttribute('y1', from.y); l.el.setAttribute('x2', d.x); l.el.setAttribute('y2', d.y);
+        });
+        ov.apills.forEach(function (l) {
+          var q = map.project(l.ll);
+          l.el.style.transform = 'translate(' + q.x + 'px,' + q.y + 'px) translate(-50%, -50%)';
+        });
+        if (ov.apin) { var pp = map.project(A.ref.ll); ov.apin.style.transform = 'translate(' + pp.x + 'px,' + pp.y + 'px)'; }
+      }
     }
     function solo(it, on) {
       if (!!it.solo === on || state.dots) return;
@@ -1045,6 +1204,13 @@ button { font: inherit; color: inherit; }
         s.address ? h('div', { class: 'pop__addr' }, s.address) : null,
         place2 ? h('div', { class: 'pop__place' }, place2) : null,
         tags.length ? h('div', { class: 'pop__tags' }, tags) : null);
+      // Analysis map: the store's distance to the reference (or: this is the reference).
+      var A = m.analysis;
+      if (A) {
+        var dd = A.dist[it.i];
+        if (A.ref.i === it.i) content.appendChild(h('div', { class: 'pop__dist' }, t('reference')));
+        else if (dd) content.appendChild(h('div', { class: 'pop__dist' }, t('distanceTo', { d: dd[0], ref: A.ref.label }) + (dd[1] === null ? '' : ' · ' + t(dd[1] ? 'sameChain' : 'competitor'))));
+      }
       // A grouped logo: the other stores it stands for at this zoom.
       var grp = ov.level && !state.dots && ov.level.g ? ov.level.g[it.i] : null;
       if (grp && grp.length > 1) {

@@ -15,6 +15,12 @@
  *   pip; the `dot` style uses ellipse shapes) · attribution text box · crimson legend
  *   panel (gradient + faint circles rendered to one background picture) · "Tiendas" heading and one
  *   picture + text box per legend row. Speaker notes list the counts and radius results.
+ *   Analysis slides (SPEC §6.3): rings as dashed ellipses without fill ("Anillo 1 km"; baked into the
+ *   basemap when not wholly inside the frame) + their pills as text, lines to the nearest store of
+ *   each chain as connectors glued to the store dot and the reference, the reference pin as its own
+ *   picture ("Referencia — …"; a reference store's marker picture carries its halo), and the
+ *   "Distancias a …" list as real text (heading, chain icon picture, name, distance); notes add the
+ *   ring counts and the nearest stores.
  *   markerStyle 'number' adds store-table slide(s) (# / chain / store / address / district).
  *
  * CONTRACT (docs/ARCHITECTURE.md §6.4): MT.export.pptx(mapIds, opts) → Promise<{file, files}>
@@ -38,6 +44,16 @@
     groupAlt: '{n} tiendas de {chain}: {names}',
     notesRadius: 'Radio de {r} alrededor de {store} ({chain}): {same} de la misma cadena y {comp} de la competencia.',
     notesGenerated: 'Generado con Mapa de Tiendas el {date}.',
+    // Analysis slides (SPEC §6.3).
+    notesAnalysis: 'Distancias en línea recta a {ref} (anillos: {rings}; tiendas hasta {max}).',
+    notesAnalysisDistricts: 'Distancias en línea recta a {ref} (anillos: {rings}; tiendas de los distritos seleccionados).',
+    notesRing: { one: 'Hasta {r}: {n} tienda{rel}.', other: 'Hasta {r}: {n} tiendas{rel}.' },
+    notesRingRel: ' ({same} de la misma cadena, {comp} de la competencia)',
+    notesNearest: 'Más cercanas:',
+    notesFlags: ' ({flags})',
+    notesApprox: 'ubicación aproximada',
+    notesToVerify: 'por verificar',
+    refName: 'Referencia — {name}',
     lang: 'es-PE',
   };
   const MAP_SCALE = 3;      // basemap picture: 3000 px across 7.75 in ≈ 387 dpi
@@ -142,19 +158,24 @@
     });
     const bakedKeys = new Set(baked.map((b) => b.r.storeId + '|' + b.r.meters));
     const baseCfg = Object.assign({}, cfg, { radius: (cfg.radius || []).filter((x) => bakedKeys.has(x.storeId + '|' + (+x.meters))) });
+    // An analysis slide's rings: ellipses when wholly inside the frame, else baked like the radius
+    // circles (their pills too).
+    const ana = cfg.analysis ? MT.layout.analysis(cfg) : null;
+    const aRings = ana ? ana.rings.filter((r) => r.visible) : [];
+    const aShapes = aRings.filter((r) => r.inside), aBaked = aRings.filter((r) => !r.inside).map((r) => r.meters);
 
     if (o.onStep) o.onStep('basemap');
     let base = null;
     if (o.basemap !== false) {
       // Basemap labels keep off the slide's markers, dots and leaders (blockers from cfg's layout).
-      base = await MT.render.mapCanvas(baseCfg, { scale: o.mapScale || MAP_SCALE, markers: false, attribution: false, blockersFor: cfg });
+      base = await MT.render.mapCanvas(baseCfg, { scale: o.mapScale || MAP_SCALE, markers: false, attribution: false, blockersFor: cfg, rings: ana ? aBaked : undefined });
     }
     if (o.onStep) o.onStep('markers');
     // The slide's own layout (the basemap picture was rendered with only the baked radius circles,
     // whose labels are layout obstacles too — its `layout` could differ from the preview's).
     const layout = MT.layout.compute(cfg);
     const rows = MT.legend.items(cfg, layout);
-    await MT.markers.ready(layout.map((i) => i.chainId).concat(rows.map((r) => r.chainId)), style);
+    await MT.markers.ready(layout.map((i) => i.chainId).concat(rows.map((r) => r.chainId), rows.distances ? rows.distances.items.map((d) => d.chainId) : []), style);
     const g = MT.slide.layout(cfg, TEXT_W, rows);
     const k = g.k;                              // slide px per inch
     const px2in = (v) => v / k, px2pt = (v) => v / k * 72;
@@ -214,6 +235,46 @@
         line: color(lab[i].color).hex, lineWidth: rpt(Math.max(0.8, th.radius.width * 0.6)), fontSize: th.radius.label.sizePt });
     });
 
+    // 3b) Analysis slide: rings (dashed outlines, no fill, largest first), the faint lines
+    //     reference → nearest store of each chain (connectors glued to the store dot — or to a
+    //     collapsed logo's ring-colour dot — and to the reference: the pin's tip, or the reference
+    //     store's dot), then the rings' pills on top (the order of MT.render.drawOverlay).
+    if (ana) {
+      const R = th.analysis.ring || {}, rc = color(R.color), lab = R.label || {};
+      aShapes.slice().sort((a, b) => b.meters - a.meters).forEach((r) => {
+        const p = at(r.bbox);
+        els.push({ kind: 'ellipse', name: 'Anillo ' + r.text, x: p.x, y: p.y, w: rin(r.bbox.w), h: rin(r.bbox.h), fill: null,
+          line: rc.hex, lineWidth: rpt(R.width || 1.6), lineTransparency: transp((R.alpha === undefined ? 1 : R.alpha) * rc.alpha), dash: R.dash ? 'dash' : null, role: 'ring' });
+      });
+      const AL = th.analysis.line || {};
+      if (AL.width > 0) {
+        const byId = {};
+        layout.forEach((it) => { byId[it.storeId] = it; });
+        const refIt = ana.ref.storeId ? byId[ana.ref.storeId] : null;
+        const from = refIt ? MT.markers.dotOf(refIt) : (ana.pin ? { x: ana.pin.x, y: ana.pin.y } : null);
+        const lc = color(AL.color);
+        if (from) {
+          ana.lines.forEach((l) => {
+            const it = byId[l.storeId];
+            if (!it) return;
+            const d = it.collapsed ? it.pos : MT.markers.dotOf(it);
+            const a = at(d), b = at(from);
+            els.push({ kind: 'line', name: 'Distancia — ' + it.name + ' (' + MT.legend.distance(l.meters) + ')', x1: a.x, y1: a.y, x2: b.x, y2: b.y,
+              color: lc.hex, lineWidth: rpt(AL.width), transparency: transp((AL.alpha === undefined ? 0.5 : AL.alpha) * lc.alpha),
+              storeId: it.storeId, dotId: it.storeId, startRole: it.collapsed ? 'marker' : 'dot',
+              markerId: refIt ? refIt.storeId : 'ref', endRole: refIt ? 'dot' : 'ref', endSite: refIt ? 0 : 2, role: 'aline' });
+          });
+        }
+      }
+      // The pills over the lines (as MT.render.drawOverlay: lines, then pills).
+      aShapes.forEach((r) => {
+        if (!r.label) return;
+        const l = r.label, q = at({ x: l.x - l.w / 2, y: l.y - l.h / 2 });
+        els.push({ kind: 'pill', name: 'Etiqueta anillo ' + l.text, x: q.x, y: q.y, w: rin(l.w), h: rin(l.h), text: l.text,
+          color: color(lab.color || R.color).hex, fill: 'FFFFFF', fillTransparency: 6, line: rc.hex, lineWidth: rpt(Math.max(0.8, (R.width || 1.6) * 0.6)), fontSize: lab.sizePt || 9 });
+      });
+    }
+
     // 4) Group spokes → leader halos → leaders → store dots → markers (top to bottom), as
     //    MT.markers.drawAll. A leader starts at the dot of `leaderFrom` (a group's nearest store) and
     //    ends at the marker; its white halo is a second connector glued to the same two shapes (it
@@ -255,11 +316,18 @@
         const sw = th.marker.dot.strokeWidth * (it.w / (2 * th.marker.dot.radius));
         const r = it.w / 2 - sw / 2;
         const p = at({ x: it.pos.x - r, y: it.pos.y - r });
+        // The analysis' reference store: its halo ring (as MT.markers draws it) under the dot.
+        if (it.isRef) {
+          const H = th.analysis.halo, k2 = Math.sqrt(style.size), rr = it.w / 2 + (H.gap + H.width / 2) * k2;
+          const q = at({ x: it.pos.x - rr, y: it.pos.y - rr });
+          els.push({ kind: 'ellipse', name: fmt(DECK.refName, { name: it.name }) + ' (halo)', x: q.x, y: q.y, w: rin(2 * rr), h: rin(2 * rr), fill: null,
+            line: color(H.color).hex, lineWidth: rpt(H.width * k2) });
+        }
         els.push({ kind: 'ellipse', name: it.name, alt: it.name + ' — ' + chain, x: p.x, y: p.y, w: rin(2 * r), h: rin(2 * r),
           fill: color(MT.markers.markerColor(it.chainId)).hex, line: color(th.marker.dot.stroke).hex, lineWidth: rpt(sw), storeId: it.storeId, role: 'marker' });
         return;
       }
-      const key = [style.kind, it.chainId, it.w.toFixed(3), it.h.toFixed(3), it.number || '', it.count > 1 ? 'x' + it.count : ''].join('|');
+      const key = [style.kind, it.chainId, it.w.toFixed(3), it.h.toFixed(3), it.number || '', it.count > 1 ? 'x' + it.count : '', it.isRef ? 'ref' : ''].join('|');
       let pic = cache.get(key);
       if (!pic) {
         const img = MT.markers.image(it, style, MARKER_SCALE);
@@ -268,7 +336,8 @@
       }
       const p = at({ x: it.pos.x + pic.dx, y: it.pos.y + pic.dy });
       // A grouped logo says how many stores it stands for (name, alt text): "Tiendas 3A ×5".
-      const name = it.count > 1 ? chain + ' ×' + it.count : it.name;
+      // The analysis' reference store (its picture has the halo): "Referencia — Plaza Vea Miraflores".
+      const name = it.count > 1 ? chain + ' ×' + it.count : it.isRef ? fmt(DECK.refName, { name: it.name }) : it.name;
       const alt = it.count > 1 ? fmt(DECK.groupAlt, { n: it.count, chain: chain, names: (it.members || []).map((id) => (MT.data.store(id) || {}).name || id).join(', ') }) : it.name + ' — ' + chain;
       els.push({ kind: 'image', name: name, alt: alt, x: p.x, y: p.y, w: rin(pic.w), h: rin(pic.h),
         data: pic.data, key: pic.path, storeId: it.storeId, role: 'marker' });
@@ -281,6 +350,16 @@
       els.push({ kind: 'ellipse', name: it.name, alt: it.name + ' — ' + MT.data.chain(it.chainId).name, x: p.x, y: p.y, w: rin(2 * r), h: rin(2 * r),
         fill: color(MT.markers.ringColor(it.chainId)).hex, line: color(cd.stroke).hex, lineWidth: rpt(sw), storeId: it.storeId, role: 'marker' });
     });
+    // The analysis' reference point (or a reference store not drawn on the slide): the pin, on top.
+    if (ana && ana.pin) {
+      const pkey = 'mt-ref-pin.png';
+      let pic = cache.get(pkey);
+      // Cut at the tip: the lines' glue site (bottom centre, endSite 2) is the tip itself.
+      if (!pic) { const img = MT.markers.pinImage(MARKER_SCALE, { tipAtBottom: true }); pic = { data: img.canvas.toDataURL('image/png'), dx: img.dx, dy: img.dy, w: img.w, h: img.h }; cache.set(pkey, pic); }
+      const p = at({ x: ana.pin.x + pic.dx, y: ana.pin.y + pic.dy });
+      els.push({ kind: 'image', name: fmt(DECK.refName, { name: ana.label }), alt: fmt(DECK.refName, { name: ana.label }), x: p.x, y: p.y, w: rin(pic.w), h: rin(pic.h),
+        data: pic.data, key: pkey, storeId: 'ref', role: 'ref' });
+    }
 
     // 5) Attribution (real text on a translucent white box), at a real point size (theme
     //    attribution.pptx) in a box as wide as that text needs, in the frame's corner.
@@ -298,8 +377,11 @@
     els.push({ kind: 'image', name: 'Panel de leyenda', x: px2in(g.panel.x), y: px2in(g.panel.y), w: px2in(g.panel.w), h: px2in(g.panel.h),
       data: o.panelData || panelImage(), key: 'mt-panel.jpg' });
     const lg = g.legend;
-    els.push({ kind: 'text', name: 'Leyenda — título', x: px2in(lg.heading.x), y: px2in(lg.heading.y), w: px2in(lg.heading.w), h: px2in(lg.heading.h),
-      runs: [{ text: lg.heading.text, bold: true, color: color(lg.heading.color).hex }], fontSize: px2pt(lg.heading.fontPx), align: 'center', valign: 'middle' });
+    // (An analysis slide short of space shows only its distance list: no "Tiendas" heading.)
+    if (lg.heading.text) {
+      els.push({ kind: 'text', name: 'Leyenda — título', x: px2in(lg.heading.x), y: px2in(lg.heading.y), w: px2in(lg.heading.w), h: px2in(lg.heading.h),
+        runs: [{ text: lg.heading.text, bold: true, color: color(lg.heading.color).hex }], fontSize: px2pt(lg.heading.fontPx), align: 'center', valign: 'middle' });
+    }
     lg.rows.forEach((r) => {
       const iconPx = Math.max(24, Math.round(px2in(r.icon.h) * ICON_DPI));
       const ikey = 'icon|' + style.kind + '|' + r.chainId + '|' + iconPx;
@@ -317,6 +399,32 @@
       els.push({ kind: 'text', name: 'Nota de la leyenda', x: px2in(lg.note.x), y: px2in(lg.note.y), w: px2in(lg.note.w) + 0.25, h: px2in(lg.note.h),
         runs: [{ text: lg.note.text, color: color(lg.note.color).hex }], fontSize: px2pt(lg.note.fontPx), align: 'left', valign: 'middle', wrap: false, role: 'legend-note' });
     }
+    // Analysis slide: "Distancias a <referencia>" — real text: the heading, then per store its chain
+    // icon (picture), its short name and its distance (right-aligned).
+    if (lg.dist) {
+      const D = lg.dist, hl = D.heading.lines;
+      if (hl.length) {
+        const top = hl[0].y, hh = hl.length * hl[0].h;
+        const wmax = Math.max.apply(null, hl.map((ln) => ln.w));
+        els.push({ kind: 'text', name: 'Distancias — título', x: px2in(hl[0].x), y: px2in(top), w: px2in(Math.max(wmax, D.w)) + 0.05, h: px2in(hh),
+          runs: hl.map((ln, i) => ({ text: ln.text, bold: true, color: color(D.heading.color).hex, breakLine: i < hl.length - 1 })), fontSize: px2pt(D.heading.fontPx),
+          align: 'left', valign: 'middle', wrap: false, lineSpacingMultiple: 1.22 / 1.2207, role: 'dist-heading' });
+      }
+      D.rows.forEach((r) => {
+        const iconPx = Math.max(24, Math.round(px2in(r.icon.h) * ICON_DPI));
+        const ikey = 'icon|' + style.kind + '|' + r.chainId + '|' + iconPx;
+        let idata = cache.get(ikey);
+        if (!idata) { idata = MT.markers.icon(r.chainId, iconPx, style).toDataURL('image/png'); cache.set(ikey, idata); }
+        const who = r.full || r.text;
+        els.push({ kind: 'image', name: 'Distancia — ' + who + ' (logo)', x: px2in(r.icon.x), y: px2in(r.icon.y), w: px2in(r.icon.w), h: px2in(r.icon.h),
+          data: idata, key: 'mt-' + U.slug(ikey) + '.png', chainId: r.chainId, role: 'dist-icon' });
+        els.push({ kind: 'text', name: 'Distancia — ' + who, x: px2in(r.textX), y: px2in(r.y), w: px2in(r.textW) + 0.05, h: px2in(r.h),
+          runs: [{ text: r.text, color: color(D.color).hex }], fontSize: px2pt(r.fontPx), align: 'left', valign: 'middle', wrap: false, role: 'dist-name' });
+        const dw = px2in(r.distW) + 0.25;
+        els.push({ kind: 'text', name: 'Distancia — ' + who + ' (valor)', x: px2in(r.distX) - dw, y: px2in(r.y), w: dw, h: px2in(r.h),
+          runs: [{ text: r.dist, bold: true, color: color(D.distColor).hex }], fontSize: px2pt(r.fontPx), align: 'right', valign: 'middle', wrap: false, role: 'dist-value' });
+      });
+    }
 
     // Speaker notes (Spanish deck content).
     const notes = [];
@@ -328,6 +436,26 @@
       notes.push(fmt(DECK.notesRadius, { r: MT.radius.formatMeters(r.meters), store: r.center.name, chain: MT.data.chain(r.chainId).name, same: r.sameChain, comp: r.competitors }));
       r.inside.slice(0, 15).forEach((x) => notes.push('   • ' + x.store.name + ' (' + MT.data.chain(x.store.chain).name + ') — ' + MT.radius.formatMeters(x.distance)));
     });
+    // Analysis slide: rings with their counts, and the nearest stores.
+    if (ana) {
+      const fa = MT.analysis.forMap(cfg);
+      if (fa) {
+        // A slide with districts takes its stores from them, not from a distance.
+        const byDistance = !!MT.data.analysisRegion(cfg);
+        notes.push(fmt(byDistance ? DECK.notesAnalysis : DECK.notesAnalysisDistricts,
+          { ref: fa.label, rings: fa.rings.map((m) => MT.legend.ringLabel(m)).join(' / '), max: MT.legend.ringLabel(fa.maxMeters) }));
+        fa.summary.cumulative.forEach((c) => notes.push('   • ' + fmt(c.total === 1 ? DECK.notesRing.one : DECK.notesRing.other, { r: MT.legend.ringLabel(c.to), n: c.total,
+          rel: fa.summary.relation ? fmt(DECK.notesRingRel, { same: c.sameChain, comp: c.competitors }) : '' })));
+        if (fa.top.length) {
+          notes.push(DECK.notesNearest);
+          fa.top.forEach((r) => {
+            const flags = [r.flags.approx ? DECK.notesApprox : null, r.flags.toVerify ? DECK.notesToVerify : null].filter(Boolean);
+            notes.push('   ' + r.rank + '. ' + r.store.name + ' (' + MT.data.chain(r.store.chain).name + ') — ' + (flags.length ? '≈ ' : '') + MT.legend.distance(r.meters)
+              + (flags.length ? fmt(DECK.notesFlags, { flags: flags.join(', ') }) : ''));
+          });
+        }
+      }
+    }
     notes.push(fmt(DECK.notesGenerated, { date: U.todayISO() }) + ' ' + th.attribution.text);
 
     // Store table for the numbered style.
@@ -339,7 +467,7 @@
       });
     }
     return { id: cfg.id, title: g.title.full || '', elements: els, notes: notes.join('\n'), table: table, layout: layout, view: view, style: style, mapGroup: mapGroup,
-      radius: { shapes: shapes.length, baked: baked.length } };
+      radius: { shapes: shapes.length, baked: baked.length }, analysis: ana ? { shapes: aShapes.length, baked: aBaked.length, pin: !!ana.pin } : null };
   }
 
   /* ---- Writer (PptxGenJS) ------------------------------------------------------------------------------- */
@@ -371,8 +499,9 @@
         break;
       }
       case 'ellipse': {
-        const o = Object.assign(box, { fill: { color: el.fill, transparency: el.fillTransparency || 0 } });
-        if (el.line) o.line = Object.assign({ color: el.line, width: r4(el.lineWidth) }, el.dash ? { dashType: el.dash } : {});
+        // (No fill: an analysis ring's outline only.)
+        const o = Object.assign(box, el.fill ? { fill: { color: el.fill, transparency: el.fillTransparency || 0 } } : {});
+        if (el.line) o.line = Object.assign({ color: el.line, width: r4(el.lineWidth) }, el.dash ? { dashType: el.dash } : {}, el.lineTransparency ? { transparency: el.lineTransparency } : {});
         slide.addShape(S.ellipse || 'ellipse', o);
         break;
       }
@@ -569,14 +698,15 @@
     g.elements.forEach((el, k) => {
       if (k < g.from || k > g.to || el.kind !== 'line' || !el.storeId) return;
       const dotId = el.dotId || el.storeId, markerId = el.markerId || el.storeId, endRole = el.endRole || 'marker';
-      const dot = idOf['dot|' + dotId], mk = idOf[endRole + '|' + markerId];
+      // Start: the store dot — or, for a logo collapsed to a ring-colour dot (no 'dot' shape), that dot.
+      const dot = idOf[(el.startRole || 'dot') + '|' + dotId], mk = idOf[endRole + '|' + markerId];
       const sp = shapes[k];
       if (!dot || !mk || sp.localName !== 'sp') return;
       const marker = g.elements.find((e) => e.role === endRole && e.storeId === markerId);
       const mx = marker.x + marker.w / 2, my = marker.y + marker.h / 2;
       const dx = el.x1 - mx, dy = el.y1 - my;
       // Rect sites 0 top, 1 left, 2 bottom, 3 right — the side facing the dot (a store dot: its first site).
-      const site = endRole !== 'marker' ? 0 : Math.abs(dy) * marker.w >= Math.abs(dx) * marker.h ? (dy < 0 ? 0 : 2) : (dx < 0 ? 1 : 3);
+      const site = el.endSite !== undefined ? el.endSite : endRole !== 'marker' ? 0 : Math.abs(dy) * marker.w >= Math.abs(dx) * marker.h ? (dy < 0 ? 0 : 2) : (dx < 0 ? 1 : 3);
       const cxn = doc.createElementNS(NS_P, 'p:cxnSp');
       const nv = doc.createElementNS(NS_P, 'p:nvCxnSpPr');
       const old = cNv(sp);

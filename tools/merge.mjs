@@ -85,6 +85,21 @@
  *  · tools/seed/overrides.json holds per-store decisions that need evidence no rule can see (links
  *    to OSM elements, positions computed from OSM street geometry, renames, statuses); each entry
  *    carries its evidence and is listed in REPORT.md ("Verification fixes").
+ *
+ * ── Manual placements (added 2026-10-01; SPEC §6.4) ─────────────────────────────────────────────
+ *  · tools/seed/overrides.json → manualPlacements.placements: the stores that no rule could place,
+ *    decided from evidence and independently re-checked (research + verdict per batch in
+ *    tools/seed/manual/). Each entry names the official/press record (chain + exact name in
+ *    tools/seed/web/<chain>.json) and has a verdict:
+ *      accept / adjust  → lat, lng, precision, status, confidence and a Spanish note. Applied AFTER all
+ *                         matching and geocoding, and only to a record that is still unplaced, so they
+ *                         never change how other stores match. The row keeps the record's source (web),
+ *                         official URL and id (web-<chain>-<slug>; ids of manual rows are assigned after
+ *                         all other rows, so existing ids never shift). Optional rename.address.
+ *      … with "link"    → the store is an OSM element already in the database: the record is matched
+ *                         to it in the P0 link pass (like overrides.json links), no new row.
+ *      reject           → stays in REPORT.md §4 with the verifier's reason.
+ *    REPORT.md §4 lists every entry ("Colocación manual"); merge-log.json → manualPlacementsApplied.
  */
 import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -501,6 +516,32 @@ for (const o of OVERRIDES.official || []) {
   if (o.note) s.extraNote = o.note;
 }
 const OSM_OVERRIDE = Object.fromEntries((OVERRIDES.osm || []).map((o) => [o.osm, o]));
+/* Manual placements (overrides.json → manualPlacements; see the header). Links join the P0 link pass below; the other
+ * entries are applied after P5. manualLog: {kind: 'link'|'place'|'reject', entry, ok, actions[], result, record}. */
+const MANUAL = OVERRIDES.manualPlacements || { placements: [] };
+const MANUAL_PLACEMENTS = MANUAL.placements || [];
+const MANUAL_ON = MANUAL.verifiedOn || UPDATED;
+const manualLog = [];
+const CONF_ES = { high: 'alta', medium: 'media', low: 'baja' };
+{
+  const seen = new Set();
+  for (const e of MANUAL_PLACEMENTS) {
+    const k = `${e.chain}#${e.official}#${e.address || ''}`;
+    if (seen.has(k)) throw new Error(`overrides.json manualPlacements: "${e.official}" (${e.chain}) appears twice`);
+    seen.add(k);
+    if (!['accept', 'adjust', 'reject'].includes(e.verdict)) throw new Error(`overrides.json manualPlacements: "${e.official}": verdict must be accept, adjust or reject`);
+    if (e.verdict !== 'reject' && (!Number.isFinite(e.lat) || !Number.isFinite(e.lng) || !['exact', 'approx'].includes(e.precision) ||
+      !['verified', 'to_verify'].includes(e.status) || !e.note)) throw new Error(`overrides.json manualPlacements: "${e.official}": lat, lng, precision, status and note are required`);
+  }
+}
+/** Notes-column text of a manual placement (Spanish): "<lead> el <date> a partir de evidencia verificada (…; confianza …): <note>". */
+function manualNoteEs(e, lead) {
+  let n = String(e.note || '').trim().replace(/\.$/, '');
+  // The note's first word is lower-cased after the colon when it is an ordinary word (not a brand or a name).
+  n = n.replace(/^(Aproximada|Aproximado|Ubicada|Ubicación|Nodo|Dentro|Edificio|Es|Centro|Punto)\b/, (w) => w.toLocaleLowerCase('es'));
+  return `${lead} el ${MANUAL_ON} a partir de evidencia verificada (tools/seed/overrides.json, manualPlacements` +
+    `${e.confidence ? `; confianza ${CONF_ES[e.confidence] || e.confidence}` : ''}): ${n}`;
+}
 /** "closed 2024-08-27 (detail)" → "cerró el 2024-08-27 (detail)"; a `reason_es` in the web JSON wins. */
 function closedReasonEs(x) {
   if (x.reason_es) return x.reason_es;
@@ -662,17 +703,22 @@ function uniqueAreaPass(c, pool, pass) {
   }
   assign(cands, pass);
 }
-// P0: links from tools/seed/overrides.json (official store ↔ OSM element, with evidence).
-for (const L of OVERRIDES.links || []) {
+// P0: links from tools/seed/overrides.json (official store ↔ OSM element, with evidence), then the manual placements
+// whose store is an OSM element already in the database (manualPlacements entries with "link").
+const MANUAL_LINKS = MANUAL_PLACEMENTS.filter((e) => e.link && e.verdict !== 'reject')
+  .map((e) => ({ chain: e.chain, official: e.official, address: e.address, osm: e.link, evidence: e.verification || '', manual: e }));
+for (const L of [...(OVERRIDES.links || []), ...MANUAL_LINKS]) {
   const s = findOfficial(L);
   const key = String(L.osm).replace(/^osm-/, '');
   const o = s && [...osmStores[L.chain], ...osmWeak[L.chain]].find((x) => x.key === key || x.members.some((m) => m.key === key));
-  const log = { kind: 'link', chain: L.chain, target: `${L.official} ↔ osm-${key}`, ok: false, actions: [], evidence: L.evidence || '' };
-  overrideLog.push(log);
+  const log = L.manual ? { kind: 'link', entry: L.manual, ok: false, actions: [], record: s }
+    : { kind: 'link', chain: L.chain, target: `${L.official} ↔ osm-${key}`, ok: false, actions: [], evidence: L.evidence || '' };
+  (L.manual ? manualLog : overrideLog).push(log);
   if (!s) { log.result = 'official record not found'; continue; }
   if (!o) { log.result = `OSM element ${key} is not an accepted ${L.chain} element in this scan`; continue; }
   if (matchedWeb.has(wkey(s)) || matchedOsm.has(o.key)) { log.result = 'already matched'; continue; }
   s.link = L;
+  if (L.manual) { s.manualPlacement = L.manual; if (L.manual.status) s.forceStatus = L.manual.status; }
   assign([{ web: s, osm: o, d: s.lat != null ? distM(s, o) : 0, score: null }], 'P0 override link');
   log.ok = true; log.actions.push(`matched to osm-${o.key}`);
 }
@@ -957,6 +1003,35 @@ for (const c of CHAIN_ORDER) {
   if (!RULES[c].dense) uniqueAreaPass(c, osmStores[c], 'P5 only one in area (after geocoding)');
 }
 
+// Manual placements (overrides.json → manualPlacements, entries without "link"): applied now, after every matching and
+// geocoding pass, so they cannot change how any other store matches; only to records that are still unplaced.
+for (const e of MANUAL_PLACEMENTS) {
+  if (e.link && e.verdict !== 'reject') continue; // done in the P0 link pass
+  const s = findOfficial(e);
+  const log = { kind: e.verdict === 'reject' ? 'reject' : 'place', entry: e, ok: false, actions: [], record: s };
+  manualLog.push(log);
+  if (!s) { log.result = 'official record not found (name changed in tools/seed/web?)'; continue; }
+  const m = matches.find((x) => x.web === s);
+  if (m) { log.result = `not needed: the rules matched it to osm-${m.osm.key}`; continue; }
+  if (s.dupOf) { log.result = `not applied: press duplicate of "${s.dupOf.name}"`; continue; }
+  if (s.lat != null) { log.result = 'not applied: the official record has coordinates now'; continue; }
+  if (s.geo) { log.result = `not needed: placed by ${s.geo.override ? 'an overrides.json "official" entry' : 'geocoding'}`; continue; }
+  if (e.verdict === 'reject') { s.manualReject = e; log.ok = true; log.actions.push('not placed: stays in §4'); continue; }
+  const pd = pip(e.lat, e.lng);
+  if (!pd) { log.result = 'not applied: the point is outside Peru'; continue; }
+  if (e.rename) {
+    s.listText = s.listText || { name: s.name, address: s.address };
+    if (e.rename.name) s.name = e.rename.name;
+    if (e.rename.address != null) s.address = e.rename.address;
+    log.actions.push(`address "${s.address}"`);
+  }
+  s.geo = { ok: true, lat: e.lat, lng: e.lng, level: 'manual', label: e.note, pipd: pd, override: true, manual: e };
+  s.geoFail = null;
+  s.manualPlacement = e;
+  if (e.status) s.forceStatus = e.status;
+  log.ok = true; log.actions.push(`placed at ${e.lat}, ${e.lng} (${pd.district})`);
+}
+
 /* ════════════════════════════════════ 6. Rows ════════════════════════════════════════════════ */
 const rows = [];
 const dropped = { outside: [], weak: [], manual: [] };
@@ -967,7 +1042,8 @@ function flagsText(s, matched) {
 }
 function officialDistrictNote(s, pd) {
   if (!s.district || !pd) return null;
-  return districtKey(s.district) === districtKey(pd.district) ? null : `distrito según la lista oficial: ${s.district}`;
+  // A press record (s.secondary) is not on the official list: its district is the article's.
+  return districtKey(s.district) === districtKey(pd.district) ? null : `distrito según ${s.secondary ? 'la prensa' : 'la lista oficial'}: ${s.district}`;
 }
 /** Notes every row of an official record carries (overrides, renames, press duplicates merged into it). */
 function officialExtraNotes(s) {
@@ -1025,7 +1101,8 @@ for (const m of matches) {
     }
   }
   const extra = [];
-  if (m.pass.startsWith('P0')) extra.push(`emparejada con este elemento OSM en tools/seed/overrides.json (${s.link.why || 'ver «Verification fixes» en tools/seed/REPORT.md'})`);
+  if (m.pass.startsWith('P0')) extra.push(s.link.manual ? manualNoteEs(s.link.manual, 'emparejada a mano con este elemento OSM')
+    : `emparejada con este elemento OSM en tools/seed/overrides.json (${s.link.why || 'ver «Verification fixes» en tools/seed/REPORT.md'})`);
   if (o.members.length > 1) extra.push(`también mapeada en OSM como ${o.members.slice(1).map((x) => x.key).join(', ')}`);
   if (m.pass.startsWith('P2') || (m.pass.startsWith('P3') && s.lat != null)) extra.push(`coordenadas oficiales a ${m.d} m`);
   if (s.lat == null) {
@@ -1053,14 +1130,17 @@ for (const c of CHAIN_ORDER) for (const s of WEB[c].stores) {
     if (!pd) { dropped.outside.push({ chain: c, name: s.name, ref: s.url }); continue; }
     const geocoded = s.lat == null;
     const LEVEL_ES = { house: 'número', street: 'calle', neighbourhood: 'barrio' };
+    const manual = geocoded && s.geo.manual ? s.geo.manual : null;
     const notes = !geocoded ? ['solo en la lista oficial (coordenadas oficiales)']
+      : manual ? [manualNoteEs(manual, 'colocada a mano')]
       : s.geo.override ? [`ubicada a mano (tools/seed/overrides.json): ${s.geo.label}`]
       : s.geo.level === 'interpolated' ? [s.geo.hnNote, s.geo.note]
       : [`geocodificada a partir de la dirección oficial (Nominatim, a nivel de ${LEVEL_ES[s.geo.level] || s.geo.level}: ${s.geo.label})`, s.geo.note];
     const doubtful = !geocoded && s.flags.some((f) => DOUBTFUL_COORDS.has(f.code));
-    pushRow({ id: null, chain: c, name, address: s.address, lat: p.lat, lng: p.lng, precision: geocoded || doubtful ? 'approx' : 'exact', source: 'web',
+    // A manual placement carries the verifier's precision and status (status via s.forceStatus).
+    pushRow({ id: null, chain: c, name, address: s.address, lat: p.lat, lng: p.lng, precision: manual ? manual.precision : geocoded || doubtful ? 'approx' : 'exact', source: 'web',
       source_ref: s.url, status: statusOf(s, geocoded || s.flags.length ? 'to_verify' : 'verified'),
-      notes: [...notes, ...flagsText(s, false), officialDistrictNote(s, pd), ...officialExtraNotes(s)], _web: s }, pd);
+      notes: [...notes, ...flagsText(s, false), officialDistrictNote(s, pd), ...officialExtraNotes(s)], _web: s, _manual: manual }, pd);
   } else {
     // Unmatched OSM stores of the same chain in the same district (province when no district): likely candidates.
     // (no district: the districts where the street exists when geocoding found several, else the province if it has ≤ 3)
@@ -1068,13 +1148,16 @@ for (const c of CHAIN_ORDER) for (const s of WEB[c].stores) {
     let hints = osmStores[c].filter((o) => !matchedOsm.has(o.key) && o.pipd && (s.district ? sameArea(s, o.pipd)
       : amb ? amb.has(districtKey(o.pipd.district)) && sameArea(s, o.pipd) : s.province ? sameArea(s, o.pipd) : false)).map((o) => `osm-${o.key}`);
     if (!s.district && !amb && hints.length > 3) hints = [];
+    // A verifier already searched for this store (manualPlacements reject): the automatic guess no longer applies.
+    if (s.manualReject) hints = [];
     for (const h of hints) (manualHintByOsm[h] ||= []).push(name);
     const why = s.forceManual ? s.forceManual : s.geoFail?.rejected ? `geocoding rejected by the house-number check: ${s.geoFail.rejected}`
       : s.geoFail?.offline ? 'not geocoded (offline run, no cached answer)' : s.geoFail?.failed ? 'Nominatim did not answer every query (rerun to retry)'
       : s.geoFail?.ambiguous ? `the source gives no district and the street exists in several (${s.geoFail.ambiguous.join(', ')})`
       : s.district ? 'no geocoding result naming this street inside the stated district' : 'no geocoding result naming this street in the stated province';
     dropped.manual.push({ chain: c, name, address: s.address, district: s.district, province: s.province, department: s.department, url: s.url,
-      flags: s.flags.map((f) => f.text), why, osmCandidates: hints, mapLink: mapLinkOf(s), notes: officialExtraNotes(s) });
+      flags: s.flags.map((f) => f.text), why, osmCandidates: hints, mapLink: mapLinkOf(s), notes: officialExtraNotes(s),
+      checked: s.manualReject ? { on: MANUAL_ON, batch: s.manualReject.batch, reason: s.manualReject.verification || '' } : null });
   }
 }
 // OSM-only
@@ -1129,10 +1212,12 @@ for (const c of CHAIN_ORDER) {
   for (const o of osmWeak[c]) if (!matchedOsm.has(o.key)) dropped.weak.push({ chain: c, key: o.key, name: o.tags.name || '', reason: o.reason });
 }
 for (const ov of OVERRIDES.osm || []) if (!ov.applied) overrideLog.push({ kind: 'osm', chain: ov.chain, target: `osm-${ov.osm}`, ok: false, actions: [], result: 'not an OSM-only row in this run', evidence: ov.evidence || '' });
-// ids for official-only rows: web-<chain>-<slug of branch>, unique per chain (deterministic order).
+// ids for official-only rows: web-<chain>-<slug of branch>, unique per chain (deterministic order). Manual placements
+// get theirs last, so placing a store never shifts the "-2" suffix of an existing row.
 {
   const used = new Set(rows.filter((r) => r.id).map((r) => r.id));
-  const pending = rows.filter((r) => !r.id).sort((a, b) => cmpStr(a.chain, b.chain) || cmpStr(norm(a.name), norm(b.name)) || cmpStr(a.address, b.address) || a.lat - b.lat || a.lng - b.lng);
+  const pending = rows.filter((r) => !r.id).sort((a, b) => (a._manual ? 1 : 0) - (b._manual ? 1 : 0) || cmpStr(a.chain, b.chain) ||
+    cmpStr(norm(a.name), norm(b.name)) || cmpStr(a.address, b.address) || a.lat - b.lat || a.lng - b.lng);
   for (const r of pending) {
     const branch = slug(r.name.replace(new RegExp('^' + RULES[r.chain].label.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\s*'), '')) || 'tienda';
     let id = `web-${r.chain}-${branch}`, k = 2;
@@ -1146,8 +1231,9 @@ rows.sort((a, b) => chainIdx[a.chain] - chainIdx[b.chain] || cmpStr(norm(a.depar
   cmpStr(norm(a.district), norm(b.district)) || cmpStr(norm(a.name), norm(b.name)) || cmpStr(a.id, b.id));
 { const ids = new Set(); for (const r of rows) { if (ids.has(r.id)) throw new Error(`duplicate id ${r.id}`); ids.add(r.id); } }
 // Geocoded (street-level) rows: flag a nearby exact row of the same chain (possible duplicate) and rows that
-// share the same street point (two house numbers on one avenue geocode to the same segment).
-for (const r of rows.filter((x) => x.precision === 'approx')) {
+// share the same street point (two house numbers on one avenue geocode to the same segment). Manual placements are
+// skipped: their duplicate check is part of the evidence (REPORT.md §4 lists the nearest row of the chain).
+for (const r of rows.filter((x) => x.precision === 'approx' && !x._manual)) {
   const near = rows.filter((x) => x !== r && x.chain === r.chain && x.status !== 'closed').map((x) => ({ x, d: distM(r, x) }))
     .filter((y) => y.d <= (RULES[r.chain].dense ? 150 : 400)).sort((a, b) => a.d - b.d || cmpStr(a.x.id, b.x.id));
   const add = [];
@@ -1188,6 +1274,10 @@ const reported = (c) => {
   return vals;
 };
 const statusCount = (arr, st) => arr.filter((r) => r.status === st).length;
+// Manual placements of this run (overrides.json → manualPlacements) and the row each one produced.
+const manualRowOf = (x) => (x.kind === 'link' ? matches.find((m) => m.web === x.record)?.row : rows.find((r) => r._manual && r._web === x.record)) || null;
+const mPlaced = manualLog.filter((x) => x.ok && x.kind === 'place'), mLinked = manualLog.filter((x) => x.ok && x.kind === 'link');
+const mRejected = manualLog.filter((x) => x.ok && x.kind === 'reject'), mSkipped = manualLog.filter((x) => !x.ok);
 
 p('# Seed store database — merge report');
 p();
@@ -1197,7 +1287,8 @@ p(`Generated by \`node tools/merge.mjs\` (rows dated ${UPDATED}). OSM data as of
   `${statusCount(rows, 'closed')} closed) → \`data/stores.js\` via \`node tools/build-data.mjs\`.`);
 p();
 p(`Exact coordinates: ${rows.filter((r) => r.precision === 'exact').length} rows (${pct(rows.filter((r) => r.precision === 'exact').length, rows.length)}). ` +
-  `Geocoded (approx): ${rows.filter((r) => r.precision === 'approx').length}. Needs manual placement (not in the CSV): **${dropped.manual.length}**. ` +
+  `Geocoded (approx): ${rows.filter((r) => r.precision === 'approx').length}. Needs manual placement (not in the CSV): **${dropped.manual.length}**` +
+  `${mPlaced.length + mLinked.length ? ` (${mPlaced.length + mLinked.length} more were placed by hand from evidence: ${mPlaced.length} new rows, ${mLinked.length} linked to OSM rows; §4)` : ''}. ` +
   `Nominatim requests this run: ${requests}${OFFLINE ? ' (offline run)' : ''}; geocode cache entries: ${Object.keys(cache.entries).length}.`);
 p();
 if (existsSync(FILES.notes)) { p(readFileSync(FILES.notes, 'utf8').trim()); p(); }
@@ -1221,6 +1312,12 @@ if (existsSync(FILES.notes)) { p(readFileSync(FILES.notes, 'utf8').trim()); p();
     p(`| ${o.kind} | ${esc(CHAIN_META[o.chain]?.name || o.chain)}: ${esc(o.target)} | ${o.ok ? 'yes' : '**no**'} | ${esc([...o.actions, o.result].filter(Boolean).join('; '))} → ${ref(r)} |`);
   }
   p();
+  if (manualLog.length) {
+    p(`**Manual placements** (\`tools/seed/overrides.json\` → \`manualPlacements\`, verified ${MANUAL_ON}; applied after all matching and geocoding): ` +
+      `${mPlaced.length} placed as new rows, ${mLinked.length} linked to OSM rows already in the database, ${mRejected.length} not placed (still in §4)` +
+      `${mSkipped.length ? `, **${mSkipped.length} not applied** (${mSkipped.map((x) => `${esc(x.entry.official)}: ${esc(x.result)}`).join('; ')})` : ''}. Every entry is listed in §4 ("Colocación manual").`);
+    p();
+  }
   const excludedNotChain = classified.filter((x) => x.kind === 'excluded' && /not the chain/.test(x.reason || ''));
   const doubtfulPos = classified.filter((x) => x.noCoords);
   p(`**OSM elements**: ${excludedNotChain.length} excluded because the mapper says they are not the chain (${excludedNotChain.map((x) => `${x.key} "${esc(x.e.tags.name)}"`).join(', ') || 'none'}); ` +
@@ -1253,7 +1350,8 @@ if (existsSync(FILES.notes)) { p(readFileSync(FILES.notes, 'utf8').trim()); p();
   p(`### Verification queue`);
   p();
   p(`${queue.length} of the ${statusCount(rows, 'to_verify')} to_verify rows, most doubtful first (1 = a position conflict was found, 2 = OSM-only with old data or on another chain's premises, ` +
-    '3 = official coordinates shared with another store or doubted by the source). The other to_verify rows are geocoded addresses, press-only openings and records the source itself flags (see notes).');
+    '3 = official coordinates shared with another store or doubted by the source). The other to_verify rows are geocoded addresses, press-only openings and records the source itself flags (see notes)' +
+    (mPlaced.length ? `, plus the ${mPlaced.filter((x) => manualRowOf(x)?.status === 'to_verify').length} stores placed by hand from evidence (listed with their evidence in §4, "Colocación manual").` : '.'));
   p();
   p('| # | Row | Chain | Name | District | Why | Notes |');
   p('|---:|---|---|---|---|---|---|');
@@ -1355,18 +1453,60 @@ for (const R of REGIONS) {
 // Manual placement
 p('## 4. Needs manual placement');
 p();
-p(`${dropped.manual.length} official stores have no coordinates in their source, no matching OSM element, and no geocoding result inside the district the source ` +
-  'states (or a geocoding result that the house-number check rejected). They are **not** in `data/stores.csv`; add them in the app (Base de datos → add store → ' +
-  'address search / click on map / paste coordinates or a Google Maps link). Where the official site links the store to Google Maps, the link is in the ' +
-  '"official map link" column: open it yourself and paste the coordinates (the tools do not read Google Maps).');
+p(`${dropped.manual.length} official or press-reported stores have no coordinates in their source, no matching OSM element, no geocoding result inside the district the source ` +
+  'states (or a geocoding result that the house-number check rejected), and no position decided from evidence. They are **not** in `data/stores.csv`; add them in the app ' +
+  '(Base de datos → add store → address search / click on map / paste coordinates or a Google Maps link). Where the official site links the store to Google Maps, the link is in the ' +
+  '"official map link" column: open it yourself and paste the coordinates (the tools do not read Google Maps).' +
+  (mRejected.length ? ` Stores marked **checked by hand** were researched and independently re-checked on ${MANUAL_ON} without finding a defensible position; the verifier's reason ` +
+    'follows in the "Why" column (`tools/seed/overrides.json` → `manualPlacements`, verdict reject).' : ''));
 p();
 if (dropped.manual.length) {
   p('| Chain | Store | Address | District / province / department (source) | Why | Official map link | Unmatched OSM rows of the chain nearby (check these first) |');
   p('|---|---|---|---|---|---|---|');
   for (const m of [...dropped.manual].sort((a, b) => chainIdx[a.chain] - chainIdx[b.chain] || cmpStr(norm(a.name), norm(b.name)))) {
-    p(`| ${CHAIN_META[m.chain].name} | ${esc(m.name)} | ${esc(m.address)} | ${esc([m.district || '—', m.province || '—', m.department || '—'].join(' / '))} | ${esc([m.why, ...m.flags, ...(m.notes || [])].join('; '))} | ${m.mapLink || '—'} | ${m.osmCandidates.join(', ') || '—'} |`);
+    const checked = m.checked ? ` — **checked by hand on ${m.checked.on} (batch ${m.checked.batch}), not placed:** ${m.checked.reason}` : '';
+    p(`| ${CHAIN_META[m.chain].name} | ${esc(m.name)} | ${esc(m.address)} | ${esc([m.district || '—', m.province || '—', m.department || '—'].join(' / '))} | ${esc([m.why, ...m.flags, ...(m.notes || [])].join('; ') + checked)} | ${m.mapLink || '—'} | ${m.osmCandidates.join(', ') || '—'} |`);
   }
   p();
+}
+if (mPlaced.length || mLinked.length || mSkipped.length) {
+  const done = [...mPlaced, ...mLinked].map((x) => ({ x, r: manualRowOf(x) }));
+  const rs = done.map((y) => y.r).filter(Boolean);
+  const newRows = mPlaced.map(manualRowOf).filter(Boolean);
+  const CONF_EN = { high: 'high', medium: 'medium', low: 'low' };
+  const km = (d) => (d < 1000 ? `${Math.round(d)} m` : `${(d / 1000).toFixed(1)} km`);
+  const urls = (e) => [...new Set([...(e.evidence || []), e.verification || ''].join(' ').match(/https?:\/\/[^\s)'"<>]+/g) || [])].map((u) => u.replace(/[.,;:]+$/, ''));
+  p(`### Colocación manual (${MANUAL_ON})`);
+  p();
+  p(`${rs.length} stores that no rule could place were placed by hand from evidence: **${newRows.length} new rows** ` +
+    `(${statusCount(newRows, 'verified')} verified, ${statusCount(newRows, 'to_verify')} to_verify; ${newRows.filter((r) => r.precision === 'exact').length} exact, ` +
+    `${newRows.filter((r) => r.precision === 'approx').length} approx) and **${mLinked.length} official stores matched to an OSM row already in the database** (no new row; ` +
+    `the OSM-only row becomes the official store). ${mRejected.length} had no defensible position and stay in the table above. Each store was researched and then ` +
+    'independently re-checked (`tools/seed/manual/<batch>-research.json`, `<batch>-verdicts.json`): coordinates, precision and status are the verifier\'s. The decisions live in ' +
+    '`tools/seed/overrides.json` → `manualPlacements` (full evidence lists there), so every run of `tools/merge.mjs` reproduces them; they are applied after all matching and ' +
+    'geocoding and only to records that are still unplaced, so they never change how any other store is matched. Official Google Maps short links were resolved only to read the coordinates in the ' +
+    'redirect URL (no Google Maps page content was fetched). A new row keeps its record\'s source (`web`: the official list, or the press note for openings not yet in it), ' +
+    'URL and an id `web-<chain>-<slug>`; its `notes` start with "Colocada a mano el … a partir de evidencia verificada" and carry the Spanish note. For a radius or distance ' +
+    'analysis, treat `approx` and `to_verify` rows as uncertain positions; the confidence says how far off they can be (low ≈ up to 1 km or more, medium ≈ one block to ' +
+    '~200 m, high ≈ the building or a few tens of metres).');
+  p();
+  p('| Chain | Store | Row · nearest other row of the chain | Position (district) | Precision · status · confidence | Method | Evidence (independent check) · sources |');
+  p('|---|---|---|---|---|---|---|');
+  for (const { x, r } of done.sort((a, b) => chainIdx[a.x.entry.chain] - chainIdx[b.x.entry.chain] || cmpStr(norm(a.r?.name || a.x.entry.official), norm(b.r?.name || b.x.entry.official)))) {
+    const e = x.entry;
+    if (!r) { p(`| ${CHAIN_META[e.chain].name} | ${esc(e.official)} | **no row** | — | — | ${esc(e.method)} | ${esc(e.verification)} |`); continue; }
+    const near = rows.filter((y) => y !== r && y.chain === r.chain && y.status !== 'closed').map((y) => ({ y, d: distM(r, y) })).sort((a, b) => a.d - b.d || cmpStr(a.y.id, b.y.id))[0];
+    const rowCell = `\`${r.id}\`${x.kind === 'link' ? ' (existing OSM row, now matched)' : ' (new)'}${near ? ` · \`${near.y.id}\` ${km(near.d)}` : ''}`;
+    const pos = `${r.lat.toFixed(6)}, ${r.lng.toFixed(6)} (${r.district})${r.address !== x.record.listText?.address && x.record.listText ? `; address set to "${esc(r.address)}"` : ''}`;
+    const meta = `${r.precision} · ${r.status} · ${CONF_EN[e.confidence] || e.confidence || '—'}${e.verdict === 'adjust' ? ' · **adjusted by the verifier**' : ''}`;
+    const src = urls(e).slice(0, 6).join(' ');
+    p(`| ${CHAIN_META[e.chain].name} | ${esc(r.name)} | ${rowCell} | ${pos} | ${meta} | ${esc(e.method)} | ${esc(e.verification)}${src ? ` Sources: ${esc(src)}` : ''} |`);
+  }
+  p();
+  if (mSkipped.length) {
+    p(`Not applied in this run (${mSkipped.length}): ${mSkipped.map((y) => `${esc(y.entry.official)} (${y.entry.chain}): ${esc(y.result)}`).join('; ')}.`);
+    p();
+  }
 }
 // Dropped / excluded
 p('## 5. What was left out');
@@ -1404,6 +1544,8 @@ const log = {
     score: m.score, row: m.row?.id || null })),
   geocoding: geoLog,
   manualPlacement: dropped.manual,
+  manualPlacementsApplied: manualLog.map((x) => ({ chain: x.entry.chain, official: x.entry.official, batch: x.entry.batch || null, verdict: x.entry.verdict,
+    kind: x.kind, ok: x.ok, actions: x.actions, result: x.result || null, row: x.ok && x.kind !== 'reject' ? manualRowOf(x)?.id || null : null })),
   verification: { coordinateChecks: coordCheckLog, houseNumberChecks: hnLog, osmOnlyChecks: osmOnlyLog, overrides: overrideLog },
   droppedWeak: dropped.weak,
   outsidePeru: dropped.outside,

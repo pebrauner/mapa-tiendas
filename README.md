@@ -57,6 +57,32 @@ Los nombres de los distritos elegidos siempre aparecen en el mapa: cuando el map
 escribe a ese zoom (los distritos de Lima vistos de lejos), la app los escribe con el mismo estilo,
 y los logos y sus líneas guía se apartan de ellos.
 
+## Análisis de distancias
+
+Pestaña **Análisis**. Las distancias son en línea recta (no consideran calles ni tiempos de viaje) y
+salen solo de la base de datos: el mismo análisis da siempre los mismos números.
+
+- **Distancias a un punto.** La referencia puede ser una tienda (escribe su nombre y pulsa Enter) o
+  un punto: pega coordenadas o un enlace de Google Maps, busca una dirección (Enter) o usa **Elegir en
+  el mapa**. A un punto le puedes poner nombre («Local propuesto Av. Primavera») y una **cadena
+  propia**, para separar «misma cadena» de «competencia». Elige hasta qué distancia mirar (1 a 20 km,
+  todo el Perú o ciertos distritos), las cadenas y los anillos (500 m, 1 km, 2 km…). Verás la tienda
+  más cercana de la misma cadena y de la competencia, cuántas tiendas hay en cada anillo y la tabla
+  completa con distancia y rumbo. Las tiendas «por verificar» y las de ubicación aproximada (≈) se
+  marcan; las cerradas nunca entran.
+- **Matriz de cercanía** (canibalización). Elige una región (distritos, provincia o una zona de Lima):
+  para cada tienda, su tienda más cercana de la misma cadena y de la competencia y cuántas hay a menos
+  de R (1 km por defecto), y la lista de pares de tiendas de una misma cadena más cercanos que el umbral
+  («posible canibalización»).
+- **Exportar a Excel**: resumen, tabla completa, cadena × anillo y parámetros (referencia, universo,
+  fecha y versión de los datos). **Agregar como lámina** crea una lámina con la referencia, los anillos,
+  líneas a la tienda más cercana de cada cadena y la lista «Distancias a …» en el panel rojo; se exporta
+  a PowerPoint, PNG o HTML como cualquier otra. En Mapas, **Editar en Análisis** vuelve a la pestaña con
+  ese análisis y **Actualizar la lámina** guarda los cambios.
+
+La pestaña recuerda sus opciones (distancia, anillos, región de la matriz) entre sesiones; las
+referencias recientes, mientras la pestaña del navegador siga abierta.
+
 ## Agregar y corregir tiendas
 
 Pestaña **Base de datos**:
@@ -106,7 +132,10 @@ La vista previa es exactamente lo que se exporta (mismas posiciones de los logos
   La atribución aparece en el mapa y en todas las exportaciones.
 - **Tiendas:** las obtenidas de OpenStreetMap están bajo la licencia
   [ODbL](https://www.openstreetmap.org/copyright) (© OpenStreetMap contributors); el resto
-  proviene de los localizadores de tiendas de cada cadena y de registros propios.
+  proviene de los localizadores de tiendas de cada cadena y de registros propios. Las pocas tiendas
+  que ninguna fuente ubicaba se colocaron a mano a partir de evidencia publicada (web oficial, prensa,
+  calles y centros comerciales de OpenStreetMap); su nota empieza con «Colocada a mano» y cita esa
+  evidencia, y las aproximadas quedan «por verificar» (`tools/seed/REPORT.md`).
 - **Distritos:** límites del INEI (referenciales).
 - **Nombres de avenidas** (`data/road-names.js`): nombres y trazos simplificados de las vías
   principales de Lima y Callao y de 9 ciudades, tomados de los mosaicos de OpenMapTiles
@@ -138,8 +167,9 @@ Sin build ni servidor: scripts clásicos bajo `window.MT`. Documentación:
 
 ```bash
 cd tools && npm install          # una vez (puppeteer-core; usa el Chrome instalado)
-node tools/test/run-all.mjs      # todas las pruebas con resumen (≈ 15 min)
+node tools/test/run-all.mjs      # todas las pruebas con resumen (≈ 12 min)
 node tools/test/e2e.mjs          # recorrido completo de un usuario en español e inglés
+node tools/test/analysis-e2e.mjs # recorrido de la pestaña Análisis (Excel, lámina, PowerPoint) en español e inglés
 node tools/test/smoke.mjs        # arranque, pestañas, idiomas, datos faltantes
 node tools/build-data.mjs        # regenera data/stores.js desde data/stores.csv
 node tools/fixtures/build-example.mjs   # js/example-project.js desde tools/fixtures/demo.mapa.json
@@ -160,11 +190,9 @@ consola. Capturas y archivos exportados quedan en `tools/test/out/`.
 
 ## Próximamente
 
-**Análisis de canibalización** (fase 2): hoy cada lámina puede tener radios de 500 m / 1 km /
-personalizados con el conteo de tiendas propias y de la competencia y su exportación a Excel. La
-fase 2 extenderá esto a todas las tiendas: competidor más cercano de cada tienda, matriz de
-superposición entre tiendas de una cadena, mapa de calor de densidad y comparación de áreas de
-influencia entre cadenas. El diseño previsto está en `docs/ARCHITECTURE.md` §8.
+Ya están las distancias a un punto y la matriz de cercanía (fase 2a, arriba). Quedan para más
+adelante: mapa de calor de densidad, comparación de áreas de influencia entre cadenas, re-escaneo de
+todo el Perú con informe de cambios y una base de datos compartida entre varios usuarios.
 
 ---
 
@@ -217,6 +245,29 @@ has no room near its store, that store is drawn as a **dot in its chain colour**
 smaller logos or the “Dots” style. The selected districts are always named on the map (the app
 writes the names the basemap leaves out at that zoom), and logos and leaders keep off them.
 
+## Distance analysis
+
+**Analysis** tab. Distances are straight-line (no streets or travel times) and come only from the
+database, so the same analysis always gives the same numbers.
+
+- **Distances to a point.** The reference is a store (type its name, Enter) or a point: paste
+  coordinates or a Google Maps link, search an address (Enter) or **Pick on the map**. A point can have
+  a name and an **own chain** (to tell “same chain” from “competitor”). Choose how far to look (1–20 km,
+  all of Peru or some districts), the chains and the rings (500 m, 1 km, 2 km…): you get the nearest
+  same-chain store and competitor, the stores in each ring and the full table with distance and bearing.
+  Stores “to verify” and approximate locations (≈) are flagged; closed stores are never included.
+- **Proximity matrix** (cannibalization). For a region (districts, a province or a Lima zone): each
+  store’s nearest same-chain store and competitor, the stores within R (1 km by default), and the
+  same-chain store pairs closer than a threshold (“possible cannibalization”).
+- **Export to Excel** (summary, full table, chain × ring, parameters with the reference, universe, date
+  and data version) and **Add as slide**: a slide with the reference, the rings, lines to the nearest
+  store of each chain and the “Distancias a …” list in the red panel, exported to PowerPoint, PNG or HTML
+  like any other. In Maps, **Edit in Analysis** goes back to the tab with that analysis; **Update the
+  slide** saves the changes.
+
+The tab remembers its options (distance, rings, matrix region) between sessions, and the recent
+references while the browser tab stays open.
+
 ## Adding and fixing stores
 
 **Database** tab: **Add store** (address search, click on the map, or paste coordinates / a Google
@@ -244,7 +295,9 @@ is exactly what gets exported.
 
 Base map © OpenStreetMap contributors · © OpenMapTiles · OpenFreeMap (attribution on every map and
 export). Store data derived from OpenStreetMap is under the **ODbL** (© OpenStreetMap
-contributors). District boundaries: INEI. Main avenue names (`data/road-names.js`, built by
+contributors). The few stores no source located were placed by hand from published evidence (official
+site, press, OpenStreetMap streets and malls); their note starts with “Colocada a mano” and cites it, and
+approximate ones stay “to verify” (`tools/seed/REPORT.md`). District boundaries: INEI. Main avenue names (`data/road-names.js`, built by
 `node tools/build-road-names.mjs` from the OpenMapTiles z14 tiles): ODbL, © OpenStreetMap contributors. **Chain names and logos are trademarks of their owners,
 used only to identify each chain.** Code: MIT ([`LICENSE`](LICENSE)); third-party libraries in
 `vendor/` keep their own licences.
@@ -252,7 +305,7 @@ used only to identify each chain.** Code: MIT ([`LICENSE`](LICENSE)); third-part
 ## Project structure and development
 
 See the Spanish section above for the folder layout and test commands
-(`node tools/test/run-all.mjs`). “Save to folder” writes `data/stores.csv` / `data/stores.js` in the
+(`node tools/test/run-all.mjs`; `node tools/test/analysis-e2e.mjs` walks the Analysis tab in both languages). “Save to folder” writes `data/stores.csv` / `data/stores.js` in the
 exact order and format of `tools/build-data.mjs`, and `data/chains.js` (with the `MT_OSM_RULES` block) in
 the format of `tools/merge.mjs`, so saving without edits leaves them byte-identical. The in-app OSM scan
 classifies with the same rules as the seed merge (`tools/seed/OSM-RULES.md`; `node tools/test/osm-rules.test.mjs`).
@@ -262,7 +315,6 @@ The example project lives in `tools/fixtures/demo.mapa.json` and is shipped as
 
 ## Coming next
 
-**Cannibalization analysis** (phase 2): today each slide can carry 500 m / 1 km / custom radius
-circles with own-vs-competitor counts and an Excel export. Phase 2 extends this to every store:
-nearest competitor per store, overlap matrix within a chain, density heat map and catchment
-comparison between chains (design notes in `docs/ARCHITECTURE.md` §8).
+Distances to a point and the proximity matrix are done (phase 2a, above). Still to come: a density
+heat map, catchment comparison between chains, a re-scan of all Peru with a change report and a
+database shared by several users.

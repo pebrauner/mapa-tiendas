@@ -27,6 +27,9 @@
  *                      or with `to` to that store's dot — a spanning tree, groupTree),
  *       grouped?, groupOf?   a store drawn by another item's group logo: only its dot (pos = anchor,
  *                      w = h = a small hit target), no leader
+ *       isRef?, refPad?      analysis slide (mapCfg.analysis, SPEC §6.3): the reference store — never
+ *                      grouped or collapsed; w / h include its halo (refPad per side, MT.markers draws
+ *                      the logo refPad smaller inside it)
  *   }>
  *   One item per store, always (legend counts). Without opts.project the map's own view is used
  *   (saved view or auto-fit) and results are memoized, so the slide legend, the preview and the
@@ -39,6 +42,12 @@
  *   fitPadding(), attributionBox(), districtLabels(), districtLabelBoxes(), roadLabels(), places,
  *   labels, place() (core solver, used by the tests), clusterNodes(), spreadDots(), spokesFor(),
  *   nameLayer(), weights, lastStats, BASEMAP_WIDTH.
+ *   Analysis slides: analysis(mapCfg, view?) → {ref:{ll, x, y, type, storeId, onSlide, chainId, label,
+ *   inFrame}, pin:{ll, x, y, box}|null, rings:[{meters, text, pts, bbox, inside, visible, label:{ll, x, y,
+ *   w, h, fs, text, bearing}|null}], lines:[{storeId, chainId, meters}], top, rows, maxMeters, label,
+ *   view} | null — where the reference pin, the rings and their pills go (pills placed off the store
+ *   dots and the logos' default spots); analysisBoxes(mapCfg, project) → the pills + pin as obstacles
+ *   (the declutter keeps logos off them); pinBox(), ringPill(), ringLabelFont(), refHaloPad().
  */
 (function () {
   'use strict';
@@ -740,7 +749,7 @@
         for (;;) {
           let pick = -1;
           for (let i = 0; i < n; i++) {
-            if (collapsed[i] || nodes[i].fixed || !conflict[i].size) continue;
+            if (collapsed[i] || nodes[i].fixed || nodes[i].keep || !conflict[i].size) continue;
             if (pick < 0) { pick = i; continue; }
             const a = conflict[i].size - conflict[pick].size;
             const b = (freq[nodes[i].group || ''] || 0) - (freq[nodes[pick].group || ''] || 0);
@@ -1049,7 +1058,7 @@
   function districtLabels(mapCfg, view) {
     if (!mapCfg || !MT.data.districts.available) return [];
     view = view || viewFor(mapCfg);
-    const key = JSON.stringify([dataVersion, view.center, view.zoomRef, mapCfg.districts, mapCfg.chains, mapCfg.onlyInside, mapCfg.hiddenStores]);
+    const key = JSON.stringify([dataVersion, view.center, view.zoomRef, mapCfg.districts, mapCfg.chains, mapCfg.onlyInside, mapCfg.hiddenStores, mapCfg.analysis]);
     if (nameMemo.has(key)) return nameMemo.get(key).map((l) => Object.assign({}, l, { ll: l.ll.slice() }));
     const out = districtLabelsOf(mapCfg, view);
     if (nameMemo.size >= 24) nameMemo.delete(nameMemo.keys().next().value);
@@ -1107,7 +1116,7 @@
     view = view || viewFor(mapCfg);
     const zb = view.zoomRef + Math.log2(BASEMAP_WIDTH / 1000);
     if (zb < mr.minzoom || zb >= (rn.maxzoom || 14)) return [];
-    const key = JSON.stringify([dataVersion, view.center, view.zoomRef, mapCfg.districts, mapCfg.chains, mapCfg.onlyInside, mapCfg.hiddenStores, mapCfg.markerStyle, mapCfg.markerSize]);
+    const key = JSON.stringify([dataVersion, view.center, view.zoomRef, mapCfg.districts, mapCfg.chains, mapCfg.onlyInside, mapCfg.hiddenStores, mapCfg.markerStyle, mapCfg.markerSize, mapCfg.analysis]);
     if (roadMemo.has(key)) return roadMemo.get(key);
     const out = roadLabelsOf(mapCfg, view, zb, rn, mr);
     if (roadMemo.size >= 24) roadMemo.delete(roadMemo.keys().next().value);
@@ -1128,6 +1137,8 @@
     storeDots(mapCfg, view, fr).forEach((d) => boxes.push({ x: d.x - dotR, y: d.y - dotR, w: 2 * dotR, h: 2 * dotR }));
     districtLabelBoxes(mapCfg, proj, view, fr, { estimate: true }).forEach((b) => boxes.push(b));
     boxes.push(attributionBox().obstacle);
+    // An analysis slide: its ring pills and reference pin (none on ordinary slides).
+    analysisBoxes(mapCfg, proj).forEach((b) => boxes.push(b));
     const hit = (p) => boxes.some((b) => p.x > b.x - halfH && p.x < b.x + b.w + halfH && p.y > b.y - halfH && p.y < b.y + b.h + halfH);
     // Softer: the spot right above each store, where its logo goes by default — a stretch clear of
     // those too leaves the logos where they are.
@@ -1326,7 +1337,7 @@
   /** Projected store locations of a map in a view (inside the frame), memoized per data version. */
   const dotMemo = new Map();
   function storeDots(mapCfg, view, fr) {
-    const key = JSON.stringify([dataVersion, view.center, view.zoomRef, mapCfg.districts, mapCfg.chains, mapCfg.onlyInside, mapCfg.hiddenStores]);
+    const key = JSON.stringify([dataVersion, view.center, view.zoomRef, mapCfg.districts, mapCfg.chains, mapCfg.onlyInside, mapCfg.hiddenStores, mapCfg.analysis]);
     if (dotMemo.has(key)) return dotMemo.get(key);
     const proj = projector(view, fr), out = [];
     try {
@@ -1417,6 +1428,141 @@
     });
   }
 
+  /* ---- Analysis slides (SPEC §6.3) ------------------------------------------------------------------
+   * A map config with `analysis` draws, over its map: the reference (a pin for a point — or for a
+   * store that is not drawn on the slide; a store on the slide keeps its logo, drawn with a halo),
+   * concentric rings around it (thin dashed MapLibre lines, MT.mapview) labelled "500 m", "1 km"…
+   * in pills, and faint lines to the nearest store of each chain. analysisGeometry() says where, in
+   * the config's OWN view: the pills sit on their ring at the bearing that keeps them off the store
+   * dots, the spots right above the dots where the logos go by default, the district names, the
+   * attribution, the pin and each other (preferring the top of the ring and the previous ring's
+   * bearing, so they line up). The declutter then treats the pills and the pin as obstacles
+   * (analysisBoxes), so logos keep off them. Pure and deterministic; memoized per (config, view,
+   * data). Distances on the slide are es-PE slide text (MT.legend.distance: "500 m", "1.5 km"; ring pills
+   * show the typed value, MT.legend.ringLabel: "1.25 km"). */
+  const anaMemo = new Map();
+  // Bearings tried for a ring's pill: straight up first, then alternating right / left (15° steps).
+  const RING_BEARINGS = [0];
+  for (let d = 15; d <= 180; d += 15) { RING_BEARINGS.push(d); if (d < 180) RING_BEARINGS.push(-d); }
+  function ringLabelFont(fs) { return '700 ' + fs + 'px ' + MT.theme.fonts.slideCss; }
+  /** Size (reference units) of a ring pill for its text: same proportions as the radius pills. */
+  function ringPill(text) {
+    const lab = (MT.theme.analysis.ring || {}).label || { sizePt: 9 };
+    const fs = MT.theme.pt2ref(lab.sizePt || 9);
+    return { fs: fs, w: textWidth(text, ringLabelFont(fs)) + fs * 0.9, h: fs * 1.45 };
+  }
+  /** Room (reference units, per side) the reference store's halo takes around its marker. */
+  function refHaloPad(size) {
+    const H = MT.theme.analysis.halo || { gap: 1.8, width: 3, casingWidth: 1.4 };
+    return ((H.gap || 0) + (H.width || 0) + (H.casingWidth || 0)) * Math.sqrt(size || 1);
+  }
+  /** Box (reference units, top-left + size) of the reference pin whose tip is at (x, y). */
+  function pinBox(x, y) {
+    const P = MT.theme.analysis.pin || { width: 30, height: 40, haloWidth: 2 };
+    const hw = (P.haloWidth || 0) + 1;
+    return { x: x - P.width / 2 - hw, y: y - P.height - hw, w: P.width + 2 * hw, h: P.height + hw * 1.6 };
+  }
+  function analysisGeometry(mapCfg, view) {
+    if (!mapCfg || !mapCfg.analysis || typeof mapCfg.analysis !== 'object' || !MT.analysis) return null;
+    view = view || viewFor(mapCfg);
+    const key = JSON.stringify([dataVersion, view.center, view.zoomRef, mapCfg.analysis, mapCfg.districts, mapCfg.chains, mapCfg.onlyInside,
+      mapCfg.hiddenStores, mapCfg.markerStyle, mapCfg.markerSize]);
+    if (anaMemo.has(key)) return anaMemo.get(key);
+    let out = null;
+    try { out = analysisGeometryOf(mapCfg, view); } catch (e) { console.warn('[layout] analysis', e); out = null; }
+    if (anaMemo.size >= 24) anaMemo.delete(anaMemo.keys().next().value);
+    anaMemo.set(key, out);
+    return out;
+  }
+  function analysisGeometryOf(mapCfg, view) {
+    const fa = MT.analysis.forMap(mapCfg);
+    if (!fa || !fa.ref) return null;
+    const fr = frame(), proj = projector(view, fr);
+    const ref = fa.ref, ll = [ref.lng, ref.lat], p = proj(ll);
+    const inFrame = (q) => q.x >= 0 && q.y >= 0 && q.x <= fr.width && q.y <= fr.height;
+    // A reference store drawn on the slide keeps its logo (with a halo); otherwise a pin marks it.
+    const storeId = ref.type === 'store' && !ref.missing ? ref.storeId : null;
+    let onSlide = false;
+    if (storeId && inFrame(p)) onSlide = MT.data.storesForMap(mapCfg).some((s) => s.id === storeId);
+    const pin = !onSlide && inFrame(p) ? { ll: ll, x: p.x, y: p.y, box: pinBox(p.x, p.y) } : null;
+    // Keep-out boxes for the pills (reference units).
+    const st = styleOf(mapCfg), dotR = MT.theme.marker.anchorDot.radius * Math.sqrt(st.size) + 2;
+    const dots = storeDots(mapCfg, view, fr);
+    const md = MT.theme.markerDims(st.kind === 'dot' ? 'badge' : st.kind, st.size), stem = MT.theme.marker.stem * Math.sqrt(st.size);
+    const spots = st.kind === 'dot' ? [] : dots.map((d) => ({ x: d.x - md.w / 2, y: d.y - stem - md.h, w: md.w, h: md.h }));
+    const names = districtLabelBoxes(mapCfg, proj, view, fr, { estimate: true });
+    const ab = attributionBox().obstacle;
+    const lines = fa.lines.map((r) => ({ storeId: r.store.id, chainId: r.store.chain, meters: r.meters, to: proj([r.store.lng, r.store.lat]) }));
+    const over = (a, b) => a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
+    const share = (a, b) => {
+      const ix = Math.min(a.x + a.w, b.x + b.w) - Math.max(a.x, b.x), iy = Math.min(a.y + a.h, b.y + b.h) - Math.max(a.y, b.y);
+      return ix > 0 && iy > 0 ? ix * iy / Math.max(1, a.w * a.h) : 0;
+    };
+    const placed = [];
+    let prevBearing = null;
+    const rings = fa.rings.map((m) => {
+      const text = MT.legend.ringLabel(m);
+      const ring = MT.analysis.ringFeatures(ref, [m], { steps: 96 }).features[0];
+      const pts = ring ? ring.geometry.coordinates[0].map((c) => proj(c)) : [];
+      let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+      pts.forEach((q) => { x0 = Math.min(x0, q.x); y0 = Math.min(y0, q.y); x1 = Math.max(x1, q.x); y1 = Math.max(y1, q.y); });
+      const inside = pts.length > 0 && x0 >= 0 && y0 >= 0 && x1 <= fr.width && y1 <= fr.height;
+      const visible = pts.length > 0 && x1 > 0 && y1 > 0 && x0 < fr.width && y0 < fr.height;
+      const pill = ringPill(text);
+      let best = null;
+      if (visible) {
+        RING_BEARINGS.forEach((deg, k) => {
+          const c = MT.analysis.destination(ref.lat, ref.lng, deg, m), q = proj([c.lng, c.lat]);
+          const b = { x: q.x - pill.w / 2 - 2, y: q.y - pill.h / 2 - 2, w: pill.w + 4, h: pill.h + 4 };
+          if (b.x < 2 || b.y < 2 || b.x + b.w > fr.width - 2 || b.y + b.h > fr.height - 2) return;
+          // Store dots on the pill hide a store (heavy); logos' default spots, district names, the
+          // pin, the attribution and the other pills are avoided when a free bearing is close.
+          let cost = 0;
+          dots.forEach((d) => { if (d.x > b.x - dotR && d.x < b.x + b.w + dotR && d.y > b.y - dotR && d.y < b.y + b.h + dotR) cost += 60; });
+          spots.forEach((s) => { const f = share(b, s); if (f > 0) cost += 6 + 18 * f; });
+          names.forEach((n) => { if (over(b, n)) cost += 40; });
+          if (pin && over(b, pin.box)) cost += 200;
+          if (over(b, ab)) cost += 200;
+          placed.forEach((o) => { if (over(b, o)) cost += 300; });
+          lines.forEach((l) => { if (segBoxLen(p.x, p.y, l.to.x, l.to.y, b) > 0) cost += 3; });
+          // Prefer the top of the ring, then the previous ring's bearing (pills in one line).
+          const turn = (a, z) => { const d = Math.abs(a - z) % 360; return d > 180 ? 360 - d : d; };
+          cost += 0.04 * Math.abs(deg) + (prevBearing === null ? 0 : 0.08 * turn(deg, prevBearing));
+          if (!best || cost < best.cost - 1e-9 || (Math.abs(cost - best.cost) <= 1e-9 && k < best.k)) best = { cost: cost, k: k, deg: deg, ll: [c.lng, c.lat], x: q.x, y: q.y, box: b };
+        });
+      }
+      let label = null;
+      if (best) {
+        placed.push(best.box);
+        prevBearing = best.deg;
+        label = { ll: [U.round(best.ll[0], 7), U.round(best.ll[1], 7)], x: best.x, y: best.y, w: pill.w, h: pill.h, fs: pill.fs, text: text, bearing: best.deg };
+      }
+      return { meters: m, text: text, pts: pts, bbox: { x: x0, y: y0, w: x1 - x0, h: y1 - y0 }, inside: inside, visible: visible, label: label };
+    });
+    return {
+      ref: { ll: ll, x: p.x, y: p.y, type: ref.type, storeId: storeId, onSlide: onSlide, chainId: ref.chainId || null, label: fa.label, inFrame: inFrame(p) },
+      pin: pin, rings: rings, lines: lines.map((l) => ({ storeId: l.storeId, chainId: l.chainId, meters: l.meters })),
+      top: fa.top, rows: fa.rows, maxMeters: fa.maxMeters, label: fa.label, view: view,
+    };
+  }
+  /**
+   * The analysis' obstacles for the declutter, in a projection: its ring pills and the reference pin
+   * (placed for the config's own view; their size is fixed in reference units, so a zoom level of
+   * the HTML export gets them where the page draws them). [] on ordinary slides.
+   */
+  function analysisBoxes(mapCfg, project) {
+    const g = mapCfg && mapCfg.analysis ? analysisGeometry(mapCfg) : null;
+    if (!g) return [];
+    const out = [];
+    g.rings.forEach((r) => {
+      if (!r.label) return;
+      const q = project(r.label.ll);
+      out.push({ x: q.x - r.label.w / 2 - 3, y: q.y - r.label.h / 2 - 3, w: r.label.w + 6, h: r.label.h + 6 });
+    });
+    if (g.pin) { const q = project(g.pin.ll); out.push(pinBox(q.x, q.y)); }
+    return out;
+  }
+
   /* ---- compute(): stores → items ---------------------------------------------------------------------- */
   let dataVersion = 0;
   ['stores:changed', 'chains:changed', 'logos:changed', 'data:ready'].forEach((ev) => MT.bus.on(ev, () => { dataVersion++; memo.clear(); }));
@@ -1427,7 +1573,8 @@
     return JSON.stringify([dataVersion, fr.width, fr.height, view.center, view.zoomRef,
       mapCfg.districts, mapCfg.chains, mapCfg.onlyInside, mapCfg.hiddenStores, mapCfg.markerStyle, mapCfg.markerSize,
       mapCfg.markerOffsets, mapCfg.view, mapCfg.fitTo, groupMode(mapCfg), mapCfg.radius,
-      opts.groupNearby === undefined ? null : opts.groupNearby, opts.autoSize === false, opts.labels === false, opts.logoScale || 0]);
+      opts.groupNearby === undefined ? null : opts.groupNearby, opts.autoSize === false, opts.labels === false, opts.logoScale || 0,
+      mapCfg.analysis]);
   }
   /** Same-chain grouping setting of a map: true | false | 'auto' (default). */
   function groupMode(mapCfg) {
@@ -1457,6 +1604,11 @@
     const offsets = mapCfg.markerOffsets || {};
     const nodes = [], meta = [], anchors = [];
     const dimsAt = (chain, size) => (mk && mk.dims ? mk.dims(chain, { kind: style.kind, size: size }) : MT.theme.markerDims(style.kind, size));
+    // Analysis slide (SPEC §6.3): the reference store keeps its own logo — never grouped, never
+    // collapsed to a dot — drawn with a halo, which its box includes (refPad on each side).
+    const ana = mapCfg.analysis ? analysisGeometry(mapCfg) : null;
+    const refId = ana && ana.ref.onSlide ? ana.ref.storeId : null;
+    const refPadAt = (size) => (refId && style.kind !== 'dot' ? refHaloPad(size) : 0);
     for (const s of stores) {
       if (!isFinite(s.lat) || !isFinite(s.lng)) continue;
       const a = project([s.lng, s.lat]);
@@ -1465,7 +1617,12 @@
       const off = offsets[s.id];
       const fixed = off && isFinite(off.dx) && isFinite(off.dy) ? { x: a.x + off.dx * fr.width, y: a.y + off.dy * fr.width } : null;
       // An offset with `g` was made by dragging a grouped logo: the store may still group.
-      nodes.push({ ax: a.x, ay: a.y, w: d.w, h: d.h, fixed: fixed, gfix: !!(fixed && off.g), key: s.id, group: s.chain });
+      const nd = { ax: a.x, ay: a.y, w: d.w, h: d.h, fixed: fixed, gfix: !!(fixed && off.g), key: s.id, group: s.chain };
+      if (refId && s.id === refId) {
+        const pad = refPadAt(style.size);
+        Object.assign(nd, { w: d.w + 2 * pad, h: d.h + 2 * pad, refPad: pad, keep: true, group: s.chain + '\u0000ref', gfix: false });
+      }
+      nodes.push(nd);
       meta.push(s);
       anchors.push(a);
     }
@@ -1503,7 +1660,9 @@
       const ob = box.obstacle || box;
       const obstacles = [{ x: ob.x - 2, y: ob.y - 2, w: ob.w + 4, h: ob.h + 4 }]
         .concat(opts.labels === false ? [] : districtLabelBoxes(mapCfg, project, lview, fr))
-        .concat(opts.labels === false ? [] : radiusLabelBoxes(mapCfg, project, fr));
+        .concat(opts.labels === false ? [] : radiusLabelBoxes(mapCfg, project, fr))
+        // Analysis slide: its ring pills and reference pin.
+        .concat(ana ? analysisBoxes(mapCfg, project) : []);
       const popts = {
         width: fr.width, height: fr.height, shape: circle ? 'circle' : 'rect',
         stem: stem, rings: dc.rings, angles: dc.angles, minGap: dc.minGap, passes: dc.passes,
@@ -1523,7 +1682,11 @@
       // Smaller logos for a crowded map (aggregate.autoSize): every size-dependent value follows.
       const resize = (k) => {
         size = U.clamp(style.size * k, MT.theme.marker.defaults.minSize, MT.theme.marker.defaults.maxSize);
-        nodes.forEach((nd, i) => { const d = dimsAt(meta[i].chain, size); nd.w = d.w; nd.h = d.h; });
+        nodes.forEach((nd, i) => {
+          const d = dimsAt(meta[i].chain, size);
+          if (nd.refPad) nd.refPad = refPadAt(size);
+          nd.w = d.w + 2 * (nd.refPad || 0); nd.h = d.h + 2 * (nd.refPad || 0);
+        });
         stem = MT.theme.marker.stem * Math.sqrt(size);
         dims = MT.theme.markerDims(style.kind, size);
         capUnits = (dc.maxLeader || 0) * (style.kind === 'card' ? dims.h * 1.6 : dims.w);
@@ -1584,6 +1747,9 @@
         shape: circle ? 'circle' : 'rect',
         displaced: !!p.displaced, manual: !!nd.fixed, leader: p.leader || null,
       };
+      // The analysis' reference store: w / h include its halo (refPad per side; the logo itself is
+      // drawn refPad smaller on each side — MT.markers).
+      if (nd.keep) { it.isRef = true; if (nd.refPad) it.refPad = nd.refPad; }
       if (style.kind === 'dot') it.dot = { x: it.anchor.x, y: it.anchor.y };
       // No room for its logo near the store: drawn as a small dot right on the location.
       if (p.collapsed) { it.collapsed = true; it.w = it.h = cdD; it.shape = 'circle'; }
@@ -1789,6 +1955,13 @@
     spokesFor: spokesFor,
     countOverlaps: countOverlaps,
     compute: compute,
+    /** Analysis slides (SPEC §6.3): where the reference, rings, pills and lines go (null otherwise). */
+    analysis: analysisGeometry,
+    analysisBoxes: analysisBoxes,
+    pinBox: pinBox,
+    ringPill: ringPill,
+    ringLabelFont: ringLabelFont,
+    refHaloPad: refHaloPad,
     /** The declutter cost weights (read-only use; tests and tuning). */
     weights: W,
     lastStats: null,

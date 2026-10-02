@@ -146,6 +146,25 @@
       label: { sizePt: 9, color: '#8E1631' },
     },
 
+    // Distance-analysis slides (SPEC §6.3): Spanish slide TEXT (data, like 'Tiendas'), used by
+    // MT.analysis.subtitle → MT.data.subtitleFor for an analysis slide without districts.
+    analysis: {
+      subtitle: 'Distancias a {ref}',                 // {ref} = the point's label or the store's name
+      subtitlePoint: 'Distancias al punto {coords}',  // an unlabelled point: "-12.12190, -77.02970"
+      // Look of an analysis slide (M1/M4 draw it in the preview, PNG, PPTX and HTML; reference units
+      // unless noted). `pin`: the reference POINT — a dark pin with a white star and a white halo, its
+      // tip on the location. `halo`: a reference STORE keeps its logo and gets this ring around it
+      // (white gap, dark ring, white casing). `ring`: the concentric distance rings (thin dashed) and
+      // their "500 m" pills. `line`: the faint lines from the reference to the nearest store of each
+      // chain. `list`: the "Distancias a <referencia>" block under the chain legend (slide text, pt).
+      pin: { color: '#1F2937', star: '#FFFFFF', halo: '#FFFFFF', haloWidth: 2.4, width: 30, height: 40, shadow: { blur: 4, offsetY: 1.2, color: 'rgba(17,24,39,0.35)' } },
+      halo: { color: '#1F2937', width: 3, gap: 1.8, casing: '#FFFFFF', casingWidth: 1.4 },
+      ring: { color: '#1F3864', width: 1.6, alpha: 0.9, dash: [6, 4], label: { sizePt: 9, color: '#1F3864' } },
+      line: { color: '#1F3864', width: 1.1, alpha: 0.5 },
+      list: { heading: 'Distancias a {ref}', headingPoint: 'Distancias al punto elegido', headingSizePt: 13, sizePt: 12, minSizePt: 9,
+        rowIn: 0.3, iconIn: 0.24, gapIn: 0.24, minRows: 5, color: '#FFFFFF', distColor: '#F7D6DD' },
+    },
+
     attribution: {
       text: '© OpenStreetMap contributors · © OpenMapTiles · OpenFreeMap',
       fontSize: 9, color: '#4B5563', background: 'rgba(255,255,255,0.78)', padding: 3, position: 'bottom-right',

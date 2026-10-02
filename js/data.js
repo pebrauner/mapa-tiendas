@@ -672,11 +672,33 @@
 
   /* ---- Map regions (used by the map, legend, exports) ------------------------------------ */
   /**
+   * The distance analysis that defines a map's region (SPEC §6.3): `mapCfg.analysis` on a map with NO
+   * districts (with districts the map is a normal district map that also carries an analysis).
+   * Returns {ref, maxMeters, maxRing, includeToVerify} — `ref` resolved by MT.analysis.resolveRef (a
+   * store reference follows the store's current position; null when it cannot be placed) — or null.
+   */
+  function analysisRegion(mapCfg) {
+    var a = mapCfg && mapCfg.analysis;
+    if (!a || typeof a !== 'object' || (mapCfg.districts || []).length || !MT.analysis) return null;
+    var rings = (Array.isArray(a.rings) ? a.rings : []).map(Number).filter(function (m) { return isFinite(m) && m > 0; });
+    var maxRing = rings.length ? Math.max.apply(null, rings) : 0;
+    var max = isFinite(+a.maxMeters) && +a.maxMeters > 0 ? +a.maxMeters : maxRing;
+    if (!max) max = maxRing = Math.max.apply(null, MT.project.ANALYSIS_DEFAULTS.rings);
+    return { ref: MT.analysis.resolveRef(a.ref), maxMeters: max, maxRing: maxRing || max, includeToVerify: a.includeToVerify !== false };
+  }
+  data.analysisRegion = analysisRegion;
+  /** Padding around the largest ring when an analysis slide fits its view (fraction of the ring's box, per side). */
+  var ANALYSIS_FIT_PAD = 0.04;
+
+  /**
    * Stores drawn on a map: status ≠ closed, chain toggled on, not hidden on this map, and
+   *  - analysis map without districts (§6.3): within `analysis.maxMeters` of the reference (haversine,
+   *    d ≤ maxMeters; the reference store itself included);
    *  - onlyInside: ubigeo ∈ mapCfg.districts;
    *  - otherwise: inside the manual view (mapCfg.view) or the districts' bbox padded by 25%
    *    (neighbouring stores show up; the map layout culls whatever falls outside the frame).
-   * Sorted by id (deterministic).
+   * Any map with `analysis.includeToVerify: false` (with or without districts) drops "por verificar"
+   * stores. Sorted by id (deterministic).
    */
   data.storesForMap = function (mapCfg) {
     if (!mapCfg) return [];
@@ -684,7 +706,14 @@
     var hidden = {};
     (mapCfg.hiddenStores || []).forEach(function (id) { hidden[id] = true; });
     var inRegion;
-    if (mapCfg.onlyInside !== false) {
+    var reg = analysisRegion(mapCfg);
+    if (reg) {
+      if (!reg.ref) return [];
+      var ref = reg.ref, max = reg.maxMeters, ringBox = MT.analysis.ringBbox(ref, max);
+      inRegion = function (s) {
+        return MT.geo.bboxContains(ringBox, s.lat, s.lng) && MT.geo.distanceMeters(ref, s) <= max;
+      };
+    } else if (mapCfg.onlyInside !== false) {
       if (!districts.length) return [];
       var set = {};
       districts.forEach(function (u) { set[u] = true; });
@@ -694,9 +723,13 @@
       if (!box) return [];
       inRegion = function (s) { return MT.geo.bboxContains(box, s.lat, s.lng); };
     }
+    // A slide carrying an analysis with includeToVerify false leaves "por verificar" stores out —
+    // with or without districts (the Análisis tab's choice holds on the slide it made).
+    var dropToVerify = !!(mapCfg.analysis && typeof mapCfg.analysis === 'object' && mapCfg.analysis.includeToVerify === false);
     var onCache = {};
     var out = data.stores().filter(function (s) {
       if (hidden[s.id] || !isFinite(s.lat) || !isFinite(s.lng)) return false;
+      if (dropToVerify && s.status === 'to_verify') return false;
       if (!(s.chain in onCache)) onCache[s.chain] = data.chainOn(mapCfg, s.chain);
       return onCache[s.chain] && inRegion(s);
     });
@@ -710,6 +743,9 @@
    */
   data.boundsForMap = function (mapCfg) {
     if (!mapCfg) return null;
+    // Analysis slide without districts: the largest ring (+ a little room for its "2 km" label).
+    var reg = analysisRegion(mapCfg);
+    if (reg) return reg.ref ? MT.geo.bboxPad(MT.analysis.ringBbox(reg.ref, reg.maxRing), ANALYSIS_FIT_PAD) : null;
     var dBox = D.unionBbox(mapCfg.districts || []);
     if (mapCfg.fitTo === 'districts' && dBox) return dBox;
     var sBox = MT.geo.bboxOfPoints(data.storesForMap(mapCfg));
@@ -717,10 +753,14 @@
     return dBox;
   };
 
-  /** "(Miraflores, San Borja, San Isidro, Surquillo)" — or the manual override. */
+  /**
+   * "(Miraflores, San Borja, San Isidro, Surquillo)" — or the manual override. An analysis slide
+   * without districts: "Distancias a Plaza Vea Angamos" (MT.analysis.subtitle, text in MT.theme.analysis).
+   */
   data.subtitleFor = function (mapCfg) {
     if (!mapCfg) return '';
     if (mapCfg.subtitleAuto === false) return mapCfg.subtitle || '';
+    if (mapCfg.analysis && typeof mapCfg.analysis === 'object' && !(mapCfg.districts || []).length && MT.analysis) return MT.analysis.subtitle(mapCfg.analysis);
     var names = [];
     (mapCfg.districts || []).forEach(function (u) {
       var d = D.get(u), n = d ? d.district : '';

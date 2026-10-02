@@ -1,0 +1,304 @@
+{
+  "batch": "a1",
+  "generated": "2026-10-01",
+  "about": "Manual placement research for the REPORT.md §4 stores (batch a1). Coordinates derive only from the cited evidence. Google Maps short links were resolved only through the HTTP redirect Location header (curl -sI, and -L -o /dev/null -w url_effective); no Google Maps page content was fetched. OSM data comes from Overpass (one query at a time, endpoint fallback as in tools/scan-osm.mjs) and the OSM API (node history). Districts were checked with tools/seed/pip.mjs.",
+  "summary": {
+    "alreadyInDatabase": {
+      "Tottus Trujillo 1": "osm-n4453923987",
+      "Tottus Zorritos": "osm-w436598550"
+    },
+    "newRows": [
+      "Tottus Iquitos",
+      "Precio Uno Ate Kampu",
+      "Precio Uno Iquitos La Marina",
+      "Precio Uno Lurín",
+      "Precio Uno Próceres"
+    ],
+    "exact": [
+      "Tottus Iquitos",
+      "Tottus Trujillo 1",
+      "Tottus Zorritos",
+      "Precio Uno Iquitos La Marina",
+      "Precio Uno Lurín"
+    ],
+    "approx": [
+      "Precio Uno Ate Kampu",
+      "Precio Uno Próceres"
+    ],
+    "unplaced": []
+  },
+  "placements": [
+    {
+      "store": "Tottus Iquitos",
+      "chain": "tottus",
+      "reportRow": {
+        "address": "C.C. Mall Aventura Iquitos",
+        "district": "",
+        "province": "Maynas",
+        "department": "Loreto"
+      },
+      "lat": -3.764673,
+      "lng": -73.267346,
+      "precision": "exact",
+      "confidence": "high",
+      "district": "San Juan Bautista",
+      "province": "Maynas",
+      "department": "Loreto",
+      "ubigeo": "160113",
+      "status": "to_verify",
+      "existingId": null,
+      "method": "OSM mall building: area-weighted centroid of the Mall Aventura Iquitos multipolygon (OSM r20255679, outer w1482370722 minus inner w1482370723). The Tottus unit itself is not mapped in OSM.",
+      "evidence": [
+        "Press: Gestión, 2023-09-08 (updated 2023-09-10), 'Hipermercados Tottus abre sus puertas en Iquitos en Mall Aventura': store of 4,957 m2 in Mall Aventura Iquitos, opened 2023-08-30 - https://gestion.pe/economia/empresas/hipermercados-tottus-abre-sus-puertas-en-iquitos-en-mall-aventura-noticia/",
+        "OSM relation 20255679 'Mall Aventura' (shop=mall, building=yes, addr:street Avenida José Abelardo Quiñones 2371, addr:city San Juan Bautista, start_date 2023-08-31, wikidata Q18397906; v1 2026-02-23) - https://www.openstreetmap.org/relation/20255679",
+        "Computed: polygon centroid -3.764673,-73.267346 (footprint about 18,700 m2; bbox -3.7654029..-3.7640102 / -73.2682339..-73.2664101); the Overpass bbox center -3.7647065,-73.267322 is 5 m away",
+        "Overpass 2026-10-01 (overpass-api.de, base 16:33Z; mall contents via overpass.kumi.systems, base 2026-06-01): no Tottus element inside or near the mall",
+        "Existence: not on the official Tottus store page, which has no Loreto filter (tools/seed/web/raw/tottus/horario-tiendas-all.store-archive.html); web search found no closure report (2026-10-01), so keep to_verify",
+        "Duplicate check: data/stores.csv has no tottus row in Loreto",
+        "pip (tools/seed/pip.mjs): San Juan Bautista / Maynas / Loreto (160113)"
+      ],
+      "exists": "probably",
+      "noteEs": "Ubicada en el centroide del edificio del Mall Aventura Iquitos (OSM r20255679, Av. José Abelardo Quiñones, San Juan Bautista); el local de Tottus no está mapeado por separado. Apertura reportada por Gestión (8 set. 2023); no figura en la lista oficial de Tottus (sin filtro Loreto), por verificar que siga operando."
+    },
+    {
+      "store": "Tottus Trujillo 1",
+      "chain": "tottus",
+      "reportRow": {
+        "address": "Av. Mansiche s/n, Caserío El Cortijo",
+        "district": "",
+        "province": "Trujillo",
+        "department": "La Libertad"
+      },
+      "lat": -8.101954,
+      "lng": -79.047883,
+      "precision": "exact",
+      "confidence": "high",
+      "district": "Trujillo",
+      "province": "Trujillo",
+      "department": "La Libertad",
+      "ubigeo": "130101",
+      "status": "verified",
+      "existingId": "osm-n4453923987",
+      "recommendation": "Do not add a new row: link the official 'Tottus Trujillo 1' to OSM n4453923987 (overrides.json 'links'), which turns osm-n4453923987 into the official store.",
+      "method": "Existing OSM store node (already in data/stores.csv as osm-n4453923987), confirmed by the mall polygon that contains it and by the official address.",
+      "evidence": [
+        "Official list caption: 'Tottus Trujillo 1. Av. Mansiche s/n - Caserío El Cortijo' - https://www.tottus.com.pe/tottus-pe/content/horario-tiendas-all (tools/seed/web/raw/tottus/horario-tiendas-all.store-archive.html); the other Trujillo store is 'Tottus Trujillo 2, Av. América Norte 1245, Urb. Los Jardines' (Open Plaza), so there is no conflict",
+        "OSM node 4453923987 (shop=supermarket, brand=Tottus, brand:wikidata Q7828510; v2 2019-07-05) at -8.101954,-79.0478827 - https://www.openstreetmap.org/node/4453923987",
+        "Computed: the node lies inside OSM way 103019624 'Mall Plaza Trujillo' (old_name 'Mall Aventura', shop=mall, operator Mall Plaza; v8 2025-05-05), whose polygon (bbox -8.1064615..-8.1010172) reaches Av. Mansiche on its north side; the node is 127 m north of the mall centroid -8.103078,-79.048106 - https://www.openstreetmap.org/way/103019624",
+        "The same OSM edit maps Sodimac (n4453923986, 105 m away, addr:street 'Pasillo Aventura Plaza'), Ripley and París inside the mall",
+        "Official Dollarcity locator coordinates of 'Dollarcity Mallplaza Trujillo' (-8.102112,-79.048286; row web-dollarcity-mallplaza-trujillo) are 48 m from the node",
+        "Wikipedia 'Mall Aventura Plaza Trujillo': Mallplaza Trujillo at Avenida Mansiche 2112, opened 2007-11-30, anchors include Tottus - https://en.wikipedia.org/wiki/Mall_Aventura_Plaza_Trujillo",
+        "REPORT.md §4 already names osm-n4453923987 as the unmatched OSM row to check",
+        "pip: Trujillo / Trujillo / La Libertad (130101)"
+      ],
+      "exists": "yes",
+      "noteEs": "Es el nodo OSM n4453923987: Tottus dentro del Mall Plaza Trujillo (ex Mall Aventura Plaza), cuyo lado norte da a la Av. Mansiche; Dollarcity Mallplaza Trujillo (coordenadas oficiales) está a 48 m. Ya está en la base como osm-n4453923987: enlazarlo con la tienda oficial en vez de crear otra fila."
+    },
+    {
+      "store": "Tottus Zorritos",
+      "chain": "tottus",
+      "reportRow": {
+        "address": "Jr. Zorritos cuadra 15 (11 Naciones Unidas)",
+        "district": "",
+        "province": "Lima",
+        "department": "Lima"
+      },
+      "lat": -12.048336,
+      "lng": -77.05848,
+      "precision": "exact",
+      "confidence": "high",
+      "district": "Lima",
+      "province": "Lima",
+      "department": "Lima",
+      "ubigeo": "150101",
+      "status": "verified",
+      "existingId": "osm-w436598550",
+      "recommendation": "Do not add a new row: link the official 'Tottus Zorritos' to OSM w436598550 (overrides.json 'links'). The OSM addr:city says Breña, but the building is north of Jr. Zorritos, in Cercado de Lima, as the press says.",
+      "method": "Existing OSM supermarket building (already in data/stores.csv as osm-w436598550) on the block bounded by Av. Colonial (Óscar R. Benavides), Jr. Zorritos and Av. Naciones Unidas, which is how the press describes the store.",
+      "evidence": [
+        "Official list caption: 'Tottus Zorritos (Vecino) Jr. Zorritos cuadra 15 (11 Naciones Unidas)' - https://www.tottus.com.pe/tottus-pe/content/horario-tiendas-all",
+        "Press: Perú Retail, 2010-07-13, 'Tottus inaugura nuevo supermercado en Cercado de Lima': store located between Zorritos, Naciones Unidas and Colonial avenues, 1,300 m2 - https://www.peru-retail.com/tottus-inaugura-nuevo-supermercado-en-cercado-de-lima/",
+        "Press: Perú Retail, 2018-11-12: the Tottus Vecino format was first applied to Tottus Zorritos, Cercado de Lima - https://www.peru-retail.com/peru-tottus-vecino-formato-de-tienda/",
+        "Job ad 'Tottus Zorritos / Avenida Colonial' (Computrabajo) - https://pe.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-tottus-zorritos-avenida-colonial-operador-tienda-abarrotes-tiempo-completo-horarios-rotativos-en-lima-5C0300C5EC5DAE1961373E686DCF3405",
+        "OSM way 436598550 (building, shop=supermarket, brand=Tottus, addr Avenida Óscar Raimundo Benavides 1291, postcode 15082, source KG 2016 field survey; v5 2025-08-15) - https://www.openstreetmap.org/way/436598550",
+        "Computed: building centroid -12.048340,-77.058496 (about 2,190 m2), 37 m from Av. Óscar R. Benavides (w326239579) and 34 m from Jr. Zorritos (w280652026), so the building spans the block between both; 117 m east of the Jr. Zorritos / Av. Naciones Unidas junction (-12.0487269,-77.0594819)",
+        "OSM house numbers on Jr. Zorritos run from #100 (-77.0427) to #1203 (-77.0560), so the block next to Av. Naciones Unidas is the last cuadra (about 14-15), consistent with 'cuadra 15'",
+        "lat/lng given = the existing row's coordinates (Overpass center of w436598550)",
+        "pip: Lima / Lima / Lima (150101)"
+      ],
+      "exists": "yes",
+      "noteEs": "Es el edificio OSM w436598550 (Tottus, Av. Óscar R. Benavides 1291), en la manzana entre la Av. Colonial, el Jr. Zorritos y la Av. Naciones Unidas que describe Perú Retail (13 jul. 2010). Ya está en la base como osm-w436598550: enlazarlo con la tienda oficial en vez de crear otra fila."
+    },
+    {
+      "store": "Precio Uno Ate Kampu",
+      "chain": "preciouno",
+      "reportRow": {
+        "address": "Av. NN-1 N° 102 Av. Daniel Alcides Carrión N° 593, 599 - Fundo La Estrella - Ate",
+        "district": "Ate",
+        "province": "Lima",
+        "department": "Lima"
+      },
+      "lat": -12.019889,
+      "lng": -76.874492,
+      "precision": "approx",
+      "confidence": "medium",
+      "district": "Ate",
+      "province": "Lima",
+      "department": "Lima",
+      "ubigeo": "150103",
+      "status": "to_verify",
+      "existingId": null,
+      "method": "Official Google Maps short link resolved by its redirect Location header only: the URL holds no coordinates but names the address 'C. 12 33, Ate'. Placed on OSM street geometry at the midpoint of the first block of Calle 12, from Av. Daniel Alcides Carrión to Calle 1, next to Condominio Kampu.",
+      "evidence": [
+        "Official card 'Ate Kampu' (Superbodega): 'Av. NN-1 N° 102 Av. Daniel Alcides Carrión N° 593, 599 - Fundo La Estrella - Ate', link https://maps.app.goo.gl/CcutjBHB1cHqD2pd9 - https://www.hiperbodegapreciouno.com.pe/nosotros/ (tools/seed/web/raw/preciouno/nosotros.stores-section.html)",
+        "curl -sI https://maps.app.goo.gl/CcutjBHB1cHqD2pd9 -> 302 Location: https://maps.google.com?q=PRECIO+UNO,+C.+12+33,+Ate+15487&ftid=0x9105c3ac2e15a07f:0x54521722a2f5fcf7 (followed: https://www.google.com/maps?q=...; no coordinates in the URL)",
+        "OSM 'Calle 12' (w1080959902 + w162750282) starts on Av. Daniel Alcides Carrión at -12.0196177,-76.8745499 (node 1273821130) and meets 'Calle 1' at -12.0201598,-76.8744337 (node 1273768000), a 62 m first block; point = its midpoint -12.019889,-76.874492, within about 40 m of every lot of that block",
+        "OSM landuse=residential 'Condominio Kampu' (w678428729, bbox -12.0194648..-12.0167075 / -76.8753312..-76.8714345) lies on the north side of the avenue, 20 m from that junction - https://www.openstreetmap.org/way/678428729",
+        "Urbania blog (search snippet; the page returned HTTP 403 when fetched): Condominio Kampu-Santa Clara is on cuadra 4 of Av. Daniel Alcides Carrión, Santa Clara, Ate - https://urbania.pe/blog/?p=4699",
+        "Numbering check: the OSM school at Av. Daniel Alcides Carrión #245 (w485193875, -12.020581,-76.880073) is 612 m west of the point; numbers rise eastward (the avenue starts at -76.8815), so #593-599 about 350 numbers further east (about 1.75 m per number) is plausible",
+        "The store fronts three addresses (Av. D. A. Carrión 593-599, Av. NN-1 102, Calle 12 #33). The blocks on either side of Calle 12 between the avenue and Calle 1 both fit and the side is not known, hence approx",
+        "Duplicate check: the only preciouno row in Ate is Huaycán (osm-w481046564, 5.0 km east)",
+        "pip: Ate / Lima / Lima (150103)"
+      ],
+      "exists": "yes",
+      "noteEs": "Aproximada: Calle 12 n.º 33 (dirección a la que lleva el enlace oficial de Google Maps publicado por Precio Uno) en su cruce con la Av. Daniel Alcides Carrión, frente al Condominio Kampu (calles de OSM); dirección oficial: Av. D. A. Carrión 593-599 / Av. NN-1 102, Fundo La Estrella."
+    },
+    {
+      "store": "Precio Uno Iquitos La Marina",
+      "chain": "preciouno",
+      "reportRow": {
+        "address": "Avenida La marina 451,455, 457",
+        "district": "",
+        "province": "Maynas",
+        "department": "Loreto"
+      },
+      "lat": -3.737306,
+      "lng": -73.241123,
+      "precision": "exact",
+      "confidence": "high",
+      "district": "Iquitos",
+      "province": "Maynas",
+      "department": "Loreto",
+      "ubigeo": "160101",
+      "status": "verified",
+      "existingId": null,
+      "suggestedId": "osm-n9905811018",
+      "method": "OSM store node n9905811018 ('Hiperbodega Precio Uno', shop=supermarket), missed by the seed scan because it has only name:en and no name/brand tag; matched to the official store by street and house numbers.",
+      "evidence": [
+        "Official card 'Iquitos La Marina' (Hiperbodega): 'Avenida La marina 451,455, 457', link https://maps.app.goo.gl/V9h7oKTCRALBZQXs6 - https://www.hiperbodegapreciouno.com.pe/nosotros/",
+        "curl -sI https://maps.app.goo.gl/V9h7oKTCRALBZQXs6 -> 302 Location: https://maps.google.com?q=Hiperbodega+PRECIO+UNO,+Av.+La+Marina+405,+Iquitos+16003&ftid=0x91ea1b966ed5f143:0xeb56d8eb069c6a03 (no coordinates in the URL)",
+        "OSM node 9905811018: name:en 'Hiperbodega Precio Uno', shop=supermarket, v1 2022-07-23 (OSM API history) at -3.7373059,-73.2411234 - https://www.openstreetmap.org/node/9905811018 ; absent from tools/seed/osm-raw.json",
+        "Computed: 13 m from Av. La Marina (w583370820); 139 m north of Clínica Adventista Ana Stahl, Av. La Marina 285 (OSM w430825438); OSM numbers rise northward (#2153 at -3.715176, #2396 at -3.706931) at about 0.72 numbers per m, so #405-457 is expected about 170-240 m north of #285: consistent within one block",
+        "2.84 km from the other Iquitos store (Precio Uno Iquitos El Ejército, osm-w966867144), so not a duplicate; data/stores.csv has no other preciouno row in Loreto",
+        "pip: Iquitos / Maynas / Loreto (160101); Google's 'Iquitos 16003' agrees"
+      ],
+      "exists": "yes",
+      "noteEs": "Nodo OSM n9905811018 (Hiperbodega Precio Uno; solo tiene name:en, por eso el escaneo no lo tomó), a 13 m de la Av. La Marina; coincide con la dirección oficial (Av. La Marina 451-457) y con la del enlace oficial de Google Maps (Av. La Marina 405, Iquitos)."
+    },
+    {
+      "store": "Precio Uno Lurín",
+      "chain": "preciouno",
+      "reportRow": {
+        "address": "U.C. N° 10579 - 10714 Sub Lote 17 Sección B Fundo San Vicente - Lurín",
+        "district": "Lurín",
+        "province": "Lima",
+        "department": "Lima"
+      },
+      "lat": -12.275475,
+      "lng": -76.871495,
+      "precision": "exact",
+      "confidence": "high",
+      "district": "Lurín",
+      "province": "Lima",
+      "department": "Lima",
+      "ubigeo": "150119",
+      "status": "verified",
+      "existingId": null,
+      "method": "Official Google Maps short link resolved by its redirect Location header: the place URL carries the place coordinates (!3d/!4d); the @ value is only the map viewport center.",
+      "evidence": [
+        "Official card 'Lurín' (Superbodega): 'U.C. N° 10579 - 10714 Sub Lote 17 Sección B Fundo San Vicente - Lurín', link https://maps.app.goo.gl/JYzkpjZ5abPUUy5b8 - https://www.hiperbodegapreciouno.com.pe/nosotros/",
+        "curl -sI https://maps.app.goo.gl/JYzkpjZ5abPUUy5b8 -> 302 Location: https://www.google.com/maps/place/Precio+uno+lurin/@-12.2754753,-76.8905499,15z/data=!4m7!3m6!1s0x9105bdb8dcaa612d:0x80bea5b85008ca18!8m2!3d-12.2754753!4d-76.8714955!15s...grocery_store...",
+        "Used the place pin !3d-12.2754753!4d-76.8714955 (rounded -12.275475,-76.871495); the @ viewport center (-76.8905499) is 2.07 km west and was not used",
+        "OSM context (Overpass, 250 m around): the point is on Antigua Panamericana Sur, Lurín's commercial strip near km 36 (Elektra and La Curacao nodes from a 2017 survey sit at the point; C.C. Plaza Sur and Mercado San Pedro 150-200 m south); no Precio Uno element is mapped",
+        "Duplicate check: data/stores.csv has no preciouno row in Lurín",
+        "pip: Lurín / Lima / Lima (150119)"
+      ],
+      "exists": "yes",
+      "noteEs": "Ubicación según el enlace oficial de Google Maps publicado por Precio Uno (coordenadas del lugar en la URL de redirección), sobre la Antigua Panamericana Sur, Lurín."
+    },
+    {
+      "store": "Precio Uno Próceres",
+      "chain": "preciouno",
+      "reportRow": {
+        "address": "Av. Próceres de la Independencia 5540 - 5570 LT. 20, 21, 22, 23 - San Juan de Lurigancho",
+        "district": "San Juan de Lurigancho",
+        "province": "Lima",
+        "department": "Lima"
+      },
+      "lat": -11.94472,
+      "lng": -76.98286,
+      "precision": "approx",
+      "confidence": "medium",
+      "district": "San Juan de Lurigancho",
+      "province": "Lima",
+      "department": "Lima",
+      "ubigeo": "150132",
+      "status": "to_verify",
+      "existingId": null,
+      "method": "House-number extrapolation along the OSM centerline of Av. Fernando Wiesse (the northern stretch of Próceres, same numbering), from cuadra 44 (OSM) and cuadra 49 (Tambo official coordinates) to #5555. Cross-checked with 'Mz. P15' from the official link's address: group P lots and Dollarcity Mariátegui ('Grupo Residencial P', same postal code 15446) front the avenue at the same spot.",
+      "evidence": [
+        "Official card 'Próceres' (Superbodega): 'Av. Próceres de la Independencia 5540 - 5570 LT. 20, 21, 22, 23 - San Juan de Lurigancho', link https://maps.app.goo.gl/11jJGHe5b8Rf6aX29 - https://www.hiperbodegapreciouno.com.pe/nosotros/",
+        "curl -sI https://maps.app.goo.gl/11jJGHe5b8Rf6aX29 -> 302 Location: https://maps.google.com?q=Hiperbodega+Precio+Uno+-+Superbodega+Pr%C3%B3ceres,+Av.+Pr%C3%B3ceres+de+la+Independencia+5570+Mz.+P15,+San+Juan+de+Lurigancho+15446&ftid=0x9105dbd268537a25:0xa82693a0cf13138 (no coordinates in the URL)",
+        "Same road, same numbering: Tambo's official store at 'Av. Próceres de la Independencia 3990' is OSM n11241861406, tagged 'Avenida Fernando Wiesse'; Tambo official 'Avenida Fernando Wiesse 4267' (-11.959313,-76.987686); OSM w119562292 'Avenida Fernando Wisse Cuadra 44', #4400 (-11.956543,-76.986405); Tambo official 'TAMBO PROCERES-C49' (cuadra 49; Tambo's Cnn names match house numbers, e.g. PROCERES-C27 = #2774) at -11.951028,-76.986938 on Av. Fernando Wiesse (tools/seed/web/tambo.json, https://www.tambo.pe/tiendas)",
+        "Why the merge rejected it: Nominatim matched the southern stretch (El Pueblito, Zárate, near #750), and OSM numbers tagged 'Próceres' stop at #4083",
+        "Computed: OSM centerline of Av. Fernando Wiesse (Overpass 2026-10-01, primary/secondary ways named 'Avenida Fernando Wiesse', 5.0 km): chainage #4400 = 1,247 m, c49 = 2,002 m, so 1.26-1.51 m per number (c49 = #4999..#4900) and #5555 at chainage 2,703-2,991 m, i.e. between -11.945685,-76.983529 and -11.943535,-76.982049; central value (c49 = #4950): chainage 2,832 m = -11.94472,-76.98286",
+        "Cross-check of Mz. P15: official Dollarcity 'Dollarcity Mariategui', address 'Grupo Residencial P, Barrio 3', postal code 15446 (same as the Precio Uno link), coordinates -11.944813,-76.982651 = chainage 2,837 m, 25 m from the point (tools/seed/web/dollarcity.json, https://dollarcity.com/ubicaciones); MINEDU school nodes (positions doubtful, used only for the area) 'Jirón Intermedio Mz P7' n5595205449 (chainage 2,626 m) and 'Calle 60 Mz P-2' n5595219715 (chainage 2,955 m) put group P on the east side of the avenue there, while 'Av. Wiesse Mz K-15' (n5595195859) is 340 m further north",
+        "Remaining uncertainty: south of Bayóvar the numbering runs about 2.5 m per number (#3990 -> #4267 -> #4400); at that rate #5555 would sit about 1.3 km further north. The P15 cross-check favours the 1.3-1.5 m rate. Error estimate: +/-200 m along the avenue",
+        "Duplicate check: data/stores.csv has no preciouno row in San Juan de Lurigancho; an Overpass search on name/brand/operator finds no Precio Uno element anywhere in Lima apart from 4 known stores",
+        "Press: no opening article found (web search 2026-10-01); the store is on the official list and has a Google Maps listing",
+        "pip: San Juan de Lurigancho / Lima / Lima (150132)"
+      ],
+      "exists": "yes",
+      "intermediate": {
+        "centerline": "Dijkstra path over OSM 'Avenida Fernando Wiesse' ways from -11.9663164,-76.9920662 to -11.9332644,-76.9688159 (124 nodes, 5,003 m)",
+        "chainage_m": {
+          "#3990 Tambo": 199.9,
+          "#4267 Tambo": 913.5,
+          "#4400 OSM w119562292": 1246.9,
+          "c49 Tambo": 2001.9,
+          "Dollarcity Mariategui": 2836.7,
+          "MINEDU Mz P7": 2625.7,
+          "MINEDU Mz P-2": 2955.3,
+          "MINEDU Mz K-15": 3178.5
+        },
+        "extrapolation": [
+          {
+            "c49Number": 4900,
+            "mPerNumber": 1.51,
+            "n5555": [
+              -11.943535,
+              -76.982049
+            ]
+          },
+          {
+            "c49Number": 4950,
+            "mPerNumber": 1.373,
+            "n5555": [
+              -11.94472,
+              -76.98286
+            ]
+          },
+          {
+            "c49Number": 4999,
+            "mPerNumber": 1.26,
+            "n5555": [
+              -11.945685,
+              -76.983529
+            ]
+          }
+        ]
+      },
+      "noteEs": "Aproximada (±200 m): Av. Fernando Wiesse, continuación de Próceres con la misma numeración; cuadra 55 extrapolada desde la cuadra 44 (OSM) y la cuadra 49 (Tambo Próceres C49, coordenadas oficiales). Coincide con la Mz. P15 del enlace oficial de Google Maps: el Grupo Residencial P (Dollarcity Mariátegui, a 25 m) da a la avenida en ese tramo."
+    }
+  ]
+}

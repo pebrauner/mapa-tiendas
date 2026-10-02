@@ -45,6 +45,11 @@
 .mt-slide__legend-icon canvas { display: block; }
 .mt-slide__legend-text { position: absolute; top: 0; font-weight: 700; white-space: pre; }
 .mt-slide__legend-note { position: absolute; font-weight: 400; white-space: pre; }
+/* Analysis slides: "Distancias a <referencia>" under the chain legend (geometry from MT.slide.layout). */
+.mt-slide__dist-heading { position: absolute; font-weight: 700; white-space: pre; text-align: left; }
+.mt-slide__dist-row { position: absolute; }
+.mt-slide__dist-name { position: absolute; top: 0; font-weight: 400; white-space: pre; overflow: hidden; }
+.mt-slide__dist-value { position: absolute; top: 0; font-weight: 700; white-space: pre; text-align: right; }
 .mt-slide__deco { pointer-events: none; user-select: none; }
 
 /* ============================== Map view ============================== */

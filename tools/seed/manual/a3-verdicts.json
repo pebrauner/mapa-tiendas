@@ -1,0 +1,88 @@
+{
+  "batch": "a3",
+  "verifiedOn": "2026-10-01",
+  "method": "Independent re-derivation. Sources: the OSM API (way/full, map bbox; Overpass endpoints timed out or returned 504), Nominatim search/reverse at no more than 1 req/s, tools/seed/pip.mjs, and a data/stores.csv duplicate scan (same chain within 1.5-3 km, all chains within 150 m). I re-read the Peru Retail raw texts under tools/seed/web/raw/tambo, and re-downloaded and text-searched the Carabayllo municipal PDF (padron_electoral-2018.pdf). Web sources re-fetched: Infobae/Sedapal, deperu.com and ruc.pe. For the official Tambo (Justo) short links in Ate, Carabayllo, Comas, Puente Piedra and Chaclacayo, I read only the HTTP Location header (coordinates and g_ep client date; no Google Maps page content). House-number interpolation was recomputed.",
+  "verdicts": [
+    {
+      "store": "Tambo Ate - Mz. A",
+      "verdict": "accept",
+      "lat": -12.040039,
+      "lng": -76.911614,
+      "precision": "approx",
+      "status": "to_verify",
+      "reason": "Re-checked. Peru Retail (09/09/2026, raw text in tools/seed/web/raw/tambo) gives 'Mz. A, Lt. 02, Asoc. de Vivienda Palmas de Barbadillo, Sec. 13, Zona 3'. Infobae (10/06/2025, Sedapal) lists 'Las Palmas de Barbadillo' in the same cut sector as 'Ex-Fundo Barbadillo' and 'Barbadillo'. The OSM API way 507687834 (DIROES, alt_name 'Fundo Barbadillo') has its bbox centre at exactly -12.040039,-76.911614. Nominatim reverse gives 'Direccion de Operaciones Especiales de la PNP, Marcos Puente Llanos, Santa Ana, Ate'. pip gives 150103 Ate. Other names on the Sedapal list that OSM maps sit around the point: Calle Los Reyes about 490 m W, Parque Florida #2 about 440 m SW, Cale Los Pinos about 850 m W and Calle Las Palmeras about 1 km E. So the stated error of about 1 km is fair. Caveat: the point is inside a walled police compound, so it cannot be the store itself. It stands for the urbanization only. Low confidence. Not a duplicate: the nearest Tambo is 1.6 km away. I resolved the Location headers of the official Tambo links within 3 km: the only one created in 2026 is MARIATEGUI-C16 (client 2026-04-20, 1.7 km N), which is older than this August opening."
+    },
+    {
+      "store": "Tambo Carabayllo - Cjto. Hab. Edwin Vásquez Mz. Q Lt. 24",
+      "verdict": "reject",
+      "lat": null,
+      "lng": null,
+      "precision": "approx",
+      "status": "to_verify",
+      "reason": "Duplicate of the official row web-tambo-chimpu-ocllo (TAMBO CHIMPU-OCLLO-C10). Per the merge.mjs rule, the press record should become a note on that row, not a separate row. The block-Q point itself checks out. OSM node 12442688259 'Q' sits at the Condorcanqui / Chimpu Ocllo corner. The Carabayllo PDF (re-downloaded) has ENACE entries 'AV. CHIMPU OCLLO Mza. Q Lte. 90', 'AV. MARIANO CONDORCANQUI Q 17', 'CONDORCANQUI No 764 MZ. P' and 'CONDORCANQUI Mza. E1', which match the OSM blocks P, O and E1 along Condorcanqui. Bus stop 'Entrada Enace' is 110 m away, and pip gives 150106. The case for a duplicate: I resolved the Location headers of all 14 official Carabayllo Tambo links. Only CHIMPU-OCLLO-C10 (client 2026-04-29) and JOSESACO (2026-07-15) were created in 2026. The May press list has exactly one Carabayllo opening, this one. Projecting #386 and #753 (official) onto the OSM Chimpu Ocllo axis gives 1.24 m per number. Block Q's frontage then comes out at about #940-980, i.e. cuadras 9-10, where 'C10' points. The official C10 point is a dropped pin 106 m off the avenue axis. Its projection is about #1270, 444 m NW. So the same store is most likely mapped twice. Suggestion for the merge: add the press address as a note on web-tambo-chimpu-ocllo. Moving that row to -11.891908,-77.037960 is a separate decision for the user."
+    },
+    {
+      "store": "Tambo Carabayllo - Mz. A Lt. 12",
+      "verdict": "reject",
+      "lat": null,
+      "lng": null,
+      "precision": "approx",
+      "status": "to_verify",
+      "reason": "No defensible location. Peru Retail (09/07/2026) gives 'Mz. A Lt. 12, Urb. Santa Luisa' under Carabayllo. The re-downloaded Carabayllo PDF confirms 'URBANIZACION SANTA LUISA DE CARABAYLLO MZ. A LOTE 1 AV UNIVERSITARIA', but no position along the roughly 5 km Carabayllo stretch of Av. Universitaria. The urbanization is not in OSM or Nominatim. Web search finds only a struck-off company 'Programa de Vivienda Santa Luisa de Carabayllo S.R.L.' with a fiscal address in Puente Piedra, which gives no location. The OSM/Dollarcity 'Santa Luisa' is in Comas/Los Olivos, 6 km south, and is a different place. Official list: the only 2026 Carabayllo additions are C10 (Chimpu Ocllo) and JOSESACO (Av. Jose Saco Rojas), and neither is on Av. Universitaria. Keep it listed for manual placement."
+    },
+    {
+      "store": "Tambo Carabayllo - Mz. F",
+      "verdict": "accept",
+      "lat": -11.87405,
+      "lng": -77.0236,
+      "precision": "approx",
+      "status": "to_verify",
+      "reason": "Re-checked. Peru Retail (09/09/2026) gives 'Mz. F, Lt. 07, Programa de Vivienda Santa Rosa'. The Carabayllo PDF confirms these Santa Rosa programmes on the Universitaria-Camino Real wedge: 'AV. UNIVERSITARIA Q 1 PROGRAMA DE VIV. SANTA ROSA DE CARABAYLLO', 'AV. CAMINO REAL PARC. 129 PROG. VIV. SANTA ROSA DE CARABAYLLO', 'PROG. VIV. SANTA ROSA NORTE AV. UNIVERSITARIA Mza. B' and 'SANTA ROSA NORTE MZ. B ... AV UNIVERSITARIA / AV. MANUEL PRADO OESTE'. OSM supports it: the IE Santa Rosa de Ponte (subdistrict 'Santa Rosa De Carabayllo', 'Camino Real Mz Q') is 80 m from OSM block 'Q' at -11.876528,-77.026736, consistent with 'Universitaria Q 1'. The midpoint recomputes exactly to -11.87405,-77.0236. Nominatim reverse labels the east side ('AH Nueva Estrella, El Progreso'), while the programme is on the west frontage, within the approx error. pip gives 150106. No Tambo within 600 m. Mz. F is not locatable, so the error is about 0.5-1 km, low confidence. Duplicate caveat: JOSESACO (link 2026-07-15, all sales channels off) is the only official Carabayllo Tambo created after mid-July. It is 2.4 km away, and OSM has a 'Santa Rosa' bus-stop pair on Prolongacion Camino Real 600 m from it. No 'Programa de Vivienda Santa Rosa' is mapped there, though. The 'Agrupacion de Familias Santa Rosa' is at Av. Jose Saco Rojas km 8 (San Diego), several km beyond. So it stays a separate row with that flag."
+    },
+    {
+      "store": "Tambo Comas - Av. Honduras 388",
+      "verdict": "accept",
+      "lat": -11.95104,
+      "lng": -77.0555,
+      "precision": "approx",
+      "status": "to_verify",
+      "reason": "Re-checked. Peru Retail (14/08/2026) gives 'Av. Honduras 388, Urb. El Parral'. deperu.com places Mercado El Parral at 'Av. Honduras s/n ... Cuadra 3', and ruc.pe gives C.C. Honduras 2000 as 'Cal. Asuncion Urb. El Parral 895'. In OSM the El Parral market polygon (w438477040) is bounded by Av. 22 de Agosto (N), Av. Carabayllo (W), Calle Roma and Calle Paris. Av. Carabayllo keeps its own name, so the market's Av. Honduras frontage must be the N side, which OSM tags as 'Avenida 22 de Agosto'. 'Honduras Center' (Asuncion 777) is on the same avenue 230 m east, and El Parral streets are named after countries and capitals. The point lies on that axis in front of the market. Nominatim reverse gives 'Avenida 22 de Agosto, El Parral, Comas', and pip gives 150110. Error about +/-200 m. Not a duplicate: the nearest Tambo is CARABAYLLO-C9 (214 m, on Av. Carabayllo, link 2026-08-26). Its name matches the May opening 'Av. Carabayllo 968' (cuadra 9), the same way TUPACAMARU-C33 of the same 08-26 batch matches May's 'Av. Tupac Amaru 3320'. So C9 is a different store."
+    },
+    {
+      "store": "Tambo Comas - Av. Universitaria Norte 5743",
+      "verdict": "accept",
+      "lat": -11.955649,
+      "lng": -77.05992,
+      "precision": "approx",
+      "status": "to_verify",
+      "reason": "Re-checked. Peru Retail (09/09/2026) gives 'Av. Universitaria Norte 5743, Urb. San Isolina'. The reference points are official or OSM: Mass 'Av. Universitaria 5977' at -11.95266,-77.06023, Tambo 'Avenida Universitaria 8021' at -11.929478,-77.05368, OSM Escuela Nacional de Folclor addr 5400 at about -11.95803 to -11.95815, and Trilce 'Avenida Universitaria 6102' at -11.953384. The avenue runs almost N-S here. Recomputed with 1.467 m per number from #5977 (343 m S), and independently with the #5400-#6102 pair, both land at about -11.9556 to -11.9558, which agrees with the point. The #5400-#5977 pair gives -11.9547 (about 100 m N). The point is just S of the Av. Mexico junction, among the OSM Santa Isolina 1/2/3 places, which fits 'Urb. San Isolina'. Odd numbers (5977 Mass) are on the west side. Nominatim reverse gives 'Avenida Universitaria, Santa Isolina 2, Infantas, Comas', and pip gives 150110. Not a duplicate: the Tambo 'Mexico 400' 114 m away is on Av. Mexico with a link from 2025-04-09. None of the 2026 official Comas Tambo links (C6, C65, C73, Los Incas C4, Giufuente C2, Tupac Amaru C33, Carabayllo C9) is on Av. Universitaria."
+    },
+    {
+      "store": "Tambo Lurigancho - Av. Bernardo Balaguer 101 (Chosica)",
+      "verdict": "accept",
+      "lat": -11.979018,
+      "lng": -76.813563,
+      "precision": "approx",
+      "status": "to_verify",
+      "reason": "Re-checked. Peru Retail (09/07/2026) gives 'Chosica (1): Av. Bernardo Balaguer 101'. A structured Nominatim query for 'Avenida Bernard de Balaguer 101' in Lurigancho again returns way 161894002 first, at -11.9790179,-76.8135625. Reverse gives 'Avenida Bernard de Balaguer, Los Jardines de Nana, Lurigancho', and pip gives 150118. This is a plain street-level geocode on the right street and district, which merge.mjs itself would accept. No reference house numbers exist on the avenue. Strong caveat: the avenue runs about 5.6 km, from UPeU / Carretera Central km 19 (W) to Ovalo Moron / Autopista Ramiro Priale (E). Number 101 is in cuadra 1, so if the numbering is continuous the store is near one end, 2-3 km from this mid-avenue point. Hence low confidence, and the noteEs warning is correct. Not a duplicate: the nearest Tambo is 1.1 km away. Official CHOSICA2 ('HUB Alameda', link 2025-10-22) is inside Alameda de Nana, 240 m off the avenue, and older. No 2026 official Tambo exists in Lurigancho-Chosica."
+    },
+    {
+      "store": "Tambo Puente Piedra - Mz. C Lt. 1",
+      "verdict": "accept",
+      "lat": -11.879859,
+      "lng": -77.071888,
+      "precision": "approx",
+      "status": "to_verify",
+      "reason": "Re-checked. Peru Retail (09/07/2026) gives 'Mz. C Lt. 1, Asoc. Viv. Rosa Luz I Et.'. Three references define the area: the official Tiendas 3A store 'A.V. ROSA LUZ I ETAPA MZ R LOTE 18' (-11.880110,-77.072194), OSM n5574104493 'Mz H Lote 15-16 Etapa I' and n5574104490 'Jiron Pasionaria 190 Mz M-i ... Etapa I'. Their mean recomputes to -11.879859,-77.071888. The point is in the flower-named grid (Jr. Los Lirios, Las Rosas, Las Orquideas, Pasionaria) north of Av. Rosa Luz. Nominatim reverse gives 'Calle Los Lirios, Puente Piedra', and pip gives 150125. Mz. C is not mapped. OSM shows blocks E, F and J fronting Av. Rosa Luz about 230-260 m S, so the error is about 200-300 m. Not a duplicate: the nearest Tambo is the July press row on Av. Famesa (640 m). The 2026 official Puente Piedra additions are elsewhere: PUENTEPIEDRA3 (2026-01-13) 1.6 km N, and LASACACIAS in La Ensenada, about 6 km S. The 3A and Mass stores 17-43 m away belong to other chains."
+    },
+    {
+      "store": "Tambo Puente Piedra - Vía Laderas de Chillón",
+      "verdict": "accept",
+      "lat": -11.9203,
+      "lng": -77.08607,
+      "precision": "approx",
+      "status": "to_verify",
+      "reason": "Re-checked. Peru Retail (09/07/2026) gives 'Via Laderas de Chillon, Explanada, Mz. E Lt. 8, Psje. Laderas de Chillon'. The OSM API map confirms 30 building ways 'Mz. F lt. 1 ... 15' with addr:neighbourhood '1 explanada, Laderas de Chillon, Puente Piedra - zona sur' on Av. 15 de Junio. Their middle is about -11.9203,-77.0861, matching the point. Nearby OSM has Mz A, B, D and G addresses (Av. 15 de Junio Mz A/B, Av. 25 de Setiembre Mz D, Mz G Lt 1), so a block E within a few hundred metres is plausible. The explanada number, though, is not stated, and Laderas features extend 500-600 m further (water tanks CR100/CR356, IEI Kumamoto). Nominatim reverse gives 'Mz. F lt. 8-B, Avenida 15 de Junio, Puente Piedra', and pip gives 150125. Low confidence, error a few hundred m to about 1 km. Not a duplicate: no Tambo within 1.5 km. The official LASACACIAS (link 2026-04-29) is on Av. Las Acacias in La Ensenada de Chillon, about 1.85 km SW, which is a different neighbourhood."
+    }
+  ]
+}

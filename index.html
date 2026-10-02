@@ -21,6 +21,7 @@
 <link rel="stylesheet" href="css/maps.css">
 <link rel="stylesheet" href="css/maps-ui.css">
 <link rel="stylesheet" href="css/db.css">
+<link rel="stylesheet" href="css/analysis.css">
 </head>
 <body>
 <div id="mt-splash" class="mt-splash" aria-live="polite">
@@ -64,6 +65,7 @@
 <script src="js/io.js"></script>
 <script src="js/data.js"></script>
 <script src="js/project.js"></script>
+<script src="js/analysis.js"></script>
 <script src="js/ui.js"></script>
 <script src="js/app.js"></script>
 
@@ -72,6 +74,7 @@
 <script src="js/i18n/maps-ui.js"></script>
 <script src="js/i18n/db.js"></script>
 <script src="js/i18n/export.js"></script>
+<script src="js/i18n/analysis.js"></script>
 
 <!-- M1 map core & rendering -->
 <script src="js/layout.js"></script>
@@ -89,8 +92,10 @@
 <script src="js/export-png.js"></script>
 <script src="js/export-pptx.js"></script>
 <script src="js/export-html.js"></script>
-<!-- M2 maps tab (last: uses everything above) -->
+<!-- M2 maps tab (uses everything above) -->
 <script src="js/ui-maps.js"></script>
+<!-- Análisis tab (phase 2a, SPEC §6: distances to a store/point, proximity between stores) -->
+<script src="js/ui-analysis.js"></script>
 
 <!-- Boot. If the app's own files did not load, replace the splash with a bilingual explanation
      (inline styles: css/ may be missing too). Data files missing is handled by the app itself. -->

@@ -27,6 +27,9 @@
  *   colour at the top-right), dims(chainId, style), image(item, style, scale) → {canvas, x, y, w, h}
  *   (marker picture incl. shadow margin and count pip, for PPTX), pipGeometry(chainId, w, h, style,
  *   count), isMarker(item), ringColor(id), anchorRadius(style), shadowMargin(style).
+ * Analysis slides (SPEC §6.3): an item with `isRef` (the reference store) is drawn last with a halo
+ *   (theme analysis.halo) inside its box (`refPad`), also in image(); drawPin(ctx, x, y) / pinImage(scale,
+ *   {tipAtBottom}) / pinFrame() = the reference point's pin (tip at x, y; theme analysis.pin); drawRefHalo(); bodyOf(item).
  */
 (function () {
   'use strict';
@@ -504,6 +507,106 @@
   /** Is this item drawn as a marker (not a store dot only: collapsed logo, grouped store)? */
   function isMarker(item) { return !item.collapsed && !item.grouped; }
 
+  /* ---- Analysis slides: the reference (SPEC §6.3) -------------------------------------------------
+   * A reference POINT is a dark pin (theme analysis.pin) with a white star and a white halo, its tip
+   * on the location. A reference STORE keeps its logo: MT.layout gives its item `isRef` and `refPad`
+   * (w / h include the halo); the logo is drawn refPad smaller on each side inside a halo — a white
+   * gap, a dark ring and a white casing (theme analysis.halo) — and painted after the other markers. */
+  /** Marker box of an item without its reference halo. */
+  function bodyOf(item) {
+    const p = item.refPad || 0;
+    return { w: item.w - 2 * p, h: item.h - 2 * p };
+  }
+  /** Teardrop path: head circle of radius r, tip at (x, y). */
+  function pinPath(ctx, x, y, P) {
+    const r = P.width / 2, cy = y - P.height + r, d = y - cy;
+    const phi = Math.acos(Math.min(1, r / d));
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineTo(x + r * Math.sin(phi), cy + r * Math.cos(phi));
+    ctx.arc(x, cy, r, Math.PI / 2 - phi, Math.PI / 2 + phi, true);
+    ctx.closePath();
+  }
+  function star(ctx, cx, cy, ro, ri) {
+    ctx.beginPath();
+    for (let i = 0; i < 10; i++) {
+      const a = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? ri : ro;
+      if (i) ctx.lineTo(cx + rr * Math.cos(a), cy + rr * Math.sin(a)); else ctx.moveTo(cx + rr * Math.cos(a), cy + rr * Math.sin(a));
+    }
+    ctx.closePath();
+  }
+  /** The reference pin, tip at (x, y) — ctx in reference units. */
+  function drawPin(ctx, x, y) {
+    const P = MT.theme.analysis.pin;
+    const r = P.width / 2, cy = y - P.height + r;
+    ctx.save();
+    ctx.lineJoin = 'round';
+    // White halo (a wide stroke) with the shadow, then the dark body, then the star.
+    setShadow(ctx, P.shadow, 1, !!P.shadow);
+    pinPath(ctx, x, y, P);
+    ctx.lineWidth = 2 * (P.haloWidth || 0); ctx.strokeStyle = P.halo; ctx.fillStyle = P.halo;
+    if (P.haloWidth > 0) ctx.stroke();
+    ctx.fill();
+    setShadow(ctx, null, 1, false);
+    pinPath(ctx, x, y, P);
+    ctx.fillStyle = P.color; ctx.fill();
+    star(ctx, x, cy, r * 0.58, r * 0.25);
+    ctx.fillStyle = P.star; ctx.fill();
+    ctx.restore();
+  }
+  /** Box of the pin picture around the tip (reference units, incl. halo and shadow): {dx, dy, w, h}. */
+  function pinFrame() {
+    const P = MT.theme.analysis.pin, sh = P.shadow || { blur: 0, offsetY: 0 };
+    const m = (P.haloWidth || 0) + Math.ceil(sh.blur + Math.abs(sh.offsetY)) + 1;
+    return { dx: -P.width / 2 - m, dy: -P.height - m, w: P.width + 2 * m, h: P.height + 2 * m };
+  }
+  /** The pin as its own picture (PPTX, HTML): {canvas, dx, dy, w, h} — box relative to the tip, reference units. */
+  /**
+   * opts.tipAtBottom: the picture ends at the tip (the halo's sliver and the shadow under the tip are
+   * left out) — PowerPoint glues the distance lines to the picture's bottom-centre connection site,
+   * which then IS the tip, also after the user moves the pin.
+   */
+  function pinImage(scale, opts) {
+    const f = Object.assign({}, pinFrame());
+    if (opts && opts.tipAtBottom) f.h = -f.dy;
+    const cv = document.createElement('canvas');
+    cv.width = Math.max(1, Math.round(f.w * scale)); cv.height = Math.max(1, Math.round(f.h * scale));
+    const ctx = cv.getContext('2d');
+    ctx.scale(cv.width / f.w, cv.height / f.h);
+    drawPin(ctx, -f.dx, -f.dy);
+    return { canvas: cv, dx: f.dx, dy: f.dy, w: f.w, h: f.h };
+  }
+  /** The reference store's halo around its marker body centred at (x, y) (ctx in reference units). */
+  function drawRefHalo(ctx, item, st, x, y, k) {
+    const H = MT.theme.analysis.halo;
+    const b0 = bodyOf(item), b = { w: b0.w * (k || 1), h: b0.h * (k || 1) };
+    // Halo widths: exactly the room the layout gave it (refPad), or (dot style) by the marker size.
+    const tot = (H.gap || 0) + (H.width || 0) + (H.casingWidth || 0);
+    const s = (item.refPad && tot ? item.refPad / tot : Math.sqrt(st.size || 1)) * (k || 1);
+    const g = (H.gap || 0) * s, wd = (H.width || 0) * s, cw = (H.casingWidth || 0) * s;
+    const rect = item.shape === 'rect';
+    const shape = (grow, fill, shadow) => {
+      ctx.save();
+      setShadow(ctx, shadow ? { color: 'rgba(17,24,39,0.3)', blur: 3, offsetY: 0.8 } : null, 1, !!shadow);
+      if (rect) {
+        const rad = TM().card.radius * (b.h / TM().card.height) + grow;
+        roundRect(ctx, x - b.w / 2 - grow, y - b.h / 2 - grow, b.w + 2 * grow, b.h + 2 * grow, rad);
+      } else circle(ctx, x, y, b.w / 2 + grow);
+      ctx.fillStyle = fill; ctx.fill();
+      ctx.restore();
+    };
+    shape(g + wd + cw, H.casing || '#FFFFFF', true);
+    shape(g + wd, H.color, false);
+    shape(g, H.casing || '#FFFFFF', false);
+  }
+  /** A reference store's marker: halo + logo (body refPad smaller on each side). */
+  function drawRef(ctx, it, st, f, shadow) {
+    f = f || 1;
+    const b = bodyOf(it);
+    drawRefHalo(ctx, it, st, it.pos.x, it.pos.y, f);
+    drawMarker(ctx, it.chainId, it.pos.x, it.pos.y, st, { w: b.w * f, h: b.h * f, number: it.number, count: it.count, shadow: shadow });
+  }
+
   /** One item: leader/stem (with its halo), marker, anchor dot. Coordinates = reference units × scale. */
   function draw(ctx, item, style, scale, opts) {
     const st = MT.layout.styleOf(style);
@@ -512,7 +615,10 @@
       if (parts.indexOf('leader') >= 0) { drawSpokes(ctx, item); drawLeader(ctx, item, true); drawLeader(ctx, item, false); }
       if (item.collapsed) { if (parts.indexOf('marker') >= 0 || parts.indexOf('dot') >= 0) drawCollapsed(ctx, item, st); return; }
       if (parts.indexOf('dot') >= 0 && needsAnchor(item, st)) drawAnchor(ctx, item, st);
-      if (parts.indexOf('marker') >= 0 && !item.grouped) drawMarker(ctx, item.chainId, item.pos.x, item.pos.y, st, { w: item.w, h: item.h, number: item.number, count: item.count, shadow: !(opts && opts.shadow === false) });
+      if (parts.indexOf('marker') >= 0 && !item.grouped) {
+        if (item.isRef) drawRef(ctx, item, st, 1, !(opts && opts.shadow === false));
+        else drawMarker(ctx, item.chainId, item.pos.x, item.pos.y, st, { w: item.w, h: item.h, number: item.number, count: item.count, shadow: !(opts && opts.shadow === false) });
+      }
     });
   }
 
@@ -533,14 +639,18 @@
       dotOrder(items).forEach((it) => { if (needsAnchor(it, st)) drawAnchor(ctx, it, st); });
       const order = paintOrder(items.filter(isMarker), st);
       let hi = null;
+      const refs = [];
       for (let i = 0; i < order.length; i++) {
         const it = order[i];
         if (opts.highlight && it.storeId === opts.highlight) { hi = it; continue; }
+        if (it.isRef) { refs.push(it); continue; }          // an analysis' reference store: on top
         drawMarker(ctx, it.chainId, it.pos.x, it.pos.y, st, { w: it.w, h: it.h, number: it.number, count: it.count });
       }
+      refs.forEach((it) => drawRef(ctx, it, st, 1));
       if (hi) {
         const f = 1.08;
-        drawMarker(ctx, hi.chainId, hi.pos.x, hi.pos.y, st, { w: hi.w * f, h: hi.h * f, number: hi.number, count: hi.count });
+        if (hi.isRef) drawRef(ctx, hi, st, f);
+        else drawMarker(ctx, hi.chainId, hi.pos.x, hi.pos.y, st, { w: hi.w * f, h: hi.h * f, number: hi.number, count: hi.count });
       }
       // Collapsed logos are dots in the ring colour (big chains first, so rare ones stay on top).
       paintOrder(items.filter((it) => it.collapsed), { kind: 'dot', size: st.size }).forEach((it) => drawCollapsed(ctx, it, st));
@@ -556,7 +666,9 @@
     cv.width = Math.max(1, Math.round(w * scale)); cv.height = Math.max(1, Math.round(h * scale));
     const ctx = cv.getContext('2d');
     ctx.scale(cv.width / w, cv.height / h);
-    drawMarker(ctx, item.chainId, w / 2, h / 2, st, { w: item.w, h: item.h, number: item.number, count: item.count });
+    // An analysis' reference store: its picture includes the halo (item.w / h do).
+    if (item.isRef) drawRef(ctx, Object.assign({}, item, { pos: { x: w / 2, y: h / 2 } }), st, 1);
+    else drawMarker(ctx, item.chainId, w / 2, h / 2, st, { w: item.w, h: item.h, number: item.number, count: item.count });
     return { canvas: cv, x: item.pos.x - w / 2, y: item.pos.y - h / 2, w: w, h: h };
   }
 
@@ -623,6 +735,12 @@
     pipGeometry: pipGeometry,
     isMarker: isMarker,
     pngSize: pngSize,
+    // Analysis slides (SPEC §6.3): the reference pin and a reference store's halo.
+    drawPin: drawPin,
+    pinImage: pinImage,
+    pinFrame: pinFrame,
+    drawRefHalo: drawRefHalo,
+    bodyOf: bodyOf,
     /** True when the logos for these chains are decoded (sync drawing will show them). */
     isReady: function (chainIds, style) {
       const st = MT.layout.styleOf(style);

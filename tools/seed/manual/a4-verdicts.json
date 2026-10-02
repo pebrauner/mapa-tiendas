@@ -1,0 +1,60 @@
+{
+  "batch": "a4",
+  "verifiedOn": "2026-10-01",
+  "verdicts": [
+    {
+      "store": "Tambo Nuevo Chimbote - Mz. A",
+      "verdict": "accept",
+      "lat": -9.120723,
+      "lng": -78.540239,
+      "precision": "approx",
+      "status": "to_verify",
+      "reason": "Re-checked. Peru Retail (09/09/2026) gives 'Mz. A, Lt. 01, Programa de Vivienda HUP Villa María'. The Osinergmin PDF item 18 shows PECSA exp. 201300143694, 04/09/2013 at 'PV HUP Villa María Sector B Sub Lt B2 Mz A Lt 2 Carret Panamericana, Nuevo Chimbote'. The OSM fuel area way 828895493 (v3, 2026-08-08) has its polygon centroid at exactly -9.120723,-78.540239, and node 3646844816 (Pecsa/PECSA) lies inside it. Nominatim places it at 'Pecsa, Pasaje 31, 1 de Mayo, Villa Maria, Nuevo Chimbote', at the PE-1N / Av. La Marina / Av. Pacífico / Av. Aviación junction. The other Pecsa (rel 7512543) is on Prolongación Av. José Pardo in Chimbote, not Villa María, so rejecting it was correct. pip gives 021809 Nuevo Chimbote. The nearest Tambo (osm-n5064262608) is about 1.1 km away and no row of any chain is within 68 m (Mass Ctra. Panamericana Norte), so this is not a duplicate. The adjacent-lot logic is sound, but lot 1 itself is unresolved, so approx and to_verify."
+    },
+    {
+      "store": "Tambo San Juan de Lurigancho - Mz. G",
+      "verdict": "reject",
+      "lat": null,
+      "lng": null,
+      "precision": "approx",
+      "status": "to_verify",
+      "reason": "No defensible location. Peru Retail (14/08/2026) confirms 'Mz. G, Lt. 25, Urb. La Planicie de Canto Grande'. Nominatim finds no 'Planicie' in SJL; the only matches are in La Molina and Carabayllo. Enel's notice (La República 24/03/2026) only lists it alongside Urb. Canto Rey, Av. El Parque cdra. 5 and Asoc. Pro Viv. Garagay, none of which Nominatim resolves to an area (Canto Rey only as a bus stop). OSM node 5591615727 (shop=convenience 'Tambo', v2, last edited 2021-12-14 by ovruni) predates the July 2026 opening and is 37 m from Tiendas 3A Canto Grande 24, so it cannot be this store. The store probably exists, but it has to be placed by hand."
+    },
+    {
+      "store": "Tambo San Martín de Porres - Mz. B",
+      "verdict": "reject",
+      "lat": null,
+      "lng": null,
+      "precision": "approx",
+      "status": "to_verify",
+      "reason": "No defensible location. Peru Retail (09/09/2026) confirms 'Mz. B, Lt. 15, Asoc. Los Olivos de San Vicente'. Nominatim finds nothing in Lima/Callao; the only hits are Calle Los Olivos in San Vicente de Cañete and Calle San Vicente in Chuquitanta, neither of which matches. A web search turns up nothing else, and an outage-notice listing of the Santa Rosa–Oquendo area is far too broad for a point. The store probably exists, but it has to be placed by hand."
+    },
+    {
+      "store": "Tambo Villa El Salvador - Mz. ZC Lt. 1",
+      "verdict": "accept",
+      "lat": -12.22304,
+      "lng": -76.932524,
+      "precision": "approx",
+      "status": "to_verify",
+      "reason": "Re-checked. Peru Retail (09/07/2026) gives 'Mz. ZC Lt. 1, Sector 3, Grupo 16'. The polygon centroid of OSM way 730043462 'Sector 3 Grupo 16' recomputes to -12.223040,-76.932524 (max vertex 208 m), and the park way 370735004 centroid is within 2 m of it. The OSM map download shows blocks A–P inside the group and no 'ZC' (possibly a commercial lot, e.g. by Mercado Atahualpa, but unproven). Nominatim gives 'Calle 4, Sector 3 Grupo 16, Sector 3, Villa El Salvador'. pip gives 150142 VES. The nearest Tambo (M BASTIDAS2, official) is 667 m away by Av. Micaela Bastidas, outside the group, and there is nothing within 150 m, so this is not a duplicate. Group-level accuracy only, so approx and to_verify."
+    },
+    {
+      "store": "Tambo Villa El Salvador - P.J. Villa El Salvador",
+      "verdict": "accept",
+      "lat": -12.188793,
+      "lng": -76.949812,
+      "precision": "approx",
+      "status": "to_verify",
+      "reason": "Re-checked. Peru Retail (14/08/2026) gives 'P.J. Villa El Salvador, Sect. 01, Gpo. 06, Lt. 05'. The polygon centroid of OSM way 730013551 'Sector 1 Grupo 6' recomputes to -12.188793,-76.949812 (max vertex 189 m), and Nominatim search and reverse both return Sector 1 Grupo 6, Sector 1, VES. pip gives 150142 VES. With no manzana in the address it cannot be refined. The nearest store of any chain is 663 m away (Tiendas 3A Calle 4, which is in Grupo 16), so this is not a duplicate. Approx and to_verify."
+    },
+    {
+      "store": "Tambo Villa El Salvador - Pasaje Pachacámac",
+      "verdict": "accept",
+      "lat": -12.246162,
+      "lng": -76.921844,
+      "precision": "approx",
+      "status": "to_verify",
+      "reason": "Re-checked. Peru Retail (08/06/2026) gives 'Pasaje Pachacámac, Virgen de la Candelaria Mz. E Lt. 01'. Nominatim has a single 'Virgen de la Candelaria' in VES (way 759079518, Sector 4), and the OSM map download shows blocks A–E inside it. The centroid of block E (way 781675179) recomputes to -12.246162,-76.921844 (max vertex 71 m), and Nominatim reverse gives 'Pasaje 20, Virgen de la Candelaria, Sector 4, VES'. pip gives 150142 VES. The adjacent neighbourhoods 'Los Aires de Pachacámac' and 'Ampliación Los Aires de Pachacámac' plausibly explain the 'Pasaje Pachacámac' name. Official Tambo Mariareiche (Justo sublocality A.H. Max Uhle) is 385 m away in a different neighbourhood, so this is not a duplicate. Minor note fix: by OSM geometry the block's bounding streets are Av. María Reiche, Calle 8, Calle 16 and Pasajes 20/21. Calle 12 is 50 m away and Pasaje 19 is 43 m away. noteEs could say 'junto a Av. María Reiche' instead."
+    }
+  ]
+}

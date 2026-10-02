@@ -17,6 +17,9 @@
   var dicts = { es: {}, en: {} };
   var missing = {};
   var PREF_KEY = 'mt.lang';
+  // es-PE number formats for distances (0–2 decimals), cached: distances read the same in both languages.
+  var esFmts = {};
+  function esFmt(digits) { return esFmts[digits] || (esFmts[digits] = new Intl.NumberFormat('es-PE', { maximumFractionDigits: digits })); }
 
   function flatten(obj, prefix, out) {
     for (var k in obj) {
@@ -132,10 +135,34 @@
       var date = d instanceof Date ? d : new Date(d);
       return new Intl.DateTimeFormat(i18n.locale(), opts || { dateStyle: 'medium' }).format(date);
     },
-    /** "350 m" / "1,2 km" in the current language. */
+    /**
+     * THE text of a measured distance, everywhere (UI, slides, PPTX, HTML, Excel): "350 m", "1.2 km",
+     * "12 km", "1,235 km" — the es-PE number format in both languages (decimal point, like
+     * "Peso: 15.8%"). The distance is first rounded to 0.1 m (the Excel "Distancia (m)" value) and
+     * then to whole metres, so a text never disagrees with the number beside it; whole metres
+     * below 1 km, one decimal below 9.95 km, whole km above (with thousands separators).
+     * MT.legend.distance, MT.radius.formatMeters, MT.analysis.formatMeters and the Análisis tab use it.
+     */
     formatDistance: function (meters) {
-      if (meters < 1000) return i18n.formatNumber(Math.round(meters)) + ' m';
-      return i18n.formatNumber(meters / 1000, { maximumFractionDigits: meters < 10000 ? 1 : 0 }) + ' km';
+      var m = +meters;
+      if (!isFinite(m)) return '';
+      m = Math.round(Math.round(m * 10) / 10);
+      if (m < 1000) return m + ' m';
+      var km = m / 1000;
+      return esFmt(km < 9.95 ? 1 : 0).format(km) + ' km';
+    },
+    /**
+     * A distance the user TYPED (a ring, a universe, a radius): its exact value, never rounded —
+     * "500 m", "1 km", "1.25 km", "12.5 km", "1,255 m" (es-PE number format in both languages).
+     */
+    formatDistanceExact: function (meters) {
+      var m = +meters;
+      if (!isFinite(m)) return '';
+      if (Math.abs(m - Math.round(m)) > 1e-6) return i18n.formatDistance(m);
+      m = Math.round(m);
+      if (m < 1000) return m + ' m';
+      if (m % 10 === 0) return esFmt(2).format(m / 1000) + ' km';
+      return esFmt(0).format(m) + ' m';
     },
   });
 

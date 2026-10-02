@@ -16,6 +16,11 @@
  *   slideCanvas(mapCfg, {width=3840}) → Promise<HTMLCanvasElement>  the complete 16:9 slide.
  * Extras: drawOverlay(ctx, mapCfg, items, scale, opts), drawAttribution(ctx, scale, opts),
  *   drawSlide(ctx, mapCfg, W, mapImage, layout) (slide without the map → canvas), queue-serialized.
+ * Analysis slides (SPEC §6.3): drawOverlay also paints the lines to the nearest store of each chain
+ *   (under the logos), the rings' pills and the reference pin (on top); the rings are MapLibre lines
+ *   (MT.mapview.basemap). mapCanvas opts.rings ([meters]) limits the rings drawn on that map (the
+ *   PPTX draws the others as ellipses); drawSlide draws the legend's "Distancias a …" list.
+ *   analysisOverlay(mapCfg, view) → the overlay geometry in a view (the preview's live camera).
  * Errors reject with err.code 'basemap-unavailable' | 'basemap-timeout' and err.messageKey
  * ('map.error.<code>') for a translated message.
  */
@@ -46,10 +51,89 @@
     ctx.restore();
   }
 
+  /* ---- Analysis slides (SPEC §6.3) ----------------------------------------------------------------
+   * Over the map of a config with `analysis` (MT.layout.analysis says where): faint lines from the
+   * reference to the nearest store of each chain (under the leaders and logos), the rings' "500 m"
+   * pills, and — on top of everything — the reference pin (a point, or a store not drawn on the
+   * slide; a reference store on the slide gets its halo from MT.markers). The rings themselves are
+   * MapLibre lines under the basemap labels (MT.mapview.basemap). */
+  /**
+   * The analysis overlay of a config in a view (its own view, or the live camera while the user
+   * pans the preview): {g, ref:{x, y}, pin:{x, y}|null, labels:[{x, y, w, h, fs, text, meters}],
+   * lines}, or null on ordinary slides.
+   */
+  function analysisOverlay(mapCfg, view) {
+    const g = mapCfg && mapCfg.analysis && MT.layout.analysis ? MT.layout.analysis(mapCfg) : null;
+    if (!g) return null;
+    const proj = MT.layout.projector(view || g.view);
+    return {
+      g: g, ref: proj(g.ref.ll), pin: g.pin ? proj(g.pin.ll) : null,
+      labels: g.rings.filter((r) => r.label).map((r) => Object.assign({ meters: r.meters }, r.label, proj(r.label.ll))),
+      lines: g.lines,
+    };
+  }
+  /** Lines reference → the dots of the nearest store of each chain (items: the layout drawn). */
+  function drawAnalysisLines(ctx, A, items, scale, opts) {
+    if (!A || !A.lines.length || !items || !items.length) return;
+    const L = MT.theme.analysis.line || {};
+    if (!(L.width > 0)) return;
+    const byId = {};
+    items.forEach((it) => { byId[it.storeId] = it; });
+    // From the reference store's own dot when it is drawn (its logo is spread a hair off a neighbour),
+    // else from the pin; none when the reference is outside the frame (as the PPTX).
+    const refIt = A.g.ref.storeId ? byId[A.g.ref.storeId] : null;
+    const from = refIt ? MT.markers.dotOf(refIt) : A.pin;
+    if (!from) return;
+    ctx.save();
+    if (opts && (opts.offsetX || opts.offsetY)) ctx.translate(opts.offsetX || 0, opts.offsetY || 0);
+    ctx.scale(scale, scale);
+    ctx.globalAlpha = L.alpha === undefined ? 0.5 : L.alpha;
+    ctx.strokeStyle = L.color; ctx.lineWidth = L.width; ctx.lineCap = 'round';
+    if (L.dash) ctx.setLineDash(L.dash);
+    ctx.beginPath();
+    A.lines.forEach((l) => {
+      const it = byId[l.storeId];
+      if (!it) return;
+      const d = it.collapsed ? it.pos : MT.markers.dotOf(it);
+      ctx.moveTo(from.x, from.y); ctx.lineTo(d.x, d.y);
+    });
+    ctx.stroke();
+    ctx.restore();
+  }
+  /** The rings' pills ("500 m", "1 km"); only: [meters] to draw (the PPTX bakes some rings). */
+  function drawRingLabels(ctx, A, scale, opts, only) {
+    if (!A || !A.labels.length) return;
+    const R = MT.theme.analysis.ring || {}, lab = R.label || {}, color = lab.color || R.color;
+    ctx.save();
+    if (opts && (opts.offsetX || opts.offsetY)) ctx.translate(opts.offsetX || 0, opts.offsetY || 0);
+    ctx.scale(scale, scale);
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    A.labels.forEach((l) => {
+      if (only && only.indexOf(l.meters) < 0) return;
+      ctx.font = MT.layout.ringLabelFont(l.fs);
+      ctx.beginPath();
+      if (ctx.roundRect) ctx.roundRect(l.x - l.w / 2, l.y - l.h / 2, l.w, l.h, l.h / 2); else ctx.rect(l.x - l.w / 2, l.y - l.h / 2, l.w, l.h);
+      ctx.fillStyle = 'rgba(255,255,255,0.94)'; ctx.fill();
+      ctx.lineWidth = Math.max(0.8, (R.width || 1.6) * 0.6); ctx.strokeStyle = R.color; ctx.stroke();
+      ctx.fillStyle = color;
+      ctx.fillText(l.text, l.x, l.y + l.fs * 0.04);
+    });
+    ctx.restore();
+  }
+  function drawRefPin(ctx, A, scale, opts) {
+    if (!A || !A.pin) return;
+    ctx.save();
+    if (opts && (opts.offsetX || opts.offsetY)) ctx.translate(opts.offsetX || 0, opts.offsetY || 0);
+    ctx.scale(scale, scale);
+    MT.markers.drawPin(ctx, A.pin.x, A.pin.y);
+    ctx.restore();
+  }
+
   /**
    * Everything drawn over the basemap, in reference units × scale: radius labels, leaders, anchor
-   * dots, markers, attribution. opts: {highlight, radiusLabels, view, markers=true, attribution=true,
-   * offsetX, offsetY}.
+   * dots, markers, attribution — and on an analysis slide its lines, ring pills and reference pin.
+   * opts: {highlight, radiusLabels, view, markers=true, attribution=true, offsetX, offsetY,
+   * analysis (overlay for the live view: analysisOverlay), rings ([meters]: only these rings' pills)}.
    */
   function drawOverlay(ctx, mapCfg, items, scale, opts) {
     opts = opts || {};
@@ -59,9 +143,13 @@
       labels = MT.radius.labels(MT.radius.compute(mapCfg), MT.layout.projector(opts.view || MT.layout.viewFor(mapCfg)));
     }
     MT.radius.drawLabels(ctx, labels, scale, opts);
+    const A = mapCfg.analysis ? (opts.analysis !== undefined ? opts.analysis : analysisOverlay(mapCfg, opts.view || MT.layout.viewFor(mapCfg))) : null;
+    if (A && opts.markers !== false) drawAnalysisLines(ctx, A, items, scale, opts);
+    if (A) drawRingLabels(ctx, A, scale, opts, Array.isArray(opts.rings) ? opts.rings : null);
     if (opts.markers !== false && items && items.length) {
       MT.markers.drawAll(ctx, items, MT.layout.styleOf(mapCfg), scale, { highlight: opts.highlight, offsetX: opts.offsetX, offsetY: opts.offsetY });
     }
+    if (A && opts.markers !== false) drawRefPin(ctx, A, scale, opts);
     if (opts.attribution !== false) drawAttribution(ctx, scale, opts);
   }
 
@@ -136,7 +224,7 @@
         loaded = true;
         try {
           MT.mapview.basemap.patch(map);
-          MT.mapview.basemap.apply(map, mapCfg, { overlays: !(opts && opts.overlays === false), items: opts && opts.items });
+          MT.mapview.basemap.apply(map, mapCfg, { overlays: !(opts && opts.overlays === false), items: opts && opts.items, rings: opts && opts.rings });
         } catch (e) { console.warn('[render] style patch', e); }
       });
       map.on('error', (e) => { if (!loaded) finish(fail('basemap-unavailable', e && e.error)); });
@@ -175,7 +263,10 @@
       const lcfg = opts.blockersFor || mapCfg;
       const blockers = () => (opts.markerBlockers !== false && MT.layout.labels.get(mapCfg, MT.layout.viewFor(mapCfg)) ? MT.layout.compute(lcfg) : null);
       let blk = blockers();
-      let canvas = await renderBasemap(mapCfg, view, W, H, { overlays: opts.overlays, timeoutMs: opts.timeoutMs, items: blk });
+      // opts.rings ([meters]): an analysis slide's rings drawn on this map (the PPTX draws the others
+      // as ellipses); default all.
+      const rings = Array.isArray(opts.rings) ? opts.rings : undefined;
+      let canvas = await renderBasemap(mapCfg, view, W, H, { overlays: opts.overlays, timeoutMs: opts.timeoutMs, items: blk, rings: rings });
       // The basemap may just have taught MT.layout where the district names are: an automatic view
       // widens to keep a selected district's name inside the frame, and a district the basemap names
       // itself no longer gets the app's label (or the app's label moves). Draw the basemap again then
@@ -185,11 +276,11 @@
       const blk2 = blockers();
       if (viewMoved || MT.layout.labels.sig(mapCfg) !== sig0 || MT.mapview.basemap.blockerKey(blk2) !== MT.mapview.basemap.blockerKey(blk)) {
         view = v2; blk = blk2;
-        canvas = await renderBasemap(mapCfg, view, W, H, { overlays: opts.overlays, timeoutMs: opts.timeoutMs, items: blk });
+        canvas = await renderBasemap(mapCfg, view, W, H, { overlays: opts.overlays, timeoutMs: opts.timeoutMs, items: blk, rings: rings });
         const blk3 = blockers();
         if (MT.mapview.basemap.blockerKey(blk3) !== MT.mapview.basemap.blockerKey(blk)) {
           blk = blk3;
-          canvas = await renderBasemap(mapCfg, view, W, H, { overlays: opts.overlays, timeoutMs: opts.timeoutMs, items: blk });
+          canvas = await renderBasemap(mapCfg, view, W, H, { overlays: opts.overlays, timeoutMs: opts.timeoutMs, items: blk, rings: rings });
         }
       }
       // After the basemap: it may just have taught MT.layout where the district names are.
@@ -197,7 +288,7 @@
       await MT.markers.ready(layout.map((i) => i.chainId), st);
       const ctx = canvas.getContext('2d');
       const s = W / F.width;
-      if (opts.overlays) drawOverlay(ctx, mapCfg, layout, s, { view: view, markers: opts.markers, attribution: opts.attribution });
+      if (opts.overlays) drawOverlay(ctx, mapCfg, layout, s, { view: view, markers: opts.markers, attribution: opts.attribution, rings: rings });
       else if (opts.attribution) drawAttribution(ctx, s);
       return { canvas: canvas, layout: layout, frame: { width: W, height: H, scale: s }, view: view };
     });
@@ -282,6 +373,23 @@
       ctx.font = MT.slide.font('normal', lg.note.fontPx); ctx.fillStyle = lg.note.color;
       ctx.fillText(lg.note.text, lg.note.x, lg.note.baseline);
     }
+    // Analysis slide: "Distancias a <referencia>" — icon, short name, distance (right-aligned).
+    if (lg.dist) {
+      const D = lg.dist;
+      ctx.textAlign = 'left';
+      ctx.font = MT.slide.font('bold', D.heading.fontPx); ctx.fillStyle = D.heading.color;
+      D.heading.lines.forEach((ln) => ctx.fillText(ln.text, ln.x, ln.baseline));
+      D.rows.forEach((r) => {
+        const icon = MT.markers.icon(r.chainId, Math.round(r.icon.h * 2), style);
+        ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
+        ctx.drawImage(icon, r.icon.x, r.icon.y, r.icon.w, r.icon.h);
+        ctx.textAlign = 'left'; ctx.font = MT.slide.font('normal', r.fontPx); ctx.fillStyle = D.color;
+        ctx.fillText(r.text, r.textX, r.baseline);
+        ctx.textAlign = 'right'; ctx.font = MT.slide.font('bold', r.fontPx); ctx.fillStyle = D.distColor;
+        ctx.fillText(r.dist, r.distX, r.baseline);
+      });
+      ctx.textAlign = 'left';
+    }
     ctx.restore();
     return g;
   }
@@ -309,7 +417,8 @@
     const map = mapCfg ? await mapCanvas(mapCfg, { scale: geo0.frame.w / MT.layout.frame().width, timeoutMs: opts.timeoutMs }) : null;
     const rows = mapCfg ? MT.legend.items(mapCfg, map.layout) : [];
     const st = MT.layout.styleOf(mapCfg);
-    await MT.markers.ready(rows.map((r) => r.chainId), st);
+    // (An analysis slide's distance list has chain icons too.)
+    await MT.markers.ready(rows.map((r) => r.chainId).concat(rows.distances ? rows.distances.items.map((d) => d.chainId) : []), st);
     await decoration();
     const g = MT.slide.layout(mapCfg, W, rows);
     const cv = document.createElement('canvas');
@@ -322,6 +431,8 @@
     mapCanvas: mapCanvas,
     slideCanvas: slideCanvas,
     drawOverlay: drawOverlay,
+    /** Analysis slides: the overlay geometry in a view (pin, ring pills, lines) — MT.mapview's live view. */
+    analysisOverlay: analysisOverlay,
     drawAttribution: drawAttribution,
     drawSlide: drawSlide,
     /** Decode the theme's slide decoration (if any) before drawSlide. */

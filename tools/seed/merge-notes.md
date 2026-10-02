@@ -1,5 +1,18 @@
 ## 0. Notes (hand-written; `tools/merge.mjs` inserts this file into the report on every run)
 
+### Manual placement of the unplaced stores (2026-10-01)
+
+The 32 stores that no rule could place (§4) were researched one by one and then independently re-checked, in four
+batches (`tools/seed/manual/a1`–`a4`, research + verdicts). The verdicts are in `tools/seed/overrides.json` →
+`manualPlacements` and `tools/merge.mjs` applies them on every run, after all matching and geocoding: **25 new rows**
+(2 verified: Precio Uno Lurín from the place pin of the official map link and Precio Uno Iquitos La Marina from an OSM node
+the scan had missed; 23 to_verify, mostly the Tambo openings reported by the press) and **2 links** (the official Tottus
+Trujillo 1 and Tottus Zorritos are the OSM-only rows `osm-n4453923987` and `osm-w436598550`, which become verified official
+stores; no new row). **5 Tambo openings stay unplaced** (no defensible position, or a duplicate of an official entry), each
+with the verifier's reason in §4. Rows 3,536 → 3,561; apart from the two linked rows no existing row changed, and all
+existing ids are kept. Method, precision, status, confidence and evidence of every store: §4, "Colocación manual
+(2026-10-01)".
+
 ### What changed in the 2026-10-01 data polish
 
 - **Mass is off by default.** `"defaultOn": false` in `tools/seed/chains/mass.json` (→ `data/chains.js`): like Tambo and
@@ -57,7 +70,8 @@
   for** and lies in the official district (province + district, because district names repeat across provinces). When the
   source gives no district, only a house/POI-level hit or a street that exists in a single district of the province was
   accepted. This is why **"Holi Pardo — Av. José Pardo 200"** was not placed: Nominatim knows an "Avenida José Pardo" in
-  Miraflores, Comas, Carabayllo and Villa María del Triunfo and the source does not say which.
+  Miraflores, Comas, Carabayllo and Villa María del Triunfo and the source does not say which. (It was placed by hand on
+  2026-10-01: the opening press note says Miraflores; §4.)
 - OSM-only rows of chains whose official list is complete say **"No figura en la lista oficial — posible cierre"**: they are candidates for
   closed stores or OSM mistakes (e.g. Metro Express on Av. Benavides, 2 Maxiahorro in Lima, 6 Mass). For chains
   whose official list is incomplete (Plaza Vea, Tottus, Vivanda, Dollarcity, Tambo, Oxxo) they say **"Solo en OSM"**: some are
@@ -67,9 +81,10 @@
   Vea total (81 official + 23 OSM-only = 104 rows) is close to the ~105 Plaza Vea implied by InRetail's 113 supermarkets
   (Plaza Vea + Vivanda). That only shows the totals are similar; it does not confirm any single OSM-only row.
 - The stores in **§4 Needs manual placement** are not in `stores.csv`. Where OSM has an unmatched store of the same
-  chain in the right area, the last column names it: often that OSM row *is* the store (e.g. Tottus Trujillo 1 →
-  `osm-n4453923987` on Av. Mansiche). Confirm and merge in the app. Where the official site links the store to Google
-  Maps, the link is in the table; open it yourself, because the tools do not read Google Maps.
+  chain in the right area, the last column names it: often that OSM row *is* the store (Tottus Trujillo 1 →
+  `osm-n4453923987` on Av. Mansiche was such a case, linked on 2026-10-01). Confirm and merge in the app. Where the official
+  site links the store to Google Maps, the link is in the table; open it yourself, because the tools do not read Google
+  Maps. Since the 2026-10-01 manual placement, §4 lists only 5 Tambo openings, each with the reason it could not be placed.
 - `data/chains.js`: Makro's default legend name is **CASH & CARRY**, as on all four reference slides (the logo stage had
   "MAKRO"; it is editable per chain in the app).
 
@@ -91,7 +106,7 @@ districts (tables in §3). Mass, Tambo and Oxxo never appear on the slides (all 
 | Tiendas 3A | 4 | 5 | 2 of the slide's 3A markers appear to sit near San Luis, outside the four districts |
 | Dollarcity | 4 | 6 | |
 | Flora y Fauna | 6 | 7 | |
-| Holi | ~4–5 | 4 | Holi 28 de Julio = the OSM node on Av. La Paz 971, Miraflores (linked 2026-10-01); Holi Pardo and Holi Petit Thouars still need manual placement (probably Miraflores / Lince) |
+| Holi | ~4–5 | 5 | Holi 28 de Julio = the OSM node on Av. La Paz 971, Miraflores (linked 2026-10-01); Holi Pardo (Av. José Pardo 200, Miraflores) placed by hand on 2026-10-01 (approx); Holi Petit Thouars is in Santa Beatriz, Cercado de Lima, outside these districts |
 | Vega | 0 | 4 | Vega Market stores (Benavides, Aviación, La Cultura, Villarán) are not on the slide |
 
 **Lima Cono Sur** (Chorrillos, Lurín, Punta Hermosa, San Juan de Miraflores, Villa El Salvador, Villa María del Triunfo)
@@ -106,7 +121,7 @@ districts (tables in §3). Mass, Tambo and Oxxo never appear on the slides (all 
 | Tiendas 3A | ~5 | 31 | the official 3A locator lists 31 stores in these districts |
 | Dollarcity | ~4–5 | 10 | + "Blvd Puntamar": the official address says Punta Hermosa but its coordinates are in San Bartolo, 7 km away (to_verify). If it is in Punta Hermosa, the count is 11 |
 | Vega | ~2 | 6 | 2 of them geocoded |
-| Precio Uno | 2 | 2 | DB: Chorrillos (Guardia Civil) + Villa María del Triunfo (Mariátegui 2524). On 2026-10-01 the house-number check moved Mariátegui 10 km north, to San Gabriel Alto (approx). The slide also has a Precio Uno marker at the north edge, near Villa María del Triunfo. **Precio Uno Lurín** (on the slide) needs manual placement |
+| Precio Uno | 2 | 3 | DB: Chorrillos (Guardia Civil) + Villa María del Triunfo (Mariátegui 2524) + Lurín. On 2026-10-01 the house-number check moved Mariátegui 10 km north, to San Gabriel Alto (approx). The slide also has a Precio Uno marker at the north edge, near Villa María del Triunfo. **Precio Uno Lurín** (on the slide) was placed by hand on 2026-10-01 from the place pin of the official map link (exact, verified) |
 | Maxiahorro | legend only | 1 | "MaxiAhorro Chorrillos" is OSM-only and not in SMU's current list → probably closed |
 | Holi, Flora y Fauna | legend only | 0 | none in these districts |
 
@@ -115,7 +130,7 @@ districts (tables in §3). Mass, Tambo and Oxxo never appear on the slides (all 
 | Chain | slide | database | comment |
 |---|---:|---:|---|
 | Plaza Vea | 5 | 5 | 2 official (Chacarero, Trujillo) + 3 OSM-only; the one on Av. España (2017 survey) is 35 m from a current Mass store |
-| Tottus | 2 | 2 | Tottus Trujillo 2 geocoded (approx, Av. América Norte); the OSM-only node on Av. Mansiche is probably Tottus Trujillo 1 (manual placement list) |
+| Tottus | 2 | 2 | Tottus Trujillo 2 geocoded (approx, Av. América Norte); Tottus Trujillo 1 is the OSM node on Av. Mansiche, in Mall Plaza Trujillo (linked on 2026-10-01, verified) |
 | Wong | 2 | 3 | the 3rd is Wong El Golf (pickup point active, opening not confirmed → to_verify) |
 | Metro | 3 | 3 | |
 | Precio Uno | 2 | 2 | |

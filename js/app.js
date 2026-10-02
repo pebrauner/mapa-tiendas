@@ -319,7 +319,7 @@
     if (!p) return true;
     if (p.name || p.maps.length > 1) return false;
     return p.maps.every(function (m) {
-      return !m.title && !m.peso && !(m.subtitleAuto === false && m.subtitle) && !(m.districts || []).length && !(m.radius || []).length;
+      return !m.title && !m.peso && !(m.subtitleAuto === false && m.subtitle) && !(m.districts || []).length && !(m.radius || []).length && !m.analysis;
     });
   };
   var exampleOpened = null;   // the project object the example became (unchanged → reopen without asking)

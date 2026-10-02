@@ -8,6 +8,8 @@
  *   'project:saved'   {method:'file'|'download', name}
  *   'project:dirty'   {dirty}                      unsaved-to-file state flipped
  * The project is autosaved to localStorage (debounced) and restored on startup.
+ * A map may carry a distance analysis (`analysis`, SPEC §6.3) — always stored normalized by
+ * normalizeAnalysis (in normalize, defaultMap/addMap and updateMap).
  */
 (function () {
   'use strict';
@@ -49,7 +51,74 @@
       markerOffsets: {},
       radius: [],
     };
-    return Object.assign(m, partial ? U.clone(partial) : {});
+    Object.assign(m, partial ? U.clone(partial) : {});
+    if (m.analysis !== undefined) { var an = P.normalizeAnalysis(m.analysis); if (an) m.analysis = an; else delete m.analysis; }
+    return m;
+  };
+
+  /* ---- Distance analysis carried by a slide (SPEC §6.3) ------------------------------------
+   * mapCfg.analysis = {kind:'distance', ref:{type:'store'|'point', storeId?, chainId?, lat?, lng?, label?},
+   *   rings:[m…], maxMeters, chains:[id…]|null, showLines, listTop, includeToVerify}
+   * Absent (or null) on ordinary slides. A slide with an analysis and no districts shows the stores
+   * within maxMeters of the reference (MT.data.storesForMap). Unknown keys are kept (forward
+   * compatible); an analysis that cannot be read (no usable reference, unknown kind) is dropped. */
+  P.ANALYSIS_KINDS = ['distance'];
+  P.ANALYSIS_DEFAULTS = { rings: [500, 1000, 2000], listTop: 8, showLines: true, includeToVerify: true };
+  var RING_MIN = 10, RING_MAX = 1000000, MAX_RINGS = 8, LIST_TOP_MAX = 30;
+  function numOf(v) { return v === null || v === undefined || v === '' || typeof v === 'boolean' ? NaN : +v; }
+  function coordOf(v, limit) { var n = numOf(v); return isFinite(n) && Math.abs(n) <= limit ? U.round(n, 6) : null; }
+  function textOf(v) { return typeof v === 'string' ? v.trim() : ''; }
+  /** {type, storeId?, chainId?, lat?, lng?, label?} or null. A store reference needs its id (lat/lng =
+   *  last known position, used if the store disappears); a point needs valid coordinates. */
+  function analysisRef(r) {
+    if (!r || typeof r !== 'object' || Array.isArray(r)) return null;
+    var type = r.type === 'store' || r.type === 'point' ? r.type : (textOf(r.storeId) ? 'store' : 'point');
+    var lat = coordOf(r.lat, 90), lng = coordOf(r.lng, 180), hasLL = lat !== null && lng !== null;
+    var out = { type: type };
+    if (type === 'store') { if (!textOf(r.storeId)) return null; out.storeId = textOf(r.storeId); }
+    else if (!hasLL) return null;
+    if (textOf(r.chainId)) out.chainId = textOf(r.chainId);
+    if (hasLL) { out.lat = lat; out.lng = lng; }
+    if (textOf(r.label)) out.label = textOf(r.label);
+    return out;
+  }
+  /** Ring distances in whole metres (10 m … 1000 km), unique, ascending, at most 8. */
+  function analysisRings(v) {
+    var out = [];
+    (Array.isArray(v) ? v : []).forEach(function (x) {
+      var m = Math.round(numOf(x));
+      if (isFinite(m) && m >= RING_MIN && m <= RING_MAX && out.indexOf(m) < 0) out.push(m);
+    });
+    return out.sort(function (a, b) { return a - b; }).slice(0, MAX_RINGS);
+  }
+  /**
+   * Validate a map's `analysis` and fill its defaults (rings [500, 1000, 2000], maxMeters = the
+   * largest ring, listTop 8, showLines true, includeToVerify true, chains null). Returns a new object,
+   * or null when it is unusable. Idempotent: normalizeAnalysis(normalizeAnalysis(a)) equals normalizeAnalysis(a).
+   */
+  P.normalizeAnalysis = function (a) {
+    if (!a || typeof a !== 'object' || Array.isArray(a)) return null;
+    var kind = a.kind === undefined || a.kind === null || a.kind === '' ? 'distance' : String(a.kind);
+    if (P.ANALYSIS_KINDS.indexOf(kind) < 0) return null;
+    var ref = analysisRef(a.ref);
+    if (!ref) return null;
+    var D = P.ANALYSIS_DEFAULTS;
+    var rings = analysisRings(a.rings);
+    if (!rings.length) rings = D.rings.slice();
+    var max = Math.round(numOf(a.maxMeters)), top = Math.round(numOf(a.listTop));
+    var chains = null;
+    if (Array.isArray(a.chains)) {
+      chains = [];
+      a.chains.forEach(function (c) { c = textOf(c); if (c && chains.indexOf(c) < 0) chains.push(c); });
+    }
+    return Object.assign(U.clone(a), {
+      kind: kind, ref: ref, rings: rings,
+      maxMeters: isFinite(max) && max >= RING_MIN && max <= RING_MAX ? max : rings[rings.length - 1],
+      chains: chains,
+      showLines: typeof a.showLines === 'boolean' ? a.showLines : D.showLines,
+      listTop: isFinite(top) ? U.clamp(top, 0, LIST_TOP_MAX) : D.listTop,
+      includeToVerify: typeof a.includeToVerify === 'boolean' ? a.includeToVerify : D.includeToVerify,
+    });
   };
 
   /** A blank project. */
@@ -92,6 +161,8 @@
       m.markerOffsets = m.markerOffsets && typeof m.markerOffsets === 'object' ? m.markerOffsets : {};
       m.radius = Array.isArray(m.radius) ? m.radius.filter(function (r) { return r && r.storeId && +r.meters > 0; }) : [];
       if (m.view && !(Array.isArray(m.view.center) && isFinite(m.view.zoomRef))) m.view = null;
+      // Distance analysis (§6.3): normalized, or removed when absent / null / unusable.
+      if (m.analysis !== undefined) { var an = P.normalizeAnalysis(m.analysis); if (an) m.analysis = an; else delete m.analysis; }
       return m;
     });
     return p;
@@ -173,6 +244,12 @@
   P.updateMap = function (id, patch) {
     var m = P.getMap(id);
     if (!m || !patch) return null;
+    // `analysis` is always stored normalized (null = none: removing it, or an unusable one).
+    if (Object.prototype.hasOwnProperty.call(patch, 'analysis')) {
+      var an = P.normalizeAnalysis(patch.analysis);
+      patch = Object.assign({}, patch, { analysis: an });
+      if (!an && !m.analysis) delete patch.analysis;
+    }
     var keys = Object.keys(patch).filter(function (k) { return k !== 'id' && !U.isEqual(m[k], patch[k]); });
     if (!keys.length) return m;
     keys.forEach(function (k) { m[k] = U.clone(patch[k]); });

@@ -13,6 +13,9 @@
  * itself on 'map:changed' (M1) and M2 calls MT.slide.render on 'map:selected'. Inspector controls
  * are built once per selected map and then synced in place, so typing never loses focus.
  * Exports call MT.export.* (M4) behind typeof guards. Strings: js/i18n/maps-ui.js ('maps.*').
+ * A slide carrying a distance analysis (mapCfg.analysis, SPEC §6.3) gets the "Análisis de distancias"
+ * section (reference read-only + "Editar en Análisis", rings, the slide's distance, list length,
+ * lines, remove); it needs no districts (rail "Distancias · hasta 2 km", no "Empieza por aquí").
  * Public helpers for tests / other modules: MT.mapsui (see the bottom of this file).
  */
 (function () {
@@ -46,7 +49,7 @@
     mounted: false,
     els: {},
     secs: {},                    // section id → {el, head, body, summary, update, rebuild}
-    open: Object.assign({ content: true, districts: true, chains: true }, MT.storage.pref('maps.sections', {}) || {}),
+    open: Object.assign({ content: true, analysis: true, districts: true, chains: true }, MT.storage.pref('maps.sections', {}) || {}),
     thumbs: {},                  // map id → <canvas> (kept across list re-renders)
     counts: {},                  // map id → markers on the slide (from MT.layout.compute)
     stats: {},                   // map id → layout stats from 'mapview:layout'
@@ -118,6 +121,8 @@
   }
   function storeLabel(s) { return s ? (s.name || MT.data.chain(s.chain).name) : ''; }
   function fmtM(m) { return MT.i18n.formatDistance(m); }
+  /** A distance the user typed (an analysis ring, the slide's universe): its exact value, "1.25 km". */
+  function fmtR(m) { return MT.i18n.formatDistanceExact(m); }
 
   /** Chain badge icon (the same drawing as the map markers) as an <img>; cached per size. */
   function chainIcon(chainId, cssPx, cls) {
@@ -254,10 +259,15 @@
 
   function slideMeta(m) {
     const nd = (m.districts || []).length;
-    if (!nd) return t('maps.rail.noDistricts');
+    // A slide defined by its distance analysis (no districts): "Distancias · 2 km · 23 tiendas".
+    const reg = !nd ? analysisRegion(m) : null;
+    if (!nd && !reg) return t('maps.rail.noDistricts');
     const n = st.counts[m.id] !== undefined ? st.counts[m.id] : MT.data.storesForMap(m).length;
+    if (reg) return t('maps.rail.analysisMeta', { d: fmtR(reg.maxMeters) }) + ' · ' + t('data.stores', { n: n });
     return t('data.districts', { n: nd }) + ' · ' + t('data.stores', { n: n });
   }
+  /** The analysis that defines a slide's region (MT.data.analysisRegion), or null. */
+  function analysisRegion(m) { return m && MT.data.analysisRegion ? MT.data.analysisRegion(m) : null; }
 
   function slideItem(m, i, active) {
     const title = m.title || t('maps.slide.untitled');
@@ -537,12 +547,26 @@
       ctx.globalAlpha = 0.16; ctx.fillStyle = f.properties.color; ctx.fill();
       ctx.globalAlpha = 1; ctx.lineWidth = Math.max(0.8, w / 260); ctx.strokeStyle = f.properties.stroke; ctx.stroke();
     });
+    // An analysis slide: its rings and reference.
+    const ag = m.analysis && MT.layout.analysis ? MT.layout.analysis(m) : null;
+    if (ag) {
+      ctx.save();
+      ctx.setLineDash([Math.max(2, w / 120), Math.max(1.5, w / 180)]);
+      ctx.lineWidth = Math.max(0.7, w / 320); ctx.strokeStyle = (MT.theme.analysis.ring || {}).color || '#1F3864';
+      ag.rings.forEach((ring) => { ctx.beginPath(); ring.pts.forEach((q, i) => { if (i) ctx.lineTo(q.x * s, q.y * s); else ctx.moveTo(q.x * s, q.y * s); }); ctx.closePath(); ctx.stroke(); });
+      ctx.restore();
+    }
     const r = Math.max(1.4, w / 150);
     items.forEach((it) => {
       ctx.beginPath(); ctx.arc(it.anchor.x * s, it.anchor.y * s, r, 0, Math.PI * 2);
       ctx.fillStyle = MT.markers.dotColor(it.chainId, m); ctx.fill();
       ctx.lineWidth = r * 0.5; ctx.strokeStyle = '#FFFFFF'; ctx.stroke();
     });
+    if (ag && ag.ref.inFrame) {
+      ctx.beginPath(); ctx.arc(ag.ref.x * s, ag.ref.y * s, r * 1.7, 0, Math.PI * 2);
+      ctx.fillStyle = (MT.theme.analysis.pin || {}).color || '#1F2937'; ctx.fill();
+      ctx.lineWidth = r * 0.6; ctx.strokeStyle = '#FFFFFF'; ctx.stroke();
+    }
     return cv;
   }
 
@@ -576,7 +600,7 @@
       U.append(els.barInfo, [
         h('span', { class: 'mt-maps-bar__pos' }, t('maps.bar.position', { n: i + 1, total: maps.length })),
         h('span', { class: 'mt-maps-bar__title' + (m.title ? '' : ' is-empty') }, m.title || t('maps.slide.untitled')),
-        (m.districts || []).length ? h('span', { class: 'mt-maps-bar__stats' },
+        (m.districts || []).length || analysisRegion(m) ? h('span', { class: 'mt-maps-bar__stats' },
           h('span', null, t('data.stores', { n: items.length })), h('span', { class: 'mt-maps-bar__dot', 'aria-hidden': 'true' }),
           h('span', null, t('maps.bar.chains', { n: chains }))) : null,
       ]);
@@ -596,13 +620,17 @@
 
   /** The most useful hint for the current slide (or null). */
   function hintFor(m) {
-    if (!m || MT.data.missing.stores || !(m.districts || []).length) return null;
+    const reg = analysisRegion(m);
+    if (!m || MT.data.missing.stores || (!(m.districts || []).length && !reg)) return null;
+    if (reg && !reg.ref) return null;               // the map's own notice explains it
     const visible = MT.data.storesForMap(m).length;
     if (!visible) {
       const chains = MT.data.chains();
       if (chains.length && chains.every((c) => !MT.data.chainOn(m, c.id))) {
         return { kind: 'chainsOff', tone: 'warn', icon: 'warning', text: t('maps.hint.chainsOff'), actions: [{ label: t('maps.hint.chainsOn'), onClick: () => setChains(chains.map((c) => c.id), true) }] };
       }
+      // An analysis slide: nothing within its distance of the reference.
+      if (reg) return { kind: 'analysisNone', tone: 'info', icon: 'info', text: t('maps.hint.analysisNone', { d: fmtR(reg.maxMeters) }), actions: [{ label: t('maps.analysis.edit'), onClick: () => openInAnalysis(m) }] };
       if (m.onlyInside !== false) {
         const near = MT.data.storesForMap(Object.assign({}, m, { onlyInside: false, view: null })).length;
         if (near) return { kind: 'nearby', tone: 'info', icon: 'info', text: t('maps.hint.nearby', { n: near }), actions: [{ label: t('maps.hint.includeNearby'), onClick: () => now({ onlyInside: false }) }] };
@@ -666,6 +694,8 @@
    * ======================================================================================= */
   const SECTIONS = [
     { id: 'content', icon: 'edit', build: buildContent, summary: (m) => '' },
+    // Only on a slide carrying a distance analysis (SPEC §6.3).
+    { id: 'analysis', icon: 'target', build: buildAnalysis, summary: analysisSummary, when: (m) => !!m.analysis },
     { id: 'districts', icon: 'pin', build: buildDistricts, summary: (m) => (m.districts.length ? String(m.districts.length) : '') },
     { id: 'chains', icon: 'store', build: buildChains, summary: chainsSummary },
     { id: 'markers', icon: 'layers', build: buildMarkers, summary: (m) => t('maps.markers.styleName.' + MT.layout.styleOf(m).kind) },
@@ -688,6 +718,7 @@
     const m = cur();
     if (!m) { box.appendChild(h('div', { class: 'mt-maps-insp__none' }, t('maps.inspector.none'))); return; }
     SECTIONS.forEach((def) => {
+      if (def.when && !def.when(m)) return;
       const s = buildSection(def, m);
       st.secs[def.id] = s;
       box.appendChild(s.el);
@@ -782,6 +813,9 @@
         setVal(title, latest(m, 'title'));
         const auto = m.subtitleAuto !== false;
         autoInput.checked = auto;
+        // An analysis slide's automatic subtitle is "Distancias a <referencia>", not a district list.
+        const swLabel = autoSw.querySelector('.mt-switch__label');
+        if (swLabel) swLabel.textContent = t(analysisRegion(m) ? 'maps.content.subtitleAutoAnalysis' : 'maps.content.subtitleAuto');
         autoBox.hidden = !auto;
         manual.hidden = auto;
         const s = MT.data.subtitleFor(Object.assign({}, m, { subtitleAuto: true }));
@@ -875,6 +909,163 @@
     return { refresh: refresh, close: close, isOpen: () => !list.hidden };
   }
 
+  /* ---- Section: distance analysis (slides carrying mapCfg.analysis — SPEC §6.3) -----------------
+   * The reference is shown read-only ("Editar en Análisis" switches to the Análisis tab, which owns
+   * it); rings, the slide's distance, the length of the legend list, the lines and "Quitar" are
+   * edited here. Every write is a whole normalized `analysis` (MT.project.updateMap). */
+  const RING_PRESETS = [500, 1000, 2000, 3000, 5000];
+  const RING_MIN = 10, RING_MAX = 1000000, MAX_RINGS = 8, LIST_MAX = 30;
+  function analysisSummary(m) {
+    const a = m.analysis;
+    return a && Array.isArray(a.rings) ? a.rings.map((r) => fmtR(r)).join(' · ') : '';
+  }
+  /** Switch to the Análisis tab with this slide's analysis loaded and linked (MT.analysisui.open). */
+  function openInAnalysis(m) {
+    flush();
+    closePopup(true);
+    const cfg = m ? (MT.project.getMap(m.id) || m) : null;
+    MT.app.showTab('analysis');
+    if (!cfg) return;
+    // Next tick: the tab mounts (lazily, on first show) before it loads the slide.
+    setTimeout(() => {
+      try { MT.analysisui.open(U.clone(cfg)); } catch (err) { console.warn('[maps] the Análisis tab could not open the slide', err); }
+    }, 0);
+  }
+  /** Write a change to the current slide's analysis (normalized by MT.project). */
+  function setAnalysis(patch) {
+    const m = cur();
+    if (!m || !m.analysis) return null;
+    return now({ analysis: Object.assign(U.clone(m.analysis), patch) });
+  }
+  function buildAnalysis(body) {
+    // Reference (read-only).
+    const refIcon = h('span', { class: 'mt-maps-aref__icon' });
+    const refKind = h('div', { class: 'mt-maps-aref__kind' });
+    const refName = h('div', { class: 'mt-maps-aref__name' });
+    const refSub = h('div', { class: 'mt-maps-aref__sub' });
+    const refWarn = h('div', { class: 'mt-maps-aref__warn', hidden: true }, iconSpan('warning', 14), h('span', null, t('maps.analysis.refMissing')));
+    const editBtn = MT.ui.button({ label: t('maps.analysis.edit'), icon: 'edit', kind: 'secondary', size: 'sm', onClick: () => openInAnalysis(cur()) });
+    editBtn.dataset.action = 'editAnalysis';
+    const refBox = h('div', { class: 'mt-maps-aref' },
+      h('div', { class: 'mt-maps-aref__head' }, refIcon, h('div', { class: 'mt-maps-aref__who' }, refKind, refName, refSub)),
+      refWarn,
+      h('div', { class: 'mt-maps-aref__foot' }, h('span', { class: 'mt-hint' }, t('maps.analysis.editHint')), editBtn));
+
+    // Rings: chips with ×, presets and a custom distance.
+    const ringChips = h('div', { class: 'mt-chips mt-maps-chips mt-maps-arings', role: 'list', 'aria-label': t('maps.analysis.rings') });
+    const presets = h('div', { class: 'mt-maps-mchips mt-maps-apresets' });
+    const ringInput = h('input', { class: 'mt-input mt-input--sm mt-input--num mt-maps-aring__m', type: 'number', min: String(RING_MIN), max: String(RING_MAX), step: '50',
+      inputmode: 'numeric', placeholder: t('maps.analysis.ringAddPh'), 'aria-label': t('maps.analysis.ringAddAria'), dataset: { field: 'ringAdd' } });
+    const ringErr = h('div', { class: 'mt-field__error', role: 'alert' });
+    const addRing = () => {
+      const v = Math.round(+ringInput.value);
+      const m = cur();
+      if (!m || !m.analysis) return;
+      if (!isFinite(v) || v < RING_MIN || v > RING_MAX) {
+        ringInput.classList.add('is-invalid');
+        ringErr.textContent = t('maps.analysis.ringInvalid', { min: MT.i18n.formatNumber(RING_MIN), max: MT.i18n.formatNumber(RING_MAX) });
+        return;
+      }
+      ringInput.classList.remove('is-invalid'); ringErr.textContent = '';
+      if (setRings(m.analysis.rings.concat(v))) ringInput.value = '';
+    };
+    ringInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); addRing(); } });
+    ringInput.addEventListener('input', () => { ringInput.classList.remove('is-invalid'); ringErr.textContent = ''; });
+    const addBtn = MT.ui.button({ label: t('maps.analysis.ringAdd'), icon: 'plus', kind: 'secondary', size: 'sm', onClick: addRing });
+    addBtn.dataset.action = 'addRing';
+    const ringsLabel = h('span', { class: 'mt-label' }, t('maps.analysis.rings'));
+
+    // The slide's stores: within which distance of the reference.
+    const maxSel = h('select', { class: 'mt-select mt-select--sm', dataset: { field: 'maxMeters' } });
+    maxSel.addEventListener('change', () => setAnalysis({ maxMeters: +maxSel.value }));
+    // Length of the "Distancias a …" list in the legend panel.
+    const topInput = h('input', { class: 'mt-input mt-input--sm mt-input--num mt-maps-atop', type: 'number', min: '0', max: String(LIST_MAX), step: '1', inputmode: 'numeric', dataset: { field: 'listTop' } });
+    const topSet = (v) => { if (isFinite(v)) setAnalysis({ listTop: U.clamp(Math.round(v), 0, LIST_MAX) }); };
+    topInput.addEventListener('change', () => topSet(+topInput.value));
+    topInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); topSet(+topInput.value); } });
+    const lines = MT.ui.switchEl({ label: t('maps.analysis.lines'), onChange: (v) => setAnalysis({ showLines: !!v }) });
+    lines.querySelector('input').dataset.field = 'showLines';
+    const removeBtn = MT.ui.button({ label: t('maps.analysis.remove'), icon: 'trash', kind: 'ghost', size: 'sm', onClick: removeAnalysis });
+    removeBtn.dataset.action = 'removeAnalysis';
+    removeBtn.classList.add('mt-maps-aremove');
+
+    U.append(body, [
+      refBox,
+      h('div', { class: 'mt-field mt-maps-field' }, ringsLabel, ringChips, presets,
+        h('div', { class: 'mt-maps-row mt-maps-aring' }, ringInput, h('span', { class: 'mt-maps-radius__unit' }, t('maps.radius.unit')), addBtn), ringErr),
+      field(t('maps.analysis.maxMeters'), maxSel, { hint: t('maps.analysis.maxHint') }),
+      field(t('maps.analysis.listTop'), topInput, { hint: t('maps.analysis.listTopHint') }),
+      h('div', { class: 'mt-maps-switchrow' }, lines, h('div', { class: 'mt-hint' }, t('maps.analysis.linesHint'))),
+      h('div', { class: 'mt-maps-row mt-maps-row--actions' }, h('span', { class: 'mt-spacer' }), removeBtn),
+    ]);
+
+    function setRings(list) {
+      const m = cur();
+      if (!m || !m.analysis) return false;
+      const a = m.analysis;
+      const next = Array.from(new Set(list.map((v) => Math.round(+v)).filter((v) => isFinite(v) && v >= RING_MIN && v <= RING_MAX))).sort((x, y) => x - y);
+      if (!next.length) return false;
+      if (next.length > MAX_RINGS) { MT.ui.toast(t('maps.analysis.ringsMax', { n: MAX_RINGS }), { type: 'warn' }); return false; }
+      // The slide's distance follows the largest ring while it was the largest ring.
+      const oldMax = Math.max.apply(null, a.rings);
+      const maxMeters = a.maxMeters === oldMax ? next[next.length - 1] : a.maxMeters;
+      setAnalysis({ rings: next, maxMeters: maxMeters });
+      return true;
+    }
+    let iconKey = '';
+    return {
+      update(m) {
+        const a = m.analysis;
+        if (!a) return;
+        // Reference
+        const ref = MT.analysis.resolveRef(a.ref);
+        const store = a.ref.type === 'store' ? MT.data.store(a.ref.storeId) : null;
+        const key = store ? 'c:' + store.chain : 'pin';
+        if (key !== iconKey) {
+          iconKey = key;
+          U.clear(refIcon);
+          refIcon.appendChild(store ? chainIcon(store.chain, 34) : h('span', { class: 'mt-maps-aref__pin', html: icon('pin', 18) }));
+        }
+        refKind.textContent = t(a.ref.type === 'store' ? 'maps.analysis.refStore' : 'maps.analysis.refPoint');
+        refName.textContent = MT.analysis.refLabel(a.ref) || '—';
+        refSub.textContent = store ? [MT.data.chain(store.chain).name, store.district].filter(Boolean).join(' · ')
+          : ref ? MT.analysis.formatCoords(ref.lat, ref.lng) + (a.ref.chainId ? ' · ' + t('maps.analysis.ownChain', { chain: MT.data.chain(a.ref.chainId).name }) : '') : '';
+        refWarn.hidden = !(a.ref.type === 'store' && !store);
+        // Rings
+        U.clear(ringChips);
+        a.rings.forEach((r) => {
+          ringChips.appendChild(h('span', { class: 'mt-chip mt-maps-chip', role: 'listitem', dataset: { m: String(r) } },
+            h('span', { class: 'mt-chip__label' }, fmtR(r)),
+            a.rings.length > 1 ? h('button', { type: 'button', class: 'mt-chip__x', 'aria-label': t('maps.analysis.ringRemove', { d: fmtR(r) }), title: t('maps.analysis.ringRemove', { d: fmtR(r) }),
+              html: icon('close', 14), onclick: () => setRings(a.rings.filter((x) => x !== r)) }) : null));
+        });
+        U.clear(presets);
+        RING_PRESETS.filter((r) => a.rings.indexOf(r) < 0).forEach((r) => {
+          presets.appendChild(h('button', { type: 'button', class: 'mt-maps-mchip', dataset: { m: String(r) }, title: t('maps.analysis.ringAddOne', { d: fmtR(r) }),
+            onclick: () => setRings(a.rings.concat(r)) }, '+ ' + fmtR(r)));
+        });
+        presets.hidden = !presets.children.length || a.rings.length >= MAX_RINGS;
+        // Distance of the slide's stores
+        const opts = Array.from(new Set(a.rings.concat(a.maxMeters))).sort((x, y) => x - y);
+        U.clear(maxSel);
+        opts.forEach((v) => maxSel.appendChild(h('option', { value: String(v), selected: v === a.maxMeters }, t('maps.analysis.maxOption', { d: fmtR(v) }))));
+        maxSel.value = String(a.maxMeters);
+        // With districts the slide shows the districts' stores: the distance does not apply.
+        maxSel.disabled = (m.districts || []).length > 0;
+        setVal(topInput, a.listTop);
+        lines.querySelector('input').checked = a.showLines !== false;
+      },
+    };
+  }
+  function removeAnalysis() {
+    const m = cur();
+    if (!m || !m.analysis) return;
+    const before = U.clone(m.analysis);
+    now({ analysis: null });
+    MT.ui.toast(t('maps.analysis.removed'), { type: 'info', timeout: 7000,
+      action: { label: t('common.undo'), onClick: () => { const c = MT.project.getMap(m.id); if (c) MT.project.updateMap(m.id, { analysis: before }); } } });
+  }
+
   /* ---- Section: districts ---------------------------------------------------------------------- */
   function buildDistricts(body) {
     const D = MT.data.districts;
@@ -897,8 +1088,12 @@
     iconSpan('layers', 15), h('span', null, t('maps.districts.presets')), iconSpan('chevronDown', 14)) : null;
     const removeAll = linkBtn(t('maps.districts.removeAll'), clearAll);
     const chips = h('div', { class: 'mt-chips mt-maps-chips', role: 'list', 'aria-label': t('maps.sec.districts') });
+    // A slide defined by its distance analysis needs no districts (SPEC §6.3): say so instead of "start here".
+    const anaText = h('span');
+    const anaNote = h('div', { class: 'mt-maps-note mt-maps-anote', hidden: true }, iconSpan('target', 16), anaText);
     U.append(body, [
       start,
+      anaNote,
       h('div', { class: 'mt-maps-combo' }, h('div', { class: 'mt-input-group mt-maps-search' }, iconSpan('search', 16), input), results, noRes),
       h('div', { class: 'mt-maps-row mt-maps-row--tools' }, presets, h('span', { class: 'mt-spacer' }), removeAll),
       chips,
@@ -1001,7 +1196,10 @@
     const api = {
       update(m) {
         const ds = m.districts || [];
-        start.hidden = ds.length > 0;
+        const reg = analysisRegion(m);
+        start.hidden = ds.length > 0 || !!reg;
+        anaNote.hidden = !reg;
+        if (reg) anaText.textContent = t('maps.districts.analysisNote', { d: fmtR(reg.maxMeters) });
         removeAll.hidden = ds.length < 2;
         toolsRow.hidden = !presets && ds.length < 2;
         const provinces = new Set(ds.map((u) => (D.get(u) || {}).province));
@@ -1577,6 +1775,16 @@
     if (s.precision === 'approx') badges.push(h('span', { class: 'mt-badge' }, t('maps.popup.approx')));
     const rChips = PRESET_METERS.map((v) => h('button', { type: 'button', class: 'mt-maps-mchip' + (radius && radius.meters === v ? ' is-on' : ''), 'aria-pressed': String(!!(radius && radius.meters === v)),
       dataset: { m: String(v) }, onclick: () => { addRadius(s.id, v); fillPopup(); } }, v === DEFAULT_METERS && !radius ? t('maps.popup.addRadius', { m: fmtM(v) }) : fmtM(v)));
+    // An analysis slide: the store's distance to the reference (or: this is the reference).
+    let distLine = null;
+    const ana = map.analysis ? MT.analysis.forMap(map) : null;
+    if (ana) {
+      const isRef = ana.ref.type === 'store' && ana.ref.storeId === s.id;
+      const row = isRef ? null : ana.rows.find((r) => r.store.id === s.id);
+      const text = isRef ? t('maps.popup.isReference') : row ? t('maps.popup.distance', { d: fmtM(row.meters), ref: ana.label })
+        + (row.dir ? ' (' + t('analysis.dir.' + row.dir) + ')' : '') + (row.sameChain === null ? '' : ' · ' + t(row.sameChain ? 'analysis.relation.same' : 'analysis.relation.competitor')) : null;
+      if (text) distLine = h('div', { class: 'mt-maps-pop__dist' }, iconSpan('target', 14), h('span', null, text));
+    }
     const el = p.el;
     U.clear(el);
     U.append(el, [
@@ -1588,6 +1796,7 @@
         iconBtn('close', t('common.close'), () => closePopup(), 'mt-maps-pop__x')),
       s.address || s.district ? h('div', { class: 'mt-maps-pop__addr' }, iconSpan('pin', 14), h('span', null, [s.address, s.district].filter(Boolean).join(' · '))) : null,
       h('div', { class: 'mt-maps-pop__badges' }, badges),
+      distLine,
       h('div', { class: 'mt-maps-pop__radius' },
         h('div', { class: 'mt-maps-pop__label' }, iconSpan('target', 14), h('span', null, radius ? t('maps.popup.radiusOn', { m: fmtM(radius.meters) }) : t('maps.popup.radiusTitle'))),
         h('div', { class: 'mt-maps-mchips' }, rChips,
@@ -1877,11 +2086,13 @@
     delete st.counts[e.id];
     scheduleThumbs([e.id]);
     if (e.id !== curId()) { updateItem(e.id); return; }
-    syncInspector(e.map, e.keys);
+    // An analysis added to / removed from this slide: its inspector section appears / goes.
+    if (e.keys.indexOf('analysis') >= 0 && !!e.map.analysis !== !!st.secs.analysis) renderInspector(true);
+    else syncInspector(e.map, e.keys);
     updateBar();
     updateItem(e.id);
     renderHints();
-    if (st.popup && e.keys.some((k) => ['hiddenStores', 'chains', 'districts', 'onlyInside', 'markerStyle', 'markerSize', 'view'].indexOf(k) >= 0)) closePopup(true);
+    if (st.popup && e.keys.some((k) => ['hiddenStores', 'chains', 'districts', 'onlyInside', 'markerStyle', 'markerSize', 'view', 'analysis'].indexOf(k) >= 0)) closePopup(true);
     else if (st.popup && e.keys.indexOf('radius') >= 0) fillPopup();
   });
   ['stores:changed', 'chains:changed', 'logos:changed'].forEach((ev) => MT.bus.on(ev, () => { if (st.mounted) dataChanged(ev); }));
@@ -1934,8 +2145,10 @@
       openPopup({ storeId: storeId, mapId: curId(), screen: { x: (rect.left + rect.right) / 2, y: (rect.top + rect.bottom) / 2 }, rect: rect });
     },
     closePopup: function () { closePopup(); },
-    /** Open/close an inspector section ('content'|'districts'|'chains'|'markers'|'map'|'radius'|'hidden'). */
+    /** Open/close an inspector section ('content'|'analysis'|'districts'|'chains'|'markers'|'map'|'radius'|'hidden'). */
     section: setSection,
+    /** "Editar en Análisis": show the Análisis tab with the current slide's analysis. */
+    openInAnalysis: function () { openInAnalysis(cur()); },
     focusDistricts: focusDistricts,
     addRadius: addRadius,
     exportRadiusXlsx: exportRadiusXlsx,

@@ -49,7 +49,7 @@ try {
   const map = await page.evaluate(() => ({ n: MT.mapview.items().length, title: MT.project.currentMap().title }));
   check(map.n > 0, `slide map rendered with ${map.n} markers (${map.title})`);
   await screenshot(page, 'pages-maps');
-  for (const id of ['db', 'chains', 'maps']) {
+  for (const id of ['analysis', 'db', 'chains', 'maps']) {
     await page.evaluate((id) => MT.app.showTab(id), id);
     await sleep(600);
   }

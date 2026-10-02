@@ -830,3 +830,46 @@
 @media (prefers-reduced-motion: reduce) {
   .mt-maps-hint, .mt-maps-pop, .mt-maps-popover { animation: none; transition: none; }
 }
+
+/* Distance analysis (slides carrying mapCfg.analysis — SPEC §6.3) */
+.mt-maps-sec[data-sec='analysis'] .mt-maps-sec__body { gap: 14px; }
+.mt-maps-aref {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 10px 10px 12px;
+  border: 1px solid var(--mt-border);
+  border-radius: var(--mt-r-lg);
+  background: var(--mt-surface);
+  box-shadow: var(--mt-shadow-xs);
+}
+.mt-maps-aref__head { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.mt-maps-aref__icon { display: grid; flex: none; }
+.mt-maps-aref__pin {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #1F2937;
+  color: #fff;
+  box-shadow: 0 0 0 2px #fff, 0 1px 4px rgba(17, 24, 39, 0.35);
+}
+.mt-maps-aref__who { flex: 1; min-width: 0; }
+.mt-maps-aref__kind { font-size: 11px; font-weight: 650; letter-spacing: 0.05em; text-transform: uppercase; color: var(--mt-g500); }
+.mt-maps-aref__name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13.5px; font-weight: 650; color: var(--mt-g900); }
+.mt-maps-aref__sub { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 11.5px; color: var(--mt-g500); }
+.mt-maps-aref__warn { display: flex; gap: 6px; font-size: 12px; line-height: 1.4; color: #7C3A06; }
+.mt-maps-aref__warn .mt-icon { margin-top: 1px; }
+.mt-maps-aref__foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.mt-maps-aref__foot .mt-hint { flex: 1 1 140px; line-height: 1.4; }
+.mt-maps-arings:empty { display: none; }
+.mt-maps-apresets { margin-top: 2px; }
+.mt-maps-apresets[hidden] { display: none; }
+.mt-maps-aring { margin-top: 2px; }
+.mt-maps-aring__m { width: 96px; text-align: right; }
+.mt-maps-atop { width: 80px; text-align: right; }
+.mt-maps-aremove { color: var(--mt-danger); }
+.mt-maps-anote[hidden] { display: none; }
+.mt-maps-pop__dist { display: flex; gap: 6px; font-size: 12.5px; line-height: 1.4; font-weight: 600; color: var(--mt-navy); }
+.mt-maps-pop__dist .mt-icon { margin-top: 2px; }

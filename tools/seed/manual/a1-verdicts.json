@@ -1,0 +1,76 @@
+{
+  "batch": "a1",
+  "verifiedOn": "2026-10-01",
+  "verdicts": [
+    {
+      "store": "Tottus Iquitos",
+      "verdict": "accept",
+      "action": "add",
+      "lat": -3.764673,
+      "lng": -73.267346,
+      "precision": "exact",
+      "status": "to_verify",
+      "reason": "Re-checked. Gestión (2023-09) says Tottus opened on 30 Aug 2023 inside Mall Aventura Iquitos (4,957 m2). The OSM API shows relation 20255679 'Mall Aventura' (shop=mall, building=yes, Av. José Abelardo Quiñones 2371, San Juan Bautista, start_date 2023-08-31) as outer way 1482370722 minus inner way 1482370723. Recomputing the area-weighted centroid gives -3.764673,-73.267336 (net area 18,590 m2), 1 m from the proposed point. The furthest building vertex is 120 m from the centroid, so the store is somewhere inside the mall footprint. Overpass finds no Tottus element within 400 m; the only shop mapped there is Aruma. Nominatim gives 'Av. José Abelardo Quiñones 2371, Santa Clara, San Juan, San Juan Bautista'. pip gives 160113 San Juan Bautista, Maynas. There is no tottus row in Loreto (nearest is Pucallpa, 534 km), so this is not a duplicate. The official Tottus page (horario-tiendas-all) does not list Iquitos. No closure news was found, and a Computrabajo 'Tottus Iquitos' job ad suggests the store is still open. The point is the building that contains the store, not the store unit, so the status stays to_verify."
+    },
+    {
+      "store": "Tottus Trujillo 1",
+      "verdict": "accept",
+      "action": "link official 'Tottus Trujillo 1' to existing row osm-n4453923987 via overrides.json links (no new row)",
+      "lat": -8.101954,
+      "lng": -79.047883,
+      "precision": "exact",
+      "status": "verified",
+      "reason": "Re-checked. The official Tottus list gives 'Tottus Trujillo 1. Av. Mansiche s/n - Caserío El Cortijo'. Trujillo 2 is Av. América Norte 1245 (row web-tottus-trujillo-2, 2.5 km away). OSM node 4453923987 (v2, 2019-07-05) has brand=Tottus and shop=supermarket. It lies inside OSM way 103019624 'Mall Plaza Trujillo' (old_name Mall Aventura, shop=mall; point-in-polygon test passed). By OSM geometry it is 115 m from Avenida Mansiche and 278 m from Av. América Oeste, so it sits on the Mansiche side, as the official address says. Nominatim returns this node itself ('Tottus, Pasillo Aventura Plaza, Trujillo'). Dollarcity Mallplaza Trujillo (official) is 48 m away, which is consistent with a mall anchor. pip gives 130101 Trujillo. The coordinates are identical to the existing row, so adding a manual row would create a duplicate. The fix is to link the official store to osm-n4453923987, which then becomes verified as an OSM feature of this store."
+    },
+    {
+      "store": "Tottus Zorritos",
+      "verdict": "accept",
+      "action": "link official 'Tottus Zorritos' to existing row osm-w436598550 via overrides.json links (no new row)",
+      "lat": -12.048336,
+      "lng": -77.05848,
+      "precision": "exact",
+      "status": "verified",
+      "reason": "Re-checked. The official list gives 'Tottus Zorritos (Vecino) Jr. Zorritos cuadra 15 (11 Naciones Unidas)'. Perú Retail (13 Jul 2010) places the 1,300 m2 store between Jr. Zorritos, Av. Naciones Unidas and Av. Colonial in Cercado de Lima. OSM way 436598550 (v5, 2025-08-15) has brand=Tottus, shop=supermarket, building, Av. Óscar R. Benavides (Colonial) 1291. In the OSM API map download its centroid is 37 m from Av. Óscar R. Benavides, 34 m from Jr. Zorritos and 91 m from Av. Naciones Unidas, so the building spans the block the press describes. Nominatim returns this building itself. pip gives 150101 Lima. OSM addr:city says Breña, but the press and INEI polygons agree on Cercado. The next Tottus is Lima Centro, 2.2 km away. The coordinates are identical to the existing row, so the fix is to link the official store to osm-w436598550 rather than add a duplicate row."
+    },
+    {
+      "store": "Precio Uno Ate Kampu",
+      "verdict": "accept",
+      "action": "add",
+      "lat": -12.019889,
+      "lng": -76.874492,
+      "precision": "approx",
+      "status": "to_verify",
+      "reason": "Re-checked. On the official page (hiperbodegapreciouno.com.pe/nosotros) the link maps.app.goo.gl/CcutjBHB1cHqD2pd9 sits directly above the 'Ate Kampu' card (Av. NN-1 N° 102 / Av. Daniel Alcides Carrión 593, 599, Fundo La Estrella). Its redirect Location header reads 'PRECIO UNO, C. 12 33, Ate 15487' and carries no coordinates. Nominatim knows only one 'Calle 12' in Ate (way 162750282, Santa Clara, 15487). Its first block (OSM way 1080959902) runs from Av. D. A. Carrión (-12.0196177,-76.8745499) to Calle 1 (-12.0201598,-76.8744337), and the midpoint recomputes exactly to the proposed point. OSM 'Condominio Kampu' (way 678428729) faces the junction from the north side of the avenue. Nominatim reverse gives 'Calle 12, Santa Clara, Ate, 15487', which matches the street and postal code in Google's address. pip gives 150103 Ate. The nearest preciouno row (Huaycán) is 5.0 km away, so this is not a duplicate. Caveats: Carrión house numbers around #593 cannot be pinned (OSM has only #245, 614 m west), and the side of Calle 12 is unknown. Street-level, so approx and to_verify."
+    },
+    {
+      "store": "Precio Uno Iquitos La Marina",
+      "verdict": "accept",
+      "action": "add as osm-n9905811018",
+      "lat": -3.737306,
+      "lng": -73.241123,
+      "precision": "exact",
+      "status": "verified",
+      "reason": "Re-checked. On the official page, link maps.app.goo.gl/V9h7oKTCRALBZQXs6 sits above the 'Iquitos La Marina' card (Avenida La Marina 451, 455, 457). Its redirect reads 'Hiperbodega PRECIO UNO, Av. La Marina 405, Iquitos 16003' and has no coordinates. OSM API history shows node 9905811018 as v1 (2022-07-23) with only name:en='Hiperbodega Precio Uno' and shop=supermarket, which is why the seed scan missed it; it is absent from osm-raw.json. In the OSM map download the node is 13 m from Avenida La Marina (way 583370820) and 136 m north of Clínica Ana Stahl (Av. La Marina 285), which fits #405–457. Nominatim returns this node itself ('Hiperbodega Precio Uno, Avenida La Marina, Iquitos'). pip gives 160101 Iquitos. The only other Precio Uno in Loreto (El Ejército, osm-w966867144) is 2.84 km away, so this is not a duplicate. As an OSM-mapped feature of this store that matches the official address, it is verified."
+    },
+    {
+      "store": "Precio Uno Lurín",
+      "verdict": "accept",
+      "action": "add",
+      "lat": -12.275475,
+      "lng": -76.871495,
+      "precision": "exact",
+      "status": "verified",
+      "reason": "Re-checked. On the official page, link maps.app.goo.gl/JYzkpjZ5abPUUy5b8 frames the 'Lurín' card (U.C. N° 10579-10714 Sub Lote 17 Sección B, Fundo San Vicente). The redirect Location header was re-read: /maps/place/Precio+uno+lurin/@-12.2754753,-76.8905499,15z/...!3d-12.2754753!4d-76.8714955 (grocery_store). The !3d/!4d place pin -12.2754753,-76.8714955 is the store; the @ value is only the viewport, 2 km west. Nominatim gives 'Antigua Panamericana Sur, Las Virreinas, Lurín'. Plaza Vea Lurín ('Urb. San Vicente ... Antigua Panamericana Sur') is 258 m away and Tambo San Vicente 205 m, both consistent with Fundo San Vicente. pip gives 150119 Lurín. The nearest Precio Uno row is 17 km away, so this is not a duplicate. These are official coordinates (the chain-published link's place pin), so it is verified."
+    },
+    {
+      "store": "Precio Uno Próceres",
+      "verdict": "accept",
+      "action": "add",
+      "lat": -11.94472,
+      "lng": -76.98286,
+      "precision": "approx",
+      "status": "to_verify",
+      "reason": "Re-checked. On the official page, link maps.app.goo.gl/11jJGHe5b8Rf6aX29 sits above the 'Próceres' card (Av. Próceres de la Independencia 5540–5570, Lt. 20–23, SJL). Its redirect reads 'Superbodega Próceres, Av. Próceres de la Independencia 5570 Mz. P15, San Juan de Lurigancho 15446' and has no coordinates. I rebuilt the Próceres–Wiesse centerline from OSM and projected 12 numbered anchors onto it: OSM #2980, #3074, #3566, #3776 and Seoane #4400; Tambo locator #2774, C32, #3990, #4267 and C49; Tiendas 3A #3412; Mass #3978-98. Up to #4400 the numbering runs about 2.4–2.7 m per number, but from #4267 to C49 only 1.3–1.7. Extrapolating to #5555 therefore spans from the proposed point (rate about 1.3–1.5 from C49) to 0.4–0.9 km further north (rate 1.9–2.5). The Mz. P15 evidence settles it. MINEDU address nodes put the P blocks (P7 at -11.94706,-76.98271; P-2 at -11.94500,-76.98047) right at this stretch on the east (Mariscal Cáceres) side, while the stretch further north is K blocks (K-3, K-15 on Wiesse at -11.9419, K7). Dollarcity Mariátegui's raw locator entry ('Grupo Residencial P, Barrio 3', postcode 15446, the same postcode Google gives the store) sits 25 m from the point. So the point is the best-supported spot. Nominatim gives 'Avenida Fernando Wiesse, 10 de Octubre, Cruz de Motupe, SJL'. pip gives 150132 SJL. There is no preciouno row in SJL (nearest Comas, 8.3 km), so this is not a duplicate. Caveat: the error could exceed the stated ±200 m if P15 lies at the edge of group P (P/M blocks span about -11.943 to -11.948). Approx and to_verify."
+    }
+  ]
+}

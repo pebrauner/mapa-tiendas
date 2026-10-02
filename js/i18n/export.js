@@ -111,6 +111,13 @@
         resetView: 'Volver a la vista inicial',
         storeOf: '{store}, {chain}',
         group: { one: 'Este logo representa {n} tienda de {chain}', other: 'Este logo agrupa {n} tiendas cercanas de {chain}' },
+        // Analysis maps (SPEC §6.3): distances to the reference.
+        distanceTo: 'A {d} de {ref}',
+        reference: 'Referencia del análisis de distancias',
+        refTitle: 'Referencia: {name}',
+        sameChain: 'misma cadena',
+        competitor: 'competencia',
+        distList: 'Tiendas más cercanas a la referencia',
       },
     },
   });
@@ -218,6 +225,12 @@
         resetView: 'Back to the initial view',
         storeOf: '{store}, {chain}',
         group: { one: 'This logo stands for {n} {chain} store', other: 'This logo groups {n} nearby {chain} stores' },
+        distanceTo: '{d} from {ref}',
+        reference: 'Reference of the distance analysis',
+        refTitle: 'Reference: {name}',
+        sameChain: 'same chain',
+        competitor: 'competitor',
+        distList: 'Stores nearest to the reference',
       },
     },
   });

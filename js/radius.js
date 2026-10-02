@@ -113,12 +113,11 @@
     };
   }
 
-  /** Slide text for a distance (Spanish: the deck is in Spanish): "500 m", "1 km", "1,5 km". */
-  function formatMeters(m) {
-    if (m < 1000) return Math.round(m) + ' m';
-    const km = Math.round(m / 100) / 10;
-    return String(km).replace('.', ',') + ' km';
-  }
+  /**
+   * Slide text for a distance (Spanish, Peru — decimal point, like "Peso: 15.8%"): "500 m", "1 km",
+   * "1.5 km", "12 km" — MT.i18n.formatDistance, the one distance text of the app.
+   */
+  function formatMeters(m) { return MT.i18n.formatDistance(m); }
 
   /** Label anchors (reference units) at the top of each circle: [{x, y, text, color}]. */
   function labels(results, project) {

@@ -428,6 +428,8 @@ body.is-ready .mt-tabpanel:not([hidden]) { animation: mt-fade-in 220ms var(--mt-
 .mt-table tbody tr.is-selected { background: var(--mt-accent-soft); }
 .mt-table tbody tr.is-muted td { color: var(--mt-g400); }
 .mt-table td.is-num, .mt-table th.is-num { text-align: right; }
+/* A distance inside an upper-case label keeps its case: "HASTA 500 m" ("500 M" reads as 500 mil in Peru). */
+.mt-unit { text-transform: none; letter-spacing: 0; }
 .mt-table td.is-wrap { white-space: normal; }
 .mt-table .mt-truncate { display: block; max-width: 320px; }
 

@@ -42,28 +42,34 @@ Source of truth for decisions and data formats: [`SPEC.md`](../SPEC.md). Verifie
 | `js/mapview.js`, `js/layout.js`, `js/markers.js`, `js/slide.js`, `js/render.js`, `js/radius.js`, `js/legend.js`, `css/maps.css`, `js/i18n/map.js` | **M1** map core & rendering | |
 | `js/ui-maps.js`, `css/maps-ui.css`, `js/i18n/maps-ui.js` | **M2** Mapas tab UI | |
 | `js/ui-db.js`, `js/ui-chains.js`, `js/osm.js`, `css/db.css`, `js/i18n/db.js` | **M3** database, chains, OSM, import/export UI | |
+| `js/analysis.js`, `tools/test/analysis.test.mjs` | **Phase 2a engine** (§8) | `MT.analysis` + the analysis parts of `js/data.js` / `js/project.js` |
+| `js/ui-analysis.js`, `css/analysis.css`, `js/i18n/analysis.js`, `tools/test/analysis-ui.test.mjs` | **Phase 2a UI** — Análisis tab (§8.4) | `MT.analysisui` |
+| `tools/test/analysis-slide.test.mjs` | **Phase 2a slides** (§8.4) | drawing of analysis slides in M1 / M2 / M4 (those modules' files) |
+| `tools/test/analysis-e2e.mjs` | **Phase 2a integration** (§14) | the user journey across the Análisis tab, Mapas and the exports, ES + EN |
 | `js/export-png.js`, `js/export-pptx.js`, `js/export-html.js`, `js/i18n/export.js` | **M4** exports | M4 has no CSS file; reuse core classes (add `css/export.css` + link it in index.html via the foundation if really needed) |
 | `data/*`, `logos/*`, `tools/seed/**`, `tools/{scan-osm,build-districts,merge,build-data,build-logos}.mjs` | **Data workflow** | **never write these from app modules** |
 
-Module files currently contain **stubs** whose header comment repeats the contract below; replace the
-whole file. A stub sets `stub: true` on its namespace — remove that flag in the real implementation.
+Every module is implemented (no namespace is a stub any more; `tools/test/contracts.mjs` fails on one).
+A future module may start as a stub that sets `stub: true` on its namespace and is listed in that test's
+`PENDING_STUBS` until it is built.
 
 ---
 
 ## 3. Load order (index.html)
 
 ```
-<head>  vendor/maplibre/maplibre-gl.css · vendor/fonts/fonts.css · css/core.css · css/maps.css · css/maps-ui.css · css/db.css
+<head>  vendor/maplibre/maplibre-gl.css · vendor/fonts/fonts.css · css/core.css · css/maps.css · css/maps-ui.css · css/db.css · css/analysis.css
 <body>  #mt-splash · #mt-app
   vendor:  maplibre-gl.js (maplibregl) · turf.min.js (turf) · topojson-client.min.js (topojson)
   data:    window.MT_MISSING = [] ; data/chains.js · data/stores.js · data/districts.js · logos/logos.js   (each with onerror → MT_MISSING.push(path))
            js/example-project.js (window.MT_EXAMPLE_PROJECT, `data-optional`: a load error does not stop the app)
-  core:    mt.js · theme.js · i18n.js · i18n/core.js · storage.js · geo.js · io.js · data.js · project.js · ui.js · app.js
-  dicts:   i18n/map.js · i18n/maps-ui.js · i18n/db.js · i18n/export.js
+  core:    mt.js · theme.js · i18n.js · i18n/core.js · storage.js · geo.js · io.js · data.js · project.js · analysis.js · ui.js · app.js
+  dicts:   i18n/map.js · i18n/maps-ui.js · i18n/db.js · i18n/export.js · i18n/analysis.js
   M1:      layout.js · markers.js · legend.js · radius.js · mapview.js · slide.js · render.js
   M3:      osm.js · ui-db.js · ui-chains.js
   M4:      export-png.js · export-pptx.js · export-html.js
   M2:      ui-maps.js
+  2a:      ui-analysis.js   (Análisis tab, §8)
   boot:    <script>MT.app.start();</script>
 ```
 
@@ -118,6 +124,7 @@ module — read it here so the deck can be restyled in one place.
 | `marker` | `{defaults:{style:'badge', size:1, minSize:0.6, maxSize:1.6}, styles[], badge:{diameter:46, ring:3.5, background, logoInset, shadow}, card:{height, maxWidth, padding, radius, background, borderWidth, shadow}, dot:{radius, stroke, strokeWidth}, number:{diameter, fontSize, color, stroke, strokeWidth}, anchorDot:{radius, stroke, strokeWidth}, stem:9, leader:{color, width, alpha, halo:{color, width, alpha}}, declutter:{rings[], angles:16, minGap, passes, maxLeader, aggregate:{radius:1.2, radiusStep, radiusMax, minCount:2, autoMinStores, autoLongRatio, autoLongShare, autoDisplacedShare}}, countPip:{diameter, fontSize, prefix:'×', stroke, strokeWidth, at}, collapsed:{radius, stroke, strokeWidth}}` (reference units) |
 | `borders` | district outline `{color, width, alpha, dash, fill}` |
 | `radius` | `{stroke, width, dash, fill, presets:[500,1000], label}` |
+| `analysis` | distance-analysis slides (§8): Spanish slide text `{subtitle:'Distancias a {ref}', subtitlePoint:'Distancias al punto {coords}'}` and their look — `pin` (reference point: dark pin, white star and halo; ref units), `halo` (ring around a reference store's logo: gap, width, casing), `ring` (`{color, width, alpha, dash, label:{sizePt, color}}`, the dashed rings and their pills), `line` (lines to the nearest store of each chain), `list` (the legend's "Distancias a …" block: `heading`, `headingPoint`, `headingSizePt`, `sizePt` 12 → `minSizePt` 9, `rowIn`, `iconIn`, `gapIn`, `minRows`, `color`, `distColor`) |
 | `attribution` | `{text:'© OpenStreetMap contributors · © OpenMapTiles · OpenFreeMap', fontSize, color, background, padding, position}` |
 | `colors` | `{crimson, crimsonDark, accent, navy, text, textMuted, unknownChain, white, black}` |
 | `fonts` | `{slide:'Calibri', slideCss:"Calibri, Carlito, …", ui, display, mapLabels:['Noto Sans Regular'], mapLabelsBold}` |
@@ -139,7 +146,9 @@ units, so the preview (any width) and the exports (1000 × scale px) are identic
 | `MT.i18n.applyDom(root)` | translates `data-i18n` (text), `data-i18n-title`, `data-i18n-placeholder`, `data-i18n-aria` (aria-label); `data-i18n-vars='{"n":3}'` |
 | `MT.i18n.has(key, lang?)`, `keys(lang?)`, `missingKeys()` | coverage checks (the smoke test fails on missing keys and on ES/EN key mismatch) |
 | `MT.i18n.locale()` | `'es-PE'` / `'en-US'` |
-| `MT.i18n.formatNumber(n, opts)`, `formatDate(d, opts)`, `formatDistance(m)` | `"850 m"`, `"1,2 km"` |
+| `MT.i18n.formatNumber(n, opts)`, `formatDate(d, opts)` | UI locale |
+| `MT.i18n.formatDistance(m)` | **the one text of a measured distance** in the whole app (UI, slides, PPTX, HTML, Excel): rounded to 0.1 m (the Excel number), then to whole metres; `"850 m"`, `"1.2 km"` (one decimal below 9.95 km), `"12 km"`, `"1,235 km"` — es-PE number format in both languages. `MT.legend.distance`, `MT.radius.formatMeters`, `MT.analysis.formatMeters` and the Análisis tab call it |
+| `MT.i18n.formatDistanceExact(m)` | a distance the user **typed** (an analysis ring, a universe, R, a pair threshold): its exact value, never rounded — `"500 m"`, `"1 km"`, `"1.25 km"`, `"1,255 m"` |
 
 Initial language: `?lang=es|en` URL parameter (also persisted) → saved preference → browser
 (`es*` → es, else en). **Static markup** should carry `data-i18n*` attributes so `setLang` updates it
@@ -199,7 +208,8 @@ confirmTitle, notAvailable, unknown, comingSoon), `data.group.<group>`, `data.st
 | `parseCoord(v)` · `parseStatus(v)` · `parseDate(v)` | "-12,08", "12.08 S", "77°03'W" → number (S/W/O negative; junk → NaN) · words → enum (closed/inactive → `closed`, unknown → `to_verify`) · ISO, D/M/YYYY (day first), Excel serials, Dates → `YYYY-MM-DD` or '' |
 | `decodeText(arrayBuffer) → string` | UTF-8 (BOM or not), UTF-16 BOMs; anything not valid UTF-8 is Windows-1252 (Excel's "CSV (delimitado por comas)") |
 | `storesToCSV(stores)`, `storesFromCSV(text)` | |
-| `readXLSX(arrayBuffer, {sheet?}) → Promise<rows>` · `writeXLSX([{name, rows, colWidths?, numberColumns?}]) → Promise<Blob>` · `storesToXLSX(stores, sheetName?)` | SheetJS lazy-loaded. Cells are read as stored **values** (a coordinate in a 2-decimal "Número" column keeps its full precision); dates → `YYYY-MM-DD` |
+| `readXLSX(arrayBuffer, {sheet?}) → Promise<rows>` · `writeXLSX([{name, rows, colWidths?, numberColumns?}]) → Promise<Blob>` · `storesToXLSX(stores, sheetName?)` | SheetJS lazy-loaded. Cells are read as stored **values** (a coordinate in a 2-decimal "Número" column keeps its full precision); dates → `YYYY-MM-DD`. Written sheets get a bold header row on a light fill and a frozen header (`polishXLSX`) |
+| `polishXLSX(XLSX, bytes, [{heads: [rows], freeze}]) → bytes` | what SheetJS CE cannot write (no cell styles): edits the package through `XLSX.CFB` — one bold font + fill + cell format in `styles.xml`, those header rows' cells use it, `<pane ySplit="1" … state="frozen"/>` in the sheets with `freeze`. Anything unexpected → the bytes unchanged (checked: Excel 16 opens the files with the panes frozen and the headers bold) |
 | `readTable(file) → Promise<rows>` | `.csv/.txt/.xlsx/.xls/.ods`; text files decoded with `decodeText` |
 | `sortStores(stores, {chainOrder?}) → new array` | the canonical row order of `data/stores.csv` / `data/stores.js` = **exactly** `tools/build-data.mjs`: chain in `data/chains.js` order (unknown ids after, by id), then department, province, district, name — accent/case-folded (`NFD`, marks removed, lower case) and compared by code units, not locale collation — then id. Also used by the DB tab's CSV/Excel export |
 | `storesJs(stores, {generated?, chainOrder?})`, `storesCsvFile(stores)`, `chainsJs(chains, osmRules?)`, `logosJs({id:{badge, wide}})` | file contents for `data/stores.js` (byte for byte what build-data generates from the CSV: same header comment, `generated` = latest `updated`), `data/stores.csv` (sorted), `data/chains.js` (byte for byte what `tools/merge.mjs` writes: same header, key order, every `osm` key, `ringColor` always, then the `window.MT_OSM_RULES` block from `MT.data.osmRules()` — none when the shipped file had none), `logos/logos.js` |
@@ -247,9 +257,10 @@ convenience, other`), `STATUSES` (`verified, to_verify, closed`), `SOURCES` (`os
 | `byProvince() → [{key, province, department, ubigeos[], label}]`, `searchProvinces(q, {limit})` | for "agregar provincia completa" |
 | `locate(lat, lng) → district|null` (also `MT.data.locate`) | bbox prefilter + `turf.booleanPointInPolygon` |
 | **Regions** | |
-| `storesForMap(mapCfg) → store[]` | status ≠ closed, chain toggled on, not in `hiddenStores`; `onlyInside` → ubigeo ∈ districts, else inside the saved view or the districts' bbox +25%; sorted by id |
-| `boundsForMap(mapCfg) → bbox|null` | `fitTo:'districts'` → districts bbox; `'stores'` → stores bbox (min 800 m), falls back to districts. Unpadded: add `MT.theme.frame.padding` |
-| `subtitleFor(mapCfg) → string` | `"(Miraflores, San Borja, San Isidro, Surquillo)"` (alphabetical, unique) or the manual subtitle |
+| `storesForMap(mapCfg) → store[]` | status ≠ closed, chain toggled on, not in `hiddenStores`; **analysis slide without districts (§8.3)** → within `analysis.maxMeters` of the reference (haversine, d ≤ max; the reference store included; `analysis.includeToVerify:false` drops *por verificar*); else `onlyInside` → ubigeo ∈ districts, else inside the saved view or the districts' bbox +25%; sorted by id |
+| `boundsForMap(mapCfg) → bbox|null` | analysis slide without districts → the largest ring's exact box + 4 % per side (null when the reference cannot be placed); `fitTo:'districts'` → districts bbox; `'stores'` → stores bbox (min 800 m), falls back to districts. Unpadded: add `MT.theme.frame.padding` |
+| `subtitleFor(mapCfg) → string` | `"(Miraflores, San Borja, San Isidro, Surquillo)"` (alphabetical, unique) or the manual subtitle; analysis slide without districts → `"Distancias a Plaza Vea Miraflores"` / `"Distancias al punto -12.12190, -77.02970"` (`MT.analysis.subtitle`) |
+| `analysisRegion(mapCfg) → {ref, maxMeters, maxRing, includeToVerify}|null` | non-null when the map's region is defined by its analysis (an `analysis` and no districts); `ref` = `MT.analysis.resolveRef(analysis.ref)` (null: cannot be placed) — use it to tell analysis slides apart (e.g. no "Elige los distritos" notice) |
 
 ### 4.8 `MT.logos` — js/data.js
 
@@ -268,7 +279,8 @@ Project model = SPEC §3.5. Map config fields (`mapCfg`):
 `{id, title, subtitle, subtitleAuto, peso, districts[], chains{id:bool}, onlyInside, showBorders,
 fitTo:'stores'|'districts', markerStyle:'badge'|'card'|'dot'|'number', markerSize (0.6–1.6),
 legendSort:'alpha'|'count', groupNearby:'auto'|true|false, view:null|{center:[lng,lat], zoomRef},
-hiddenStores[], markerOffsets{storeId:{dx,dy,g?}}, radius[{storeId, meters}]}`.
+hiddenStores[], markerOffsets{storeId:{dx,dy,g?}}, radius[{storeId, meters}], analysis?}`
+(`analysis`: absent/null on ordinary slides; a distance analysis carried by the slide, §8.3).
 `markerOffsets`: marker **centre minus anchor dot**, as a fraction of the frame width; `g: 1` = a
 grouped logo dragged by the user (its stores stay one group at that spot). `groupNearby`: same-chain
 grouping of nearby stores (§6.1), `'auto'` by default.
@@ -286,7 +298,8 @@ grouping of nearby stores (§6.1), `'auto'` by default.
 | `rename(name)`, `isDirty()`, `fileName()` | dirty = not saved to a file since last change |
 | `newProject(name?)` (alias `new`), `open(file|handle)`, `openDialog()`, `save({saveAs?, download?}) → Promise<{method, name}|null>` | FS Access save picker / same file on Ctrl+S; download fallback |
 | `openData(obj, {name?}) → project` | open a project from a plain object (validated + copied; not tied to a file, not dirty) — used for the built-in example |
-| `toJSON()`, `normalize(obj)`, `suggestedFileName()` | `normalize` validates (`project-invalid`, `project-newer`) and fills defaults; keeps unknown chain ids |
+| `toJSON()`, `normalize(obj)`, `suggestedFileName()` | `normalize` validates (`project-invalid`, `project-newer`) and fills defaults; keeps unknown chain ids; normalizes each map's `analysis` (dropped when unusable) |
+| `normalizeAnalysis(a) → analysis|null`, `ANALYSIS_DEFAULTS`, `ANALYSIS_KINDS` | validate a slide's distance analysis and fill its defaults (§8.3). `defaultMap`/`addMap`, `normalize` and `updateMap` always store it normalized (`updateMap(id, {analysis: null})` removes it; no event when nothing changed) |
 | `restore()` | used by the app at boot (localStorage autosave `mt.project.autosave`, 500 ms debounce) |
 | `chainOn(map, chainId)` | = `MT.data.chainOn` |
 
@@ -324,7 +337,7 @@ grouping of nearby stores (§6.1), `'auto'` by default.
 | API | Description |
 |---|---|
 | `registerTab({id, labelKey, icon, order, hash, mount(panelEl), onShow(), onHide()})` | call at script-evaluation time; `mount` runs **once, lazily**, the first time the tab is shown; `MT.i18n.applyDom(panel)` runs after it |
-| `showTab(id)`, `currentTab()`, `tabs()` | URL hash `#mapas`, `#base`, `#cadenas`; Alt+1/2/3; arrow keys in the tab bar |
+| `showTab(id)`, `currentTab()`, `tabs()` | URL hash `#mapas`, `#analisis`, `#base`, `#cadenas` (tab ids `maps`, `analysis`, `db`, `chains`, in that order); Alt+1…4; arrow keys in the tab bar |
 | `addProjectMenuItem({id, labelKey, icon, group:'file'|'export'|'data'|'other', order, shortcut, onClick, enabled() → bool})` | entries of the ⋮ project menu (core adds new/open/save/saveAs/rename) |
 | `newProject()`, `openProject()`, `saveProject({saveAs?})` | with confirmations + toasts (Ctrl+O / Ctrl+S) |
 | `openExampleProject() → Promise<bool>`, `exampleAvailable()`, `isBlankProject()` | the built-in example (`window.MT_EXAMPLE_PROJECT` from `js/example-project.js`, generated from `tools/fixtures/demo.mapa.json` by `node tools/fixtures/build-example.mjs`). Opens straight away on a blank project (or the unchanged example); unsaved changes → dialog *Cancelar / Abrir sin guardar / Guardar y abrir el ejemplo* (a cancelled or failed save keeps the project); a project already saved to a file → a confirmation. Entry points: project menu *Abrir proyecto de ejemplo* (`id:'example'`), the Mapas empty state (no slides) and the *Elige los distritos* notice of a blank project (*Ver ejemplo con 4 regiones*) |
@@ -612,11 +625,19 @@ drawn by the DOM slide, `drawSlide` and the PPTX ("Nota de la leyenda").
 - `features(mapCfg|results)` (circles with `color`, `stroke`, `fillOpacity` in the centre store's chain
   colour, stroke darkened for light brands), `labels(results, project)`, `drawLabels(ctx, labels, scale)`
   ("1 km" pills at the top of each circle, slide font `labelFont(fs)` — the same Calibri text as the
-  PPTX pill), `formatMeters(m)` ("500 m", "1,5 km" — slide text, Spanish),
+  PPTX pill), `formatMeters(m)` (= `MT.i18n.formatDistance`: "500 m", "1.5 km", "12 km" — decimal point),
   `rows(results)` → spreadsheet rows (header in the UI language) for `MT.io.writeXLSX`, `colorsFor(chainId)`.
 - `inactiveReason(mapCfg, storeId) → 'missing'|'closed'|'hidden'|'chainOff'|null` — `compute` skips a
   radius whose centre store is not on the slide (no circle around nothing in any output); the Mapas
   radius card explains why and offers *Mostrar la tienda* / *Activar {cadena}*.
+
+**Analysis slides (§8.4)** — `MT.layout.analysis(cfg)` places the reference pin and the ring pills;
+`analysisBoxes` makes them declutter obstacles; the reference store's item has `isRef` / `refPad`
+(halo room, never grouped or collapsed). `MT.markers` draws the halo / `drawPin` / `pinImage`;
+`MT.render.drawOverlay` the lines, pills and pin (`analysisOverlay(cfg, view)` for the live camera);
+`MT.mapview` the rings layer `'mt-analysis-rings'`; `MT.legend.items(...).distances` + `MT.slide`'s
+`legend.dist` the "Distancias a …" list; `MT.legend.distance(m)` = es-PE slide text (= `MT.i18n.formatDistance`),
+`MT.legend.ringLabel(m)` = a ring's typed value ("1.25 km").
 
 **Theme notes:** M1 reads every look from `MT.theme` (marker sizes, ring, shadows, leader, borders,
 radius stroke width/dash and fill alpha, attribution, slide/panel/legend geometry and fonts). District
@@ -701,10 +722,11 @@ synced in place on `'map:changed'`, so typing never loses focus or caret. Listen
 `runExport(kind, {scope:'current'|'all', slideW, mapScale})` (`kind`: `'pptx'|'slidePng'|'mapPng'|'html'`),
 `state() → {mounted, popup, sections, exporting, pending}`.
 
-**Phase 2 (§8) hook** — the inspector is a list of section definitions (`SECTIONS` in ui-maps.js:
-`{id, icon, build(body, map) → {update(map, keys)}, summary(map)}`); the cannibalization analysis would
-add an "Análisis" section next to *Radios de influencia*, reusing the store picker, the radius cards'
-result list and the Excel export, with its results stored under a per-map `analysis` key.
+**Phase 2a (§8) hook** — the inspector is a list of section definitions (`SECTIONS` in ui-maps.js:
+`{id, icon, build(body, map) → {update(map, keys)}, summary(map), when?(map)}`); the *Análisis de
+distancias* section (`when`: the slide has a `mapCfg.analysis`) is implemented — see §8.4 (reference,
+rings, the slide's distance, list length, lines, *Editar en Análisis*, remove). The reference itself is
+chosen in the Análisis tab; everything is stored normalized under the per-map `analysis` key.
 
 ### 6.3 M3 — Base de datos, Cadenas, OSM (js/ui-db.js, js/ui-chains.js, js/osm.js)
 
@@ -974,9 +996,18 @@ node tools/test/smoke.mjs          # boot, tabs, language, missing-data path, 12
 node tools/test/core-api.mjs       # core API behaviour on fixtures
 node tools/test/pages-smoke.mjs    # the app served over HTTP (as on GitHub Pages): boot, map, tabs, autosave
 node tools/test/contracts.mjs      # every MT.* path used by any module exists at runtime; events wired
+node tools/test/analysis.test.mjs  # phase 2a engine on the real data: distances vs Vincenty, rings, grid = brute force,
+                                   #   performance, the project `analysis` key, analysis slides' stores/bounds/subtitle
+node tools/test/analysis-ui.test.mjs # the Análisis tab: both modes = the engine, Excel read back, add/edit/update slide
+node tools/test/analysis-slide.test.mjs [--office]  # analysis slides drawn: reference / halo / pin, rings + pills,
+                                   #   lines, legend list + space rule, Mapas inspector, PNG / PPTX (+ PowerPoint) / HTML
 node tools/test/i18n-check.mjs     # ES/EN key parity, keys used in code exist, nothing untranslated on screen
 node tools/test/e2e.mjs            # full user journey (build 3 slides, exports, DB add/edit/delete/import,
                                    #   save/open, reload) in ES and EN — --lang=es|en
+node tools/test/analysis-e2e.mjs   # phase 2a journey in ES and EN (--lang=es|en): hand-placed store in the DB,
+                                   #   mode A store + Google Maps point, Excel read back, "Agregar como lámina" →
+                                   #   PNG + PPTX via Exportar → "Editar en Análisis" → "Actualizar la lámina",
+                                   #   mode B Lima Sur + Excel, reload (what persists)
 node tools/test/styleguide.mjs     # design-system screenshots
 node tools/test/tech-proof.mjs     # TECH-NOTES evidence (network)
 node tools/test/net.mjs            # live MT.geo calls (network)
@@ -1014,24 +1045,341 @@ ubigeos are skipped silently).
 
 ---
 
-## 8. Phase 2 — cannibalization analysis (planned)
+## 8. Phase 2a — distance & cannibalization analysis (SPEC §6)
 
-The user wants a fuller **cannibalization analysis** later ("analizar el radio en el que una tienda
-está cerca de otras"). v1 ships the basic radius tool (SPEC §1: click a store → 500 m / 1 km / custom
-circle, same-chain vs competitor counts with distances, in all exports, Excel export). Keep v1 code
-ready for it:
+Status: **engine implemented** — `js/analysis.js` (`MT.analysis`), the analysis parts of `js/data.js`
+and `js/project.js`, Spanish slide text in `MT.theme.analysis`; test `node tools/test/analysis.test.mjs`
+(`analysis` in run-all). **Análisis tab implemented** (`js/ui-analysis.js`, `MT.analysisui`, §8.4; test
+`node tools/test/analysis-ui.test.mjs`, `analysis-ui` in run-all; `PENDING_STUBS` in `tools/test/contracts.mjs`
+is empty again). **Analysis slides implemented** in M1 / M2 / M4 (§8.4, test
+`node tools/test/analysis-slide.test.mjs`). The v1 radius tool (`MT.radius`) is unchanged.
 
-- `MT.radius.compute` stays a **pure function** of `(mapCfg, MT.data)` returning plain data — phase 2
-  reuses it for every store instead of one.
-- Reserved namespace **`MT.analysis`** (do not use it for anything else), expected APIs:
-  `nearest(storeId, {sameChain|competitors, limit})`, `overlapMatrix(storeIds, meters)` (pairs of
-  stores closer than 2 × radius, shared catchment area via `turf.intersect`),
-  `densityGrid(stores, cellMeters)` (heatmap layer), `catchmentCompare(chainA, chainB, meters)`.
-  Distances with `MT.geo.distanceMeters`; spatial pre-filtering with bboxes (stores are ≈ thousands).
-- Results export with `MT.io.writeXLSX`; map layers through `MT.mapview` (a future
-  `MT.mapview.setAnalysisLayer(geojson, style)` hook) so they also appear in exports.
-- The project model already allows extra per-map keys; phase 2 would add e.g.
-  `analysis: {kind, meters, chains}` — `MT.project.normalize` keeps unknown keys.
+### 8.1 Model
+
+- **Straight-line distances only** (no routing service): `MT.geo.distanceMeters` — haversine on a
+  sphere of radius **R = 6 371 008.8 m** (IUGG mean radius, = turf). One formula everywhere (radius
+  tool, analysis, slides, rings), so a pair of stores always shows the same distance. Accuracy vs the
+  WGS84 ellipsoid (Vincenty), measured by the test at six Peruvian latitudes up to 20 km: east–west
+  ≈ 0.14 %, 45° ≈ 0.22 %, **north–south up to ≈ 0.56 %** (the sphere is larger than the ellipsoid's
+  meridian radius near the equator; 0.52 % at Lima), mean 0.24 %; real nearest-competitor pairs: max
+  0.55 %. That is ≤ 5.6 m per km — well below the accuracy of store coordinates (OSM / geocoded),
+  so the spherical model is kept (an ellipsoidal formula would change v1 radius results).
+- **Bearings**: initial great-circle bearing from the reference to the store (0° = north, clockwise).
+  Compass **codes** `'N','NE','E','SE','S','SW','W','NW'` (45° sectors, N = [337.5°, 22.5°)) are
+  language-neutral — display with `MT.t('analysis.dir.' + code)` (ES: N, NE, E, SE, S, SO, O, NO) or
+  `'analysis.dirName.' + code`. Same spot (0 m) → `bearingDeg`/`dir` null.
+- **Reference** (`ref`): `{type:'store', storeId, chainId, lat, lng, label}` (a store follows its
+  CURRENT position; label = its name) or `{type:'point', chainId|null, lat, lng, label}` (clicked /
+  pasted / geocoded; `chainId` = the user's optional "own chain"; label '' = none). `sameChain` of a row is
+  `store.chain === ref.chainId`, or **null** for a point without chain.
+- **Universe**: non-closed stores with coordinates (closed are NEVER included), filtered by chains
+  (array = exactly those ids; `{id: bool}` = map toggles, missing → `chain.defaultOn`; null = all),
+  districts (ubigeos; [] = all of Peru), `maxMeters` (d ≤ max; null = all of Peru), `includeToVerify`
+  (default true; rows carry `flags.toVerify` and `flags.approx` for `precision=approx` — show "≈"),
+  `exclude`/`hiddenStores`. The reference store itself is excluded from its own table.
+- **Determinism**: rows sorted by meters, then id (code-unit order); store-to-store results sorted by
+  id; per-chain count objects have sorted keys; nearest-store ties → smaller id. No randomness, no
+  dependence on input order (tested with shuffled input).
+- **Spatial index**: a grid with ~1 km cells (degrees of latitude; longitude cells widened by
+  1/cos(mean |lat|)). A radius query scans only the cells of the circle's **exact** bounding box
+  (spherical cap: |Δlat| ≤ m/R, |Δlng| ≤ asin(sin(m/R)/cos lat)) and measures each candidate with
+  `MT.geo.distanceMeters`, so results are identical to a brute-force scan (tested on all of Peru);
+  when the box would cover more cells than there are points it scans the points (cost ≤ min). Nearest
+  searches grow circles ×4 from 2 cells (or from 2 × radius in `neighborMatrix`, whose radius query
+  already covered the inside). Measured (headless Chrome, 3 532 stores incl. Tambo/Oxxo/Mass):
+  `neighborMatrix` all Peru ≈ 100 ms (budget 300 ms), `closePairs` 1 km ≈ 25 ms, `distancesFrom` all
+  Peru ≈ 4 ms.
+
+### 8.2 `MT.analysis` (js/analysis.js) — pure, deterministic; returned `store` objects are READ-ONLY
+
+| API | Description |
+|---|---|
+| `refFromStore(id) → ref|null` | any store with coordinates (also a closed one, if the UI offers it) |
+| `refFromPoint({lat, lng, label?, chainId?}) → ref|null` | numbers or numeric strings; rounded to 6 decimals; invalid / out of range → null |
+| `resolveRef(x) → ref|null` | x = store id, ref, saved slide ref (`{type, storeId?, chainId?, lat?, lng?, label?}`) or a `distancesFrom` result. A saved store ref whose store left the database uses its saved lat/lng (`missing: true`) |
+| `refLabel(x)`, `subtitle(analysis)`, `formatCoords(lat, lng)` | label / store name / `"-12.12190, -77.02970"`; the slide subtitle from `MT.theme.analysis` |
+| `defaultChains(ref) → [ids]` | SPEC §6.1 default selection: chains with `defaultOn` + the reference's chain |
+| `distancesFrom(ref, {chains, maxMeters, districts, includeToVerify=true, exclude, hiddenStores, stores}) → {ref, rows, params}` | `rows: [{store, meters (float, unrounded), bearingDeg, dir, sameChain, flags:{toVerify, approx}, rank (1…n)}]`; `stores` = an explicit universe (default `MT.data.stores()`); `params` echoes the options (for the Excel *Parámetros* sheet). Unresolvable ref → `{ref:null, rows:[]}` |
+| `ringSummary(rows|result, rings=[500,1000,2000,3000,5000]) → {rings, relation, total, bands, beyond, cumulative}` | `bands[i] = {from, to, total, sameChain, competitors, byChain:{id:n}}` holds `rings[i-1] < d ≤ rings[i]` (first: `0 ≤ d ≤ rings[0]`); `beyond` = d > last ring (`to: null`); `cumulative[i]` = d ≤ `rings[i]`. `relation` false for a point without chain (then only `total` / `byChain` are meaningful). Rings are sorted, unique, positive |
+| `nearest(refOrId|result, {chainId | sameChain | competitors, limit=1 (null = all), …distancesFrom opts}) → rows` | a filtered slice of the distance table (rows keep their rank) |
+| `nearestByChain(rows|result) → rows` · `summary(result) → {nearestSame, nearestCompetitor, byChain}` | the nearest store of each chain (nearest first) — slide lines, the results headline |
+| `storesForRegion({districts, chains, hiddenStores, exclude, includeToVerify, stores}) → store[]` | Mode B universe (and Mode A with districts). For a map config it gives the same stores as `MT.data.storesForMap` of an "only inside" map (tested) |
+| `neighborMatrix(stores, {radius=1000, candidates=stores}) → rows` | per store (sorted by id): `nearestSame {store, meters}|null`, `nearestCompetitor {store, chainId, meters}|null` (any distance), `sameWithin`, `competitorsWithin`, `byChainWithin {id:n}` (d ≤ radius, the store itself excluded). `candidates` = a wider universe (e.g. region stores against all of Peru) |
+| `closePairs(stores, {meters=1000, sameChainOnly=false, candidates}) → [{a, b, meters, sameChain}]` · `comparePairs(x, y)` | each pair once (`a.id < b.id`), d ≤ meters; same-chain pairs first ("posible canibalización"), then meters, then ids (`comparePairs`). `candidates`: b is taken from them, a from `stores` — so chunks of a list L against `{candidates: L}`, concatenated and sorted with `comparePairs`, = `closePairs(L)` (tested) |
+| `index(stores, {cellMeters=1000}) → {size, cells, within(lat, lng, m, test?) → [{store, meters}], nearest(lat, lng, test?, {maxMeters, start}) → {store, meters}|null}` | the grid index itself (e.g. hover queries on the analysis map) |
+| `bearing(a, b)`, `compass(deg)`, `destination(lat, lng, deg, m)`, `ringBbox(x, m)`, `ringFeatures(x, rings, {steps=96})`, `formatMeters(m)`, `normRings(rings)` | geometry on the same sphere: `ringFeatures` → FeatureCollection of geodesic circles `{properties:{meters, label:'1.25 km'}}` (CCW from north; label = the typed value, `MT.i18n.formatDistanceExact`) — a store drawn inside a ring is counted in it; `formatMeters` = `MT.i18n.formatDistance` ("500 m", "1.5 km") |
+| `forMap(mapCfg) → {ref, label, rows, summary, top, lines, rings, maxMeters}|null` | everything an analysis slide draws: distances from the reference to `MT.data.storesForMap(mapCfg)` (reference store excluded), ring counts for `analysis.rings`, `top` = first `listTop` rows, `lines` = nearest store per chain (empty when `showLines` false). null for ordinary slides |
+| constants | `EARTH_RADIUS`, `DIRS`, `DEFAULT_RINGS` (Análisis tab bands), `CELL_METERS` |
+
+### 8.3 Slides with an analysis — `mapCfg.analysis` (SPEC §6.3)
+
+```js
+analysis: { kind: 'distance',
+  ref: { type: 'store', storeId, chainId?, lat?, lng?, label? }   // lat/lng/label = last known, used if the store disappears
+     | { type: 'point', lat, lng, label?, chainId? },
+  rings: [500, 1000, 2000],      // metres, 10 m … 1000 km, unique, ascending, ≤ 8 (default [500, 1000, 2000])
+  maxMeters: 2000,               // the slide's stores: d ≤ maxMeters (default = largest ring)
+  chains: ['plazavea', …] | null,// the Análisis tab's chain selection when the slide was made (informational;
+                                 //   the slide draws what mapCfg.chains toggles on)
+  showLines: true, listTop: 8,   // lines to the nearest store of each chain; N nearest in the legend panel (0–30)
+  includeToVerify: true }        // false → "por verificar" stores left out of the slide (with or without districts)
+```
+
+- `MT.project.normalizeAnalysis` validates it (unknown `kind`, no usable reference → dropped; junk rings
+  → defaults; unknown extra keys kept) and is idempotent; `normalize`, `defaultMap`/`addMap` and
+  `updateMap` always store it normalized. Slides without one have no `analysis` key.
+- `includeToVerify: false` drops the "por verificar" stores in `MT.data.storesForMap` on **every** slide
+  carrying an analysis — also one with districts (the tab's *Distritos* universe), so its map, legend
+  counts, list, notes and HTML match the tab.
+- **No districts** → the analysis defines the region: `MT.data.storesForMap` = stores within
+  `maxMeters` (chain toggles, `hiddenStores`, `includeToVerify` apply; the reference store is
+  included like any other store), `boundsForMap` = the largest ring + 4 % per side (`MT.layout.viewFor`
+  then contains the whole ring — tested), `subtitleFor` = "Distancias a <label or store name>" (or
+  "Distancias al punto <lat, lng>") unless the subtitle is manual. `MT.data.analysisRegion(cfg)` says
+  whether a map is such a slide. **With districts** the slide is an ordinary district slide that also
+  carries the analysis (rings / list drawn from `forMap`, stores from the districts).
+- Adding a slide from the Análisis tab: `MT.project.addMap({title, districts: [], chains: <toggles
+  matching the selection>, analysis: {ref, rings, maxMeters, chains, showLines, listTop}})` — or, when
+  the project's only slide is still untouched (a new project), `updateMap` of that slide (§8.4).
+
+### 8.4 The modules built on the engine
+
+**Análisis tab (`js/ui-analysis.js`, `css/analysis.css` `.mt-analysis-*`, `js/i18n/analysis.js` `analysis.*`)
+— implemented.** Tab `{id:'analysis', labelKey:'tab.analysis', icon:'target', order:15, hash:'analisis'}`
+(Alt+2). Layout: header (title, mode switch *Distancias a un punto | Matriz de cercanía*, "En línea recta"
+note) · sidebar (the mode's controls) · main: results header + actions, summary cards, then the analysis
+map (its own MapLibre instance, `MT.dbui.createMap`) beside the results (mode A) or above a full-width
+table (mode B). Every number comes from `MT.analysis`; nothing is computed differently in the UI.
+- **Mode A.** Reference: one combobox — local type-ahead over stores (name / chain / district,
+  accent-insensitive, `MT.util.normalize`), a pasted coordinate pair or Google Maps link
+  (`MT.geo.parseCoords` → "Usar el punto …"), and a last row *Buscar «…» como dirección*; **Enter** with
+  no option (or on that row) runs `MT.geo.search` once (Nominatim — never while typing) and lists the
+  addresses under the box. *Elegir en el mapa* (also active while there is no reference; Esc cancels):
+  a click on a store dot (all stores of the selected chains are shown faintly) uses that store, elsewhere
+  a point. A point has an optional label and *cadena propia* (→ same chain / competitor split). Recent
+  references: `sessionStorage['mt.analysis.recent']` (6). Universe: chips 1/2/3/5/10/20 km / Todo el Perú
+  (default 5 km) or *Distritos* (district combobox + *Zonas de Lima*); chains popover (grouped, Todas /
+  Ninguna / Predeterminadas, store counts in the universe; default `defaultChains(ref)`, the reference's
+  chain added on every new reference); *Incluir «por verificar»*. Rings: chips + a "1500" / "1.5 km" / "1,5 km" box
+  (10 m–1000 km, ≤ 8; default 500 m–5 km). Map options: lines to the nearest store of each chain, logos +
+  distances for the nearest N (0–30; `MT.markers.icon` badges as map images). **Rings in use**
+  (`ringsInUse`): with a distance universe d, the rings ≤ d plus d itself — a ring past the universe
+  would only repeat its count — for the cards, the ring table, the Excel and the map (the rule of the
+  slide it makes); a muted line names the rings left out ("Los anillos de 3 km y 5 km quedan fuera del
+  universo (2 km)."); with *Distritos* the line says the counts are the districts' stores. Results:
+  cards *Misma cadena más cercana* (or "elige una cadena propia" for a point without chain),
+  *Competencia más cercana* (*Tienda más cercana* without relation) — searched in **all of Peru** (same
+  chains, same *por verificar* choice; ≈ 4 ms): one past the universe keeps its distance, tagged
+  *Fuera del universo (2 km)* with one click *Ampliar a 3 km* (the smallest chip that holds it) —, and
+  *Tiendas a menos de…* (cumulative `ringSummary`); tabs
+  *Tiendas* (virtualized table, ~20 DOM rows for 3,500: N°, store, chain ≥ 900 px, distance, *Rumbo*
+  arrow + code, relation ≥ 540 px, flags ≥ 700 px — shown inline in the store cell while their column is
+  hidden; sortable, filter box, ↑↓ PgUp/PgDn Home/End, Enter = card on the map) and *Por cadena y
+  anillo* (bands × total / same / competitors / each chain). Row click / keyboard ↔ map halo + card
+  (*Usar como referencia*); map click → row. The map opens on the smallest ring holding the N nearest.
+  UI distances: `fmtDist` = `MT.i18n.formatDistance` (measured: "850 m", "1.2 km", "12 km", "1,954 km"),
+  `fmtRing` = `MT.i18n.formatDistanceExact` (typed: ring chips, universe chips, R, threshold, band headers
+  — "1.25 km"). Distances inside upper-case labels are wrapped in `.mt-unit` (`text-transform: none`):
+  "HASTA 500 m", never "500 M" (= 500 mil). No store in the universe: the empty state names the
+  nearest store of the chosen chains ("La tienda más cercana es Precio Uno La Merced, a 210 km.") with
+  one button to the chip that reaches it (or *Todo el Perú*); *Exportar a Excel*, *Agregar como lámina*
+  and *Actualizar la lámina* are disabled while there are no rows. A pasted link that is not a
+  coordinate link (a `maps.app.goo.gl` short link, a Google Maps URL without coordinates) shows one
+  disabled option with `geo.error.shortlink` / `geo.error.invalid` and is never sent to Nominatim; a full
+  link's `/place/<name>/` prefills the point's label. Esc closes a store card (focus stays on the table).
+- **Excel (A)** `Distancias a <ref> - <fecha>.xlsx`: *Resumen* (reference, universe, nearest same /
+  competitor — with a *Nota* "Fuera del universo (2 km)" when past it —, cumulative ring counts (rings in
+  use, the cut-rings line), nearest per chain; number formats **per cell**: metres `#,##0.0` on the
+  "más cercana" rows only, counts `#,##0`), *Distancias* (every row: N°, chain, store,
+  address, district…, **Distancia (m)** as a number with 1 decimal + the text, *Rumbo*, *Rumbo (°)*,
+  relation, *Por verificar*, *Ubicación aproximada*, lat/lng, id; autofilter), *Por cadena y anillo*
+  (bands and cumulative), *Parámetros* (reference, type, store id, chain, lat/lng, universe, chains, por
+  verificar, closed excluded, rings, date + time, data version = `seedInfo` + local changes, source,
+  method; data version "Datos del 2026-10-01 (3,557 tiendas activas) · 4 cerradas, excluidas" — the
+  header's count). Headers and sheet names in the UI language. The "Distancia" text is built from the
+  same value as the number beside it (322.46 m → 322.5 and "323 m"). Written with SheetJS
+  (`MT.vendor.xlsx`) like `MT.io.writeXLSX`, plus number formats, an autofilter and a frozen header on
+  the data sheets only, bold header rows everywhere (`MT.io.polishXLSX`).
+- **Agregar como lámina** → `MT.project.addMap({title: <ref label>, districts, chains: <toggles = the
+  selection>, analysis: {kind, ref (saved form), rings, maxMeters, chains, showLines, listTop,
+  includeToVerify}})`: universe *distance d* → no districts, `maxMeters = d`, rings ≤ d plus d (the frame
+  shows the whole universe); *Todo el Perú* → `maxMeters` = largest ring; *Distritos* → those districts
+  (an ordinary district slide carrying the analysis). On a new project whose only slide is untouched
+  (no title, Peso, manual subtitle, districts, radius, analysis, hidden stores or dragged logos) that
+  slide is filled instead (`updateMap`, automatic subtitle, automatic view), so the deck does not start
+  with an empty slide. Then the Mapas tab on that slide; the tab stays
+  **linked** to it (bar *Editando el análisis de la lámina «…»*, button **Actualizar la lámina** =
+  `updateMap(id, {districts, chains, analysis})`). Mapas → *Editar en Análisis* calls
+  `MT.analysisui.open(cfg)` (= `edit`).
+- **Mode B.** Region (district combobox, provinces, *Zonas de Lima*; required — the empty state offers
+  the zones), chains, R (chips 250 m / 500 m / 1 km / 2 km + custom), pair threshold (same), *Incluir pares
+  con la competencia* (off), *Contar tiendas vecinas fuera de la región* (on: candidates = the chains'
+  stores in all of Peru; pairs over the region + neighbours within the threshold, keeping pairs that
+  touch the region), *por verificar*. `neighborMatrix(region, {radius, candidates})` runs in **idle
+  chunks** of 500 stores when the region has more than 750 (rows are id-sorted, so the concatenation =
+  one call; a newer request cancels a running one; progress in the results bar). Cards: stores analysed,
+  same-chain pairs < threshold (*Posible canibalización*), stores with another of their chain within R,
+  with a competitor within R. Tabs *Por tienda* (sorted by nearest same-chain distance; nearest same /
+  competitor with distance pills, counts within R) and *Pares cercanos* (tag, the two stores, distance).
+  Map: region outlines, dots (out-of-region neighbours faded), red lines = same-chain pairs, grey =
+  competitor pairs, a selected store's dashed lines to its nearest same / competitor, legend; framed on
+  the region's stores. **Pair threshold ≤ 5 km** (chips + a custom value, `PAIR_MAX`); the pairs are
+  computed in idle chunks too (`closePairs(chunk, {candidates: pool})`, re-sorted with `comparePairs`);
+  the counts (cards, tab, Parámetros) cover every pair, while the list, the map lines and the Excel keep
+  the first **50,000** (same chain first, then the closest) with a notice *Se muestran los primeros
+  50,000 de 334,816 pares…*. Measured, Lima province with every chain and competitor pairs: 1 km =
+  21,391 pairs (all listed), 5 km = 334,816 — < 1 s to compute and draw, longest main-thread block
+  ≈ 0.3 s, Excel 2.4 s. A selected pair is a filter on its own layer `mtb-pair-sel` (the pair lines are
+  not rebuilt on a click). **Short windows** (`@media (max-height: 820px)`, 1366 × 768 laptops): tighter
+  headings, two-line cards, a 22 % map strip and denser rows — the matrix keeps 8 rows in view.
+  **Excel (B)** `Matriz de cercanía - <región> - <fecha>.xlsx`: *Por tienda* (rows in the tab's order —
+  nearest same-chain store first, stores without one last, then id; chain and store first, the ids last;
+  one header per column: *Distancia a la misma cadena (m)* / *Distancia a la competencia (m)*…; counts
+  within R, one column per chain), *Pares cercanos*, *Parámetros* (+ *Pares listados* when capped).
+- **State:** settings in pref `analysis.settings` (mode, universe, rings, options, mode B region and
+  parameters); the reference lives in the session only. Listens to `stores:changed`, `chains:changed`,
+  `logos:changed`, `lang:changed`, `project:loaded`, `project:changed`, `map:changed`.
+
+| `MT.analysisui` | Description |
+|---|---|
+| `edit(mapId or mapCfg) → bool`, `open(…)` | load a slide's analysis into mode A (reference, universe from `maxMeters` or its districts, rings, chains from its toggles, options) and link the slide |
+| `results()` (mode A) | `ringSummary` is over the rings in use (≤ the distance universe, plus it) |
+| `setMode('distance' or 'matrix')`, `mode()` | |
+| `setReference(x) → ref or null` | a store id, `{lat, lng, label?, chainId?}` or a reference |
+| `setUniverse({meters} / {km} / {all:true} / {districts})`, `setChains(ids)`, `setRings(m[])`, `setOptions({includeToVerify, showLines, listTop})` | mode A parameters |
+| `setMatrix({districts, chains, radius, threshold, showCompetitors, neighbors, includeToVerify}) → Promise` | mode B parameters; resolves when computed |
+| `results()` | `{mode:'distance', ref, res, ringSummary, counts}` or `{mode:'matrix', rows, pairs, region, ms}` |
+| `select(storeId)`, `selectPair(i)`, `setPicking(on)`, `searchAddress(q) → Promise` | |
+| `exportXlsx() → Promise<name or null>`, `addAsSlide() → map or null`, `updateSlide() → map or null` | |
+| `whenIdle() → Promise`, `state()`, `map()` | for tests |
+
+**Slides (M1 `layout/mapview/slide/legend/markers/render`, M2 inspector, M4 exports) — implemented**
+(test `node tools/test/analysis-slide.test.mjs [--office]`, `analysis-slide` in run-all). Ordinary slides
+are unchanged byte for byte: the example project's four slides export the same PNG bytes (1920 px) and the
+same `MT.layout.compute`, `MT.slide.layout` and `MT.export.pptx.plan` as before (checked against a copy of
+the previous code on the same data).
+- **Caches:** the memo keys of `MT.layout` (`compute`, `districtLabels`, `roadLabels`, store dots) include
+  `mapCfg.analysis`.
+- **Geometry** `MT.layout.analysis(cfg, view?)` (memoized; the config's own view): the reference, a
+  **pin** for a point — or for a reference store that is not drawn (chain off, hidden, outside the
+  frame) —, the rings projected (`inside` the frame or not) and their **pills** ("500 m", "1 km"): each
+  sits on its ring at the bearing (15° steps, straight up first) that keeps it inside the frame and off
+  the store dots (heavy), the logos' default spots above the dots, the selected districts' names, the
+  pin, the attribution and the other pills, preferring the top of the ring and the previous ring's
+  bearing (the pills line up). `analysisBoxes(cfg, project)` = pills + pin as **declutter obstacles**
+  (logos keep off them), also label blockers and keep-outs of the app's avenue names.
+- **Reference store:** keeps its own logo — never grouped or collapsed (own group, `keep`) — with a
+  **halo** (theme `analysis.halo`: white gap, dark ring, white casing) inside its box (`item.isRef`,
+  `item.refPad`), painted after the other logos (`MT.markers`).
+- **Lines** (`forMap(cfg).lines`, nearest store of each chain; none when `showLines` is false): faint,
+  from the reference (its store's dot or the point) to the store's dot, under the leaders and logos.
+- **Rings:** MapLibre line layer `'mt-analysis-rings'` (dashed, under the labels) in the preview, every
+  export map and the HTML page; pills / lines / pin painted by `MT.render.drawOverlay` (preview = export;
+  `MT.render.analysisOverlay(cfg, liveView)` while the preview camera moves).
+- **Distances on the slide** are Spanish (Peru) slide text, `MT.legend.distance(m)` (= `MT.i18n.formatDistance`):
+  "754 m", "1.1 km" (one decimal below 10 km), "12 km" — the list, the line names, the notes. **Ring labels**
+  (pills, "Anillo 1.25 km" shapes, notes, the inspector's chips) show the typed value: `MT.legend.ringLabel(m)`
+  (= `MT.i18n.formatDistanceExact`). A listed store whose location is approximate or *por verificar* reads
+  "≈ 750 m" (preview, PNG, PPTX text, HTML list); the speaker notes say which ("(ubicación aproximada, por
+  verificar)").
+- **Legend panel:** `MT.legend.items(cfg).distances` = `{heading: 'Distancias a <label>'` (a point without
+  label: `'Distancias al punto elegido'`), `items`: the `listTop` nearest stores drawn on the slide (chain,
+  short name = the name without its chain's, distance)`}`; `MT.slide.layout(...).legend.dist` lays it out
+  under the chain legend. **Space rule** (`analysisLegend` in js/slide.js): (1) both blocks — the chain
+  legend at its theme sizes (16 → 11 pt, 1–3 columns) and the list at 12 → 9 pt with all its rows; the
+  list shrinks first while that lets the chain legend grow, and is never in larger type than the
+  legend; (2) else the list loses rows from the bottom, down to `analysis.list.minRows` (5); (3) else only
+  the list is shown (no "Tiendas" heading, no chain rows): its chain icons stand in for the legend, as
+  large as fits, losing rows last. The whole block is centred vertically. Drawn by the DOM preview,
+  `MT.render.drawSlide` and the PPTX (real text).
+- **Preview / Mapas:** no *Elige los distritos* on a slide whose region is its analysis; notices `noRef`
+  (the reference cannot be placed) and `noStoresNear`; rail "Distancias · hasta 2 km · n tiendas"; bar
+  counts; marker tooltip "Referencia del análisis…"; store popup "A 754 m de <referencia> (NE) ·
+  Competencia". Inspector section **Análisis de distancias** (`SECTIONS` id `'analysis'`, only on such
+  slides, after the texts): the reference read-only + **Editar en Análisis** (`MT.app.showTab('analysis')`,
+  then `MT.analysisui.open(cfg)`), ring
+  chips (× removes; presets 500 m … 5 km; a custom distance in metres; ≤ 8; the slide's `maxMeters`
+  follows the largest ring while it was the largest), *Tiendas de la lámina* (`maxMeters`, one of the
+  rings), list length (0–30), lines switch, *Quitar el análisis* (toast with *Deshacer*). The districts
+  section says districts are optional instead of *Empieza por aquí*; the subtitle switch reads
+  *Subtítulo automático («Distancias a …»)*. `MT.mapsui.openInAnalysis()`.
+- **PNG:** the same overlay (map and slide). **PPTX:** rings as dashed ellipses without fill
+  ("Anillo 1 km"; a ring not wholly inside the frame is baked into the basemap with its pill —
+  `MT.render.mapCanvas(cfg, {rings: [meters]})`), then the lines, then the pills as text ("Etiqueta
+  anillo …") — the stacking of `MT.render.drawOverlay` (lines under the pills). Lines are connectors
+  ("Distancia — <tienda> (754 m)") glued to the store dot — or, for a logo collapsed to a ring-colour
+  dot, to that dot (`startRole: 'marker'`) — and to the reference: the pin's bottom centre, or the
+  reference store's dot. The pin is its own picture ("Referencia — <label>", role `'ref'`) **cut at its
+  tip** (`MT.markers.pinImage(scale, {tipAtBottom: true})`), so the glue site is the tip also after the
+  pin is moved in PowerPoint — or the reference store's marker picture with its halo. The list is real
+  text ("Distancias — título", per store an icon picture, the name and the distance), and the speaker
+  notes give the cumulative ring counts (same chain / competitors; "1 tienda" in the singular), the
+  universe ("tiendas hasta 2 km", or "tiendas de los distritos seleccionados" on a slide with
+  districts) and the nearest stores with their flags. All inside the "Mapa" group. **HTML:**
+  `maps[i].analysis` (`MT.export.html.data`): ring layer, pills, pin, the reference store's own marker
+  picture (halo; badge / card styles) or `halo` ring widths that the page draws around its dot / number
+  pin (CSS rings, class `mk--ref`; dot / number styles), lines, "A 754 m de <referencia> ·
+  competencia" in every popup, and the list in the legend panel (click → that store's popup).
+- Done already: `MT.app.isBlankProject` treats a slide with an analysis as work to keep.
+
+### 8.5 Tests — `tools/test/analysis.test.mjs`, `tools/test/analysis-slide.test.mjs`, `tools/test/analysis-ui.test.mjs`, `tools/test/analysis-e2e.mjs`
+
+On the real data: haversine vs an independent Vincenty implementation (1 152 synthetic pairs, 6
+latitudes × 24 directions × 50 m–20 km, + 3 000 real nearest-competitor pairs; bounds as in §8.1),
+`row.meters === MT.geo.distanceMeters`, cardinal bearings and compass sectors, ring boundaries
+(d = 500 → first band, 500.001 → second), cumulative and same-chain / competitor counts, exclusions
+(closed, the reference itself, hidden, *por verificar*, chains as array / toggles, districts), repeat
+and shuffled-input determinism, **grid = brute force** (`neighborMatrix` at 1 km over all of Peru, 250 m
+and a wider candidate universe on Lima; `closePairs` 1 km and 2 km same-chain; `index.within` /
+`nearest`), the performance budgets, `normalizeAnalysis` (defaults, validation, idempotence,
+`normalize` / `addMap` / `updateMap` / save round trip) and `storesForMap` / `boundsForMap` /
+`subtitleFor` / `forMap` for analysis slides, plus the tab's position. Zero console errors.
+
+`analysis-slide.test.mjs` (slides A = Plaza Vea Miraflores, rings 500 m / 1 km / 2 km; B = a labelled
+point with an own chain, listTop 10; C = every chain, rings to 5 km, listTop 30): rings inside the frame
+with their pills, no dot under a pill, no logo over a pill or the pin, the reference store's halo (never
+grouped / collapsed), lines = one per chain, the legend list (es-PE text, short names, headings) and its
+space rule (incl. the list-only case), ordinary slides untouched, the preview (no notice, ring layer, DOM
+list, rail, inspector edits: rings, distance, list length, lines, *Editar en Análisis*, remove + undo),
+PNG pixels (pill, halo, pin), the PPTX plan and XML (ellipses on the rings, pills, glued connectors,
+reference picture, list as text, notes), `--office`: PowerPoint opens the deck and its render matches
+the PNG export, the HTML data and page (layer, pills, lines, pin, list, popup distance), card / dot /
+number styles, the English UI. Zero console errors.
+
+`analysis-ui.test.mjs` (the tab, real data): type-ahead to Plaza Vea Miraflores (no Nominatim while
+typing), table / cards / cumulative counts = `distancesFrom` / `summary` / `ringSummary`, es-PE texts,
+sorting, filter, keyboard, row ↔ map (a real click on a dot), universe chips (1 km, all of Peru:
+virtualized), the chains popover, *por verificar*, rings (add "1,5 km" — read as 1.5 km —, invalid, remove), the ring × chain
+table, the Excel read back with SheetJS in Node (sheet names, metres as numbers = engine, Parámetros),
+pasted coordinates in Surquillo + own chain + label, a Google Maps link, a mocked address search (one
+call, on Enter), pick on the map (a point and a store), recent references, *Agregar como lámina* (slide
+config, same stores, subtitle) → Mapas *Editar en Análisis* → *Actualizar la lámina*, mode B on Lima Sur
+= `neighborMatrix` / `closePairs` (neighbours outside the region on/off, competitor pairs, R chips and a
+custom R, cards, tags, pair and store selection on the map), the matrix Excel, Lima province with every
+chain in idle chunks = one engine call, English, 1280 px without overflow. Zero console errors.
+
+`analysis-e2e.mjs` (the journey through the real UI, once in Spanish and once in English, real data,
+downloads read back in Node): the hand-placed Holi Pardo (`manualPlacements`) found by the Base de datos
+search and flagged; mode A by type-ahead to Plaza Vea Miraflores, universe chip 2 km = `distancesFrom`
+(Holi Pardo listed with ≈ / por verificar); the Excel read back (sheet names in the UI language, metres =
+engine); *Agregar como lámina* → the Mapas slide (subtitle, legend counts, the "Distancias a …" list) → PNG
+slide and PowerPoint through the Exportar popover (ring shapes, the list as text, glued lines) → inspector
+*Editar en Análisis* → linked tab → 1 km → *Actualizar la lámina*; a Google Maps link point with label and
+own chain = engine; mode B on Lima Sur (zone button) = `neighborMatrix` and its Excel; reload → language,
+tab, mode B region, mode A settings, the slide (autosave) and the recent references persist, the reference
+itself does not (per session, SPEC §6.1) and one click on the recent store restores it. Zero console errors.
+
+Review fixes (§15) are pinned by: `analysis.test.mjs` — the four formatters agree at the boundaries, typed
+ring labels, a district slide without *por verificar*, press rows' notes; `analysis-ui.test.mjs` — universe
+2 km with rings to 5 km (counts = `distancesFrom(maxMeters: ring)`, cut-rings line, no ring past 2 km on the
+map), the nearest same-chain store past the universe (Tottus San Luis → Tottus Jockey Plaza 2.1 km, *Ampliar a
+3 km*), the no-store state (Selva central → 210 km), a short link (no Nominatim), Esc, upper-case headers with
+lower-case units, Excel formats per cell / frozen bold headers / text = number, *Por tienda* order and
+headers, the pair cap at 5 km and 50,000 pairs, 8 matrix rows at 1366 × 768; `analysis-slide.test.mjs` — "≈"
+rows, lines under pills, the pin's glue site at its tip, every line glued (also to a collapsed logo, slide
+D), notes (singular, flags, districts), a district slide without *por verificar*, a 1250 m ring, the HTML
+halo in the dot / number styles (data and page); `analysis-e2e.mjs` — the "≈" row, the link's place name as
+the label, *Por tienda* order.
 
 ---
 
@@ -1189,3 +1537,60 @@ Second visual QA of the four demo slides (Lima Cono Sur still not deck-ready). N
 - Tests: `layout.test.mjs` (auto size, spokes tree, spread dots, dot paint order, legend key),
   `maps-core.mjs` (marker blockers once labels are known, names written by the app and off the dots),
   `export.test.mjs` (spoke connectors, legend key, 6 pt attribution).
+
+---
+
+## 14. Phase 2a integration (2026-10-01)
+
+The data track (the 32 unplaced stores of `tools/seed/REPORT.md` §4, SPEC §6.4) and the three analysis
+tracks (engine, Análisis tab, slides) were merged and checked together on the real data
+(`node tools/test/run-all.mjs`). What changed while integrating:
+
+- **One decimal convention: the es-PE decimal point** ("1.5 km", like "Peso: 15.8%" in the reference
+  deck and Chrome's `es-PE` number format). Before, the Análisis tab (`fmtDist`), `MT.analysis.formatMeters`
+  and the v1 `MT.radius.formatMeters` wrote "1,5 km" while `MT.i18n.formatDistance` (Mapas) and the analysis
+  slides (`MT.legend.distance`) wrote "1.5 km": a slide added from the tab showed other numbers than the
+  tab. Now every distance text uses the point in both languages. Typed distances still accept a decimal
+  comma ("1,5 km"); "1,500" (comma before three digits, no "km") reads as 1500 m.
+- **Mapas → *Editar en Análisis*** calls `MT.analysisui.open(cfg)` directly (it was looked up by name while
+  the tab was built in parallel); `contracts.mjs` now checks that path.
+- **"Agregar como lámina" on a new project** fills the project's only, untouched slide instead of adding a
+  second one after an empty "Sin título" slide (§8.4).
+- **Data:** 25 stores placed by hand + 2 linked to existing OSM rows (`tools/seed/overrides.json`
+  `manualPlacements`, applied by `tools/merge.mjs`): 3,561 rows (3,282 verified, 275 *por verificar*, 4
+  closed). Their notes start with "Colocada a mano …" and cite the evidence; 21 are `approx` and 23
+  *por verificar*, so the Análisis tab and its Excel flag them ("≈", *Por verificar*). The example project
+  stays valid (no store id it references is missing); its Lima Sur and Lima Cono Sur slides now also show
+  Holi Pardo and Precio Uno Lurín. No test hard-codes a store total.
+- **Tests:** `analysis-e2e.mjs` (§8.5) added to run-all; `analysis-slide.test.mjs` now checks that *Editar
+  en Análisis* loads and links the slide's analysis; `analysis-ui.test.mjs` / `analysis.test.mjs` pin the
+  decimal point and the blank-slide reuse.
+
+## 15. Phase 2a review fixes (2026-10-01)
+
+Fixes after the review of the phase 2a work (details and evidence: `docs/TEST-REPORT.md` §5), so module
+owners know what changed under them:
+
+- **One distance text.** `MT.i18n.formatDistance` is the only formatter of a measured distance (0.1 m,
+  then whole metres; one decimal below 9.95 km; es-PE grouping "1,235 km"); `MT.legend.distance`,
+  `MT.radius.formatMeters`, `MT.analysis.formatMeters` and the tab's `fmtDist` call it, so the Mapas
+  popup, the slide, the v1 radius notes, the tab and its Excel agree at every boundary (999.6 m → "1 km"
+  everywhere). Typed distances (rings, universes, R, thresholds) use `MT.i18n.formatDistanceExact`
+  ("1.25 km", never "1.3 km"): ring pills, "Anillo …" shapes, notes, the tab's and the inspector's chips.
+- **Análisis tab:** rings past a distance universe are left out of the cards, the ring table, the Excel
+  and the map (they repeated the universe's count); nearest same-chain / competitor / store searched in
+  all of Peru with a *Fuera del universo* tag and *Ampliar a …*; no-store state names the nearest store;
+  Excel / slide disabled without rows; short links never geocoded; Esc closes a card; Excel number
+  formats per cell, bold headers, frozen header rows (`MT.io.polishXLSX`, also used by `MT.io.writeXLSX`),
+  *Por tienda* in the tab's order with readable columns, data version counted like the header; mode B
+  threshold ≤ 5 km, 50,000 listed pairs, chunked `closePairs`, a selection layer; short-window CSS.
+- **Engine:** `closePairs(…, {candidates})` + `comparePairs` (chunking); ring feature labels are typed values.
+- **Data:** `MT.data.storesForMap` applies `analysis.includeToVerify: false` to district slides too.
+  `tools/merge.mjs`: a press record's district note says "según la prensa" (1 row, `web-tambo-callao-av-venezuela`).
+- **Slides / exports:** list rows of approximate / *por verificar* stores read "≈ 750 m"; PPTX stacks
+  lines under the pills, glues lines to collapsed logos' dots, cuts the pin picture at its tip, writes
+  district-aware and singular/plural notes with flags; the HTML marks the reference store in the dot and
+  number styles (`analysis.halo`, `.mk--ref`).
+- **Wording:** ES "Alertas" (flags column), "Ninguna entre las cadenas elegidas", "Líneas a la tienda más
+  cercana de cada cadena"; EN "Your chain (optional)", and "cannibalisation" with the British spelling
+  the rest of the English UI uses (colour, centre, neighbouring, analysed).

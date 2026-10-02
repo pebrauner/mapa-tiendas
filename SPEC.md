@@ -223,3 +223,71 @@ names are always written, off the store dots.
 ## 5. Phase 2 (not in v1)
 Full cannibalization analysis (nearest competitor for every store, overlap matrix, density heatmap,
 catchment comparison), batch "re-scan all Peru" with change report, multi-user shared database.
+(Distances to a store/point and the nearest-store / close-pair matrix were delivered as phase 2a, §6.)
+
+## 6. Phase 2a — distance & cannibalization analysis (requested 2026-10-01)
+
+User request: "distances from each store to a selected store/point". Straight-line (geodesic, haversine)
+distances; no routing service. All numbers must be reproducible from the data — no invented indices.
+
+**Status (2026-10-01): implemented.** §6.1 Análisis tab (`js/ui-analysis.js`, both modes, Excel, "Agregar
+como lámina" / "Actualizar la lámina"), §6.2 engine (`js/analysis.js`), §6.3 analysis slides in the preview,
+PNG, PPTX and HTML (+ the Mapas inspector section), §6.4 data (27 of the 32 stores placed or linked — 25 new
+rows, 2 linked to existing OSM rows; the 5 the verifiers rejected stay listed in `tools/seed/REPORT.md` §4).
+Distances in the UI and on slides use the es-PE decimal point ("1.5 km", like "Peso: 15.8%"), one formatter
+for measured distances and the exact value for typed ones ("1.25 km"). Review fixes: ARCHITECTURE §15.
+Architecture and API: `docs/ARCHITECTURE.md` §8. Tests: `analysis`, `analysis-ui`, `analysis-slide` and the
+journey `analysis-e2e` (ES + EN) in `tools/test/run-all.mjs`. Still open from §5: density heat map,
+catchment comparison, re-scan with change report, shared database.
+
+### 6.1 New tab "Análisis" (Mapas | Análisis | Base de datos | Cadenas)
+
+**Mode A — Distancias a un punto** (primary)
+- **Reference** = one of: a store (type-ahead over all stores: name/chain/district, accent-insensitive, or
+  click a store on the analysis map) · a point (click on the map, paste coordinates or a Google Maps link via
+  `MT.geo.parseCoords`, or address search via Nominatim on Enter). Optional label for points (e.g. "Local
+  propuesto Av. Primavera"). Recent references kept in the session.
+- **Universe**: max distance (1 / 2 / 3 / 5 / 10 / 20 km / todo el Perú; default 5 km) or restrict to selected
+  districts; chains multi-select grouped (default: chains with defaultOn, plus the reference store's chain);
+  closed stores always excluded; "por verificar" included by default and flagged; `precision=approx` flagged "≈".
+- **Results**: summary — nearest same-chain store (when the reference is a store, or the user picks a "own
+  chain" for a point) and nearest competitor with distances (searched in all of Peru: one past the universe is
+  shown as such, with one click to widen it); ring bands (default 500 m / 1 km / 2 km / 3 km / 5 km, editable;
+  with a distance universe only the rings within it, plus the universe) × (same chain / competitors / per
+  chain) count table; full sortable table — rank, chain
+  badge, store, district, distance, direction (N/NE/…), relation (misma cadena / competencia), flags; row click
+  highlights on the map.
+- **Map**: reference marker, concentric labelled rings, stores as chain-colored dots (badges for the nearest
+  N), optional lines from the reference to the nearest store of each chain, distance labels for the nearest N.
+- **Export**: Excel (sheets Resumen, Distancias, Por cadena y anillo, Parámetros) and **"Agregar como lámina"**
+  → adds a slide to the current project carrying the analysis (see 6.3), exportable like any slide.
+
+**Mode B — Matriz de cercanía** (cannibalization between existing stores)
+- Region (districts picker, like Mapas) + chains + radius R (default 1 km).
+- Per store: nearest same-chain store + distance, nearest competitor (chain + store + distance), number of
+  same-chain stores within R, number of competitors within R (and per chain).
+- **Close pairs**: list of store pairs closer than a threshold (default 1 km, at most 5 km), same-chain pairs
+  first ("posible canibalización"), competitor pairs optional. Counts cover every pair; the list, map lines and
+  Excel keep the first 50,000.
+- Map: stores + lines for close same-chain pairs. Excel export (sheets Por tienda, Pares cercanos, Parámetros).
+
+### 6.2 Engine `MT.analysis` (js/analysis.js) — pure functions over `MT.data`
+`distancesFrom(ref, opts)`, `ringSummary(rows, rings)`, `nearest(refOrStoreId, opts)`,
+`neighborMatrix(stores, {radius})`, `closePairs(stores, {meters, sameChainOnly})`, `bearing()`; grid spatial
+index so all-Peru runs stay fast (3,500+ stores). Deterministic ordering (distance, then id).
+
+### 6.3 Slides with an analysis
+Map config key `analysis: { kind:'distance', ref:{type:'store'|'point', storeId?, lat?, lng?, label?},
+rings:[meters…], maxMeters, chains, showLines, listTop }`. Such a slide needs no districts: its stores are those
+within `maxMeters` of the reference (chains toggles still apply). It renders the reference marker + rings +
+optional lines in preview, PNG, PPTX and HTML; the legend panel adds "Distancias a <referencia>" with the
+nearest N stores (badge, name, distance) under the normal chain legend (or replaces it when space is short).
+The Mapas inspector shows an "Análisis de distancias" section (reference, rings, top N, "Editar en Análisis").
+The v1 basic radius tool stays as is.
+
+### 6.4 Data — manual placement of the 32 unplaced stores
+REPORT §4 stores are placed from evidence (official links, OSM features such as malls/street corners,
+house-number interpolation, press descriptions, Plus Codes) through a `manualPlacements` section of
+`tools/seed/overrides.json`, so `merge.mjs` reproduces them. Each carries precision, status and a Spanish note
+citing the evidence. Official Google Maps short links published by a chain may be resolved only to read the
+coordinates contained in the redirect URL (no Google Maps page content is fetched).

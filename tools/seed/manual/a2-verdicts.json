@@ -1,0 +1,100 @@
+{
+  "batch": "a2",
+  "verifiedOn": "2026-10-01",
+  "method": "Independent re-derivation: OSM API (element/full, map bbox, node/ways; Overpass was returning 504), Nominatim reverse/search at <= 1 req/s, tools/seed/pip.mjs, data/stores.csv duplicate scan (all chains within 400 m, same chain nearest 3), official raw files under tools/seed/web/raw, Perú Retail articles re-fetched, Google Maps short link resolved by its Location header only (no page content), Plus Codes re-decoded with a local OLC decoder validated against official Tambo Ica records.",
+  "verdicts": [
+    {
+      "store": "Vega Market Alameda de los Cóndores",
+      "verdict": "accept",
+      "lat": -12.101138,
+      "lng": -76.944137,
+      "precision": "approx",
+      "status": "to_verify",
+      "reason": "Re-checked. Official Vega locator (raw sucursales_content.json) gives 'Av. Alameda de los Cóndores 638, Urb. Valle de la Molina' with empty Latitud/Longitud; Perú Retail (25/08/2025) confirms a 2025 La Molina opening. Recomputed on OSM w36980293 + w320604749 (849.2 m): #445 (n5597143961) at chainage 491.4 m, Mass 610 (official) at 739.9 m, 15.0 m to the SE; 1.506 m per number gives #638 at 782.1 m, i.e. -12.101138,-76.944137 (identical). Other official points on the same avenue agree: Tambo 'Alameda de los Cóndores 521' at 595.0 m and Oxxo 'Av. Alameda de los Condores 598' at 686.6 m. Extrapolating from #521 or #298 instead gives 785.5-786.6 m, within 5 m. Even numbers (#298, #326, #610) are on the SE side, where OSM tags the parks addr:neighbourhood 'Valle de La Molina' (Parque La Molina 1, 67 m away); the NW side is Urb. La Ensenada. That matches the official urbanización. Nominatim reverse gives 'Rio Santa, Valle de La Molina, La Molina'; pip gives 150114. No vega row within 2.8 km. The rows nearby belong to other chains (Mass 610 at 42 m, Tiendas 3A at 64 m, Oxxo 598 at 97 m). Approx and to_verify."
+    },
+    {
+      "store": "Vega Market Mariano Pastor",
+      "verdict": "accept",
+      "lat": -12.073157,
+      "lng": -77.064868,
+      "precision": "approx",
+      "status": "to_verify",
+      "reason": "Re-checked. Official entry 'Calle Mariano Pastor Sevilla 194 (Ref 1/2 cuadra Mcdo. Bolívar).', no coordinates. Recomputed on OSM w73952919 (251.4 m, the only way of that name nearby): Calle Yauli joins at 199.8 m and Mass 177 (official) is at 166.0 m, 12.3 m south. The point at 186.4 m, 12.3 m north, is identical to the researcher's. It is 32 m from Mass 177 and 79 m from the Mercado Bolívar node, which fits '1/2 cuadra'. Nominatim reverse gives 'Mariano Pastor Sevilla, Pueblo Libre'; pip gives 150121. The nearest vega row is Clement at 258 m, a different address. Caveat: the numbering direction is not proven. The odd-numbers-on-the-left pattern seen on Cóndores, Pardo, Petit Thouars, Sánchez Cerro and Simón Bolívar would make numbers rise westward, which would put #194 about 20 m west of #177, roughly 40 m from this point. A 'cuadra 2' listing on this 251 m street fits numbering from Clovis, with Yauli closing cuadra 1, as assumed here. Either way the store is on this block, so confidence is medium rather than high. Approx and to_verify."
+    },
+    {
+      "store": "Vega Market San Luis",
+      "verdict": "adjust",
+      "lat": -12.075408,
+      "lng": -77.002338,
+      "precision": "approx",
+      "status": "to_verify",
+      "reason": "Official entry 'Jr. Río Tumbes 290, Urb. Las Moras' confirmed. The researcher's point is simply the projection of #275 (n7573585042), but the store is #290. OSM also has 'Avenida Rios Tumbes 325' (kindergarten Virgen de la Paz, n5597296627, addr:full, minedu import) on the same NE (odd) side as #275, 162 m to the SE across Av. San Juan, so numbers rise to the SE. Line w90290805 + w90291322 (400.7 m): #275 at 306.3 m, #325 at 144.1 m, Av. San Juan crossing at about 200 m. Interpolating #290 between them (merge.mjs rule: nearest lower and higher reference, 50 apart, plausible distance) gives 257.6 m, still on the Río Nazca to Av. San Juan block. It is placed 12 m on the SW (even) side, opposite #275: -12.075408,-77.002338, 50 m from the old point. pip gives 150134 San Luis; Nominatim reverse gives 'Avenida Río Tumbes, Las Moras, San Luis'. No vega row in San Luis (nearest is La Cultura at 1.1 km) and no store of any chain within 200 m. Approx and to_verify.",
+      "noteEs": "Aproximada: Jr. Río Tumbes 290, Urb. Las Moras, interpolada entre el n.º 275 (Transportes San Alejandro, OSM) y el n.º 325 (I.E.I. Virgen de la Paz, OSM) de la misma calle, en la acera de los números pares. La lista oficial de Vega no trae coordenadas."
+    },
+    {
+      "store": "Vega Market Santa Catalina",
+      "verdict": "adjust",
+      "lat": -12.089658,
+      "lng": -77.020164,
+      "precision": "exact",
+      "status": "to_verify",
+      "reason": "OSM w408467429 'Plaza Santa Catalina' (shop=mall, Calle Carlos Villarán 500, La Victoria) matches the official address 'Av. Carlos Villarán 500 ... Centro Comercial Santa Catalina'. The researcher's point -12.089395,-77.019913 is the bounding-box centre of this L-shaped building and falls outside it: 17.7 m from the nearest wall, in the open corner toward Calle Solidaridad. Nominatim reverse there returns 'Calle Solidaridad', not the mall. The area centroid (-12.089491,-77.020041) is also outside, by 5 m. Replaced with the polygon's interior pole (13 m from every wall, at the corner of the L): -12.089658,-77.020164, 40 m from the old point. Nominatim reverse gives 'María Almenara, 500, Calle Carlos Villarán, Urbanización Santa Catalina, La Victoria'; pip gives 150115. The building covers 3,457 m2, so any unit in it is within about 60 m of this point. No vega row in La Victoria; the nearest rows are Tambo Jprado (165 m) and Tambo Stacatalina (274 m). Precision stays exact, because this is the OSM building of the mall that contains the store, the same convention as Tottus Iquitos in batch a1. Status is to_verify because the Vega unit itself is not mapped.",
+      "noteEs": "Dentro del centro comercial Plaza Santa Catalina (Calle Carlos Villarán 500, edificio en OSM), donde está la tienda según la dirección oficial de Vega; el local de Vega no está mapeado."
+    },
+    {
+      "store": "Holi Pardo",
+      "verdict": "accept",
+      "lat": -12.118786,
+      "lng": -77.030441,
+      "precision": "approx",
+      "status": "to_verify",
+      "reason": "Re-checked. Holi's complaint-form list (re-fetched) gives 'Pardo - Av. José Pardo 200'. Perú Retail (04/12/2025): opened Friday 28/11 'en la Av. Pardo N° 200, en Miraflores'. On Av. José Pardo, OSM #140 (n4335777529) and #216 (Norky's, w361995976) are both on the north (even) side. Numbers rise westward (#102 and #121 near the Óvalo, #255 to #332 further west). t = 0.789 recomputes to -12.118786,-77.030441, identical; using the vertex mean of Norky's moves it by less than 3 m. The point is at Norky's east wall, 12 m from Mifarma. Nominatim reverse gives 'Aruma, 216, Avenida José Pardo, Miraflores'; pip gives 150122. The nearest holi row is Holi 28 de Julio at 1.07 km, so this is not a duplicate. Approx and to_verify."
+    },
+    {
+      "store": "Holi Petit Thouars",
+      "verdict": "accept",
+      "lat": -12.076923,
+      "lng": -77.034226,
+      "precision": "approx",
+      "status": "to_verify",
+      "reason": "Re-checked. Holi list: 'Petit Thouars - Av. Petit Thouars 1261'. Perú Retail (21/12/2025): opened 19/12/2025 'en la Av. Petit Thouars 1261, en el Cercado de Lima'; the 04/12 note's 'en Miraflores' was only a forecast. The addressed OSM buildings #1255 (w1110465380) and #1281 (w436732571) are both on the east (odd) side, 19.8 m and 20.6 m from the centreline (w893125483). t = 0.231 recomputes to -12.076923,-77.034226, identical, 23 m east of the centreline, at 1.49 m per number. Mass 1329 (official) continues on the same side at 1.63 m per number. The 2017 block-corner nodes #1201 and #1299 sit on the west side and would put #1261 about 18 m further south; the addressed buildings are the better reference. Nominatim reverse gives '1255, Avenida Petit Thouars, Santa Beatriz, Lima'; pip gives 150101. The nearest holi row is 1.9 km away. Approx and to_verify."
+    },
+    {
+      "store": "Tambo Municipalidad",
+      "verdict": "adjust",
+      "lat": -14.064068,
+      "lng": -75.730536,
+      "precision": "approx",
+      "status": "to_verify",
+      "reason": "Confirmed that the official Justo record EmpEf5HeA8u4Ekaxs 'TAMBO MUNICIPALIDAD-C2 - ICA' carries Tambo San Eugenio's Plus Code, link and coordinates (identical to AECjovSuv4mXoB8Lx). The curl -sI Location header resolves to @-12.08488,-77.0207849 / !3d-12.08488!4d-77.01821 (La Victoria, Lima). Re-decoded WX8J+2PV: near Lima it is -12.084887,-77.018203; near Ica it is -14.084887,-76.018203, in Paracas (Pisco) desert, 31 km from Ica city (not 70 km as stated). Discarding them is right. New evidence: Perú Retail (12/12/2025, 'Tambo crece con 18 aperturas…', https://www.peru-retail.com/tambo-crece-con-18-aperturas-y-ya-supera-las-730-tiendas-a-nivel-nacional-donde-abrio/) lists 'Ica: Av. Municipalidad 271, Cercado de Ica', the exact house number. In OSM, cuadra 2 runs from Calle Tacna/Av. Bolívar (96.9 m) to Calle Loreto/Av. San Martín (220.5 m), which fits INEI '#209;213' (south side, 117 m) and Roky's #374 (north side, 337 m). Interpolating #271 between them gives 199.9 m; the merge.mjs straight-line rule gives -14.063970,-75.730564. Odd numbers are on the south side (INEI), so the point is placed 15 m south of the centreline: -14.064068,-75.730536, 34 m from the researcher's block midpoint. pip gives 110101 Ica; Nominatim reverse gives 'Avenida Municipalidad, Ica'. The nearest Tambo is Huánuco 183 at 257 m and nothing of any chain is within 150 m, so this is not a duplicate. It exists (official record and opening press). Approx and to_verify.",
+      "noteEs": "Aproximada: Av. Municipalidad 271, Cercado de Ica (Perú Retail, 12/12/2025), interpolada entre el n.º 209-213 (INEI) y el n.º 374 (Roky's) de la misma avenida (OSM), en la acera de los números impares. Las coordenadas oficiales, el Plus Code WX8J+2PV y el enlace de Google Maps son los de Tambo San Eugenio (La Victoria, Lima) y se descartaron."
+    },
+    {
+      "store": "Tambo Jesús María - Jr. Gral. Luis Sánchez Cerro 1699",
+      "verdict": "accept",
+      "lat": -12.07915,
+      "lng": -77.048546,
+      "precision": "approx",
+      "status": "to_verify",
+      "reason": "Re-checked. Perú Retail (09/07/2026) lists 'Jesús María (2): ... Jr. Gral. Luis Sánchez Cerro 1699'. It is not in the official Justo list (840 records, no match). OSM w1341641945 (Huáscar to Húsares de Junín, 52.1 m): the block-corner address nodes #1700/#1701 are just south of Húsares and #1798/#1799 are at the next corner, with odd numbers on the east. So #1699 is the last lot before Húsares on the east side. 75 % along the way, 8 m east, recomputes to -12.079150,-77.048546, identical. Nominatim reverse gives 'Calle Luis M. Sánchez Cerro, Jesús María'; pip gives 150113. The unnamed shop=convenience n4734957779 (v1, 2017) is across Húsares at the #1701 corner, 36 m away, and predates the June 2026 opening. The nearest tambo row is 275 m away. Exists by press only (probably). Approx and to_verify."
+    },
+    {
+      "store": "Tambo Lima - Psj. Melchora Balandra 100",
+      "verdict": "reject",
+      "lat": null,
+      "lng": null,
+      "precision": "approx",
+      "status": "to_verify",
+      "reason": "No defensible location. Perú Retail (09/09/2026) confirms 'Cercado de Lima (1): Psj. Melchora Balandra 100.' Not in the official Justo list (no Balandra or Melchora among 840 records). Nominatim with countrycodes=pe ('Melchora Balandra', 'Pasaje Melchora Balandra', 'Melchora, Lima') returns only Calle Melchora Balandra (w118415326) in Independencia, 11 km north, which contradicts the district. A web search finds no such pasaje in the Cercado. The OSM-only Tambo rows osm-n6547620077 (v1 2019) and osm-w1376181759 (v1 2025-04-09) predate the August 2026 opening, so neither is this store. The store probably exists; place it by hand once the address is confirmed."
+    },
+    {
+      "store": "Tambo Callao - Av. Venezuela",
+      "verdict": "accept",
+      "lat": -12.061699,
+      "lng": -77.090172,
+      "precision": "approx",
+      "status": "to_verify",
+      "reason": "Re-checked. Perú Retail (09/07/2026) lists 'Callao (1): Av. Venezuela, cdra. 34 s/n.' in its Callao section. Av. Venezuela has no frontage in the Callao district itself. Its Callao-province side (La Perla, then Bellavista) is numbered from La Perla (#120 Cogorno n4041994321, -77.1174, La Perla). OSM tags the Centro Médico Naval (w433817288) 'Avenida República de Venezuela 3400', addr:city Bellavista. Across the avenue, the Liceo Naval kindergarten (n5563075447, San Miguel) is tagged 'Avenida Venezuela Cuadra 34'. The point is the avenue's north edge at CMN gate n9085708081, directly opposite those cuadra-34 references. pip gives 070102 Bellavista; Nominatim reverse gives 'Hospital Centro Médico Naval, 3400, Avenida República de Venezuela, Bellavista'. The Lima-numbered cuadra 34 (UNMSM) has a Cercado de Lima north side, not Callao, so rejecting that alternative is right. The uncertainty spans the CMN frontage, about 600 m, so confidence is low. No tambo within 800 m. Approx and to_verify."
+    }
+  ]
+}

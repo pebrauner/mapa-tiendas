@@ -1,0 +1,175 @@
+{
+  "batch": "a4",
+  "generated": "2026-10-01",
+  "scope": "REPORT.md §4 'Needs manual placement': 6 Tambo openings reported by Peru Retail (May-Aug 2026), not yet in the official Justo store list",
+  "sourcesChecked": {
+    "officialList": "tools/seed/web/raw/tambo/justo_graphql_stores.json (839 records, retrieved 2026-10-01; lags openings after ~mid-May 2026): none of the 6 stores is present (searched names/sublocalities for Planicie, Canto Grande, Villa María, HUP, San Vicente, Candelaria, Pachacámac, Sector/Grupo).",
+    "osmScan": "tools/seed/osm-raw.json (osmBase 2026-10-01T05:51:36Z): no Tambo element within 1.5 km of any of the VES / Nuevo Chimbote candidate areas.",
+    "overpass": "Live Overpass queries 2026-10-01 (osm_base 16:46-16:47Z): major roads around the Villa María (Nuevo Chimbote) fuel station; place/shop features and city blocks in VES Sector 3 Grupos 9-29.",
+    "nominatim": "Nominatim search/lookup/reverse, ≤1 req/s, UA 'mapa-tiendas-seed/1.0 (github.com/pebrauner/mapa-tiendas)'.",
+    "duplicates": "data/stores.csv searched by chain + district + street/urbanization and by distance: no existing row is any of these stores (details per store)."
+  },
+  "placements": [
+    {
+      "store": "Tambo Nuevo Chimbote - Mz. A",
+      "chain": "tambo",
+      "address": "Mz. A, Lt. 01, Programa de Vivienda HUP Villa María",
+      "district": "Nuevo Chimbote",
+      "lat": -9.120723,
+      "lng": -78.540239,
+      "precision": "approx",
+      "confidence": "medium",
+      "method": "Registry + OSM feature: Osinergmin lists a PECSA fuel-station project at 'Programa de Vivienda HUP Villa María, Sector B, Sub Lt B2, Mz A Lt 2, Carret. Panamericana, Nuevo Chimbote' (exp. 201300143694, 04/09/2013). The only PECSA station in Villa María in OSM (node 3646844816 operator=PECSA, brand:wikidata=Q62299262; area way 828895493) stands on the old Panamericana stretch (OSM 'Avenida La Marina' way 1547457512, which continues from PE-1N way 287161074 via 'Avenida Panamericana Sur' way 569451300) at the end of Av. Aviación (way 828897505); Mass's official list calls the same spot 'Ctra. Panamericana Norte (Cruce con Av. Aviación)' (web-mass-ctra-panamericana-norte, 68 m away). Tambo is Mz. A Lt. 01, the lot next to the station's Mz. A Lt. 2: placed at the station area centroid (lot 1 unresolved, expected within ~100 m).",
+      "evidence": [
+        "https://www.peru-retail.com/tambo-inaugura-20-nuevas-tiendas-y-supera-las-900-a-nivel-nacional-donde-estan-sus-nuevos-locales/ (2026-09-09: 'Nuevo Chimbote, Áncash (1): Mz. A, Lt. 01, Programa de Vivienda HUP Villa María')",
+        "http://gasnatural.osinerg.gob.pe/contenidos/uploads/GFGN/Con_ITF.pdf (item 18: PERUANA DE ESTACIONES DE SERVICIOS S.A.C., exp. 201300143694, 04/09/2013, 'PROGRAMA DE VIVIENDA HUP VILLA MARIA, SECTOR B SECTOR SUB LT B2 MZ A LT 2 CARRET PANAMERICANA, NUEVO CHIMBOTE – SANTA - ANCASH')",
+        "https://www.openstreetmap.org/node/3646844816 (amenity=fuel, name Pecsa, operator=PECSA; Nominatim address: Pasaje 31, 1 de Mayo, Villa Maria, Nuevo Chimbote)",
+        "https://www.openstreetmap.org/way/828895493 (amenity=fuel area; centroid -9.120723,-78.540239; max vertex distance 43 m)",
+        "https://www.openstreetmap.org/way/1547457512 and https://www.openstreetmap.org/way/759915658 (Avenida La Marina, secondary, passing the station; Nominatim reverse at -9.1199,-78.5402 and -9.1207,-78.5394)",
+        "https://www.openstreetmap.org/way/569451300 ('Avenida Panamericana Sur', continuation of PE-1N https://www.openstreetmap.org/way/287161074 into Villa María)",
+        "https://www.openstreetmap.org/node/9667050706 (place=quarter 'Villa Maria', Nuevo Chimbote, 650 m W of the station)",
+        "data/stores.csv web-mass-ctra-panamericana-norte 'Ctra. Panamericana Norte (Cruce Con Av. Aviación) - CHIMBOTE' at 68 m (official Mass list) — corroborates that this road is the Carretera Panamericana",
+        "Rejected alternative: OSM relation 7512543 (Pecsa) is on Prolongación Av. José Pardo ~365 m off the Panamericana stretch and not in Villa María",
+        "pip (tools/seed/pip.mjs): 021809 Nuevo Chimbote, Santa, Áncash"
+      ],
+      "computed": {
+        "stationNode": [-9.1208469, -78.5401122],
+        "stationAreaCentroid": [-9.120723, -78.540239],
+        "nodeToCentroidM": 20,
+        "pip": { "ubigeo": "021809", "district": "Nuevo Chimbote", "province": "Santa", "department": "Áncash" },
+        "nearestExistingTamboM": 1135,
+        "nearestExistingTambo": "osm-n5064262608 Tambo Nuevo (VFHC+828)"
+      },
+      "exists": "probably",
+      "existsNote": "Opening (August 2026) reported by Peru Retail on 2026-09-09; not yet in the official Justo list (which lags since ~mid-May 2026). No Tambo row in data/stores.csv within 1.1 km.",
+      "noteEs": "Ubicación aproximada: Mz. A Lt. 01 del P.V. HUP Villa María, lote contiguo al grifo PECSA (Mz. A Lt. 2, Carretera Panamericana) según registro de Osinergmin (exp. 201300143694, 2013); grifo mapeado en OSM (nodo 3646844816 / vía 828895493) en Villa María, Nuevo Chimbote. Apertura reportada por Peru Retail (09/09/2026); aún no figura en la lista oficial."
+    },
+    {
+      "store": "Tambo San Juan de Lurigancho - Mz. G",
+      "chain": "tambo",
+      "address": "Mz. G, Lt. 25, Urb. La Planicie de Canto Grande",
+      "district": "San Juan de Lurigancho",
+      "lat": null,
+      "lng": null,
+      "precision": "approx",
+      "confidence": "none",
+      "method": "No defensible point. 'La Planicie (de Canto Grande)' is not in OSM: Nominatim returns nothing in SJL (only Calle La Planicie in Rímac and Wong La Planicie in La Molina). It exists as 'Asociación de Vivienda La Planicie de Canto Grande' (RUC 20269554593, fiscal address 'Mza. J Lote 01 A.V. La Planicie', SJL — no street). The only locational lead is an Enel outage notice listing 'Urb. Canto Rey, Av. El Parque cdra. 5 Mz. D, Asoc. La Planicie de Canto Grande Mz. E, F, H, J, Asoc. Pro Viv. Garagay Mz. D' in one block; OSM has Av. Canto Rey (way 549418674, -11.97706,-76.99876) and a 'Canto Rey' bus stop on Av. Fernando Wiesse (Urb. San Rafael) but no 'Urb. Canto Rey', 'Av. El Parque' (SJL, that area) or 'Garagay' feature, so an outage co-listing cannot fix a point. The report's nearby unmatched OSM row osm-n5591615727 is NOT this store: it is a bare 'Tambo' shop=convenience node, version 2, last edited 2021-12-14 (before this July 2026 opening), 37 m from Tiendas 3A Canto Grande 24, whose official address is 'U.I. Elizabeth, Comuna 9, Mz C Lote 22' (not La Planicie).",
+      "evidence": [
+        "https://www.peru-retail.com/tambo-inaugura-16-nuevas-tiendas-y-queda-cerca-de-alcanzar-los-900-locales-a-nivel-nacional/ (2026-08-14: 'San Juan de Lurigancho (2): Av. Los Jardines Este 587 y Mz. G, Lt. 25, Urb. La Planicie de Canto Grande')",
+        "https://larepublica.pe/sociedad/2026/03/24/corte-de-luz-este-25-de-marzo-conoce-los-8-distritos-de-lima-que-se-veran-afectados-atmp-1162008 (Enel outage 25/03/2026, SJL: Urb. Canto Rey, Av. El Parque cdra. 5 Mz. D, Asoc. La Planicie de Canto Grande Mz. E, F, H, J, Asoc. Pro Viv. Garagay Mz. D)",
+        "https://ubicania.com/empresas/asociacion-de-vivienda-la-planicie-de-canto-grande_id_0DF3277811271697 (Asociación de Vivienda La Planicie de Canto Grande, SJL; address 'MZA. J LOTE. 01 A.V. LA PLANICIE')",
+        "https://www.openstreetmap.org/way/549418674 (Avenida Canto Rey, SJL — lead only)",
+        "https://www.openstreetmap.org/node/5591615727 (Tambo, v2, 2021-12-14; tools/seed/osm-element-meta.json) — rejected",
+        "Nominatim (2026-10-01): 'La Planicie, San Juan de Lurigancho', 'Planicie de Canto Grande', 'Planicie' in SJL viewbox → no SJL result",
+        "Enel weekly outage PDF 06-12/04/2026 (https://statics.exitosanoticias.pe/2026/04/69cec5b9e1912.pdf) lists an 'Agrup. Fam. La Planicie' next to Juan Valer Sandoval / Cristo Rey — a different settlement name, not used"
+      ],
+      "computed": {
+        "osm_n5591615727": { "lat": -11.9898448, "lng": -77.0151351, "version": 2, "timestamp": "2021-12-14T00:09:07Z", "nearestOfficial3A": "web-tiendas3a-canto-grande-24 at 37 m", "nearestOfficialTambo": "osm-w437364306 Tambo Basadre at 481 m" }
+      },
+      "exists": "probably",
+      "existsNote": "Opening (July 2026) reported by Peru Retail on 2026-08-14; not yet in the official Justo list. Not in data/stores.csv under another id (osm-n5591615727 is an older, unrelated OSM node).",
+      "noteEs": "Sin ubicación: la Urb./Asoc. La Planicie de Canto Grande no figura en OSM ni en Nominatim; solo un aviso de corte de luz de Enel (La República, 24/03/2026) la lista junto a Urb. Canto Rey y Av. El Parque cdra. 5, lo que no basta para ubicarla. El nodo OSM n5591615727 (editado en 2021, junto a Tiendas 3A Canto Grande 24) no corresponde a esta apertura de julio de 2026. Ubicar a mano."
+    },
+    {
+      "store": "Tambo San Martín de Porres - Mz. B",
+      "chain": "tambo",
+      "address": "Mz. B, Lt. 15, Asoc. Los Olivos de San Vicente",
+      "district": "San Martín de Porres",
+      "lat": null,
+      "lng": null,
+      "precision": "approx",
+      "confidence": "none",
+      "method": "No defensible point. 'Asoc. Los Olivos de San Vicente' is not in OSM (Nominatim: no match; only an unrelated Calle San Vicente in Chuquitanta and San Vicente Ferrer schools in Los Olivos district). The only lead is a Pluz outage notice for 25/09/2026 (SMP/Callao, 8:00-18:00) listing 'Asoc. Los Olivos de San Vicente Mzs. A, B, C, D, E' among ~25 associations of the Santa Rosa–Oquendo area (Jardines de Sta. Rosa III, La Alborada de Sta. Rosa, Sta. María del Valle III, San Valentín, San Remo III, Las Gardenias de Oquendo, La Floresta de Oquendo, Villas de Oquendo, ...): that places it somewhere along the SMP/Callao border near Oquendo, an area of several km² — too broad for a point. Not found in the Callao cadastral plan (CERCADO-CALLAO-2020.pdf).",
+      "evidence": [
+        "https://www.peru-retail.com/tambo-inaugura-20-nuevas-tiendas-y-supera-las-900-a-nivel-nacional-donde-estan-sus-nuevos-locales/ (2026-09-09: 'San Martín de Porres (2): Av. Alfredo Mendiola 900, Urb. Palao y Mz. B, Lt. 15, Asoc. Los Olivos de San Vicente')",
+        "https://elcomercio.pe/respuestas/a-que-hora/anuncian-corte-de-luz-este-sabado-26-de-setiembre-revisa-los-horarios-y-zonas-afectadas-tdpe-noticia/ (Pluz outage 25/09/2026, SMP/Callao: '... ASOC. LOS OLIVOS DE SAN VICENTE MZS. A, B, C, D, E ...' with Santa Rosa / Oquendo associations)",
+        "Nominatim (2026-10-01): 'Los Olivos de San Vicente, San Martín de Porres', 'Olivos de San Vicente' (global and SMP viewbox), 'San Vicente' SMP viewbox → no association",
+        "https://www.municallao.gob.pe/portal-anterior/pdf/obras/mapas/maps/CERCADO-CALLAO-2020.pdf (text layer searched: no 'San Vicente')"
+      ],
+      "computed": {},
+      "exists": "probably",
+      "existsNote": "Opening (August 2026) reported by Peru Retail on 2026-09-09; not yet in the official Justo list. No data/stores.csv row mentions San Vicente in SMP.",
+      "noteEs": "Sin ubicación: la Asoc. Los Olivos de San Vicente no figura en OSM ni en Nominatim; un aviso de corte de luz de Pluz (25/09/2026) la incluye entre asociaciones de la zona Santa Rosa–Oquendo (límite SMP/Callao), zona demasiado amplia para ubicar la tienda. Ubicar a mano."
+    },
+    {
+      "store": "Tambo Villa El Salvador - Mz. ZC Lt. 1",
+      "chain": "tambo",
+      "address": "Mz. ZC Lt. 1, Sector 3, Grupo 16",
+      "district": "Villa El Salvador",
+      "lat": -12.22304,
+      "lng": -76.932524,
+      "precision": "approx",
+      "confidence": "medium",
+      "method": "OSM feature: polygon 'Sector 3 Grupo 16' (place=neighbourhood, way 730043462), centroid computed from its geometry (Nominatim lookup polygon_geojson); the group's central park (way 370735004) has the same centroid. OSM maps the group's blocks A–P (e.g. block A way 781389708) but no block 'ZC'; the only 'ZC' blocks in VES are in Urb. Pachacámac III/IV Etapa, Sector 4 (ways 730262143, 870609923), i.e. not Sector 3 Grupo 16, so the block could not be resolved. Max distance from the centroid to the group's edge: 208 m.",
+      "evidence": [
+        "https://www.peru-retail.com/tambo-suma-23-nuevos-locales-en-junio-y-queda-cerca-de-alcanzar-900-tiendas-a-nivel-nacional/ (2026-07-09: 'Villa El Salvador (1): Mz. ZC Lt. 1, Sector 3, Grupo 16')",
+        "https://www.openstreetmap.org/way/730043462 (place=neighbourhood 'Sector 3 Grupo 16'; centroid -12.223040,-76.932524; max vertex distance 208 m)",
+        "https://www.openstreetmap.org/way/370735004 (leisure=park 'Parque Sector 3 Grupo 16'; centroid -12.223057,-76.932519)",
+        "Overpass 2026-10-01 (osm_base 16:47:13Z), bbox -12.2265,-76.9375,-12.2195,-76.9270: city blocks A–P per group; 'ZC' only at https://www.openstreetmap.org/way/730262143 (Urb. Pachacámac III Etapa) and https://www.openstreetmap.org/way/870609923 (Urb. Pachacámac IV Etapa)",
+        "pip (tools/seed/pip.mjs): 150142 Villa El Salvador"
+      ],
+      "computed": {
+        "groupCentroid": [-12.22304, -76.932524],
+        "groupMaxVertexM": 208,
+        "pip": { "ubigeo": "150142", "district": "Villa El Salvador", "province": "Lima", "department": "Lima" },
+        "nearestExistingTambo": "web-tambo-m-bastidas2 at 667 m"
+      },
+      "exists": "probably",
+      "existsNote": "Opening (June 2026) reported by Peru Retail on 2026-07-09; not yet in the official Justo list. Nearest Tambo in data/stores.csv is 667 m away (M BASTIDAS2, Q3H6+FJQ) — not the same store.",
+      "noteEs": "Ubicación aproximada: centro del Grupo Residencial 16 del Sector 3 de Villa El Salvador (polígono OSM 730043462, margen de unos 200 m); la Mz. ZC no está mapeada en OSM. Apertura reportada por Peru Retail (09/07/2026); aún no figura en la lista oficial."
+    },
+    {
+      "store": "Tambo Villa El Salvador - P.J. Villa El Salvador",
+      "chain": "tambo",
+      "address": "P.J. Villa El Salvador, Sect. 01, Gpo. 06, Lt. 05",
+      "district": "Villa El Salvador",
+      "lat": -12.188793,
+      "lng": -76.949812,
+      "precision": "approx",
+      "confidence": "medium",
+      "method": "OSM feature: polygon 'Sector 1 Grupo 6' (place=neighbourhood, way 730013551), centroid computed from its geometry. The address gives a lot number but no manzana, so the position inside the group cannot be refined. Max distance from the centroid to the group's edge: 189 m.",
+      "evidence": [
+        "https://www.peru-retail.com/tambo-inaugura-16-nuevas-tiendas-y-queda-cerca-de-alcanzar-los-900-locales-a-nivel-nacional/ (2026-08-14: 'Villa El Salvador (1): P.J. Villa El Salvador, Sect. 01, Gpo. 06, Lt. 05')",
+        "https://www.openstreetmap.org/way/730013551 (place=neighbourhood 'Sector 1 Grupo 6'; centroid -12.188793,-76.949812; max vertex distance 189 m)",
+        "pip (tools/seed/pip.mjs): 150142 Villa El Salvador"
+      ],
+      "computed": {
+        "groupCentroid": [-12.188793, -76.949812],
+        "groupMaxVertexM": 189,
+        "pip": { "ubigeo": "150142", "district": "Villa El Salvador", "province": "Lima", "department": "Lima" },
+        "nearestExistingTambo": "web-tambo-micaela-bastidas (Av. Modelo 1126, Sector I Grupo 21) at 798 m"
+      },
+      "exists": "probably",
+      "existsNote": "Opening (July 2026) reported by Peru Retail on 2026-08-14; not yet in the official Justo list. Nearest Tambo in data/stores.csv is 798 m away (Micaela Bastidas, Sector I Grupo 21) — not the same store.",
+      "noteEs": "Ubicación aproximada: centro del Grupo Residencial 6 del Sector 1 de Villa El Salvador (polígono OSM 730013551, margen de unos 190 m); la dirección no indica manzana. Apertura reportada por Peru Retail (14/08/2026); aún no figura en la lista oficial."
+    },
+    {
+      "store": "Tambo Villa El Salvador - Pasaje Pachacámac",
+      "chain": "tambo",
+      "address": "Pasaje Pachacámac, Virgen de la Candelaria Mz. E Lt. 01",
+      "district": "Villa El Salvador",
+      "lat": -12.246162,
+      "lng": -76.921844,
+      "precision": "approx",
+      "confidence": "medium",
+      "method": "OSM feature: city block 'E' of the settlement 'Virgen de la Candelaria' (place=city_block, way 781675179, inside place=neighbourhood way 759079518, Sector 4 of VES); centroid computed from its geometry. The block (~140 x 35 m) is bounded by Av. María Reiche (N, way 325260044), Calle 12 (W, way 157951831), Calle 8 (S, way 157951781) and Pasaje 19 (E, way 157951848) per Nominatim reverse; no street is named 'Pasaje Pachacámac' in OSM (several neighbouring settlements carry the Pachacámac name: Los Aires / Brisas de Pachacámac), so lot 01 was not resolved. Max distance from the centroid to the block's corners: 71 m.",
+      "evidence": [
+        "https://www.peru-retail.com/tambo-amplia-su-presencia-con-18-nuevos-locales-donde-estan-ubicados-y-cuantos-acumula/ (2026-06-08: 'Villa El Salvador (1): Pasaje Pachacámac, Virgen de la Candelaria Mz. E Lt. 01')",
+        "https://www.openstreetmap.org/way/781675179 (place=city_block 'E', Virgen de la Candelaria; centroid -12.246162,-76.921844; max vertex distance 71 m)",
+        "https://www.openstreetmap.org/way/759079518 (place=neighbourhood 'Virgen de la Candelaria', Sector 4, VES); https://www.openstreetmap.org/node/8699775739 (Capilla Virgen de la Candelaria)",
+        "Nominatim reverse 2026-10-01 around the block: https://www.openstreetmap.org/way/325260044 (Av. María Reiche), https://www.openstreetmap.org/way/157951831 (Calle 12), https://www.openstreetmap.org/way/157951781 (Calle 8), https://www.openstreetmap.org/way/157951848 (Pasaje 19)",
+        "pip (tools/seed/pip.mjs): 150142 Villa El Salvador"
+      ],
+      "computed": {
+        "blockCentroid": [-12.246162, -76.921844],
+        "blockMaxVertexM": 71,
+        "blockRing": [[-12.2457088, -76.9223084], [-12.2467773, -76.921665], [-12.2466165, -76.9213855], [-12.2455482, -76.9220291]],
+        "pip": { "ubigeo": "150142", "district": "Villa El Salvador", "province": "Lima", "department": "Lima" },
+        "nearestExistingTambo": "web-tambo-mariareiche (official coords, sublocality A.H. Max Uhle) at 385 m"
+      },
+      "exists": "probably",
+      "existsNote": "Opening (May 2026) reported by Peru Retail on 2026-06-08; not in the official Justo list. The nearest Tambo in data/stores.csv, web-tambo-mariareiche, has official coordinates 385 m away in A.H. Max Uhle (not Virgen de la Candelaria), so it is treated as a different store; worth a glance since both are near Av. María Reiche and the Justo list cut-off is ~mid-May.",
+      "noteEs": "Ubicación aproximada: Mz. E de Virgen de la Candelaria, Sector 4 de Villa El Salvador (manzana OSM 781675179, entre Av. María Reiche, Calle 12, Calle 8 y Pasaje 19); en OSM ninguna vía figura como «Pasaje Pachacámac». Apertura reportada por Peru Retail (08/06/2026); aún no figura en la lista oficial. Tambo María Reiche (lista oficial) queda a 385 m."
+    }
+  ]
+}

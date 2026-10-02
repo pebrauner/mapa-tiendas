@@ -1,0 +1,644 @@
+{
+  "batch": "a2",
+  "generated": "2026-10-01",
+  "about": "Manual placement research for the REPORT.md §4 stores (batch a2). Coordinates derive only from the cited evidence. The only Google Maps short link involved was resolved through the HTTP redirect Location header (curl -sI, and -L -o /dev/null -w url_effective); no Google Maps page content was fetched. OSM data from Overpass (one query at a time, endpoint fallback as in tools/scan-osm.mjs; answers with osm_base 2026-10-01 except where noted), the OSM API (node history) and Nominatim (one request at a time, UA mapa-tiendas-seed/1.0). Plus Codes decoded with a local Open Location Code decoder. Official coordinates of other chains' stores on the same street (Mass locator) used as house-number references, as tools/merge.mjs does. Districts checked with tools/seed/pip.mjs.",
+  "summary": {
+    "alreadyInDatabase": {},
+    "newRows": [
+      "Vega Market Alameda de los Cóndores",
+      "Vega Market Mariano Pastor",
+      "Vega Market San Luis",
+      "Vega Market Santa Catalina",
+      "Holi Pardo",
+      "Holi Petit Thouars",
+      "Tambo Municipalidad",
+      "Tambo Jesús María - Jr. Gral. Luis Sánchez Cerro 1699",
+      "Tambo Callao - Av. Venezuela"
+    ],
+    "exact": [
+      "Vega Market Santa Catalina"
+    ],
+    "approx": [
+      "Vega Market Alameda de los Cóndores",
+      "Vega Market Mariano Pastor",
+      "Vega Market San Luis",
+      "Holi Pardo",
+      "Holi Petit Thouars",
+      "Tambo Municipalidad",
+      "Tambo Jesús María - Jr. Gral. Luis Sánchez Cerro 1699",
+      "Tambo Callao - Av. Venezuela"
+    ],
+    "unplaced": [
+      "Tambo Lima - Psj. Melchora Balandra 100"
+    ],
+    "districtDiffersFromSource": {
+      "Tambo Callao - Av. Venezuela": "source Callao, pip Bellavista"
+    },
+    "districtFilledFromEvidence": {
+      "Holi Pardo": "Miraflores (Perú Retail 2025-12-04)",
+      "Holi Petit Thouars": "Lima / Cercado (Perú Retail 2025-12-21)",
+      "Tambo Municipalidad": "Ica (Av. Municipalidad, Ica)"
+    }
+  },
+  "overpassQueries": {
+    "condores": "overpass.private.coffee, osm_base 2026-07-24 (street names only; superseded by condores2 / condores_geom)",
+    "condores2": "maps.mail.ru, 2026-10-01T16:43Z",
+    "condores_geom": "overpass-api.de, 2026-10-01T16:42Z",
+    "pastor": "overpass.private.coffee, osm_base 2026-05-31 (street / market existence only; pastor_geom is fresh)",
+    "pastor_geom": "overpass-api.de, 2026-10-01T16:52Z",
+    "tumbes": "overpass-api.de, 2026-10-01T16:53Z",
+    "catalina": "overpass-api.de, 2026-10-01T16:44Z",
+    "holi": "maps.mail.ru, 2026-10-01T16:57Z",
+    "ica": "overpass-api.de, 2026-10-01T17:03Z",
+    "sanchezcerro": "maps.mail.ru, 2026-10-01T16:59Z",
+    "sc_local": "overpass-api.de, 2026-10-01T16:59Z",
+    "balandra": "maps.mail.ru, 2026-10-01T17:00Z",
+    "balandra_area": "maps.mail.ru, 2026-10-01T17:05Z",
+    "venezuela": "maps.mail.ru, 2026-10-01T17:02Z",
+    "cmn": "overpass-api.de, 2026-10-01T17:02Z"
+  },
+  "placements": [
+    {
+      "store": "Vega Market Alameda de los Cóndores",
+      "chain": "vega",
+      "reportRow": {
+        "address": "Av. Alameda de los Cóndores 638, Urb. Valle de la Molina",
+        "district": "La Molina",
+        "province": "Lima",
+        "department": "Lima"
+      },
+      "lat": -12.101138,
+      "lng": -76.944137,
+      "precision": "approx",
+      "confidence": "medium",
+      "district": "La Molina",
+      "province": "Lima",
+      "department": "Lima",
+      "ubigeo": "150114",
+      "status": "to_verify",
+      "existingId": null,
+      "method": "House-number extrapolation along the OSM street (merge.mjs rule: nearest reference + a second reference >= 50 numbers apart, gap <= 300): from #610 (Mass Av. De Los Condores 610, official coordinates) and #445 (OSM) to #638, measured as chainage along the south-east carriageway of Avenida de Los Cóndores (even side), keeping the Mass store's 15 m setback.",
+      "evidence": [
+        "Official locator entry 'La Molina - Vega Market Alameda de los Cóndores': 'Av. Alameda de los Cóndores 638, Urb. Valle de la Molina', tel 960137801, Latitud/Longitud empty - https://www.vega.pe/nuestras-tiendas (tools/seed/web/raw/vega/sucursales_content.json)",
+        "Official locator re-fetched 2026-10-01 (vega.pe/nuestras-tiendas, Site-Editor \"sucursales\" content list): still no Latitud/Longitud for this entry; the public VTEX pickup-points API (https://www.vega.pe/api/checkout/pub/pickup-points?geoCoordinates=...) still lists only the same 14 supermayorista/market points, none of them this store",
+        "Press: Perú Retail 2025-07-10 / 2025-08-25 / 2025-09-15: Grupo Vega opened a Market in La Molina in 2025 - https://www.peru-retail.com/grupo-vega-acelera-su-expansion-con-la-apertura-de-una-nueva-tienda-conoce-donde-se-ubica/",
+        "OSM: the only 'Cóndores' avenue in La Molina's urban area is 'Avenida de Los Cóndores' (old_name Avenida Las Viñas de la Molina; carriageways w320604749 / w338385071, stub w36980293 / w370214817), from Av. Alameda del Corregidor to the Óvalo Los Cóndores (w36980538); OSM place=neighbourhood 'Valle de La Molina' (n11415366071, -12.1030228,-76.9431875) lies just south-east of the oval - https://www.openstreetmap.org/way/320604749",
+        "Reference #610: Mass 'Av. De Los Condores 610', La Molina, official coordinates -12.101371,-76.944443 (data/stores.csv web-mass-av-de-los-condores-610) - https://www.tiendasmass.com.pe/ubicame/",
+        "OSM house numbers on the same street: #298 Lavamax n9451827285 (-12.1043156,-76.9481543), #326 Pretty Pet n13196431755 (-12.1037401,-76.9475249), #445 IE Santa Lucía n5597143961 (-12.1024835,-76.9464554); #196 (IE Newman, n5597063597 / w480963138, 'Mz Ñ Lote 14-18') does not fit the sequence and was ignored - https://www.openstreetmap.org/node/5597143961",
+        "Computed (line = stub w36980293 + SE carriageway w320604749, 849.2 m): chainage #445 = 491.4 m, #610 = 739.9 m (offset -15 m, right/SE side, like #298 and #326), 1.506 m per number; #638 -> 782.1 m; point -12.101138,-76.944137, 42 m from Mass 610 and 66 m from the Óvalo Los Cóndores (straight-line extrapolation gives -12.101182,-76.944102, 6 m away)",
+        "Duplicate check: data/stores.csv has no vega row in La Molina",
+        "pip: La Molina / Lima / Lima (150114)"
+      ],
+      "computed": {
+        "chain445": 491.4,
+        "chain610": 739.9,
+        "off610": -15,
+        "metresPerNumber": 1.506,
+        "t": 0.1697,
+        "straightExtrapolation": {
+          "lat": -12.101182,
+          "lng": -76.944102
+        },
+        "chain638": 782.1,
+        "lineLen": 849.2,
+        "lat": -12.101138,
+        "lng": -76.944137,
+        "distFromMass610M": 42,
+        "distToOvalEndM": 66,
+        "pip": {
+          "ubigeo": "150114",
+          "district": "La Molina",
+          "province": "Lima",
+          "department": "Lima"
+        }
+      },
+      "exists": "yes",
+      "noteEs": "Aproximada: Av. Alameda de los Cóndores 638 (en OSM, Av. de Los Cóndores), cerca del Óvalo Los Cóndores; extrapolada por numeración desde el n.º 610 (Mass, coordenadas oficiales, a 42 m en la misma acera) y el n.º 445 (OSM). La lista oficial de Vega no trae coordenadas."
+    },
+    {
+      "store": "Vega Market Mariano Pastor",
+      "chain": "vega",
+      "reportRow": {
+        "address": "Calle Mariano Pastor Sevilla 194 (Ref 1/2 cuadra Mcdo. Bolívar).",
+        "district": "Pueblo Libre",
+        "province": "Lima",
+        "department": "Lima"
+      },
+      "lat": -12.073157,
+      "lng": -77.064868,
+      "precision": "approx",
+      "confidence": "high",
+      "district": "Pueblo Libre",
+      "province": "Lima",
+      "department": "Lima",
+      "ubigeo": "150121",
+      "status": "to_verify",
+      "existingId": null,
+      "method": "OSM street geometry + one official reference on the same street: #194 placed 17 numbers (about 20 m) east of Mass Jr. Mariano Pastor Sevilla 177 (official coordinates), on the opposite (even, north) side, short of the Calle Yauli junction; checked against the official reference \"1/2 cuadra Mcdo. Bolívar\".",
+      "evidence": [
+        "Official locator entry 'Pueblo Libre - Vega Market Mariano Pastor': 'Calle Mariano Pastor Sevilla 194 (Ref 1/2 cuadra Mcdo. Bolívar).', tel 905 435 166, no coordinates - https://www.vega.pe/nuestras-tiendas",
+        "Official locator re-fetched 2026-10-01 (vega.pe/nuestras-tiendas, Site-Editor \"sucursales\" content list): still no Latitud/Longitud for this entry; the public VTEX pickup-points API (https://www.vega.pe/api/checkout/pub/pickup-points?geoCoordinates=...) still lists only the same 14 supermayorista/market points, none of them this store",
+        "OSM 'Mariano Pastor Sevilla' (w73952919, oneway, 251.4 m) from Clovis (-12.07322,-77.0665859) to Calle Andalucía (-12.0732854,-77.0642748); Calle Yauli (w73952920) meets it at -12.073272,-77.0647494 (chainage 199.8 m) - https://www.openstreetmap.org/way/73952919",
+        "Reference #177: Mass 'Jr. Mariano Pastor Sevilla 177', Pueblo Libre, official coordinates -12.073372,-77.065063 (data/stores.csv web-mass-jr-mariano-pastor-sevilla-177): chainage 166 m, 12.3 m south of the centreline (odd side) - https://www.tiendasmass.com.pe/ubicame/",
+        "OSM 'Mercado Bolivar' n1705270783 (-12.0728734,-77.0655359), on the block between Av. Simón Bolívar and Mariano Pastor Sevilla (north side) - https://www.openstreetmap.org/node/1705270783",
+        "Computed: #194 -> chainage 186.4 m (17 numbers x 1.2 m past #177, capped 5 m before Calle Yauli), mirrored to the north (even) side -> -12.073157,-77.064868; 32 m from Mass 177 and 79 m from the Mercado Bolívar node (consistent with \"1/2 cuadra\")",
+        "No OSM house numbers on this street; the street is only 251 m long, so the error is bounded to well under one block",
+        "Duplicate check: the vega rows in Pueblo Libre are Clement (Av. Leguía y Meléndez 1040) and Mariano Cornejo (Av. Mariano Cornejo 1407): different stores",
+        "pip: Pueblo Libre / Lima / Lima (150121)"
+      ],
+      "computed": {
+        "first": {
+          "streetLengthM": 251.4,
+          "streetEnds": [
+            {
+              "lat": -12.07322,
+              "lng": -77.0665859
+            },
+            {
+              "lat": -12.0732854,
+              "lng": -77.0642748
+            }
+          ],
+          "yauliJunction": {
+            "lat": -12.073272,
+            "lng": -77.0647494
+          },
+          "junctionChainM": 199.8,
+          "market": {
+            "lat": -12.0728734,
+            "lng": -77.0655359
+          },
+          "lat": -12.073269,
+          "lng": -77.064841,
+          "distToMarketM": 87,
+          "pip": {
+            "ubigeo": "150121",
+            "district": "Pueblo Libre",
+            "province": "Lima",
+            "department": "Lima"
+          }
+        },
+        "refined": {
+          "chain177": 166,
+          "off177": -12.3,
+          "chainYauli": 199.8,
+          "chain194": 186.4,
+          "lat": -12.073157,
+          "lng": -77.064868,
+          "distFromMass177M": 32,
+          "distToMarketM": 79,
+          "pip": {
+            "ubigeo": "150121",
+            "district": "Pueblo Libre",
+            "province": "Lima",
+            "department": "Lima"
+          }
+        }
+      },
+      "exists": "yes",
+      "noteEs": "Aproximada: Calle Mariano Pastor Sevilla 194, acera norte, a unos 30 m del n.º 177 (Mass, coordenadas oficiales) y antes del cruce con la Calle Yauli; a unos 80 m del Mercado Bolívar (OSM), como indica la referencia oficial «1/2 cuadra Mcdo. Bolívar»."
+    },
+    {
+      "store": "Vega Market San Luis",
+      "chain": "vega",
+      "reportRow": {
+        "address": "Jr. Río Tumbes 290, Urb. Las Moras",
+        "district": "San Luis",
+        "province": "Lima",
+        "department": "Lima"
+      },
+      "lat": -12.074973,
+      "lng": -77.002455,
+      "precision": "approx",
+      "confidence": "medium",
+      "district": "San Luis",
+      "province": "Lima",
+      "department": "Lima",
+      "ubigeo": "150134",
+      "status": "to_verify",
+      "existingId": null,
+      "method": "OSM house number on the same street: projection of #275 (OSM, Urbanización Las Moras) onto the centreline of Río Tumbes; #290 is 15 numbers away on the opposite (even) side of the same block.",
+      "evidence": [
+        "Official locator entry 'San Luis - Vega Market San Luis': 'Jr. Río Tumbes 290, Urb. Las Moras', tel 923 808 560, no coordinates - https://www.vega.pe/nuestras-tiendas",
+        "Official locator re-fetched 2026-10-01 (vega.pe/nuestras-tiendas, Site-Editor \"sucursales\" content list): still no Latitud/Longitud for this entry; the public VTEX pickup-points API (https://www.vega.pe/api/checkout/pub/pickup-points?geoCoordinates=...) still lists only the same 14 supermayorista/market points, none of them this store",
+        "OSM street 'Calle Río Tumbes' w90290805 + 'Avenida Río Tumbes' w90291322 (400.7 m, -12.077361,-77.001056 -> -12.074227,-77.002871); OSM place=neighbourhood 'Las Moras' n10741805836 and 'Parque Las Moras' w392187262 beside it - https://www.openstreetmap.org/way/90291322",
+        "OSM n7573585042 'Transportes San Alejandro S.A.C.': addr:street Avenida Río Tumbes, addr:housenumber 275, addr:neighbourhood Urbanización Las Moras, addr:city San Luis, at -12.0749203,-77.0023573 - https://www.openstreetmap.org/node/7573585042",
+        "Computed: #275 projects at chainage 306.3 m (12.1 m off the centreline); point = foot of the projection -12.074973,-77.002455",
+        "Duplicate check: data/stores.csv has no vega row in San Luis",
+        "pip: San Luis / Lima / Lima (150134)"
+      ],
+      "computed": {
+        "ref275": {
+          "lat": -12.0749203,
+          "lng": -77.0023573
+        },
+        "chainM": 306.3,
+        "offsetM": -12.1,
+        "streetLengthM": 400.7,
+        "lat": -12.074973,
+        "lng": -77.002455,
+        "pip": {
+          "ubigeo": "150134",
+          "district": "San Luis",
+          "province": "Lima",
+          "department": "Lima"
+        }
+      },
+      "exists": "yes",
+      "noteEs": "Aproximada: Jr. Río Tumbes 290, Urb. Las Moras, a la altura del n.º 275 de la misma calle (Transportes San Alejandro, OSM). La lista oficial de Vega no trae coordenadas."
+    },
+    {
+      "store": "Vega Market Santa Catalina",
+      "chain": "vega",
+      "reportRow": {
+        "address": "Av. Carlos Villarán 500 - espalda Cdra 2 Av. Javier Prado Este, Centro Comercial Santa Catalina",
+        "district": "La Victoria",
+        "province": "Lima",
+        "department": "Lima"
+      },
+      "lat": -12.089395,
+      "lng": -77.019913,
+      "precision": "exact",
+      "confidence": "high",
+      "district": "La Victoria",
+      "province": "Lima",
+      "department": "Lima",
+      "ubigeo": "150115",
+      "status": "verified",
+      "existingId": null,
+      "method": "OSM shopping-centre building: centroid of OSM w408467429 \"Plaza Santa Catalina\" (shop=mall, addr Calle Carlos Villarán 500, La Victoria), the centre named in the official address. The Vega unit itself is not mapped.",
+      "evidence": [
+        "Official locator entry 'La Victoria - Vega Market Santa Catalina': 'Av. Carlos Villarán 500 - espalda Cdra 2 Av. Javier Prado Este, Centro Comercial Santa Catalina', tel 977742429, no coordinates - https://www.vega.pe/nuestras-tiendas",
+        "Official locator re-fetched 2026-10-01 (vega.pe/nuestras-tiendas, Site-Editor \"sucursales\" content list): still no Latitud/Longitud for this entry; the public VTEX pickup-points API (https://www.vega.pe/api/checkout/pub/pickup-points?geoCoordinates=...) still lists only the same 14 supermayorista/market points, none of them this store",
+        "OSM w408467429 'Plaza Santa Catalina': shop=mall, building=yes (3 levels), addr:street Calle Carlos Villarán, addr:housenumber 500, addr:city La Victoria, operator Grupo Mulder, start_date 2019-03-04; centre -12.089395,-77.019913 - https://www.openstreetmap.org/way/408467429",
+        "Press: Perú Retail 2019-03-04: strip center Plaza Santa Catalina opened at avenida Carlos Villarán 500, Urb. Santa Catalina, La Victoria - https://www.peru-retail.com/peru-strip-center-plaza-santa-catalina-la-victoria/",
+        "Job posting (Computrabajo, search result) for \"Vega Market Santa Catalina / La Victoria\" shows the store operating - https://pe.computrabajo.com/trabajo-de-jefe-de-operaciones-en-lima-en-la-victoria-sin-experiencia",
+        "Duplicate check: data/stores.csv has no vega row in La Victoria",
+        "pip: La Victoria / Lima / Lima (150115)"
+      ],
+      "computed": {
+        "lat": -12.089395,
+        "lng": -77.019913,
+        "pip": {
+          "ubigeo": "150115",
+          "district": "La Victoria",
+          "province": "Lima",
+          "department": "Lima"
+        }
+      },
+      "exists": "yes",
+      "noteEs": "Ubicación del centro comercial Plaza Santa Catalina (Calle Carlos Villarán 500, OSM), donde está la tienda según la dirección oficial de Vega."
+    },
+    {
+      "store": "Holi Pardo",
+      "chain": "holi",
+      "reportRow": {
+        "address": "Av. José Pardo 200",
+        "district": "",
+        "province": "Lima",
+        "department": "Lima"
+      },
+      "lat": -12.118786,
+      "lng": -77.030441,
+      "precision": "approx",
+      "confidence": "high",
+      "district": "Miraflores",
+      "province": "Lima",
+      "department": "Lima",
+      "ubigeo": "150122",
+      "status": "to_verify",
+      "existingId": null,
+      "method": "District from the press (Miraflores); position by house-number interpolation between two OSM even numbers on the same (north) side of Av. José Pardo: #140 and #216.",
+      "evidence": [
+        "Official establishment list (Libro de Reclamaciones form): 'Pardo  - Av. José Pardo 200' (no district, no coordinates) - https://holisupermercado.com/libro-de-reclamaciones/",
+        "Press: Perú Retail 2025-12-04: the new Holi store opened on Friday 28 November \"en la Av. Pardo N° 200, en Miraflores\" (8th store, 372 m2 on two levels) - https://www.peru-retail.com/supermercados-holi-abre-su-octavo-local-en-lima-y-alista-dos-aperturas-antes-de-fin-de-ano/",
+        "OSM house numbers, Avenida José Pardo, Miraflores: even (north) side #140 Clafer Divisas n4335777529 (-12.1189264,-77.029797), #216 Norky's w361995976 (-12.1187488,-77.030613), #332 Market Capon w332748280; odd (south) side #102, #121, #255, #265, #293 - https://www.openstreetmap.org/way/361995976",
+        "Computed: t = (200-140)/(216-140) = 0.789 -> -12.118786,-77.030441",
+        "OSM has no Holi element at this address (Overpass 2026-10-01: Holi nodes only in Barranco, Surquillo, Miraflores La Mar, Jesús María, San Borja, Av. La Paz)",
+        "Duplicate check: the Miraflores holi rows are Holi La mar (Av. La Mar 834) and Holi 28 de Julio (Av. La Paz 971): different stores",
+        "pip: Miraflores / Lima / Lima (150122)"
+      ],
+      "computed": {
+        "ref140": {
+          "lat": -12.1189264,
+          "lng": -77.029797,
+          "name": "Clafer Divisas"
+        },
+        "ref216": {
+          "lat": -12.1187488,
+          "lng": -77.030613,
+          "name": "Norky's"
+        },
+        "t": 0.789,
+        "lat": -12.118786,
+        "lng": -77.030441,
+        "pip": {
+          "ubigeo": "150122",
+          "district": "Miraflores",
+          "province": "Lima",
+          "department": "Lima"
+        }
+      },
+      "exists": "yes",
+      "noteEs": "Aproximada: Av. José Pardo 200, Miraflores (Perú Retail, 04/12/2025: abrió el 28/11/2025), interpolada entre el n.º 140 y el n.º 216 (Norky's) de la misma acera (OSM)."
+    },
+    {
+      "store": "Holi Petit Thouars",
+      "chain": "holi",
+      "reportRow": {
+        "address": "Av. Petit Thouars 1261",
+        "district": "",
+        "province": "Lima",
+        "department": "Lima"
+      },
+      "lat": -12.076923,
+      "lng": -77.034226,
+      "precision": "approx",
+      "confidence": "high",
+      "district": "Lima",
+      "province": "Lima",
+      "department": "Lima",
+      "ubigeo": "150101",
+      "status": "to_verify",
+      "existingId": null,
+      "method": "District from the opening press note (Cercado de Lima); position by house-number interpolation between OSM #1255 and #1281 on the same (east, odd) side of Av. Petit Thouars, Santa Beatriz.",
+      "evidence": [
+        "Official establishment list (Libro de Reclamaciones form): 'Petit Thouars - Av. Petit Thouars 1261' (no district, no coordinates) - https://holisupermercado.com/libro-de-reclamaciones/",
+        "Press: Perú Retail 2025-12-21: on Friday 19 December Holi opened a store \"en la Av. Petit Thouars 1261, en el Cercado de Lima\" (9th store) - https://www.peru-retail.com/supermercados-holi-termino-el-2025-con-la-apertura-de-su-novena-tienda-donde-se-ubica/ (a note of 2025-12-04 had announced it \"en Miraflores\"; numbers 1xxx are in Santa Beatriz, Miraflores numbers on this avenue are 4xxx-5xxx, e.g. Mass Av. Petit Thouars 4763)",
+        "OSM house numbers, Avenida Petit Thouars (odd/east side): #1255 w1110465380 (-12.076845,-77.0342375; also n10158797289 'Avenida Petit Thouars 1255 Oficina 302'), #1281 w436732571 (-12.0771813,-77.0341897; addr:district Lima, addr:subdistrict Lima Cercado); address-interpolation nodes #1201 n5086067765 and #1299 n5086067766 - https://www.openstreetmap.org/way/436732571",
+        "Computed: t = (1261-1255)/(1281-1255) = 0.231 -> -12.076923,-77.034226; consistency: Mass Av. Petit Thouars 1329 (official coordinates -12.077882,-77.034168) lies 107 m further south on the same side",
+        "OSM has no Holi element at this address (Overpass 2026-10-01)",
+        "Duplicate check: the only holi row in district Lima is Holi Cercado (Jr. García Villón 639)",
+        "pip: Lima / Lima / Lima (150101)"
+      ],
+      "computed": {
+        "ref1255": {
+          "lat": -12.076845,
+          "lng": -77.0342375
+        },
+        "ref1281": {
+          "lat": -12.0771813,
+          "lng": -77.0341897,
+          "name": "De Alta Gastronomia Le Grand Gourmet",
+          "district": "Lima"
+        },
+        "t": 0.231,
+        "lat": -12.076923,
+        "lng": -77.034226,
+        "pip": {
+          "ubigeo": "150101",
+          "district": "Lima",
+          "province": "Lima",
+          "department": "Lima"
+        }
+      },
+      "exists": "yes",
+      "noteEs": "Aproximada: Av. Petit Thouars 1261, Santa Beatriz, Cercado de Lima (Perú Retail, 21/12/2025: abrió el 19/12/2025), interpolada entre el n.º 1255 y el n.º 1281 de la misma acera (OSM)."
+    },
+    {
+      "store": "Tambo Municipalidad",
+      "chain": "tambo",
+      "reportRow": {
+        "address": "WX8J+2PV, La Victoria",
+        "district": "",
+        "province": "Ica",
+        "department": "Ica"
+      },
+      "lat": -14.063866,
+      "lng": -75.730297,
+      "precision": "approx",
+      "confidence": "medium",
+      "district": "Ica",
+      "province": "Ica",
+      "department": "Ica",
+      "ubigeo": "110101",
+      "status": "to_verify",
+      "existingId": null,
+      "method": "The official record \"TAMBO MUNICIPALIDAD-C2 - ICA\" carries the coordinates, Plus Code and Google Maps link of another store (Tambo San Eugenio, La Victoria, Lima), so they were discarded. Location from the chain's store-naming convention STREET-C<cuadra> - CITY (Av. Municipalidad, cuadra 2, Ica), placed at the middle of that block on the OSM street, with the block limits from OSM house numbers #209-213 and #374.",
+      "evidence": [
+        "Official Justo/GraphQL record (tambo.pe, re-queried 2026-10-01, unchanged): _id EmpEf5HeA8u4Ekaxs, name \"TAMBO MUNICIPALIDAD-C2 - ICA\", streetAddress \"WX8J+2PV, La Victoria\", extendedAddress https://maps.app.goo.gl/VThX3jq4R8F7YfbC9, location -12.084887504577637,-77.01820373535156: identical to record AECjovSuv4mXoB8Lx \"TAMBO SANEUGENIO-C8 - LA VICTORIA\" (streetAddress \"WX8J+2PV\", same link, same location) - https://www.tambo.pe/tiendas (tools/seed/web/raw/tambo/justo_graphql_stores.json)",
+        "curl -sI https://maps.app.goo.gl/VThX3jq4R8F7YfbC9 -> Location: https://www.google.com/maps/place/12%C2%B005'05.6%22S+77%C2%B001'05.6%22W/@-12.08488,-77.0207849,17z/data=!3m1!4b1!4m4!3m3!8m2!3d-12.08488!4d-77.01821 (La Victoria, Lima: the San Eugenio store; no Google Maps page content fetched)",
+        "Plus Code decoded with a local Open Location Code decoder (validated against official Tambo Ica records W7JF+C5R, 267H+P2R, X732+565, X76Q+GGR, which decode to their official coordinates): WX8J+2PV recovered near La Victoria, Lima = 57V4WX8J+2PV -> -12.084887,-77.018203 (La Victoria, Lima = the San Eugenio store); recovered near Ica city (reference -14.0639,-75.7292) = 57Q5WX8J+2PV -> -14.084887,-76.018203, open desert in Paracas district (Pisco), about 70 km from Ica city: not usable",
+        "Naming convention check (same official list, Ica): HUANUCO-C1 = Calle Huánuco 183; CUTERVO-C2 = Av. Cutervo 288; PIURA-C1 = Calle Piura 172; SANMARTIN-C5 = Av. San Martín 598; so \"MUNICIPALIDAD-C2 - ICA\" = Av. Municipalidad, cuadra 2 (numbers 200-299), Ica",
+        "OSM 'Avenida Municipalidad', Ica (w630752481 + w630753204), from the Plaza de Armas (-14.063469,-75.728784) westward; Municipalidad Provincial de Ica w441525299 on it - https://www.openstreetmap.org/way/630753204",
+        "OSM house numbers on it: INEI Ica w441527158 '#209;213' (chainage 114.7 m), Roky's w512396454 '#374' (chainage 336.4 m), so 1.343 m per number; cuadra 2 (#200-299) = chainage 102.6-235.6 m; midpoint -> -14.063866,-75.730297",
+        "Duplicate check: no tambo row on Av. Municipalidad; the nearest Ica Tambo is Huánuco 183 (web-tambo-huanuco), about 250 m away; no Tambo-named OSM element in Ica city (Overpass 2026-10-01)",
+        "pip: Ica / Ica / Ica (110101)"
+      ],
+      "computed": {
+        "ref209_213": {
+          "lat": -14.063928749999999,
+          "lng": -75.7297571,
+          "chainM": 114.7
+        },
+        "ref374": {
+          "lat": -14.06409275,
+          "lng": -75.7318406,
+          "chainM": 336.4
+        },
+        "metresPerNumber": 1.343,
+        "cuadra2ChainM": [
+          102.6,
+          235.6
+        ],
+        "lat": -14.063866,
+        "lng": -75.730297,
+        "pip": {
+          "ubigeo": "110101",
+          "district": "Ica",
+          "province": "Ica",
+          "department": "Ica"
+        },
+        "plusCode": {
+          "relativeToLimaLaVictoria": {
+            "full": "57V4WX8J+2PV",
+            "lat": -12.084887499999999,
+            "lng": -77.01820312499999,
+            "refCode": "57V4WXJJ+22",
+            "pip": {
+              "ubigeo": "150115",
+              "district": "La Victoria",
+              "province": "Lima",
+              "department": "Lima"
+            }
+          },
+          "relativeToIca": {
+            "full": "57Q5WX8J+2PV",
+            "lat": -14.084887499999999,
+            "lng": -76.01820312499999,
+            "refCode": "57Q6W7PC+C8",
+            "pip": {
+              "ubigeo": "110505",
+              "district": "Paracas",
+              "province": "Pisco",
+              "department": "Ica"
+            }
+          }
+        }
+      },
+      "exists": "yes",
+      "noteEs": "Aproximada: cuadra 2 de la Av. Municipalidad, Ica (nombre oficial «MUNICIPALIDAD-C2 - ICA»; numeración de OSM: n.º 209-213 y n.º 374). Las coordenadas oficiales, el Plus Code WX8J+2PV y el enlace de Google Maps son los de Tambo San Eugenio (La Victoria, Lima) y se descartaron."
+    },
+    {
+      "store": "Tambo Jesús María - Jr. Gral. Luis Sánchez Cerro 1699",
+      "chain": "tambo",
+      "reportRow": {
+        "address": "Jr. Gral. Luis Sánchez Cerro 1699",
+        "district": "Jesús María",
+        "province": "Lima",
+        "department": "Lima"
+      },
+      "lat": -12.07915,
+      "lng": -77.048546,
+      "precision": "approx",
+      "confidence": "medium",
+      "district": "Jesús María",
+      "province": "Lima",
+      "department": "Lima",
+      "ubigeo": "150113",
+      "status": "to_verify",
+      "existingId": null,
+      "method": "OSM street geometry + OSM house numbers: #1700/#1701 (OSM) are just south of Av. Húsares de Junín, so #1699 is the last lot of the short cuadra 16 (Jr. Huáscar to Av. Húsares de Junín, 52 m); placed on its east (odd) side near the Húsares de Junín corner.",
+      "evidence": [
+        "Press: Perú Retail 2026-07-09, June 2026 openings: \"Jesús María (2): Av. Gral. Felipe Salaverry 1880; y Jr. Gral. Luis Sánchez Cerro 1699.\" - https://www.peru-retail.com/tambo-suma-23-nuevos-locales-en-junio-y-queda-cerca-de-alcanzar-900-tiendas-a-nivel-nacional/ (tools/seed/web/raw/tambo/peru-retail_tambo_2026_06.txt)",
+        "Not in the official Justo store list (re-queried 2026-10-01: unchanged, lags since about mid-May 2026)",
+        "OSM 'Calle Luis M. Sánchez Cerro' (alt_name Jirón Sanchez Cerro): w1341641945 from Jr. Huáscar (-12.0787924,-77.048567) to Av. Húsares de Junín (-12.0792551,-77.0486395), then w152507770 southward - https://www.openstreetmap.org/way/1341641945",
+        "OSM house numbers: Sánchez Cerro #1700 n1653261652 (-12.0793491,-77.0486757), #1701 n1653261700 (-12.0794017,-77.0485308), #1798 n1653261616, #1799 n1653261728 (numbers rise southward, odd on the east side); Jr. Huáscar #1699 n1653261657 at the corner where the street starts - https://www.openstreetmap.org/node/1653261700",
+        "Computed: 75 % along w1341641945, 8 m east of the centreline -> -12.07915,-77.048546; 28 m from #1701 across Av. Húsares de Junín",
+        "OSM has no Tambo at this corner; the unnamed shop=convenience n4734957779 south of the corner dates from 2017 (v1, OSM API), long before the June 2026 opening, so it is not this store",
+        "Duplicate check: the nearest tambo rows are Huamachuco 1499 (web-tambo-humachuco, about 280 m) and Lloque Yupanqui 1312 (about 470 m): different addresses",
+        "pip: Jesús María / Lima / Lima (150113)"
+      ],
+      "computed": {
+        "stubLengthM": 52.1,
+        "stub": [
+          {
+            "lat": -12.0787924,
+            "lng": -77.048567
+          },
+          {
+            "lat": -12.0792551,
+            "lng": -77.0486395
+          }
+        ],
+        "ref1700": {
+          "lat": -12.0793491,
+          "lng": -77.0486757
+        },
+        "ref1701": {
+          "lat": -12.0794017,
+          "lng": -77.0485308
+        },
+        "huascar1699": {
+          "lat": -12.0788544,
+          "lng": -77.0484951
+        },
+        "lat": -12.07915,
+        "lng": -77.048546,
+        "distTo1701M": 28,
+        "pip": {
+          "ubigeo": "150113",
+          "district": "Jesús María",
+          "province": "Lima",
+          "department": "Lima"
+        }
+      },
+      "exists": "probably",
+      "noteEs": "Aproximada: Jr. Gral. Luis Sánchez Cerro 1699, esquina con la Av. Húsares de Junín, acera de los números impares (el n.º 1701 está cruzando la avenida, OSM); prensa: Perú Retail, 09/07/2026 (apertura en junio de 2026)."
+    },
+    {
+      "store": "Tambo Lima - Psj. Melchora Balandra 100",
+      "chain": "tambo",
+      "reportRow": {
+        "address": "Psj. Melchora Balandra 100",
+        "district": "Lima",
+        "province": "Lima",
+        "department": "Lima"
+      },
+      "lat": null,
+      "lng": null,
+      "precision": "approx",
+      "confidence": "none",
+      "district": "Lima",
+      "province": "Lima",
+      "department": "Lima",
+      "ubigeo": null,
+      "status": "to_verify",
+      "existingId": null,
+      "method": "Not placed. No street of that name exists in Cercado de Lima in OSM or Nominatim; the only \"Melchora Balandra\" in Lima Metropolitana is a 110 m residential street in an asentamiento in Independencia, which contradicts the stated district.",
+      "evidence": [
+        "Press: Perú Retail 2026-09-09, August 2026 openings: \"Cercado de Lima (1): Psj. Melchora Balandra 100.\" - https://www.peru-retail.com/tambo-inaugura-20-nuevas-tiendas-y-supera-las-900-a-nivel-nacional-donde-estan-sus-nuevos-locales/ (tools/seed/web/raw/tambo/peru-retail_tambo_2026_08.txt)",
+        "Not in the official Justo store list (re-queried 2026-10-01; no record mentions Balandra/Melchora)",
+        "Overpass 2026-10-01 over Lima Metropolitana (-12.25,-77.20,-11.80,-76.80), ways / addr:street / name ~ \"Balandra|Melchora\": only \"Calle Melchora Balandra\" w118415326 (-11.968002,-77.040098 to -11.968799,-77.03909), plus streets named after José Olaya Balandra in Surco, Chorrillos, VMT and Callao - https://www.openstreetmap.org/way/118415326",
+        "Nominatim (q=\"Melchora Balandra\", countrycodes=pe): only \"Calle Melchora Balandra, Independencia, 15328\"; earlier merge.mjs queries (\"Psj./Pasaje Melchora Balandra 100, Lima\") returned nothing",
+        "pip of that street: Independencia (150112), 11 km north of the Cercado; no shops and no Tambo mapped within 1.5 km of it (Overpass 2026-10-01). Candidate NOT used: it contradicts the press district (\"Cercado de Lima\"), although the same press list is loose with that label (it also files Av. Elmer Faucett 582, a San Miguel address, under \"Cercado de Lima\")",
+        "Report §4 nearby OSM rows: osm-n6547620077 (Av. Grau 127, OSM v1 2019-06-14) and osm-w1376181759 (Tambo+ building, OSM v1 2025-04-09) were both mapped before this August 2026 opening, so neither can be this store",
+        "Web searches found no other mention of a Pasaje Melchora Balandra in Cercado de Lima"
+      ],
+      "computed": {
+        "candidateNotUsed": {
+          "lat": -11.968509,
+          "lng": -77.039464,
+          "district": "Independencia",
+          "ubigeo": "150112",
+          "osm": "w118415326"
+        }
+      },
+      "exists": "probably",
+      "noteEs": "Sin ubicación: la prensa (Perú Retail, 09/09/2026) la ubica en el Psj. Melchora Balandra 100, Cercado de Lima, pero en OSM y Nominatim la única vía con ese nombre en Lima es la Calle Melchora Balandra de Independencia; falta confirmar la dirección antes de ubicarla."
+    },
+    {
+      "store": "Tambo Callao - Av. Venezuela",
+      "chain": "tambo",
+      "reportRow": {
+        "address": "Av. Venezuela, cdra. 34 s/n",
+        "district": "Callao",
+        "province": "Callao",
+        "department": "Callao"
+      },
+      "lat": -12.061699,
+      "lng": -77.090172,
+      "precision": "approx",
+      "confidence": "low",
+      "district": "Bellavista",
+      "province": "Callao",
+      "department": "Callao",
+      "ubigeo": "070102",
+      "status": "to_verify",
+      "existingId": null,
+      "method": "Block-level: on the Callao side, Av. República de Venezuela cuadra 34 (house number 3400 in OSM) is the frontage of the Centro Médico Naval, an \"s/n\" institutional address. Placed on the north (Callao) side of the avenue at the CMN gate where the OSM \"3400\" references sit. The CMN frontage is about 600 m long, hence low confidence.",
+      "evidence": [
+        "Press: Perú Retail 2026-07-09, June 2026 openings, section Callao: \"Callao (1): Av. Venezuela, cdra. 34 s/n.\" - https://www.peru-retail.com/tambo-suma-23-nuevos-locales-en-junio-y-queda-cerca-de-alcanzar-900-tiendas-a-nivel-nacional/",
+        "Not in the official Justo store list (re-queried 2026-10-01: unchanged)",
+        "OSM numbering on Av. República de Venezuela, Callao side (rises eastward from La Perla): #120 n4041994321 (-77.1174), #1100/#1399 n5078106300/n5078106301 (-77.110), #1800-#2099 n5078106318..n5078106425 (-77.103 to -77.099); #3400 on the Centro Médico Naval w433817288 (addr:city Bellavista) and on the Liceo Naval Lizardo Montero n1301470754 and its kindergarten n5563075447 across the avenue (-12.063168,-77.089865 / -12.062036,-77.090152) - https://www.openstreetmap.org/way/433817288",
+        "BVS directory: \"Centro Médico Naval - NAMRID, Av. Venezuela Cdra. 36 - Callao\" (NAMRU-6 inside the CMN; the CMN frontage spans cuadras 34-36) - https://bvsalud.org/centros?q=PE235.1",
+        "CMN polygon south edge runs along the avenue from -77.0871 to -77.0924; OSM gate n9085708081 (access=private, entrance=yes) at -12.0616863,-77.0901736, 13.4 m north of the centreline; point = the avenue's north edge at that gate -> -12.061699,-77.090172",
+        "Rejected alternative: Lima-side numbering cuadra 34 (between #3252 n11203803112 at -77.0776 and #3789 w134140860 at -77.0848, UNMSM) lies in Cercado de Lima, not in Callao as the press says",
+        "Duplicate check: no tambo row within 600 m (nearest: Tambo Amancaes, Calle Los Amancaes 120, 0.7 km west; Tambo Venezuela 5021 (San Miguel), 0.9 km west)",
+        "pip: Bellavista / Callao / Callao (070102); the press lists the district as \"Callao\", but the CMN frontage on the Callao side belongs to Bellavista"
+      ],
+      "computed": {
+        "gate": {
+          "lat": -12.0616863,
+          "lng": -77.0901736,
+          "tags": {
+            "access": "private",
+            "barrier": "gate",
+            "entrance": "yes"
+          }
+        },
+        "gateOffsetM": 13.4,
+        "lat": -12.061699,
+        "lng": -77.090172,
+        "pip": {
+          "ubigeo": "070102",
+          "district": "Bellavista",
+          "province": "Callao",
+          "department": "Callao"
+        }
+      },
+      "exists": "probably",
+      "noteEs": "Aproximada (por verificar): la cuadra 34 de la Av. Venezuela, del lado del Callao, es el frente del Centro Médico Naval (OSM: Av. República de Venezuela 3400, Bellavista); se ubicó junto a la puerta del CMN en esa cuadra. Prensa: Perú Retail, 09/07/2026, que la registra en el Callao."
+    }
+  ]
+}

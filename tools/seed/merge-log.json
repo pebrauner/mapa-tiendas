@@ -16162,6 +16162,28 @@
    "row": "osm-n14232788501"
   },
   {
+   "chain": "tottus",
+   "official": "Tottus Trujillo 1",
+   "osm": "n4453923987",
+   "osmName": "Tottus",
+   "kind": "shop",
+   "pass": "P0 override link",
+   "distanceM": null,
+   "score": null,
+   "row": "osm-n4453923987"
+  },
+  {
+   "chain": "tottus",
+   "official": "Tottus Zorritos",
+   "osm": "w436598550",
+   "osmName": "Tottus",
+   "kind": "shop",
+   "pass": "P0 override link",
+   "distanceM": null,
+   "score": null,
+   "row": "osm-w436598550"
+  },
+  {
    "chain": "plazavea",
    "official": "Plaza Vea Callao",
    "osm": "w298244352",
@@ -23447,44 +23469,6 @@
   },
   {
    "chain": "tottus",
-   "name": "Tottus Zorritos",
-   "address": "Jr. Zorritos cuadra 15 (11 Naciones Unidas)",
-   "district": "",
-   "ok": false,
-   "level": null,
-   "lat": null,
-   "lng": null,
-   "found": null,
-   "queries": [
-    {
-     "q": "Jirón Zorritos, Lima, Perú"
-    },
-    {
-     "q": "Jr. Zorritos cuadra 15, Lima, Perú"
-    }
-   ]
-  },
-  {
-   "chain": "tottus",
-   "name": "Tottus Trujillo 1",
-   "address": "Av. Mansiche s/n, Caserío El Cortijo",
-   "district": "",
-   "ok": false,
-   "level": null,
-   "lat": null,
-   "lng": null,
-   "found": null,
-   "queries": [
-    {
-     "q": "Avenida Mansiche, Trujillo, Perú"
-    },
-    {
-     "q": "Av. Mansiche s/n, Caserío El Cortijo, Trujillo, Perú"
-    }
-   ]
-  },
-  {
-   "chain": "tottus",
    "name": "Tottus Trujillo 2",
    "address": "Av. América Norte 1245, Urb. Los Jardines",
    "district": "",
@@ -25449,208 +25433,6 @@
  ],
  "manualPlacement": [
   {
-   "chain": "tottus",
-   "name": "Tottus Zorritos",
-   "address": "Jr. Zorritos cuadra 15 (11 Naciones Unidas)",
-   "district": "",
-   "province": "Lima",
-   "department": "Lima",
-   "url": "https://www.tottus.com.pe/tottus-pe/content/horario-tiendas-all",
-   "flags": [],
-   "why": "the source gives no district and the street exists in several (Breña, Lima)",
-   "osmCandidates": [
-    "osm-w436598550"
-   ],
-   "mapLink": "",
-   "notes": []
-  },
-  {
-   "chain": "tottus",
-   "name": "Tottus Trujillo 1",
-   "address": "Av. Mansiche s/n, Caserío El Cortijo",
-   "district": "",
-   "province": "Trujillo",
-   "department": "La Libertad",
-   "url": "https://www.tottus.com.pe/tottus-pe/content/horario-tiendas-all",
-   "flags": [],
-   "why": "the source gives no district and the street exists in several (Trujillo, Huanchaco)",
-   "osmCandidates": [
-    "osm-n4453923987"
-   ],
-   "mapLink": "",
-   "notes": []
-  },
-  {
-   "chain": "tottus",
-   "name": "Tottus Iquitos",
-   "address": "C.C. Mall Aventura Iquitos",
-   "district": "",
-   "province": "Maynas",
-   "department": "Loreto",
-   "url": "https://gestion.pe/economia/empresas/hipermercados-tottus-abre-sus-puertas-en-iquitos-en-mall-aventura-noticia/",
-   "flags": [
-    "reported by the press, not in the official list"
-   ],
-   "why": "no geocoding result naming this street in the stated province",
-   "osmCandidates": [],
-   "mapLink": "",
-   "notes": []
-  },
-  {
-   "chain": "preciouno",
-   "name": "Precio Uno Iquitos La Marina",
-   "address": "Avenida La marina 451,455, 457",
-   "district": "",
-   "province": "Maynas",
-   "department": "Loreto",
-   "url": "https://www.hiperbodegapreciouno.com.pe/nosotros/",
-   "flags": [],
-   "why": "the source gives no district and the street exists in several (Punchana, Iquitos)",
-   "osmCandidates": [],
-   "mapLink": "https://maps.app.goo.gl/V9h7oKTCRALBZQXs6",
-   "notes": []
-  },
-  {
-   "chain": "preciouno",
-   "name": "Precio Uno Lurín",
-   "address": "U.C. N° 10579 - 10714 Sub Lote 17 Sección B Fundo San Vicente - Lurín",
-   "district": "Lurín",
-   "province": "Lima",
-   "department": "Lima",
-   "url": "https://www.hiperbodegapreciouno.com.pe/nosotros/",
-   "flags": [],
-   "why": "no geocoding result naming this street inside the stated district",
-   "osmCandidates": [],
-   "mapLink": "https://maps.app.goo.gl/JYzkpjZ5abPUUy5b8",
-   "notes": []
-  },
-  {
-   "chain": "preciouno",
-   "name": "Precio Uno Ate Kampu",
-   "address": "Av. NN-1 N° 102 Av. Daniel Alcides Carrión N° 593, 599 - Fundo La Estrella - Ate",
-   "district": "Ate",
-   "province": "Lima",
-   "department": "Lima",
-   "url": "https://www.hiperbodegapreciouno.com.pe/nosotros/",
-   "flags": [],
-   "why": "no geocoding result naming this street inside the stated district",
-   "osmCandidates": [],
-   "mapLink": "https://maps.app.goo.gl/CcutjBHB1cHqD2pd9",
-   "notes": []
-  },
-  {
-   "chain": "preciouno",
-   "name": "Precio Uno Próceres",
-   "address": "Av. Próceres de la Independencia 5540 - 5570 LT. 20, 21, 22, 23 - San Juan de Lurigancho",
-   "district": "San Juan de Lurigancho",
-   "province": "Lima",
-   "department": "Lima",
-   "url": "https://www.hiperbodegapreciouno.com.pe/nosotros/",
-   "flags": [],
-   "why": "geocoding rejected by the house-number check: the geocoded street point (Avenida Próceres de la Independencia, El Pueblito, Zárate) lies 78 m from #750 of the same street, but the store is at #5540, beyond the known house numbers (#33–#4083)",
-   "osmCandidates": [],
-   "mapLink": "https://maps.app.goo.gl/11jJGHe5b8Rf6aX29",
-   "notes": []
-  },
-  {
-   "chain": "vega",
-   "name": "Vega Market Alameda de los Cóndores",
-   "address": "Av. Alameda de los Cóndores 638, Urb. Valle de la Molina",
-   "district": "La Molina",
-   "province": "Lima",
-   "department": "Lima",
-   "url": "https://www.vega.pe/nuestras-tiendas",
-   "flags": [],
-   "why": "no geocoding result naming this street inside the stated district",
-   "osmCandidates": [],
-   "mapLink": "",
-   "notes": []
-  },
-  {
-   "chain": "vega",
-   "name": "Vega Market Santa Catalina",
-   "address": "Av. Carlos Villarán 500 - espalda Cdra 2 Av. Javier Prado Este, Centro Comercial Santa Catalina",
-   "district": "La Victoria",
-   "province": "Lima",
-   "department": "Lima",
-   "url": "https://www.vega.pe/nuestras-tiendas",
-   "flags": [],
-   "why": "no geocoding result naming this street inside the stated district",
-   "osmCandidates": [],
-   "mapLink": "",
-   "notes": []
-  },
-  {
-   "chain": "vega",
-   "name": "Vega Market Mariano Pastor",
-   "address": "Calle Mariano Pastor Sevilla 194 (Ref 1/2 cuadra Mcdo. Bolívar).",
-   "district": "Pueblo Libre",
-   "province": "Lima",
-   "department": "Lima",
-   "url": "https://www.vega.pe/nuestras-tiendas",
-   "flags": [],
-   "why": "no geocoding result naming this street inside the stated district",
-   "osmCandidates": [],
-   "mapLink": "",
-   "notes": []
-  },
-  {
-   "chain": "vega",
-   "name": "Vega Market San Luis",
-   "address": "Jr. Río Tumbes 290, Urb. Las Moras",
-   "district": "San Luis",
-   "province": "Lima",
-   "department": "Lima",
-   "url": "https://www.vega.pe/nuestras-tiendas",
-   "flags": [],
-   "why": "no geocoding result naming this street inside the stated district",
-   "osmCandidates": [],
-   "mapLink": "",
-   "notes": []
-  },
-  {
-   "chain": "holi",
-   "name": "Holi Petit Thouars",
-   "address": "Av. Petit Thouars 1261",
-   "district": "",
-   "province": "Lima",
-   "department": "Lima",
-   "url": "https://holisupermercado.com/libro-de-reclamaciones/",
-   "flags": [],
-   "why": "the source gives no district and the street exists in several (Lima, Lince, San Isidro)",
-   "osmCandidates": [],
-   "mapLink": "",
-   "notes": []
-  },
-  {
-   "chain": "holi",
-   "name": "Holi Pardo",
-   "address": "Av. José Pardo 200",
-   "district": "",
-   "province": "Lima",
-   "department": "Lima",
-   "url": "https://holisupermercado.com/libro-de-reclamaciones/",
-   "flags": [],
-   "why": "the source gives no district and the street exists in several (Comas, Carabayllo, Villa María del Triunfo, Miraflores)",
-   "osmCandidates": [],
-   "mapLink": "",
-   "notes": []
-  },
-  {
-   "chain": "tambo",
-   "name": "Tambo Municipalidad",
-   "address": "WX8J+2PV, La Victoria",
-   "district": "",
-   "province": "Ica",
-   "department": "Ica",
-   "url": "https://www.tambo.pe/tiendas",
-   "flags": [],
-   "why": "no geocoding result naming this street in the stated province",
-   "osmCandidates": [],
-   "mapLink": "",
-   "notes": []
-  },
-  {
    "chain": "tambo",
    "name": "Tambo Carabayllo - Cjto. Hab. Edwin Vásquez Mz. Q Lt. 24",
    "address": "Cjto. Hab. Edwin Vásquez Mz. Q Lt. 24",
@@ -25664,23 +25446,12 @@
    "why": "no geocoding result naming this street inside the stated district",
    "osmCandidates": [],
    "mapLink": "",
-   "notes": []
-  },
-  {
-   "chain": "tambo",
-   "name": "Tambo Villa El Salvador - Pasaje Pachacámac",
-   "address": "Pasaje Pachacámac, Virgen de la Candelaria Mz. E Lt. 01",
-   "district": "Villa El Salvador",
-   "province": "Lima",
-   "department": "Lima",
-   "url": "https://www.peru-retail.com/tambo-amplia-su-presencia-con-18-nuevos-locales-donde-estan-ubicados-y-cuantos-acumula/",
-   "flags": [
-    "reported by the press, not in the official list"
-   ],
-   "why": "no geocoding result naming this street inside the stated district",
-   "osmCandidates": [],
-   "mapLink": "",
-   "notes": []
+   "notes": [],
+   "checked": {
+    "on": "2026-10-01",
+    "batch": "a3",
+    "reason": "Duplicate of the official row web-tambo-chimpu-ocllo (TAMBO CHIMPU-OCLLO-C10). Per the merge.mjs rule, the press record should become a note on that row, not a separate row. The block-Q point itself checks out. OSM node 12442688259 'Q' sits at the Condorcanqui / Chimpu Ocllo corner. The Carabayllo PDF (re-downloaded) has ENACE entries 'AV. CHIMPU OCLLO Mza. Q Lte. 90', 'AV. MARIANO CONDORCANQUI Q 17', 'CONDORCANQUI No 764 MZ. P' and 'CONDORCANQUI Mza. E1', which match the OSM blocks P, O and E1 along Condorcanqui. Bus stop 'Entrada Enace' is 110 m away, and pip gives 150106. The case for a duplicate: I resolved the Location headers of all 14 official Carabayllo Tambo links. Only CHIMPU-OCLLO-C10 (client 2026-04-29) and JOSESACO (2026-07-15) were created in 2026. The May press list has exactly one Carabayllo opening, this one. Projecting #386 and #753 (official) onto the OSM Chimpu Ocllo axis gives 1.24 m per number. Block Q's frontage then comes out at about #940-980, i.e. cuadras 9-10, where 'C10' points. The official C10 point is a dropped pin 106 m off the avenue axis. Its projection is about #1270, 444 m NW. So the same store is most likely mapped twice. Suggestion for the merge: add the press address as a note on web-tambo-chimpu-ocllo. Moving that row to -11.891908,-77.037960 is a separate decision for the user."
+   }
   },
   {
    "chain": "tambo",
@@ -25696,119 +25467,12 @@
    "why": "no geocoding result naming this street inside the stated district",
    "osmCandidates": [],
    "mapLink": "",
-   "notes": []
-  },
-  {
-   "chain": "tambo",
-   "name": "Tambo Lurigancho - Av. Bernardo Balaguer 101 (Chosica)",
-   "address": "Av. Bernardo Balaguer 101 (Chosica)",
-   "district": "Lurigancho",
-   "province": "Lima",
-   "department": "Lima",
-   "url": "https://www.peru-retail.com/tambo-suma-23-nuevos-locales-en-junio-y-queda-cerca-de-alcanzar-900-tiendas-a-nivel-nacional/",
-   "flags": [
-    "reported by the press, not in the official list"
-   ],
-   "why": "no geocoding result naming this street inside the stated district",
-   "osmCandidates": [],
-   "mapLink": "",
-   "notes": []
-  },
-  {
-   "chain": "tambo",
-   "name": "Tambo Jesús María - Jr. Gral. Luis Sánchez Cerro 1699",
-   "address": "Jr. Gral. Luis Sánchez Cerro 1699",
-   "district": "Jesús María",
-   "province": "Lima",
-   "department": "Lima",
-   "url": "https://www.peru-retail.com/tambo-suma-23-nuevos-locales-en-junio-y-queda-cerca-de-alcanzar-900-tiendas-a-nivel-nacional/",
-   "flags": [
-    "reported by the press, not in the official list"
-   ],
-   "why": "no geocoding result naming this street inside the stated district",
-   "osmCandidates": [],
-   "mapLink": "",
-   "notes": []
-  },
-  {
-   "chain": "tambo",
-   "name": "Tambo Puente Piedra - Mz. C Lt. 1",
-   "address": "Mz. C Lt. 1, Asoc. Viv. Rosa Luz I Et.",
-   "district": "Puente Piedra",
-   "province": "Lima",
-   "department": "Lima",
-   "url": "https://www.peru-retail.com/tambo-suma-23-nuevos-locales-en-junio-y-queda-cerca-de-alcanzar-900-tiendas-a-nivel-nacional/",
-   "flags": [
-    "reported by the press, not in the official list"
-   ],
-   "why": "no geocoding result naming this street inside the stated district",
-   "osmCandidates": [],
-   "mapLink": "",
-   "notes": []
-  },
-  {
-   "chain": "tambo",
-   "name": "Tambo Puente Piedra - Vía Laderas de Chillón",
-   "address": "Vía Laderas de Chillón, Explanada, Mz. E Lt. 8, Psje. Laderas de Chillón",
-   "district": "Puente Piedra",
-   "province": "Lima",
-   "department": "Lima",
-   "url": "https://www.peru-retail.com/tambo-suma-23-nuevos-locales-en-junio-y-queda-cerca-de-alcanzar-900-tiendas-a-nivel-nacional/",
-   "flags": [
-    "reported by the press, not in the official list"
-   ],
-   "why": "no geocoding result naming this street inside the stated district",
-   "osmCandidates": [],
-   "mapLink": "",
-   "notes": []
-  },
-  {
-   "chain": "tambo",
-   "name": "Tambo Villa El Salvador - Mz. ZC Lt. 1",
-   "address": "Mz. ZC Lt. 1, Sector 3, Grupo 16",
-   "district": "Villa El Salvador",
-   "province": "Lima",
-   "department": "Lima",
-   "url": "https://www.peru-retail.com/tambo-suma-23-nuevos-locales-en-junio-y-queda-cerca-de-alcanzar-900-tiendas-a-nivel-nacional/",
-   "flags": [
-    "reported by the press, not in the official list"
-   ],
-   "why": "no geocoding result naming this street inside the stated district",
-   "osmCandidates": [],
-   "mapLink": "",
-   "notes": []
-  },
-  {
-   "chain": "tambo",
-   "name": "Tambo Callao - Av. Venezuela",
-   "address": "Av. Venezuela, cdra. 34 s/n",
-   "district": "Callao",
-   "province": "Callao",
-   "department": "Callao",
-   "url": "https://www.peru-retail.com/tambo-suma-23-nuevos-locales-en-junio-y-queda-cerca-de-alcanzar-900-tiendas-a-nivel-nacional/",
-   "flags": [
-    "reported by the press, not in the official list"
-   ],
-   "why": "no geocoding result naming this street inside the stated district",
-   "osmCandidates": [],
-   "mapLink": "",
-   "notes": []
-  },
-  {
-   "chain": "tambo",
-   "name": "Tambo Comas - Av. Honduras 388",
-   "address": "Av. Honduras 388, Urb. El Parral",
-   "district": "Comas",
-   "province": "Lima",
-   "department": "Lima",
-   "url": "https://www.peru-retail.com/tambo-inaugura-16-nuevas-tiendas-y-queda-cerca-de-alcanzar-los-900-locales-a-nivel-nacional/",
-   "flags": [
-    "reported by the press, not in the official list"
-   ],
-   "why": "no geocoding result naming this street inside the stated district",
-   "osmCandidates": [],
-   "mapLink": "",
-   "notes": []
+   "notes": [],
+   "checked": {
+    "on": "2026-10-01",
+    "batch": "a3",
+    "reason": "No defensible location. Peru Retail (09/07/2026) gives 'Mz. A Lt. 12, Urb. Santa Luisa' under Carabayllo. The re-downloaded Carabayllo PDF confirms 'URBANIZACION SANTA LUISA DE CARABAYLLO MZ. A LOTE 1 AV UNIVERSITARIA', but no position along the roughly 5 km Carabayllo stretch of Av. Universitaria. The urbanization is not in OSM or Nominatim. Web search finds only a struck-off company 'Programa de Vivienda Santa Luisa de Carabayllo S.R.L.' with a fiscal address in Puente Piedra, which gives no location. The OSM/Dollarcity 'Santa Luisa' is in Comas/Los Olivos, 6 km south, and is a different place. Official list: the only 2026 Carabayllo additions are C10 (Chimpu Ocllo) and JOSESACO (Av. Jose Saco Rojas), and neither is on Av. Universitaria. Keep it listed for manual placement."
+   }
   },
   {
    "chain": "tambo",
@@ -25822,43 +25486,14 @@
     "reported by the press, not in the official list"
    ],
    "why": "no geocoding result naming this street inside the stated district",
-   "osmCandidates": [
-    "osm-n5591615727"
-   ],
-   "mapLink": "",
-   "notes": []
-  },
-  {
-   "chain": "tambo",
-   "name": "Tambo Villa El Salvador - P.J. Villa El Salvador",
-   "address": "P.J. Villa El Salvador, Sect. 01, Gpo. 06, Lt. 05",
-   "district": "Villa El Salvador",
-   "province": "Lima",
-   "department": "Lima",
-   "url": "https://www.peru-retail.com/tambo-inaugura-16-nuevas-tiendas-y-queda-cerca-de-alcanzar-los-900-locales-a-nivel-nacional/",
-   "flags": [
-    "reported by the press, not in the official list"
-   ],
-   "why": "no geocoding result naming this street inside the stated district",
    "osmCandidates": [],
    "mapLink": "",
-   "notes": []
-  },
-  {
-   "chain": "tambo",
-   "name": "Tambo Ate - Mz. A",
-   "address": "Mz. A, Lt. 02, Asoc. de Vivienda Palmas de Barbadillo, Sec. 13, Zona 3",
-   "district": "Ate",
-   "province": "Lima",
-   "department": "Lima",
-   "url": "https://www.peru-retail.com/tambo-inaugura-20-nuevas-tiendas-y-supera-las-900-a-nivel-nacional-donde-estan-sus-nuevos-locales/",
-   "flags": [
-    "reported by the press, not in the official list"
-   ],
-   "why": "no geocoding result naming this street inside the stated district",
-   "osmCandidates": [],
-   "mapLink": "",
-   "notes": []
+   "notes": [],
+   "checked": {
+    "on": "2026-10-01",
+    "batch": "a4",
+    "reason": "No defensible location. Peru Retail (14/08/2026) confirms 'Mz. G, Lt. 25, Urb. La Planicie de Canto Grande'. Nominatim finds no 'Planicie' in SJL; the only matches are in La Molina and Carabayllo. Enel's notice (La República 24/03/2026) only lists it alongside Urb. Canto Rey, Av. El Parque cdra. 5 and Asoc. Pro Viv. Garagay, none of which Nominatim resolves to an area (Canto Rey only as a bus stop). OSM node 5591615727 (shop=convenience 'Tambo', v2, last edited 2021-12-14 by ovruni) predates the July 2026 opening and is 37 m from Tiendas 3A Canto Grande 24, so it cannot be this store. The store probably exists, but it has to be placed by hand."
+   }
   },
   {
    "chain": "tambo",
@@ -25872,12 +25507,14 @@
     "reported by the press, not in the official list"
    ],
    "why": "no geocoding result naming this street inside the stated district",
-   "osmCandidates": [
-    "osm-n6547620077",
-    "osm-w1376181759"
-   ],
+   "osmCandidates": [],
    "mapLink": "",
-   "notes": []
+   "notes": [],
+   "checked": {
+    "on": "2026-10-01",
+    "batch": "a2",
+    "reason": "No defensible location. Perú Retail (09/09/2026) confirms 'Cercado de Lima (1): Psj. Melchora Balandra 100.' Not in the official Justo list (no Balandra or Melchora among 840 records). Nominatim with countrycodes=pe ('Melchora Balandra', 'Pasaje Melchora Balandra', 'Melchora, Lima') returns only Calle Melchora Balandra (w118415326) in Independencia, 11 km north, which contradicts the district. A web search finds no such pasaje in the Cercado. The OSM-only Tambo rows osm-n6547620077 (v1 2019) and osm-w1376181759 (v1 2025-04-09) predate the August 2026 opening, so neither is this store. The store probably exists; place it by hand once the address is confirmed."
+   }
   },
   {
    "chain": "tambo",
@@ -25893,55 +25530,431 @@
    "why": "no geocoding result naming this street inside the stated district",
    "osmCandidates": [],
    "mapLink": "",
-   "notes": []
+   "notes": [],
+   "checked": {
+    "on": "2026-10-01",
+    "batch": "a4",
+    "reason": "No defensible location. Peru Retail (09/09/2026) confirms 'Mz. B, Lt. 15, Asoc. Los Olivos de San Vicente'. Nominatim finds nothing in Lima/Callao; the only hits are Calle Los Olivos in San Vicente de Cañete and Calle San Vicente in Chuquitanta, neither of which matches. A web search turns up nothing else, and an outage-notice listing of the Santa Rosa–Oquendo area is far too broad for a point. The store probably exists, but it has to be placed by hand."
+   }
+  }
+ ],
+ "manualPlacementsApplied": [
+  {
+   "chain": "tottus",
+   "official": "Tottus Trujillo 1",
+   "batch": "a1",
+   "verdict": "accept",
+   "kind": "link",
+   "ok": true,
+   "actions": [
+    "matched to osm-n4453923987"
+   ],
+   "result": null,
+   "row": "osm-n4453923987"
+  },
+  {
+   "chain": "tottus",
+   "official": "Tottus Zorritos",
+   "batch": "a1",
+   "verdict": "accept",
+   "kind": "link",
+   "ok": true,
+   "actions": [
+    "matched to osm-w436598550"
+   ],
+   "result": null,
+   "row": "osm-w436598550"
+  },
+  {
+   "chain": "tottus",
+   "official": "Tottus Iquitos",
+   "batch": "a1",
+   "verdict": "accept",
+   "kind": "place",
+   "ok": true,
+   "actions": [
+    "placed at -3.764673, -73.267346 (San Juan Bautista)"
+   ],
+   "result": null,
+   "row": "web-tottus-iquitos"
+  },
+  {
+   "chain": "preciouno",
+   "official": "Precio Uno Ate Kampu",
+   "batch": "a1",
+   "verdict": "accept",
+   "kind": "place",
+   "ok": true,
+   "actions": [
+    "placed at -12.019889, -76.874492 (Ate)"
+   ],
+   "result": null,
+   "row": "web-preciouno-ate-kampu"
+  },
+  {
+   "chain": "preciouno",
+   "official": "Precio Uno Iquitos La Marina",
+   "batch": "a1",
+   "verdict": "accept",
+   "kind": "place",
+   "ok": true,
+   "actions": [
+    "placed at -3.737306, -73.241123 (Iquitos)"
+   ],
+   "result": null,
+   "row": "web-preciouno-iquitos-la-marina"
+  },
+  {
+   "chain": "preciouno",
+   "official": "Precio Uno Lurín",
+   "batch": "a1",
+   "verdict": "accept",
+   "kind": "place",
+   "ok": true,
+   "actions": [
+    "placed at -12.275475, -76.871495 (Lurín)"
+   ],
+   "result": null,
+   "row": "web-preciouno-lurin"
+  },
+  {
+   "chain": "preciouno",
+   "official": "Precio Uno Próceres",
+   "batch": "a1",
+   "verdict": "accept",
+   "kind": "place",
+   "ok": true,
+   "actions": [
+    "placed at -11.94472, -76.98286 (San Juan de Lurigancho)"
+   ],
+   "result": null,
+   "row": "web-preciouno-proceres"
+  },
+  {
+   "chain": "vega",
+   "official": "Vega Market Alameda de los Cóndores",
+   "batch": "a2",
+   "verdict": "accept",
+   "kind": "place",
+   "ok": true,
+   "actions": [
+    "placed at -12.101138, -76.944137 (La Molina)"
+   ],
+   "result": null,
+   "row": "web-vega-market-alameda-de-los-condores"
+  },
+  {
+   "chain": "vega",
+   "official": "Vega Market Mariano Pastor",
+   "batch": "a2",
+   "verdict": "accept",
+   "kind": "place",
+   "ok": true,
+   "actions": [
+    "placed at -12.073157, -77.064868 (Pueblo Libre)"
+   ],
+   "result": null,
+   "row": "web-vega-market-mariano-pastor"
+  },
+  {
+   "chain": "vega",
+   "official": "Vega Market San Luis",
+   "batch": "a2",
+   "verdict": "adjust",
+   "kind": "place",
+   "ok": true,
+   "actions": [
+    "placed at -12.075408, -77.002338 (San Luis)"
+   ],
+   "result": null,
+   "row": "web-vega-market-san-luis"
+  },
+  {
+   "chain": "vega",
+   "official": "Vega Market Santa Catalina",
+   "batch": "a2",
+   "verdict": "adjust",
+   "kind": "place",
+   "ok": true,
+   "actions": [
+    "placed at -12.089658, -77.020164 (La Victoria)"
+   ],
+   "result": null,
+   "row": "web-vega-market-santa-catalina"
+  },
+  {
+   "chain": "holi",
+   "official": "Holi Pardo",
+   "batch": "a2",
+   "verdict": "accept",
+   "kind": "place",
+   "ok": true,
+   "actions": [
+    "placed at -12.118786, -77.030441 (Miraflores)"
+   ],
+   "result": null,
+   "row": "web-holi-pardo"
+  },
+  {
+   "chain": "holi",
+   "official": "Holi Petit Thouars",
+   "batch": "a2",
+   "verdict": "accept",
+   "kind": "place",
+   "ok": true,
+   "actions": [
+    "placed at -12.076923, -77.034226 (Lima)"
+   ],
+   "result": null,
+   "row": "web-holi-petit-thouars"
   },
   {
    "chain": "tambo",
-   "name": "Tambo Comas - Av. Universitaria Norte 5743",
-   "address": "Av. Universitaria Norte 5743, Urb. San Isolina",
-   "district": "Comas",
-   "province": "Lima",
-   "department": "Lima",
-   "url": "https://www.peru-retail.com/tambo-inaugura-20-nuevas-tiendas-y-supera-las-900-a-nivel-nacional-donde-estan-sus-nuevos-locales/",
-   "flags": [
-    "reported by the press, not in the official list"
+   "official": "TAMBO MUNICIPALIDAD-C2 - ICA",
+   "batch": "a2",
+   "verdict": "adjust",
+   "kind": "place",
+   "ok": true,
+   "actions": [
+    "address \"Av. Municipalidad 271, Cercado de Ica\"",
+    "placed at -14.064068, -75.730536 (Ica)"
    ],
-   "why": "no geocoding result naming this street inside the stated district",
-   "osmCandidates": [],
-   "mapLink": "",
-   "notes": []
+   "result": null,
+   "row": "web-tambo-municipalidad"
   },
   {
    "chain": "tambo",
-   "name": "Tambo Carabayllo - Mz. F",
-   "address": "Mz. F, Lt. 07, Programa de Vivienda Santa Rosa",
-   "district": "Carabayllo",
-   "province": "Lima",
-   "department": "Lima",
-   "url": "https://www.peru-retail.com/tambo-inaugura-20-nuevas-tiendas-y-supera-las-900-a-nivel-nacional-donde-estan-sus-nuevos-locales/",
-   "flags": [
-    "reported by the press, not in the official list"
+   "official": "Tambo Jesús María - Jr. Gral. Luis Sánchez Cerro 1699",
+   "batch": "a2",
+   "verdict": "accept",
+   "kind": "place",
+   "ok": true,
+   "actions": [
+    "placed at -12.07915, -77.048546 (Jesús María)"
    ],
-   "why": "no geocoding result naming this street inside the stated district",
-   "osmCandidates": [],
-   "mapLink": "",
-   "notes": []
+   "result": null,
+   "row": "web-tambo-jesus-maria-jr-gral-luis-sanchez-cerro-1699"
   },
   {
    "chain": "tambo",
-   "name": "Tambo Nuevo Chimbote - Mz. A",
-   "address": "Mz. A, Lt. 01, Programa de Vivienda HUP Villa María",
-   "district": "Nuevo Chimbote",
-   "province": "Santa",
-   "department": "Áncash",
-   "url": "https://www.peru-retail.com/tambo-inaugura-20-nuevas-tiendas-y-supera-las-900-a-nivel-nacional-donde-estan-sus-nuevos-locales/",
-   "flags": [
-    "reported by the press, not in the official list"
+   "official": "Tambo Lima - Psj. Melchora Balandra 100",
+   "batch": "a2",
+   "verdict": "reject",
+   "kind": "reject",
+   "ok": true,
+   "actions": [
+    "not placed: stays in §4"
    ],
-   "why": "no geocoding result naming this street inside the stated district",
-   "osmCandidates": [],
-   "mapLink": "",
-   "notes": []
+   "result": null,
+   "row": null
+  },
+  {
+   "chain": "tambo",
+   "official": "Tambo Callao - Av. Venezuela",
+   "batch": "a2",
+   "verdict": "accept",
+   "kind": "place",
+   "ok": true,
+   "actions": [
+    "placed at -12.061699, -77.090172 (Bellavista)"
+   ],
+   "result": null,
+   "row": "web-tambo-callao-av-venezuela"
+  },
+  {
+   "chain": "tambo",
+   "official": "Tambo Ate - Mz. A",
+   "batch": "a3",
+   "verdict": "accept",
+   "kind": "place",
+   "ok": true,
+   "actions": [
+    "placed at -12.040039, -76.911614 (Ate)"
+   ],
+   "result": null,
+   "row": "web-tambo-ate-mz-a"
+  },
+  {
+   "chain": "tambo",
+   "official": "Tambo Carabayllo - Cjto. Hab. Edwin Vásquez Mz. Q Lt. 24",
+   "batch": "a3",
+   "verdict": "reject",
+   "kind": "reject",
+   "ok": true,
+   "actions": [
+    "not placed: stays in §4"
+   ],
+   "result": null,
+   "row": null
+  },
+  {
+   "chain": "tambo",
+   "official": "Tambo Carabayllo - Mz. A Lt. 12",
+   "batch": "a3",
+   "verdict": "reject",
+   "kind": "reject",
+   "ok": true,
+   "actions": [
+    "not placed: stays in §4"
+   ],
+   "result": null,
+   "row": null
+  },
+  {
+   "chain": "tambo",
+   "official": "Tambo Carabayllo - Mz. F",
+   "batch": "a3",
+   "verdict": "accept",
+   "kind": "place",
+   "ok": true,
+   "actions": [
+    "placed at -11.87405, -77.0236 (Carabayllo)"
+   ],
+   "result": null,
+   "row": "web-tambo-carabayllo-mz-f"
+  },
+  {
+   "chain": "tambo",
+   "official": "Tambo Comas - Av. Honduras 388",
+   "batch": "a3",
+   "verdict": "accept",
+   "kind": "place",
+   "ok": true,
+   "actions": [
+    "placed at -11.95104, -77.0555 (Comas)"
+   ],
+   "result": null,
+   "row": "web-tambo-comas-av-honduras-388"
+  },
+  {
+   "chain": "tambo",
+   "official": "Tambo Comas - Av. Universitaria Norte 5743",
+   "batch": "a3",
+   "verdict": "accept",
+   "kind": "place",
+   "ok": true,
+   "actions": [
+    "placed at -11.955649, -77.05992 (Comas)"
+   ],
+   "result": null,
+   "row": "web-tambo-comas-av-universitaria-norte-5743"
+  },
+  {
+   "chain": "tambo",
+   "official": "Tambo Lurigancho - Av. Bernardo Balaguer 101 (Chosica)",
+   "batch": "a3",
+   "verdict": "accept",
+   "kind": "place",
+   "ok": true,
+   "actions": [
+    "placed at -11.979018, -76.813563 (Lurigancho)"
+   ],
+   "result": null,
+   "row": "web-tambo-lurigancho-av-bernardo-balaguer-101-chosica"
+  },
+  {
+   "chain": "tambo",
+   "official": "Tambo Puente Piedra - Mz. C Lt. 1",
+   "batch": "a3",
+   "verdict": "accept",
+   "kind": "place",
+   "ok": true,
+   "actions": [
+    "placed at -11.879859, -77.071888 (Puente Piedra)"
+   ],
+   "result": null,
+   "row": "web-tambo-puente-piedra-mz-c-lt-1"
+  },
+  {
+   "chain": "tambo",
+   "official": "Tambo Puente Piedra - Vía Laderas de Chillón",
+   "batch": "a3",
+   "verdict": "accept",
+   "kind": "place",
+   "ok": true,
+   "actions": [
+    "placed at -11.9203, -77.08607 (Puente Piedra)"
+   ],
+   "result": null,
+   "row": "web-tambo-puente-piedra-via-laderas-de-chillon"
+  },
+  {
+   "chain": "tambo",
+   "official": "Tambo Nuevo Chimbote - Mz. A",
+   "batch": "a4",
+   "verdict": "accept",
+   "kind": "place",
+   "ok": true,
+   "actions": [
+    "placed at -9.120723, -78.540239 (Nuevo Chimbote)"
+   ],
+   "result": null,
+   "row": "web-tambo-nuevo-chimbote-mz-a"
+  },
+  {
+   "chain": "tambo",
+   "official": "Tambo San Juan de Lurigancho - Mz. G",
+   "batch": "a4",
+   "verdict": "reject",
+   "kind": "reject",
+   "ok": true,
+   "actions": [
+    "not placed: stays in §4"
+   ],
+   "result": null,
+   "row": null
+  },
+  {
+   "chain": "tambo",
+   "official": "Tambo San Martín de Porres - Mz. B",
+   "batch": "a4",
+   "verdict": "reject",
+   "kind": "reject",
+   "ok": true,
+   "actions": [
+    "not placed: stays in §4"
+   ],
+   "result": null,
+   "row": null
+  },
+  {
+   "chain": "tambo",
+   "official": "Tambo Villa El Salvador - Mz. ZC Lt. 1",
+   "batch": "a4",
+   "verdict": "accept",
+   "kind": "place",
+   "ok": true,
+   "actions": [
+    "placed at -12.22304, -76.932524 (Villa El Salvador)"
+   ],
+   "result": null,
+   "row": "web-tambo-villa-el-salvador-mz-zc-lt-1"
+  },
+  {
+   "chain": "tambo",
+   "official": "Tambo Villa El Salvador - P.J. Villa El Salvador",
+   "batch": "a4",
+   "verdict": "accept",
+   "kind": "place",
+   "ok": true,
+   "actions": [
+    "placed at -12.188793, -76.949812 (Villa El Salvador)"
+   ],
+   "result": null,
+   "row": "web-tambo-villa-el-salvador-p-j-villa-el-salvador"
+  },
+  {
+   "chain": "tambo",
+   "official": "Tambo Villa El Salvador - Pasaje Pachacámac",
+   "batch": "a4",
+   "verdict": "accept",
+   "kind": "place",
+   "ok": true,
+   "actions": [
+    "placed at -12.246162, -76.921844 (Villa El Salvador)"
+   ],
+   "result": null,
+   "row": "web-tambo-villa-el-salvador-pasaje-pachacamac"
   }
  ],
  "verification": {
@@ -26314,13 +26327,6 @@
     "action": "note: another chain nearby",
     "other": "TAMBO PIURA-C1-ICA",
     "d": 57
-   },
-   {
-    "chain": "tottus",
-    "key": "n4453923987",
-    "action": "note: another chain nearby",
-    "other": "Dollarcity Mallplaza Trujillo",
-    "d": 48
    },
    {
     "chain": "metro",

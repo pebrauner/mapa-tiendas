@@ -2,9 +2,9 @@
 //
 // Every `MT.a.b.c` path referenced anywhere in js/*.js must exist at runtime once the app has
 // booted and every tab has been mounted (catches renamed/missing APIs between modules built in
-// parallel). Also checks: no namespace is still a stub, the reserved MT.analysis namespace is not
-// used, every tab/menu entry the docs promise is registered, and the documented events have
-// listeners where a module depends on them.
+// parallel). Also checks: no namespace is still a stub (except the PENDING_STUBS of the phase being
+// built), the MT.analysis engine exposes its API, every tab/menu entry the docs promise is
+// registered, and the documented events have listeners where a module depends on them.
 //
 //   node tools/test/contracts.mjs
 
@@ -20,6 +20,9 @@ const OPTIONAL = new Set([
   'MT.theme.basemap.cssWidth',           // optional theme override read by MT.layout
   'MT.render.overlay',                   // mentioned in comments only
 ]);
+// Namespaces that are still stubs ON PURPOSE while a phase is being built (docs/ARCHITECTURE.md §8).
+// (Phase 2a's Análisis tab, MT.analysisui, is built: none pending.)
+const PENDING_STUBS = new Set([]);
 // Trailing segments that are methods of built-in values (arrays, strings, promises).
 const BUILTIN = new Set(['forEach', 'map', 'filter', 'some', 'every', 'slice', 'indexOf', 'then', 'catch',
   'length', 'find', 'reduce', 'concat', 'join', 'includes', 'push', 'call', 'apply', 'bind', 'toFixed']);
@@ -79,7 +82,8 @@ try {
     if (MT.export && MT.export.stub) stubs.push('export');
     return {
       stubs,
-      analysis: 'analysis' in MT,
+      analysis: MT.analysis && !MT.analysis.stub ? ['refFromStore', 'refFromPoint', 'resolveRef', 'distancesFrom', 'ringSummary', 'nearest',
+        'neighborMatrix', 'closePairs', 'storesForRegion', 'index', 'bearing', 'compass', 'forMap'].filter((k) => typeof MT.analysis[k] !== 'function') : null,
       tabs: MT.app.tabs().map((t) => `${t.id}#${t.hash}`),
       listeners: Object.fromEntries(['map:changed', 'map:selected', 'stores:changed', 'chains:changed', 'logos:changed',
         'lang:changed', 'store:click', 'project:loaded', 'app:showChanges', 'view:changed', 'mapview:layout']
@@ -89,9 +93,10 @@ try {
       dbui: MT.dbui ? ['select', 'openEditor', 'importFile', 'saveToFolder'].filter((k) => typeof MT.dbui[k] === 'function') : [],
     };
   });
-  check(info.stubs.length === 0, `no stub namespaces left (${info.stubs.join(', ') || 'none'})`);
-  check(!info.analysis, 'MT.analysis stays reserved for phase 2 (not defined)');
-  check(info.tabs.join(' ') === 'maps#mapas db#base chains#cadenas', `tabs registered in order: ${info.tabs.join(' ')}`);
+  const unexpected = info.stubs.filter((s) => !PENDING_STUBS.has(s));
+  check(unexpected.length === 0, `no stub namespaces left (${unexpected.join(', ') || 'none'}; pending on purpose: ${info.stubs.filter((s) => PENDING_STUBS.has(s)).join(', ') || 'none'})`);
+  check(Array.isArray(info.analysis) && info.analysis.length === 0, `MT.analysis engine exposes its API (${info.analysis === null ? 'missing or stub' : 'missing: ' + (info.analysis.join(', ') || 'none')})`);
+  check(info.tabs.join(' ') === 'maps#mapas analysis#analisis db#base chains#cadenas', `tabs registered in order: ${info.tabs.join(' ')}`);
   for (const [e, n] of Object.entries(info.listeners)) check(n > 0, `event '${e}' has ${n} listener(s)`);
   check(info.exportApi.length === 5, `MT.export exposes png/pptx/html/run/dialog (${info.exportApi.join(', ')})`);
   check(info.dbui.length === 4, `MT.dbui exposes select/openEditor/importFile/saveToFolder`);

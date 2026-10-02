@@ -31,8 +31,8 @@ const { check, finish } = makeChecker('smoke');
   }));
   console.log('  ', JSON.stringify(info));
   check(info.lang === 'es', 'language is es from ?lang=es');
-  check(info.tabs.join() === 'maps,db,chains', `tabs registered in order (got ${info.tabs})`);
-  check(info.tabLabels.join('|') === 'Mapas|Base de datos|Cadenas', `Spanish tab labels (got ${info.tabLabels.join('|')})`);
+  check(info.tabs.join() === 'maps,analysis,db,chains', `tabs registered in order (got ${info.tabs})`);
+  check(info.tabLabels.join('|') === 'Mapas|Análisis|Base de datos|Cadenas', `Spanish tab labels (got ${info.tabLabels.join('|')})`);
   check(info.stores > 0 && info.chains >= 16 && info.districts > 0, 'data loaded (stores, chains, districts)');
   check(!Object.values(info.missing).some(Boolean), 'no data file reported missing');
   check(info.maps === 1, 'fresh project has one map');
@@ -54,7 +54,7 @@ const { check, finish } = makeChecker('smoke');
   await sleep(300);
   await screenshot(page, 'smoke-es-maps');
 
-  for (const id of ['db', 'chains', 'maps']) {
+  for (const id of ['analysis', 'db', 'chains', 'maps']) {
     await page.click(`#tab-${id}`);
     await sleep(350);
     const st = await page.evaluate((id) => {
@@ -76,7 +76,7 @@ const { check, finish } = makeChecker('smoke');
   // Keyboard: arrow keys move between tabs.
   await page.focus('#tab-maps');
   await page.keyboard.press('ArrowRight');
-  check(await page.evaluate(() => MT.app.currentTab()) === 'db', 'ArrowRight moves to the next tab');
+  check(await page.evaluate(() => MT.app.currentTab()) === 'analysis', 'ArrowRight moves to the next tab');
   await page.keyboard.press('ArrowLeft');
 
   // Project menu.
@@ -112,7 +112,7 @@ const { check, finish } = makeChecker('smoke');
     stubTitle: (document.querySelector('#panel-maps .mt-empty__title') || {}).textContent,
   }));
   check(en.lang === 'en' && en.html === 'en', 'language switched to en');
-  check(en.tabLabels.join('|') === 'Maps|Database|Chains', `English tab labels (got ${en.tabLabels.join('|')})`);
+  check(en.tabLabels.join('|') === 'Maps|Analysis|Database|Chains', `English tab labels (got ${en.tabLabels.join('|')})`);
   check(!en.stubTitle || en.stubTitle === 'Section under construction' || !/construcción/.test(en.stubTitle), 'panel text re-translated');
   await screenshot(page, 'smoke-en-maps');
 
@@ -122,7 +122,7 @@ const { check, finish } = makeChecker('smoke');
   check(await page.evaluate(() => MT.i18n.lang) === 'en', 'language persisted after reload');
   check(await page.evaluate(() => MT.project.current().name) === 'Estudio Lima Sur', 'project autosave restored after reload');
 
-  for (const id of ['db', 'chains', 'maps']) { await page.click(`#tab-${id}`); await sleep(150); }
+  for (const id of ['analysis', 'db', 'chains', 'maps']) { await page.click(`#tab-${id}`); await sleep(150); }
   missingKeys = await page.evaluate(() => MT.i18n.missingKeys());
   check(missingKeys.length === 0, `no missing i18n keys in English (${missingKeys.join(', ')})`);
   // Every key must exist in both languages.
@@ -149,7 +149,7 @@ const { check, finish } = makeChecker('smoke');
   check(st.booted, 'app boots with no data');
   check(st.missing.stores && st.missing.chains && st.missing.districts && st.missing.logos, 'all four files reported missing');
   check(/Faltan 4 archivos de datos/.test(st.banner), 'banner explains the missing files');
-  for (const id of ['maps', 'db', 'chains']) {
+  for (const id of ['maps', 'analysis', 'db', 'chains']) {
     await page.click(`#tab-${id}`);
     await sleep(200);
   }

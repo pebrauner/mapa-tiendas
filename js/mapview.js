@@ -28,6 +28,10 @@
  *   own label of that name hidden; after each render the map's label boxes are harvested
  *   (MT.layout.labels). Main avenue names below zoom 14 in the cities of data/road-names.js:
  *   'mt-road-names' (MT.layout.roadLabels). Main roads in a warm tone, route shields from zoom 10.
+ * Analysis slides (mapCfg.analysis, SPEC §6.3): the rings are the 'mt-analysis-rings' layer (thin,
+ *   dashed, under the labels; basemap.apply opts.rings limits them); pills, pin and lines are drawn
+ *   by MT.render.drawOverlay and follow the live camera; such a slide needs no districts (no
+ *   "Elige los distritos" notice; 'noRef' / 'noStoresNear' notices instead).
  * Label blockers ('mt-label-blockers'): the frame's edges, the attribution and — once the view's
  *   labels are known — the layout's markers, store dots and leaders: a basemap label they would cut
  *   is left out instead (no harvest while they block).
@@ -39,7 +43,8 @@
 
   /* ---- Basemap style helpers (shared with MT.render) ---------------------------------------- */
   const L = { bFill: 'mt-borders-fill', bLine: 'mt-borders-line', ocean: 'mt-ocean-mask', rFill: 'mt-radius-fill', rLine: 'mt-radius-line',
-    dLabels: 'mt-district-labels', mainRoads: 'mt-highway-name-main', roadNames: 'mt-road-names', blockers: 'mt-label-blockers', shields: 'mt-highway-shield-main' };
+    dLabels: 'mt-district-labels', mainRoads: 'mt-highway-name-main', roadNames: 'mt-road-names', blockers: 'mt-label-blockers', shields: 'mt-highway-shield-main',
+    aRings: 'mt-analysis-rings' };
   const BLOCK_IMG = 'mt-blank', BLOCK_IMG_PX = 32, BLOCK_PX = 24;
   // Positron's place-name layers: a selected district's name the app writes itself is hidden here.
   const PLACE_LABEL_LAYERS = ['label_other', 'label_village', 'label_town', 'label_city', 'label_city_capital'];
@@ -174,6 +179,13 @@
     map.addLayer({ id: L.rFill, type: 'fill', source: 'mt-radius', paint: { 'fill-color': ['get', 'color'], 'fill-opacity': ['get', 'fillOpacity'] } }, before);
     map.addLayer({ id: L.rLine, type: 'line', source: 'mt-radius', layout: { 'line-join': 'round' },
       paint: { 'line-color': ['get', 'stroke'], 'line-width': th.radius.width * k, 'line-dasharray': (th.radius.dash || [1, 0]).map((d) => d / th.radius.width) } }, before);
+    // Analysis slides (SPEC §6.3): the distance rings around the reference, thin and dashed, below
+    // the labels like the radius circles (their "500 m" pills are drawn by MT.render.drawOverlay).
+    const ar = (th.analysis && th.analysis.ring) || { color: '#1F3864', width: 1.6, alpha: 0.9, dash: [6, 4] };
+    map.addSource('mt-analysis', { type: 'geojson', data: EMPTY_FC });
+    map.addLayer({ id: L.aRings, type: 'line', source: 'mt-analysis', layout: { 'line-join': 'round' },
+      paint: Object.assign({ 'line-color': ar.color, 'line-width': ar.width * k, 'line-opacity': ar.alpha === undefined ? 1 : ar.alpha },
+        ar.dash ? { 'line-dasharray': ar.dash.map((d) => d / ar.width) } : {}) }, before);
     // The selected districts' names the basemap does not write (MT.layout.districtLabels `app`),
     // styled like positron's district names. On top of every layer: placed first, always shown, and
     // the basemap's labels give way to them.
@@ -251,6 +263,8 @@
           box(it.pos.x + pg.dx, it.pos.y + pg.dy, pg.w, pg.h);
         }
       });
+      // An analysis slide's ring pills and reference pin (none on ordinary slides).
+      if (mapCfg.analysis) MT.layout.analysisBoxes(mapCfg, MT.layout.projector(view, fr)).forEach((b) => box(b.x + b.w / 2, b.y + b.h / 2, b.w, b.h));
     }
     return { type: 'FeatureCollection', features: feats };
   }
@@ -405,9 +419,21 @@
   }
 
   /**
+   * GeoJSON of an analysis slide's rings (geodesic circles around the reference, MT.analysis), or
+   * none. only: [meters] — just these rings (the PPTX draws the others as ellipses).
+   */
+  function analysisRingData(mapCfg, only) {
+    const g = mapCfg && mapCfg.analysis && MT.layout.analysis ? MT.layout.analysis(mapCfg) : null;
+    if (!g) return EMPTY_FC;
+    const rings = g.rings.map((r) => r.meters).filter((m) => !Array.isArray(only) || only.indexOf(m) >= 0);
+    return rings.length ? MT.analysis.ringFeatures({ lat: g.ref.ll[1], lng: g.ref.ll[0] }, rings, { steps: 128 }) : EMPTY_FC;
+  }
+
+  /**
    * Set borders + radius data, the app's district names and the label blockers on a map for a
-   * config. opts: {overlays, items} — items: the config's layout, whose markers, dots and leaders
-   * then block basemap labels too (applyBlockers).
+   * config. opts: {overlays, items, rings} — items: the config's layout, whose markers, dots and
+   * leaders then block basemap labels too (applyBlockers); rings: [meters] of an analysis slide's
+   * rings to draw (default all).
    */
   function applyOverlays(map, mapCfg, opts) {
     ensureLayers(map);
@@ -416,6 +442,7 @@
     [L.bFill, L.bLine, L.ocean].forEach((id) => { if (map.getLayer(id)) map.setLayoutProperty(id, 'visibility', show ? 'visible' : 'none'); });
     const radius = mapCfg && !(opts && opts.overlays === false) ? MT.radius.features(mapCfg) : EMPTY_FC;
     map.getSource('mt-radius').setData(radius);
+    if (map.getSource('mt-analysis')) map.getSource('mt-analysis').setData(mapCfg && !(opts && opts.overlays === false) ? analysisRingData(mapCfg, opts && opts.rings) : EMPTY_FC);
     // District names, main avenue names and the label blockers are part of the basemap (overlays:false too).
     applyDistrictLabels(map, mapCfg);
     applyRoadNames(map, mapCfg);
@@ -426,7 +453,7 @@
   let root = null, stage = null, canvas = null, hits = null, ui = null, map = null, ro = null;
   let els = {};
   let cfg = null, view = null;
-  let items = [], live = [], liveLabels = [], radiusResults = [];
+  let items = [], live = [], liveLabels = [], radiusResults = [], liveAnalysis = null;
   let frameW = 0, frameH = 0, dprNow = 1;
   let styleReady = false, basemapFailed = false, webglFailed = false, firstIdle = false;
   let applying = false, userMoving = false;
@@ -604,7 +631,7 @@
     if (!root) return;
     const token = ++renderToken;
     if (!cfg) {
-      items = []; live = []; liveLabels = []; radiusResults = []; view = null;
+      items = []; live = []; liveLabels = []; radiusResults = []; liveAnalysis = null; view = null;
       buildHits(); draw(); updateUi();
       return;
     }
@@ -642,7 +669,7 @@
     }
     const v = MT.layout.viewFor(cfg);
     const kb = JSON.stringify([cfg.showBorders, cfg.districts, MT.data.districts.available, MT.layout.labels.sig(cfg)]);
-    const kr = JSON.stringify([cfg.radius, cfg.chains, cfg.hiddenStores, MT.layout.dataVersion()]);
+    const kr = JSON.stringify([cfg.radius, cfg.chains, cfg.hiddenStores, MT.layout.dataVersion(), cfg.analysis || null]);
     const kv = JSON.stringify([v.center, v.zoomRef]);
     // The markers block basemap labels once this view's own labels are known (harvested from a
     // render without them: the declutter keeps logos off those labels first).
@@ -664,6 +691,8 @@
     live = items.map(cloneItem);
     radiusResults = cfg ? MT.radius.compute(cfg) : [];
     liveLabels = cfg ? MT.radius.labels(radiusResults, MT.layout.projector(view)) : [];
+    // An analysis slide: its pin, ring pills and lines follow the camera too.
+    liveAnalysis = cfg && cfg.analysis ? MT.render.analysisOverlay(cfg, view) : null;
   }
   function liveView() {
     const c = map.getCenter();
@@ -689,6 +718,7 @@
         if (it.spokes) lv.spokes = it.spokes.map((s) => ({ x1: s.x1 + dx, y1: s.y1 + dy, x2: s.x2 + dx, y2: s.y2 + dy, storeId: s.storeId }));
       }
       liveLabels = MT.radius.labels(radiusResults, proj);
+      if (cfg.analysis) liveAnalysis = MT.render.analysisOverlay(cfg, liveView());
       positionHits();
       draw();
     });
@@ -714,7 +744,7 @@
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     if (!cfg) return;
-    MT.render.drawOverlay(ctx, cfg, live, canvas.width / fr().width, { highlight: hoverId || selectedId, radiusLabels: liveLabels });
+    MT.render.drawOverlay(ctx, cfg, live, canvas.width / fr().width, { highlight: hoverId || selectedId, radiusLabels: liveLabels, analysis: liveAnalysis });
   }
 
   /* ---- Hit targets (accessible marker buttons) ---------------------------------------------------- */
@@ -933,6 +963,7 @@
       h('div', { class: 'mt-mapview__tip-title' }, (it.number ? it.number + '. ' : '') + (it.name || chain.name)),
       h('div', { class: 'mt-mapview__tip-sub' }, [chain.name, store && store.district].filter(Boolean).join(' · ')),
       it.count > 1 ? h('div', { class: 'mt-mapview__tip-sub' }, MT.t('map.marker.group', { n: it.count, chain: chain.name })) : null,
+      it.isRef ? h('div', { class: 'mt-mapview__tip-sub' }, MT.t('map.marker.reference')) : null,
       h('div', { class: 'mt-mapview__tip-hint' }, MT.t('map.marker.hint')),
     ]);
     els.tip.hidden = false;
@@ -1002,12 +1033,20 @@
     }
     // Centre notice for empty / error states.
     let key = null;
+    // A slide carrying a distance analysis without districts is defined by its reference and
+    // distance (SPEC §6.3): it needs no districts.
+    const reg = cfg && MT.data.analysisRegion ? MT.data.analysisRegion(cfg) : null;
+    const vars = {};
     if (webglFailed) key = 'webglError';
     else if (basemapFailed) key = 'basemapError';
     else if (!cfg) key = 'noMap';
     else if (MT.data.missing.stores) key = 'noData';
-    else if (!(cfg.districts || []).length) key = 'noDistricts';
-    else if (!items.length) key = MT.data.storesForMap(cfg).length ? 'outOfView' : 'noStores';
+    else if (reg && !reg.ref) key = 'noRef';
+    else if (!reg && !(cfg.districts || []).length) key = 'noDistricts';
+    else if (!items.length) {
+      key = MT.data.storesForMap(cfg).length ? 'outOfView' : reg ? 'noStoresNear' : 'noStores';
+      if (reg) vars.d = MT.i18n.formatDistanceExact(reg.maxMeters);
+    }
     els.notice.hidden = !key;
     root.classList.toggle('has-notice', !!key);
     if (key) {
@@ -1024,7 +1063,7 @@
       U.append(els.notice, [
         h('span', { class: 'mt-mapview__notice-icon', html: MT.ui.icon(key === 'basemapError' || key === 'webglError' ? 'cloudOff' : key === 'noData' ? 'warning' : key === 'noMap' ? 'map' : 'pin', { size: 20 }) }),
         h('div', { class: 'mt-mapview__notice-title' }, MT.t('map.notice.' + key + '.title')),
-        h('div', { class: 'mt-mapview__notice-text' }, MT.t('map.notice.' + key + '.text')),
+        h('div', { class: 'mt-mapview__notice-text' }, MT.t('map.notice.' + key + '.text', vars)),
         action ? h('div', { class: 'mt-mapview__notice-actions' }, action, example) : null,
       ]);
       // The whole "Elige los distritos" card leads to the district search (it is the first step).

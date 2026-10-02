@@ -54,12 +54,16 @@ Lima Sur Tottus goes from 6 to 5 rows.
 
 ### Remains for you to verify manually
 
-1. **The verification queue below**: the to_verify rows most likely to be wrong (112 in this run), most doubtful first. Start with the position conflicts:
+1. **The verification queue below**: the to_verify rows most likely to be wrong (110 in this run: the 2026-10-01 links made two of the 112 verified), most doubtful first. Start with the position conflicts:
    the renamed Huánuco Mass, Dollarcity Blvd Puntamar, Dollarcity 28 de Julio (placed at the neighbourhood centre),
    Precio Uno El Agustino / Comas / Mariátegui (computed positions), and the house-number moves.
-2. **§4 Needs manual placement** (32 stores). Precio Uno Próceres, Lurín, Ate Kampu and Iquitos La Marina have official
-   Google Maps links in the table; open them yourself and paste the coordinates. Tottus Iquitos is in Mall Aventura
-   Iquitos. Holi Pardo and Holi Petit Thouars: the district is unknown.
+2. **§4 Needs manual placement**: was 32 stores; on 2026-10-01, 27 were placed by hand from evidence (25 new rows, 2 links
+   to existing OSM rows; §4 "Colocación manual"). Check the 23 to_verify ones in the field when you can, the
+   low-confidence ones first (Tambo Ate - Mz. A, Callao - Av. Venezuela, Carabayllo - Mz. F, Bernardo Balaguer 101, Laderas
+   de Chillón: up to ~1 km off). 5 Tambo openings remain unplaced, each with the verifier's reason: Melchora Balandra
+   (no such pasaje in the Cercado), Santa Luisa Mz. A (no position along Av. Universitaria), La Planicie de Canto Grande and
+   Los Olivos de San Vicente (neighbourhoods not mapped), and Edwin Vásquez Mz. Q (probably the official row
+   `web-tambo-chimpu-ocllo`, whose official pin is 444 m from block Q: your call whether to move it).
 3. **Decisions only you can make**: (a) is "Mass Av. Juan Velasco Alvarado" (Pillco Marca) a real store, or a stray copy
    of the Paracas record? (b) Tottus `osm-n4308090578` (Calle Lima, Ica) is hidden; re-enable it if Ica has a second
    Tottus. (c) The Plaza Vea OSM-only rows from 2016–2017 ("Express" in Chimbote and San Isidro, "Super" in San Miguel,
@@ -70,11 +74,11 @@ Lima Sur Tottus goes from 6 to 5 rows.
      "Dollarcity inaugura" articles in Peru-Retail and Gestión.
    - **Oxxo** (210 vs 215 in the FEMSA 6-K for 2026-06-30): the list is a January 2026 copy, so read FEMSA's quarterly report and the
      Peru-Retail "Oxxo inaugura" articles. The 5 OSM-only Oxxo rows may be openings since January.
-   - **Tambo** (890 rows + 19 manual vs 902 reported on 2026-09-09; 52 Justo stores have online ordering disabled, so some may be
-     closed): query the Justo API again and read Peru-Retail's monthly opening articles.
-   - **Precio Uno**: the 4 manual stores above.
-   - **Holi**: Pardo and Petit Thouars.
-   - **Tottus**: Iquitos, plus confirming the OSM candidates for Trujillo 1 (`osm-n4453923987`) and Zorritos (`osm-w436598550`).
+   - **Tambo** (890 rows + 19 manual vs 902 reported on 2026-09-09; since the 2026-10-01 manual placement 904 rows + 5 manual;
+     52 Justo stores have online ordering disabled, so some may be closed): query the Justo API again and read Peru-Retail's
+     monthly opening articles.
+   - **Precio Uno**, **Holi**, **Tottus**: the stores that were missing (Precio Uno Próceres, Lurín, Ate Kampu, Iquitos La
+     Marina; Holi Pardo, Petit Thouars; Tottus Iquitos, Trujillo 1, Zorritos) were placed or linked on 2026-10-01 (§4).
 5. **For the radius / cannibalization feature** (SPEC §1, basic version in v1; the full analysis is phase 2): treat
    rows with `precision = approx` **or** `status = to_verify` as uncertain positions. Never draw `closed` rows. On a long
    avenue an approx row can still be a few hundred metres off.

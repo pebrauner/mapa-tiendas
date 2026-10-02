@@ -301,8 +301,64 @@
         XLSX.utils.book_append_sheet(wb, ws, String(sh.name || 'Hoja1').slice(0, 31));
       });
       var out = XLSX.write(wb, { bookType: 'xlsx', type: 'array', compression: true });
+      out = io.polishXLSX(XLSX, out, sheets.map(function (sh) { return { heads: [0], freeze: sh.rows.length > 1 }; }));
       return new Blob([out], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
     });
+  };
+
+  /**
+   * What SheetJS Community Edition does not write (it has no cell styles): header rows in bold on a
+   * light grey fill and, on data tables, the header row frozen (it stays in view while scrolling).
+   * Edits the package's XML in place through SheetJS' own zip reader/writer (XLSX.CFB): styles.xml
+   * gets one font, one fill and one cell format; each sheet's header cells get that format, its
+   * <sheetView> a frozen pane. data = XLSX.write(…, {type:'array'}); sheets[i] = {heads: [row
+   * indexes, 0-based], freeze: bool} for the i-th sheet. Returns the new bytes, or the given ones
+   * when anything looks unexpected (a plain, valid workbook beats a broken one).
+   */
+  io.polishXLSX = function (XLSX, data, sheets) {
+    try {
+      var CFB = XLSX.CFB;
+      if (!CFB || !sheets || !sheets.length) return data;
+      var zip = CFB.read(data instanceof Uint8Array ? data : new Uint8Array(data), { type: 'array' });
+      var utf8 = function (e) { return new TextDecoder('utf-8').decode(e.content instanceof Uint8Array ? e.content : new Uint8Array(e.content)); };
+      var put = function (e, text) { e.content = new TextEncoder().encode(text); e.size = e.content.length; };
+      var styles = CFB.find(zip, '/xl/styles.xml');
+      if (!styles) return data;
+      var sx = utf8(styles);
+      var count = function (tag) { var m = new RegExp('<' + tag + ' count="(\\d+)"').exec(sx); return m ? +m[1] : -1; };
+      var fonts = count('fonts'), fills = count('fills'), xfs = count('cellXfs');
+      if (fonts < 1 || fills < 1 || xfs < 1 || !/<\/fonts>/.test(sx) || !/<\/fills>/.test(sx) || !/<\/cellXfs>/.test(sx)) return data;
+      sx = sx.replace(/<fonts count="\d+"/, '<fonts count="' + (fonts + 1) + '"')
+        .replace('</fonts>', '<font><b/><sz val="12"/><color theme="1"/><name val="Calibri"/><family val="2"/><scheme val="minor"/></font></fonts>')
+        .replace(/<fills count="\d+"/, '<fills count="' + (fills + 1) + '"')
+        .replace('</fills>', '<fill><patternFill patternType="solid"><fgColor rgb="FFF3F4F6"/><bgColor indexed="64"/></patternFill></fill></fills>')
+        .replace(/<cellXfs count="\d+"/, '<cellXfs count="' + (xfs + 1) + '"')
+        .replace('</cellXfs>', '<xf numFmtId="0" fontId="' + fonts + '" fillId="' + fills + '" borderId="0" xfId="0" applyFont="1" applyFill="1"/></cellXfs>');
+      var head = xfs;                                  // index of the new cell format
+      var edits = [];
+      for (var i = 0; i < sheets.length; i++) {
+        var e = CFB.find(zip, '/xl/worksheets/sheet' + (i + 1) + '.xml');
+        if (!e) return data;
+        var x = utf8(e), o = sheets[i] || {};
+        (o.heads || []).forEach(function (r) {
+          x = x.replace(new RegExp('(<row r="' + (r + 1) + '"[^>]*>)([\\s\\S]*?)(</row>)'), function (m, a, cells, z) {
+            return a + cells.replace(/<c r="([A-Z]+\d+)"(?![^>]*\ss=)/g, '<c r="$1" s="' + head + '"') + z;
+          });
+        });
+        if (o.freeze) {
+          var pane = '<sheetView workbookViewId="0"><pane ySplit="1" topLeftCell="A2" activePane="bottomLeft" state="frozen"/><selection pane="bottomLeft"/></sheetView>';
+          if (x.indexOf('<sheetView workbookViewId="0"/>') < 0) return data;
+          x = x.replace('<sheetView workbookViewId="0"/>', pane);
+        }
+        edits.push([e, x]);
+      }
+      put(styles, sx);
+      edits.forEach(function (ed) { put(ed[0], ed[1]); });
+      return CFB.write(zip, { type: 'array', fileType: 'zip', compression: true });
+    } catch (err) {
+      console.warn('[io] xlsx styling skipped', err);
+      return data;
+    }
   };
   io.storesToXLSX = function (stores, sheetName) {
     var cols = MT.data.COLUMNS;
