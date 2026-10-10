@@ -30,7 +30,12 @@ try {
   await shot('pop-chains');
   await page.keyboard.press('Escape');
 
-  await ev('location popover', () => document.querySelectorAll('.mt-db-fbtn')[1].click());
+  await ev('zones popover', () => document.querySelector('.mt-db-fbtn[data-facet=zones]').click());
+  await sleep(300);
+  await shot('pop-zones');
+  await page.keyboard.press('Escape');
+
+  await ev('location popover', () => document.querySelector('.mt-db-fbtn[data-facet=location]').click());
   await sleep(300);
   await shot('pop-location');
   await page.keyboard.press('Escape');
