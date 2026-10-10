@@ -300,6 +300,14 @@
   background: var(--mt-info-soft); color: #1E3A8A; border-bottom: 1px solid #D5E0FB; font-size: var(--mt-fs-xs); line-height: 1.4;
 }
 .mt-analysis-capnote .mt-icon { flex: none; margin-top: 1px; color: var(--mt-info); }
+/* Zonas Nielsen menu of the district picker (rows: name · number of districts) */
+.mt-analysis-zonemenu { max-height: calc(100vh - 16px); overflow-y: auto; }
+.mt-analysis-zoneopt { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; }
+.mt-analysis-zoneopt__n { flex: none; font-size: var(--mt-fs-xs); color: var(--mt-g500); }
+/* Mode B empty state: the Zonas Nielsen as buttons, grouped by area */
+.mt-analysis-zonegroups { display: flex; flex-direction: column; gap: 12px; max-width: 480px; }
+.mt-analysis-zonegroup { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.mt-analysis-zonegroup__area { font-size: 11px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--mt-g500); }
 .mt-analysis-zonebtns { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; max-width: 480px; }
 .mt-analysis-loading { flex: 1; display: grid; place-items: center; }
 .mt-analysis-nomatch { position: absolute; left: 0; right: 0; top: 64px; padding: 16px; text-align: center; font-size: var(--mt-fs-sm); color: var(--mt-g500); }

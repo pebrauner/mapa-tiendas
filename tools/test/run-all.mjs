@@ -41,6 +41,7 @@ const SUITES = [
   ['analysis-slide', 'analysis-slide.test.mjs', [], 'analysis slides: reference, rings, distance list, inspector; preview, PNG, PPTX, HTML'],
   ['analysis-ui', 'analysis-ui.test.mjs', [], 'Análisis tab: distances to a store/point, proximity matrix, Excel, "Agregar como lámina"'],
   ['analysis-matrix', 'analysis-matrix.test.mjs', [], 'proximity matrix regressions (2026-10-02 report): user flow, line ends, labels, cards, focus'],
+  ['analysis-zones', 'analysis-zones.test.mjs', [], 'Análisis tab: Zonas Nielsen as region shortcuts (menu, buttons, search, labels, Excel), Lima presets without zones.js'],
   ['version-guard', 'version-guard.test.mjs', [], 'new-version banner, stale browser cache after a deploy, error isolation'],
   ['robustness', 'robustness.test.mjs', [], 'review fixes: import encodings, tabs, folder copies, missing files'],
   ['styleguide', 'styleguide.mjs', [], 'design-system catalogue renders'],
