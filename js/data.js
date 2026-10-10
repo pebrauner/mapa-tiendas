@@ -674,7 +674,7 @@
 
   /* ---- Zonas Nielsen ------------------------------------------------------------------------ */
   /**
-   * Zonas Nielsen = the SUBAREA of the company's store list: the main grouping of the stores (SPEC §3.6).
+   * Zonas Nielsen = the SUBAREA of the company's store list: the main grouping of the stores (SPEC §3.7).
    * Shipped as window.MT_ZONES (data/zones.js, generated from data/zonas-nielsen.csv); optional: without it
    * `available` is false and the picker offers no zones. A zone is a named set of districts and a district
    * belongs to ONE zone; a store's zone is its district's zone (stores outside every zone: "resto del Perú").

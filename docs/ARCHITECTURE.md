@@ -14,7 +14,8 @@ Source of truth for decisions and data formats: [`SPEC.md`](../SPEC.md). Verifie
    (`var`, `function`), but ES2017+ syntax (arrow functions, `const`, template literals, `async`) is
    fine in modules: Chrome/Edge are the targets.
 3. **No `fetch()` of local files.** Data arrives as globals: `MT_SEED` (data/stores.js),
-   `MT_CHAINS` (data/chains.js), `MT_DISTRICTS` (data/districts.js), `MT_LOGOS` (logos/logos.js).
+   `MT_CHAINS` (data/chains.js), `MT_DISTRICTS` (data/districts.js), `MT_LOGOS` (logos/logos.js), and the
+   optional `MT_ZONES` (data/zones.js: Zonas Nielsen, SPEC §3.7).
    Any of them may be **missing or broken** (a separate data workflow regenerates them) — read them
    only through `MT.data` / `MT.logos`, which degrade gracefully.
 4. **Canvas safety:** anything drawn on a canvas must be a data URI or a generated canvas
@@ -63,6 +64,7 @@ A future module may start as a stub that sets `stub: true` on its namespace and 
   vendor:  maplibre-gl.js (maplibregl) · turf.min.js (turf) · topojson-client.min.js (topojson)
   data:    window.MT_MISSING = [] ; data/chains.js · data/stores.js · data/districts.js · logos/logos.js   (each with onerror → MT_MISSING.push(path))
            js/example-project.js (window.MT_EXAMPLE_PROJECT, `data-optional`: a load error does not stop the app)
+           data/zones.js (window.MT_ZONES, Zonas Nielsen, `data-optional`: without it MT.data.zones.available is false and the zone UI is absent)
   core:    mt.js · theme.js · i18n.js · i18n/core.js · storage.js · geo.js · io.js · data.js · project.js · analysis.js · ui.js · app.js
   dicts:   i18n/map.js · i18n/maps-ui.js · i18n/db.js · i18n/export.js · i18n/analysis.js
   M1:      layout.js · markers.js · legend.js · radius.js · mapview.js · slide.js · render.js
@@ -265,6 +267,11 @@ convenience, other`), `STATUSES` (`verified, to_verify, closed`), `SOURCES` (`os
 | `search(q, {limit=20}) → ranked results` | accent-insensitive; every word must match district/province/department; district matches first; 4–6 digit codes match ubigeos; colloquial Lima/Callao names first (Surco → Santiago de Surco, Magdalena → Magdalena del Mar, Cercado, SJL, SMP, SJM, VES, VMT, Chosica…); Lima Metropolitana / Callao win word-prefix ties. Synchronous — fine to run as the user types |
 | `byProvince() → [{key, province, department, ubigeos[], label}]`, `searchProvinces(q, {limit})` | for "agregar provincia completa" |
 | `locate(lat, lng) → district|null` (also `MT.data.locate`) | bbox prefilter + `turf.booleanPointInPolygon` |
+| **Zonas Nielsen** `MT.data.zones` (SPEC §3.7) | the main grouping of the stores: a zone is a named set of districts, a district is in ONE zone, a store's zone is its district's zone |
+| `available`, `all() → [{id, name, area, ubigeos[]}]`, `get(id)`, `byArea() → [{area, zones[]}]` | `available` is false when `data/zones.js` is absent (optional): every zone UI hides itself; only ubigeos that exist in `MT.data.districts` are kept |
+| `ofDistrict(ubigeo) → zone|null`, `ofStore(store) → zone|null` | null = "resto del Perú" (no zone) |
+| `search(q, {limit=10}) → [{id, name, area, ubigeos, score}]` | accent-insensitive, word based, best first |
+| `covered(ubigeos) → {zones[], rest[]}` | the zones whose districts are ALL in the list, and the districts not part of such a zone (how the Mapas chips fold a complete zone into one chip) |
 | **Regions** | |
 | `storesForMap(mapCfg) → store[]` | status ≠ closed, chain toggled on, not in `hiddenStores`; **analysis slide without districts (§8.3)** → within `analysis.maxMeters` of the reference (haversine, d ≤ max; the reference store included; `analysis.includeToVerify:false` drops *por verificar*); else `onlyInside` → ubigeo ∈ districts, else inside the saved view or the districts' bbox +25%; sorted by id |
 | `boundsForMap(mapCfg) → bbox|null` | analysis slide without districts → the largest ring's exact box + 4 % per side (null when the reference cannot be placed); `fitTo:'districts'` → districts bbox; `'stores'` → stores bbox (min 800 m), falls back to districts. Unpadded: add `MT.theme.frame.padding` |
@@ -683,14 +690,25 @@ columns, narrower below 1380 and 1200 px):
 - **Inspector** — collapsible sections (open state in pref `maps.sections`), each header shows a summary:
   1. *Textos de la lámina*: title; subtitle with switch "Lista automática de distritos" (read-only
      preview) or manual text (starts from the automatic text, abbreviations allowed); Peso (free text).
-  2. *Distritos*: inline **combobox** over `MT.data.districts.search` (local, as-you-type; ↑/↓, Enter,
-     Esc; shows "Provincia, Departamento" and store counts; already-added rows disabled) + province rows
-     ("Toda la provincia de X", `searchProvinces`) + **"Zonas de Lima"** presets (Lima Moderna / Centro /
-     Norte / Este / Sur, Balnearios del sur, Callao — APEIM grouping, only ubigeos present in the data);
-     chips with × (Backspace in the box only edits the text — holding it used to remove every
-     district), "+N más" above 16, "Quitar todos" (confirm from 4). Enter does not guess between
-     equally good matches ("San Juan"): it asks to pick one. With no districts a "Empieza por aquí"
-     card is shown; a new slide focuses the box.
+  2. *Zonas Nielsen* (section id `districts`; the heading is the literal text "Zonas Nielsen" in both
+     languages): inline **combobox** over `MT.data.districts.search` (local, as-you-type; ↑/↓, Enter,
+     Esc; shows "Provincia, Departamento" and store counts; already-added rows disabled), then the
+     matching **Nielsen zones** (`MT.data.zones.search`, at most 3, after the districts so that a name that
+     is both a district and a zone — Trujillo, Piura — keeps picking the district on Enter; a query that
+     only matches a zone has the zone first), then province rows ("Toda la provincia de X",
+     `searchProvinces`). Under the box, the **zone pills** (`.mt-maps-zone`, `aria-pressed`) grouped by area
+     ("Lima + Callao" / "Provincias"): a pill adds every district of the zone that is not on the slide
+     yet, or removes them all when the zone is complete; `is-partial` (dashed) when only some of its
+     districts are on the slide (the tooltip says how many are missing, and the store count). Chips: a zone
+     whose districts are ALL on the slide (`MT.data.zones.covered`) is ONE zone chip (name + "N distritos",
+     × removes that zone's districts, the chip body expands its districts next to it; the expanded state
+     is per session and resets when the zone stops being complete), the other districts are chips with ×
+     (Backspace in the box only edits the text — holding it used to remove every district), "+N más"
+     above 16 items, "Quitar todos" (confirm from 4). The slide still stores only `districts`
+     (`mapCfg.zones` does not exist; old projects open unchanged) and the automatic subtitle still lists
+     districts. Enter does not guess between equally good matches ("San Juan"): it asks to pick one. With
+     no districts a "Empieza por aquí" card is shown; a new slide focuses the box. Without
+     `data/zones.js` there are no pills and no zone results (the district search is unchanged).
   3. *Cadenas*: grouped by `MT.data.GROUPS`, badge icon (`MT.markers.icon`) + name + count of stores of
      that chain in the slide's region (`storesForMap` with every chain on) + switch; Todas/Ninguna per
      group and global. Unknown chain ids appear under "Otras".

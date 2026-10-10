@@ -37,9 +37,10 @@ guardarlo antes; nunca lo reemplaza sin preguntar.
 
 1. Pestaña **Mapas** → la lámina 1 ya está creada. Escribe el **título** (p. ej. «Lima
    Metropolitana Sur») y el **Peso** (p. ej. `15.8%`).
-2. En **Distritos**, escribe un nombre y pulsa Enter (*Miraflores*, *Surco*, *SJL* también
-   funcionan) o usa **Zonas de Lima** para agregar una zona completa. El subtítulo
-   «(Miraflores, San Borja, …)» se arma solo.
+2. En **Zonas Nielsen**, elige una zona (*Lima Cono Sur*, *Metropolitana Sur*, *Trujillo*…) con un
+   clic, o escribe un distrito y pulsa Enter (*Miraflores*, *Surco*, *SJL* también funcionan). Una
+   zona completa se muestra como una sola etiqueta que puedes abrir para ver sus distritos. El
+   subtítulo «(Miraflores, San Borja, …)» se arma solo.
 3. En **Cadenas**, enciende o apaga las cadenas (Tambo y Oxxo vienen apagadas). La leyenda muestra
    solo lo que se ve en el mapa, con su conteo: `PLAZA VEA (6)`.
 4. Ajusta el encuadre con la rueda del mouse o arrastrando el mapa («Volver al automático» lo
@@ -155,7 +156,8 @@ index.html     la app (abre con doble clic)
 css/           estilos (core + uno por módulo)
 js/            módulos de la app (scripts clásicos, espacio de nombres window.MT)
 js/i18n/       textos en español e inglés
-data/          tiendas (stores.csv = fuente, stores.js = generado), cadenas, distritos, nombres de avenidas
+data/          tiendas (stores.csv = fuente, stores.js = generado), cadenas, distritos, zonas Nielsen
+               (zonas-nielsen.csv = fuente, zones.js = generado), nombres de avenidas
 logos/         logos de las cadenas (PNG + logos.js con data URIs)
 vendor/        MapLibre GL, PptxGenJS, SheetJS, Turf, topojson-client, fuentes
 tools/         scripts de datos y pruebas (Node; no los necesita quien usa la app)
@@ -176,6 +178,8 @@ node tools/test/e2e.mjs          # recorrido completo de un usuario en español 
 node tools/test/analysis-e2e.mjs # recorrido de la pestaña Análisis (Excel, lámina, PowerPoint) en español e inglés
 node tools/test/smoke.mjs        # arranque, pestañas, idiomas, datos faltantes
 node tools/build-data.mjs        # regenera data/stores.js desde data/stores.csv
+node tools/build-zones.mjs       # regenera data/zones.js desde data/zonas-nielsen.csv (--check solo valida)
+node tools/test/zones.test.mjs   # zonas Nielsen: datos, API y selector de la pestaña Mapas (es/en)
 node tools/fixtures/build-example.mjs   # js/example-project.js desde tools/fixtures/demo.mapa.json
 node tools/test/osm-rules.test.mjs      # escaneo OSM de la app = reglas de la semilla (vs data/stores.csv)
 node tools/test/demo-slides.mjs         # 4 láminas de ejemplo: PNG, .pptx y render con PowerPoint (Windows)
@@ -261,8 +265,9 @@ asking.
 ## Your first slide in 5 minutes
 
 1. **Maps** tab → slide 1 exists. Type the **title** and the **Peso**.
-2. **Districts:** type a name and press Enter (*Miraflores*, *Surco*, *SJL* work) or use the
-   **Lima zones** presets. The “(Miraflores, San Borja, …)” subtitle builds itself.
+2. **Zonas Nielsen:** pick a zone (*Lima Cono Sur*, *Metropolitana Sur*, *Trujillo*…) with one click,
+   or type a district and press Enter (*Miraflores*, *Surco*, *SJL* work). A complete zone shows as one
+   chip you can open to see its districts. The “(Miraflores, San Borja, …)” subtitle builds itself.
 3. **Chains:** switch chains on or off (Tambo and Oxxo start off). The legend lists only what the
    map shows, with counts.
 4. Frame the map with the wheel or by dragging (“Back to automatic” undoes it). Drag any logo to

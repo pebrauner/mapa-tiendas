@@ -1270,6 +1270,7 @@
         U.clear(chips);
         // A zone whose districts are ALL on the slide is one chip (its districts open next to it); the rest are district chips.
         const cov = Z.available ? Z.covered(ds) : { zones: [], rest: ds };
+        Object.keys(st.zonesOpen).forEach((id) => { if (!cov.zones.some((z) => z.id === id)) delete st.zonesOpen[id]; });   // a zone that is back (or gone) starts collapsed
         const items = [];
         cov.zones.forEach((z) => {
           items.push({ kind: 'z', z: z });

@@ -125,9 +125,9 @@ async function journey(lang) {
     await setText('peso', '15.8%');
     await idle();
     let m1 = await ev(() => { const m = MT.project.currentMap(); return { id: m.id, title: m.title, peso: m.peso, districts: m.districts, sub: MT.data.subtitleFor(m),
-      chips: document.querySelectorAll('.mt-maps-chip').length, slideTitle: (document.querySelector('.mt-slide__title') || {}).textContent }; });
+      chips: document.querySelectorAll('.mt-maps-chip').length, zoneChip: (document.querySelector('.mt-maps-chip--zone .mt-chip__label') || {}).textContent, slideTitle: (document.querySelector('.mt-slide__title') || {}).textContent }; });
     check(m1.title === 'Lima Metropolitana Sur' && m1.peso === '15.8%', `title and Peso typed (${m1.title}, ${m1.peso})`);
-    check(m1.districts.join() === '150122,150130,150131,150141' && m1.chips === 4, `4 districts picked from the search (${m1.districts})`);
+    check(m1.districts.join() === '150122,150130,150131,150141' && m1.chips === 1 && m1.zoneChip === 'Metropolitana Sur', `4 districts picked from the search (${m1.districts}) show as ONE Nielsen zone chip (${m1.zoneChip})`);
     check(m1.sub === '(Miraflores, San Borja, San Isidro, Surquillo)', `automatic subtitle (${m1.sub})`);
     const slideText = await ev(() => (document.querySelector('.mt-slide') || document.body).innerText);
     check(/Lima Metropolitana Sur/.test(slideText) && /15\.8%/.test(slideText) && /Peso:/.test(slideText) && /Tiendas/.test(slideText), 'slide preview shows title, subtitle with Peso and the "Tiendas" panel');

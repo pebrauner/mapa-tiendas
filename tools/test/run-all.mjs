@@ -35,6 +35,7 @@ const SUITES = [
   ['layout', 'layout.test.mjs', [], 'deterministic marker declutter'],
   ['maps-core', 'maps-core.mjs', [], 'M1 map, slide, markers, legend, radius, render'],
   ['maps-ui', 'maps-ui.test.mjs', [], 'M2 Mapas tab'],
+  ['zones', 'zones.test.mjs', [], 'Zonas Nielsen: data files, MT.data.zones, the zone picker of the Mapas tab (es/en), no zones.js'],
   ['db', 'db.test.mjs', [], 'M3 database, chains, import/export, OSM scan (mocked)'],
   ['osm-rules', 'osm-rules.test.mjs', [], 'in-app OSM scan = seed rules (data/chains.js) vs stores.csv'],
   ['export', 'export.test.mjs', [], 'M4 PNG / PPTX / HTML exports'],

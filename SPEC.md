@@ -152,6 +152,34 @@ UI shows "N unsaved local changes". Persist options:
 - **Export** CSV / Excel (.xlsx) — and **Import** CSV/XLSX (merge by `id`, or append new rows; geocode
   rows that have an address but no coordinates, 1 req/s with progress).
 
+### 3.7 Zonas Nielsen — `data/zonas-nielsen.csv` (canonical) and `data/zones.js` (generated)
+
+The **Zonas Nielsen** are the main grouping of the stores: the `SUBAREA` column of the company's store list
+("Listado de tiendas — Octubre 2026 V2 — Zona Nielsen", sheet `BD`). A zone is a **named set of districts**;
+a district belongs to **one** zone; a store's zone is its district's zone (`ubigeo`), so it needs no column in
+`stores.csv`. Stores outside every zone are "the rest of Peru" (*Resto del Perú*).
+
+CSV: UTF-8 with BOM, CRLF, header row, columns in this order: `ubigeo` (6 digits, must exist in
+`data/districts.js`) · `district` · `province` · `department` (informational, must match INEI) · `zone`
+(display name, Spanish, as in the list: *Lima Cono Norte*, *Metropolitana Sur*, *Arequipa*…) · `area`
+(`Lima + Callao` | `Provincias`: groups the zones in the picker) · `origin` (`excel` = the zone most of the
+district's stores carry in the list · `vecindad` = no store of the list there, placed by neighbourhood) · `note`.
+Zones keep the order of their first row. 15 zones / 114 districts: the 7 Lima + Callao zones cover all 50
+districts of Lima Metropolitana and Callao; the 8 provincial zones (Arequipa, Cajamarca, Chiclayo, Chimbote,
+Huánuco, Ica, Piura, Trujillo) hold the districts of their city area that have stores in the list.
+**"Resto Perú / Norte / Sur" is not a zone**: the list gives the same district several of them, so it cannot be a
+set of districts. Edit the CSV (add or move a district), then `node tools/build-zones.mjs` (`--check` validates
+and fails when `zones.js` is out of date).
+
+```js
+window.MT_ZONES = { count: 15, zones: [ { id: "lima-cono-norte", name: "Lima Cono Norte", area: "Lima + Callao", ubigeos: ["150102", …] }, … ] };
+```
+Optional script (`data-optional` in `index.html`): without it `MT.data.zones.available` is false and the zone UI
+is simply absent. API (`js/data.js`): `MT.data.zones` → `available`, `all()`, `get(id)`, `byArea()`, `ofDistrict(ubigeo)`,
+`ofStore(store)`, `search(q, {limit})`, `covered(ubigeos)` → `{zones, rest}` (the zones fully inside a district list).
+A slide still stores only `districts` (a zone is shown as one chip when all its districts are selected), so project
+files from older versions open unchanged.
+
 ---
 
 ## 4. App structure
