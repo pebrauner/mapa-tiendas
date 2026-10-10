@@ -5,10 +5,13 @@
 //   node tools/test/db.test.mjs --live     + one real Overpass scan of Miraflores (slow on file://)
 //   node tools/test/db.test.mjs --headful  watch it
 // Screenshots: tools/test/out/db-*.png. Fails on any console error.
+// Section 2b covers the Zonas Nielsen grouping (filter facet, column, drawer line, Excel column) on the
+// REAL data files (all stores, every district, the 15 zones of data/zones.js), plus a run without zones.js.
 
-import { openApp, screenshot, makeChecker, sleep, captureDownloads, waitForDownload, waitForMapIdle } from './lib.mjs';
-import { readFileSync, readdirSync } from 'node:fs';
+import { openApp, prepareApp, launch, collectErrors, screenshot, makeChecker, sleep, captureDownloads, waitForDownload, waitForMapIdle, splitNetworkNoise, ROOT, OUT } from './lib.mjs';
+import { readFileSync, readdirSync, rmSync } from 'node:fs';
 import path from 'node:path';
+import vm from 'node:vm';
 
 const headless = !process.argv.includes('--headful');
 const live = process.argv.includes('--live');
@@ -72,7 +75,8 @@ await checks(page, 'mount & table', async () => {
   ok(rows.length > 10 && rows.length <= 63, 'table rows rendered (virtualized window)', rows.length);
   ok(/63 tiendas/.test(__$('.mt-db-count').textContent), 'count shows 63 tiendas', __$('.mt-db-count').textContent);
   ok(__$('.mt-db-head__meta').textContent.includes('16 cadenas'), 'header meta shows the chain count');
-  ok(__$$('.mt-db-fbtn').length === 5, 'five filter buttons (chains, location, status, source, precision)');
+  // Zona Nielsen was added after "Cadenas" (it is the main grouping): six buttons, found by data-facet, not by position.
+  ok(__$$('.mt-db-fbtn').map((b) => b.dataset.facet).join() === 'chains,zones,location,statuses,sources,precisions', 'six filter buttons (chains, Zona Nielsen, location, status, source, precision)', __$$('.mt-db-fbtn').map((b) => b.dataset.facet));
   ok(__$('.mt-db-changes').textContent.includes('Sin cambios locales'), 'no local changes at start');
   const closedRow = rows.find((r) => r.classList.contains('is-muted'));
   ok(!!closedRow || MT.dbui.visible().some((s) => s.status === 'closed'), 'closed store present (muted row)');
@@ -153,7 +157,7 @@ await checks(page, 'facet popovers', async () => {
   __$('.mt-db-pop').dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
   ok(!__$('.mt-db-pop'), 'Escape closes the popover');
   // Location cascade
-  __$$('.mt-db-fbtn')[1].click();
+  __$('.mt-db-fbtn[data-facet=location]').click();
   await __until(() => __$('.mt-db-pop select'));
   let sels = __$$('.mt-db-pop select');
   ok(sels.length === 3 && sels[1].disabled && sels[2].disabled, 'location popover: province/district disabled until a department is chosen');
@@ -165,10 +169,10 @@ await checks(page, 'facet popovers', async () => {
   const miraOpt = [...sels[2].options].find((o) => /Miraflores/.test(o.textContent));
   ok(!!miraOpt && /\(15\)/.test(miraOpt.textContent), 'district options carry counts', miraOpt && miraOpt.textContent);
   __setValue(sels[2], miraOpt.value);
-  ok(MT.dbui.visible().length === 15 && /Miraflores/.test(__$$('.mt-db-fbtn')[1].textContent), 'district chosen → 15 stores, button shows Miraflores');
+  ok(MT.dbui.visible().length === 15 && /Miraflores/.test(__$('.mt-db-fbtn[data-facet=location]').textContent), 'district chosen → 15 stores, button shows Miraflores');
   __$('.mt-db-pop').dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
   // Status popover
-  __$$('.mt-db-fbtn')[2].click();
+  __$('.mt-db-fbtn[data-facet=statuses]').click();
   await __until(() => __$('.mt-db-pop'));
   __$$('.mt-db-pop__opt input')[1].click(); // to_verify
   ok(MT.dbui.filters().statuses.join() === 'to_verify', 'status popover sets the filter');
@@ -835,6 +839,404 @@ await browser.close();
   const unexpected = e2.filter((e) => !/ERR_FILE_NOT_FOUND/.test(e));
   check(unexpected.length === 0, `only file-not-found errors (${unexpected.join(' | ')})`);
   await b2.close();
+}
+
+/* ============================================================================================
+ * 2b. Zonas Nielsen on the real data files: facet, column, drawer, Excel; then without data/zones.js
+ * ========================================================================================== */
+{
+  // SheetJS in Node (the vendored build), to read the exported workbooks back.
+  const XLSX = (() => {
+    const ctx = {}; ctx.window = ctx; ctx.self = ctx;
+    vm.createContext(ctx);
+    vm.runInContext(readFileSync(path.join(ROOT, 'vendor', 'xlsx', 'xlsx.full.min.js'), 'utf8'), ctx);
+    return ctx.XLSX;
+  })();
+  const readSheet = (file) => { const wb = XLSX.read(readFileSync(file), { type: 'buffer' }); return XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], { header: 1, raw: true, defval: '' }); };
+
+  const { browser: bz, page: pz, errors: ez } = await openApp({ lang: 'es', fixtures: 'missing', headless, hash: 'base', viewport: { width: 1440, height: 900 } });
+  // Page helpers; the expectations come from the zones' district lists (MT.data.zones.all()[i].ubigeos), NOT from ofStore().
+  const installZoneHelpers = async () => {
+    await installHelpers(pz);
+    await pz.evaluate(() => {
+      const Z = MT.data.zones;
+      window.__zx = {
+        all: () => MT.data.stores({ includeClosed: true }),
+        inZone: (zid) => { const set = new Set(Z.get(zid).ubigeos); return MT.data.stores({ includeClosed: true }).filter((s) => set.has(s.ubigeo)); },
+        inRest: () => { const set = new Set(Z.all().flatMap((z) => z.ubigeos)); return MT.data.stores({ includeClosed: true }).filter((s) => !set.has(s.ubigeo)); },
+        ids: (list) => list.map((s) => s.id).sort().join(),
+        btn: () => __$('.mt-db-fbtn[data-facet=zones]'),
+        n: (opt) => +opt.querySelector('.mt-db-pop__n').textContent.replace(/\D/g, ''),
+        closePop: () => { const p = __$('.mt-db-pop'); if (p) p.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true })); },
+        openZones: async () => { __zx.btn().click(); await __until(() => __$('.mt-db-pop--zones')); return __$('.mt-db-pop--zones'); },
+      };
+    });
+  };
+  await pz.waitForFunction(() => document.querySelector('.mt-db-table tbody tr[data-id]'));
+  await installZoneHelpers();
+
+  await checks(pz, 'zonas nielsen: the facet (es)', async () => {
+    const ok = window.__ok;
+    const Z = MT.data.zones, all = __zx.all();
+    ok(Z.available && Z.all().length === 15, 'the 15 Nielsen zones are loaded', Z.all().length);
+    ok(!!__zx.btn() && /Zona Nielsen/.test(__zx.btn().textContent) && __$$('.mt-db-fbtn')[1] === __zx.btn(), 'the filter bar has "Zona Nielsen", right after "Cadenas"', __zx.btn() && __zx.btn().textContent);
+    const pop = await __zx.openZones();
+    ok(__$$('.mt-db-pop__group', pop).map((g) => g.textContent.trim()).join('|') === 'Lima + Callao|Provincias', 'zones grouped by area: Lima + Callao / Provincias');
+    const opts = __$$('.mt-db-pop__opt', pop);
+    ok(opts.length === 16 && opts[15].dataset.zone === '__rest__' && /Resto del Perú/.test(opts[15].textContent), '15 zones + "Resto del Perú" as the last option', opts.map((o) => o.dataset.zone));
+    ok(opts.slice(0, 15).map((o) => o.dataset.zone).join() === Z.all().map((z) => z.id).join(), 'zones in the order of data/zonas-nielsen.csv');
+    const zoneNames = opts.slice(0, 15).map((o) => o.querySelector('.mt-db-pop__name').textContent);
+    ok(zoneNames.join() === Z.all().map((z) => z.name).join() && zoneNames.includes('Lima Cono Sur') && zoneNames.includes('Metropolitana Oriente'), 'zone names are shown as data', zoneNames);
+    // counts: from the zones' district lists; zones + "Resto del Perú" partition the whole database
+    const exp = Z.all().map((z) => __zx.inZone(z.id).length);
+    ok(opts.slice(0, 15).every((o, i) => __zx.n(o) === exp[i]) && exp.every((n) => n > 0), 'each zone shows its number of stores', exp);
+    ok(__zx.n(opts[15]) === __zx.inRest().length && __zx.inRest().length > 0, '"Resto del Perú" shows the stores that are in no zone', __zx.n(opts[15]));
+    ok(exp.reduce((a, b) => a + b, 0) + __zx.inRest().length === all.length, 'zones + "Resto del Perú" add up to every store', all.length);
+    ok(__$('.mt-db-pop--zones [role=separator]') && opts.every((o) => o.querySelector('input[type=checkbox]')), 'options are checkboxes; "Resto del Perú" is set apart');
+    // select Lima Cono Sur
+    opts.find((o) => o.dataset.zone === 'lima-cono-sur').querySelector('input').click();
+    ok(__zx.ids(MT.dbui.visible()) === __zx.ids(__zx.inZone('lima-cono-sur')) && MT.dbui.visible().length === exp[2], 'Lima Cono Sur leaves exactly the stores whose district is in that zone', MT.dbui.visible().length);
+    ok(MT.dbui.filters().zones.join() === 'lima-cono-sur' && __zx.btn().classList.contains('is-active') && /Zona Nielsen:?\s*Lima Cono Sur/.test(__zx.btn().textContent.trim()), 'the button shows the zone name', __zx.btn().textContent.trim());
+    const cnt = __$('.mt-db-count').textContent.match(/^([\d.,]+) de ([\d.,]+) tiendas$/);
+    ok(cnt && +cnt[1].replace(/\D/g, '') === exp[2] && +cnt[2].replace(/\D/g, '') === all.length, 'the count shows "n de total tiendas"', __$('.mt-db-count').textContent);
+    ok(!__$('.mt-db-clear').hidden, '"Limpiar filtros" appears');
+    // a second zone → union, "2 zonas"
+    __$$('.mt-db-pop__opt', pop).find((o) => o.dataset.zone === 'metropolitana-sur').querySelector('input').click();
+    ok(__zx.ids(MT.dbui.visible()) === __zx.ids(__zx.inZone('lima-cono-sur').concat(__zx.inZone('metropolitana-sur'))) && /2 zonas/.test(__zx.btn().textContent), 'two zones → their union, button says "2 zonas"', __zx.btn().textContent.trim());
+    // the area checkbox ticks every zone of the area; indeterminate while partial
+    const g = __$$('.mt-db-pop__group', pop);
+    const gbox = (i) => g[i].querySelector('input');
+    ok(gbox(0).indeterminate && !gbox(0).checked && !gbox(1).indeterminate, 'area checkbox is indeterminate while only some of its zones are ticked');
+    gbox(1).click();
+    const provs = Z.all().filter((z) => z.area === 'Provincias').map((z) => z.id), lima = Z.all().filter((z) => z.area !== 'Provincias').map((z) => z.id);
+    ok(provs.length === 8 && provs.every((id) => MT.dbui.filters().zones.includes(id)) && MT.dbui.filters().zones.length === 10, '"Provincias" ticks its 8 zones (the 2 ticked before stay)', MT.dbui.filters().zones);
+    gbox(0).click();   // partial → all ticked
+    ok(lima.every((id) => MT.dbui.filters().zones.includes(id)) && gbox(0).checked && !gbox(0).indeterminate && MT.dbui.filters().zones.length === 15, '"Lima + Callao" ticks the rest of its zones: all 15, no "Resto del Perú"', MT.dbui.filters().zones.length);
+    ok(__zx.ids(MT.dbui.visible()) === __zx.ids(all.filter((s) => !__zx.inRest().includes(s))) && /15 zonas/.test(__zx.btn().textContent), 'all 15 zones → every store that is in a zone', MT.dbui.visible().length);
+    // "Resto del Perú" is the partition's other half
+    __$$('.mt-db-pop__opt', pop).find((o) => o.dataset.zone === '__rest__').querySelector('input').click();
+    ok(MT.dbui.visible().length === all.length && /16 zonas/.test(__zx.btn().textContent), 'zones + "Resto del Perú" → the whole list', MT.dbui.visible().length);
+    gbox(0).click(); gbox(1).click();   // untick both areas (all ticked → click unticks)
+    ok(MT.dbui.filters().zones.join() === '__rest__' && __zx.ids(MT.dbui.visible()) === __zx.ids(__zx.inRest()), '"Resto del Perú" alone → the stores in no zone', MT.dbui.visible().length);
+    ok(/Zona Nielsen:?\s*Resto del Perú/.test(__zx.btn().textContent.trim()), 'the button says "Resto del Perú"', __zx.btn().textContent.trim());
+    ok(MT.dbui.visible().every((s) => !Z.ofStore(s)), 'none of them has a zone (Z.ofStore agrees)');
+    __$('.mt-db-pop__head .mt-db-link').click();
+    ok(MT.dbui.filters().zones.length === 0 && MT.dbui.visible().length === all.length && !__zx.btn().classList.contains('is-active') && __$$('.mt-db-pop__opt input', pop).every((i) => !i.checked), '"Limpiar" in the popover clears the facet');
+    __zx.closePop();
+    ok(!__$('.mt-db-pop'), 'Escape closes the popover');
+    // pure API
+    const F = (f) => MT.dbui.filterStores(all, f);
+    ok(F({ zones: ['lima-cono-sur'] }).length === exp[2] && F({ zones: ['lima-cono-sur', 'ya-no-existe'] }).length === exp[2], 'filterStores({zones}) is pure and ignores unknown zone ids');
+    ok(F({ zones: ['ya-no-existe'] }).length === all.length && F({}).length === all.length && F({ zones: undefined }).length === all.length, 'only unknown ids (or no zones field) → no zone filter');
+    ok(MT.dbui.filterStores(all, { zones: ['lima-cono-sur'] }, 'zones').length === all.length, 'skip="zones" ignores the zone filter (facet counts)');
+    ok(F({ zones: ['lima-cono-sur'], chains: ['wong'] }).every((s) => s.chain === 'wong' && Z.ofStore(s).id === 'lima-cono-sur'), 'zones combine with the other filters');
+    ok(F({ q: 'cono sur' }).length >= exp[2] && __zx.inZone('lima-cono-sur').every((s) => F({ q: 'cono sur' }).includes(s)), 'the search box also finds a zone by name ("cono sur")');
+    return { checks: __take() };
+  });
+  await pz.evaluate(() => { MT.dbui.setFilters({ zones: ['lima-cono-sur'] }); });
+  await sleep(300);
+  await screenshot(pz, 'db-zones-table');
+  await pz.evaluate(async () => { await __zx.openZones(); });
+  await sleep(300);
+  await screenshot(pz, 'db-zones-popover');
+  await pz.evaluate(() => { __zx.closePop(); MT.dbui.clearFilters(); });
+  // Keyboard: the popover focuses its first checkbox; Tab + Space ticks a zone and the focus stays (the list is not rebuilt); Esc gives the focus back
+  await pz.evaluate(async () => { await __zx.openZones(); });
+  await sleep(100);
+  await pz.keyboard.press('Tab');
+  await pz.keyboard.press('Space');
+  const kz = await pz.evaluate(() => ({ zones: MT.dbui.filters().zones.join(), type: document.activeElement.type, zone: document.activeElement.closest('label') && document.activeElement.closest('label').dataset.zone }));
+  check(kz.zones === 'lima-centro' && kz.type === 'checkbox' && kz.zone === 'lima-centro', `keyboard: Tab + Space ticks a zone and the focus stays on its checkbox (${JSON.stringify(kz)})`);
+  await pz.keyboard.press('Space');
+  check(await pz.evaluate(() => MT.dbui.filters().zones.length === 0 && document.activeElement.type === 'checkbox'), 'keyboard: Space again unticks it');
+  await pz.keyboard.press('Escape');
+  check(await pz.evaluate(() => !__$('.mt-db-pop') && document.activeElement === __zx.btn()), 'keyboard: Escape closes the popover and the focus returns to the "Zona Nielsen" button');
+
+  await checks(pz, 'zonas nielsen: counts respect the other filters', async () => {
+    const ok = window.__ok;
+    const Z = MT.data.zones, all = __zx.all();
+    const wong = all.filter((s) => s.chain === 'wong');
+    MT.dbui.setFilters({ chains: ['wong'] });
+    let pop = await __zx.openZones();
+    let opts = __$$('.mt-db-pop__opt', pop);
+    const zexp = Z.all().map((z) => wong.filter((s) => z.ubigeos.includes(s.ubigeo)).length);
+    ok(opts.slice(0, 15).every((o, i) => __zx.n(o) === zexp[i]), 'with Wong ticked, each zone counts only Wong stores', zexp);
+    ok(zexp.reduce((a, b) => a + b, 0) + __zx.n(opts[15]) === wong.length && opts.reduce((a, o) => a + __zx.n(o), 0) === wong.length && wong.length > 0, 'and zones + "Resto del Perú" add up to the Wong stores', wong.length);
+    __zx.closePop();
+    // the other direction: the other facets count under the zone filter
+    MT.dbui.setFilters({ chains: [], zones: ['lima-cono-sur'] });
+    const inCS = __zx.inZone('lima-cono-sur');
+    __$('.mt-db-fbtn[data-facet=chains]').click();
+    await __until(() => __$('.mt-db-pop--chains'));
+    const wongOpt = __$$('.mt-db-pop__opt').find((l) => /Wong/.test(l.textContent));
+    ok(__zx.n(wongOpt) === inCS.filter((s) => s.chain === 'wong').length, 'the chains popover counts only the stores of the selected zone', __zx.n(wongOpt));
+    __zx.closePop();
+    __$('.mt-db-fbtn[data-facet=location]').click();
+    await __until(() => __$('.mt-db-pop--location select'));
+    const sel0 = __$('.mt-db-pop--location select');
+    const depN = (o) => +o.textContent.match(/\(([\d.,]+)\)$/)[1].replace(/\D/g, '');
+    const deps = [...sel0.options].filter((o) => o.value && o.value !== '__none__');
+    ok(deps.length > 20 && deps.every((o) => depN(o) === inCS.filter((s) => s.department === o.value).length) && depN(deps.find((o) => o.value === 'Lima')) > 0, 'the location popover counts only the stores of the selected zone (every department)', deps.filter((o) => depN(o)).map((o) => o.textContent));
+    __zx.closePop();
+    MT.dbui.clearFilters();
+    return { checks: __take() };
+  });
+
+  await checks(pz, 'zonas nielsen: column & sorting', async () => {
+    const ok = window.__ok;
+    const Z = MT.data.zones;
+    const th = () => __$$('.mt-db-table th').find((x) => x.textContent.trim() === 'Zona Nielsen');
+    ok(!!th() && th().classList.contains('is-sortable') && th().getAttribute('aria-sort') === 'none', 'the table has a sortable "Zona Nielsen" column', __$$('.mt-db-table th').map((x) => x.textContent.trim()));
+    ok(__$$('.mt-db-table th').map((x) => x.textContent.trim()).join('|') === '|Cadena|Tienda|Zona Nielsen|Distrito|Estado', 'columns at 1440 px with the map open: …Tienda, Zona Nielsen, Distrito, Estado', __$$('.mt-db-table th').map((x) => x.textContent.trim()));
+    const rows = __$$('.mt-db-table tbody tr[data-id]');
+    const cell = (tr) => tr.querySelector('.mt-db-td-zone');
+    const wrongRow = rows.find((tr) => {
+      const s = MT.data.store(tr.dataset.id), z = Z.all().find((zz) => zz.ubigeos.includes(s.ubigeo));
+      return z ? !cell(tr).textContent.includes(z.name) : cell(tr).dataset.zone !== '__rest__' || !/^—/.test(cell(tr).textContent.trim());
+    });
+    ok(rows.length > 10 && !wrongRow, 'every row shows its zone (name), or a muted dash for "Resto del Perú"', wrongRow && wrongRow.textContent);
+    const restRows = rows.filter((tr) => cell(tr).dataset.zone === '__rest__');
+    ok(restRows.length > 0 && restRows.every((tr) => cell(tr).querySelector('.mt-muted') && /Resto del Perú/.test(cell(tr).textContent)), 'the dash is muted and named for screen readers', restRows.length);
+    ok(__$('.mt-db-tablewrap').scrollWidth <= __$('.mt-db-tablewrap').clientWidth + 1, 'no horizontal scrolling in the table', [__$('.mt-db-tablewrap').scrollWidth, __$('.mt-db-tablewrap').clientWidth]);
+    const rank = (s) => { const i = Z.all().findIndex((z) => z.ubigeos.includes(s.ubigeo)); return i < 0 ? 99 : i; };
+    th().click();
+    ok(th().getAttribute('aria-sort') === 'ascending' && th().classList.contains('is-sorted'), 'click sorts ascending (aria-sort)');
+    const asc = MT.dbui.visible();
+    ok(asc.every((s, i) => !i || rank(asc[i - 1]) <= rank(s)) && rank(asc[0]) === 0 && rank(asc[asc.length - 1]) === 99, 'ascending: zones in the order of data/zonas-nielsen.csv, "Resto del Perú" last', [rank(asc[0]), rank(asc[asc.length - 1])]);
+    const sameZone = asc.filter((s) => rank(s) === rank(asc[0]));
+    ok(sameZone.every((s, i) => !i || MT.util.compare(sameZone[i - 1].name, s.name) <= 0), 'inside a zone: by store name', sameZone.length);
+    ok(MT.storage.pref('db.sort', null).key === 'zone', 'the sort is remembered');
+    th().click();
+    const desc = MT.dbui.visible();
+    ok(th().getAttribute('aria-sort') === 'descending' && desc.every((s, i) => !i || rank(desc[i - 1]) >= rank(s)) && rank(desc[0]) === 99, 'second click: descending ("Resto del Perú" first)');
+    ok(__$$('.mt-db-table tbody tr[data-id]').every((tr, i, a) => !i || rank(MT.data.store(a[i - 1].dataset.id)) >= rank(MT.data.store(tr.dataset.id))), 'the rendered rows follow the sort');
+    __$$('.mt-db-table th').find((x) => x.textContent.trim() === 'Cadena').click();
+    return { checks: __take() };
+  });
+  // Widths: the Tienda column must stay usable; Zona Nielsen comes before Fuente / Actualizado.
+  const colsAt = async (width) => {
+    await pz.setViewport({ width, height: 900, deviceScaleFactor: 1 });
+    await sleep(500);
+    return pz.evaluate(() => ({ heads: __$$('.mt-db-table th').map((x) => x.textContent.trim()).join('|'), over: __$('.mt-db-tablewrap').scrollWidth - __$('.mt-db-tablewrap').clientWidth,
+      tienda: Math.round(__$('.mt-db-table tbody tr[data-id] td:nth-child(3)').getBoundingClientRect().width), tw: __$('.mt-db-tablewrap').clientWidth }));
+  };
+  for (const [w, heads] of [[1000, '|Cadena|Tienda|Distrito|Estado'], [1300, '|Cadena|Tienda|Distrito|Estado'], [1340, '|Cadena|Tienda|Zona Nielsen|Distrito|Estado'], [1440, '|Cadena|Tienda|Zona Nielsen|Distrito|Estado'], [1700, '|Cadena|Tienda|Zona Nielsen|Distrito|Estado|Fuente'], [2000, '|Cadena|Tienda|Zona Nielsen|Distrito|Estado|Fuente|Actualizado']]) {
+    const c = await colsAt(w);
+    // (the Tienda column takes what is left: below ~760 px it was already narrow before Zona Nielsen existed)
+    check(c.heads === heads && c.over <= 1 && (w < 1340 || c.tienda >= 110), `viewport ${w} px (table ${c.tw} px): columns ${c.heads.replace(/\|/g, ' · ')}; Tienda ${c.tienda} px, no horizontal scroll`);
+  }
+  await pz.setViewport({ width: 1440, height: 900, deviceScaleFactor: 1 });
+  await sleep(400);
+
+  await checks(pz, 'zonas nielsen: edit drawer', async () => {
+    const ok = window.__ok;
+    const Z = MT.data.zones;
+    const cs = __zx.inZone('lima-cono-sur')[0];
+    MT.dbui.openEditor(cs.id);
+    await __until(() => __$('.mt-db-drawer.is-open') && __$('.mt-db-zoneline'));
+    let line = __$('.mt-db-drawer .mt-db-zoneline');
+    ok(/Zona Nielsen/.test(line.textContent) && /Lima Cono Sur/.test(line.textContent) && line.dataset.zone === 'lima-cono-sur', 'the drawer shows the store\'s Zona Nielsen next to its district', line.textContent);
+    ok(line.textContent.includes('Lima + Callao'), 'with its area');
+    ok(!__$('.mt-db-zoneline input, .mt-db-zoneline select'), 'it is read-only (no control)');
+    ok(!__$('.mt-db-drawer').classList.contains('is-dirty'), 'looking at it does not make the form dirty');
+    // move the pin (pasted coordinates) to Miraflores, then to Cusco: the zone follows the district
+    const paste = (txt) => { const p = __$('#mt-db-f-paste'); p.value = txt; p.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true })); };
+    paste('-12.1219, -77.0297');
+    const mira = Z.ofDistrict(MT.data.locate(-12.1219, -77.0297).ubigeo);
+    line = __$('.mt-db-drawer .mt-db-zoneline');
+    ok(mira && mira.id !== 'lima-cono-sur' && line.dataset.zone === mira.id && line.textContent.includes(mira.name) && /Miraflores/.test(__$('.mt-db-district').textContent), 'moving the pin to Miraflores updates the zone to ' + (mira && mira.name), line.textContent);
+    paste('-13.5320, -71.9675');
+    const cusco = MT.data.locate(-13.5320, -71.9675);
+    line = __$('.mt-db-drawer .mt-db-zoneline');
+    ok(cusco && !Z.ofDistrict(cusco.ubigeo) && line.dataset.zone === '__rest__' && /Resto del Perú/.test(line.textContent), 'a district in no zone → "Resto del Perú"', line.textContent);
+    paste('-13.5320');   // not a coordinate pair: nothing changes
+    ok(!!__$('.mt-db-zoneline'), 'an unreadable paste leaves the line alone');
+    MT.dbui.closeEditor(true);
+    await __until(() => !__$('.mt-db-drawer.is-open'));
+    // a new store has no position yet: no zone to show
+    MT.dbui.openEditor(null);
+    await __until(() => __$('.mt-db-drawer.is-open') && __$('.mt-db-district'));
+    ok(!__$('.mt-db-zoneline') && /Todavía sin ubicación/.test(__$('.mt-db-district').textContent), 'a new store without position: no zone line');
+    paste('-12.1219, -77.0297');
+    ok(!!__$('.mt-db-zoneline') && __$('.mt-db-zoneline').dataset.zone === mira.id, 'it appears when the pin is placed');
+    MT.dbui.closeEditor(true);
+    await __until(() => !__$('.mt-db-drawer.is-open'));
+    return { checks: __take() };
+  });
+  await pz.evaluate(() => { MT.dbui.openEditor(__zx.inZone('lima-cono-sur')[0].id); });
+  await sleep(1500);
+  await screenshot(pz, 'db-zones-drawer');
+  await pz.evaluate(() => MT.dbui.closeEditor(true));
+
+  await waitForMapIdle(pz, { expr: 'MT.dbui && MT.dbui._map' }).catch(() => {});
+  await checks(pz, 'zonas nielsen: map card', async () => {
+    const ok = window.__ok;
+    const cs = __zx.inZone('lima-cono-sur')[0];
+    MT.dbui.select(cs.id, { source: 'api' });
+    await __until(() => __$('.mt-db-card'), 15000);
+    ok(__$$('.mt-db-card .mt-badge').some((b) => b.textContent === 'Lima Cono Sur'), 'the store card on the map names the zone', __$$('.mt-db-card .mt-badge').map((b) => b.textContent));
+    return { checks: __take() };
+  });
+
+  await checks(pz, 'zonas nielsen: English', async () => {
+    const ok = window.__ok;
+    const Z = MT.data.zones;
+    MT.i18n.setLang('en');
+    MT.dbui.setFilters({ zones: ['lima-cono-sur', '__rest__'] });
+    await __until(() => /2 zones/.test(__zx.btn().textContent));
+    ok(/Zona Nielsen/.test(__zx.btn().textContent) && /2 zones/.test(__zx.btn().textContent), 'English: the facet is "Zona Nielsen", two selected say "2 zones"', __zx.btn().textContent.trim());
+    MT.dbui.setFilters({ zones: ['__rest__'] });
+    ok(/Rest of Peru/.test(__zx.btn().textContent), 'English: the single "Resto del Perú" is "Rest of Peru" on the button', __zx.btn().textContent.trim());
+    const pop = await __zx.openZones();
+    ok(/Filter by Nielsen zone/i.test(pop.textContent) && __$$('.mt-db-pop__group', pop).map((g) => g.textContent.trim()).join('|') === 'Lima + Callao|Provinces', 'English popover: title and areas (Lima + Callao / Provinces)', __$$('.mt-db-pop__group', pop).map((g) => g.textContent.trim()));
+    const opts = __$$('.mt-db-pop__opt', pop);
+    ok(/Rest of Peru/.test(opts[15].textContent) && opts.slice(0, 15).map((o) => o.querySelector('.mt-db-pop__name').textContent).join() === Z.all().map((z) => z.name).join(), 'English: the last option is "Rest of Peru"; zone names stay as data');
+    __zx.closePop();
+    MT.dbui.setFilters({ zones: [] });
+    ok(__$$('.mt-db-table th').some((x) => x.textContent.trim() === 'Zona Nielsen'), 'English: the column is "Zona Nielsen"');
+    const restRow = __$$('.mt-db-table tbody tr[data-id]').find((tr) => tr.querySelector('.mt-db-td-zone').dataset.zone === '__rest__');
+    ok(!restRow || /Rest of Peru/.test(restRow.querySelector('.mt-db-td-zone').textContent), 'English: the dash cell is read as "Rest of Peru"');
+    MT.dbui.openEditor(__zx.inZone('metropolitana-sur')[0].id);
+    await __until(() => __$('.mt-db-drawer.is-open') && __$('.mt-db-zoneline'));
+    ok(/Zona Nielsen/.test(__$('.mt-db-zoneline').textContent) && /Metropolitana Sur/.test(__$('.mt-db-zoneline').textContent), 'English drawer: "Zona Nielsen Metropolitana Sur"', __$('.mt-db-zoneline').textContent);
+    MT.dbui.closeEditor(true);
+    ok(/zone/.test(__$('.mt-db-search__input').placeholder), 'English: the search placeholder mentions the zone', __$('.mt-db-search__input').placeholder);
+    ok(MT.i18n.missingKeys().length === 0, 'no missing i18n keys in English', MT.i18n.missingKeys());
+    MT.i18n.setLang('es');
+    await __until(() => /Zona Nielsen/.test(__zx.btn().textContent));
+    MT.dbui.setFilters({ zones: ['__rest__'] });
+    ok(/Resto del Perú/.test(__zx.btn().textContent), 'back in Spanish: "Resto del Perú"');
+    MT.dbui.clearFilters();
+    return { checks: __take() };
+  });
+
+  /* ---- Excel export: the filtered list gets a "Zona Nielsen" column; CSV and repository files do not ---- */
+  const dlz = await captureDownloads(pz, path.join(OUT, 'downloads-zones'));
+  await checks(pz, 'zonas nielsen: exports', async () => {
+    MT.dbui.setFilters({ zones: ['lima-cono-sur'] });
+    await MT.dbui.exportStores('csv');
+    await MT.dbui.exportStores('xlsx');
+    MT.dbui.clearFilters();
+    return { checks: [] };
+  });
+  const csvZ = readFileSync(await waitForDownload(dlz, /\.csv$/), 'utf8');
+  check(!/Zona Nielsen|zone/i.test(csvZ.split('\r\n')[0]) && csvZ.split('\r\n')[0] === '﻿' + (await pz.evaluate(() => MT.data.COLUMNS.join(','))), 'the filtered CSV keeps the canonical columns (no Zona Nielsen)');
+  const xFile = await waitForDownload(dlz, /\.xlsx$/);
+  const xr = readSheet(xFile);
+  const cols = await pz.evaluate(() => MT.data.COLUMNS.slice());
+  const csExpected = await pz.evaluate(() => __zx.inZone('lima-cono-sur').length);
+  check(xr[0].join() === [...cols.slice(0, cols.indexOf('ubigeo') + 1), 'Zona Nielsen', ...cols.slice(cols.indexOf('ubigeo') + 1)].join(), `the filtered Excel has a "Zona Nielsen" column right after the Ubigeo (${xr[0].slice(6, 11).join(' · ')})`);
+  const iz = xr[0].indexOf('Zona Nielsen'), iLat = xr[0].indexOf('lat'), iId = xr[0].indexOf('id');
+  check(xr.length - 1 === csExpected && csExpected > 0 && xr.slice(1).every((r) => r[iz] === 'Lima Cono Sur'), `its ${xr.length - 1} rows all say "Lima Cono Sur"`);
+  check(xr.slice(1).every((r) => typeof r[iLat] === 'number' && r[xr[0].indexOf('lng')] < 0), 'lat/lng stay numbers (their column shifted by one)');
+  const ids = new Set(await pz.evaluate(() => __zx.inZone('lima-cono-sur').map((s) => s.id)));
+  check(xr.slice(1).every((r) => ids.has(r[iId])), 'and they are the stores of that zone');
+  rmSync(xFile, { force: true });
+  await checks(pz, 'zonas nielsen: Excel of the whole base', async () => {
+    await MT.dbui.exportStores('xlsx', { all: true });
+    return { checks: [] };
+  });
+  const xAll = readSheet(await waitForDownload(dlz, /\.xlsx$/));
+  const allInfo = await pz.evaluate(() => ({ n: __zx.all().length, rest: __zx.inRest().length }));
+  const izA = xAll[0].indexOf('Zona Nielsen');
+  check(xAll.length - 1 === allInfo.n && xAll.slice(1).filter((r) => r[izA] === 'Resto del Perú').length === allInfo.rest && xAll.slice(1).every((r) => r[izA]), `the whole-base Excel: ${xAll.length - 1} rows, every one with a zone or "Resto del Perú" (${allInfo.rest})`);
+
+  /* ---- Persistence: a saved filter comes back (and an old one without the field still loads) ---- */
+  const reload = async () => {
+    await pz.reload({ waitUntil: 'load' });
+    await pz.waitForFunction(() => window.MT && MT.app && MT.app.booted === true);
+    await pz.waitForFunction(() => document.querySelector('.mt-db-table tbody tr[data-id]'));
+    await installZoneHelpers();
+  };
+  await pz.evaluate(() => { MT.dbui.setFilters({ zones: ['lima-cono-sur', 'trujillo'] }); });
+  await reload();
+  await checks(pz, 'zonas nielsen: filter persistence', async () => {
+    const ok = window.__ok;
+    ok(MT.dbui.filters().zones.join() === 'lima-cono-sur,trujillo', 'the zone filter survives a reload', MT.dbui.filters().zones);
+    ok(__zx.ids(MT.dbui.visible()) === __zx.ids(__zx.inZone('lima-cono-sur').concat(__zx.inZone('trujillo'))) && /2 zonas/.test(__zx.btn().textContent) && __zx.btn().classList.contains('is-active'), 'the table, the count and the button show it', __zx.btn().textContent.trim());
+    const pop = await __zx.openZones();
+    ok(__$$('.mt-db-pop__opt input', pop).filter((i) => i.checked).length === 2, 'and so does the popover (2 ticked)');
+    __zx.closePop();
+    // an old saved filter (before zones existed): loads, zones empty, the rest intact
+    localStorage.setItem('mt.pref.db.filters', JSON.stringify({ q: '', chains: ['wong'], department: '', province: '', ubigeo: '', statuses: [], sources: [], precisions: [], local: false }));
+    return { checks: __take() };
+  });
+  await reload();
+  await checks(pz, 'zonas nielsen: an old saved filter', async () => {
+    const ok = window.__ok;
+    ok(MT.dbui.filters().zones.length === 0 && MT.dbui.filters().chains.join() === 'wong', 'a filter saved without the "zones" field loads (no zones, chains intact)', MT.dbui.filters());
+    ok(MT.dbui.visible().every((s) => s.chain === 'wong') && MT.dbui.visible().length === __zx.all().filter((s) => s.chain === 'wong').length, 'and filters as saved');
+    // ids that no longer exist (or junk) are dropped on load; the ones that exist stay
+    localStorage.setItem('mt.pref.db.filters', JSON.stringify({ q: '', chains: [], zones: ['lima-cono-sur', 'ya-no-existe', 7, null, '__rest__'], department: '', province: '', ubigeo: '', statuses: [], sources: [], precisions: [], local: false }));
+    return { checks: __take() };
+  });
+  await reload();
+  await checks(pz, 'zonas nielsen: saved zone ids are checked', async () => {
+    const ok = window.__ok;
+    ok(MT.dbui.filters().zones.join() === 'lima-cono-sur,__rest__', 'unknown ids and non-strings are dropped, the known ones stay', MT.dbui.filters().zones);
+    ok(__zx.ids(MT.dbui.visible()) === __zx.ids(__zx.inZone('lima-cono-sur').concat(__zx.inRest())), 'the list follows the cleaned filter', MT.dbui.visible().length);
+    localStorage.setItem('mt.pref.db.filters', JSON.stringify({ zones: 'lima-cono-sur', chains: 5 }));   // wrong types: ignored field by field
+    return { checks: __take() };
+  });
+  await reload();
+  await checks(pz, 'zonas nielsen: wrong types in the saved filter', async () => {
+    const ok = window.__ok;
+    ok(MT.dbui.filters().zones.length === 0 && MT.dbui.filters().chains.length === 0 && MT.dbui.visible().length === __zx.all().length, 'a non-array "zones" is ignored like the other fields');
+    MT.dbui.clearFilters();
+    return { checks: __take() };
+  });
+  const realZ = splitNetworkNoise(ez).real;
+  check(realZ.length === 0, `no console errors in the zones run (${realZ.length})`);
+  realZ.forEach((e) => console.log('    ', e));
+  await bz.close();
+
+  /* ---- Without data/zones.js the tab has no zone UI and nothing breaks ---- */
+  console.log('\n[zonas nielsen: without data/zones.js]');
+  const noz = prepareApp({ fixtures: 'missing' });
+  rmSync(path.join(noz.dir, 'data', 'zones.js'));
+  const bn = await launch();
+  const pn = (await bn.pages())[0];
+  await pn.setViewport({ width: 1440, height: 900, deviceScaleFactor: 1 });
+  const en = collectErrors(pn);
+  // a zone filter saved by a session that had the file: must not hide anything now
+  await pn.evaluateOnNewDocument(() => { try { localStorage.setItem('mt.pref.db.filters', JSON.stringify({ q: '', chains: [], zones: ['lima-cono-sur'], department: '', province: '', ubigeo: '', statuses: [], sources: [], precisions: [], local: false })); } catch (e) { /* ignore */ } });
+  await pn.goto(noz.url + '?lang=es#base', { waitUntil: 'load' });
+  await pn.waitForFunction(() => window.MT && MT.app && MT.app.booted === true);
+  await pn.waitForFunction(() => document.querySelector('.mt-db-table tbody tr[data-id]'));
+  await installHelpers(pn);
+  const nz = await pn.evaluate(async () => {
+    const all = MT.data.stores({ includeClosed: true });
+    const out = {
+      available: MT.data.zones.available,
+      facets: [...document.querySelectorAll('.mt-db-fbtn')].map((b) => b.dataset.facet).join(),
+      heads: [...document.querySelectorAll('.mt-db-table th')].map((x) => x.textContent.trim()).join('|'),
+      visible: MT.dbui.visible().length, total: all.length, zones: MT.dbui.filters().zones.length,
+      pure: MT.dbui.filterStores(all, { zones: ['lima-cono-sur'] }).length, search: MT.dbui.filterStores(all, { q: 'cono sur' }).length,
+      clear: document.querySelector('.mt-db-clear').hidden,
+    };
+    MT.dbui.openEditor(MT.dbui.visible()[0].id);
+    await __until(() => __$('.mt-db-drawer.is-open') && __$('.mt-db-district'));
+    out.drawerLine = !!document.querySelector('.mt-db-zoneline');
+    out.drawerDistrict = document.querySelector('.mt-db-district').textContent.length > 0;
+    MT.dbui.closeEditor(true);
+    MT.dbui.select(MT.dbui.visible()[3].id, { source: 'api' });
+    MT.dbui.setFilters({ chains: ['wong'] });
+    out.afterFilter = MT.dbui.visible().length;
+    return out;
+  });
+  check(!nz.available && nz.facets === 'chains,location,statuses,sources,precisions' && !/Zona Nielsen/.test(nz.heads), `without zones.js: no zone facet (${nz.facets}) and no zone column (${nz.heads})`);
+  check(nz.visible === nz.total && nz.zones === 0 && nz.pure === nz.total && nz.clear === true, `a saved zone filter is dropped: all ${nz.visible} stores listed, no "Limpiar filtros"`);
+  check(nz.drawerLine === false && nz.drawerDistrict, 'the drawer shows the district and no zone line');
+  check(nz.afterFilter > 0 && nz.afterFilter < nz.total, `the other filters still work (${nz.afterFilter} Wong stores)`);
+  const dln = await captureDownloads(pn, path.join(OUT, 'downloads-nozones'));
+  await pn.evaluate(async () => { MT.dbui.clearFilters(); await MT.dbui.exportStores('xlsx'); });
+  const xn = readSheet(await waitForDownload(dln, /\.xlsx$/));
+  check(xn[0].join() === (await pn.evaluate(() => MT.data.COLUMNS.join(','))) && xn.length - 1 === nz.total, 'the Excel export still works without zones: the canonical columns, every store');
+  await screenshot(pn, 'db-zones-missing');
+  const unexpectedN = splitNetworkNoise(en).real.filter((e) => !/ERR_FILE_NOT_FOUND/.test(e));
+  check(unexpectedN.length === 0, `only the file-not-found of zones.js (${unexpectedN.join(' | ')})`);
+  await bn.close();
+  rmSync(noz.dir, { recursive: true, force: true });
 }
 
 /* ============================================================================================

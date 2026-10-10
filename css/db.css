@@ -79,6 +79,7 @@
 }
 .mt-db-pop.is-open { opacity: 1; transform: none; }
 .mt-db-pop--chains { width: 320px; }
+.mt-db-pop--zones { width: 300px; }
 .mt-db-pop--location { width: 320px; }
 .mt-db-pop__head { position: sticky; top: 0; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: var(--mt-s2); padding: 10px 12px 8px 14px; background: var(--mt-surface); border-bottom: 1px solid var(--mt-g150); }
 .mt-db-pop__title { font-size: var(--mt-fs-xs); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--mt-g500); }
@@ -95,6 +96,8 @@
 .mt-db-pop__flag { color: var(--mt-warn); font-weight: 600; font-size: 11px; }
 .mt-db-pop__n { font-size: var(--mt-fs-xs); color: var(--mt-g500); font-weight: 600; font-variant-numeric: tabular-nums; }
 .mt-db-pop__empty { padding: 16px; text-align: center; color: var(--mt-g500); font-size: var(--mt-fs-sm); }
+/* Zona Nielsen facet: "Resto del Perú" is set apart from the zones by a hairline. */
+.mt-db-pop__sep { height: 1px; margin: 8px 8px 4px; background: var(--mt-g150); }
 
 /* Chain logo (table, lists): circle with the brand ring, as on the map */
 .mt-db-logo { flex: none; display: block; border-radius: 50%; border: 2px solid var(--mt-g300); background: #fff; object-fit: cover; }
@@ -139,6 +142,7 @@
 .mt-db-cell-2__sub { font-size: var(--mt-fs-xs); color: var(--mt-g500); min-height: 15px; }
 .mt-db-cell-2__sub.is-approx { color: var(--mt-warn); }
 .mt-db-name { font-weight: 600; }
+.mt-db-td-zone .mt-muted { color: var(--mt-g400); }   /* "Resto del Perú": an empty-looking cell, the name is read by screen readers */
 .mt-db-td-date { color: var(--mt-g600); padding-right: 16px !important; }
 
 /* Floating bulk-selection bar */
@@ -258,6 +262,9 @@
 .mt-db-district { font-size: var(--mt-fs-sm); color: var(--mt-g700); min-height: 20px; }
 .mt-db-district__ok { display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap; }
 .mt-db-district__ok .mt-icon { color: var(--mt-accent); }
+.mt-db-zoneline { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.mt-db-zoneline .mt-icon { color: var(--mt-g400); }
+.mt-db-zoneline__label { color: var(--mt-g500); font-size: var(--mt-fs-xs); font-weight: 600; letter-spacing: .02em; }
 .mt-db-warn { display: inline-flex; align-items: center; gap: 6px; color: var(--mt-warn); }
 .mt-db-msg { font-size: var(--mt-fs-xs); line-height: 1.45; }
 .mt-db-msg:empty { display: none; }

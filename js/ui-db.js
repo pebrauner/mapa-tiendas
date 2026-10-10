@@ -1,10 +1,15 @@
 /* js/ui-db.js — "Base de datos" tab (module M3).
  *
  * Layout: header (title, local-changes cluster, Import / Export / OSM scan / Add store) · filter
- * bar (search + Cadenas, Ubicación, Estado, Fuente, Precisión popovers) · split view: virtualized
- * table | MapLibre map of the filtered stores (resizable) · edit drawer (all fields, mini-map with
- * draggable pin, paste coordinates / Google Maps link, address search) · import dialog (column
- * mapping, merge/append, geocoding at 1 req/s) · OSM scan dialog + review screen.
+ * bar (search + Cadenas, Zona Nielsen, Ubicación, Estado, Fuente, Precisión popovers) · split view:
+ * virtualized table | MapLibre map of the filtered stores (resizable) · edit drawer (all fields,
+ * mini-map with draggable pin, paste coordinates / Google Maps link, address search) · import dialog
+ * (column mapping, merge/append, geocoding at 1 req/s) · OSM scan dialog + review screen.
+ *
+ * Zona Nielsen (MT.data.zones, optional: without data/zones.js the tab simply has no zone UI) is the
+ * main grouping of the stores: a facet in the filter bar (the 15 zones by area + "Resto del Perú" =
+ * stores in no zone), a table column, a read-only line in the drawer and a column in the Excel export.
+ * A store's zone is its district's zone (MT.data.zones.ofStore): never stored in the store record.
  *
  * Also exposes MT.dbui — helpers shared with the Cadenas tab and the tests:
  *   createMap(el, opts) → maplibregl.Map (positron, Spanish labels, errors swallowed)
@@ -321,31 +326,52 @@
   /* =========================================================================================
    * Filtering & sorting (pure)
    * ======================================================================================= */
-  var EMPTY_FILTERS = { q: '', chains: [], department: '', province: '', ubigeo: '', statuses: [], sources: [], precisions: [], local: false };
+  var EMPTY_FILTERS = { q: '', chains: [], zones: [], department: '', province: '', ubigeo: '', statuses: [], sources: [], precisions: [], local: false };
   var NONE = '__none__'; // "no location" pseudo-department
+  var REST = '__rest__'; // "Resto del Perú" pseudo-zone: stores in no Nielsen zone (also those without a district)
   var searchIndex = new WeakMap();
   function searchText(s) {
     var v = searchIndex.get(s);
     if (v === undefined) {
-      var c = MT.data.chain(s.chain);
-      v = U.normalize([s.name, s.address, s.district, s.province, s.department, s.ubigeo, c.name, c.legendName, s.id, s.notes, s.source_ref].join(' '));
+      var c = MT.data.chain(s.chain), z = MT.data.zones.ofStore(s);
+      v = U.normalize([s.name, s.address, s.district, s.province, s.department, s.ubigeo, z ? z.name : '', c.name, c.legendName, s.id, s.notes, s.source_ref].join(' '));
       searchIndex.set(s, v);
     }
     return v;
   }
   function isLocal(id) { var st = MT.data.storeState(id); return st === 'added' || st === 'edited' || st === 'deleted'; }
 
-  /** Pure filter. skip: facet name to ignore ('chains'|'location'|'statuses'|'sources'|'precisions') for facet counts. */
+  /* ---- Zonas Nielsen: a store's zone is its district's zone (MT.data.zones.ofStore) ------------- */
+  function zoneId(s) { var z = MT.data.zones.ofStore(s); return z ? z.id : REST; }
+  /** Zone ids → the known ones, in zone order, "Resto del Perú" last; [] when the zones file did not load. */
+  function cleanZones(ids) {
+    var Z = MT.data.zones;
+    if (!Z.available || !Array.isArray(ids)) return [];
+    var want = toSet(ids);
+    return Z.all().map(function (z) { return z.id; }).concat(REST).filter(function (id) { return want[id]; });
+  }
+  /** Position of the store's zone in data/zonas-nielsen.csv (stores in no zone come last). */
+  function zoneRank(s) { var z = MT.data.zones.ofStore(s); return z ? MT.data.zones.all().indexOf(z) : 1e6; }
+  function zoneName(id) { var z = MT.data.zones.get(id); return id === REST ? t('db.zone.rest') : z ? z.name : id; }
+  function areaLabel(area) { var k = 'db.zone.area.' + U.normalize(area).replace(/[^a-z0-9]+/g, '-'); return MT.i18n.has(k) ? t(k) : area; }
+
+  /**
+   * Pure filter. skip: facet name to ignore ('chains'|'zones'|'location'|'statuses'|'sources'|'precisions') for facet counts.
+   * f.zones: Nielsen zone ids (+ '__rest__' = "Resto del Perú"); unknown ids are ignored, and without the zones file there is no zone filter.
+   */
   dbui.filterStores = function (list, f, skip) {
     f = Object.assign({}, EMPTY_FILTERS, f || {});
     var words = U.normalize(f.q).split(' ').filter(Boolean);
     var chains = f.chains.length && skip !== 'chains' ? toSet(f.chains) : null;
+    var zoneIds = skip !== 'zones' ? cleanZones(f.zones) : [];
+    var zones = zoneIds.length ? toSet(zoneIds) : null;
     var statuses = f.statuses.length && skip !== 'statuses' ? toSet(f.statuses) : null;
     var sources = f.sources.length && skip !== 'sources' ? toSet(f.sources) : null;
     var precisions = f.precisions.length && skip !== 'precisions' ? toSet(f.precisions) : null;
     var loc = skip !== 'location';
     return list.filter(function (s) {
       if (chains && !chains[s.chain]) return false;
+      if (zones && !zones[zoneId(s)]) return false;
       if (statuses && !statuses[s.status]) return false;
       if (sources && !sources[s.source]) return false;
       if (precisions && !precisions[s.precision]) return false;
@@ -369,6 +395,7 @@
   var SORTS = {
     chain: function (s) { return MT.data.chain(s.chain).name + '|' + s.name; },
     name: function (s) { return s.name; },
+    zone: zoneRank,   // zone order of data/zonas-nielsen.csv, "Resto del Perú" last; then the store name (sortList)
     district: function (s) { return (s.district || '~') + '|' + s.province + '|' + s.name; },
     status: function (s) { return STATUS_ORDER[s.status]; },
     source: function (s) { return t('data.source.' + s.source) + '|' + s.precision; },
@@ -405,6 +432,9 @@
     Object.keys(EMPTY_FILTERS).forEach(function (k) {
       if (f && f[k] !== undefined && typeof f[k] === typeof EMPTY_FILTERS[k] && Array.isArray(f[k]) === Array.isArray(EMPTY_FILTERS[k])) o[k] = f[k];
     });
+    // A filter saved by an older version has no `zones` (EMPTY_FILTERS supplies []). The zone ids can only be
+    // checked against MT.data.zones once the data is loaded: mount() does it (cleanZones), here only the shape.
+    if (o.zones) o.zones = o.zones.filter(function (v) { return typeof v === 'string'; });
     o.local = false; // the "local changes" view is never restored
     return o;
   }
@@ -415,6 +445,7 @@
   dbui.filters = function () { return U.clone(state.filters); };
   dbui.setFilters = function (patch) {
     Object.assign(state.filters, patch || {});
+    if (patch && 'zones' in patch) state.filters.zones = cleanZones(patch.zones);
     if (patch && 'department' in patch && !('province' in patch)) { state.filters.province = ''; state.filters.ubigeo = ''; }
     if (patch && 'province' in patch && !('ubigeo' in patch)) state.filters.ubigeo = '';
     var save = Object.assign({}, state.filters, { local: false });
@@ -430,6 +461,8 @@
    * ======================================================================================= */
   function mount(panel) {
     mounted = true;
+    // The data is loaded by now: a saved zone filter keeps only the zones that still exist (none without data/zones.js).
+    state.filters.zones = cleanZones(state.filters.zones);
     els.panel = panel;
     els.root = h('div', { class: 'mt-db' });
     panel.appendChild(els.root);
@@ -496,6 +529,25 @@
       { label: t('db.export.xlsx'), icon: 'table', disabled: !all, onClick: function () { dbui.exportStores('xlsx', { all: true }); } },
     ], { align: 'end', minWidth: 250 });
   }
+  /**
+   * The Excel of a store list: MT.io.storesToXLSX plus a "Zona Nielsen" column (the zone of the store's
+   * district; "Resto del Perú" when it has none) right after the Ubigeo. Only this Excel has it: the
+   * CSV and the repository files (stores.csv / stores.js) keep the canonical columns. Without
+   * data/zones.js it is exactly MT.io.storesToXLSX.
+   */
+  function storesXLSX(list) {
+    if (!MT.data.zones.available) return MT.io.storesToXLSX(list);
+    var cols = MT.data.COLUMNS, at = cols.indexOf('ubigeo') + 1;
+    var rows = MT.io.storesToRows(list).map(function (r, i) {
+      var zone = i === 0 ? t('db.col.zone') : zoneName(zoneId(list[i - 1]));
+      return r.slice(0, at).concat([zone], r.slice(at));
+    });
+    var widths = { id: 22, chain: 12, name: 32, address: 34, district: 18, province: 14, department: 14, ubigeo: 8, lat: 11, lng: 11, precision: 9, source: 8, source_ref: 24, status: 10, notes: 30, updated: 11 };   // as MT.io.storesToXLSX
+    var colWidths = cols.map(function (c) { return widths[c] || 12; });
+    colWidths.splice(at, 0, 20);
+    var col = function (c) { var i = cols.indexOf(c); return i >= at ? i + 1 : i; };   // index in the sheet, after the inserted column
+    return MT.io.writeXLSX([{ name: MT.t('io.sheetStores'), rows: rows, colWidths: colWidths, numberColumns: [col('lat'), col('lng')] }]);
+  }
   dbui.exportStores = function (kind, opts) {
     var list = opts && opts.all ? MT.data.stores({ includeClosed: true }) : state.list.filter(function (s) { return !state.deleted[s.id]; });
     // Same row order as data/stores.csv (chain, department, province, district, name), so an
@@ -504,7 +556,7 @@
     var base = t('db.export.fileBase');
     if (kind === 'xlsx') {
       var busy = MT.ui.busy({ title: t('db.export.working') });
-      return MT.io.storesToXLSX(list).then(function (blob) {
+      return storesXLSX(list).then(function (blob) {
         busy.close();
         MT.io.download(blob, MT.io.datedName(base, 'xlsx'));
         MT.ui.toast(t('db.export.done', { n: list.length }), { type: 'success' });
@@ -518,11 +570,14 @@
   /* ---- Filter bar --------------------------------------------------------------------------- */
   var FACETS = [
     { id: 'chains', icon: 'store', label: 'db.filter.chains' },
+    { id: 'zones', icon: 'layers', label: 'db.filter.zones', needsZones: true },   // Zona Nielsen: only when data/zones.js loaded
     { id: 'location', icon: 'pin', label: 'db.filter.location' },
     { id: 'statuses', icon: 'check', label: 'db.filter.status', values: function () { return MT.data.STATUSES; }, valueLabel: function (v) { return t('data.status.' + v); }, field: 'status' },
     { id: 'sources', icon: 'database', label: 'db.filter.source', values: function () { return MT.data.SOURCES; }, valueLabel: function (v) { return t('data.source.' + v); }, field: 'source' },
     { id: 'precisions', icon: 'target', label: 'db.filter.precision', values: function () { return MT.data.PRECISIONS; }, valueLabel: function (v) { return t('data.precision.' + v); }, field: 'precision' },
   ];
+  /** The facets this session offers (no Zona Nielsen without the zones file). */
+  function facets() { return FACETS.filter(function (f) { return !f.needsZones || MT.data.zones.available; }); }
   function buildFilterBar() {
     els.search = h('input', { class: 'mt-input mt-input--sm mt-db-search__input', type: 'search', value: state.filters.q,
       placeholder: t('db.filter.searchPh'), 'data-i18n-placeholder': 'db.filter.searchPh', 'aria-label': t('db.filter.search'), 'data-i18n-aria': 'db.filter.search' });
@@ -533,8 +588,8 @@
       if (e.key === 'ArrowDown' && state.list.length) { e.preventDefault(); els.tableWrap.focus(); if (!state.selected) dbui.select(state.list[0].id, { source: 'key' }); }
     });
     els.fbtns = {};
-    var btns = FACETS.map(function (f) {
-      var b = h('button', { type: 'button', class: 'mt-db-fbtn', 'aria-haspopup': 'dialog', 'aria-expanded': 'false', onclick: function () { openFacet(f, b); } });
+    var btns = facets().map(function (f) {
+      var b = h('button', { type: 'button', class: 'mt-db-fbtn', 'data-facet': f.id, 'aria-haspopup': 'dialog', 'aria-expanded': 'false', onclick: function () { openFacet(f, b); } });
       els.fbtns[f.id] = b;
       return b;
     });
@@ -554,9 +609,10 @@
   }
   function renderFilterButtons() {
     var f = state.filters;
-    FACETS.forEach(function (fc) {
+    facets().forEach(function (fc) {
       var b = els.fbtns[fc.id], val = '';
       if (fc.id === 'chains' && f.chains.length) val = f.chains.length === 1 ? MT.data.chain(f.chains[0]).name : t('db.filter.nChains', { n: f.chains.length });
+      else if (fc.id === 'zones' && f.zones.length) val = f.zones.length === 1 ? zoneName(f.zones[0]) : t('db.filter.nZones', { n: f.zones.length });
       else if (fc.id === 'location') {
         if (f.ubigeo) val = (MT.data.districts.get(f.ubigeo) || {}).district || storeDistrictName(f.ubigeo) || f.ubigeo;
         else if (f.province) val = f.province;
@@ -569,7 +625,7 @@
       if (val) b.appendChild(h('span', { class: 'mt-db-fbtn__val' }, val));
       b.appendChild(MT.ui.iconEl('chevronDown', { size: 14 }));
     });
-    var any = FACETS.some(function (fc) { return facetActive(fc.id); }) || !!f.q || f.local;
+    var any = facets().some(function (fc) { return facetActive(fc.id); }) || !!f.q || f.local;
     els.clearBtn.hidden = !any;
     els.clearBtn.textContent = t('db.filter.clear');
     if (els.search && document.activeElement !== els.search) els.search.value = f.q;
@@ -584,6 +640,7 @@
     var base = dbui.filterStores(all, state.filters, fc.id);
     var content;
     if (fc.id === 'chains') content = chainFacet(base);
+    else if (fc.id === 'zones') content = zoneFacet(base);
     else if (fc.id === 'location') content = locationFacet(all);
     else content = listFacet(fc, base);
     dbui.popover(anchor, content, { label: t(fc.label), className: 'mt-db-pop--' + fc.id });
@@ -627,6 +684,51 @@
     render();
     return h('div', null, facetHeader('db.filter.chainsTitle', function () { sel = {}; apply(); render(); }),
       MT.data.chains().length > 8 ? h('div', { class: 'mt-db-pop__search' }, search) : null, body);
+  }
+
+  /**
+   * Zona Nielsen: the zones by area (Lima + Callao / Provincias; the area checkbox ticks all its zones)
+   * and, last, "Resto del Perú" (stores in no zone). The counts are those of `base` = the list under the
+   * OTHER filters, so zones + "Resto del Perú" always add up to it. Ticking does not rebuild the
+   * list: the keyboard focus stays on the checkbox.
+   */
+  function zoneFacet(base) {
+    var counts = {};
+    base.forEach(function (s) { var id = zoneId(s); counts[id] = (counts[id] || 0) + 1; });
+    var sel = toSet(state.filters.zones);
+    var body = h('div', { class: 'mt-db-pop__body' });
+    var boxes = {}, groups = [];
+    function apply() { dbui.setFilters({ zones: Object.keys(sel).filter(function (k) { return sel[k]; }) }); }
+    function sync() {
+      groups.forEach(function (g) {
+        var on = g.ids.filter(function (id) { return sel[id]; }).length;
+        g.box.checked = on === g.ids.length;
+        g.box.indeterminate = on > 0 && on < g.ids.length;
+      });
+    }
+    function option(id, name, hint) {
+      var box = h('input', { type: 'checkbox', checked: !!sel[id] });
+      box.addEventListener('change', function () { sel[id] = box.checked; apply(); sync(); });
+      boxes[id] = box;
+      return h('label', { class: 'mt-check mt-db-pop__opt' + (counts[id] ? '' : ' is-empty'), 'data-zone': id, title: hint || null }, box,
+        h('span', { class: 'mt-db-pop__name' }, name), h('span', { class: 'mt-db-pop__n' }, fmtNum(counts[id] || 0)));
+    }
+    MT.data.zones.byArea().forEach(function (g) {
+      var ids = g.zones.map(function (z) { return z.id; });
+      var gbox = h('input', { type: 'checkbox' });
+      gbox.addEventListener('change', function () { ids.forEach(function (id) { sel[id] = gbox.checked; boxes[id].checked = gbox.checked; }); apply(); sync(); });
+      groups.push({ ids: ids, box: gbox });
+      body.appendChild(h('label', { class: 'mt-check mt-db-pop__group' }, gbox, h('span', null, areaLabel(g.area))));
+      g.zones.forEach(function (z) { body.appendChild(option(z.id, z.name)); });
+    });
+    body.appendChild(h('div', { class: 'mt-db-pop__sep', role: 'separator' }));
+    body.appendChild(option(REST, t('db.zone.rest'), t('db.zone.restHint')));
+    sync();
+    return h('div', null, facetHeader('db.filter.zonesTitle', function () {
+      sel = {};
+      U.$$('input', body).forEach(function (i) { i.checked = false; i.indeterminate = false; });
+      apply();
+    }), body);
   }
 
   function listFacet(fc, base) {
@@ -694,11 +796,18 @@
     { id: 'check', width: 44 },
     { id: 'chain', width: 156, sort: 'chain', label: 'data.col.chain' },
     { id: 'name', sort: 'name', label: 'db.col.store' },
+    // Zona Nielsen (the main grouping) takes the slot Fuente had (it shows from 760 px); Fuente and Actualizado
+    // move out to the widths where the Tienda column still keeps >= ~130 px.
+    { id: 'zone', width: 140, sort: 'zone', label: 'db.col.zone', minWidth: 760, needsZones: true },
     { id: 'district', width: 176, sort: 'district', label: 'data.col.district' },
     { id: 'status', width: 132, sort: 'status', label: 'data.col.status' },
-    { id: 'source', width: 122, sort: 'source', label: 'data.col.source', minWidth: 760 },
-    { id: 'updated', width: 108, sort: 'updated', label: 'data.col.updated', minWidth: 880 },
+    { id: 'source', width: 122, sort: 'source', label: 'data.col.source', minWidth: 900 },
+    { id: 'updated', width: 108, sort: 'updated', label: 'data.col.updated', minWidth: 1010 },
   ];
+  /** The columns that fit the table's width (and exist: no Zona Nielsen column without the zones file). */
+  function colsFor(width) {
+    return COLS.filter(function (c) { return (!c.minWidth || width >= c.minWidth) && (!c.needsZones || MT.data.zones.available); });
+  }
   var visibleCols = COLS;
   var ROW_H = 52;
   var rendered = { first: -1, last: -1 };
@@ -719,6 +828,7 @@
     els.resizer = h('div', { class: 'mt-db-resizer', role: 'separator', tabindex: '0', 'aria-orientation': 'vertical', 'aria-label': t('db.map.resize'), title: t('db.map.resize') });
     els.body = h('div', { class: 'mt-db-body' }, els.tablePane, els.resizer, els.mapPane);
     els.root.appendChild(els.body);
+    visibleCols = colsFor(els.tableWrap.clientWidth || 1200);
     applyMapWidth();
     setShowMap(state.showMap, true);
 
@@ -733,9 +843,9 @@
   }
 
   function updateVisibleCols() {
-    var w = els.tableWrap.clientWidth || 1200;
-    var next = COLS.filter(function (c) { return !c.minWidth || w >= c.minWidth; });
-    if (next.length !== visibleCols.length) { visibleCols = next; renderTableHead(); }
+    var next = colsFor(els.tableWrap.clientWidth || 1200);
+    var ids = function (cols) { return cols.map(function (c) { return c.id; }).join(); };
+    if (ids(next) !== ids(visibleCols)) { visibleCols = next; renderTableHead(); }
   }
 
   function renderTableHead() {
@@ -872,6 +982,13 @@
             h('div', { class: 'mt-db-cell-2__top' }, h('span', { class: 'mt-truncate mt-db-name' }, s.name || h('em', { class: 'mt-muted' }, t('db.noName'))), badge,
               isFinite(s.lat) ? null : h('span', { class: 'mt-badge mt-badge--warn', title: t('db.noCoordsHint') }, t('db.noCoords'))),
             h('div', { class: 'mt-db-cell-2__sub mt-truncate' }, s.address || '')));
+          break;
+        case 'zone':
+          var zone = MT.data.zones.ofStore(s);
+          td = zone
+            ? h('td', { class: 'mt-db-td-zone', 'data-zone': zone.id }, h('div', { class: 'mt-db-cell-2', title: zone.name + ' · ' + areaLabel(zone.area) },
+              h('div', { class: 'mt-db-cell-2__top mt-truncate' }, zone.name), h('div', { class: 'mt-db-cell-2__sub mt-truncate' }, areaLabel(zone.area))))
+            : h('td', { class: 'mt-db-td-zone', 'data-zone': REST }, h('span', { class: 'mt-muted', title: t('db.zone.rest'), 'aria-hidden': 'true' }, '—'), h('span', { class: 'mt-sr-only' }, t('db.zone.rest')));
           break;
         case 'district':
           td = h('td', null, h('div', { class: 'mt-db-cell-2' },
@@ -1111,7 +1228,7 @@
     popup._storeId = s.id;
   }
   function storeCard(s) {
-    var c = MT.data.chain(s.chain);
+    var c = MT.data.chain(s.chain), zone = MT.data.zones.ofStore(s);
     var gmaps = 'https://www.google.com/maps/search/?api=1&query=' + s.lat + ',' + s.lng;
     return h('div', { class: 'mt-db-card' },
       h('div', { class: 'mt-db-card__head' }, logoImg(s.chain, 28),
@@ -1119,7 +1236,8 @@
       s.address ? h('div', { class: 'mt-db-card__line' }, s.address) : null,
       h('div', { class: 'mt-db-card__line mt-muted' }, [s.district, s.province].filter(Boolean).join(', ') || t('db.noDistrict')),
       h('div', { class: 'mt-db-card__meta' }, statusBadge(s.status), h('span', { class: 'mt-badge' }, t('data.source.' + s.source)),
-        s.precision === 'approx' ? h('span', { class: 'mt-badge mt-badge--warn' }, t('data.precision.approx')) : null),
+        s.precision === 'approx' ? h('span', { class: 'mt-badge mt-badge--warn' }, t('data.precision.approx')) : null,
+        zone ? h('span', { class: 'mt-badge mt-badge--info', title: t('db.zone.label') }, zone.name) : null),
       h('div', { class: 'mt-db-card__actions' },
         MT.ui.button({ icon: 'edit', label: t('common.edit'), kind: 'primary', size: 'sm', onClick: function () { dbui.openEditor(s.id); } }),
         h('a', { class: 'mt-db-card__ext', href: gmaps, target: '_blank', rel: 'noopener noreferrer' }, t('db.card.gmaps'))));
@@ -1396,6 +1514,14 @@
     if (!dist) { el.appendChild(h('span', { class: 'mt-db-warn' }, MT.ui.iconEl('warning', { size: 15 }), t('db.edit.outside'))); return; }
     el.appendChild(h('span', { class: 'mt-db-district__ok' }, MT.ui.iconEl('pin', { size: 15 }),
       h('strong', null, dist.district), ' — ' + dist.province + ', ' + dist.department, h('span', { class: 'mt-mono mt-muted' }, ' · ' + dist.ubigeo)));
+    // Zona Nielsen of that district (read-only, follows the pin like the district does).
+    if (MT.data.zones.available) {
+      var zone = MT.data.zones.ofDistrict(dist.ubigeo);
+      el.appendChild(h('div', { class: 'mt-db-zoneline', 'data-zone': zone ? zone.id : REST },
+        MT.ui.iconEl('layers', { size: 15 }), h('span', { class: 'mt-db-zoneline__label' }, t('db.zone.label')),
+        zone ? h('strong', null, zone.name) : h('span', { class: 'mt-muted', title: t('db.zone.restHint') }, t('db.zone.rest')),
+        zone ? h('span', { class: 'mt-muted' }, ' · ' + areaLabel(zone.area)) : null));
+    }
   }
   function applyPastedCoords(text) {
     var r = MT.geo.parseCoordsDetailed(text);
