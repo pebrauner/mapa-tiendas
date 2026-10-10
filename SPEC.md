@@ -162,13 +162,24 @@ a district belongs to **one** zone; a store's zone is its district's zone (`ubig
 CSV: UTF-8 with BOM, CRLF, header row, columns in this order: `ubigeo` (6 digits, must exist in
 `data/districts.js`) · `district` · `province` · `department` (informational, must match INEI) · `zone`
 (display name, Spanish, as in the list: *Lima Cono Norte*, *Metropolitana Sur*, *Arequipa*…) · `area`
-(`Lima + Callao` | `Provincias`: groups the zones in the picker) · `origin` (`excel` = the zone most of the
-district's stores carry in the list · `vecindad` = no store of the list there, placed by neighbourhood) · `note`.
-Zones keep the order of their first row. 15 zones / 114 districts: the 7 Lima + Callao zones cover all 50
-districts of Lima Metropolitana and Callao; the 8 provincial zones (Arequipa, Cajamarca, Chiclayo, Chimbote,
-Huánuco, Ica, Piura, Trujillo) hold the districts of their city area that have stores in the list.
-**"Resto Perú / Norte / Sur" is not a zone**: the list gives the same district several of them, so it cannot be a
-set of districts. Edit the CSV (add or move a district), then `node tools/build-zones.mjs` (`--check` validates
+(`Lima + Callao` | `Provincias`: groups the zones in the picker) · `origin` (`excel` = derived from the list ·
+`vecindad` = no store of the list in that district, placed next to its neighbours: only Mi Perú, Lurigancho and
+Santa María del Mar) · `note`. Zones keep the order of their first row. 15 zones / 114 districts: the 7 Lima +
+Callao zones cover all 50 districts of Lima Metropolitana and Callao; the 8 provincial zones (Arequipa,
+Cajamarca, Chiclayo, Chimbote, Huánuco, Ica, Piura, Trujillo) hold the districts where the list's stores carry
+that zone (e.g. Mollendo is in Arequipa and the Sullana-province districts are in Piura, because that is how the
+list labels them).
+
+**Derivation rule** (reproducible for the next refresh of the list): each Excel row is mapped to its INEI district;
+a district joins the zone that **strictly outnumbers every other label** of its stores, the catch-all
+"Resto Perú" labels counted as labels. So a few districts that carry a zone label on some rows are NOT in a zone:
+Ferreñafe (Chiclayo 2 vs Resto Perú 3), Chulucanas (Piura 1 vs Resto Perú Norte 1, a tie) and Nasca (Ica 1 vs Resto
+Perú 2); and a few stray labels are outvoted (Comas 48 Cono Norte vs 1 Metropolitana Norte, La Victoria 13 Oriente vs 1
+Centro, Santa Anita 21 vs 1, Cieneguilla 3 Cono Sur vs 1 Oriente, Trujillo 80 vs 1 Piura, Sullana 14 vs 1 Resto Perú).
+The `note` column keeps the counts ("48 de 49 filas del Excel").
+**"Resto Perú / Norte / Sur" is not a zone**: the list gives the same district several of them (Huancayo, Pisco, Talara…),
+so it cannot be a set of districts (about 215 of the 1,564 rows carry one of them and are reachable in the tool only
+as "Resto del Perú" in the Base de datos filter). Edit the CSV (add or move a district), then `node tools/build-zones.mjs` (`--check` validates
 and fails when `zones.js` is out of date).
 
 ```js
@@ -189,7 +200,7 @@ index.html            app shell; loads vendor → data → js in order
 css/                  one stylesheet per module (core.css, maps.css, db.css, ...)
 js/                   classic scripts; each registers into window.MT
 js/i18n/              per-module ES/EN dictionaries (MT.i18n.add)
-data/                 stores.csv, stores.js, chains.js, districts.js
+data/                 stores.csv, stores.js, chains.js, districts.js, zonas-nielsen.csv, zones.js (Zonas Nielsen, §3.7)
 logos/                <id>.png, <id>-wide.png, logos.js
 vendor/               maplibre-gl, pptxgenjs, xlsx (SheetJS), turf, topojson-client (+ licenses)
 tools/                Node dev scripts (NOT needed by users): seed scans, build-data, logo build, tests
@@ -199,13 +210,15 @@ docs/                 ARCHITECTURE.md (module APIs), user guide
 ### 4.1 Screens
 
 1. **Mapas** (map builder) — project = list of maps (slides). Left: map list (add / duplicate /
-   delete / reorder) + settings for the current map: title, district picker (search all Peru,
-   chips, "add whole province"), subtitle (auto/override), Peso, chain toggles grouped with counts
+   delete / reorder) + settings for the current map: title, **Zonas Nielsen** picker (zone buttons by area, a zone
+   = a named set of districts; plus the district search over all Peru, chips, "add whole province"; §3.7),
+   subtitle (auto/override), Peso, chain toggles grouped with counts
    (all/none per group), options (only inside, show borders, fit to stores/districts, marker style,
    marker size, legend sort), radius circles. Center: **live 16:9 slide preview** with the MapLibre
    map inside the map frame + the red legend panel. Badges draggable (manual override, "reset layout").
    Click a badge → popup (name, address, hide on this map, add radius).
-2. **Base de datos** — filterable table (chain, department/province/district, status, source, text),
+2. **Base de datos** — filterable table (chain, **Zona Nielsen**, department/province/district, status, source, text; a sortable
+   Zona Nielsen column; the zone in the edit drawer and in the Excel export),
    side map of filtered stores, edit drawer, add store (address search / click map / paste coords or
    Google Maps URL — parse `@lat,lng`, `!3dlat!4dlng`, `?q=lat,lng`, plain `lat, lng`), drag pin to fix,
    **OSM scan** for selected districts/department & chains → review screen (New / Matched / Not found

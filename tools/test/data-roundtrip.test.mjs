@@ -199,7 +199,7 @@ try {
   }
   check(fixture.maps[0].radius.length === 1 && fixture.maps[0].radius[0].meters === 1000, 'Lima Metropolitana Sur keeps one 1 km radius');
 
-  // (a) First run: a blank project → the "Elige los distritos" notice offers the example; no dialog.
+  // (a) First run: a blank project → the "Elige las zonas Nielsen" notice offers the example; no dialog.
   await page.evaluate(() => { MT.project.newProject(); MT.app.showTab('maps'); });
   await page.waitForFunction(() => document.querySelector('.mt-mapview__notice:not([hidden]) .mt-mapview__example'), { timeout: 15000 });
   await sleep(300);

@@ -14,7 +14,7 @@
 (function () {
   'use strict';
   // Contract version of this file (index.html data-api; the boot check refuses a mix of versions, ARCHITECTURE §16).
-  (window.MT.modules = window.MT.modules || {})['data'] = { api: '1' };
+  (window.MT.modules = window.MT.modules || {})['data'] = { api: '2' };   // 2: MT.data.zones (Zonas Nielsen) is used by ui-maps, ui-db and ui-analysis
   var MT = window.MT, U = MT.util;
 
   var COLUMNS = ['id', 'chain', 'name', 'address', 'district', 'province', 'department', 'ubigeo',

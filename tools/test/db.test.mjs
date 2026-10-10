@@ -1020,10 +1020,10 @@ await browser.close();
     return pz.evaluate(() => ({ heads: __$$('.mt-db-table th').map((x) => x.textContent.trim()).join('|'), over: __$('.mt-db-tablewrap').scrollWidth - __$('.mt-db-tablewrap').clientWidth,
       tienda: Math.round(__$('.mt-db-table tbody tr[data-id] td:nth-child(3)').getBoundingClientRect().width), tw: __$('.mt-db-tablewrap').clientWidth }));
   };
-  for (const [w, heads] of [[1000, '|Cadena|Tienda|Distrito|Estado'], [1300, '|Cadena|Tienda|Distrito|Estado'], [1340, '|Cadena|Tienda|Zona Nielsen|Distrito|Estado'], [1440, '|Cadena|Tienda|Zona Nielsen|Distrito|Estado'], [1700, '|Cadena|Tienda|Zona Nielsen|Distrito|Estado|Fuente'], [2000, '|Cadena|Tienda|Zona Nielsen|Distrito|Estado|Fuente|Actualizado']]) {
+  for (const [w, heads] of [[1000, '|Cadena|Tienda|Distrito|Estado'], [1300, '|Cadena|Tienda|Distrito|Estado'], [1340, '|Cadena|Tienda|Distrito|Estado'], [1400, '|Cadena|Tienda|Zona Nielsen|Distrito|Estado'], [1440, '|Cadena|Tienda|Zona Nielsen|Distrito|Estado'], [1700, '|Cadena|Tienda|Zona Nielsen|Distrito|Estado|Fuente'], [2000, '|Cadena|Tienda|Zona Nielsen|Distrito|Estado|Fuente|Actualizado']]) {
     const c = await colsAt(w);
-    // (the Tienda column takes what is left: below ~760 px it was already narrow before Zona Nielsen existed)
-    check(c.heads === heads && c.over <= 1 && (w < 1340 || c.tienda >= 110), `viewport ${w} px (table ${c.tw} px): columns ${c.heads.replace(/\|/g, ' · ')}; Tienda ${c.tienda} px, no horizontal scroll`);
+    // (the Tienda column takes what is left: Zona Nielsen shows from a table of 800 px, where Tienda keeps >= 130 px)
+    check(c.heads === heads && c.over <= 1 && (w < 1400 || c.tienda >= 130), `viewport ${w} px (table ${c.tw} px): columns ${c.heads.replace(/\|/g, ' · ')}; Tienda ${c.tienda} px, no horizontal scroll`);
   }
   await pz.setViewport({ width: 1440, height: 900, deviceScaleFactor: 1 });
   await sleep(400);

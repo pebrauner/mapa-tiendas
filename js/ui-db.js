@@ -402,7 +402,8 @@
     updated: function (s) { return s.updated || ''; },
   };
   function sortList(list, sort) {
-    var key = SORTS[sort.key] || SORTS.chain;
+    // A saved sort by the zone column means nothing without data/zones.js (no such column): sort by chain instead.
+    var key = (sort.key === 'zone' && !MT.data.zones.available ? SORTS.chain : SORTS[sort.key]) || SORTS.chain;
     var out = list.map(function (s) { return [key(s), s]; });
     var dir = sort.dir < 0 ? -1 : 1;
     out.sort(function (a, b) {
@@ -539,7 +540,8 @@
     if (!MT.data.zones.available) return MT.io.storesToXLSX(list);
     var cols = MT.data.COLUMNS, at = cols.indexOf('ubigeo') + 1;
     var rows = MT.io.storesToRows(list).map(function (r, i) {
-      var zone = i === 0 ? t('db.col.zone') : zoneName(zoneId(list[i - 1]));
+      // The same store gives the same cell in every UI language ("Resto del Perú" is always Spanish, like the zone names).
+      var zone = i === 0 ? t('db.col.zone') : (function (id) { return id === REST ? MT.i18n.tIn('es', 'db.zone.rest') : zoneName(id); })(zoneId(list[i - 1]));
       return r.slice(0, at).concat([zone], r.slice(at));
     });
     var widths = { id: 22, chain: 12, name: 32, address: 34, district: 18, province: 14, department: 14, ubigeo: 8, lat: 11, lng: 11, precision: 9, source: 8, source_ref: 24, status: 10, notes: 30, updated: 11 };   // as MT.io.storesToXLSX
@@ -796,9 +798,9 @@
     { id: 'check', width: 44 },
     { id: 'chain', width: 156, sort: 'chain', label: 'data.col.chain' },
     { id: 'name', sort: 'name', label: 'db.col.store' },
-    // Zona Nielsen (the main grouping) takes the slot Fuente had (it shows from 760 px); Fuente and Actualizado
-    // move out to the widths where the Tienda column still keeps >= ~130 px.
-    { id: 'zone', width: 140, sort: 'zone', label: 'db.col.zone', minWidth: 760, needsZones: true },
+    // Zona Nielsen (the main grouping) takes the slot Fuente had; 160 px fits "Metropolitana Oriente" untruncated and
+    // it shows from the table width where the Tienda column still keeps >= ~130 px. Fuente and Actualizado move out.
+    { id: 'zone', width: 160, sort: 'zone', label: 'db.col.zone', minWidth: 800, needsZones: true },
     { id: 'district', width: 176, sort: 'district', label: 'data.col.district' },
     { id: 'status', width: 132, sort: 'status', label: 'data.col.status' },
     { id: 'source', width: 122, sort: 'source', label: 'data.col.source', minWidth: 900 },

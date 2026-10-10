@@ -66,17 +66,7 @@
   const EMPTY = { type: 'FeatureCollection', features: [] };
   const COLOR_SAME = '#D92D3A', COLOR_COMP = '#8B8F98';
   const COLOR_NEAR_COMP = '#52525B';                             // mode B: dashed line to the nearest competitor
-  // Fallback only (data/zones.js missing → MT.data.zones.available is false): the Lima Metropolitana zones (APEIM grouping) + Callao.
-  // Normally the region shortcuts are the Zonas Nielsen of MT.data.zones (see zoneSet below).
-  const LIMA_ZONES = [
-    { id: 'moderna', ubigeos: ['150104', '150113', '150114', '150116', '150120', '150121', '150122', '150130', '150131', '150136', '150140', '150141'] },
-    { id: 'centro', ubigeos: ['150101', '150105', '150115', '150128', '150134'] },
-    { id: 'norte', ubigeos: ['150102', '150106', '150110', '150112', '150117', '150125', '150135', '150139'] },
-    { id: 'este', ubigeos: ['150103', '150107', '150109', '150111', '150118', '150132', '150137'] },
-    { id: 'sur', ubigeos: ['150108', '150119', '150123', '150133', '150142', '150143'] },
-    { id: 'balnearios', ubigeos: ['150124', '150126', '150127', '150129', '150138'] },
-    { id: 'callao', ubigeos: ['070101', '070102', '070103', '070104', '070105', '070106', '070107'] },
-  ];
+  // The region shortcuts are the Zonas Nielsen of MT.data.zones (zoneSet below); without data/zones.js there are none.
 
   // UI settings remembered between sessions (pref 'analysis.settings'); references only per session.
   const saved = Object.assign({}, MT.storage.pref('analysis.settings', {}) || {});
@@ -380,18 +370,18 @@
     return MT.i18n.has(k) ? t(k) : a;
   }
   /**
-   * What the "pick a zone" menu and the mode B buttons offer: {label, nielsen, groups:[{area, zones:[{id, name, ubigeos}]}]}.
+   * What the "pick a zone" menu and the mode B buttons offer: {label, groups:[{area, zones:[{id, name, ubigeos}]}]}.
    * The Zonas Nielsen of MT.data.zones by area (names are data: not translated); a zone's districts are the ones in
-   * the district list. Without data/zones.js: the old Lima presets (LIMA_ZONES) in one group, so nothing breaks.
+   * the district list. Without data/zones.js there are no groups (the menu and the buttons simply do not appear).
    */
   function zoneSet() {
-    const D = MT.data.districts, Z = MT.data.zones, nielsen = !!(Z && Z.available);
+    const D = MT.data.districts, Z = MT.data.zones;
     const known = (list) => list.filter((u) => D.get(u));
-    const groups = nielsen
+    const groups = Z && Z.available
       ? Z.byArea().map((g) => ({ area: areaLabel(g.area), zones: g.zones.map((z) => ({ id: z.id, name: z.name, ubigeos: known(z.ubigeos) })) }))
-      : [{ area: '', zones: LIMA_ZONES.map((z) => ({ id: z.id, name: t('maps.districts.preset.' + z.id), ubigeos: known(z.ubigeos) })) }];
+      : [];
     return {
-      nielsen: nielsen, label: t(nielsen ? 'analysis.districts.presets' : 'analysis.districts.presetsLima'),
+      label: t('analysis.districts.presets'),
       groups: groups.map((g) => ({ area: g.area, zones: g.zones.filter((z) => z.ubigeos.length) })).filter((g) => g.zones.length),
     };
   }
@@ -417,7 +407,7 @@
     const noRes = h('div', { class: 'mt-analysis-options__empty', hidden: true });
     const Z = MT.data.zones, zs = zoneSet();
     const presets = zs.groups.length ? h('button', { type: 'button', class: 'mt-btn mt-btn--secondary mt-btn--sm mt-analysis-presets', 'aria-haspopup': 'menu', 'aria-expanded': 'false',
-      title: zs.nielsen ? t('analysis.districts.presetsAria') : null, onclick: (e) => presetMenu(e.currentTarget) },
+      title: t('analysis.districts.presetsAria'), onclick: (e) => presetMenu(e.currentTarget) },
     iconSpan('layers', 15), h('span', null, zs.label), iconSpan('chevronDown', 14)) : null;
     const removeAll = linkBtn(t('analysis.districts.removeAll'), () => { cfg.set([]); input.focus(); });
     const chips = h('div', { class: 'mt-chips mt-analysis-chips', role: 'list' });
@@ -429,9 +419,11 @@
     const combo = combobox(input, results, {
       options(q) {
         const have = new Set(cfg.get());
-        const out = D.search(q, { limit: 8 }).map((d) => ({ kind: 'd', d: d, disabled: have.has(d.ubigeo) }));
-        // Zonas Nielsen after the districts (as in the Mapas tab: Enter on a name that is both, e.g. Trujillo, picks the district).
-        if (Z && Z.available) Z.search(q, { limit: 3 }).forEach((z) => out.push({ kind: 'z', z: z, disabled: z.ubigeos.every((u) => have.has(u)) }));
+        const ds = D.search(q, { limit: 8 }).map((d) => ({ kind: 'd', d: d, disabled: have.has(d.ubigeo) }));
+        const zres = Z && Z.available ? Z.search(q, { limit: 3 }).map((z) => ({ kind: 'z', z: z, disabled: z.ubigeos.every((u) => have.has(u)) })) : [];
+        // Zonas Nielsen after the best 3 districts (as in the Mapas tab: Enter on a name that is both, e.g. Trujillo, picks the
+        // district, and the zone is still on screen without scrolling).
+        const out = ds.slice(0, 3).concat(zres, ds.slice(3));
         if (U.normalize(q).length >= 3) D.searchProvinces(q, { limit: 2 }).forEach((p) => { if (p.ubigeos.length > 1) out.push({ kind: 'p', p: p }); });
         return out;
       },
@@ -1333,7 +1325,7 @@
   }
   function whereTextA() {
     const a = st.a;
-    if (a.uniKind === 'districts') return t('analysis.results.inDistricts', { n: a.districts.length });
+    if (a.uniKind === 'districts') { const z = zoneNameOf(a.districts); return z ? t('analysis.results.inZone', { name: z }) : t('analysis.results.inDistricts', { n: a.districts.length }); }
     if (a.uniKind === 'all') return t('analysis.results.inPeru');
     return t('analysis.results.within', { d: fmtRing(a.uniMeters) });
   }

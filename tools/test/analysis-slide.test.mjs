@@ -168,7 +168,7 @@ try {
       stats: !!document.querySelector('.mt-maps-bar__stats'),
     };
   }, ids);
-  check(!pv.notice, `no "Elige los distritos" (or any) notice over an analysis slide${pv.notice ? ': ' + pv.notice : ''}`);
+  check(!pv.notice, `no "Elige las zonas Nielsen" (or any) notice over an analysis slide${pv.notice ? ': ' + pv.notice : ''}`);
   check(pv.layer && pv.feats === 3, `the rings are a MapLibre layer of the preview map (mt-analysis-rings, ${pv.feats} features)`);
   check(pv.distRows === 8 && /Distancias a Plaza Vea Miraflores/.test(pv.distHead), `preview legend shows "${pv.distHead}" with ${pv.distRows} rows`);
   check(pv.sec && pv.anote && !pv.start, 'inspector: "Análisis de distancias" section; districts section explains they are optional (no "Empieza por aquí")');

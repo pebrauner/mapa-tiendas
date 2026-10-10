@@ -61,6 +61,33 @@ Los nombres de los distritos elegidos siempre aparecen en el mapa: cuando el map
 escribe a ese zoom (los distritos de Lima vistos de lejos), la app los escribe con el mismo estilo,
 y los logos y sus líneas guía se apartan de ellos.
 
+## Zonas Nielsen
+
+Las **zonas Nielsen** son la agrupación principal de las tiendas: la columna *SUBAREA* del listado de
+tiendas de la compañía. Cada zona es un conjunto de distritos y cada distrito pertenece a una sola zona:
+**Lima Centro, Lima Cono Norte, Lima Cono Sur, Lima Oriente, Metropolitana Norte, Metropolitana Oriente,
+Metropolitana Sur** (Lima + Callao) y **Arequipa, Cajamarca, Chiclayo, Chimbote, Huánuco, Ica, Piura,
+Trujillo** (Provincias). La zona de una tienda es la de su distrito; las tiendas fuera de estas zonas son
+el «resto del Perú».
+
+- **Mapas → Zonas Nielsen:** una fila de botones por área; un clic agrega todos los distritos de la zona
+  (otro clic los quita; punteado = solo una parte de la zona). También se encuentran escribiendo su nombre
+  (*cono sur*, *metropolitana*). Una zona completa se muestra como una sola etiqueta con su número de
+  distritos; al abrirla ves los distritos. La lámina sigue guardando solo distritos: los proyectos
+  anteriores se abren igual.
+- **Base de datos:** filtro **Zona Nielsen** (con conteos; incluye «Resto del Perú»), columna ordenable,
+  la zona en la ficha de la tienda y en el Excel exportado.
+- **Análisis:** el menú y los botones de región de la matriz de cercanía (y el universo «Zonas Nielsen»
+  del análisis desde un punto) usan las mismas zonas; una región que es una zona se nombra con ella
+  («Matriz de cercanía · Lima Cono Sur»).
+
+Las zonas viven en `data/zonas-nielsen.csv` (una fila por distrito: `ubigeo, distrito, zona, área, origen`),
+que se edita a mano y se convierte con `node tools/build-zones.mjs` en `data/zones.js` (igual que
+`stores.csv` → `stores.js`). Las zonas «Resto Perú / Norte / Sur» del listado no son conjuntos de
+distritos (el listado asigna un mismo distrito a varias), por eso no son zonas aquí. Tres distritos de
+Lima y Callao sin tiendas en el listado (Mi Perú, Lurigancho, Santa María del Mar) se ubicaron por
+vecindad (`origen = vecindad` en el CSV).
+
 ## Análisis de distancias
 
 Pestaña **Análisis**. Las distancias son en línea recta (no consideran calles ni tiempos de viaje) y
@@ -70,11 +97,11 @@ salen solo de la base de datos: el mismo análisis da siempre los mismos número
   un punto: pega coordenadas o un enlace de Google Maps, busca una dirección (Enter) o usa **Elegir en
   el mapa**. A un punto le puedes poner nombre («Local propuesto Av. Primavera») y una **cadena
   propia**, para separar «misma cadena» de «competencia». Elige hasta qué distancia mirar (1 a 20 km,
-  todo el Perú o ciertos distritos), las cadenas y los anillos (500 m, 1 km, 2 km…). Verás la tienda
+  todo el Perú o ciertas zonas Nielsen o distritos), las cadenas y los anillos (500 m, 1 km, 2 km…). Verás la tienda
   más cercana de la misma cadena y de la competencia, cuántas tiendas hay en cada anillo y la tabla
   completa con distancia y rumbo. Las tiendas «por verificar» y las de ubicación aproximada (≈) se
   marcan; las cerradas nunca entran.
-- **Matriz de cercanía** (canibalización). Elige una región (distritos, provincia o una zona de Lima):
+- **Matriz de cercanía** (canibalización). Elige una región (una zona Nielsen, distritos o una provincia):
   para cada tienda, su tienda más cercana de la misma cadena y de la competencia y cuántas hay a menos
   de R (1 km por defecto), y la lista de pares de tiendas de una misma cadena más cercanos que el umbral
   («posible canibalización»).
@@ -283,6 +310,30 @@ has no room near its store, that store is drawn as a **dot in its chain colour**
 smaller logos or the “Dots” style. The selected districts are always named on the map (the app
 writes the names the basemap leaves out at that zoom), and logos and leaders keep off them.
 
+## Zonas Nielsen
+
+The **Nielsen zones** are the main grouping of the stores: the *SUBAREA* column of the company's store
+list. A zone is a set of districts and a district belongs to one zone: **Lima Centro, Lima Cono Norte,
+Lima Cono Sur, Lima Oriente, Metropolitana Norte, Metropolitana Oriente, Metropolitana Sur** (Lima + Callao)
+and **Arequipa, Cajamarca, Chiclayo, Chimbote, Huánuco, Ica, Piura, Trujillo** (Provinces). A store's zone
+is its district's zone; stores outside these zones are "the rest of Peru".
+
+- **Maps → Zonas Nielsen:** one row of buttons per area; a click adds every district of the zone (another
+  click removes them; dashed = only part of the zone). You can also find them by typing a name (*cono sur*,
+  *metropolitana*). A complete zone shows as one chip with its district count; open it to see its districts.
+  The slide still stores only districts, so older projects open unchanged.
+- **Database:** a **Zona Nielsen** filter (with counts, including "Rest of Peru"), a sortable column, the zone
+  in the store editor and in the exported Excel.
+- **Analysis:** the region menu and buttons of the proximity matrix (and the "Zonas Nielsen" universe of the
+  distance-from-a-point mode) use the same zones; a region that equals a zone is named after it
+  ("Proximity matrix · Lima Cono Sur").
+
+The zones live in `data/zonas-nielsen.csv` (one row per district: `ubigeo, district, …, zone, area, origin`),
+which you edit by hand and convert with `node tools/build-zones.mjs` into `data/zones.js` (the same way
+`stores.csv` → `stores.js`). The list's "Resto Perú / Norte / Sur" values are not sets of districts (the list
+gives one district several of them), so they are not zones here. Three Lima / Callao districts that have no
+store in the list (Mi Perú, Lurigancho, Santa María del Mar) were placed by neighbourhood (`origin = vecindad`).
+
 ## Distance analysis
 
 **Analysis** tab. Distances are straight-line (no streets or travel times) and come only from the
@@ -291,10 +342,10 @@ database, so the same analysis always gives the same numbers.
 - **Distances to a point.** The reference is a store (type its name, Enter) or a point: paste
   coordinates or a Google Maps link, search an address (Enter) or **Pick on the map**. A point can have
   a name and an **own chain** (to tell “same chain” from “competitor”). Choose how far to look (1–20 km,
-  all of Peru or some districts), the chains and the rings (500 m, 1 km, 2 km…): you get the nearest
+  all of Peru or some Nielsen zones or districts), the chains and the rings (500 m, 1 km, 2 km…): you get the nearest
   same-chain store and competitor, the stores in each ring and the full table with distance and bearing.
   Stores “to verify” and approximate locations (≈) are flagged; closed stores are never included.
-- **Proximity matrix** (cannibalization). For a region (districts, a province or a Lima zone): each
+- **Proximity matrix** (cannibalization). For a region (a Nielsen zone, districts or a province): each
   store’s nearest same-chain store and competitor, the stores within R (1 km by default), and the
   same-chain store pairs closer than a threshold (“possible cannibalization”).
 - **Export to Excel** (summary, full table, chain × ring, parameters with the reference, universe, date

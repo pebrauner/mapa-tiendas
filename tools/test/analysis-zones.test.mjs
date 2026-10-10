@@ -15,8 +15,8 @@
 //   5. English: headings "Lima + Callao" / "Provinces", the title "Proximity matrix · Lima Cono Sur", the Excel name;
 //      the zone names themselves are data (never translated).
 //   6. The region is stored as districts: after a reload the saved region comes back, named after its zone.
-//   7. Without data/zones.js (MT.data.zones.available = false, a second app) the old Lima presets still work:
-//      "Zonas de Lima" menu and buttons, "Matriz de cercanía · Lima Sur", nothing breaks.
+//   7. Without data/zones.js (MT.data.zones.available = false, a second app) there are no zone shortcuts (no menu, no
+//      buttons, no zone in the search results) and nothing else breaks: districts are still picked and named.
 // Zero console errors.
 
 import { readFileSync } from 'node:fs';
@@ -295,7 +295,7 @@ try {
   check(old.ds.length === 6 && old.rows > 20 && old.boxes === 0 && old.head === 'Matriz de cercanía · 6 distritos', `an old saved list of 6 districts loads as it was: "${old.head}", ${old.rows} stores`);
 
   /* ---- 9. no data/zones.js ----------------------------------------------------------------------------------- */
-  console.log('\n9. Sin data/zones.js: los presets de Lima de antes');
+  console.log('\n9. Sin data/zones.js: sin atajos de zona; los distritos siguen funcionando');
   const fb = await openApp({
     lang: 'es', hash: 'analisis',
     onNewDocument: () => { try { Object.defineProperty(window, 'MT_ZONES', { configurable: true, get: () => undefined, set: () => {} }); } catch (e) { /* ignore */ } },
@@ -307,23 +307,17 @@ try {
   await fb.page.click('.mt-analysis-modes .mt-seg__opt:nth-child(2)');
   await sleep(500);
   const eF = await F.emptyState();
-  check(eF.title === 'Elige la región' && eF.buttons.join() === 'Lima Moderna,Lima Centro,Lima Norte,Lima Este,Lima Sur,Balnearios del sur,Callao' && eF.groups === 1 && eF.areas.length === 0, `empty state: the 7 old Lima presets as buttons (${eF.buttons.join(', ')})`);
-  const pbF = await F.presetsBtn();
-  check(pbF && pbF.text === 'Zonas de Lima', `the presets button reads "${pbF && pbF.text}"`);
-  await F.openMenu();
-  const mF = await F.menu();
-  check(mF.headings.length === 0 && mF.items.join() === eF.buttons.join() && mF.counts[4] === '6 distritos', `the menu lists the same 7 presets, no area headings (${mF.counts.join(', ')})`);
-  await F.pickMenu('Lima Sur');
-  await F.idle();
-  check(sorted(await F.region()) === sorted(['150108', '150119', '150123', '150133', '150142', '150143']) && (await F.head()) === 'Matriz de cercanía · Lima Sur', `pick "Lima Sur" → its 6 districts, title "${await F.head()}"`);
+  check(eF.title === 'Elige la región' && eF.buttons.length === 0 && eF.groups === 0, `empty state: no zone buttons (${eF.buttons.length}) and no old Lima presets`);
+  check((await F.presetsBtn()) === null, 'no zones menu button next to the district search');
   await F.type('cono sur');
   check((await F.options()).length === 0, 'typing a zone name offers no zone');
   await fb.page.keyboard.press('Escape');
-  await F.ev(() => MT.analysisui.setMatrix({ districts: [] }));
-  await sleep(400);
-  await F.ev(() => [...document.querySelectorAll('.mt-analysis-zonebtns button')].find((b) => b.textContent === 'Callao').click());
+  await F.clearSearch();
+  await F.type('miraflores');
+  await fb.page.keyboard.press('Enter');
   await F.idle();
-  check((await F.head()) === 'Matriz de cercanía · Callao' && (await F.region()).length === 7, `button "Callao" → its 7 districts, title "${await F.head()}"`);
+  check(sorted(await F.region()) === sorted(['150122']), 'a district is still picked from the search');
+  check((await F.head()).length > 0, `and the matrix is titled (${await F.head()})`);
   const { real: realF } = splitNetworkNoise(fb.errors);
   check(realF.length === 0, `no console errors without zones.js${realF.length ? ': ' + realF.slice(0, 3).join(' | ') : ''}`);
 

@@ -31,7 +31,7 @@
  * Analysis slides (mapCfg.analysis, SPEC §6.3): the rings are the 'mt-analysis-rings' layer (thin,
  *   dashed, under the labels; basemap.apply opts.rings limits them); pills, pin and lines are drawn
  *   by MT.render.drawOverlay and follow the live camera; such a slide needs no districts (no
- *   "Elige los distritos" notice; 'noRef' / 'noStoresNear' notices instead).
+ *   "Elige las zonas Nielsen" notice; 'noRef' / 'noStoresNear' notices instead).
  * Label blockers ('mt-label-blockers'): the frame's edges, the attribution and — once the view's
  *   labels are known — the layout's markers, store dots and leaders: a basemap label they would cut
  *   is left out instead (no harvest while they block).
@@ -1068,7 +1068,7 @@
         h('div', { class: 'mt-mapview__notice-text' }, MT.t('map.notice.' + key + '.text', vars)),
         action ? h('div', { class: 'mt-mapview__notice-actions' }, action, example) : null,
       ]);
-      // The whole "Elige los distritos" card leads to the district search (it is the first step).
+      // The whole "Elige las zonas Nielsen" card leads to the zone and district picker (it is the first step).
       els.notice.classList.toggle('is-action', key === 'noDistricts' && !!action);
       els.notice.onclick = key === 'noDistricts' && action ? (e) => { if (!e.target.closest('button')) MT.mapsui.focusDistricts(); } : null;
     }

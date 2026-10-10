@@ -449,7 +449,7 @@ end, so the live preview, the PNG/slide exports and the PPTX pieces are the same
   is saved on the slide it was made on, a running camera animation (wheel inertia, +/−, keyboard pan)
   is stopped, a drag is dropped; `onMoveEnd` ignores a gesture that started on another map.
 - Basemap failure: retried automatically on the window `online` event and from the notice's
-  *Reintentar* button (`setStyle`); the *Elige los distritos* notice has an *Elegir distritos* button.
+  *Reintentar* button (`setStyle`); the *Elige las zonas Nielsen* notice has an *Elegir zonas* button.
 - Preview-only chrome (never exported): +/− buttons (on hover/focus), chips **Encuadre manual** (click →
   `{view:null}`), **N logos movidos** (click → `{markerOffsets:{}}`), **N logos se superponen** (hint),
   centre notices (no map / no districts / no stores / stores out of view / store data missing /
@@ -693,16 +693,18 @@ columns, narrower below 1380 and 1200 px):
   2. *Zonas Nielsen* (section id `districts`; the heading is the literal text "Zonas Nielsen" in both
      languages): inline **combobox** over `MT.data.districts.search` (local, as-you-type; ↑/↓, Enter,
      Esc; shows "Provincia, Departamento" and store counts; already-added rows disabled), then the
-     matching **Nielsen zones** (`MT.data.zones.search`, at most 3, after the districts so that a name that
-     is both a district and a zone — Trujillo, Piura — keeps picking the district on Enter; a query that
-     only matches a zone has the zone first), then province rows ("Toda la provincia de X",
+     matching **Nielsen zones** (`MT.data.zones.search`, at most 3, placed after the best 3 districts so that a
+     name that is both a district and a zone — Trujillo, Piura — keeps picking the district on Enter and the
+     zone is still on screen without scrolling; a query that only matches a zone has the zone first), then province rows ("Toda la provincia de X",
      `searchProvinces`). Under the box, the **zone pills** (`.mt-maps-zone`, `aria-pressed`) grouped by area
      ("Lima + Callao" / "Provincias"): a pill adds every district of the zone that is not on the slide
      yet, or removes them all when the zone is complete; `is-partial` (dashed) when only some of its
      districts are on the slide (the tooltip says how many are missing, and the store count). Chips: a zone
      whose districts are ALL on the slide (`MT.data.zones.covered`) is ONE zone chip (name + "N distritos",
      × removes that zone's districts, the chip body expands its districts next to it; the expanded state
-     is per session and resets when the zone stops being complete), the other districts are chips with ×
+     is per session and resets when the zone stops being complete; "+N más" counts zone chips and loose
+     districts, the districts of an opened zone are always all shown; the header badge counts the same
+     chips), the other districts are chips with ×
      (Backspace in the box only edits the text — holding it used to remove every district), "+N más"
      above 16 items, "Quitar todos" (confirm from 4). The slide still stores only `districts`
      (`mapCfg.zones` does not exist; old projects open unchanged) and the automatic subtitle still lists
@@ -770,9 +772,14 @@ strings `js/i18n/db.js` (`db.*`, `chains.*`, `osm.*`). Tests: `node tools/test/d
   `'app:showChanges'` → shows the DB tab filtered to locally changed stores (deleted seed stores
   included, with *Restaurar*).
 - **Base de datos**: header (counts, local-changes cluster, Importar, Exportar ▾, Escanear OSM,
-  Agregar tienda) · filter bar (accent-insensitive search; popovers Cadenas (grouped, faceted counts),
-  Ubicación (departamento → provincia → distrito, + "sin ubicación"), Estado, Fuente, Precisión) ·
-  virtualized table (fixed layout, ~25 DOM rows for 3,500 stores, sortable headers, keyboard ↑↓
+  Agregar tienda) · filter bar (accent-insensitive search, which also finds a store by its zone name;
+  popovers Cadenas (grouped, faceted counts), **Zona Nielsen** (the 15 zones by area + "Resto del Perú"
+  for stores in no zone, faceted counts that respect the other filters; `filters.zones` = zone ids plus the
+  pseudo id `__rest__`, `data-facet="zones"`), Ubicación (departamento → provincia → distrito, + "sin
+  ubicación"), Estado, Fuente, Precisión) ·
+  virtualized table (fixed layout, ~25 DOM rows for 3,500 stores, sortable headers incl. the **Zona Nielsen**
+  column (160 px, from a table width of 800 px, so Fuente / Actualizado now appear from 900 / 1010 px; without
+  `data/zones.js` there is no column and a saved zone sort falls back to chain), keyboard ↑↓
   PgUp/PgDn Home/End, Enter = edit, Space = check) · bulk bar (mark verified / to verify / closed,
   delete) · resizable MapLibre map of the filtered stores (GeoJSON circles by chain colour, selection
   halo, store card popup with *Editar* and a Google Maps link) · edit drawer (all fields, chain select,
@@ -793,7 +800,11 @@ strings `js/i18n/db.js` (`db.*`, `chains.*`, `osm.*`). Tests: `node tools/test/d
   are skipped (`outsidePeru`) and swapped lat/lng are fixed and reported. Files are read with
   `MT.io.readTable`.
 - **Export** CSV / Excel of the filtered list or the whole base (`MT.io.storesToCSV/storesToXLSX`,
-  `datedName('Tiendas', …)`), rows in the `data/stores.csv` order (`MT.io.sortStores`).
+  `datedName('Tiendas', …)`), rows in the `data/stores.csv` order (`MT.io.sortStores`). The CSV is the
+  canonical format (unchanged); the Excel gets an extra **Zona Nielsen** column right after `ubigeo`
+  (`storesXLSX` in `js/ui-db.js`, "Resto del Perú" always in Spanish; without `data/zones.js` it is exactly
+  `MT.io.storesToXLSX`). The edit drawer shows the store's zone (read-only, follows the pin) and the store
+  card of the side map shows it as a badge.
 - **Guardar en carpeta** (`MT.dbui.saveToFolder`): `MT.io.repoFiles()` (refuses when a shipped data
   file did not load) → `fs.ensureFolder()` → `fs.looksLikeApp()` and, on file://,
   `fs.isRunningFolder()` (another copy of the app → nothing is written, "Esa no es la carpeta que tienes
@@ -1034,6 +1045,10 @@ node tools/test/analysis-matrix.test.mjs # proximity matrix regressions of the 2
 node tools/test/contracts.mjs      # every MT.* path used by any module exists at runtime; events wired
 node tools/test/analysis.test.mjs  # phase 2a engine on the real data: distances vs Vincenty, rings, grid = brute force,
                                    #   performance, the project `analysis` key, analysis slides' stores/bounds/subtitle
+node tools/test/zones.test.mjs     # Zonas Nielsen: data files (CSV = zones.js, 15 zones / 114 districts), MT.data.zones,
+                                   #   the zone picker of the Mapas tab in ES + EN, a build without zones.js
+node tools/build-zones.mjs         # (data) data/zonas-nielsen.csv → data/zones.js (--check validates and detects a stale file)
+node tools/test/analysis-zones.test.mjs # the Análisis tab's zone shortcuts: menu, buttons, search, zone names in titles / Excel, no zones.js
 node tools/test/analysis-ui.test.mjs # the Análisis tab: both modes = the engine, Excel read back, add/edit/update slide
 node tools/test/analysis-slide.test.mjs [--office]  # analysis slides drawn: reference / halo / pin, rings + pills,
                                    #   lines, legend list + space rule, Mapas inspector, PNG / PPTX (+ PowerPoint) / HTML
@@ -1194,7 +1209,8 @@ table (mode B). Every number comes from `MT.analysis`; nothing is computed diffe
   a click on a store dot (all stores of the selected chains are shown faintly) uses that store, elsewhere
   a point. A point has an optional label and *cadena propia* (→ same chain / competitor split). Recent
   references: `sessionStorage['mt.analysis.recent']` (6). Universe: chips 1/2/3/5/10/20 km / Todo el Perú
-  (default 5 km) or *Distritos* (district combobox + *Zonas de Lima*); chains popover (grouped, Todas /
+  (default 5 km) or *Zonas Nielsen* (district combobox + the *Zonas Nielsen* menu, `zoneSet()`; the stored
+  universe is still a list of districts); chains popover (grouped, Todas /
   Ninguna / Predeterminadas, store counts in the universe; default `defaultChains(ref)`, the reference's
   chain added on every new reference); *Incluir «por verificar»*. Rings: chips + a "1500" / "1.5 km" / "1,5 km" box
   (10 m–1000 km, ≤ 8; default 500 m–5 km). Map options: lines to the nearest store of each chain, logos +
@@ -1247,8 +1263,11 @@ table (mode B). Every number comes from `MT.analysis`; nothing is computed diffe
   **linked** to it (bar *Editando el análisis de la lámina «…»*, button **Actualizar la lámina** =
   `updateMap(id, {districts, chains, analysis})`). Mapas → *Editar en Análisis* calls
   `MT.analysisui.open(cfg)` (= `edit`).
-- **Mode B.** Region (district combobox, provinces, *Zonas de Lima*; required — the empty state offers
-  the zones), chains, R (chips 250 m / 500 m / 1 km / 2 km + custom), pair threshold (same), *Incluir pares
+- **Mode B.** Region (district combobox, provinces, *Zonas Nielsen* — a menu by area in the picker, plus the zone
+  search results after the best 3 districts; required — the empty state offers the 15 zones as buttons grouped
+  by area; a district list that equals a zone (or up to three whole zones) is named after it, `zoneNameOf()`:
+  "Matriz de cercanía · Lima Cono Sur", the Excel file name and Parámetros sheet; without `data/zones.js`
+  there are no zone shortcuts), chains, R (chips 250 m / 500 m / 1 km / 2 km + custom), pair threshold (same), *Incluir pares
   con la competencia* (off), *Contar tiendas vecinas fuera de la región* (on: candidates = the chains'
   stores in all of Peru; pairs over the region + neighbours within the threshold, keeping pairs that
   touch the region), *por verificar*. `neighborMatrix(region, {radius, candidates})` runs in **idle
@@ -1342,7 +1361,7 @@ the previous code on the same data).
   the list is shown (no "Tiendas" heading, no chain rows): its chain icons stand in for the legend, as
   large as fits, losing rows last. The whole block is centred vertically. Drawn by the DOM preview,
   `MT.render.drawSlide` and the PPTX (real text).
-- **Preview / Mapas:** no *Elige los distritos* on a slide whose region is its analysis; notices `noRef`
+- **Preview / Mapas:** no *Elige las zonas Nielsen* on a slide whose region is its analysis; notices `noRef`
   (the reference cannot be placed) and `noStoresNear`; rail "Distancias · hasta 2 km · n tiendas"; bar
   counts; marker tooltip "Referencia del análisis…"; store popup "A 754 m de <referencia> (NE) ·
   Competencia". Inspector section **Análisis de distancias** (`SECTIONS` id `'analysis'`, only on such
@@ -1490,7 +1509,7 @@ their verification are in [`TEST-REPORT.md`](TEST-REPORT.md). What changed for m
   `tools/fixtures/demo.mapa.json` by `node tools/fixtures/build-example.mjs`; loaded by index.html as an
   optional script) + `MT.app.openExampleProject()` / `exampleAvailable()` / `isBlankProject()` +
   `MT.project.openData(obj, {name})`. Entry points: project menu *Abrir proyecto de ejemplo*, the Mapas
-  empty state and the first-run *Elige los distritos* notice (*Ver ejemplo con 4 regiones*). Strings
+  empty state and the first-run *Elige las zonas Nielsen* notice (*Ver ejemplo con 4 regiones*). Strings
   `project.example.*` (core). It never replaces unsaved work without the *save first?* dialog.
 - **Store file order:** `MT.io.sortStores` = `tools/build-data.mjs` order; `repoFiles()` writes
   `data/stores.csv` and `data/stores.js` byte-identical to the data workflow (same header comment and

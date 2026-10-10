@@ -343,12 +343,12 @@ if (want('states')) {
   await page.evaluate(() => { const m = MT.project.addMap({ id: 'empty', title: '' }); MT.slide.render(MT.project.getMap(m.id)); });
   await sleep(400);
   let st = await page.evaluate(() => ({ notice: document.querySelector('.mt-mapview__notice').textContent, ph: document.querySelector('.mt-slide__title').textContent }));
-  check(/Elige los distritos/.test(st.notice) && st.ph === 'Título del mapa', `new map: "${st.notice.slice(0, 40)}…", title placeholder`);
+  check(/Elige las zonas Nielsen/.test(st.notice) && st.ph === 'Título del mapa', `new map: "${st.notice.slice(0, 40)}…", title placeholder`);
   await screenshot(page, 'm1-state-empty-es', { clip: CLIP });
   await page.evaluate(() => MT.i18n.setLang('en'));
   await sleep(300);
   st = await page.evaluate(() => ({ notice: document.querySelector('.mt-mapview__notice').textContent, ph: document.querySelector('.mt-slide__title').textContent }));
-  check(/Choose the districts/.test(st.notice) && st.ph === 'Map title', 'English: notice and placeholder translated');
+  check(/Choose the Nielsen zones/.test(st.notice) && st.ph === 'Map title', 'English: notice and placeholder translated');
   await page.evaluate(() => { MT.i18n.setLang('es'); MT.slide.render(null); });
   await sleep(200);
   st = await page.evaluate(() => document.querySelector('.mt-mapview__notice').textContent);

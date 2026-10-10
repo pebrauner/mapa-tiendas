@@ -119,7 +119,7 @@ try {
   const pressed = await ev(() => document.querySelector('.mt-maps-zone[data-zone="metropolitana-sur"]').getAttribute('aria-pressed'));
   check(pl.on.join() === 'Metropolitana Sur' && pl.partial.length === 0 && pressed === 'true', 'the pill is on (is-on, aria-pressed=true)');
   const sum = await ev(() => document.querySelector('.mt-maps-sec[data-sec="districts"] .mt-maps-sec__summary').textContent);
-  check(sum === String(ms.ubigeos.length), `the section summary counts districts (${sum})`);
+  check(sum === '1', `the section badge counts what the chips show: one zone = 1 (${sum})`);
   const sub = await ev(() => MT.data.subtitleFor(MT.project.currentMap()));
   check(sub === '(Miraflores, San Borja, San Isidro, Surquillo)', `the automatic subtitle still lists the districts: ${sub}`);
   const nStores = await ev(() => MT.data.storesForMap(MT.project.currentMap()).length);
@@ -137,7 +137,9 @@ try {
   await waitFor(() => MT.project.currentMap().districts.length === 3);
   pl = await pills();
   const ptitle = await ev(() => document.querySelector('.mt-maps-zone[data-zone="metropolitana-sur"]').title);
-  check(pl.on.length === 0 && pl.partial.join() === 'Metropolitana Sur' && /1 por agregar/.test(ptitle), `removing one district: the zone chip is gone, the pill is partial (${ptitle})`);
+  const plabel = await ev(() => document.querySelector('.mt-maps-zone[data-zone="metropolitana-sur"]').getAttribute('aria-label'));
+  check(pl.on.length === 0 && pl.partial.join() === 'Metropolitana Sur' && /Falta 1 por agregar/.test(ptitle), `removing one district: the zone chip is gone, the pill is partial (${ptitle})`);
+  check(plabel === 'Metropolitana Sur, Falta 1 por agregar', `a partial pill says so in its accessible name (${plabel})`);
   check((await chips()).length === 3 && (await chips()).every((c) => !c.startsWith('ZONE')), 'its 3 remaining districts are individual chips');
   // a pill completes the zone; a second click removes it
   await page.click('.mt-maps-zone[data-zone="metropolitana-sur"]');
@@ -203,6 +205,46 @@ try {
   check(/Elige las zonas Nielsen|Elegir zonas/.test(empty.notice) || /Elige las zonas Nielsen/.test(await ev(() => document.body.innerText)), 'the empty map card says "Elige las zonas Nielsen"');
   check(/Sin zonas ni distritos aún/.test(empty.rail || ''), 'the slide list says "Sin zonas ni distritos aún"');
 
+  console.log('\n3b. Review fixes: focus, expanded zones, search order, groups');
+  // keyboard: removing a loose district next to a complete zone must not jump onto the zone's ×
+  await ev(() => MT.project.updateMap(MT.project.currentMapId(), { districts: ['150122', '150130', '150105', '150101', '150128'] }));   // Miraflores, San Borja + Lima Centro
+  await waitFor(() => document.querySelectorAll('.mt-maps-chips .mt-chip').length === 3);
+  check(JSON.stringify(await chips()) === JSON.stringify(['ZONE:Lima Centro', 'Miraflores', 'San Borja']), `chips: the complete zone first, then the loose districts (${(await chips()).join(', ')})`);
+  await page.focus('.mt-maps-chip[data-ubigeo="150122"] .mt-chip__x');
+  await page.keyboard.press('Enter');
+  await sleep(200);
+  const foc = await ev(() => { const a = document.activeElement; const chip = a && a.closest('.mt-chip'); return chip ? (chip.dataset.zone ? 'zone ' + chip.dataset.zone : 'district ' + chip.dataset.ubigeo) : (a && a.tagName); });
+  check(foc === 'district 150130', `after removing Miraflores by keyboard the focus is on the next chip's × (San Borja), not the zone's (${foc})`);
+  await clearAllDistricts();
+  // keyboard: the expander keeps the focus when the chips are rebuilt
+  await page.click('.mt-maps-zone[data-zone="arequipa"]');
+  await waitFor(() => MT.project.currentMap().districts.length === 19);
+  await page.focus('.mt-maps-chip__zone');
+  await page.keyboard.press('Enter');
+  await sleep(200);
+  const f2 = await ev(() => { const a = document.activeElement; return { onZoneBtn: !!(a && a.classList.contains('mt-maps-chip__zone')), expanded: a && a.getAttribute('aria-expanded'), members: document.querySelectorAll('.mt-maps-chip.is-member').length, more: !!document.querySelector('.mt-maps-chipmore') }; });
+  check(f2.onZoneBtn && f2.expanded === 'true', 'after Enter on the zone chip the focus stays on its button and it reports aria-expanded=true');
+  check(f2.members === 19 && !f2.more, `an opened zone with 19 districts (Arequipa) shows all of them, no "+N más" (${f2.members})`);
+  await page.keyboard.press('Space');
+  await sleep(200);
+  check((await ev(() => document.activeElement.getAttribute('aria-expanded'))) === 'false', 'Space collapses it and the focus is still there');
+  await clearAllDistricts();
+  // the badge: a zone + 2 loose districts = 3 chips
+  await ev(() => MT.project.updateMap(MT.project.currentMapId(), { districts: ['150105', '150101', '150128', '150122', '150130'] }));
+  await waitFor(() => document.querySelectorAll('.mt-maps-chips .mt-chip').length === 3);
+  const badge = await ev(() => document.querySelector('.mt-maps-sec[data-sec="districts"] .mt-maps-sec__summary').textContent);
+  check(badge === '3', `badge = zone chips + loose districts (${badge})`);
+  await clearAllDistricts();
+  // search order: the zone of a city name is on screen without scrolling (row <= 5), the district still first
+  await typeSearch('trujillo');
+  r = await results();
+  const zi = r.indexOf('ZONE Trujillo');
+  check(r[0] === 'DIST Trujillo' && zi > 0 && zi <= 4, `"trujillo": the district first, the zone within the first 5 rows (row ${zi + 1})`);
+  await page.keyboard.press('Escape');
+  // area groups are real groups, named by their heading
+  const groups = await ev(() => [...document.querySelectorAll('.mt-maps-zones__row')].map((g) => ({ role: g.getAttribute('role'), name: document.getElementById(g.getAttribute('aria-labelledby')).textContent })));
+  check(JSON.stringify(groups) === JSON.stringify([{ role: 'group', name: 'Lima + Callao' }, { role: 'group', name: 'Provincias' }]), 'each area is a labelled group (Lima + Callao, Provincias)');
+
   console.log('\n4. Keyboard and English');
   await page.focus('.mt-maps-zone[data-zone="lima-oriente"]');
   await page.keyboard.press('Space');
@@ -244,6 +286,8 @@ console.log('\n5. Without data/zones.js (optional data file)');
     await bare.page.waitForFunction(() => MT.app && MT.app.booted === true && document.querySelector('.mt-maps .mt-maps-sec'), { timeout: 20000 });
     const info = await bare.page.evaluate(() => ({ available: MT.data.zones.available, pills: document.querySelectorAll('.mt-maps-zone').length, group: !!document.querySelector('.mt-maps-zones'), search: !!document.querySelector('[data-field="districtSearch"]') }));
     check(info.available === false && info.pills === 0 && !info.group && info.search, 'no zones: no pills, the district search is still there');
+    const txt = await bare.page.evaluate(() => ({ ph: document.querySelector('[data-field="districtSearch"]').placeholder, notes: [...document.querySelectorAll('.mt-maps-note')].map((n) => n.textContent).join(' | '), start: (document.querySelector('.mt-maps-start__text') || {}).textContent || '' }));
+    check(txt.ph === 'Escribe un distrito o provincia…' && !/zona/i.test(txt.start) && /zones\.js/.test(txt.notes), `no zones: the texts do not promise zones, and a note says why (${txt.notes.slice(0, 60)}…)`);
     await bare.page.$eval('[data-field="districtSearch"]', (el) => el.focus());
     await bare.page.type('[data-field="districtSearch"]', 'miraflores');
     await sleep(300);

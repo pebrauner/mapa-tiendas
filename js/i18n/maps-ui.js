@@ -118,6 +118,8 @@
         analysisNote: 'Opcional. Esta lámina muestra las tiendas a menos de {d} de la referencia del análisis; si eliges distritos, mostrará las tiendas de esos distritos.',
         searchLabel: 'Buscar zona, distrito o provincia',
         searchPh: 'Escribe una zona, distrito o provincia…',
+        searchLabelNoZones: 'Buscar distrito o provincia',          // sin data/zones.js
+        searchPhNoZones: 'Escribe un distrito o provincia…',
         resultsAria: 'Zonas y distritos encontrados',
         noResults: 'Ninguna zona ni distrito coincide con «{q}».',
         ambiguous: 'Hay varios distritos con ese nombre: elige el correcto en la lista (↑ ↓ y Enter, o un clic).',
@@ -127,10 +129,6 @@
         provinceSub: { one: '{department} · {n} distrito', other: '{department} · {n} distritos' },
         added: { one: 'Se agregó {n} distrito.', other: 'Se agregaron {n} distritos.' },
         nothingNew: 'Esos distritos ya estaban en la lámina.',
-        preset: {
-          moderna: 'Lima Moderna', centro: 'Lima Centro', norte: 'Lima Norte', este: 'Lima Este',
-          sur: 'Lima Sur', balnearios: 'Balnearios del sur', callao: 'Callao',
-        },
         removeAll: 'Quitar todos',
         removeAllConfirm: { one: '¿Quitar el distrito de esta lámina?', other: '¿Quitar los {n} distritos de esta lámina?' },
         remove: 'Quitar {name}',
@@ -138,6 +136,7 @@
         less: 'Ver menos',
         startTitle: 'Empieza por aquí',
         startText: 'Elige una zona Nielsen o escribe el nombre de un distrito (p. ej. Miraflores). El mapa, el subtítulo y la leyenda se arman solos.',
+        startTextNoZones: 'Escribe el nombre de un distrito (p. ej. Miraflores). El mapa, el subtítulo y la leyenda se arman solos.',
       },
       // Zonas Nielsen (SUBAREA del listado de la compañía): la agrupación principal de las tiendas; cada zona es un conjunto de distritos.
       zones: {
@@ -145,12 +144,12 @@
         area: { 'lima-callao': 'Lima + Callao', provincias: 'Provincias' },
         title: '{name} · {d} · {s}',
         option: 'Zona Nielsen · {area} · {d}',
-        chipSub: '{d}',
         expand: 'Ver los distritos de {name}',
         collapse: 'Ocultar los distritos de {name}',
         remove: 'Quitar la zona {name}',
+        removed: 'Se quitó la zona {name}.',
         added: { one: 'Zona {name}: se agregó {n} distrito.', other: 'Zona {name}: se agregaron {n} distritos.' },
-        partial: 'Faltan {n} por agregar',
+        partial: { one: 'Falta {n} por agregar', other: 'Faltan {n} por agregar' },
         none: 'Aún no se cargaron las zonas Nielsen (data/zones.js): puedes elegir distritos y provincias.',
       },
       chains: {
@@ -403,6 +402,8 @@
         analysisNote: 'Optional. This slide shows the stores within {d} of the analysis reference; if you choose districts, it will show the stores of those districts.',
         searchLabel: 'Search zone, district or province',
         searchPh: 'Type a zone, district or province…',
+        searchLabelNoZones: 'Search district or province',          // without data/zones.js
+        searchPhNoZones: 'Type a district or province…',
         resultsAria: 'Matching zones and districts',
         noResults: 'No zone or district matches “{q}”.',
         ambiguous: 'Several districts have that name: pick the right one in the list (↑ ↓ and Enter, or a click).',
@@ -412,10 +413,6 @@
         provinceSub: { one: '{department} · {n} district', other: '{department} · {n} districts' },
         added: { one: '{n} district added.', other: '{n} districts added.' },
         nothingNew: 'Those districts were already on the slide.',
-        preset: {
-          moderna: 'Lima Moderna', centro: 'Lima Centro', norte: 'Lima Norte', este: 'Lima Este',
-          sur: 'Lima Sur', balnearios: 'Southern beach districts', callao: 'Callao',
-        },
         removeAll: 'Remove all',
         removeAllConfirm: { one: 'Remove the district from this slide?', other: 'Remove the {n} districts from this slide?' },
         remove: 'Remove {name}',
@@ -423,6 +420,7 @@
         less: 'Show less',
         startTitle: 'Start here',
         startText: 'Pick a Nielsen zone or type a district name (e.g. Miraflores). The map, subtitle and legend build themselves.',
+        startTextNoZones: 'Type a district name (e.g. Miraflores). The map, subtitle and legend build themselves.',
       },
       // Zonas Nielsen (SUBAREA of the company store list): the main grouping of the stores; each zone is a set of districts.
       zones: {
@@ -430,12 +428,12 @@
         area: { 'lima-callao': 'Lima + Callao', provincias: 'Provinces' },
         title: '{name} · {d} · {s}',
         option: 'Zona Nielsen · {area} · {d}',
-        chipSub: '{d}',
         expand: 'Show the districts of {name}',
         collapse: 'Hide the districts of {name}',
         remove: 'Remove the zone {name}',
+        removed: 'Zone {name} removed.',
         added: { one: 'Zone {name}: {n} district added.', other: 'Zone {name}: {n} districts added.' },
-        partial: '{n} still to add',
+        partial: { one: '{n} still to add', other: '{n} still to add' },
         none: 'The Nielsen zones (data/zones.js) did not load: you can still choose districts and provinces.',
       },
       chains: {

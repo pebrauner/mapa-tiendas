@@ -6,10 +6,12 @@
  *   node tools/build-zones.mjs --check    # validate only, write nothing (also fails if data/zones.js is out of date)
  *
  * Zonas Nielsen = the SUBAREA column of the company's store list ("Listado de tiendas - Octubre 2026 V2 -
- * Zona Nielsen", sheet BD): the main grouping of the stores. Each district belongs to ONE zone (the zone
- * most of its stores carry in that list); districts with no store in the list were placed by neighbourhood
- * (column `origin` = "vecindad"). "Resto Perú / Norte / Sur" is not a set of districts (the list gives the
- * same district several of them), so it is not a zone here: stores outside the zones belong to "the rest of Peru".
+ * Zona Nielsen", sheet BD): the main grouping of the stores. Each district belongs to ONE zone: the zone that
+ * strictly outnumbers every other label (the catch-all "Resto Perú" ones included) among the stores the list has
+ * in that district (column `origin` = "excel"; a tie or a catch-all majority leaves the district out of every
+ * zone). The 3 Lima / Callao districts that have no store in the list were placed next to their neighbours
+ * (`origin` = "vecindad"). "Resto Perú / Norte / Sur" is not a set of districts (the list gives the same district
+ * several of them), so it is not a zone here: stores outside the zones belong to "the rest of Peru".
  *
  * CSV: UTF-8 with BOM, comma separator, header row, columns in this order:
  *   ubigeo (6-digit INEI code) · district · province · department (informational, must match data/districts.js)
@@ -31,32 +33,34 @@ const OUT = path.join(ROOT, 'data', 'zones.js');
 const DISTRICTS = path.join(ROOT, 'data', 'districts.js');
 const COLUMNS = ['ubigeo', 'district', 'province', 'department', 'zone', 'area', 'origin', 'note'];
 const ORIGINS = ['excel', 'vecindad'];
+const AREAS = ['Lima + Callao', 'Provincias'];   // the picker's groups (their names are translated in js/i18n/maps-ui.js: maps.zones.area.*)
 const CHECK = process.argv.includes('--check');
 
 /** RFC-4180 parser (quoted fields, doubled quotes, CRLF/LF). */
 function parseCsv(text) {
   const rows = [];
-  let row = [], field = '', quoted = false, i = 0;
+  let row = [], field = '', quoted = false, i = 0, line = 1, start = 1;   // row.line = physical line where the row starts
   const n = text.length;
   while (i < n) {
     const c = text[i];
     if (quoted) {
       if (c === '"') { if (text[i + 1] === '"') { field += '"'; i += 2; continue; } quoted = false; i++; continue; }
+      if (c === '\n') line++;
       field += c; i++; continue;
     }
     if (c === '"' && field === '') { quoted = true; i++; continue; }
     if (c === ',') { row.push(field); field = ''; i++; continue; }
     if (c === '\r' && text[i + 1] === '\n') { i++; continue; }
-    if (c === '\n') { row.push(field); rows.push(row); row = []; field = ''; i++; continue; }
+    if (c === '\n') { row.push(field); row.line = start; rows.push(row); row = []; field = ''; i++; line++; start = line; continue; }
     field += c; i++;
   }
-  if (field !== '' || row.length) { row.push(field); rows.push(row); }
+  if (field !== '' || row.length) { row.push(field); row.line = start; rows.push(row); }
   return rows;
 }
 const fold = (s) => String(s ?? '').normalize('NFD').replace(/\p{M}/gu, '').toLowerCase();
 const slug = (s) => fold(s).replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 
-const [header, ...body] = parseCsv(readFileSync(CSV, 'utf8').replace(/^﻿/, '')).filter((r) => !(r.length === 1 && r[0] === ''));
+const [header, ...body] = parseCsv(readFileSync(CSV, 'utf8').replace(/^\uFEFF/, '')).filter((r) => !(r.length === 1 && r[0] === ''));
 const problems = [];
 if (!header || header.join(',') !== COLUMNS.join(',')) {
   console.error(`build-zones: unexpected header in data/zonas-nielsen.csv:\n  ${header && header.join(',')}\nexpected:\n  ${COLUMNS.join(',')}`);
@@ -73,8 +77,8 @@ if (existsSync(DISTRICTS)) {
 } else problems.push('data/districts.js not found: district codes cannot be checked');
 
 const zones = [], byId = new Map(), seen = new Map();
-body.forEach((r, k) => {
-  const line = k + 2;
+body.forEach((r) => {
+  const line = r.line;
   if (r.length !== COLUMNS.length) { problems.push(`line ${line}: ${r.length} fields (expected ${COLUMNS.length})`); return; }
   const o = Object.fromEntries(COLUMNS.map((c, j) => [c, r[j]]));
   if (!/^\d{6}$/.test(o.ubigeo)) problems.push(`line ${line}: ubigeo "${o.ubigeo}" is not 6 digits`);
@@ -87,7 +91,8 @@ body.forEach((r, k) => {
   if (seen.has(o.ubigeo)) problems.push(`line ${line}: district ${o.ubigeo} (${o.district}) is already in zone "${seen.get(o.ubigeo)}": a district belongs to ONE zone`);
   seen.set(o.ubigeo, o.zone);
   if (!o.zone.trim()) problems.push(`line ${line}: empty zone`);
-  if (!o.area.trim()) problems.push(`line ${line}: empty area`);
+  if (!AREAS.includes(o.area)) problems.push(`line ${line}: area "${o.area}" (expected ${AREAS.join(' | ')})`);
+  if (!slug(o.zone)) problems.push(`line ${line}: zone "${o.zone}" has no letters or digits (its id would be empty)`);
   if (!ORIGINS.includes(o.origin)) problems.push(`line ${line}: origin "${o.origin}" (expected ${ORIGINS.join(' | ')})`);
   let z = byId.get(slug(o.zone));
   if (!z) { z = { id: slug(o.zone), name: o.zone, area: o.area, ubigeos: [] }; byId.set(z.id, z); zones.push(z); }
@@ -95,6 +100,7 @@ body.forEach((r, k) => {
   if (z.name !== o.zone) problems.push(`line ${line}: zone "${o.zone}" collides with "${z.name}" (same id)`);
   z.ubigeos.push(o.ubigeo);
 });
+if (!zones.length) problems.push('the CSV has no zone rows: an empty data/zones.js would make the zone UI disappear without a message');
 if (problems.length) {
   console.error(`build-zones: ${problems.length} problem(s) in data/zonas-nielsen.csv:\n  ` + problems.slice(0, 40).join('\n  '));
   process.exit(1);

@@ -688,13 +688,20 @@
     { id: 'content', icon: 'edit', build: buildContent, summary: (m) => '' },
     // Only on a slide carrying a distance analysis (SPEC §6.3).
     { id: 'analysis', icon: 'target', build: buildAnalysis, summary: analysisSummary, when: (m) => !!m.analysis },
-    { id: 'districts', icon: 'pin', build: buildDistricts, summary: (m) => (m.districts.length ? String(m.districts.length) : '') },
+    { id: 'districts', icon: 'pin', build: buildDistricts, summary: districtsSummary },
     { id: 'chains', icon: 'store', build: buildChains, summary: chainsSummary },
     { id: 'markers', icon: 'layers', build: buildMarkers, summary: (m) => t('maps.markers.styleName.' + MT.layout.styleOf(m).kind) },
     { id: 'map', icon: 'map', build: buildFraming, summary: (m) => (m.view ? t('maps.map.viewManualShort') : '') },
     { id: 'radius', icon: 'target', build: buildRadius, summary: (m) => (m.radius.length ? String(m.radius.length) : '') },
     { id: 'hidden', icon: 'eyeOff', build: buildHidden, summary: (m) => (m.hiddenStores.length ? String(m.hiddenStores.length) : '') },
   ];
+  /** The badge of the "Zonas Nielsen" header = what its chips show: a complete zone counts once, every other district once. */
+  function districtsSummary(m) {
+    const ds = m.districts || [];
+    if (!ds.length) return '';
+    const Z = MT.data.zones, cov = Z && Z.available ? Z.covered(ds) : null;
+    return String(cov ? cov.zones.length + cov.rest.length : ds.length);
+  }
   function chainsSummary(m) {
     const list = MT.data.chains();
     if (!list.length) return '';
@@ -1065,17 +1072,17 @@
       body.appendChild(note('warning', t('maps.districts.unavailable'), 'warn'));
       return { update() {} };
     }
+    const Z = MT.data.zones;   // Zonas Nielsen (data/zones.js is optional: Z.available)
     const listId = U.uid('mt-maps-dres');
     const input = h('input', { class: 'mt-input', type: 'text', role: 'combobox', 'aria-autocomplete': 'list', 'aria-expanded': 'false',
-      'aria-controls': listId, 'aria-label': t('maps.districts.searchLabel'), placeholder: t('maps.districts.searchPh'),
+      'aria-controls': listId, 'aria-label': (Z.available ? t('maps.districts.searchLabel') : t('maps.districts.searchLabelNoZones')), placeholder: (Z.available ? t('maps.districts.searchPh') : t('maps.districts.searchPhNoZones')),
       autocomplete: 'off', spellcheck: 'false', dataset: { field: 'districtSearch' } });
     const results = h('ul', { class: 'mt-maps-results', id: listId, role: 'listbox', 'aria-label': t('maps.districts.resultsAria'), hidden: true });
     const noRes = h('div', { class: 'mt-maps-results__empty', hidden: true });
     const start = h('div', { class: 'mt-maps-start' },
       h('span', { class: 'mt-maps-start__icon', html: icon('pin', 18) }),
-      h('div', null, h('div', { class: 'mt-maps-start__title' }, t('maps.districts.startTitle')), h('div', { class: 'mt-maps-start__text' }, t('maps.districts.startText'))));
+      h('div', null, h('div', { class: 'mt-maps-start__title' }, t('maps.districts.startTitle')), h('div', { class: 'mt-maps-start__text' }, (Z.available ? t('maps.districts.startText') : t('maps.districts.startTextNoZones')))));
     // Zonas Nielsen: always-visible toggle pills grouped by area (a zone = a named set of districts; MT.data.zones).
-    const Z = MT.data.zones;
     const areaLabel = (a) => { const k = 'maps.zones.area.' + U.normalize(a).replace(/[^a-z0-9]+/g, '-'); return MT.i18n.has(k) ? t(k) : a; };
     const zoneStores = (z) => z.ubigeos.reduce((n, u) => n + ubigeoCount(u), 0);
     const zoneTitle = (z) => t('maps.zones.title', { name: z.name, d: t('data.districts', { n: z.ubigeos.length }), s: t('data.stores', { n: zoneStores(z) }) });
@@ -1083,8 +1090,9 @@
     const zonePicker = Z.available ? h('div', { class: 'mt-maps-zones', role: 'group', 'aria-label': t('maps.zones.label'), dataset: { field: 'zones' } }) : null;
     if (zonePicker) {
       Z.byArea().forEach((g) => {
-        zonePicker.appendChild(h('div', { class: 'mt-maps-zones__area' }, areaLabel(g.area)));
-        const row = h('div', { class: 'mt-maps-zones__row' });
+        const gid = U.uid('mt-maps-zarea');
+        zonePicker.appendChild(h('div', { class: 'mt-maps-zones__area', id: gid }, areaLabel(g.area)));
+        const row = h('div', { class: 'mt-maps-zones__row', role: 'group', 'aria-labelledby': gid });
         g.zones.forEach((z) => {
           const btn = h('button', { type: 'button', class: 'mt-maps-zone', 'aria-pressed': 'false', dataset: { zone: z.id }, onclick: () => toggleZone(z) },
             h('span', { class: 'mt-maps-zone__name' }, z.name));
@@ -1104,6 +1112,7 @@
       anaNote,
       h('div', { class: 'mt-maps-combo' }, h('div', { class: 'mt-input-group mt-maps-search' }, iconSpan('search', 16), input), results, noRes),
       zonePicker,
+      Z.available ? null : note('info', t('maps.zones.none')),
       h('div', { class: 'mt-maps-row mt-maps-row--tools' }, h('span', { class: 'mt-spacer' }), removeAll),
       chips,
     ]);
@@ -1112,10 +1121,11 @@
       options(q) {
         const m = cur();
         const have = new Set(m ? latest(m, 'districts') : []);
-        const out = D.search(q, { limit: 8 }).map((d) => ({ kind: 'd', d: d, disabled: have.has(d.ubigeo) }));
-        // Zonas Nielsen after the districts (typing a name that is both, e.g. Trujillo, keeps picking the district on Enter);
-        // a query that only matches a zone ("cono sur") has the zone first.
-        if (Z.available) Z.search(q, { limit: 3 }).forEach((z) => out.push({ kind: 'z', z: z, disabled: z.ubigeos.every((u) => have.has(u)) }));
+        const ds = D.search(q, { limit: 8 }).map((d) => ({ kind: 'd', d: d, disabled: have.has(d.ubigeo) }));
+        const zs = Z.available ? Z.search(q, { limit: 3 }).map((z) => ({ kind: 'z', z: z, disabled: z.ubigeos.every((u) => have.has(u)) })) : [];
+        // Zonas Nielsen after the best 3 districts: typing a name that is both (Trujillo, Piura…) keeps picking the district on
+        // Enter, yet the zone is on screen without scrolling; a query that only matches a zone ("cono sur") has the zone first.
+        const out = ds.slice(0, 3).concat(zs, ds.slice(3));
         if (U.normalize(q).length >= 3) {
           D.searchProvinces(q, { limit: 2 }).forEach((p) => { if (p.ubigeos.length > 1) out.push({ kind: 'p', p: p }); });
         }
@@ -1203,7 +1213,7 @@
       const hadFocus = chips.contains(document.activeElement);
       const xs0 = U.$$('.mt-chip__x', chips), i = xs0.indexOf(document.activeElement);
       now({ districts: latest(m, 'districts').filter((u) => !drop.has(u)) });
-      announce(t('maps.zones.remove', { name: z.name }));
+      announce(t('maps.zones.removed', { name: z.name }));
       if (hadFocus && !chips.contains(document.activeElement)) {
         const xs = U.$$('.mt-chip__x', chips);
         (xs[Math.min(Math.max(i, 0), xs.length - 1)] || input).focus();
@@ -1217,7 +1227,7 @@
       if (z.ubigeos.every((u) => have.has(u))) {
         const drop = new Set(z.ubigeos);
         now({ districts: latest(m, 'districts').filter((u) => !drop.has(u)) });
-        announce(t('maps.zones.remove', { name: z.name }));
+        announce(t('maps.zones.removed', { name: z.name }));
       } else addZone(z);
     }
     function clearAll() {
@@ -1231,14 +1241,16 @@
     function removeOne(u) {
       const m = cur();
       if (!m) return;
-      const i = m.districts.indexOf(u);
+      // The chip order is no longer the order of m.districts (complete zones come first), so the focus
+      // target is found among the chip × buttons themselves.
+      const i = U.$$('.mt-chip__x', chips).indexOf(document.activeElement);
       const hadFocus = chips.contains(document.activeElement);
       now({ districts: m.districts.filter((x) => x !== u) });   // re-renders the chips synchronously
       // Keep the keyboard where it was (next chip's ×, else the search box) — only if the removed
       // button had focus, and right now: a deferred focus() could steal it from wherever the user went.
       if (hadFocus && !chips.contains(document.activeElement)) {
         const xs = U.$$('.mt-chip__x', chips);
-        (xs[Math.min(i, xs.length - 1)] || input).focus();
+        (xs[Math.min(Math.max(i, 0), xs.length - 1)] || input).focus();
       }
     }
 
@@ -1262,7 +1274,10 @@
             btn.classList.toggle('is-on', on);
             btn.classList.toggle('is-partial', !on && n > 0);
             btn.setAttribute('aria-pressed', on ? 'true' : 'false');
-            btn.title = zoneTitle(z) + (!on && n > 0 ? ' · ' + t('maps.zones.partial', { n: z.ubigeos.length - n }) : '');
+            const part = !on && n > 0 ? t('maps.zones.partial', { n: z.ubigeos.length - n }) : '';
+            btn.title = zoneTitle(z) + (part ? ' · ' + part : '');
+            // A partly selected zone is "not pressed": say how much is missing in its accessible name too.
+            if (part) btn.setAttribute('aria-label', z.name + ', ' + part); else btn.removeAttribute('aria-label');
           });
         }
         const provinces = new Set(ds.map((u) => (D.get(u) || {}).province));
@@ -1271,21 +1286,26 @@
         // A zone whose districts are ALL on the slide is one chip (its districts open next to it); the rest are district chips.
         const cov = Z.available ? Z.covered(ds) : { zones: [], rest: ds };
         Object.keys(st.zonesOpen).forEach((id) => { if (!cov.zones.some((z) => z.id === id)) delete st.zonesOpen[id]; });   // a zone that is back (or gone) starts collapsed
-        const items = [];
-        cov.zones.forEach((z) => {
-          items.push({ kind: 'z', z: z });
-          if (st.zonesOpen[z.id]) z.ubigeos.forEach((u) => items.push({ kind: 'd', u: u, member: true }));
+        // "+N más" counts the zone chips and the loose districts; the districts of an opened zone are always all shown.
+        const top = cov.zones.map((z) => ({ kind: 'z', z: z })).concat(cov.rest.map((u) => ({ kind: 'd', u: u })));
+        const many = top.length > CHIP_LIMIT + 2;
+        const shown = [];
+        (many && !st.chipsExpanded ? top.slice(0, CHIP_LIMIT) : top).forEach((it) => {
+          shown.push(it);
+          if (it.kind === 'z' && st.zonesOpen[it.z.id]) it.z.ubigeos.forEach((u) => shown.push({ kind: 'd', u: u, member: true }));
         });
-        cov.rest.forEach((u) => items.push({ kind: 'd', u: u }));
-        const many = items.length > CHIP_LIMIT + 2;
-        const shown = many && !st.chipsExpanded ? items.slice(0, CHIP_LIMIT) : items;
         shown.forEach((it) => {
           if (it.kind === 'z') {
             const z = it.z, open = !!st.zonesOpen[z.id];
             const label = t(open ? 'maps.zones.collapse' : 'maps.zones.expand', { name: z.name });
             chips.appendChild(h('span', { class: 'mt-chip mt-maps-chip mt-maps-chip--zone' + (open ? ' is-open' : ''), role: 'listitem', title: zoneTitle(z), dataset: { zone: z.id } },
               h('button', { type: 'button', class: 'mt-maps-chip__zone', 'aria-expanded': open ? 'true' : 'false', 'aria-label': label, title: label,
-                onclick: () => { st.zonesOpen[z.id] = !open; api.update(cur()); } },
+                onclick: () => {
+                  st.zonesOpen[z.id] = !open;
+                  api.update(cur());   // rebuilds the chips: put the keyboard back on this zone's button
+                  const again = chips.querySelector('.mt-maps-chip--zone[data-zone="' + z.id + '"] .mt-maps-chip__zone');
+                  if (again) again.focus();
+                } },
               iconSpan('layers', 14),
               h('span', { class: 'mt-chip__label' }, z.name),
               h('span', { class: 'mt-chip__sub' }, t('data.districts', { n: z.ubigeos.length })),
@@ -1304,7 +1324,7 @@
         });
         if (many) {
           chips.appendChild(h('button', { type: 'button', class: 'mt-maps-chipmore', onclick: () => { st.chipsExpanded = !st.chipsExpanded; api.update(cur()); } },
-            st.chipsExpanded ? t('maps.districts.less') : t('maps.districts.more', { n: items.length - CHIP_LIMIT })));
+            st.chipsExpanded ? t('maps.districts.less') : t('maps.districts.more', { n: top.length - CHIP_LIMIT })));
         }
         if (combo.isOpen()) combo.refresh();
       },

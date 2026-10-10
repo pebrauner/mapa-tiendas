@@ -613,6 +613,8 @@ try {
   await sleep(200);
   await page.click('.mt-analysis-table--b tbody tr[data-id]');
   await sleep(600);
+  // (the selection lines are drawn by the map after a render: wait for them instead of hoping 600 ms is enough, it was a coin flip)
+  await page.waitForFunction(() => MT.analysisui.map().querySourceFeatures('mtb-sel').length >= 2, { timeout: 10000 }).catch(() => {});
   const bsel = await ev(() => ({ id: MT.analysisui.state().matrix.selected, card: (document.querySelector('.mt-analysis-popup') || {}).textContent || '', sel: MT.analysisui.map().querySourceFeatures('mtb-sel').length }));
   check(!!bsel.id && /Misma cadena más cercana/.test(bsel.card) && /Competencia más cercana/.test(bsel.card) && /A menos de 1 km/.test(bsel.card) && bsel.sel >= 2,
     'store click → card (nearest same / competitor, stores within R by chain) + dashed lines to both');
