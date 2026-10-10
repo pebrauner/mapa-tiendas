@@ -16,7 +16,7 @@
 //      "Actualizar la lámina" → the slide's analysis follows.
 //   5. Mode A, a point reference from a pasted Google Maps link, with a label and an own chain → = engine;
 //      "Agregar como lámina" again → a second slide.
-//   6. Mode B on Lima Sur (zone button) = MT.analysis.neighborMatrix / closePairs; its Excel read back.
+//   6. Mode B on Lima Cono Sur (a Zona Nielsen: its button) = MT.analysis.neighborMatrix / closePairs; its Excel read back.
 //   7. Reload → the tab, mode B with its region, the mode A settings (universe, rings), the slide with its
 //      analysis (autosave), the language and the recent references persist; the reference itself is per
 //      session by design (SPEC §6.1: recent list) — one click on it restores the analysis.
@@ -32,7 +32,7 @@ const args = Object.fromEntries(process.argv.slice(2).map((a) => a.replace(/^--/
 const LANGS = args.lang ? [args.lang] : ['es', 'en'];
 const { check, finish } = makeChecker('analysis-e2e');
 
-const LIMA_SUR = ['150108', '150119', '150123', '150133', '150142', '150143'];
+const ZONE_ID = 'lima-cono-sur', ZONE_NAME = 'Lima Cono Sur';   // a Zona Nielsen (names are data: the same in both languages); its districts come from MT.data.zones
 const GMAPS = 'https://www.google.com/maps/place/Parque+Kennedy/@-12.1219,-77.0302,17z/data=!3m1!4b1!4m6!3m5!1s0x0:0x0!8m2!3d-12.12185!4d-77.03007';
 
 // The File System Access pickers cannot be driven headlessly: the app then downloads (like Firefox).
@@ -312,14 +312,16 @@ async function journey(lang) {
     await waitFor(() => MT.app.currentTab() === 'analysis');
 
     /* ---------------------------------------------------------------- 6. mode B */
-    console.log('\n6. Matriz de cercanía — Lima Sur');
+    console.log(`\n6. Matriz de cercanía — ${ZONE_NAME}`);
+    const ZONE = await ev((id) => { const z = MT.data.zones.get(id); return z && { name: z.name, ubigeos: z.ubigeos.slice() }; }, ZONE_ID);
+    check(!!ZONE && ZONE.name === ZONE_NAME && ZONE.ubigeos.length === 12, `the Zona Nielsen ${ZONE_NAME} has ${ZONE && ZONE.ubigeos.length} districts`);
     await page.click('.mt-analysis-modes .mt-seg__opt:nth-child(2)');
     await waitFor(() => MT.analysisui.mode() === 'matrix');
     await sleep(300);
     const zoneBtn = await ev(() => !!document.querySelector('.mt-analysis-zonebtns button'));
-    if (zoneBtn) await ev(() => [...document.querySelectorAll('.mt-analysis-zonebtns button')].find((b) => b.textContent === 'Lima Sur').click());
-    else await ev((ds) => MT.analysisui.setMatrix({ districts: ds }), LIMA_SUR);
-    await waitFor((n) => MT.analysisui.state().matrix.districts.length === n, LIMA_SUR.length);
+    if (zoneBtn) await ev((name) => [...document.querySelectorAll('.mt-analysis-zonebtns button')].find((b) => b.textContent === name).click(), ZONE_NAME);
+    else await ev((ds) => MT.analysisui.setMatrix({ districts: ds }), ZONE.ubigeos);
+    await waitFor((n) => MT.analysisui.state().matrix.districts.length === n, ZONE.ubigeos.length);
     await ev(() => MT.analysisui.whenIdle());
     await sleep(300);
     const mb = await ev(() => {
@@ -330,13 +332,13 @@ async function journey(lang) {
       return { n: nm.length, same: sig(nm) === sig(r.rows), pairs: r.pairs.length, sameFirst: r.pairs.every((p, i, a) => !i || !(p.sameChain && !a[i - 1].sameChain)),
         head: document.querySelector('.mt-analysis-mainhead__h').textContent, districts: st.districts.slice().sort().join() };
     });
-    check(mb.districts === LIMA_SUR.slice().sort().join() && mb.same && mb.n > 40, `Lima Sur: ${mb.n} stores, per-store matrix = MT.analysis.neighborMatrix`);
-    check(mb.pairs > 0 && mb.sameFirst && mb.head === L('Matriz de cercanía · Lima Sur', 'Proximity matrix · Lima Sur'), `${mb.pairs} close pairs (same chain first), "${mb.head}"`);
+    check(mb.districts === ZONE.ubigeos.slice().sort().join() && mb.same && mb.n > 40, `${ZONE_NAME}: ${mb.n} stores, per-store matrix = MT.analysis.neighborMatrix`);
+    check(mb.pairs > 0 && mb.sameFirst && mb.head === L(`Matriz de cercanía · ${ZONE_NAME}`, `Proximity matrix · ${ZONE_NAME}`), `${mb.pairs} close pairs (same chain first), "${mb.head}" (the districts equal the zone → named after it)`);
     await anaIdle();
     await shot('04-matrix');
     before = files();
     await page.click('.mt-analysis-act-excel');
-    const xb = await newDownload(new RegExp(`^${L('Matriz de cercanía', 'Proximity matrix')} - Lima Sur - \\d{4}-\\d\\d-\\d\\d\\.xlsx$`), before, 30000);
+    const xb = await newDownload(new RegExp(`^${L('Matriz de cercanía', 'Proximity matrix')} - ${ZONE_NAME} - \\d{4}-\\d\\d-\\d\\d\\.xlsx$`), before, 30000);
     const bookB = readBook(xb);
     const engB = await ev(() => { const r = MT.analysisui.results(); return { rows: r.rows.map((x) => [x.store.id, x.sameWithin, x.competitorsWithin, x.nearestSame ? x.nearestSame.meters : null]), pairs: r.pairs.map((p) => [p.a.id, p.b.id, p.meters]) }; });
     const PT = bookB.sheets[L('Por tienda', 'By store')] || [[]], PP = bookB.sheets[L('Pares cercanos', 'Close pairs')] || [[]];
@@ -364,8 +366,8 @@ async function journey(lang) {
       st: MT.analysisui.state(), lang: MT.i18n.lang, hash: location.hash, rows: (MT.analysisui.results().rows || []).length,
       slides: MT.project.maps().length, slide: MT.project.maps().find((m) => m.analysis && m.analysis.ref && m.analysis.ref.type === 'store') }));
     check(after.lang === lang && after.hash === '#analisis' && after.st.mode === 'matrix', `after reload: language ${after.lang}, the Análisis tab, mode B`);
-    check(after.st.matrix.districts.slice().sort().join() === LIMA_SUR.slice().sort().join() && after.rows === mb.n && after.st.matrix.radius === beforeReload.matrix.radius,
-      `after reload: mode B region (Lima Sur) and R kept, recomputed (${after.rows} stores)`);
+    check(after.st.matrix.districts.slice().sort().join() === ZONE.ubigeos.slice().sort().join() && after.rows === mb.n && after.st.matrix.radius === beforeReload.matrix.radius,
+      `after reload: mode B region (${ZONE_NAME}, stored as districts) and R kept, recomputed (${after.rows} stores)`);
     check(after.project === beforeReload.project && after.slides === 2 && after.slide && after.slide.analysis.maxMeters === 1000, 'after reload: the project and its two analysis slides are restored (autosave)');
     check(!after.st.ref && !after.st.linked, 'after reload: no reference is restored (per session by design) and no slide link');
     await page.click('.mt-analysis-modes .mt-seg__opt:nth-child(1)');

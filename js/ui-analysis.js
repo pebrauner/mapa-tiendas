@@ -66,7 +66,8 @@
   const EMPTY = { type: 'FeatureCollection', features: [] };
   const COLOR_SAME = '#D92D3A', COLOR_COMP = '#8B8F98';
   const COLOR_NEAR_COMP = '#52525B';                             // mode B: dashed line to the nearest competitor
-  // Lima Metropolitana zones (APEIM grouping) + Callao — the same presets as the Mapas district picker.
+  // Fallback only (data/zones.js missing → MT.data.zones.available is false): the Lima Metropolitana zones (APEIM grouping) + Callao.
+  // Normally the region shortcuts are the Zonas Nielsen of MT.data.zones (see zoneSet below).
   const LIMA_ZONES = [
     { id: 'moderna', ubigeos: ['150104', '150113', '150114', '150116', '150120', '150121', '150122', '150130', '150131', '150136', '150140', '150141'] },
     { id: 'centro', ubigeos: ['150101', '150105', '150115', '150128', '150134'] },
@@ -372,9 +373,38 @@
     return { refresh: refresh, close: close, isOpen: () => !list.hidden };
   }
 
+  /* ---- Zonas Nielsen as region shortcuts ----------------------------------------------------------- */
+  /** "Lima + Callao" / "Provincias": the area names are translated (maps.zones.area.*); anything else shows as it is. */
+  function areaLabel(a) {
+    const k = 'maps.zones.area.' + U.normalize(a).replace(/[^a-z0-9]+/g, '-');
+    return MT.i18n.has(k) ? t(k) : a;
+  }
   /**
-   * District picker: combobox over MT.data.districts.search (+ "Toda la provincia de X"), "Zonas de
-   * Lima" presets, chips with ×. cfg: {get() → ubigeos, set(ubigeos)}.
+   * What the "pick a zone" menu and the mode B buttons offer: {label, nielsen, groups:[{area, zones:[{id, name, ubigeos}]}]}.
+   * The Zonas Nielsen of MT.data.zones by area (names are data: not translated); a zone's districts are the ones in
+   * the district list. Without data/zones.js: the old Lima presets (LIMA_ZONES) in one group, so nothing breaks.
+   */
+  function zoneSet() {
+    const D = MT.data.districts, Z = MT.data.zones, nielsen = !!(Z && Z.available);
+    const known = (list) => list.filter((u) => D.get(u));
+    const groups = nielsen
+      ? Z.byArea().map((g) => ({ area: areaLabel(g.area), zones: g.zones.map((z) => ({ id: z.id, name: z.name, ubigeos: known(z.ubigeos) })) }))
+      : [{ area: '', zones: LIMA_ZONES.map((z) => ({ id: z.id, name: t('maps.districts.preset.' + z.id), ubigeos: known(z.ubigeos) })) }];
+    return {
+      nielsen: nielsen, label: t(nielsen ? 'analysis.districts.presets' : 'analysis.districts.presetsLima'),
+      groups: groups.map((g) => ({ area: g.area, zones: g.zones.filter((z) => z.ubigeos.length) })).filter((g) => g.zones.length),
+    };
+  }
+  /** The zone a district list equals ("Lima Cono Sur"; two or three whole zones: "Lima Centro + Lima Oriente"), or ''. */
+  function zoneNameOf(ubigeos) {
+    const set = new Set(ubigeos), whole = [], union = new Set();
+    zoneSet().groups.forEach((g) => g.zones.forEach((z) => { if (z.ubigeos.every((u) => set.has(u))) { whole.push(z); z.ubigeos.forEach((u) => union.add(u)); } }));
+    return whole.length && whole.length <= 3 && union.size === set.size ? whole.map((z) => z.name).join(' + ') : '';
+  }
+
+  /**
+   * District picker: combobox over MT.data.districts.search (+ the Zonas Nielsen and "Toda la provincia de X"),
+   * a menu of the Zonas Nielsen by area (zoneSet), chips with ×. cfg: {get() → ubigeos, set(ubigeos)}.
    */
   function districtPicker(cfg) {
     const D = MT.data.districts;
@@ -385,10 +415,10 @@
       'aria-controls': listId, 'aria-label': t('analysis.districts.searchLabel'), placeholder: t('analysis.districts.searchPh'), autocomplete: 'off', spellcheck: 'false' });
     const results = h('ul', { class: 'mt-analysis-options', id: listId, role: 'listbox', 'aria-label': t('analysis.districts.resultsAria'), hidden: true });
     const noRes = h('div', { class: 'mt-analysis-options__empty', hidden: true });
-    const zones = LIMA_ZONES.map((z) => ({ id: z.id, ubigeos: z.ubigeos.filter((u) => D.get(u)) })).filter((z) => z.ubigeos.length);
-    const presets = zones.length ? h('button', { type: 'button', class: 'mt-btn mt-btn--secondary mt-btn--sm', 'aria-haspopup': 'menu', 'aria-expanded': 'false',
-      onclick: (e) => MT.ui.menu(e.currentTarget, zones.map((z) => ({ label: t('maps.districts.preset.' + z.id), hint: t('data.districts', { n: z.ubigeos.length }), icon: 'pin', onClick: () => addMany(z.ubigeos) })), { minWidth: 230 }) },
-    iconSpan('layers', 15), h('span', null, t('analysis.districts.presets')), iconSpan('chevronDown', 14)) : null;
+    const Z = MT.data.zones, zs = zoneSet();
+    const presets = zs.groups.length ? h('button', { type: 'button', class: 'mt-btn mt-btn--secondary mt-btn--sm mt-analysis-presets', 'aria-haspopup': 'menu', 'aria-expanded': 'false',
+      title: zs.nielsen ? t('analysis.districts.presetsAria') : null, onclick: (e) => presetMenu(e.currentTarget) },
+    iconSpan('layers', 15), h('span', null, zs.label), iconSpan('chevronDown', 14)) : null;
     const removeAll = linkBtn(t('analysis.districts.removeAll'), () => { cfg.set([]); input.focus(); });
     const chips = h('div', { class: 'mt-chips mt-analysis-chips', role: 'list' });
     U.append(wrap, [
@@ -400,10 +430,19 @@
       options(q) {
         const have = new Set(cfg.get());
         const out = D.search(q, { limit: 8 }).map((d) => ({ kind: 'd', d: d, disabled: have.has(d.ubigeo) }));
+        // Zonas Nielsen after the districts (as in the Mapas tab: Enter on a name that is both, e.g. Trujillo, picks the district).
+        if (Z && Z.available) Z.search(q, { limit: 3 }).forEach((z) => out.push({ kind: 'z', z: z, disabled: z.ubigeos.every((u) => have.has(u)) }));
         if (U.normalize(q).length >= 3) D.searchProvinces(q, { limit: 2 }).forEach((p) => { if (p.ubigeos.length > 1) out.push({ kind: 'p', p: p }); });
         return out;
       },
       render(o) {
+        if (o.kind === 'z') {
+          return h('li', { class: 'mt-analysis-opt' + (o.disabled ? ' is-added' : ''), dataset: { zone: o.z.id } },
+            iconSpan(o.disabled ? 'check' : 'layers', 16, 'mt-analysis-opt__icon'),
+            h('span', { class: 'mt-analysis-opt__main' }, h('span', { class: 'mt-analysis-opt__name' }, o.z.name),
+              h('span', { class: 'mt-analysis-opt__sub' }, t('analysis.districts.zoneSub', { area: areaLabel(o.z.area), d: t('data.districts', { n: o.z.ubigeos.length }) }))),
+            o.disabled ? h('span', { class: 'mt-analysis-opt__aside' }, t('analysis.districts.already')) : null);
+        }
         if (o.kind === 'p') {
           return h('li', { class: 'mt-analysis-opt' }, iconSpan('layers', 16, 'mt-analysis-opt__icon'),
             h('span', { class: 'mt-analysis-opt__main' }, h('span', { class: 'mt-analysis-opt__name' }, t('analysis.districts.province', { province: o.p.province })),
@@ -416,7 +455,8 @@
           o.disabled ? h('span', { class: 'mt-analysis-opt__aside' }, t('analysis.districts.already')) : null);
       },
       onPick(o) {
-        if (o.kind === 'p') addMany(o.p.ubigeos);
+        if (o.kind === 'z') addMany(o.z.ubigeos);
+        else if (o.kind === 'p') addMany(o.p.ubigeos);
         else if (cfg.get().indexOf(o.d.ubigeo) < 0) cfg.set(cfg.get().concat(o.d.ubigeo));
         input.value = '';
         combo.close();
@@ -433,6 +473,22 @@
       if (!add.length) { MT.ui.toast(t('analysis.districts.nothingNew'), { type: 'info' }); return; }
       cfg.set(cfg.get().concat(add));
       announce(t('analysis.districts.added', { n: add.length }));
+    }
+    /**
+     * The zones by area (headings), one line each so the 15 of them fit a laptop screen; a zone already fully on the
+     * list shows a check. Picking adds its districts (like the old Lima presets).
+     */
+    function presetMenu(anchor) {
+      const have = new Set(cfg.get()), items = [];
+      zoneSet().groups.forEach((g) => {
+        if (g.area) items.push({ heading: g.area });
+        g.zones.forEach((z) => items.push({
+          label: h('span', { class: 'mt-analysis-zoneopt' }, z.name, ' ', h('span', { class: 'mt-analysis-zoneopt__n' }, t('data.districts', { n: z.ubigeos.length }))),
+          icon: z.ubigeos.every((u) => have.has(u)) ? 'check' : 'pin', onClick: () => addMany(z.ubigeos),
+        }));
+      });
+      const menu = MT.ui.menu(anchor, items, { minWidth: 250 });
+      if (menu && menu.el) menu.el.classList.add('mt-analysis-zonemenu');      // still too long for a short window → it scrolls
     }
     function update() {
       const ds = cfg.get();
@@ -1764,8 +1820,8 @@
     const ds = st.b.districts, D = MT.data.districts;
     if (!ds.length) return '';
     const set = new Set(ds);
-    const zone = LIMA_ZONES.find((z) => { const u = z.ubigeos.filter((x) => D.get(x)); return u.length === set.size && u.every((x) => set.has(x)); });
-    if (zone) return t('maps.districts.preset.' + zone.id);
+    const zone = zoneNameOf(ds);                      // a district set equal to a Zona Nielsen (or a few) is named after it
+    if (zone) return zone;
     const prov = D.byProvince().find((p) => p.ubigeos.length === set.size && p.ubigeos.every((u) => set.has(u)));
     if (prov) return t('analysis.matrix.provinceName', { province: prov.province });
     if (ds.length <= 3) return ds.map((u) => (D.get(u) || {}).district || u).join(', ');
@@ -1892,10 +1948,13 @@
     U.clear(ui.content);
     if (!b.districts.length) {
       ui.bar.hidden = true;
-      const zones = h('div', { class: 'mt-analysis-zonebtns' });
-      LIMA_ZONES.forEach((z) => {
-        const us = z.ubigeos.filter((u) => MT.data.districts.get(u));
-        if (us.length) zones.appendChild(MT.ui.button({ label: t('maps.districts.preset.' + z.id), kind: 'secondary', size: 'sm', onClick: () => { b.districts = us.slice(); if (st.side.regionPicker) st.side.regionPicker.update(); onParamsB({ fit: true }); } }));
+      // The Zonas Nielsen by area (zoneSet); a button fills the region with the districts of its zone.
+      const zs = zoneSet(), zones = h('div', { class: 'mt-analysis-zonegroups', role: 'group', 'aria-label': zs.label });
+      zs.groups.forEach((g) => {
+        const row = h('div', { class: 'mt-analysis-zonebtns' });
+        g.zones.forEach((z) => row.appendChild(MT.ui.button({ label: z.name, title: z.name + ' · ' + t('data.districts', { n: z.ubigeos.length }), kind: 'secondary', size: 'sm', className: 'mt-analysis-zonebtn',
+          onClick: () => { b.districts = z.ubigeos.slice(); if (st.side.regionPicker) st.side.regionPicker.update(); onParamsB({ fit: true }); } })));
+        zones.appendChild(h('div', { class: 'mt-analysis-zonegroup' }, g.area ? h('div', { class: 'mt-analysis-zonegroup__area' }, g.area) : null, row));
       });
       ui.content.appendChild(MT.ui.emptyState({ icon: 'pin', title: t('analysis.matrix.emptyTitle'), text: t('analysis.matrix.emptyText'), className: 'mt-analysis-empty', action: zones }));
       return;
@@ -2593,10 +2652,12 @@
   }
   function chainNames(set) { return sortedChainIds(set).map(chainName).join(', '); }
   function districtNames(list) { return list.map((u) => (MT.data.districts.get(u) || {}).district || u).join(', '); }
+  /** The districts for the Excel; a Zona Nielsen (or a few) comes first by name: "Lima Cono Sur (Chorrillos, Cieneguilla, …)". */
+  function districtsText(list) { const z = zoneNameOf(list); return z ? z + ' (' + districtNames(list) + ')' : districtNames(list); }
 
   function sheetsA() {
     const a = st.a, r = a.ref, res = a.res, rs = a.ringSum, rel = rs.relation, sum = AN().summary(res), near = a.near || {};
-    const universe = a.uniKind === 'districts' ? X('universeDistricts', { list: districtNames(a.districts) }) : a.uniKind === 'all' ? X('universePeru') : X('universeDistance', { d: fmtRing(a.uniMeters) });
+    const universe = a.uniKind === 'districts' ? X('universeDistricts', { list: districtsText(a.districts) }) : a.uniKind === 'all' ? X('universePeru') : X('universeDistance', { d: fmtRing(a.uniMeters) });
     // Number formats per cell: metres with one decimal on the "más cercana" rows only, whole counts elsewhere.
     const cells = [], heads = [0];
     const M1 = '#,##0.0', N0 = '#,##0';
@@ -2716,7 +2777,7 @@
     });
     const pc = b.pairCounts || { same: 0, comp: 0, total: 0 };
     const params = [[X('concept'), X('value')],
-      [X('region'), districtNames(b.districts)],
+      [X('region'), districtsText(b.districts)],
       [X('storesRegion'), b.rows.length],
       [X('chainsIn'), chainNames(b.chains)],
       [X('radius'), fmtRing(b.radius) + ' (' + b.radius + ' m)'],

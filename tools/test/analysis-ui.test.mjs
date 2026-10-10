@@ -9,7 +9,7 @@
 // ring × chain bands); sortable virtualized table, filter, keyboard, row ↔ map selection; Excel read back
 // with SheetJS in Node (Resumen, Distancias, Por cadena y anillo, Parámetros); "Agregar como lámina" →
 // MT.project map with a normalized analysis + Mapas tab; MT.analysisui.edit / "Actualizar la lámina".
-// Mode B "Matriz de cercanía": Lima Sur = MT.analysis.neighborMatrix / closePairs (neighbours outside
+// Mode B "Matriz de cercanía": Lima Cono Sur (a Zona Nielsen) = MT.analysis.neighborMatrix / closePairs (neighbours outside
 // the region, competitor pairs, radius), the "posible canibalización" tags, map lines, Excel; a big
 // region (Lima, every chain) computed in idle chunks = one engine call. English, 1280 px, no console errors.
 
@@ -43,7 +43,9 @@ function fmtDist(m) {
   return new Intl.NumberFormat('es-PE', { maximumFractionDigits: km < 9.95 ? 1 : 0 }).format(km) + ' km';
 }
 const round1 = (m) => Math.round(m * 10) / 10;
-const LIMA_SUR = ['150108', '150119', '150123', '150133', '150142', '150143'];
+// A Zona Nielsen (names are data: the same in both languages); its districts come from MT.data.zones (set once the app is up).
+const ZONE_ID = 'lima-cono-sur', ZONE_NAME = 'Lima Cono Sur';
+let ZONE = null;
 
 const { browser, page, errors } = await openApp({ lang: 'es', hash: 'analisis' });
 const ev = (fn, ...args) => page.evaluate(fn, ...args);
@@ -60,6 +62,7 @@ const tableRows = (sel = '.mt-analysis-table--a') => ev((sel) => [...document.qu
 try {
   await page.waitForFunction(() => MT.analysisui && MT.analysisui.state().mapReady, { timeout: 45000 });
   await mapIdle();
+  ZONE = await ev((id) => { const z = MT.data.zones.get(id); return z && { name: z.name, ubigeos: z.ubigeos.slice() }; }, ZONE_ID);
 
   /* ---- 0. The tab ---------------------------------------------------------------------------------- */
   const boot = await ev(() => ({
@@ -524,19 +527,23 @@ try {
   const upd = await ev((id) => MT.project.getMap(id).analysis, slide.id);
   check(upd.maxMeters === 1000 && upd.rings.join() === '500,1000', `"Actualizar la lámina" → maxMeters ${upd.maxMeters}, rings ${upd.rings.join('/')}`);
 
-  /* ---- 10. Mode B: Lima Sur ------------------------------------------------------------------------------ */
+  /* ---- 10. Mode B: Lima Cono Sur (a Zona Nielsen) --------------------------------------------------------- */
   await page.click('.mt-analysis-modes .mt-seg__opt:nth-child(2)');
   await sleep(400);
-  const bEmpty = await ev(() => ({ title: (document.querySelector('.mt-analysis-respane:not([hidden]) .mt-empty__title') || {}).textContent, zones: [...document.querySelectorAll('.mt-analysis-zonebtns button')].map((b) => b.textContent) }));
+  const bEmpty = await ev(() => ({ title: (document.querySelector('.mt-analysis-respane:not([hidden]) .mt-empty__title') || {}).textContent, zones: [...document.querySelectorAll('.mt-analysis-zonebtns button')].map((b) => b.textContent),
+    areas: [...document.querySelectorAll('.mt-analysis-zonegroup__area')].map((x) => x.textContent) }));
+  check(!!ZONE && ZONE.name === ZONE_NAME && ZONE.ubigeos.length === 12, `the Zona Nielsen ${ZONE_NAME} has ${ZONE && ZONE.ubigeos.length} districts (MT.data.zones)`);
   if (bEmpty.title === 'Elige la región') {
-    check(bEmpty.zones.includes('Lima Sur'), `mode B without region: "Elige la región" + zone buttons (${bEmpty.zones.join(', ')})`);
-    await ev(() => [...document.querySelectorAll('.mt-analysis-zonebtns button')].find((b) => b.textContent === 'Lima Sur').click());
+    check(bEmpty.zones.length === 15 && bEmpty.zones.includes(ZONE_NAME) && bEmpty.areas.join('|') === 'Lima + Callao|Provincias',
+      `mode B without region: "Elige la región" + the Zonas Nielsen as buttons by area (${bEmpty.areas.join(' / ')}: ${bEmpty.zones.length} zones)`);
+    await ev((name) => [...document.querySelectorAll('.mt-analysis-zonebtns button')].find((b) => b.textContent === name).click(), ZONE_NAME);
   } else {
     check(true, 'mode B remembers its last region');
-    await ev((ds) => MT.analysisui.setMatrix({ districts: ds }), LIMA_SUR);
+    await ev((ds) => MT.analysisui.setMatrix({ districts: ds }), ZONE.ubigeos);
   }
   await ev(() => MT.analysisui.whenIdle());
   await sleep(300);
+  check(await ev(() => MT.analysisui.state().matrix.districts.slice().sort().join()) === ZONE.ubigeos.slice().sort().join(), `the zone button fills exactly the ${ZONE.ubigeos.length} districts of ${ZONE_NAME}`);
   const engB = async (o) => ev((o) => {
     const A = MT.analysis, st = MT.analysisui.state().matrix, r = MT.analysisui.results();
     const region = A.storesForRegion({ districts: st.districts, chains: st.chains, includeToVerify: true });
@@ -558,11 +565,11 @@ try {
       withSame: nm.filter((x) => x.sameWithin > 0).length, withComp: nm.filter((x) => x.competitorsWithin > 0).length };
   }, o || {});
   let b1 = await engB();
-  check(b1.rowsSame && b1.n > 40, `per-store matrix = MT.analysis.neighborMatrix (Lima Sur, R 1 km, neighbours across the border): ${b1.n} stores`);
+  check(b1.rowsSame && b1.n > 40, `per-store matrix = MT.analysis.neighborMatrix (${ZONE_NAME}, R 1 km, neighbours across the border): ${b1.n} stores`);
   check(b1.pairsSame && b1.pairs > 0 && b1.comp === 0, `close pairs = MT.analysis.closePairs (same chain only by default): ${b1.pairs} pairs`);
   const sb = await ev(() => ({ cards: [...document.querySelectorAll('.mt-analysis-stat')].map((c) => [c.querySelector('.mt-analysis-stat__label').textContent, c.querySelector('.mt-analysis-stat__value').textContent]),
     head: document.querySelector('.mt-analysis-mainhead__h').textContent }));
-  check(sb.head === 'Matriz de cercanía · Lima Sur' && sb.cards[0][1] === String(b1.n) && sb.cards[1][1] === String(b1.samePairs) && sb.cards[2][1] === String(b1.withSame) && sb.cards[3][1] === String(b1.withComp),
+  check(sb.head === `Matriz de cercanía · ${ZONE_NAME}` && sb.cards[0][1] === String(b1.n) && sb.cards[1][1] === String(b1.samePairs) && sb.cards[2][1] === String(b1.withSame) && sb.cards[3][1] === String(b1.withComp),
     `summary: ${sb.cards.map((c) => c[0] + ' ' + c[1]).join(' · ')}`);
   const bRows = await tableRows('.mt-analysis-table--b');
   const firstSame = await ev(() => MT.util.sortBy(MT.analysisui.results().rows.filter((r) => r.nearestSame), (r) => r.nearestSame.meters)[0].store.id);
@@ -611,7 +618,7 @@ try {
     'store click → card (nearest same / competitor, stores within R by chain) + dashed lines to both');
   // Excel B
   await page.click('.mt-analysis-act-excel');
-  const fileB = await waitForDownload(dl, /^Matriz de cercanía - Lima Sur - \d{4}-\d\d-\d\d\.xlsx$/);
+  const fileB = await waitForDownload(dl, new RegExp(`^Matriz de cercanía - ${ZONE_NAME} - \\d{4}-\\d\\d-\\d\\d\\.xlsx$`));
   const bookB = readBook(fileB);
   const xb = await ev(() => { const r = MT.analysisui.results(); return { rows: r.rows.map((x) => [x.store.id, x.nearestSame ? x.nearestSame.meters : null, x.sameWithin, x.competitorsWithin]), pairs: r.pairs.map((p) => [p.a.id, p.b.id, p.meters]) }; });
   check(bookB.names.join('|') === 'Por tienda|Pares cercanos|Parámetros', `matrix workbook sheets: ${bookB.names.join(', ')}`);
@@ -625,7 +632,7 @@ try {
   const PP = bookB.sheets['Pares cercanos'];
   check(PP.length === xb.pairs.length + 1 && PP[1][0] === 'Posible canibalización' && typeof PP[1][7] === 'number' && PP[1][7] === round1(xb.pairs[0][2]), `"Pares cercanos": ${PP.length - 1} pairs, tagged, metres as numbers`);
   const PB = Object.fromEntries(bookB.sheets['Parámetros'].slice(1).map((r) => [r[0], r[1]]));
-  check(/Chorrillos/.test(PB['Región']) && PB['Radio de vecindad (R)'] === '1 km (1000 m)' && PB['Umbral de pares cercanos'] === '1 km (1000 m)' && /haversine/.test(PB['Método']),
+  check(PB['Región'].startsWith(`${ZONE_NAME} (`) && /Chorrillos/.test(PB['Región']) && PB['Radio de vecindad (R)'] === '1 km (1000 m)' && PB['Umbral de pares cercanos'] === '1 km (1000 m)' && /haversine/.test(PB['Método']),
     `"Parámetros" (matrix): region, R, threshold, method`);
 
   /* ---- 11. Big region in idle chunks ----------------------------------------------------------------------- */
@@ -665,7 +672,7 @@ try {
   await screenshot(page, 'an-ui-11-lima');
 
   /* ---- 12. English, 1280 px ---------------------------------------------------------------------------- */
-  await ev(() => MT.analysisui.setMatrix({ districts: ['150108', '150119', '150123', '150133', '150142', '150143'], chains: MT.analysis.defaultChains(null) }));
+  await ev((ds) => MT.analysisui.setMatrix({ districts: ds, chains: MT.analysis.defaultChains(null) }), ZONE.ubigeos);
   await page.setViewport({ width: 1366, height: 768 });
   await ev(() => { const b = document.querySelector('.mt-analysis-respane:not([hidden]) .mt-analysis-rtab[data-view="stores"]'); if (b) b.click(); });
   await sleep(600);
@@ -681,7 +688,7 @@ try {
     head: document.querySelector('.mt-analysis-mainhead__h').textContent, tabs: [...document.querySelectorAll('.mt-analysis-respane:not([hidden]) .mt-analysis-rtab')].map((b) => b.textContent),
     raw: [...document.querySelectorAll('#panel-analysis *')].filter((el) => !el.children.length && /^analysis\.[a-z]/.test(el.textContent.trim())).length,
     missing: MT.i18n.missingKeys() }));
-  check(en.title === 'Distance analysis' && en.modes.join('|') === 'Distances to a point|Proximity matrix' && en.head === 'Proximity matrix · Lima Sur' && en.tabs[0].startsWith('By store'),
+  check(en.title === 'Distance analysis' && en.modes.join('|') === 'Distances to a point|Proximity matrix' && en.head === `Proximity matrix · ${ZONE_NAME}` && en.tabs[0].startsWith('By store'),
     `English: ${en.title} · ${en.modes.join(' | ')} · ${en.head}`);
   check(en.raw === 0 && en.missing.length === 0, `no raw keys on screen, no missing keys (${en.missing.join(', ')})`);
   await ev(() => MT.analysisui.setMode('distance'));
