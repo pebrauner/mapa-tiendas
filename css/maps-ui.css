@@ -491,11 +491,48 @@
 .mt-maps-opt--province .mt-maps-opt__icon { color: var(--mt-accent); }
 .mt-maps-opt__logo { flex: none; }
 .mt-maps-results__empty { padding: 4px 2px; font-size: 12.5px; color: var(--mt-g500); }
-.mt-maps-presets { gap: 6px; }
-.mt-maps-presets .mt-icon { margin: 0; color: var(--mt-g500); }
+/* Zonas Nielsen: toggle pills by area, and the one-chip form of a fully selected zone */
+.mt-maps-zones { display: flex; flex-direction: column; gap: 6px; }
+.mt-maps-zones__area { padding-top: 6px; font-size: 11px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--mt-g500); }
+.mt-maps-zones__row { display: flex; flex-wrap: wrap; gap: 6px; }
+.mt-maps-zone {
+  height: 28px;
+  padding: 0 11px;
+  border: 1px solid var(--mt-border-strong);
+  border-radius: var(--mt-r-pill);
+  background: var(--mt-surface);
+  box-shadow: var(--mt-shadow-xs);
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--mt-g700);
+  cursor: pointer;
+}
+.mt-maps-zone:hover { border-color: var(--mt-g500); color: var(--mt-g900); }
+.mt-maps-zone.is-partial { border-style: dashed; border-color: var(--mt-accent); color: var(--mt-accent-press); }
+.mt-maps-zone.is-on { background: var(--mt-accent-soft); border-color: var(--mt-accent); color: var(--mt-accent-press); }
+.mt-maps-zone.is-on:hover { background: var(--mt-accent-soft-2); }
 .mt-maps-chips { gap: 6px; }
 .mt-maps-chip { background: var(--mt-surface); border-color: var(--mt-border-strong); box-shadow: var(--mt-shadow-xs); }
 .mt-maps-chip.is-unknown { border-style: dashed; opacity: 0.65; }
+.mt-maps-chip--zone { padding-left: 4px; background: var(--mt-accent-soft); border-color: var(--mt-accent-soft-2); color: var(--mt-accent-press); }
+.mt-maps-chip__zone {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  height: 100%;
+  padding: 0 2px 0 7px;
+  border: 0;
+  border-radius: var(--mt-r-pill);
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+.mt-maps-chip__zone .mt-icon { margin: 0; flex: none; }
+.mt-maps-chip--zone .mt-chip__sub { color: var(--mt-accent-press); opacity: 0.75; }
+.mt-maps-chip.is-member { margin-left: 14px; }
 .mt-maps-chipmore {
   height: 28px;
   padding: 0 11px;

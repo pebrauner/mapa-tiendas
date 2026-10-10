@@ -672,6 +672,82 @@
     return b;
   }
 
+  /* ---- Zonas Nielsen ------------------------------------------------------------------------ */
+  /**
+   * Zonas Nielsen = the SUBAREA of the company's store list: the main grouping of the stores (SPEC §3.6).
+   * Shipped as window.MT_ZONES (data/zones.js, generated from data/zonas-nielsen.csv); optional: without it
+   * `available` is false and the picker offers no zones. A zone is a named set of districts and a district
+   * belongs to ONE zone; a store's zone is its district's zone (stores outside every zone: "resto del Perú").
+   */
+  var Z = (data.zones = { available: false, _list: [], _byId: {}, _byUbigeo: {} });
+
+  function initZones() {
+    var s = window.MT_ZONES;
+    Z._list = []; Z._byId = {}; Z._byUbigeo = {}; Z.available = false;
+    if (!s || !Array.isArray(s.zones)) return;
+    s.zones.forEach(function (raw) {
+      if (!raw || !raw.id || !raw.name || !Array.isArray(raw.ubigeos)) return;
+      var ubigeos = raw.ubigeos.map(String).filter(function (u) { return !D.available || D.get(u); });
+      if (!ubigeos.length) return;
+      var z = { id: String(raw.id), name: String(raw.name), area: String(raw.area || ''), ubigeos: ubigeos, _n: U.normalize(raw.name) };
+      Z._list.push(z); Z._byId[z.id] = z;
+      ubigeos.forEach(function (u) { Z._byUbigeo[u] = z; });
+    });
+    Z.available = Z._list.length > 0;
+  }
+
+  /** All zones [{id, name, area, ubigeos}] in the order of data/zonas-nielsen.csv. */
+  Z.all = function () { return Z._list; };
+  Z.get = function (id) { return Z._byId[id] || null; };
+  /** Zones grouped by area, in order: [{area:'Lima + Callao', zones:[…]}, {area:'Provincias', zones:[…]}]. */
+  Z.byArea = function () {
+    var out = [], idx = {};
+    Z._list.forEach(function (z) {
+      if (!(z.area in idx)) { idx[z.area] = out.length; out.push({ area: z.area, zones: [] }); }
+      out[idx[z.area]].zones.push(z);
+    });
+    return out;
+  };
+  /** Zone of a district (by ubigeo), or null. */
+  Z.ofDistrict = function (ubigeo) { return Z._byUbigeo[ubigeo] || null; };
+  /** Zone of a store (its district's zone), or null. */
+  Z.ofStore = function (store) { return store && store.ubigeo ? Z._byUbigeo[store.ubigeo] || null : null; };
+  /**
+   * Accent-insensitive search by name: every query word must start a word of the zone name (or occur in it).
+   * [{id, name, area, ubigeos, score}], best first.
+   */
+  Z.search = function (q, opts) {
+    var nq = U.normalize(q), limit = (opts && opts.limit) || 10;
+    if (!nq) return [];
+    var words = nq.split(' '), out = [];
+    Z._list.forEach(function (z) {
+      var score = 0;
+      for (var i = 0; i < words.length; i++) {
+        var w = words[i], s = 0;
+        if (z._n === w) s = 100; else if (z._n.indexOf(w) === 0) s = 70;
+        else if ((' ' + z._n).indexOf(' ' + w) >= 0) s = 50; else if (z._n.indexOf(w) >= 0) s = 20;
+        if (!s) return;
+        score += s;
+      }
+      if (z._n === nq) score += 200;
+      out.push(Object.assign({ score: score }, z));
+    });
+    out.sort(function (a, b) { return b.score - a.score || Z._list.indexOf(Z._byId[a.id]) - Z._list.indexOf(Z._byId[b.id]); });
+    return out.slice(0, limit);
+  };
+  /**
+   * Which zones a list of districts covers completely: {zones:[zone…] (every district of the zone is in the
+   * list; in zone order), rest:[ubigeo…] (the districts that are not part of such a zone; input order)}.
+   */
+  Z.covered = function (ubigeos) {
+    var list = ubigeos || [], have = {};
+    list.forEach(function (u) { have[u] = true; });
+    var zs = Z._list.filter(function (z) { return z.ubigeos.every(function (u) { return have[u]; }); });
+    var inZone = {};
+    zs.forEach(function (z) { z.ubigeos.forEach(function (u) { inZone[u] = true; }); });
+    return { zones: zs, rest: list.filter(function (u) { return !inZone[u]; }) };
+  };
+
   /* ---- Map regions (used by the map, legend, exports) ------------------------------------ */
   /**
    * The distance analysis that defines a map's region (SPEC §6.3): `mapCfg.analysis` on a map with NO
@@ -910,7 +986,7 @@
 
   data.ready = Promise.all([MT.storage.ready, loadFonts()]).then(function () {
     var ss = seedStores(), sc = seedChains(), sl = seedLogos();
-    data.missing = { stores: !ss, chains: !sc, districts: !seedTopo(), logos: !sl };
+    data.missing = { stores: !ss, chains: !sc, districts: !seedTopo(), logos: !sl };   // zones.js is optional: MT.data.zones.available
     if (ss) {
       ss.forEach(function (raw) {
         if (!raw || !raw.id) return;
@@ -928,6 +1004,7 @@
     var G = window.MT_OSM_RULES;
     seedOsmRules = sc && G && typeof G === 'object' && !Array.isArray(G) && Array.isArray(G.nameKeys) ? U.clone(G) : null;
     initDistricts();
+    initZones();
     return Promise.all([MT.storage.getAll('stores'), MT.storage.getAll('chains'), MT.storage.getAll('logos')]);
   }).then(function (r) {
     r[0].forEach(function (rec) { storeOverlay[rec.id] = rec; });

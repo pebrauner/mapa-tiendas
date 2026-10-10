@@ -1,0 +1,115 @@
+﻿ubigeo,district,province,department,zone,area,origin,note
+150105,Breña,Lima,Lima,Lima Centro,Lima + Callao,excel,9 de 9 filas del Excel
+150101,Lima,Lima,Lima,Lima Centro,Lima + Callao,excel,30 de 30 filas del Excel
+150128,Rímac,Lima,Lima,Lima Centro,Lima + Callao,excel,11 de 11 filas del Excel
+150102,Ancón,Lima,Lima,Lima Cono Norte,Lima + Callao,excel,6 de 6 filas del Excel
+150106,Carabayllo,Lima,Lima,Lima Cono Norte,Lima + Callao,excel,25 de 25 filas del Excel
+150110,Comas,Lima,Lima,Lima Cono Norte,Lima + Callao,excel,48 de 49 filas del Excel
+150112,Independencia,Lima,Lima,Lima Cono Norte,Lima + Callao,excel,15 de 15 filas del Excel
+150117,Los Olivos,Lima,Lima,Lima Cono Norte,Lima + Callao,excel,39 de 39 filas del Excel
+070107,Mi Perú,Callao,Callao,Lima Cono Norte,Lima + Callao,vecindad,sin tiendas en el Excel: asignada por vecindad (Ventanilla)
+150125,Puente Piedra,Lima,Lima,Lima Cono Norte,Lima + Callao,excel,27 de 27 filas del Excel
+150135,San Martín de Porres,Lima,Lima,Lima Cono Norte,Lima + Callao,excel,60 de 60 filas del Excel
+150139,Santa Rosa,Lima,Lima,Lima Cono Norte,Lima + Callao,excel,2 de 2 filas del Excel
+070106,Ventanilla,Callao,Callao,Lima Cono Norte,Lima + Callao,excel,17 de 17 filas del Excel
+150108,Chorrillos,Lima,Lima,Lima Cono Sur,Lima + Callao,excel,34 de 34 filas del Excel
+150109,Cieneguilla,Lima,Lima,Lima Cono Sur,Lima + Callao,excel,3 de 4 filas del Excel
+150119,Lurín,Lima,Lima,Lima Cono Sur,Lima + Callao,excel,12 de 12 filas del Excel
+150123,Pachacámac,Lima,Lima,Lima Cono Sur,Lima + Callao,excel,10 de 10 filas del Excel
+150124,Pucusana,Lima,Lima,Lima Cono Sur,Lima + Callao,excel,2 de 2 filas del Excel
+150126,Punta Hermosa,Lima,Lima,Lima Cono Sur,Lima + Callao,excel,5 de 5 filas del Excel
+150127,Punta Negra,Lima,Lima,Lima Cono Sur,Lima + Callao,excel,1 de 1 filas del Excel
+150129,San Bartolo,Lima,Lima,Lima Cono Sur,Lima + Callao,excel,2 de 2 filas del Excel
+150133,San Juan de Miraflores,Lima,Lima,Lima Cono Sur,Lima + Callao,excel,35 de 35 filas del Excel
+150138,Santa María del Mar,Lima,Lima,Lima Cono Sur,Lima + Callao,vecindad,sin tiendas en el Excel: asignada por vecindad (San Bartolo)
+150142,Villa El Salvador,Lima,Lima,Lima Cono Sur,Lima + Callao,excel,28 de 28 filas del Excel
+150143,Villa María del Triunfo,Lima,Lima,Lima Cono Sur,Lima + Callao,excel,24 de 24 filas del Excel
+150103,Ate,Lima,Lima,Lima Oriente,Lima + Callao,excel,40 de 40 filas del Excel
+150107,Chaclacayo,Lima,Lima,Lima Oriente,Lima + Callao,excel,6 de 6 filas del Excel
+150111,El Agustino,Lima,Lima,Lima Oriente,Lima + Callao,excel,10 de 10 filas del Excel
+150115,La Victoria,Lima,Lima,Lima Oriente,Lima + Callao,excel,13 de 14 filas del Excel
+150118,Lurigancho,Lima,Lima,Lima Oriente,Lima + Callao,vecindad,"sin tiendas en el Excel: asignada por vecindad (Chaclacayo, Chosica)"
+150132,San Juan de Lurigancho,Lima,Lima,Lima Oriente,Lima + Callao,excel,79 de 79 filas del Excel
+150134,San Luis,Lima,Lima,Lima Oriente,Lima + Callao,excel,7 de 7 filas del Excel
+150137,Santa Anita,Lima,Lima,Lima Oriente,Lima + Callao,excel,21 de 22 filas del Excel
+070102,Bellavista,Callao,Callao,Metropolitana Norte,Lima + Callao,excel,10 de 10 filas del Excel
+070101,Callao,Callao,Callao,Metropolitana Norte,Lima + Callao,excel,26 de 26 filas del Excel
+070103,Carmen de la Legua Reynoso,Callao,Callao,Metropolitana Norte,Lima + Callao,excel,2 de 2 filas del Excel
+150113,Jesús María,Lima,Lima,Metropolitana Norte,Lima + Callao,excel,12 de 12 filas del Excel
+070104,La Perla,Callao,Callao,Metropolitana Norte,Lima + Callao,excel,6 de 6 filas del Excel
+070105,La Punta,Callao,Callao,Metropolitana Norte,Lima + Callao,excel,2 de 2 filas del Excel
+150116,Lince,Lima,Lima,Metropolitana Norte,Lima + Callao,excel,10 de 10 filas del Excel
+150120,Magdalena del Mar,Lima,Lima,Metropolitana Norte,Lima + Callao,excel,14 de 14 filas del Excel
+150121,Pueblo Libre,Lima,Lima,Metropolitana Norte,Lima + Callao,excel,12 de 12 filas del Excel
+150136,San Miguel,Lima,Lima,Metropolitana Norte,Lima + Callao,excel,32 de 32 filas del Excel
+150104,Barranco,Lima,Lima,Metropolitana Oriente,Lima + Callao,excel,8 de 8 filas del Excel
+150114,La Molina,Lima,Lima,Metropolitana Oriente,Lima + Callao,excel,27 de 27 filas del Excel
+150140,Santiago de Surco,Lima,Lima,Metropolitana Oriente,Lima + Callao,excel,49 de 49 filas del Excel
+150122,Miraflores,Lima,Lima,Metropolitana Sur,Lima + Callao,excel,23 de 23 filas del Excel
+150130,San Borja,Lima,Lima,Metropolitana Sur,Lima + Callao,excel,14 de 14 filas del Excel
+150131,San Isidro,Lima,Lima,Metropolitana Sur,Lima + Callao,excel,11 de 11 filas del Excel
+150141,Surquillo,Lima,Lima,Metropolitana Sur,Lima + Callao,excel,17 de 17 filas del Excel
+040102,Alto Selva Alegre,Arequipa,Arequipa,Arequipa,Provincias,excel,13 de 13 filas del Excel
+040101,Arequipa,Arequipa,Arequipa,Arequipa,Provincias,excel,19 de 19 filas del Excel
+040103,Cayma,Arequipa,Arequipa,Arequipa,Provincias,excel,7 de 7 filas del Excel
+040104,Cerro Colorado,Arequipa,Arequipa,Arequipa,Provincias,excel,21 de 21 filas del Excel
+040105,Characato,Arequipa,Arequipa,Arequipa,Provincias,excel,1 de 1 filas del Excel
+040107,Jacobo Hunter,Arequipa,Arequipa,Arequipa,Provincias,excel,2 de 2 filas del Excel
+040129,José Luis Bustamante y Rivero,Arequipa,Arequipa,Arequipa,Provincias,excel,8 de 8 filas del Excel
+040108,La Joya,Arequipa,Arequipa,Arequipa,Provincias,excel,2 de 2 filas del Excel
+040109,Mariano Melgar,Arequipa,Arequipa,Arequipa,Provincias,excel,7 de 7 filas del Excel
+040110,Miraflores,Arequipa,Arequipa,Arequipa,Provincias,excel,4 de 4 filas del Excel
+040701,Mollendo,Islay,Arequipa,Arequipa,Provincias,excel,1 de 1 filas del Excel
+040112,Paucarpata,Arequipa,Arequipa,Arequipa,Provincias,excel,12 de 12 filas del Excel
+040117,Sachaca,Arequipa,Arequipa,Arequipa,Provincias,excel,2 de 2 filas del Excel
+040121,Santa Rita de Siguas,Arequipa,Arequipa,Arequipa,Provincias,excel,1 de 1 filas del Excel
+040122,Socabaya,Arequipa,Arequipa,Arequipa,Provincias,excel,5 de 6 filas del Excel
+040123,Tiabaya,Arequipa,Arequipa,Arequipa,Provincias,excel,1 de 1 filas del Excel
+040124,Uchumayo,Arequipa,Arequipa,Arequipa,Provincias,excel,1 de 1 filas del Excel
+040126,Yanahuara,Arequipa,Arequipa,Arequipa,Provincias,excel,4 de 4 filas del Excel
+040128,Yura,Arequipa,Arequipa,Arequipa,Provincias,excel,4 de 4 filas del Excel
+060101,Cajamarca,Cajamarca,Cajamarca,Cajamarca,Provincias,excel,4 de 4 filas del Excel
+140101,Chiclayo,Chiclayo,Lambayeque,Chiclayo,Provincias,excel,28 de 28 filas del Excel
+140102,Chongoyape,Chiclayo,Lambayeque,Chiclayo,Provincias,excel,1 de 1 filas del Excel
+140105,José Leonardo Ortiz,Chiclayo,Lambayeque,Chiclayo,Provincias,excel,7 de 7 filas del Excel
+140106,La Victoria,Chiclayo,Lambayeque,Chiclayo,Provincias,excel,4 de 4 filas del Excel
+140107,Lagunas,Chiclayo,Lambayeque,Chiclayo,Provincias,excel,1 de 1 filas del Excel
+140108,Monsefú,Chiclayo,Lambayeque,Chiclayo,Provincias,excel,2 de 2 filas del Excel
+140111,Picsi,Chiclayo,Lambayeque,Chiclayo,Provincias,excel,1 de 1 filas del Excel
+140112,Pimentel,Chiclayo,Lambayeque,Chiclayo,Provincias,excel,4 de 4 filas del Excel
+140118,Pomalca,Chiclayo,Lambayeque,Chiclayo,Provincias,excel,1 de 1 filas del Excel
+140113,Reque,Chiclayo,Lambayeque,Chiclayo,Provincias,excel,1 de 1 filas del Excel
+021801,Chimbote,Santa,Áncash,Chimbote,Provincias,excel,20 de 20 filas del Excel
+021803,Coishco,Santa,Áncash,Chimbote,Provincias,excel,2 de 2 filas del Excel
+021805,Moro,Santa,Áncash,Chimbote,Provincias,excel,1 de 1 filas del Excel
+021809,Nuevo Chimbote,Santa,Áncash,Chimbote,Provincias,excel,12 de 12 filas del Excel
+021808,Santa,Santa,Áncash,Chimbote,Provincias,excel,2 de 2 filas del Excel
+100101,Huánuco,Huánuco,Huánuco,Huánuco,Provincias,excel,3 de 3 filas del Excel
+110101,Ica,Ica,Ica,Ica,Provincias,excel,20 de 20 filas del Excel
+110103,Los Aquijes,Ica,Ica,Ica,Provincias,excel,1 de 1 filas del Excel
+110105,Pachacútec,Ica,Ica,Ica,Provincias,excel,1 de 1 filas del Excel
+110106,Parcona,Ica,Ica,Ica,Provincias,excel,2 de 2 filas del Excel
+110108,Salas,Ica,Ica,Ica,Provincias,excel,2 de 2 filas del Excel
+110111,Santiago,Ica,Ica,Ica,Provincias,excel,1 de 1 filas del Excel
+110112,Subtanjalla,Ica,Ica,Ica,Provincias,excel,2 de 2 filas del Excel
+200602,Bellavista,Sullana,Piura,Piura,Provincias,excel,2 de 2 filas del Excel
+200104,Castilla,Piura,Piura,Piura,Provincias,excel,11 de 11 filas del Excel
+200105,Catacaos,Piura,Piura,Piura,Provincias,excel,4 de 4 filas del Excel
+200107,Cura Mori,Piura,Piura,Piura,Provincias,excel,1 de 1 filas del Excel
+200109,La Arena,Piura,Piura,Piura,Provincias,excel,1 de 1 filas del Excel
+200110,La Unión,Piura,Piura,Piura,Provincias,excel,2 de 2 filas del Excel
+200605,Marcavelica,Sullana,Piura,Piura,Provincias,excel,1 de 1 filas del Excel
+200101,Piura,Piura,Piura,Piura,Provincias,excel,41 de 41 filas del Excel
+200607,Querecotillo,Sullana,Piura,Piura,Provincias,excel,1 de 1 filas del Excel
+200601,Sullana,Sullana,Piura,Piura,Provincias,excel,14 de 15 filas del Excel
+200114,Tambo Grande,Piura,Piura,Piura,Provincias,excel,4 de 4 filas del Excel
+200115,Veintiséis de Octubre,Piura,Piura,Piura,Provincias,excel,2 de 2 filas del Excel
+130102,El Porvenir,Trujillo,La Libertad,Trujillo,Provincias,excel,4 de 4 filas del Excel
+130103,Florencia de Mora,Trujillo,La Libertad,Trujillo,Provincias,excel,2 de 2 filas del Excel
+130104,Huanchaco,Trujillo,La Libertad,Trujillo,Provincias,excel,8 de 8 filas del Excel
+130105,La Esperanza,Trujillo,La Libertad,Trujillo,Provincias,excel,8 de 8 filas del Excel
+130106,Laredo,Trujillo,La Libertad,Trujillo,Provincias,excel,3 de 3 filas del Excel
+130107,Moche,Trujillo,La Libertad,Trujillo,Provincias,excel,2 de 2 filas del Excel
+130109,Salaverry,Trujillo,La Libertad,Trujillo,Provincias,excel,1 de 1 filas del Excel
+130101,Trujillo,Trujillo,La Libertad,Trujillo,Provincias,excel,80 de 81 filas del Excel
+130111,Víctor Larco Herrera,Trujillo,La Libertad,Trujillo,Provincias,excel,9 de 9 filas del Excel

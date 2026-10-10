@@ -33,17 +33,6 @@
   const DENSE = 120;            // markers on one slide above which we suggest dots / smaller logos
   const CHIP_LIMIT = 14;        // district chips shown before "+N más"
 
-  // Lima Metropolitana zones (APEIM grouping) + Callao — quick presets for the district picker.
-  const LIMA_ZONES = [
-    { id: 'moderna', ubigeos: ['150104', '150113', '150114', '150116', '150120', '150121', '150122', '150130', '150131', '150136', '150140', '150141'] },
-    { id: 'centro', ubigeos: ['150101', '150105', '150115', '150128', '150134'] },
-    { id: 'norte', ubigeos: ['150102', '150106', '150110', '150112', '150117', '150125', '150135', '150139'] },
-    { id: 'este', ubigeos: ['150103', '150107', '150109', '150111', '150118', '150132', '150137'] },
-    { id: 'sur', ubigeos: ['150108', '150119', '150123', '150133', '150142', '150143'] },
-    { id: 'balnearios', ubigeos: ['150124', '150126', '150127', '150129', '150138'] },
-    { id: 'callao', ubigeos: ['070101', '070102', '070103', '070104', '070105', '070106', '070107'] },
-  ];
-
   /* =========================================================================================
    * State
    * ======================================================================================= */
@@ -60,6 +49,7 @@
     exporting: false,
     dismissed: {},               // 'mapId:kind' → true (hints the user closed)
     chipsExpanded: false,
+    zonesOpen: {},               // zone id → its districts are shown next to its chip
     radiusOpen: {},              // storeId → results list expanded
     iconCache: {},               // 'chainId|px' → data URI of the badge icon
     ubigeoCounts: null,          // ubigeo → stores (all chains), for the district search
@@ -1084,10 +1074,26 @@
     const start = h('div', { class: 'mt-maps-start' },
       h('span', { class: 'mt-maps-start__icon', html: icon('pin', 18) }),
       h('div', null, h('div', { class: 'mt-maps-start__title' }, t('maps.districts.startTitle')), h('div', { class: 'mt-maps-start__text' }, t('maps.districts.startText'))));
-    const zones = LIMA_ZONES.map((z) => ({ id: z.id, ubigeos: z.ubigeos.filter((u) => D.get(u)) })).filter((z) => z.ubigeos.length);
-    const presets = zones.length ? h('button', { type: 'button', class: 'mt-btn mt-btn--secondary mt-btn--sm mt-maps-presets', 'aria-haspopup': 'menu', 'aria-expanded': 'false',
-      title: t('maps.districts.presetsAria'), onclick: (e) => presetMenu(e.currentTarget) },
-    iconSpan('layers', 15), h('span', null, t('maps.districts.presets')), iconSpan('chevronDown', 14)) : null;
+    // Zonas Nielsen: always-visible toggle pills grouped by area (a zone = a named set of districts; MT.data.zones).
+    const Z = MT.data.zones;
+    const areaLabel = (a) => { const k = 'maps.zones.area.' + U.normalize(a).replace(/[^a-z0-9]+/g, '-'); return MT.i18n.has(k) ? t(k) : a; };
+    const zoneStores = (z) => z.ubigeos.reduce((n, u) => n + ubigeoCount(u), 0);
+    const zoneTitle = (z) => t('maps.zones.title', { name: z.name, d: t('data.districts', { n: z.ubigeos.length }), s: t('data.stores', { n: zoneStores(z) }) });
+    const zoneBtns = {};
+    const zonePicker = Z.available ? h('div', { class: 'mt-maps-zones', role: 'group', 'aria-label': t('maps.zones.label'), dataset: { field: 'zones' } }) : null;
+    if (zonePicker) {
+      Z.byArea().forEach((g) => {
+        zonePicker.appendChild(h('div', { class: 'mt-maps-zones__area' }, areaLabel(g.area)));
+        const row = h('div', { class: 'mt-maps-zones__row' });
+        g.zones.forEach((z) => {
+          const btn = h('button', { type: 'button', class: 'mt-maps-zone', 'aria-pressed': 'false', dataset: { zone: z.id }, onclick: () => toggleZone(z) },
+            h('span', { class: 'mt-maps-zone__name' }, z.name));
+          zoneBtns[z.id] = btn;
+          row.appendChild(btn);
+        });
+        zonePicker.appendChild(row);
+      });
+    }
     const removeAll = linkBtn(t('maps.districts.removeAll'), clearAll);
     const chips = h('div', { class: 'mt-chips mt-maps-chips', role: 'list', 'aria-label': t('maps.sec.districts') });
     // A slide defined by its distance analysis needs no districts (SPEC §6.3): say so instead of "start here".
@@ -1097,7 +1103,8 @@
       start,
       anaNote,
       h('div', { class: 'mt-maps-combo' }, h('div', { class: 'mt-input-group mt-maps-search' }, iconSpan('search', 16), input), results, noRes),
-      h('div', { class: 'mt-maps-row mt-maps-row--tools' }, presets, h('span', { class: 'mt-spacer' }), removeAll),
+      zonePicker,
+      h('div', { class: 'mt-maps-row mt-maps-row--tools' }, h('span', { class: 'mt-spacer' }), removeAll),
       chips,
     ]);
 
@@ -1106,12 +1113,23 @@
         const m = cur();
         const have = new Set(m ? latest(m, 'districts') : []);
         const out = D.search(q, { limit: 8 }).map((d) => ({ kind: 'd', d: d, disabled: have.has(d.ubigeo) }));
+        // Zonas Nielsen after the districts (typing a name that is both, e.g. Trujillo, keeps picking the district on Enter);
+        // a query that only matches a zone ("cono sur") has the zone first.
+        if (Z.available) Z.search(q, { limit: 3 }).forEach((z) => out.push({ kind: 'z', z: z, disabled: z.ubigeos.every((u) => have.has(u)) }));
         if (U.normalize(q).length >= 3) {
           D.searchProvinces(q, { limit: 2 }).forEach((p) => { if (p.ubigeos.length > 1) out.push({ kind: 'p', p: p }); });
         }
         return out;
       },
       render(o) {
+        if (o.kind === 'z') {
+          return h('li', { class: 'mt-maps-opt mt-maps-opt--zone' + (o.disabled ? ' is-added' : ''), dataset: { zone: o.z.id } },
+            h('span', { class: 'mt-maps-opt__icon', html: icon(o.disabled ? 'check' : 'layers', 16) }),
+            h('span', { class: 'mt-maps-opt__main' },
+              h('span', { class: 'mt-maps-opt__name' }, o.z.name),
+              h('span', { class: 'mt-maps-opt__sub' }, t('maps.zones.option', { area: areaLabel(o.z.area), d: t('data.districts', { n: o.z.ubigeos.length }) }))),
+            h('span', { class: 'mt-maps-opt__count' }, o.disabled ? t('maps.districts.already') : t('data.stores', { n: zoneStores(o.z) })));
+        }
         if (o.kind === 'p') {
           return h('li', { class: 'mt-maps-opt mt-maps-opt--province' },
             h('span', { class: 'mt-maps-opt__icon', html: icon('layers', 16) }),
@@ -1129,7 +1147,8 @@
           h('span', { class: 'mt-maps-opt__count' }, o.disabled ? t('maps.districts.already') : n ? t('data.stores', { n: n }) : ''));
       },
       onPick(o) {
-        if (o.kind === 'p') addMany(o.p.ubigeos);
+        if (o.kind === 'z') addZone(o.z);
+        else if (o.kind === 'p') addMany(o.p.ubigeos);
         else {
           const m = cur();
           const list = latest(m, 'districts');
@@ -1166,11 +1185,40 @@
       now({ districts: m.districts.concat(add) });
       announce(t('maps.districts.added', { n: add.length }));
     }
-    function presetMenu(anchor) {
-      MT.ui.menu(anchor, zones.map((z) => ({
-        label: t('maps.districts.preset.' + z.id), hint: t('data.districts', { n: z.ubigeos.length }), icon: 'pin',
-        onClick: () => addMany(z.ubigeos),
-      })), { align: 'start', minWidth: 230 });
+    /** Add every district of a Nielsen zone that is not on the slide yet. */
+    function addZone(z) {
+      const m = cur();
+      if (!m) return;
+      const list = latest(m, 'districts'), have = new Set(list);
+      const add = z.ubigeos.filter((u) => !have.has(u) && D.get(u));
+      if (!add.length) { MT.ui.toast(t('maps.districts.nothingNew'), { type: 'info' }); return; }
+      now({ districts: list.concat(add) });
+      announce(t('maps.zones.added', { name: z.name, n: add.length }));
+    }
+    /** Remove every district of a zone from the slide (the zone's own districts only: a district belongs to one zone). */
+    function removeZone(z) {
+      const m = cur();
+      if (!m) return;
+      const drop = new Set(z.ubigeos);
+      const hadFocus = chips.contains(document.activeElement);
+      const xs0 = U.$$('.mt-chip__x', chips), i = xs0.indexOf(document.activeElement);
+      now({ districts: latest(m, 'districts').filter((u) => !drop.has(u)) });
+      announce(t('maps.zones.remove', { name: z.name }));
+      if (hadFocus && !chips.contains(document.activeElement)) {
+        const xs = U.$$('.mt-chip__x', chips);
+        (xs[Math.min(Math.max(i, 0), xs.length - 1)] || input).focus();
+      }
+    }
+    /** A pill of the zone grid: all of the zone on → off; otherwise (none or some of it) → all on. */
+    function toggleZone(z) {
+      const m = cur();
+      if (!m) return;
+      const have = new Set(latest(m, 'districts'));
+      if (z.ubigeos.every((u) => have.has(u))) {
+        const drop = new Set(z.ubigeos);
+        now({ districts: latest(m, 'districts').filter((u) => !drop.has(u)) });
+        announce(t('maps.zones.remove', { name: z.name }));
+      } else addZone(z);
     }
     function clearAll() {
       const m = cur();
@@ -1203,16 +1251,51 @@
         anaNote.hidden = !reg;
         if (reg) anaText.textContent = t('maps.districts.analysisNote', { d: fmtR(reg.maxMeters) });
         removeAll.hidden = ds.length < 2;
-        toolsRow.hidden = !presets && ds.length < 2;
+        toolsRow.hidden = ds.length < 2;
+        // Zone pills: on = every district of the zone is on the slide, partial = some of them.
+        if (zonePicker) {
+          const have = new Set(ds);
+          Z.all().forEach((z) => {
+            const btn = zoneBtns[z.id];
+            if (!btn) return;
+            const n = z.ubigeos.filter((u) => have.has(u)).length, on = n === z.ubigeos.length;
+            btn.classList.toggle('is-on', on);
+            btn.classList.toggle('is-partial', !on && n > 0);
+            btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+            btn.title = zoneTitle(z) + (!on && n > 0 ? ' · ' + t('maps.zones.partial', { n: z.ubigeos.length - n }) : '');
+          });
+        }
         const provinces = new Set(ds.map((u) => (D.get(u) || {}).province));
         const showSub = provinces.size > 1;
         U.clear(chips);
-        const many = ds.length > CHIP_LIMIT + 2;
-        const shown = many && !st.chipsExpanded ? ds.slice(0, CHIP_LIMIT) : ds;
-        shown.forEach((u) => {
-          const d = D.get(u);
+        // A zone whose districts are ALL on the slide is one chip (its districts open next to it); the rest are district chips.
+        const cov = Z.available ? Z.covered(ds) : { zones: [], rest: ds };
+        const items = [];
+        cov.zones.forEach((z) => {
+          items.push({ kind: 'z', z: z });
+          if (st.zonesOpen[z.id]) z.ubigeos.forEach((u) => items.push({ kind: 'd', u: u, member: true }));
+        });
+        cov.rest.forEach((u) => items.push({ kind: 'd', u: u }));
+        const many = items.length > CHIP_LIMIT + 2;
+        const shown = many && !st.chipsExpanded ? items.slice(0, CHIP_LIMIT) : items;
+        shown.forEach((it) => {
+          if (it.kind === 'z') {
+            const z = it.z, open = !!st.zonesOpen[z.id];
+            const label = t(open ? 'maps.zones.collapse' : 'maps.zones.expand', { name: z.name });
+            chips.appendChild(h('span', { class: 'mt-chip mt-maps-chip mt-maps-chip--zone' + (open ? ' is-open' : ''), role: 'listitem', title: zoneTitle(z), dataset: { zone: z.id } },
+              h('button', { type: 'button', class: 'mt-maps-chip__zone', 'aria-expanded': open ? 'true' : 'false', 'aria-label': label, title: label,
+                onclick: () => { st.zonesOpen[z.id] = !open; api.update(cur()); } },
+              iconSpan('layers', 14),
+              h('span', { class: 'mt-chip__label' }, z.name),
+              h('span', { class: 'mt-chip__sub' }, t('data.districts', { n: z.ubigeos.length })),
+              iconSpan(open ? 'chevronDown' : 'chevronRight', 12)),
+              h('button', { type: 'button', class: 'mt-chip__x', 'aria-label': t('maps.zones.remove', { name: z.name }), title: t('maps.zones.remove', { name: z.name }),
+                html: icon('close', 14), onclick: () => removeZone(z) })));
+            return;
+          }
+          const u = it.u, d = D.get(u);
           const name = d ? d.district : u;
-          chips.appendChild(h('span', { class: 'mt-chip mt-maps-chip' + (d ? '' : ' is-unknown'), role: 'listitem', title: d ? d.label : u, dataset: { ubigeo: u } },
+          chips.appendChild(h('span', { class: 'mt-chip mt-maps-chip' + (d ? '' : ' is-unknown') + (it.member ? ' is-member' : ''), role: 'listitem', title: d ? d.label : u, dataset: { ubigeo: u } },
             h('span', { class: 'mt-chip__label' }, name),
             showSub && d ? h('span', { class: 'mt-chip__sub' }, d.province) : null,
             h('button', { type: 'button', class: 'mt-chip__x', 'aria-label': t('maps.districts.remove', { name: name }), title: t('maps.districts.remove', { name: name }),
@@ -1220,7 +1303,7 @@
         });
         if (many) {
           chips.appendChild(h('button', { type: 'button', class: 'mt-maps-chipmore', onclick: () => { st.chipsExpanded = !st.chipsExpanded; api.update(cur()); } },
-            st.chipsExpanded ? t('maps.districts.less') : t('maps.districts.more', { n: ds.length - CHIP_LIMIT })));
+            st.chipsExpanded ? t('maps.districts.less') : t('maps.districts.more', { n: items.length - CHIP_LIMIT })));
         }
         if (combo.isOpen()) combo.refresh();
       },

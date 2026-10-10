@@ -78,6 +78,9 @@ window.addEventListener('error', function (e) {
 <!-- Main avenue names of Peru's main cities (window.MT_ROAD_NAMES, tools/build-road-names.mjs): the
      basemap tiles name them only from zoom 14. Optional: without it slides simply show fewer names. -->
 <script src="data/road-names.js" data-optional></script>
+<!-- Zonas Nielsen (window.MT_ZONES, tools/build-zones.mjs from data/zonas-nielsen.csv): the main grouping of the
+     stores (SUBAREA of the company list). Optional: without it the district picker simply offers no zones. -->
+<script src="data/zones.js" data-optional></script>
 <!-- Built-in example project (window.MT_EXAMPLE_PROJECT, "Abrir proyecto de ejemplo"), generated from
      tools/fixtures/demo.mapa.json by tools/fixtures/build-example.mjs. Optional: without it the
      example entries are simply disabled. -->

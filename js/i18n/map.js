@@ -34,7 +34,7 @@
       },
       notice: {
         noMap: { title: 'No hay un mapa seleccionado', text: 'Crea un mapa o elige uno de la lista.' },
-        noDistricts: { title: 'Elige los distritos', text: 'Agrega uno o más distritos para armar el mapa.', action: 'Elegir distritos' },
+        noDistricts: { title: 'Elige las zonas Nielsen', text: 'Agrega una o más zonas Nielsen (o distritos) para armar el mapa.', action: 'Elegir zonas' },
         noStores: { title: 'No hay tiendas para mostrar', text: 'Ninguna tienda de las cadenas activas cae en estos distritos.' },
         noStoresNear: { title: 'No hay tiendas cerca de la referencia', text: 'Ninguna tienda de las cadenas activas está a menos de {d} de la referencia.' },
         noRef: { title: 'No se encuentra la referencia', text: 'La tienda o el punto de referencia de este análisis ya no está en la base. Edítalo en Análisis o quita el análisis de la lámina.' },
@@ -96,7 +96,7 @@
       },
       notice: {
         noMap: { title: 'No map selected', text: 'Create a map or pick one from the list.' },
-        noDistricts: { title: 'Choose the districts', text: 'Add one or more districts to build the map.', action: 'Choose districts' },
+        noDistricts: { title: 'Choose the Nielsen zones', text: 'Add one or more Nielsen zones (or districts) to build the map.', action: 'Choose zones' },
         noStores: { title: 'No stores to show', text: 'No store of the active chains falls inside these districts.' },
         noStoresNear: { title: 'No stores near the reference', text: 'No store of the active chains is within {d} of the reference.' },
         noRef: { title: 'The reference cannot be found', text: 'The reference store or point of this analysis is no longer in the database. Edit it in Analysis or remove the analysis from the slide.' },
